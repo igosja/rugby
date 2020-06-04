@@ -12,10 +12,10 @@ $model = $controller->myTeamOrVice;
 
 ?>
 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-size-2">
-    <span class="italic"><?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.header'); ?></span>
+    <span class="italic">Показатели вашей команды:</span>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.vs'); ?>
+            - Рейтинг силы команды (Vs)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->team_power_vs; ?>
@@ -23,7 +23,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.s15'); ?>
+            - Сила 15 лучших (s15)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->team_power_s_15; ?>
@@ -31,7 +31,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.s19'); ?>
+            - Сила 19 лучших (s19)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->team_power_s_19; ?>
@@ -39,7 +39,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.s24'); ?>
+            - Сила 24 лучших (s24)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->team_power_s_24; ?>
@@ -47,7 +47,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.price-base'); ?>
+            - Стоимость строений
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= FormatHelper::asCurrency($model->team_price_base); ?>
@@ -55,7 +55,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - <?= Yii::t('app', 'frontend.views.team.team-bottom-my-team.price-total'); ?>
+            - Общая стоимость
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= FormatHelper::asCurrency($model->team_price_total); ?>

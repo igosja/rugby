@@ -11,35 +11,35 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Players',
+                'text' => 'Игроки',
                 'url' => ['team/view', 'id' => $id],
             ],
             [
-                'text' => 'Games',
+                'text' => 'Матчи',
                 'url' => ['team/game', 'id' => $id],
             ],
             [
-                'text' => 'Statistics',
+                'text' => 'Статистика',
                 'url' => ['team/statistics', 'id' => $id],
             ],
             [
-                'text' => Yii::t('app', 'frontend.views.team.team-links.deal'),
+                'text' => 'Сделки',
                 'url' => ['team/deal', 'id' => $id],
             ],
             [
-                'text' => 'History',
+                'text' => 'События',
                 'url' => ['team/history', 'id' => $id],
             ],
             [
-                'text' => 'Finance',
+                'text' => 'Финансы',
                 'url' => ['team/finance', 'id' => $id],
             ],
             [
-                'text' => 'Achievements',
+                'text' => 'Достижения',
                 'url' => ['team/achievement', 'id' => $id],
             ],
             [
-                'text' => 'Trophies',
+                'text' => 'Трофеи',
                 'url' => ['team/trophy', 'id' => $id],
             ],
         ]

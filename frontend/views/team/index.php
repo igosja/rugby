@@ -13,7 +13,7 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1><?= Yii::t('app', 'frontend.views.team.index.h1'); ?></h1>
+        <h1>Команды</h1>
     </div>
 </div>
 <div class="row">
@@ -22,9 +22,9 @@ use yii\helpers\Html;
     try {
         $columns = [
             [
-                'footer' => Yii::t('app', 'frontend.views.team.index.footer-country'),
+                'footer' => 'Страна',
                 'format' => 'raw',
-                'label' => Yii::t('app', 'frontend.views.team.index.label-country'),
+                'label' => 'Страна',
                 'value' => function (Team $model) {
                     return $model->stadium->city->country->countryImage()
                         . ' ' . Html::a(
@@ -35,9 +35,9 @@ use yii\helpers\Html;
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team.index.footer-team'),
+                'footer' => 'Команды',
                 'headerOptions' => ['class' => 'col-25'],
-                'label' => Yii::t('app', 'frontend.views.team.index.label-team'),
+                'label' => 'Команды',
                 'value' => function (Team $model) {
                     return $model->team_player;
                 }

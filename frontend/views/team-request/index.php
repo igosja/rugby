@@ -19,7 +19,7 @@ use yii\web\View;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1><?= Yii::t('app', 'frontend.views.team-request.index.h1'); ?></h1>
+        <h1>Получение команды</h1>
     </div>
 </div>
 <div class="row">
@@ -35,22 +35,22 @@ use yii\web\View;
                     return Html::a(
                         '<i class="fa fa-times-circle"></i>',
                         ['team-request/delete', 'id' => $model->team_request_id],
-                        ['title' => Yii::t('app', 'frontend.views.team-request.index.title-delete')]
+                        ['title' => 'Удалить заявку']
                     );
                 }
             ],
             [
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.label-your-team'),
+                'footer' => 'Ваши заявки',
                 'format' => 'raw',
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-your-team'),
+                'label' => 'Ваши заявки',
                 'value' => function (TeamRequest $model) {
                     return $model->team->teamLink('img');
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.label-your-vs'),
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-your-vs'),
+                'footer' => 'Vs',
+                'label' => 'Vs',
                 'value' => function (TeamRequest $model) {
                     return $model->team->team_power_vs;
                 }
@@ -82,15 +82,15 @@ use yii\web\View;
                     return Html::a(
                         '<i class="fa fa-check-circle"></i>',
                         ['team-request/request', 'id' => $model->team_id],
-                        ['title' => Yii::t('app', 'frontend.views.team-request.index.title-get')]
+                        ['title' => 'Выбрать']
                     );
                 }
             ],
             [
                 'attribute' => 'team',
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-team'),
+                'footer' => 'Команда',
                 'format' => 'raw',
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-team'),
+                'label' => 'Команда',
                 'value' => function (Team $model) {
                     return $model->teamLink('string', true);
                 }
@@ -98,11 +98,11 @@ use yii\web\View;
             [
                 'attribute' => 'country',
                 'contentOptions' => ['class' => 'hidden-xs'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-country'),
+                'footer' => 'Страна',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'hidden-xs'],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-country'),
+                'label' => 'Страна',
                 'value' => function (Team $model) {
                     return $model->stadium->city->country->countryLink();
                 }
@@ -110,21 +110,21 @@ use yii\web\View;
             [
                 'attribute' => 'base',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-base'),
+                'footer' => 'База',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-base'),
+                'label' => 'База',
                 'value' => function (Team $model) {
-                    return $model->baseUsed() . ' ' . Yii::t('app', 'frontend.views.team-request.index.from') . ' ' . $model->base->base_slot_max;
+                    return $model->baseUsed() . ' из ' . $model->base->base_slot_max;
                 }
             ],
             [
                 'attribute' => 'stadium',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-stadium'),
+                'footer' => 'Стадион',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-stadium'),
+                'label' => 'Стадион',
                 'value' => function (Team $model) {
                     return Yii::$app->formatter->asInteger($model->stadium->stadium_capacity);
                 }
@@ -132,10 +132,10 @@ use yii\web\View;
             [
                 'attribute' => 'finance',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-finance'),
+                'footer' => 'Финансы',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-finance'),
+                'label' => 'Финансы',
                 'value' => function (Team $model) {
                     return FormatHelper::asCurrency($model->team_finance);
                 }
@@ -143,32 +143,32 @@ use yii\web\View;
             [
                 'attribute' => 'vs',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-vs'),
+                'footer' => 'Vs',
                 'footerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => Yii::t('app', 'frontend.views.team-request.index.footer-title-vs'),
+                    'title' => 'Рейтинг силы команды в длительных соревнованиях',
                 ],
                 'headerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => Yii::t('app', 'frontend.views.team-request.index.header-title-vs'),
+                    'title' => 'Рейтинг силы команды в длительных соревнованиях',
                 ],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-vs'),
+                'label' => 'Vs',
                 'value' => function (Team $model) {
                     return $model->team_power_vs;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => Yii::t('app', 'frontend.views.team-request.index.footer-request') . '',
+                'footer' => 'ЧЗ',
                 'footerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => Yii::t('app', 'frontend.views.team-request.index.footer-title-request'),
+                    'title' => 'Число заявок',
                 ],
                 'headerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => Yii::t('app', 'frontend.views.team-request.index.header-title-request'),
+                    'title' => 'Число заявок',
                 ],
-                'label' => Yii::t('app', 'frontend.views.team-request.index.label-request'),
+                'label' => 'ЧЗ',
                 'value' => function (Team $model) {
                     return count($model->teamRequests);
                 }

@@ -48,9 +48,9 @@ use yii\helpers\Html;
                     <td>
                         <?= Html::a(
                             Html::img('/img/country/12/' . $item['countryId'] . '.png'),
-                            ['country/team', 'id' => $item['countryId']]
+                            ['federation/team', 'id' => $item['countryId']]
                         ) ?>
-                        <?= Html::a($item['countryName'], ['country/team', 'id' => $item['countryId']]) ?>
+                        <?= Html::a($item['countryName'], ['federation/team', 'id' => $item['countryId']]) ?>
                     </td>
                     <?php foreach ($item['division'] as $key => $value) : ?>
                         <td class="text-center col-10">

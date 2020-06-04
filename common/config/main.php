@@ -1,4 +1,10 @@
 <?php
+
+use yii\i18n\PhpMessageSource;
+use yii\redis\Cache;
+use yii\redis\Connection;
+use yii\swiftmailer\Mailer;
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -6,12 +12,12 @@ return [
     ],
     'components' => [
         'cache' => [
-            'class' => 'yii\redis\Cache',
+            'class' => Cache::class,
         ],
         'i18n' => [
             'translations' => [
                 'app*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    'class' => PhpMessageSource::class,
                     'basePath' => '@common/messages',
                     //'sourceLanguage' => 'en-US',
                     'fileMap' => [
@@ -21,14 +27,14 @@ return [
             ],
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => Mailer::class,
             'transport' => [
                 'class' => 'Swift_SendmailTransport',
             ],
             'viewPath' => '@common/mail',
         ],
         'redis' => [
-            'class' => 'yii\redis\Connection',
+            'class' => Connection::class,
             'database' => 0,
             'hostname' => 'localhost',
             'port' => 6379,
@@ -36,5 +42,5 @@ return [
     ],
     'language' => 'en',
     'timeZone' => 'UTC',
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'vendorPath' => dirname(__DIR__, 2) . '/vendor',
 ];
