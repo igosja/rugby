@@ -171,9 +171,9 @@ class Game extends AbstractActiveRecord
     public function gameHomeGuest(int $teamOrNationalId): string
     {
         if (in_array($teamOrNationalId, [$this->game_home_team_id, $this->game_home_national_id], true)) {
-            return 'H';
+            return 'Д';
         }
-        return 'G';
+        return 'Г';
     }
 
     /**

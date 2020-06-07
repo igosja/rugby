@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\db\ActiveQuery;
 
 /**
  * Class StatisticTeam
@@ -30,6 +31,8 @@ use common\components\AbstractActiveRecord;
  * @property int $statistic_team_win_over
  * @property string $statistic_team_win_percent
  * @property int $statistic_team_win_shootout
+ *
+ * @property Team $team
  */
 class StatisticTeam extends AbstractActiveRecord
 {
@@ -39,5 +42,13 @@ class StatisticTeam extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%statistic_team}}';
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTeam(): ActiveQuery
+    {
+        return $this->hasOne(Team::class, ['team_id' => 'statistic_team_team_id']);
     }
 }

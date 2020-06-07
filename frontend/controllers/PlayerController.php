@@ -3,11 +3,14 @@
 namespace frontend\controllers;
 
 use common\models\db\Player;
+use common\models\db\Position;
 use common\models\db\Season;
 use frontend\components\AbstractController;
 use frontend\models\preparers\LineupPrepare;
 use frontend\models\queries\PlayerQuery;
+use frontend\models\search\PlayerSearch;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -17,10 +20,40 @@ use yii\web\NotFoundHttpException;
 class PlayerController extends AbstractController
 {
     /**
-     *
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
+        $searchModel = new PlayerSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        $countryArray = ArrayHelper::map(
+            Player::find()
+                ->joinWith([
+                    'country',
+                ])
+                ->groupBy(['player_country_id'])
+                ->orderBy(['country_name' => SORT_ASC])
+                ->all(),
+            'country.country_id',
+            'country.country_name'
+        );
+
+        $positionArray = ArrayHelper::map(
+            Position::find()
+                ->orderBy(['position_id' => SORT_ASC])
+                ->all(),
+            'position_id',
+            'position_name'
+        );
+
+        $this->seoTitle('Список игроков');
+        return $this->render('index', [
+            'countryArray' => $countryArray,
+            'dataProvider' => $dataProvider,
+            'model' => $searchModel,
+            'positionArray' => $positionArray,
+        ]);
     }
 
     /**

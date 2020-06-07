@@ -34,26 +34,26 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'S',
+                'footer' => 'С',
                 'footerOptions' => ['title' => 'Сезон'],
-                'label' => 'S',
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Season'],
+                'label' => 'С',
+                'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
                 'value' => static function (Achievement $model) {
                     return $model->achievement_season_id;
                 }
             ],
             [
-                'footer' => 'Tournament',
-                'label' => 'Tournament',
+                'footer' => 'Турнир',
+                'label' => 'Турнир',
                 'value' => static function (Achievement $model) {
                     return $model->tournament();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Place',
+                'footer' => 'Место',
                 'format' => 'raw',
-                'label' => 'Place',
+                'label' => 'Место',
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Achievement $model) {
                     return $model->position();

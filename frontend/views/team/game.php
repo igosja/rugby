@@ -36,7 +36,7 @@ use yii\web\View;
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Season', 'seasonId') ?>
+                <?= Html::label('Сезон', 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?= Html::dropDownList(
@@ -81,37 +81,37 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Date',
+                'footer' => 'Дата',
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Date',
+                'label' => 'Дата',
                 'value' => static function (Game $model): string {
                     return FormatHelper::asDate($model->schedule->schedule_date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Tournament',
+                'footer' => 'Турнир',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-30 hidden-xs'],
-                'label' => 'Tournament',
+                'label' => 'Турнир',
                 'value' => static function (Game $model): string {
                     return $model->schedule->tournamentType->tournament_type_name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Stage',
+                'footer' => 'Стадия',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Stage',
+                'label' => 'Стадия',
                 'value' => static function (Game $model): string {
                     return $model->schedule->stage->stage_name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Home/Guest'],
-                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Home/Guest'],
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Дома/В гостях'],
+                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Дома/В гостях'],
                 'value' => static function (Game $model) use ($team): string {
                     return $model->gameHomeGuest($team->team_id);
                 }
@@ -133,9 +133,9 @@ use yii\web\View;
                 }
             ],
             [
-                'footer' => 'Opponent',
+                'footer' => 'Соперник',
                 'format' => 'raw',
-                'label' => 'Opponent',
+                'label' => 'Соперник',
                 'value' => static function (Game $model) use ($team): string {
                     return $model->opponentLink($team->team_id);
                 }
@@ -152,9 +152,9 @@ use yii\web\View;
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Score',
+                'footer' => 'Счёт',
                 'format' => 'raw',
-                'label' => 'Score',
+                'label' => 'Счёт',
                 'value' => static function (Game $model) use ($team): string {
                     return Html::a(
                         $model->formatTeamScore($team->team_id),
