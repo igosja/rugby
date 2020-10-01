@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\db\ForumMessage;
+use common\models\db\News;
+use common\models\db\User;
 use frontend\components\AbstractController;
 use frontend\models\forms\SignInForm;
 use frontend\models\PasswordResetRequestForm;
@@ -63,13 +66,43 @@ class SiteController extends AbstractController
      */
     public function actionIndex(): string
     {
+        $birthdays = User::find()
+            ->where(['user_birth_day' => date('d'), 'user_birth_month' => date('m')])
+            ->orderBy(['user_id' => SORT_ASC])
+            ->all();
+        $countryNews = News::find()
+            ->where(['!=', 'news_country_id', 0])
+            ->orderBy(['news_id' => SORT_DESC])
+            ->limit(10)
+            ->one();
+        $forumMessage = ForumMessage::find()
+            ->select([
+                '*',
+                'forum_message_id' => 'MAX(forum_message_id)',
+                'forum_message_date' => 'MAX(forum_message_date)',
+            ])
+            ->joinWith(['forumTheme.forumGroup'])
+            ->where([
+                'forum_group.forum_group_country_id' => 0
+            ])
+            ->groupBy(['forum_message_forum_theme_id'])
+            ->orderBy(['forum_message_id' => SORT_DESC])
+            ->limit(10)
+            ->all();
+        $news = News::find()->where(['news_country_id' => 0])->orderBy(['news_id' => SORT_DESC])->one();
+
         $this->view->title = 'Регбийный онлайн менеджер';
         $this->view->registerMetaTag([
             'name' => 'description',
             'content' => 'Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер',
         ]);
 
-        return $this->render('index');
+        return $this->render('index', [
+            'birthdays' => $birthdays,
+            'countryNews' => $countryNews,
+            'forumMessage' => $forumMessage,
+            'news' => $news,
+        ]);
     }
 
     /**

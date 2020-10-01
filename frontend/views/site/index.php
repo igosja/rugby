@@ -1,11 +1,15 @@
 <?php
 
+use common\models\db\ForumMessage;
+use common\models\db\News;
+use common\models\db\User;
 use yii\helpers\Html;
-
-$news = [];
-$countryNews = [];
-$birthdays = [];
-$forumMessage = [];
+/**
+ * @var User[] $birthdays
+ * @var News $countryNews
+ * @var ForumMessage[] $forumMessage
+ * @var News $news
+ */
 
 ?>
 <div class="row">
