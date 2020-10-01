@@ -16,6 +16,7 @@ use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\ErrorAction;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -103,6 +104,28 @@ class SiteController extends AbstractController
             'forumMessage' => $forumMessage,
             'news' => $news,
         ]);
+    }
+
+    /**
+     * @param string $code
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionAuth(string $code): Response
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+        }
+
+        $user = User::find()
+            ->where(['user_code' => $code])
+            ->limit(1)
+            ->one();
+        $this->notFound($user);
+
+        Yii::$app->user->login($user, 2592000);
+
+        return $this->redirect(['team/view']);
     }
 
     /**
