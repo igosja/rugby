@@ -7726,6 +7726,31 @@ class m200107_104503_player extends Migration
                 [29, 9, 39, 14, 12, 58, 58, 58, 26, 1322458, 1324, 0, 4, 55, 0, 50, 5],
                 [30, 9, 45, 1, 5, 60, 60, 60, 37, 1386240, 1388, 0, 3, 99, 0, 50, 4],
                 [31, 9, 31, 14, 8, 62, 62, 62, 27, 1451358, 1453, 0, 2, 13, 0, 50, 3],
+            ]
+        );
+
+        $this->batchInsert(
+            self::TABLE,
+            [
+                'player_age',
+                'player_country_id',
+                'player_name_id',
+                'player_physical_id',
+                'player_position_id',
+                'player_power_nominal',
+                'player_power_nominal_s',
+                'player_power_old',
+                'player_power_real',
+                'player_price',
+                'player_salary',
+                'player_school_id',
+                'player_style_id',
+                'player_surname_id',
+                'player_team_id',
+                'player_tire',
+                'player_training_ability',
+            ],
+            [
                 [17, 7, 61, 18, 2, 34, 34, 34, 18, 656914, 658, 171, 3, 265, 171, 50, 4],
                 [18, 7, 90, 1, 2, 36, 36, 36, 22, 705600, 706, 171, 5, 320, 171, 50, 1],
                 [19, 7, 58, 16, 4, 38, 38, 38, 19, 755478, 756, 171, 4, 260, 171, 50, 2],
