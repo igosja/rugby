@@ -1,0 +1,64 @@
+<?php
+
+namespace console\migrations;
+
+use yii\db\Migration;
+
+/**
+ * Class M200101000062Transfer
+ * @package console\migrations
+ */
+class M200101000062Transfer extends Migration
+{
+    private const TABLE = '{{%transfer}}';
+
+    /**
+     * @return bool|void
+     */
+    public function safeUp()
+    {
+        $this->createTable(
+            self::TABLE,
+            [
+                'id' => $this->primaryKey(11),
+            'age' => $this->integer(2),
+            'cancel' => $this->integer(11)->defaultValue(0),
+            'date' => $this->integer(11)->defaultValue(0),
+            'is_to_league' => $this->boolean()->defaultValue(false),
+            'player_id' => $this->integer(11)->notNull(),
+            'player_price' => $this->integer(11),
+            'power' => $this->integer(3),
+            'price_buyer' => $this->integer(11),
+            'price_seller' => $this->integer(11)->notNull(),
+            'ready' => $this->integer(11)->defaultValue(0),
+            'season_id' => $this->integer(3)->notNull(),
+            'team_buyer_id' => $this->integer(11),
+            'team_seller_id' => $this->integer(11)->notNull(),
+            'user_buyer_id' => $this->integer(11),
+            'user_seller_id' => $this->integer(11)->notNull(),
+            'voted' => $this->integer(11)->defaultValue(0),
+        ]);
+
+        $this->addForeignKey('transfer_player_id', self::TABLE, 'player_id', '{{%player}}', 'id');
+        $this->addForeignKey('transfer_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
+        $this->addForeignKey('transfer_team_buyer_id', self::TABLE, 'team_buyer_id', '{{%team}}', 'id');
+        $this->addForeignKey('transfer_team_seller_id', self::TABLE, 'team_seller_id', '{{%team}}', 'id');
+        $this->addForeignKey('transfer_user_buyer_id', self::TABLE, 'user_buyer_id', '{{%user}}', 'id');
+        $this->addForeignKey('transfer_user_seller_id', self::TABLE, 'user_seller_id', '{{%user}}', 'id');
+
+        $this->createIndex('ready', self::TABLE, 'ready');
+        $this->createIndex('voted', self::TABLE, 'voted');
+
+        return true;
+    }
+
+    /**
+     * @return bool|void
+     */
+    public function safeDown()
+    {
+        $this->dropTable(self::TABLE);
+
+        return true;
+    }
+}

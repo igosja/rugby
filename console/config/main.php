@@ -1,4 +1,9 @@
 <?php
+
+use yii\console\controllers\FixtureController;
+use yii\log\FileTarget;
+use yii\web\UrlManager;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -16,7 +21,7 @@ return [
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'fixture' => [
-            'class' => 'yii\console\controllers\FixtureController',
+            'class' => FixtureController::class,
             'namespace' => 'common\fixtures',
         ],
     ],
@@ -24,14 +29,14 @@ return [
         'log' => [
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'urlManager' => [
             'baseUrl' => '/',
-            'class' => 'yii\web\UrlManager',
+            'class' => UrlManager::class,
             'enablePrettyUrl' => true,
             'scriptUrl' => 'index.php',
             'showScriptName' => false,

@@ -44,6 +44,7 @@ return [
     'controllerMap' => [
         'migrate' => [
             'class' => MigrateController::class,
+            'migrationPath' => null,
             'migrationNamespaces' => [
                 'console\migrations',
             ],
