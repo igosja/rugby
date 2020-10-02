@@ -1,14 +1,17 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_101010_federation
+ * @package console\migrations
  */
 class m200107_101010_federation extends Migration
 {
-    const TABLE = '{{%federation}}';
-    const MAX_COUNTRY_ID = 197;
+    private const TABLE = '{{%federation}}';
+    private const MAX_COUNTRY_ID = 197;
 
     /**
      * @return bool|void

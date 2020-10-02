@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_102210_friendly_invite_status
+ * @package console\migrations
  */
 class m200107_102210_friendly_invite_status extends Migration
 {
-    const TABLE = '{{%friendly_invite_status}}';
+    private const TABLE = '{{%friendly_invite_status}}';
 
     /**
      * @return bool|void

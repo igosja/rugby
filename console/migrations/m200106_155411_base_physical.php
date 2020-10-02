@@ -1,38 +1,43 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200106_155411_base_physical
+ * @package console\migrations
  */
 class m200106_155411_base_physical extends Migration
 {
-    const TABLE = '{{%base_physical}}';
+    private const TABLE = '{{%base_physical}}';
 
     /**
-     * @return bool|void
+     * @return bool
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $this->createTable(self::TABLE, [
-            'base_physical_id' => $this->primaryKey(2),
-            'base_physical_base_level' => $this->integer(1)->defaultValue(0),
-            'base_physical_build_speed' => $this->integer(2)->defaultValue(0),
-            'base_physical_change_count' => $this->integer(2)->defaultValue(0),
-            'base_physical_level' => $this->integer(2)->defaultValue(0),
-            'base_physical_price_buy' => $this->integer(7)->defaultValue(0),
-            'base_physical_price_sell' => $this->integer(7)->defaultValue(0),
-            'base_physical_tire_bonus' => $this->integer(1)->defaultValue(0),
+            'id' => $this->primaryKey(2),
+            'base_level' => $this->integer(1)->notNull(),
+            'build_speed' => $this->integer(2)->notNull(),
+            'change_count' => $this->integer(2)->notNull(),
+            'level' => $this->integer(2)->notNull(),
+            'price_buy' => $this->integer(7)->notNull(),
+            'price_sell' => $this->integer(7)->notNull(),
+            'tire_bonus' => $this->integer(1)->notNull(),
         ]);
 
+        $this->addForeignKey('base_physical_base_level', self::TABLE, 'base_level', '{{%base}}', 'level');
+
         $this->batchInsert(self::TABLE, [
-            'base_physical_base_level',
-            'base_physical_build_speed',
-            'base_physical_change_count',
-            'base_physical_level',
-            'base_physical_price_buy',
-            'base_physical_price_sell',
-            'base_physical_tire_bonus'
+            'base_level',
+            'build_speed',
+            'change_count',
+            'level',
+            'price_buy',
+            'price_sell',
+            'tire_bonus'
         ], [
             [0, 0, 0, 0, 0, 0, 2],
             [1, 1, 5, 1, 250000, 187500, 1],
@@ -46,13 +51,17 @@ class m200106_155411_base_physical extends Migration
             [5, 9, 45, 9, 2250000, 1687500, -3],
             [5, 10, 50, 10, 2500000, 1875000, -3],
         ]);
+
+        return true;
     }
 
     /**
-     * @return bool|void
+     * @return bool
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         $this->dropTable(self::TABLE);
+
+        return true;
     }
 }

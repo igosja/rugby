@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_102818_lineup_special
+ * @package console\migrations
  */
 class m200107_102818_lineup_special extends Migration
 {
-    const TABLE = '{{%lineup_special}}';
+    private const TABLE = '{{%lineup_special}}';
 
     /**
      * @return bool|void

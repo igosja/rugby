@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_103439_mood
+ * @package console\migrations
  */
 class m200107_103439_mood extends Migration
 {
-    const TABLE = '{{%mood}}';
+    private const TABLE = '{{%mood}}';
 
     /**
      * @return bool|void

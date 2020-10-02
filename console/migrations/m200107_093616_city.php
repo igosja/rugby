@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_093616_city
+ * @package console\migrations
  */
 class m200107_093616_city extends Migration
 {
-    const TABLE = '{{%city}}';
+    private const TABLE = '{{%city}}';
 
     /**
      * @return bool|void

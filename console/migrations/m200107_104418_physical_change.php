@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_104418_physical_change
+ * @package console\migrations
  */
 class m200107_104418_physical_change extends Migration
 {
-    const TABLE = '{{%physical_change}}';
+    private const TABLE = '{{%physical_change}}';
 
     /**
      * @return bool|void

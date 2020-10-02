@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200112_145535_user_block_type
+ * @package console\migrations
  */
 class m200112_145535_user_block_type extends Migration
 {
-    const TABLE = '{{%user_block_type}}';
+    private const TABLE = '{{%user_block_type}}';
 
     /**
      * @return bool|void

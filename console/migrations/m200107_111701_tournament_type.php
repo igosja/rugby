@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_111701_tournament_type
+ * @package console\migrations
  */
 class m200107_111701_tournament_type extends Migration
 {
-    const TABLE = '{{%tournament_type}}';
+    private const TABLE = '{{%tournament_type}}';
 
     /**
      * @return bool|void

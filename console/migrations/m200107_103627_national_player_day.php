@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_103627_national_player_day
+ * @package console\migrations
  */
 class m200107_103627_national_player_day extends Migration
 {
-    const TABLE = '{{%national_player_day}}';
+    private const TABLE = '{{%national_player_day}}';
 
     /**
      * @return bool|void

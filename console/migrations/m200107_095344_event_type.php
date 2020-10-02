@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_095344_event_type
+ * @package console\migrations
  */
 class m200107_095344_event_type extends Migration
 {
-    const TABLE = '{{%event_type}}';
+    private const TABLE = '{{%event_type}}';
 
     /**
      * @return bool|void

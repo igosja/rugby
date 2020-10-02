@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_093435_building_stadium
+ * @package console\migrations
  */
 class m200107_093435_building_stadium extends Migration
 {
-    const TABLE = '{{%building_stadium}}';
+    private const TABLE = '{{%building_stadium}}';
 
     /**
      * @return bool|void

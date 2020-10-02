@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200106_165655_blacklist
+ * @package console\migrations
  */
 class m200106_165655_blacklist extends Migration
 {
-    const TABLE = '{{%blacklist}}';
+    private const TABLE = '{{%blacklist}}';
 
     /**
      * @return bool|void

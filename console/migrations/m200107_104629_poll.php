@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_104629_poll
+ * @package console\migrations
  */
 class m200107_104629_poll extends Migration
 {
-    const TABLE = '{{%poll}}';
+    private const TABLE = '{{%poll}}';
 
     /**
      * @return bool|void

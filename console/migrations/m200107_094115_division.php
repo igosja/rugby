@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_094115_division
+ * @package console\migrations
  */
 class m200107_094115_division extends Migration
 {
-    const TABLE = '{{%division}}';
+    private const TABLE = '{{%division}}';
 
     /**
      * @return bool|void

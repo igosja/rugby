@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_102716_league_coefficient
+ * @package console\migrations
  */
 class m200107_102716_league_coefficient extends Migration
 {
-    const TABLE = '{{%league_coefficient}}';
+    private const TABLE = '{{%league_coefficient}}';
 
     /**
      * @return bool|void

@@ -1,5 +1,6 @@
 <?php
 
+use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\redis\Cache;
 use yii\redis\Connection;
@@ -19,7 +20,7 @@ return [
                 'app*' => [
                     'class' => PhpMessageSource::class,
                     'basePath' => '@common/messages',
-                    //'sourceLanguage' => 'en-US',
+                    'sourceLanguage' => 'en-US',
                     'fileMap' => [
                         'app' => 'app.php',
                     ],
@@ -38,6 +39,14 @@ return [
             'database' => 0,
             'hostname' => 'localhost',
             'port' => 6379,
+        ],
+    ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => MigrateController::class,
+            'migrationNamespaces' => [
+                'console\migrations',
+            ],
         ],
     ],
     'language' => 'en',

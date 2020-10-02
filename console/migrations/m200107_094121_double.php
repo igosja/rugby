@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
- * Class m200107_093921_cookie
+ * Class m200107_094121_double
+ * @package console\migrations
  */
-class m200107_093921_cookie extends Migration
+class m200107_094121_double extends Migration
 {
-    const TABLE = '{{%cookie}}';
+    private const TABLE = '{{%cookie}}';
 
     /**
      * @return bool|void

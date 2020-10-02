@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_102433_history_text
+ * @package console\migrations
  */
 class m200107_102433_history_text extends Migration
 {
-    const TABLE = '{{%history_text}}';
+    private const TABLE = '{{%history_text}}';
 
     /**
      * @return bool|void

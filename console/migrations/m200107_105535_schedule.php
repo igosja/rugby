@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_105535_schedule
+ * @package console\migrations
  */
 class m200107_105535_schedule extends Migration
 {
-    const TABLE = '{{%schedule}}';
+    private const TABLE = '{{%schedule}}';
 
     /**
      * @return bool|void

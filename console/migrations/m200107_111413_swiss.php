@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_111413_swiss
+ * @package console\migrations
  */
 class m200107_111413_swiss extends Migration
 {
-    const TABLE = '{{%swiss}}';
+    private const TABLE = '{{%swiss}}';
 
     /**
      * @return bool|void

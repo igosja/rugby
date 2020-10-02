@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200113_112452_weather
+ * @package console\migrations
  */
 class m200113_112452_weather extends Migration
 {
-    const TABLE = '{{%weather}}';
+    private const TABLE = '{{%weather}}';
 
     /**
      * @return bool|void

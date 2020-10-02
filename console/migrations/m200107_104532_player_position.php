@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_104532_player_position
+ * @package console\migrations
  */
 class m200107_104532_player_position extends Migration
 {
-    const TABLE = '{{%player_position}}';
+    private const TABLE = '{{%player_position}}';
 
     /**
      * @return bool|void

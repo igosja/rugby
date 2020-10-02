@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_095245_event_text_goal
+ * @package console\migrations
  */
 class m200107_095245_event_text_goal extends Migration
 {
-    const TABLE = '{{%event_text_goal}}';
+    private const TABLE = '{{%event_text_goal}}';
 
     /**
      * @return bool|void

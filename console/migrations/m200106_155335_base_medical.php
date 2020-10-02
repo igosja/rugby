@@ -1,36 +1,41 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200106_155335_base_medical
+ * @package console\migrations
  */
 class m200106_155335_base_medical extends Migration
 {
-    const TABLE = '{{%base_medical}}';
+    private const TABLE = '{{%base_medical}}';
 
     /**
-     * @return bool|void
+     * @return bool
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $this->createTable(self::TABLE, [
-            'base_medical_id' => $this->primaryKey(2),
-            'base_medical_base_level' => $this->integer(1)->defaultValue(0),
-            'base_medical_build_speed' => $this->integer(2)->defaultValue(0),
-            'base_medical_level' => $this->integer(2)->defaultValue(0),
-            'base_medical_price_buy' => $this->integer(7)->defaultValue(0),
-            'base_medical_price_sell' => $this->integer(7)->defaultValue(0),
-            'base_medical_tire' => $this->integer(2)->defaultValue(0),
+            'id' => $this->primaryKey(2),
+            'base_level' => $this->integer(1)->notNull(),
+            'build_speed' => $this->integer(2)->notNull(),
+            'level' => $this->integer(2)->notNull(),
+            'price_buy' => $this->integer(7)->notNull(),
+            'price_sell' => $this->integer(7)->notNull(),
+            'tire' => $this->integer(2)->notNull(),
         ]);
 
+        $this->addForeignKey('base_medical_base_level', self::TABLE, 'base_level', '{{%base}}', 'level');
+
         $this->batchInsert(self::TABLE, [
-            'base_medical_base_level',
-            'base_medical_build_speed',
-            'base_medical_level',
-            'base_medical_price_buy',
-            'base_medical_price_sell',
-            'base_medical_tire'
+            'base_level',
+            'build_speed',
+            'level',
+            'price_buy',
+            'price_sell',
+            'tire'
         ], [
             [0, 0, 0, 0, 0, 50],
             [1, 1, 1, 250000, 187500, 45],
@@ -44,13 +49,17 @@ class m200106_155335_base_medical extends Migration
             [5, 9, 9, 2250000, 1687500, 5],
             [5, 10, 10, 2500000, 1875000, 0],
         ]);
+
+        return true;
     }
 
     /**
-     * @return bool|void
+     * @return bool
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         $this->dropTable(self::TABLE);
+
+        return true;
     }
 }

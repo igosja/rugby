@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_102033_forum_message
+ * @package console\migrations
  */
 class m200107_102033_forum_message extends Migration
 {
-    const TABLE = '{{%forum_message}}';
+    private const TABLE = '{{%forum_message}}';
 
     /**
      * @return bool|void

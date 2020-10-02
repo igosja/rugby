@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_103246_money
+ * @package console\migrations
  */
 class m200107_103246_money extends Migration
 {
-    const TABLE = '{{%money}}';
+    private const TABLE = '{{%money}}';
 
     /**
      * @return bool|void

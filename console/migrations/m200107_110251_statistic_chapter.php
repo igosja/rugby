@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_110251_statistic_chapter
+ * @package console\migrations
  */
 class m200107_110251_statistic_chapter extends Migration
 {
-    const TABLE = '{{%statistic_chapter}}';
+    private const TABLE = '{{%statistic_chapter}}';
 
     /**
      * @return bool|void

@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_101848_fire_reason
+ * @package console\migrations
  */
 class m200107_101848_fire_reason extends Migration
 {
-    const TABLE = '{{%fire_reason}}';
+    private const TABLE = '{{%fire_reason}}';
 
     /**
      * @return bool|void

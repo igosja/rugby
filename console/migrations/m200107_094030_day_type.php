@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_094030_day_type
+ * @package console\migrations
  */
 class m200107_094030_day_type extends Migration
 {
-    const TABLE = '{{%day_type}}';
+    private const TABLE = '{{%day_type}}';
 
     /**
      * @return bool|void

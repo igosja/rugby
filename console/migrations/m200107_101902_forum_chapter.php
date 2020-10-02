@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_101902_forum_chapter
+ * @package console\migrations
  */
 class m200107_101902_forum_chapter extends Migration
 {
-    const TABLE = '{{%forum_chapter}}';
+    private const TABLE = '{{%forum_chapter}}';
 
     /**
      * @return bool|void

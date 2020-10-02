@@ -1,40 +1,43 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200106_155218_base
+ * @package console\migrations
  */
 class m200106_155218_base extends Migration
 {
-    const TABLE = '{{%base}}';
+    private const TABLE = '{{%base}}';
 
     /**
-     * @return bool|void
+     * @return bool
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $this->createTable(self::TABLE, [
-            'base_id' => $this->primaryKey(2),
-            'base_build_speed' => $this->integer(2)->defaultValue(0),
-            'base_level' => $this->integer(2)->defaultValue(0),
-            'base_maintenance_base' => $this->integer(7)->defaultValue(0),
-            'base_maintenance_slot' => $this->integer(6)->defaultValue(0),
-            'base_price_buy' => $this->integer(8)->defaultValue(0),
-            'base_price_sell' => $this->integer(7)->defaultValue(0),
-            'base_slot_max' => $this->integer(2)->defaultValue(0),
-            'base_slot_min' => $this->integer(2)->defaultValue(0),
+            'id' => $this->primaryKey(2),
+            'build_speed' => $this->integer(2)->notNull(),
+            'level' => $this->integer(2)->notNull(),
+            'maintenance_base' => $this->integer(7)->notNull(),
+            'maintenance_slot' => $this->integer(6)->notNull(),
+            'price_buy' => $this->integer(8)->notNull(),
+            'price_sell' => $this->integer(7)->notNull(),
+            'slot_max' => $this->integer(2)->notNull(),
+            'slot_min' => $this->integer(2)->notNull(),
         ]);
 
         $this->batchInsert(self::TABLE, [
-            'base_build_speed',
-            'base_level',
-            'base_maintenance_base',
-            'base_maintenance_slot',
-            'base_price_buy',
-            'base_price_sell',
-            'base_slot_max',
-            'base_slot_min',
+            'build_speed',
+            'level',
+            'maintenance_base',
+            'maintenance_slot',
+            'price_buy',
+            'price_sell',
+            'slot_max',
+            'slot_min',
         ], [
             [0, 0, 0, 0, 0, 0, 0, 0],
             [2, 1, 50000, 25000, 500000, 375000, 5, 0],
@@ -48,13 +51,17 @@ class m200106_155218_base extends Migration
             [18, 9, 450000, 225000, 8000000, 6000000, 45, 38],
             [20, 10, 500000, 250000, 10000000, 7500000, 50, 43],
         ]);
+
+        return true;
     }
 
     /**
-     * {@inheritdoc}
+     * @return bool
      */
-    public function safeDown()
+    public function safeDown(): bool
     {
         $this->dropTable(self::TABLE);
+
+        return true;
     }
 }

@@ -1,13 +1,16 @@
 <?php
 
+namespace console\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m200107_094613_election_president
+ * @package console\migrations
  */
 class m200107_094613_election_president extends Migration
 {
-    const TABLE = '{{%election_president}}';
+    private const TABLE = '{{%election_president}}';
 
     /**
      * @return bool|void
