@@ -23,7 +23,7 @@ class M200101000045ForumGroup extends Migration
                 'id' => $this->primaryKey(11),
                 'country_id' => $this->integer(3),
                 'description' => $this->text()->notNull(),
-                'forum_chapter_id' => $this->integer(11)->notNull(),
+                'forum_chapter_id' => $this->integer(1)->notNull(),
                 'name' => $this->string(255)->notNull(),
                 'order' => $this->integer(3)->notNull(),
             ]

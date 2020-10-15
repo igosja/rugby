@@ -21,7 +21,7 @@ class M200101000113Payment extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'log' => $this->text(),
                 'status' => $this->boolean()->defaultValue(false),
                 'sum' => $this->decimal(11, 2)->notNull(),

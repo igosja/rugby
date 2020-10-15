@@ -29,7 +29,7 @@ class M200101000132Snapshot extends Migration
                 'base_scout' => $this->decimal(4, 2)->defaultValue(0),
                 'base_training' => $this->decimal(4, 2)->defaultValue(0),
                 'country' => $this->integer(3)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'manager' => $this->integer(11)->defaultValue(0),
                 'manager_vip_percent' => $this->decimal(5, 2)->defaultValue(0),
                 'manager_with_team' => $this->integer(11)->defaultValue(0),

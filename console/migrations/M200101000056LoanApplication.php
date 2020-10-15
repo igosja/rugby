@@ -21,11 +21,11 @@ class M200101000056LoanApplication extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'day' => $this->integer(1)->notNull(),
                 'deal_reason_id' => $this->integer(2),
+                'is_only_one' => $this->boolean()->defaultValue(false),
                 'loan_id' => $this->integer(11)->notNull(),
-                'only_one' => $this->boolean()->defaultValue(false),
                 'price' => $this->integer(11)->notNull(),
                 'team_id' => $this->integer(11)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

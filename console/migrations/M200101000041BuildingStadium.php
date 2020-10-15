@@ -23,9 +23,9 @@ class M200101000041BuildingStadium extends Migration
                 'id' => $this->primaryKey(11),
                 'capacity' => $this->integer(5)->notNull(),
                 'construction_type_id' => $this->integer(1)->notNull(),
-                'date' => $this->integer(11)->defaultValue(0),
-                'day' => $this->integer(2)->defaultValue(0),
-                'ready' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
+                'day' => $this->integer(2)->notNull(),
+                'ready' => $this->integer(11),
                 'team_id' => $this->integer(11)->notNull(),
             ]
         );

@@ -8,8 +8,8 @@ use common\components\AbstractActiveRecord;
  * Class DealReason
  * @package common\models\db
  *
- * @property int $deal_reason_id
- * @property string $deal_reason_text
+ * @property int $id
+ * @property string $text
  */
 class DealReason extends AbstractActiveRecord
 {
@@ -19,5 +19,17 @@ class DealReason extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%deal_reason}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['text'], 'required'],
+            [['text'], 'trim'],
+            [['text'], 'string', 'max' => 255],
+        ];
     }
 }

@@ -9,21 +9,20 @@ use yii\db\ActiveQuery;
  * Class Stadium
  * @package common\models\db
  *
- * @property int $stadium_id
- * @property int $stadium_capacity
- * @property int $stadium_city_id
- * @property int $stadium_date
- * @property int $stadium_maintenance
- * @property string $stadium_name
+ * @property int $id
+ * @property int $capacity
+ * @property int $city_id
+ * @property int $date
+ * @property int $maintenance
+ * @property string $name
  *
- * @property City $city
- * @property Team $team
+ * @property-read City $city
  */
 class Stadium extends AbstractActiveRecord
 {
-    const ONE_SIT_PRICE_BUY = 200;
-    const ONE_SIT_PRICE_SELL = 150;
-    const START_CAPACITY = 100;
+    public const ONE_SIT_PRICE_BUY = 200;
+    public const ONE_SIT_PRICE_SELL = 150;
+    public const START_CAPACITY = 100;
 
     /**
      * @return string
@@ -34,28 +33,17 @@ class Stadium extends AbstractActiveRecord
     }
 
     /**
-     * @param bool $insert
-     * @return bool
+     * @return array
      */
-    public function beforeSave($insert): bool
+    public function rules(): array
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->stadium_capacity = self::START_CAPACITY;
-            $this->stadium_date = time();
-            $this->stadium_maintenance = $this->countMaintenance();
-        }
-        return true;
-    }
-
-    /**
-     * @return int
-     */
-    public function countMaintenance(): int
-    {
-        return round(pow($this->stadium_capacity / 35, 2));
+        return [
+            [['capacity', 'city_id', 'name'], 'required'],
+            [['capacity'], 'min' => 0, 'max' => 99999],
+            [['city_id', 'maintenance'], 'min' => 1],
+            [['name'], 'trim'],
+            [['city_id'], 'exist', 'targetRelation' => 'city'],
+        ];
     }
 
     /**
@@ -63,14 +51,6 @@ class Stadium extends AbstractActiveRecord
      */
     public function getCity(): ActiveQuery
     {
-        return $this->hasOne(City::class, ['city_id' => 'stadium_city_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getTeam(): ActiveQuery
-    {
-        return $this->hasOne(Team::class, ['team_stadium_id' => 'stadium_id']);
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 }

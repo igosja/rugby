@@ -9,10 +9,12 @@ use yii\db\ActiveQuery;
  * Class PlayerPosition
  * @package common\models\db
  *
- * @property int $player_position_player_id
- * @property int $player_position_position_id
+ * @property int $id
+ * @property int $player_id
+ * @property int $position_id
  *
- * @property Position $position
+ * @property-read Player $player
+ * @property-read Position $position
  */
 class PlayerPosition extends AbstractActiveRecord
 {
@@ -25,10 +27,32 @@ class PlayerPosition extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            [['player_id', 'position_id'], 'required'],
+            [['position_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['player_id'], 'integer', 'min' => 1],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['position_id'], 'exist', 'targetRelation' => 'position'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getPlayer(): ActiveQuery
+    {
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getPosition(): ActiveQuery
     {
-        return $this->hasOne(Position::class, ['position_id' => 'player_position_position_id']);
+        return $this->hasOne(Position::class, ['id' => 'position_id']);
     }
 }

@@ -26,7 +26,7 @@ class M200101000004Stadium extends Migration
                 'id' => $this->primaryKey(11),
                 'capacity' => $this->integer(5)->defaultValue(0),
                 'city_id' => $this->integer(11)->notNull(),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'maintenance' => $this->integer(11)->defaultValue(0),
                 'name' => $this->string(255)->notNull(),
             ]

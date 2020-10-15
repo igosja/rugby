@@ -21,11 +21,11 @@ class M200101000137Support extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'admin_id' => $this->integer(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'admin_user_id' => $this->integer(11),
+                'date' => $this->integer(11)->notNull(),
                 'federation_id' => $this->integer(3),
-                'is_inside' => $this->boolean()->defaultValue(false),
-                'is_question' => $this->integer(1)->defaultValue(1),
+                'is_inside' => $this->boolean(),
+                'is_question' => $this->boolean(),
                 'president_user_id' => $this->integer(11)->defaultValue(1),
                 'read' => $this->integer(11)->defaultValue(0),
                 'text' => $this->text()->notNull(),
@@ -33,7 +33,7 @@ class M200101000137Support extends Migration
             ]
         );
 
-        $this->addForeignKey('support_admin_id', self::TABLE, 'admin_id', '{{%user}}', 'id');
+        $this->addForeignKey('support_admin_user_id', self::TABLE, 'admin_user_id', '{{%user}}', 'id');
         $this->addForeignKey('support_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('support_president_user_id', self::TABLE, 'president_user_id', '{{%user}}', 'id');
         $this->addForeignKey('support_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');

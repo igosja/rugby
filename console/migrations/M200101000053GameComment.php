@@ -21,11 +21,11 @@ class M200101000053GameComment extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'check' => $this->integer(11)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
-                'game_id' => $this->integer(1)->notNull(),
+                'check' => $this->integer(11),
+                'date' => $this->integer(11)->notNull(),
+                'game_id' => $this->integer(11)->notNull(),
                 'text' => $this->text()->notNull(),
-                'user_id' => $this->integer(1)->notNull(),
+                'user_id' => $this->integer(11)->notNull(),
             ]
         );
 

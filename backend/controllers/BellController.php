@@ -5,10 +5,10 @@ namespace backend\controllers;
 use backend\components\AbstractController;
 use common\models\db\Complaint;
 use common\models\db\Logo;
-use common\models\db\Poll;
-use common\models\db\PollStatus;
 use common\models\db\Support;
 use common\models\db\Team;
+use common\models\db\Vote;
+use common\models\db\VoteStatus;
 use Yii;
 use yii\web\Response;
 
@@ -29,8 +29,9 @@ class BellController extends AbstractController
         $freeTeam = Team::find()->where(['team_user_id' => 0])->andWhere(['!=', 'team_id', 0])->count();
         $logo = Logo::find()->where(['!=', 'logo_team_id', 0])->count();
         $photo = Logo::find()->where(['logo_team_id' => 0])->count();
-        $poll = Poll::find()->where(['poll_poll_status_id' => PollStatus::NEW_ONE])->count();
-        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count();
+        $poll = Vote::find()->where(['poll_poll_status_id' => VoteStatus::NEW_ONE])->count();
+        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count(
+        );
 
         $bell = $support + $poll + $logo + $photo + $complaint;
 

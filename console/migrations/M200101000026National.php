@@ -44,6 +44,8 @@ class M200101000026National extends Migration
         $this->addForeignKey('national_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
         $this->addForeignKey('national_national_type_id', self::TABLE, 'national_type_id', '{{%national_type}}', 'id');
         $this->addForeignKey('national_stadium_id', self::TABLE, 'stadium_id', '{{%stadium}}', 'id');
+        $this->addForeignKey('national_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');
+        $this->addForeignKey('national_vice_user_id', self::TABLE, 'vice_user_id', '{{%user}}', 'id');
 
         $this->batchInsert(
             self::TABLE,

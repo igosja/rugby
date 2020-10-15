@@ -3,16 +3,13 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use yii\db\ActiveQuery;
 
 /**
  * Class Surname
  * @package common\models\db
  *
- * @property int $surname_id
- * @property string $surname_name
- *
- * @property Player[] $players
+ * @property int $id
+ * @property string $name
  */
 class Surname extends AbstractActiveRecord
 {
@@ -25,10 +22,14 @@ class Surname extends AbstractActiveRecord
     }
 
     /**
-     * @return ActiveQuery
+     * @return array[]
      */
-    public function getPlayers(): ActiveQuery
+    public function rules(): array
     {
-        return $this->hasMany(Player::class, ['player_surname_id' => 'surname_id']);
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+        ];
     }
 }

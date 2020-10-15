@@ -21,7 +21,7 @@ class M200101000014Schedule extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'season_id' => $this->integer(3)->notNull(),
                 'stage_id' => $this->integer(2)->notNull(),
                 'tournament_type_id' => $this->integer(1)->notNull(),

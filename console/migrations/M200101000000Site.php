@@ -21,7 +21,7 @@ class M200101000000Site extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'date_cron' => $this->integer(11)->defaultValue(0),
+                'date_cron' => $this->integer(11),
                 'status' => $this->boolean()->defaultValue(true),
                 'version_1' => $this->integer(3)->defaultValue(0),
                 'version_2' => $this->integer(3)->defaultValue(0),

@@ -2,6 +2,7 @@
 
 namespace common\models\db;
 
+use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -9,24 +10,25 @@ use yii\db\ActiveQuery;
  * Class Achievement
  * @package common\models\db
  *
- * @property int $achievement_id
- * @property int $achievement_country_id
- * @property int $achievement_division_id
- * @property int $achievement_is_playoff
- * @property int $achievement_national_id
- * @property int $achievement_place
- * @property int $achievement_season_id
- * @property int $achievement_stage_id
- * @property int $achievement_team_id
- * @property int $achievement_tournament_type_id
- * @property int $achievement_user_id
+ * @property int $id
+ * @property int $country_id
+ * @property int $division_id
+ * @property int $national_id
+ * @property int $place
+ * @property int $season_id
+ * @property int $stage_id
+ * @property int $team_id
+ * @property int $tournament_type_id
+ * @property int $user_id
  *
- * @property Country $country
- * @property Division $division
- * @property National $national
- * @property Stage $stage
- * @property Team $team
- * @property TournamentType $tournamentType
+ * @property-read Country $country
+ * @property-read Division $division
+ * @property-read National $national
+ * @property-read Season $season
+ * @property-read Stage $stage
+ * @property-read Team $team
+ * @property-read TournamentType $tournamentType
+ * @property-read User $user
  */
 class Achievement extends AbstractActiveRecord
 {
@@ -39,61 +41,38 @@ class Achievement extends AbstractActiveRecord
     }
 
     /**
-     * @return string
+     * @return array[]
      */
-    public function position(): string
+    public function rules(): array
     {
-        if ($this->achievement_place) {
-            $result = $this->achievement_place;
-            if ($this->achievement_place <= 3) {
-                if (1 === $this->achievement_place) {
-                    $color = 'gold';
-                } elseif (2 === $this->achievement_place) {
-                    $color = 'silver';
-                } else {
-                    $color = '#6A3805';
-                }
-                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
-            }
-        } elseif ($this->stage) {
-            $result = $this->stage->stage_name;
-            if (in_array($this->achievement_stage_id, [Stage::FINAL_GAME, Stage::SEMI], true)) {
-                if (Stage::FINAL_GAME === $this->achievement_stage_id) {
-                    $color = 'silver';
-                } else {
-                    $color = '#6A3805';
-                }
-                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
-            }
-        } else {
-            $result = 'Champion <i class="fa fa-trophy" style="color: gold;"></i>';
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return string
-     */
-    public function tournament(): string
-    {
-        $result = $this->tournamentType->tournament_type_name;
-
-        if ($this->achievement_country_id || $this->achievement_division_id) {
-            $additional = [];
-
-            if ($this->achievement_country_id) {
-                $additional[] = $this->country->country_name;
-            }
-
-            if ($this->achievement_division_id) {
-                $additional[] = $this->division->division_name;
-            }
-
-            $result .= ' (' . implode(', ', $additional) . ')';
-        }
-
-        return $result;
+        return [
+            [['season_id', 'tournament_type_id'], 'required'],
+            [
+                [
+                    'country_id',
+                    'division_id',
+                    'national_id',
+                    'season_id',
+                    'stage_id',
+                    'team_id',
+                    'tournament_type_id',
+                    'user_id',
+                ],
+                'integer',
+                'min' => 0,
+            ],
+            [['national_id'], AtLeastValidator::class, 'in' => ['national_id', 'team_id']],
+            [['place'], AtLeastValidator::class, 'in' => ['place', 'stage_id']],
+            [['place'], 'integer', 'min' => 1, 'max' => 99],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['division_id'], 'exist', 'targetRelation' => 'division'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['season_id'], 'exist', 'targetRelation' => 'season'],
+            [['stage_id'], 'exist', 'targetRelation' => 'stage'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+            [['tournament_type_id'], 'exist', 'targetRelation' => 'tournamentType'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
     }
 
     /**
@@ -101,7 +80,7 @@ class Achievement extends AbstractActiveRecord
      */
     public function getCountry(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'achievement_country_id'])->cache();
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
@@ -109,7 +88,7 @@ class Achievement extends AbstractActiveRecord
      */
     public function getDivision(): ActiveQuery
     {
-        return $this->hasOne(Division::class, ['division_id' => 'achievement_division_id'])->cache();
+        return $this->hasOne(Division::class, ['id' => 'division_id']);
     }
 
     /**
@@ -117,7 +96,15 @@ class Achievement extends AbstractActiveRecord
      */
     public function getNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['national_id' => 'achievement_national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'national_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSeason(): ActiveQuery
+    {
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
     }
 
     /**
@@ -125,7 +112,7 @@ class Achievement extends AbstractActiveRecord
      */
     public function getStage(): ActiveQuery
     {
-        return $this->hasOne(Stage::class, ['stage_id' => 'achievement_stage_id'])->cache();
+        return $this->hasOne(Stage::class, ['id' => 'stage_id']);
     }
 
     /**
@@ -133,7 +120,7 @@ class Achievement extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'achievement_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
     /**
@@ -141,6 +128,14 @@ class Achievement extends AbstractActiveRecord
      */
     public function getTournamentType(): ActiveQuery
     {
-        return $this->hasOne(TournamentType::class, ['tournament_type_id' => 'achievement_tournament_type_id'])->cache();
+        return $this->hasOne(TournamentType::class, ['id' => 'tournament_type_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

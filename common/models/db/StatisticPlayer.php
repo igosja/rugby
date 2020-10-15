@@ -9,47 +9,45 @@ use yii\db\ActiveQuery;
  * Class StatisticPlayer
  * @package common\models\db
  *
- * @property int $statistic_player_id
- * @property int $statistic_player_assist
- * @property int $statistic_player_assist_power
- * @property int $statistic_player_assist_short
- * @property int $statistic_player_shootout_win
- * @property int $statistic_player_championship_playoff
- * @property int $statistic_player_country_id
- * @property int $statistic_player_division_id
- * @property int $statistic_player_face_off
- * @property float $statistic_player_face_off_percent
- * @property int $statistic_player_face_off_win
- * @property int $statistic_player_game
- * @property int $statistic_player_game_with_shootout
- * @property int $statistic_player_is_gk
- * @property int $statistic_player_loose
- * @property int $statistic_player_national_id
- * @property int $statistic_player_pass
- * @property float $statistic_player_pass_per_game
- * @property int $statistic_player_penalty
- * @property int $statistic_player_player_id
- * @property int $statistic_player_plus_minus
- * @property int $statistic_player_point
- * @property int $statistic_player_save
- * @property float $statistic_player_save_percent
- * @property int $statistic_player_score
- * @property int $statistic_player_score_draw
- * @property int $statistic_player_score_power
- * @property int $statistic_player_score_short
- * @property float $statistic_player_score_shot_percent
- * @property int $statistic_player_score_win
- * @property int $statistic_player_season_id
- * @property int $statistic_player_shot
- * @property int $statistic_player_shot_gk
- * @property float $statistic_player_shot_per_game
- * @property int $statistic_player_shutout
- * @property int $statistic_player_team_id
- * @property int $statistic_player_tournament_type_id
- * @property int $statistic_player_win
+ * @property int $id
+ * @property int $assist
+ * @property int $assist_power
+ * @property int $assist_short
+ * @property int $shootout_win
+ * @property int $country_id
+ * @property int $division_id
+ * @property int $face_off
+ * @property float $face_off_percent
+ * @property int $face_off_win
+ * @property int $game
+ * @property int $game_with_shootout
+ * @property int $loose
+ * @property int $national_id
+ * @property int $pass
+ * @property float $pass_per_game
+ * @property int $penalty
+ * @property int $player_id
+ * @property int $plus_minus
+ * @property int $point
+ * @property int $save
+ * @property float $save_percent
+ * @property int $score
+ * @property int $score_draw
+ * @property int $score_power
+ * @property int $score_short
+ * @property float $score_shot_percent
+ * @property int $score_win
+ * @property int $season_id
+ * @property int $shot
+ * @property int $shot_gk
+ * @property float $shot_per_game
+ * @property int $shutout
+ * @property int $team_id
+ * @property int $tournament_type_id
+ * @property int $win
  *
- * @property Player $player
- * @property Team $team
+ * @property-read Player $player
+ * @property-read Team $team
  */
 class StatisticPlayer extends AbstractActiveRecord
 {
@@ -66,7 +64,7 @@ class StatisticPlayer extends AbstractActiveRecord
      */
     public function getPlayer(): ActiveQuery
     {
-        return $this->hasOne(Player::class, ['player_id' => 'statistic_player_player_id']);
+        return $this->hasOne(Player::class, ['player_id' => 'player_id']);
     }
 
     /**
@@ -74,6 +72,6 @@ class StatisticPlayer extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'statistic_player_team_id']);
+        return $this->hasOne(Team::class, ['team_id' => 'team_id']);
     }
 }

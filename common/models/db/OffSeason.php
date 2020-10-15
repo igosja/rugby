@@ -9,26 +9,27 @@ use yii\db\ActiveQuery;
  * Class OffSeason
  * @package common\models\db
  *
- * @property int $off_season_id
- * @property int $off_season_bonus_loose
- * @property int $off_season_bonus_tries
- * @property int $off_season_difference
- * @property int $off_season_draw
- * @property int $off_season_game
- * @property int $off_season_guest
- * @property int $off_season_home
- * @property int $off_season_loose
- * @property int $off_season_place
- * @property int $off_season_point
- * @property int $off_season_point_against
- * @property int $off_season_point_for
- * @property int $off_season_season_id
- * @property int $off_season_team_id
- * @property int $off_season_tries_against
- * @property int $off_season_tries_for
- * @property int $off_season_win
+ * @property int $id
+ * @property int $bonus_loose
+ * @property int $bonus_tries
+ * @property int $difference
+ * @property int $draw
+ * @property int $game
+ * @property int $guest
+ * @property int $home
+ * @property int $loose
+ * @property int $place
+ * @property int $point
+ * @property int $point_against
+ * @property int $point_for
+ * @property int $season_id
+ * @property int $team_id
+ * @property int $tries_against
+ * @property int $tries_for
+ * @property int $win
  *
- * @property Team $team
+ * @property-read Season $season
+ * @property-read Team $team
  */
 class OffSeason extends AbstractActiveRecord
 {
@@ -41,10 +42,35 @@ class OffSeason extends AbstractActiveRecord
     }
 
     /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['place', 'season_id', 'team_id'], 'required'],
+            [['bonus_loose', 'bonus_tries', 'point'], 'integer', 'min' => 0, 'max' => 99],
+            [['difference', 'season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
+            [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 12],
+            [['place', 'team_id'], 'integer', 'min' => 1],
+            [['point_against', 'point_for'], 'integer', 'min' => 0, 'max' => 9999],
+            [['season_id'], 'exist', 'targetRelation' => 'season'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSeason(): ActiveQuery
+    {
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'off_season_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 }

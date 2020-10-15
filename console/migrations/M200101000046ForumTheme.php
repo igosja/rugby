@@ -22,8 +22,8 @@ class M200101000046ForumTheme extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'count_view' => $this->integer(11)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
-                'date_update' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
+                'date_update' => $this->integer(11),
                 'forum_group_id' => $this->integer(11)->notNull(),
                 'name' => $this->string(255)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

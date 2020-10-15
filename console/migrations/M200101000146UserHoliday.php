@@ -21,8 +21,8 @@ class M200101000146UserHoliday extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date_end' => $this->integer(11)->defaultValue(0),
-                'date_start' => $this->integer(11)->defaultValue(0),
+                'date_end' => $this->integer(11),
+                'date_start' => $this->integer(11)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
             ]
         );

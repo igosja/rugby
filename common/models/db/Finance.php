@@ -3,41 +3,41 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Exception;
 use yii\db\ActiveQuery;
 
 /**
  * Class Finance
  * @package common\models\db
  *
- * @property int $finance_id
- * @property int $finance_building_id
- * @property int $finance_capacity
- * @property string $finance_comment
- * @property int $finance_country_id
- * @property int $finance_date
- * @property int $finance_finance_text_id
- * @property int $finance_level
- * @property int $finance_loan_id
- * @property int $finance_national_id
- * @property int $finance_player_id
- * @property int $finance_season_id
- * @property int $finance_team_id
- * @property int $finance_transfer_id
- * @property int $finance_user_id
- * @property int $finance_value
- * @property int $finance_value_after
- * @property int $finance_value_before
+ * @property int $id
+ * @property int $building_id
+ * @property int $capacity
+ * @property string $comment
+ * @property int $country_id
+ * @property int $date
+ * @property int $finance_text_id
+ * @property int $level
+ * @property int $loan_id
+ * @property int $national_id
+ * @property int $player_id
+ * @property int $season_id
+ * @property int $team_id
+ * @property int $transfer_id
+ * @property int $user_id
+ * @property int $value
+ * @property int $value_after
+ * @property int $value_before
  *
- * @property Building $building
- * @property Country $country
- * @property FinanceText $financeText
- * @property Loan $loan
- * @property National $national
- * @property Player $player
- * @property Team $team
- * @property Transfer $transfer
- * @property User $user
+ * @property-read Building $building
+ * @property-read Country $country
+ * @property-read FinanceText $financeText
+ * @property-read Loan $loan
+ * @property-read National $national
+ * @property-read Player $player
+ * @property-read Season $season
+ * @property-read Team $team
+ * @property-read Transfer $transfer
+ * @property-read User $user
  */
 class Finance extends AbstractActiveRecord
 {
@@ -50,170 +50,28 @@ class Finance extends AbstractActiveRecord
     }
 
     /**
-     * @return array
+     * @return array[]
      */
     public function rules(): array
     {
         return [
-            [
-                [
-                    'finance_id',
-                    'finance_building_id',
-                    'finance_capacity',
-                    'finance_country_id',
-                    'finance_finance_text_id',
-                    'finance_loan_id',
-                    'finance_national_id',
-                    'finance_player_id',
-                    'finance_team_id',
-                    'finance_transfer_id',
-                    'finance_user_id',
-                    'finance_value',
-                    'finance_value_after',
-                    'finance_value_before'
-                ],
-                'integer'
-            ],
-            [['finance_level'], 'integer', 'min' => 0, 'max' => 10],
-            [['finance_finance_text_id', 'finance_value', 'finance_value_after', 'finance_value_before'], 'required'],
-            [['finance_comment'], 'string', 'max' => 255],
-            [
-                ['finance_building_id'],
-                'exist',
-                'targetRelation' => 'building',
-            ],
-            [
-                ['finance_country_id'],
-                'exist',
-                'targetRelation' => 'country',
-            ],
-            [
-                ['finance_finance_text_id'],
-                'exist',
-                'targetRelation' => 'financeText',
-            ],
-            [
-                ['finance_loan_id'],
-                'exist',
-                'targetRelation' => 'loan',
-            ],
-            [
-                ['finance_national_id'],
-                'exist',
-                'targetRelation' => 'national',
-            ],
-            [
-                ['finance_player_id'],
-                'exist',
-                'targetRelation' => 'player',
-            ],
-            [
-                ['finance_team_id'],
-                'exist',
-                'targetRelation' => 'team',
-            ],
-            [
-                ['finance_transfer_id'],
-                'exist',
-                'targetRelation' => 'transfer',
-            ],
-            [
-                ['finance_user_id'],
-                'exist',
-                'targetRelation' => 'user',
-            ],
+            [['season_id', 'value', 'value_after', 'value_before'], 'required'],
+            [['building_id'], 'integer', 'min' => 0, 'max' => 9],
+            [['finance_text_id', 'level'], 'integer', 'min' => 0, 'max' => 99],
+            [['country_id', 'national_id', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['capacity'], 'integer', 'min' => 0, 'max' => 99999],
+            [['loan_id', 'player_id', 'transfer_id', 'user_id'], 'integer', 'min' => 0],
+            [['building_id'], 'exist', 'targetRelation' => 'building'],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['finance_text_id'], 'exist', 'targetRelation' => 'financeText'],
+            [['loan_id'], 'exist', 'targetRelation' => 'loan'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['season_id'], 'exist', 'targetRelation' => 'season'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+            [['transfer_id'], 'exist', 'targetRelation' => 'transfer'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
-    }
-
-    /**
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert): bool
-    {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            if (!$this->finance_season_id) {
-                $this->finance_season_id = Season::getCurrentSeason();
-            }
-            $this->finance_date = time();
-        }
-        return true;
-    }
-
-    /**
-     * @param array $data
-     * @return bool
-     * @throws Exception
-     */
-    public static function log(array $data): bool
-    {
-        $history = new self();
-        $history->setAttributes($data);
-        return $history->save();
-    }
-
-    /**
-     * @return string
-     */
-    public function text(): string
-    {
-        $text = $this->financeText->finance_text_text;
-        if (false !== strpos($text, '{player}')) {
-            $text = str_replace(
-                '{player}',
-                $this->player->playerLink(),
-                $text
-            );
-        }
-        if (false !== strpos($text, '{team}')) {
-            $text = str_replace(
-                '{team}',
-                $this->team->teamLink(),
-                $text
-            );
-        }
-        if (false !== strpos($text, '{user}')) {
-            $text = str_replace(
-                '{user}',
-                $this->user->userLink(),
-                $text
-            );
-        }
-        if (false !== strpos($text, '{building}')) {
-            $building = '';
-            if (Building::BASE === $this->finance_building_id) {
-                $building = 'база';
-            } elseif (Building::MEDICAL === $this->finance_building_id) {
-                $building = 'медцентр';
-            } elseif (Building::PHYSICAL === $this->finance_building_id) {
-                $building = 'центр физподготовки';
-            } elseif (Building::SCHOOL === $this->finance_building_id) {
-                $building = 'спортшкола';
-            } elseif (Building::SCOUT === $this->finance_building_id) {
-                $building = 'скаут-центр';
-            } elseif (Building::TRAINING === $this->finance_building_id) {
-                $building = 'тренировочный центр';
-            }
-            $text = str_replace(
-                '{building}',
-                $building,
-                $text
-            );
-        }
-        $text = str_replace(
-            ['{capacity}', '{level}'],
-            [$this->finance_capacity, $this->finance_level],
-            $text
-        );
-
-        if ($this->finance_comment) {
-            $text .= ' (' . $this->finance_comment . ')';
-        }
-
-        return $text;
     }
 
     /**
@@ -221,7 +79,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getBuilding(): ActiveQuery
     {
-        return $this->hasOne(Building::class, ['building_id' => 'finance_building_id'])->cache();
+        return $this->hasOne(Building::class, ['id' => 'building_id']);
     }
 
     /**
@@ -229,7 +87,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getCountry(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'finance_country_id'])->cache();
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
@@ -237,7 +95,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getFinanceText(): ActiveQuery
     {
-        return $this->hasOne(FinanceText::class, ['finance_text_id' => 'finance_finance_text_id'])->cache();
+        return $this->hasOne(FinanceText::class, ['id' => 'finance_text_id']);
     }
 
     /**
@@ -245,7 +103,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getLoan(): ActiveQuery
     {
-        return $this->hasOne(Loan::class, ['loan_id' => 'finance_loan_id'])->cache();
+        return $this->hasOne(Loan::class, ['id' => 'loan_id']);
     }
 
     /**
@@ -253,7 +111,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getNational(): ActiveQuery
     {
-        return $this->hasOne(Loan::class, ['national_id' => 'finance_national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'national_id']);
     }
 
     /**
@@ -261,7 +119,15 @@ class Finance extends AbstractActiveRecord
      */
     public function getPlayer(): ActiveQuery
     {
-        return $this->hasOne(Player::class, ['player_id' => 'finance_player_id'])->cache();
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSeason(): ActiveQuery
+    {
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
     }
 
     /**
@@ -269,7 +135,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'finance_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
     /**
@@ -277,7 +143,7 @@ class Finance extends AbstractActiveRecord
      */
     public function getTransfer(): ActiveQuery
     {
-        return $this->hasOne(Transfer::class, ['transfer_id' => 'finance_transfer_id'])->cache();
+        return $this->hasOne(Transfer::class, ['id' => 'transfer_id']);
     }
 
     /**
@@ -285,6 +151,6 @@ class Finance extends AbstractActiveRecord
      */
     public function getUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'finance_user_id'])->cache();
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

@@ -9,12 +9,11 @@ use yii\db\ActiveQuery;
  * Class City
  * @package common\models\db
  *
- * @property int $city_id
- * @property int $city_country_id
- * @property string $city_name
+ * @property int $id
+ * @property int $country_id
+ * @property string $name
  *
- * @property Country $country
- * @property Stadium[] $stadiums
+ * @property-read Country $country
  */
 class City extends AbstractActiveRecord
 {
@@ -27,18 +26,24 @@ class City extends AbstractActiveRecord
     }
 
     /**
-     * @return ActiveQuery
+     * @return array[]
      */
-    public function getCountry(): ActiveQuery
+    public function rules(): array
     {
-        return $this->hasOne(Country::class, ['country_id' => 'city_country_id']);
+        return [
+            [['country_id', 'name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+            [['country_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+        ];
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getStadiums(): ActiveQuery
+    public function getCountry(): ActiveQuery
     {
-        return $this->hasMany(Stadium::class, ['stadium_city_id' => 'city_id']);
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 }

@@ -21,7 +21,7 @@ class M200101000093FriendlyInvite extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'friendly_invite_status_id' => $this->integer(1)->notNull(),
                 'guest_team_id' => $this->integer(11)->notNull(),
                 'guest_user_id' => $this->integer(11)->notNull(),

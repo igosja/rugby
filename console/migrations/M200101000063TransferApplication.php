@@ -21,7 +21,7 @@ class M200101000063TransferApplication extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'deal_reason_id' => $this->integer(2),
                 'is_only_one' => $this->boolean(),
                 'price' => $this->integer(11)->notNull(),

@@ -21,7 +21,7 @@ class M200101000065TransferPosition extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'position_id' => $this->integer(1)->defaultValue(0),
+                'position_id' => $this->integer(2)->defaultValue(0),
                 'transfer_id' => $this->integer(11)->defaultValue(0),
             ]
         );

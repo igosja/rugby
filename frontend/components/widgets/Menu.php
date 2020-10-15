@@ -249,15 +249,15 @@ class Menu extends Widget
 //                ->andWhere(['>', 'news_id', $controller->user->user_news_id])
 //                ->count();
 //
-//            $poll = Poll::find()
-//                ->where(['poll_poll_status_id' => PollStatus::OPEN, 'poll_country_id' => 0])
+//            $poll = Vote::find()
+//                ->where(['poll_poll_status_id' => VoteStatus::OPEN, 'poll_country_id' => 0])
 //                ->andWhere([
 //                    'not',
 //                    [
-//                        'poll_id' => PollAnswer::find()
+//                        'poll_id' => VoteAnswer::find()
 //                            ->select(['poll_answer_poll_id'])
 //                            ->where([
-//                                'poll_answer_id' => PollUser::find()
+//                                'poll_answer_id' => VoteUser::find()
 //                                    ->select(['poll_user_poll_answer_id'])
 //                                    ->where(['poll_user_user_id' => Yii::$app->user->id])
 //                            ])
@@ -290,18 +290,18 @@ class Menu extends Widget
 //                $countryInfo = $countryNews + $supportManager + $supportAdmin + $supportPresident;
 //
 //                if (!$poll) {
-//                    $poll = Poll::find()
+//                    $poll = Vote::find()
 //                        ->where([
-//                            'poll_poll_status_id' => PollStatus::OPEN,
+//                            'poll_poll_status_id' => VoteStatus::OPEN,
 //                            'poll_country_id' => $controller->myTeam->stadium->city->country->country_id,
 //                        ])
 //                        ->andWhere([
 //                            'not',
 //                            [
-//                                'poll_id' => PollAnswer::find()
+//                                'poll_id' => VoteAnswer::find()
 //                                    ->select(['poll_answer_poll_id'])
 //                                    ->where([
-//                                        'poll_answer_id' => PollUser::find()
+//                                        'poll_answer_id' => VoteUser::find()
 //                                            ->select(['poll_user_poll_answer_id'])
 //                                            ->where(['poll_user_user_id' => Yii::$app->user->id])
 //                                    ])

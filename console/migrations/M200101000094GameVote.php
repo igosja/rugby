@@ -22,7 +22,7 @@ class M200101000094GameVote extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'game_id' => $this->integer(11)->notNull(),
-                'rating' => $this->integer(2)->notNull(),
+                'rating' => $this->integer(1)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
             ]
         );

@@ -4,33 +4,35 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
-use yii\helpers\Html;
 
 /**
  * Class National
  * @package common\models\db
  *
- * @property int $national_id
- * @property int $national_country_id
- * @property int $national_finance
- * @property int $national_mood_rest
- * @property int $national_mood_super
- * @property int $national_national_type_id
- * @property int $national_power_c_21
- * @property int $national_power_c_26
- * @property int $national_power_c_32
- * @property int $national_power_s_21
- * @property int $national_power_s_26
- * @property int $national_power_s_32
- * @property int $national_power_v
- * @property int $national_power_vs
- * @property int $national_stadium_id
- * @property int $national_user_id
- * @property int $national_vice_id
- * @property int $national_visitor
+ * @property int $id
+ * @property int $country_id
+ * @property int $finance
+ * @property int $mood_rest
+ * @property int $mood_super
+ * @property int $national_type_id
+ * @property int $power_c_15
+ * @property int $power_c_19
+ * @property int $power_c_24
+ * @property int $power_s_15
+ * @property int $power_s_19
+ * @property int $power_s_24
+ * @property int $power_v
+ * @property int $power_vs
+ * @property int $stadium_id
+ * @property int $user_id
+ * @property int $vice_user_id
+ * @property int $visitor
  *
- * @property Country $country
- * @property NationalType $nationalType
+ * @property-read Country $country
+ * @property-read NationalType $nationalType
+ * @property-read Stadium $stadium
+ * @property-read User $user
+ * @property-read User $viceUser
  */
 class National extends AbstractActiveRecord
 {
@@ -43,26 +45,37 @@ class National extends AbstractActiveRecord
     }
 
     /**
-     * @param bool $image
-     * @return string
+     * @return array[]
      */
-    public function nationalLink(bool $image = false): string
+    public function rules(): array
     {
-        $result = '';
-        if ($image) {
-            $result .= Html::img(
-                    '/img/country/12/' . $this->country->country_id . '.png',
-                    [
-                        'alt' => $this->country->country_name,
-                        'title' => $this->country->country_name,
-                    ]
-                ) . ' ';
-        }
-        $result .= Html::a(
-            $this->country->country_name . ' (' . $this->nationalType->national_type_name . ')',
-            ['national/view', 'id' => $this->national_id]
-        );
-        return $result;
+        return [
+            [['country_id', 'national_type_id'], 'required'],
+            [['mood_rest', 'mood_super', 'national_type_id'], 'integer', 'min' => 1, 'max' => 9],
+            [['country_id', 'visitor'], 'integer', 'min' => 1, 'max' => 999],
+            [
+                [
+                    'power_c_15',
+                    'power_c_19',
+                    'power_c_24',
+                    'power_s_15',
+                    'power_s_19',
+                    'power_s_24',
+                    'power_v',
+                    'power_vs',
+                ],
+                'integer',
+                'min' => 1,
+                'max' => 99999
+            ],
+            [['finance'], 'integer', 'min' => 0],
+            [['stadium_id', 'user_id', 'vice_user_id'], 'integer', 'min' => 1],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['national_type_id'], 'exist', 'targetRelation' => 'nationalType'],
+            [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+            [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
+        ];
     }
 
     /**
@@ -70,7 +83,7 @@ class National extends AbstractActiveRecord
      */
     public function getCountry(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'national_country_id']);
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
@@ -78,6 +91,30 @@ class National extends AbstractActiveRecord
      */
     public function getNationalType(): ActiveQuery
     {
-        return $this->hasOne(NationalType::class, ['national_type_id' => 'national_national_type_id']);
+        return $this->hasOne(NationalType::class, ['id' => 'national_type_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getStadium(): ActiveQuery
+    {
+        return $this->hasOne(Stadium::class, ['id' => 'stadium_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getViceUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'vice_user_id']);
     }
 }

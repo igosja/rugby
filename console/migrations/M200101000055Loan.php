@@ -23,8 +23,7 @@ class M200101000055Loan extends Migration
                 'id' => $this->primaryKey(11),
                 'age' => $this->integer(2)->defaultValue(0),
                 'cancel' => $this->integer(11)->defaultValue(0),
-                'check' => $this->integer(11)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'day' => $this->integer(1),
                 'day_max' => $this->integer(1)->notNull(),
                 'day_min' => $this->integer(1)->notNull(),
@@ -33,12 +32,13 @@ class M200101000055Loan extends Migration
                 'power' => $this->integer(3)->defaultValue(0),
                 'price_buyer' => $this->integer(11)->defaultValue(0),
                 'price_seller' => $this->integer(11)->notNull(),
-                'ready' => $this->integer(11)->defaultValue(0),
+                'ready' => $this->integer(11),
                 'season_id' => $this->integer(3)->notNull(),
                 'team_buyer_id' => $this->integer(11),
                 'team_seller_id' => $this->integer(11)->notNull(),
                 'user_buyer_id' => $this->integer(11),
-                'user_seller_id' => $this->integer(11)->defaultValue(0),
+                'user_seller_id' => $this->integer(11)->notNull(),
+                'voted' => $this->integer(11),
             ]
         );
 

@@ -12,11 +12,11 @@ use common\models\db\Logo;
 use common\models\db\News;
 use common\models\db\NewsComment;
 use common\models\db\Payment;
-use common\models\db\Poll;
-use common\models\db\PollStatus;
 use common\models\db\Support;
 use common\models\db\Team;
 use common\models\db\TransferComment;
+use common\models\db\Vote;
+use common\models\db\VoteStatus;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Response;
@@ -76,7 +76,7 @@ class SiteController extends AbstractController
         $newsComment = NewsComment::find()->where(['news_comment_check' => 0])->count();
         $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count();
         $transferComment = TransferComment::find()->where(['transfer_comment_check' => 0])->count();
-        $poll = Poll::find()->where(['poll_poll_status_id' => PollStatus::NEW_ONE])->count();
+        $poll = Vote::find()->where(['poll_poll_status_id' => VoteStatus::NEW_ONE])->count();
 
         $countModeration = 0;
         $countModeration = $countModeration + $forumMessage;

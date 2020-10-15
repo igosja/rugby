@@ -8,9 +8,9 @@ use common\components\AbstractActiveRecord;
  * Class ForumChapter
  * @package common\models\db
  *
- * @property int $forum_chapter_id
- * @property string $forum_chapter_name
- * @property int $forum_chapter_order
+ * @property int $id
+ * @property string $name
+ * @property int $order
  */
 class ForumChapter extends AbstractActiveRecord
 {
@@ -20,5 +20,18 @@ class ForumChapter extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%forum_chapter}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+            [['order'], 'integer', 'min' => 1, 'max' => 9],
+        ];
     }
 }

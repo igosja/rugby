@@ -2,6 +2,7 @@
 
 namespace common\models\db;
 
+use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -9,30 +10,30 @@ use yii\db\ActiveQuery;
  * Class Lineup
  * @package common\models\db
  *
- * @property int $lineup_id
- * @property int $lineup_age
- * @property int $lineup_captain
- * @property int $lineup_conversion
- * @property int $lineup_drop_goal
- * @property int $lineup_game_id
- * @property int $lineup_minute
- * @property int $lineup_national_id
- * @property int $lineup_penalty
- * @property int $lineup_player_id
- * @property int $lineup_plus_minus
- * @property int $lineup_point
- * @property int $lineup_position_id
- * @property int $lineup_power_change
- * @property int $lineup_power_nominal
- * @property int $lineup_power_real
- * @property int $lineup_red_card
- * @property int $lineup_team_id
- * @property int $lineup_try
- * @property int $lineup_yellow_card
+ * @property int $id
+ * @property int $age
+ * @property int $conversion
+ * @property int $drop_goal
+ * @property int $game_id
+ * @property bool $is_captain
+ * @property int $minute
+ * @property int $national_id
+ * @property int $player_id
+ * @property int $point
+ * @property int $position_id
+ * @property int $power_change
+ * @property int $power_nominal
+ * @property int $power_real
+ * @property int $red_card
+ * @property int $team_id
+ * @property int $try
+ * @property int $yellow_card
  *
- * @property Game $game
- * @property LineupSpecial[] $lineupSpecial
- * @property Position $position
+ * @property-read Game $game
+ * @property-read National $national
+ * @property-read Player $player
+ * @property-read Position $position
+ * @property-read Team $team
  */
 class Lineup extends AbstractActiveRecord
 {
@@ -44,39 +45,25 @@ class Lineup extends AbstractActiveRecord
         return '{{%lineup}}';
     }
 
-    public function iconCaptain(): string
-    {
-        $result = '';
-        if ($this->lineup_captain) {
-            $result = '<i class="fa fa-copyright" title="Captain"></i>';
-        }
-        return $result;
-    }
-
     /**
-     * @return string
+     * @return array[]
      */
-    public function special(): string
+    public function rules(): array
     {
-        $result = [];
-        foreach ($this->lineupSpecial as $special) {
-            $result[] = $special->special->special_name . $special->lineup_special_level;
-        }
-        return implode(' ', $result);
-    }
-
-    /**
-     * @return string
-     */
-    public function iconPowerChange(): string
-    {
-        $result = '';
-        if ($this->lineup_power_change > 0) {
-            $result = '<i class="fa fa-plus-square-o font-green" title="+1 балл по результатам матча"></i>';
-        } elseif ($this->lineup_power_change < 0) {
-            $result = '<i class="fa fa-minus-square-o font-red" title="-1 балл по результатам матча"></i>';
-        }
-        return $result;
+        return [
+            [['game_id', 'player_id', 'position_id'], 'required'],
+            [['national_id'], AtLeastValidator::class, 'in' => ['national_id', 'team_id']],
+            [['is_captain'], 'boolean'],
+            [['drop_goal', 'red_card', 'try', 'yellow_card'], 'integer', 'min' => 0, 'max' => 9],
+            [['conversion', 'minute', 'point', 'position_id'], 'integer', 'min' => 0, 'max' => 99],
+            [['national_id', 'power_nominal', 'power_real', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['game_id', 'player_id', 'team_id'], 'integer', 'min' => 1],
+            [['game_id'], 'exist', 'targetRelation' => 'game'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['position_id'], 'exist', 'targetRelation' => 'position'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+        ];
     }
 
     /**
@@ -84,15 +71,23 @@ class Lineup extends AbstractActiveRecord
      */
     public function getGame(): ActiveQuery
     {
-        return $this->hasOne(Game::class, ['game_id' => 'lineup_game_id']);
+        return $this->hasOne(Game::class, ['id' => 'game_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getLineupSpecial(): ActiveQuery
+    public function getNational(): ActiveQuery
     {
-        return $this->hasMany(LineupSpecial::class, ['lineup_special_lineup_id' => 'lineup_id']);
+        return $this->hasOne(National::class, ['id' => 'national_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getPlayer(): ActiveQuery
+    {
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
     }
 
     /**
@@ -100,6 +95,14 @@ class Lineup extends AbstractActiveRecord
      */
     public function getPosition(): ActiveQuery
     {
-        return $this->hasOne(Position::class, ['position_id' => 'lineup_position_id']);
+        return $this->hasOne(Position::class, ['id' => 'position_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTeam(): ActiveQuery
+    {
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 }

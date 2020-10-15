@@ -21,8 +21,8 @@ class M200101000021News extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'check' => $this->integer(11)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
+                'check' => $this->integer(11),
+                'date' => $this->integer(11)->notNull(),
                 'federation_id' => $this->integer(3),
                 'text' => $this->text()->notNull(),
                 'title' => $this->string(255)->notNull(),

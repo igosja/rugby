@@ -8,9 +8,9 @@ use common\components\AbstractActiveRecord;
  * Class RatingChapter
  * @package common\models\db
  *
- * @property int $rating_chapter_id
- * @property string $rating_chapter_name
- * @property int $rating_chapter_order
+ * @property int $id
+ * @property string $name
+ * @property int $order
  */
 class RatingChapter extends AbstractActiveRecord
 {
@@ -20,5 +20,18 @@ class RatingChapter extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%rating_chapter}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name', 'order'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+            [['order'], 'integer', 'min' => 1, 'max' => 9],
+        ];
     }
 }

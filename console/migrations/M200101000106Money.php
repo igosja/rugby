@@ -21,7 +21,7 @@ class M200101000106Money extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'money_text_id' => $this->integer(2)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
                 'value' => $this->decimal(11, 2)->notNull(),
