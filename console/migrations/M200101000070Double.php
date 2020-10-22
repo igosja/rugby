@@ -23,7 +23,7 @@ class M200101000070Double extends Migration
                 'id' => $this->primaryKey(11),
                 'child_user_id' => $this->integer(11)->notNull(),
                 'count' => $this->integer(3)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'parent_user_id' => $this->integer(11)->notNull(),
             ]
         );

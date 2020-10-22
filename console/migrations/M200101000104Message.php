@@ -21,10 +21,10 @@ class M200101000104Message extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
-                'read' => $this->integer(11)->defaultValue(0),
-                'text' => $this->text()->notNull(),
+                'date' => $this->integer(11)->notNull(),
                 'from_user_id' => $this->integer(11)->notNull(),
+                'read' => $this->integer(11),
+                'text' => $this->text()->notNull(),
                 'to_user_id' => $this->integer(11)->notNull(),
             ]
         );

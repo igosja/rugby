@@ -34,7 +34,7 @@ class M200101000148UserRating extends Migration
                 'loose_strong' => $this->integer(11)->defaultValue(0),
                 'loose_super' => $this->integer(11)->defaultValue(0),
                 'loose_weak' => $this->integer(11)->defaultValue(0),
-                'rating' => $this->decimal(6.2)->defaultValue(0),
+                'rating' => $this->decimal(6, 2)->defaultValue(0),
                 'season_id' => $this->integer(3),
                 'user_id' => $this->integer(11)->notNull(),
                 'vs_super' => $this->integer(11)->defaultValue(0),

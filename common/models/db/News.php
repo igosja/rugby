@@ -3,26 +3,23 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Throwable;
-use Yii;
 use yii\db\ActiveQuery;
-use yii\db\StaleObjectException;
 
 /**
  * Class News
  * @package common\models\db
  *
- * @property int $news_id
- * @property int $news_check
- * @property int $news_country_id
- * @property int $news_date
- * @property string $news_text
- * @property string $news_title
- * @property int $news_user_id
+ * @property int $id
+ * @property int $check
+ * @property int $federation_id
+ * @property int $date
+ * @property string $text
+ * @property string $title
+ * @property int $user_id
  *
- * @property Country $country
- * @property NewsComment[] $newsComments
- * @property User $user
+ * @property-read Federation $federation
+ * @property-read NewsComment[] $newsComments
+ * @property-read User $user
  */
 class News extends AbstractActiveRecord
 {
@@ -40,68 +37,22 @@ class News extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['news_id', 'news_check', 'news_country_id', 'news_date', 'news_user_id'], 'integer'],
-            [['news_text', 'news_title'], 'required'],
-            [['news_title'], 'string', 'max' => 255],
-            [['news_text', 'news_title'], 'trim'],
-            [
-                ['news_country_id'],
-                'exist',
-                'targetRelation' => 'country',
-            ],
-            [
-                ['news_user_id'],
-                'exist',
-                'targetRelation' => 'user',
-            ],
+            [['text', 'title', 'user_id'], 'required'],
+            [['check', 'federation_id', 'user_id'], 'integer'],
+            [['text', 'title'], 'trim'],
+            [['title'], 'string', 'max' => 255],
+            [['text'], 'string'],
+            [['federation_id'], 'exist', 'targetRelation' => 'country'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
-    }
-
-    /**
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert): bool
-    {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->news_date = time();
-            if (!$this->news_user_id) {
-                $this->news_user_id = Yii::$app->user->id;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * @return bool
-     * @throws Throwable
-     * @throws StaleObjectException
-     */
-    public function beforeDelete(): bool
-    {
-        foreach ($this->newsComments as $newsComment) {
-            $newsComment->delete();
-        }
-        return parent::beforeDelete();
-    }
-
-    /**
-     * @return string
-     */
-    public function text(): string
-    {
-        return nl2br($this->news_text);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'news_country_id'])->cache();
+        return $this->hasOne(Federation::class, ['id' => 'federation_id'])->cache();
     }
 
     /**
@@ -109,7 +60,7 @@ class News extends AbstractActiveRecord
      */
     public function getNewsComments(): ActiveQuery
     {
-        return $this->hasMany(NewsComment::class, ['news_comment_news_id' => 'news_id']);
+        return $this->hasMany(NewsComment::class, ['comment_id' => 'id']);
     }
 
     /**
@@ -117,6 +68,6 @@ class News extends AbstractActiveRecord
      */
     public function getUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'news_user_id'])->cache();
+        return $this->hasOne(User::class, ['user_id' => 'user_id'])->cache();
     }
 }

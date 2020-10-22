@@ -21,7 +21,7 @@ class M200101000073ElectionNationalApplication extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'election_national_id' => $this->integer(11)->notNull(),
                 'text' => $this->text()->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

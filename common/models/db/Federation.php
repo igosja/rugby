@@ -9,18 +9,18 @@ use yii\db\ActiveQuery;
  * Class Federation
  * @package common\models\db
  *
- * @property int $federation_id
- * @property int $federation_auto
- * @property int $federation_country_id
- * @property int $federation_finance
- * @property int $federation_game
- * @property int $federation_president_id
- * @property int $federation_stadium_capacity
- * @property int $federation_vice_id
+ * @property int $id
+ * @property int $auto
+ * @property int $country_id
+ * @property int $finance
+ * @property int $game
+ * @property int $president_user_id
+ * @property int $stadium_capacity
+ * @property int $vice_user_id
  *
- * @property Country $country
- * @property User $president
- * @property User $vice
+ * @property-read Country $country
+ * @property-read User $presidentUser
+ * @property-read User $viceUser
  */
 class Federation extends AbstractActiveRecord
 {
@@ -33,70 +33,18 @@ class Federation extends AbstractActiveRecord
     }
 
     /**
-     * @return int
+     * @return array[]
      */
-    public function attitudePresident(): int
+    public function rules(): array
     {
-        $result = 0;
-        foreach ($this->country->cities as $city) {
-            foreach ($city->stadiums as $stadium) {
-                if ($stadium->team->team_user_id) {
-                    $result++;
-                }
-            }
-        }
-        if (!$result) {
-            $result = 1;
-        }
-        return $result;
-    }
-
-    /**
-     * @return int
-     */
-    public function attitudePresidentNegative(): int
-    {
-        $result = 0;
-        foreach ($this->country->cities as $city) {
-            foreach ($city->stadiums as $stadium) {
-                if (Attitude::NEGATIVE == $stadium->team->team_attitude_president && $stadium->team->team_user_id) {
-                    $result++;
-                }
-            }
-        }
-        return round($result / $this->attitudePresident() * 100);
-    }
-
-    /**
-     * @return int
-     */
-    public function attitudePresidentNeutral(): int
-    {
-        $result = 0;
-        foreach ($this->country->cities as $city) {
-            foreach ($city->stadiums as $stadium) {
-                if (Attitude::NEUTRAL == $stadium->team->team_attitude_president && $stadium->team->team_user_id) {
-                    $result++;
-                }
-            }
-        }
-        return round($result / $this->attitudePresident() * 100);
-    }
-
-    /**
-     * @return int
-     */
-    public function attitudePresidentPositive(): int
-    {
-        $result = 0;
-        foreach ($this->country->cities as $city) {
-            foreach ($city->stadiums as $stadium) {
-                if (Attitude::POSITIVE == $stadium->team->team_attitude_president && $stadium->team->team_user_id) {
-                    $result++;
-                }
-            }
-        }
-        return round($result / $this->attitudePresident() * 100);
+        return [
+            [['country_id'], 'required'],
+            [['country_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['auto', 'game', 'stadium_capacity'], 'integer', 'min' => 0, 'max' => 99999],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['president_user_id'], 'exist', 'targetRelation' => 'presidentUser'],
+            [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
+        ];
     }
 
     /**
@@ -104,22 +52,22 @@ class Federation extends AbstractActiveRecord
      */
     public function getCountry(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'federation_country_id']);
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getPresident(): ActiveQuery
+    public function getPresidentUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'federation_president_id']);
+        return $this->hasOne(User::class, ['id' => 'president_user_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getVice(): ActiveQuery
+    public function getViceUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'federation_vice_id']);
+        return $this->hasOne(User::class, ['id' => 'vice_user_id']);
     }
 }

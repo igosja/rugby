@@ -8,15 +8,15 @@ use common\components\AbstractActiveRecord;
  * Class Attitude
  * @package common\models\db
  *
- * @property int $attitude_id
- * @property string $attitude_name
- * @property int $attitude_order
+ * @property int $id
+ * @property string $name
+ * @property int $order
  */
 class Attitude extends AbstractActiveRecord
 {
-    const NEGATIVE = 1;
-    const NEUTRAL = 2;
-    const POSITIVE = 3;
+    public const NEGATIVE = 1;
+    public const NEUTRAL = 2;
+    public const POSITIVE = 3;
 
     /**
      * @return string
@@ -24,5 +24,18 @@ class Attitude extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%attitude}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name', 'order'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+            [['order'], 'integer', 'min' => 1, 'max' => 9],
+        ];
     }
 }

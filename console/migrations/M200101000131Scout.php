@@ -25,7 +25,7 @@ class M200101000131Scout extends Migration
                 'is_style' => $this->boolean()->defaultValue(false),
                 'percent' => $this->integer(3)->defaultValue(0),
                 'player_id' => $this->integer(11)->notNull(),
-                'ready' => $this->integer(11)->defaultValue(0),
+                'ready' => $this->integer(11),
                 'season_id' => $this->integer(3)->notNull(),
                 'team_id' => $this->integer(11)->notNull(),
             ]

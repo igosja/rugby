@@ -5,12 +5,12 @@ namespace console\migrations;
 use yii\db\Migration;
 
 /**
- * Class M200101000118PollStatus
+ * Class M200101000118VoteStatus
  * @package console\migrations
  */
-class M200101000118PollStatus extends Migration
+class M200101000118VoteStatus extends Migration
 {
-    private const TABLE = '{{%poll_status}}';
+    private const TABLE = '{{%vote_status}}';
 
     /**
      * @return bool

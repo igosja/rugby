@@ -21,8 +21,8 @@ class M200101000122PreNews extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'new' => $this->text(),
                 'error' => $this->text(),
+                'new' => $this->text(),
             ]
         );
 

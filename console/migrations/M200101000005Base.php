@@ -22,7 +22,7 @@ class M200101000005Base extends Migration
             [
                 'id' => $this->primaryKey(2),
                 'build_speed' => $this->integer(2)->notNull(),
-                'level' => $this->integer(2)->unique(),
+                'level' => $this->integer(2)->notNull()->unique(),
                 'maintenance_base' => $this->integer(7)->notNull(),
                 'maintenance_slot' => $this->integer(6)->notNull(),
                 'price_buy' => $this->integer(8)->notNull(),

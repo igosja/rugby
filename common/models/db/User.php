@@ -2,58 +2,58 @@
 
 namespace common\models\db;
 
-use common\components\helpers\FormatHelper;
-use frontend\components\AbstractController;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\web\IdentityInterface;
 
 /**
  * Class User
  * @package common\models\db
  *
- * @property int $user_id
- * @property int $user_birth_day
- * @property int $user_birth_month
- * @property int $user_birth_year
- * @property string $user_city
- * @property string $user_code
- * @property int $user_country_id
- * @property int $user_date_confirm
- * @property int $user_date_delete
- * @property int $user_date_login
- * @property int $user_date_register
- * @property int $user_date_vip
- * @property string $user_email
- * @property int $user_finance
- * @property int $user_language_id
- * @property string $user_login
- * @property float $user_money
- * @property string $user_name
- * @property int $user_news_id
- * @property int $user_no_vice
- * @property string $user_notes
- * @property int $user_password
- * @property float $user_rating
- * @property int $user_referrer_done
- * @property int $user_referrer_id
- * @property int $user_sex_id
- * @property string $user_social_facebook_id
- * @property string $user_social_google_id
- * @property string $user_surname
- * @property string $user_timezone
- * @property int $user_user_role_id
+ * @property int $id
+ * @property int $birth_day
+ * @property int $birth_month
+ * @property int $birth_year
+ * @property string $city
+ * @property string $code
+ * @property int $country_id
+ * @property int $date_confirm
+ * @property int $date_delete
+ * @property int $date_login
+ * @property int $date_register
+ * @property int $date_vip
+ * @property string $email
+ * @property int $finance
+ * @property bool $is_no_vice
+ * @property bool $is_referrer_done
+ * @property int $language_id
+ * @property string $login
+ * @property float $money
+ * @property string $name
+ * @property int $news_id
+ * @property string $notes
+ * @property int $password
+ * @property float $rating
+ * @property int $referrer_user_id
+ * @property int $sex_id
+ * @property string $social_facebook_id
+ * @property string $social_google_id
+ * @property string $surname
+ * @property string $timezone
+ * @property int $user_role_id
  *
- * @property UserBlock[] $userBlocks
- * @property UserBlock $userBlockCommentActive
- * @property UserBlock $userBlockCommentNewsActive
+ * @property-read string $authKey
+ * @property-read Country $country
+ * @property-read Language $language
+ * @property-read News $news
+ * @property-read User $referrerUser
+ * @property-read Sex $sex
+ * @property-read UserRole $userRole
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const ADMIN_USER_ID = 1;
+    public const ADMIN_USER_ID = 1;
 
     /**
      * @return string
@@ -64,19 +64,76 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param bool $insert
-     * @return bool
+     * @return array[]
      */
-    public function beforeSave($insert): bool
+    public function rules(): array
     {
-        if (parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->generateUserCode();
-            $this->user_date_register = time();
-        }
-        return true;
+        return [
+            [['email', 'login', 'user_role_id'], 'required'],
+            [['email', 'login'], 'unique'],
+            [['email'], 'email'],
+            [['is_no_vice', 'is_referrer_done'], 'boolean'],
+            [
+                [
+                    'city',
+                    'code',
+                    'email',
+                    'login',
+                    'name',
+                    'notes',
+                    'password',
+                    'social_facebook_id',
+                    'social_google_id',
+                    'surname',
+                    'timezone'
+                ],
+                'trim'
+            ],
+            [['code'], 'string', 'length' => 32],
+            [
+                [
+                    'city',
+                    'email',
+                    'login',
+                    'name',
+                    'password',
+                    'social_facebook_id',
+                    'social_google_id',
+                    'surname',
+                    'timezone'
+                ],
+                'string',
+                'max' => 255
+            ],
+            [['notes'], 'string'],
+            [['sex_id', 'user_role_id'], 'integer', 'min' => 1, 'max' => 9],
+            [['birth_day'], 'integer', 'min' => 1, 'max' => 31],
+            [['birth_month'], 'integer', 'min' => 1, 'max' => 12],
+            [['country_id', 'language_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['birth_year'], 'integer', 'min' => 1, 'max' => date('Y')],
+            [['rating'], 'number', 'min' => 1, 'max' => 9999],
+            [['money'], 'number', 'min' => 1, 'max' => 999999999],
+            [
+                [
+                    'date_confirm',
+                    'date_delete',
+                    'date_login',
+                    'date_register',
+                    'date_vip',
+                    'finance',
+                    'news_id',
+                    'referrer_user_id',
+                ],
+                'number',
+                'min' => 0
+            ],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['language_id'], 'exist', 'targetRelation' => 'language'],
+            [['news_id'], 'exist', 'targetRelation' => 'news'],
+            [['referrer_user_id'], 'exist', 'targetRelation' => 'referrerUser'],
+            [['sex_id'], 'exist', 'targetRelation' => 'sex'],
+            [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
+        ];
     }
 
     /**
@@ -86,7 +143,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentity($id)
     {
         return self::find()
-            ->where(['user_id' => $id])
+            ->where(['id' => $id])
             ->limit(1)
             ->one();
     }
@@ -99,7 +156,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::find()
-            ->where(['user_code' => $token])
+            ->where(['code' => $token])
             ->limit(1)
             ->one();
     }
@@ -117,7 +174,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAuthKey(): string
     {
-        return $this->user_code;
+        return $this->code;
     }
 
     /**
@@ -135,193 +192,54 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword(string $password): bool
     {
-        return Yii::$app->security->validatePassword($password, $this->user_password);
-    }
-
-    /**
-     * @return string
-     */
-    public function lastVisit(): string
-    {
-        $date = $this->user_date_login;
-        $min_5 = $date + 5 * 60;
-        $min_60 = $date + 60 * 60;
-        $now = time();
-
-        if ($min_5 >= $now) {
-            $date = '<span class="red">online</span>';
-        } elseif ($min_60 >= $now) {
-            $difference = $now - $date;
-            $difference = $difference / 60;
-            $difference = round($difference, 0);
-            $date = $difference . ' минут назад';
-        } elseif (0 == $date) {
-            $date = '-';
-        } else {
-            $date = FormatHelper::asDateTime($date);
-        }
-
-        return $date;
-    }
-
-    /**
-     * @return bool
-     */
-    public function generateUserCode(): bool
-    {
-        $code = md5(uniqid(rand(), 1));
-        if (!self::find()->where(['user_code' => $code])->exists()) {
-            $this->user_code = $code;
-        } else {
-            $this->generateUserCode();
-        }
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function iconVip(): string
-    {
-        $result = '';
-        if ($this->isVip()) {
-            $result = ' <i aria-hidden="true" class="fa fa-star font-yellow" title="VIP"></i>';
-        }
-        return $result;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canDialog(): bool
-    {
-        /**
-         * @var AbstractController $controller
-         */
-        $controller = Yii::$app->controller;
-        if (!$controller->user) {
-            return false;
-        }
-        if (!$this->user_id) {
-            return false;
-        }
-        if ($this->user_id == Yii::$app->user->id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function fullName(): string
-    {
-        $result = 'Новый менеджер';
-        if ($this->user_name || $this->user_surname) {
-            $result = $this->user_name . ' ' . $this->user_surname;
-        }
-        return $result;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isVip(): bool
-    {
-        return $this->user_date_vip > time();
-    }
-
-    /**
-     * @param array $options
-     * @return string
-     */
-    public function userLink(array $options = []): string
-    {
-        if (isset($options['color']) && UserRole::ADMIN == $this->user_user_role_id) {
-            unset($options['color']);
-            $options = ArrayHelper::merge($options, ['class' => 'red']);
-        }
-
-        return Html::a(
-            Html::encode($this->user_login),
-            ['user/view', 'id' => $this->user_id],
-            $options
-        );
-    }
-
-    /**
-     * @return UserBlock|null
-     */
-    public function getCommentNewsBlock()
-    {
-        if ($this->userBlockCommentNewsActive) {
-            return $this->userBlockCommentNewsActive;
-        }
-        if ($this->userBlockCommentActive) {
-            return $this->userBlockCommentActive;
-        }
-        return null;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlock(): ActiveQuery
+    public function getCountry(): ActiveQuery
     {
-        return $this
-            ->hasOne(UserBlock::class, ['user_block_user_id' => 'user_id'])
-            ->select([
-                'user_block_date',
-                'user_block_user_block_reason_id',
-                'user_block_user_id',
-            ]);
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlockComment(): ActiveQuery
+    public function getLanguage(): ActiveQuery
     {
-        return $this
-            ->getUserBlock()
-            ->andWhere(['user_block_user_block_type_id' => UserBlockType::TYPE_COMMENT]);
+        return $this->hasOne(Language::class, ['id' => 'language_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlockCommentNews(): ActiveQuery
+    public function getNews(): ActiveQuery
     {
-        return $this
-            ->getUserBlock()
-            ->andWhere(['user_block_user_block_type_id' => UserBlockType::TYPE_COMMENT_NEWS]);
+        return $this->hasOne(News::class, ['id' => 'news_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlockCommentActive(): ActiveQuery
+    public function getReferrerUser(): ActiveQuery
     {
-        return $this
-            ->getUserBlockComment()
-            ->andWhere(['>', 'user_block_date', time()]);
+        return $this->hasOne(self::class, ['id' => 'referrer_user_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlockCommentNewsActive(): ActiveQuery
+    public function getSex(): ActiveQuery
     {
-        return $this
-            ->getUserBlockCommentNews()
-            ->andWhere(['>', 'user_block_date', time()]);
+        return $this->hasOne(Sex::class, ['id' => 'sex_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUserBlocks(): ActiveQuery
+    public function getUserRole(): ActiveQuery
     {
-        return $this->hasMany(UserBlock::class, ['user_block_user_id' => 'user_id']);
+        return $this->hasOne(UserRole::class, ['id' => 'user_role_id']);
     }
 }

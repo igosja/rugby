@@ -21,8 +21,8 @@ class M200101000057LoanComment extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'check' => $this->integer(11)->defaultValue(0),
-                'date' => $this->integer(11)->defaultValue(0),
+                'check' => $this->integer(11),
+                'date' => $this->integer(11)->notNull(),
                 'loan_id' => $this->integer(11)->notNull(),
                 'text' => $this->text()->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

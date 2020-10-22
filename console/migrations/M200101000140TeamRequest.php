@@ -21,7 +21,7 @@ class M200101000140TeamRequest extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'leave_team_id' => $this->integer(11),
                 'team_id' => $this->integer(11)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

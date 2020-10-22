@@ -21,9 +21,9 @@ class M200101000102LineupTemplate extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'captain' => $this->boolean()->defaultValue(false),
+                'is_captain' => $this->boolean()->defaultValue(false),
                 'name' => $this->string(255)->notNull(),
-                'national_id' => $this->integer(5),
+                'national_id' => $this->integer(3),
                 'player_1_id' => $this->integer(11)->notNull(),
                 'player_2_id' => $this->integer(11)->notNull(),
                 'player_3_id' => $this->integer(11)->notNull(),

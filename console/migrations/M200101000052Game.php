@@ -21,8 +21,8 @@ class M200101000052Game extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'bonus_home' => $this->integer(1)->defaultValue(1),
-                'guest_auto' => $this->integer(1)->defaultValue(0),
+                'bonus_home' => $this->boolean()->defaultValue(true),
+                'guest_auto' => $this->boolean()->defaultValue(false),
                 'guest_collision' => $this->integer(1)->defaultValue(0),
                 'guest_conversion' => $this->integer(2)->defaultValue(0),
                 'guest_drop_goal' => $this->integer(1)->defaultValue(0),
@@ -47,12 +47,12 @@ class M200101000052Game extends Migration
                 'guest_rudeness_id' => $this->integer(1),
                 'guest_style_id' => $this->integer(1),
                 'guest_tactic_id' => $this->integer(1),
-                'guest_team_id' => $this->integer(5),
+                'guest_team_id' => $this->integer(11),
                 'guest_teamwork' => $this->decimal(3, 1)->defaultValue(0),
                 'guest_try' => $this->integer(2)->defaultValue(0),
                 'guest_user_id' => $this->integer(11),
                 'guest_yellow_card' => $this->integer(1)->defaultValue(0),
-                'home_auto' => $this->integer(1)->defaultValue(0),
+                'home_auto' => $this->boolean()->defaultValue(false),
                 'home_collision' => $this->integer(1)->defaultValue(0),
                 'home_conversion' => $this->integer(2)->defaultValue(0),
                 'home_drop_goal' => $this->integer(1)->defaultValue(0),
@@ -77,16 +77,16 @@ class M200101000052Game extends Migration
                 'home_rudeness_id' => $this->integer(1),
                 'home_style_id' => $this->integer(1),
                 'home_tactic_id' => $this->integer(1),
-                'home_team_id' => $this->integer(5),
+                'home_team_id' => $this->integer(11),
                 'home_teamwork' => $this->decimal(3, 1)->defaultValue(0),
                 'home_try' => $this->integer(2)->defaultValue(0),
                 'home_user_id' => $this->integer(11),
                 'home_yellow_card' => $this->integer(1)->defaultValue(0),
-                'played' => $this->integer(11)->defaultValue(0),
-                'ticket' => $this->integer(2)->defaultValue(0),
+                'played' => $this->integer(11),
+                'ticket_price' => $this->integer(2)->defaultValue(0),
                 'schedule_id' => $this->integer(11)->notNull(),
                 'stadium_capacity' => $this->integer(5)->defaultValue(0),
-                'stadium_id' => $this->integer(5),
+                'stadium_id' => $this->integer(11),
                 'visitor' => $this->integer(5)->defaultValue(0),
                 'weather_id' => $this->integer(1)->defaultValue(4),
             ]
@@ -94,12 +94,14 @@ class M200101000052Game extends Migration
 
         $this->addForeignKey('game_guest_mood_id', self::TABLE, 'guest_mood_id', '{{%mood}}', 'id');
         $this->addForeignKey('game_guest_national_id', self::TABLE, 'guest_national_id', '{{%national}}', 'id');
+        $this->addForeignKey('game_guest_rudeness_id', self::TABLE, 'guest_rudeness_id', '{{%rudeness}}', 'id');
         $this->addForeignKey('game_guest_style_id', self::TABLE, 'guest_style_id', '{{%style}}', 'id');
         $this->addForeignKey('game_guest_tactic_id', self::TABLE, 'guest_tactic_id', '{{%tactic}}', 'id');
         $this->addForeignKey('game_guest_team_id', self::TABLE, 'guest_team_id', '{{%team}}', 'id');
         $this->addForeignKey('game_guest_user_id', self::TABLE, 'guest_user_id', '{{%user}}', 'id');
         $this->addForeignKey('game_home_mood_id', self::TABLE, 'home_mood_id', '{{%mood}}', 'id');
         $this->addForeignKey('game_home_national_id', self::TABLE, 'home_national_id', '{{%national}}', 'id');
+        $this->addForeignKey('game_home_rudeness_id', self::TABLE, 'home_rudeness_id', '{{%rudeness}}', 'id');
         $this->addForeignKey('game_home_style_id', self::TABLE, 'home_style_id', '{{%style}}', 'id');
         $this->addForeignKey('game_home_tactic_id', self::TABLE, 'home_tactic_id', '{{%tactic}}', 'id');
         $this->addForeignKey('game_home_team_id', self::TABLE, 'home_team_id', '{{%team}}', 'id');

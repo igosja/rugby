@@ -8,12 +8,12 @@ use common\components\AbstractActiveRecord;
  * Class NationalType
  * @package common\models\db
  *
- * @property int $national_type_id
- * @property string $national_type_name
+ * @property int $id
+ * @property string $name
  */
 class NationalType extends AbstractActiveRecord
 {
-    const MAIN = 1;
+    public const MAIN = 1;
 
     /**
      * @return string
@@ -21,5 +21,17 @@ class NationalType extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%national_type}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+        ];
     }
 }

@@ -22,7 +22,7 @@ class M200101000082ElectionPresidentVote extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'election_president_application_id' => $this->integer(11)->notNull(),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
             ]
         );

@@ -8,8 +8,8 @@ use common\components\AbstractActiveRecord;
  * Class Tactic
  * @package common\models\db
  *
- * @property int $tactic_id
- * @property string $tactic_name
+ * @property int $id
+ * @property string $name
  */
 class Tactic extends AbstractActiveRecord
 {
@@ -19,5 +19,17 @@ class Tactic extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%tactic}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 20],
+        ];
     }
 }

@@ -8,8 +8,8 @@ use common\components\AbstractActiveRecord;
  * Class Building
  * @package common\models\db
  *
- * @property int $building_id
- * @property string $building_name
+ * @property int $id
+ * @property string $name
  */
 class Building extends AbstractActiveRecord
 {
@@ -20,14 +20,23 @@ class Building extends AbstractActiveRecord
     public const SCOUT = 5;
     public const TRAINING = 6;
 
-    public const MAX_LEVEL = 10;
-    public const MIN_LEVEL = 0;
-
     /**
      * @return string
      */
     public static function tableName(): string
     {
         return '{{%building}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+        ];
     }
 }

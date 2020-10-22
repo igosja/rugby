@@ -31,6 +31,7 @@ class M200101000099LeagueDistribution extends Migration
         );
 
         $this->addForeignKey('league_distribution_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('league_distribution_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
 
         $this->createIndex('country_season', self::TABLE, ['country_id', 'season_id'], true);
 

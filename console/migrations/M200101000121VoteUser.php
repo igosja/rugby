@@ -5,12 +5,12 @@ namespace console\migrations;
 use yii\db\Migration;
 
 /**
- * Class M200101000121PollUser
+ * Class M200101000121VoteUser
  * @package console\migrations
  */
-class M200101000121PollUser extends Migration
+class M200101000121VoteUser extends Migration
 {
-    private const TABLE = '{{%poll_user}}';
+    private const TABLE = '{{%vote_user}}';
 
     /**
      * @return bool
@@ -20,14 +20,15 @@ class M200101000121PollUser extends Migration
         $this->createTable(
             self::TABLE,
             [
-                'date' => $this->integer(11)->defaultValue(0),
-                'poll_answer_id' => $this->integer(11)->notNull(),
+                'id' => $this->primaryKey(11),
+                'date' => $this->integer(11)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
+                'vote_answer_id' => $this->integer(11)->notNull(),
             ]
         );
 
-        $this->addForeignKey('poll_user_poll_answer_id', self::TABLE, 'poll_answer_id', '{{%poll_answer}}', 'id');
-        $this->addForeignKey('poll_user_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');
+        $this->addForeignKey('vote_user_vote_answer_id', self::TABLE, 'vote_answer_id', '{{%vote_answer}}', 'id');
+        $this->addForeignKey('vote_user_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');
 
         return true;
     }

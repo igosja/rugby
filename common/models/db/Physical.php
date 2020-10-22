@@ -3,16 +3,18 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use yii\helpers\Html;
+use yii\db\ActiveQuery;
 
 /**
  * Class Physical
  * @package common\models\db
  *
- * @property int $physical_id
- * @property string $physical_name
- * @property int $physical_opposite
- * @property int $physical_value
+ * @property int $id
+ * @property string $name
+ * @property int $opposite_id
+ * @property int $value
+ *
+ * @property-read Physical $opposite
  */
 class Physical extends AbstractActiveRecord
 {
@@ -25,27 +27,25 @@ class Physical extends AbstractActiveRecord
     }
 
     /**
-     * @return Physical
+     * @return array
      */
-    public static function getRandPhysical(): Physical
+    public function rules(): array
     {
-        $physicalArray = self::find()
-            ->select(['physical_id', 'physical_value'])
-            ->all();
-        return $physicalArray[array_rand($physicalArray)];
+        return [
+            [['name', 'opposite_id', 'value'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 20],
+            [['opposite_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['value'], 'integer', 'min' => -999, 'max' => 999],
+            [['opposite_id'], 'exist', 'targetRelation' => 'opposite'],
+        ];
     }
 
     /**
-     * @return string
+     * @return ActiveQuery
      */
-    public function image(): string
+    public function getOpposite(): ActiveQuery
     {
-        return Html::img(
-            '/img/physical/' . $this->physical_id . '.png',
-            [
-                'alt' => $this->physical_name,
-                'title' => $this->physical_name,
-            ]
-        );
+        return $this->hasOne(self::class, ['id' => 'opposite_id']);
     }
 }

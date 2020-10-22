@@ -8,16 +8,30 @@ use common\components\AbstractActiveRecord;
  * Class EventType
  * @package common\models\db
  *
- * @property int $event_type_id
- * @property string $event_type_text
+ * @property int $id
+ * @property string $text
  */
 class EventType extends AbstractActiveRecord
 {
+    public const TYPE_GOAL = 1;
+
     /**
      * @return string
      */
     public static function tableName(): string
     {
         return '{{%event_type}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['text'], 'required'],
+            [['text'], 'trim'],
+            [['text'], 'string', 'max' => 255],
+        ];
     }
 }

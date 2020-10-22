@@ -8,8 +8,8 @@ use common\components\AbstractActiveRecord;
  * Class FriendlyInviteStatus
  * @package common\models\db
  *
- * @property int $friendly_invite_status_id
- * @property string $friendly_invite_status_name
+ * @property int $id
+ * @property string $name
  */
 class FriendlyInviteStatus extends AbstractActiveRecord
 {
@@ -19,5 +19,17 @@ class FriendlyInviteStatus extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%friendly_invite_status}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+        ];
     }
 }

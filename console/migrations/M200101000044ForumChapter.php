@@ -20,7 +20,7 @@ class M200101000044ForumChapter extends Migration
         $this->createTable(
             self::TABLE,
             [
-                'id' => $this->primaryKey(11),
+                'id' => $this->primaryKey(1),
                 'name' => $this->string(255)->notNull(),
                 'order' => $this->integer(1)->notNull(),
             ]

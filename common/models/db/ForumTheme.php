@@ -9,15 +9,16 @@ use yii\db\ActiveQuery;
  * Class ForumTheme
  * @package common\models\db
  *
- * @property int $forum_theme_id
- * @property int $forum_theme_count_view
- * @property int $forum_theme_date
- * @property int $forum_theme_date_update
- * @property int $forum_theme_forum_group_id
- * @property string $forum_theme_name
- * @property int $forum_theme_user_id
+ * @property int $id
+ * @property int $count_view
+ * @property int $date
+ * @property int $date_update
+ * @property int $forum_group_id
+ * @property string $name
+ * @property int $user_id
  *
- * @property ForumGroup $forumGroup
+ * @property-read ForumGroup $forumGroup
+ * @property-read User $user
  */
 class ForumTheme extends AbstractActiveRecord
 {
@@ -30,10 +31,33 @@ class ForumTheme extends AbstractActiveRecord
     }
 
     /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['forum_group_id', 'name', 'user_id'], 'required'],
+            [['count_view', 'forum_group_id', 'user_id'], 'integer', 'min' => 0],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 255],
+            [['forum_group_id'], 'exist', 'targetRelation' => 'forumGroup'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getForumGroup(): ActiveQuery
     {
-        return $this->hasOne(ForumGroup::class, ['forum_group_id' => 'forum_theme_forum_group_id']);
+        return $this->hasOne(ForumGroup::class, ['id' => 'forum_group_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

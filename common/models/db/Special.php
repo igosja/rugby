@@ -8,9 +8,9 @@ use common\components\AbstractActiveRecord;
  * Class Special
  * @package common\models\db
  *
- * @property int $special_id
- * @property string $special_name
- * @property string $special_text
+ * @property int $id
+ * @property string $name
+ * @property string $text
  */
 class Special extends AbstractActiveRecord
 {
@@ -20,5 +20,18 @@ class Special extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%special}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name', 'text'], 'required'],
+            [['name', 'text'], 'trim'],
+            [['name'], 'string', 'max' => 2],
+            [['text'], 'string', 'max' => 255],
+        ];
     }
 }

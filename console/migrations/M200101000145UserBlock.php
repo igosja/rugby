@@ -21,7 +21,7 @@ class M200101000145UserBlock extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'user_block_reason_id' => $this->integer(2)->notNull(),
                 'user_block_type_id' => $this->integer(1)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),

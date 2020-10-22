@@ -21,7 +21,7 @@ class M200101000129Rule extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(2),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'order' => $this->integer(2)->notNull(),
                 'text' => $this->text()->notNull(),
                 'title' => $this->string(255)->notNull(),

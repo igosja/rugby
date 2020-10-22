@@ -22,7 +22,7 @@ class M200101000058LoanPosition extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'loan_id' => $this->integer(11)->notNull(),
-                'position_id' => $this->integer(1)->notNull(),
+                'position_id' => $this->integer(2)->notNull(),
             ]
         );
 

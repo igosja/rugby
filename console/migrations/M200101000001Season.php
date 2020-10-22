@@ -21,13 +21,16 @@ class M200101000001Season extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(3),
+                'is_future' => $this->boolean()->defaultValue(false),
             ]
         );
 
-        $this->insert(
+        $this->batchInsert(
             self::TABLE,
+            ['id', 'is_future'],
             [
-                'id' => null,
+                [1, false],
+                [2, true],
             ]
         );
 

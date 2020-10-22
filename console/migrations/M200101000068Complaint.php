@@ -21,14 +21,15 @@ class M200101000068Complaint extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'date' => $this->integer(11)->defaultValue(0),
+                'date' => $this->integer(11)->notNull(),
                 'chat_id' => $this->integer(11),
                 'forum_message_id' => $this->integer(11),
                 'game_comment_id' => $this->integer(11),
                 'loan_comment_id' => $this->integer(11),
                 'news_id' => $this->integer(11),
                 'news_comment_id' => $this->integer(11),
-                'ready' => $this->integer(11)->defaultValue(0),
+                'ready' => $this->integer(11),
+                'text' => $this->text()->notNull(),
                 'transfer_comment_id' => $this->integer(11),
                 'user_id' => $this->integer(11)->notNull(),
             ]
