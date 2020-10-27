@@ -41,6 +41,7 @@ class ForumGroup extends AbstractActiveRecord
             [['description', 'name'], 'trim'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
+            [['name'], 'unique'],
             [['country_id'], 'exist', 'targetRelation' => 'country'],
             [['forum_chapter_id'], 'exist', 'targetRelation' => 'forumChapter'],
         ];

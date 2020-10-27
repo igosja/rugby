@@ -22,7 +22,7 @@ class M200101000087EventText extends Migration
             [
                 'id' => $this->primaryKey(1),
                 'event_type_id' => $this->integer(1)->notNull(),
-                'text' => $this->string(255)->notNull(),
+                'text' => $this->string(255)->notNull()->unique(),
             ]
         );
 

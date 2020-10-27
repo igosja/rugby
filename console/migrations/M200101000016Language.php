@@ -21,8 +21,8 @@ class M200101000016Language extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'code' => $this->string(2)->notNull(),
-                'name' => $this->string(255)->notNull(),
+                'code' => $this->string(2)->notNull()->unique(),
+                'name' => $this->string(255)->notNull()->unique(),
             ]
         );
 

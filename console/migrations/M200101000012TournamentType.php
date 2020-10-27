@@ -22,7 +22,7 @@ class M200101000012TournamentType extends Migration
             [
                 'id' => $this->primaryKey(1),
                 'day_type_id' => $this->integer(1)->notNull(),
-                'name' => $this->string(20)->notNull(),
+                'name' => $this->string(20)->notNull()->unique(),
                 'visitor' => $this->integer(3)->notNull(),
             ]
         );

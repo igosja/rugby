@@ -24,7 +24,7 @@ class M200101000002Country extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(3),
-                'name' => $this->string(255)->notNull(),
+                'name' => $this->string(255)->notNull()->unique(),
             ]
         );
 

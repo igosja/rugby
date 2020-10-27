@@ -30,6 +30,7 @@ class UserBlockReason extends AbstractActiveRecord
             [['text'], 'required'],
             [['text'], 'trim'],
             [['text'], 'string', 'max' => 255],
+            [['text'], 'unique'],
         ];
     }
 }

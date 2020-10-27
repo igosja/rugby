@@ -21,7 +21,7 @@ class M200101000086EventType extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'text' => $this->string(255)->notNull(),
+                'text' => $this->string(255)->notNull()->unique(),
             ]
         );
 

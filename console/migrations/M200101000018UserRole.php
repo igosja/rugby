@@ -21,7 +21,7 @@ class M200101000018UserRole extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(20)->notNull(),
+                'name' => $this->string(20)->notNull()->unique(),
             ]
         );
 

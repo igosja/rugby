@@ -11,10 +11,10 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property string $name
- * @property int $opposite_id
+ * @property int $opposite_physical_id
  * @property int $value
  *
- * @property-read Physical $opposite
+ * @property-read Physical $oppositePhysical
  */
 class Physical extends AbstractActiveRecord
 {
@@ -32,20 +32,21 @@ class Physical extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['name', 'opposite_id', 'value'], 'required'],
+            [['name', 'opposite_physical_id', 'value'], 'required'],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 20],
             [['opposite_id'], 'integer', 'min' => 1, 'max' => 99],
             [['value'], 'integer', 'min' => -999, 'max' => 999],
             [['opposite_id'], 'exist', 'targetRelation' => 'opposite'],
+            [['name', 'opposite_physical_id'], 'unique'],
         ];
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getOpposite(): ActiveQuery
+    public function getOppositePhysical(): ActiveQuery
     {
-        return $this->hasOne(self::class, ['id' => 'opposite_id']);
+        return $this->hasOne(self::class, ['id' => 'opposite_physical_id']);
     }
 }

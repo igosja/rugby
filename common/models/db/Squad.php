@@ -32,6 +32,7 @@ class Squad extends AbstractActiveRecord
             [['color', 'name'], 'trim'],
             [['color'], 'string', 'max' => 6],
             [['name'], 'string', 'max' => 255],
+            [['color', 'name'], 'unique'],
         ];
     }
 }

@@ -35,6 +35,7 @@ class Division extends AbstractActiveRecord
             [['name'], 'required'],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 255],
+            [['name'], 'unique'],
         ];
     }
 }

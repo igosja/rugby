@@ -35,6 +35,7 @@ class EventText extends AbstractActiveRecord
             [['event_type_id'], 'integer', 'min' => 0, 'max' => 9],
             [['text'], 'trim'],
             [['text'], 'string', 'max' => 255],
+            [['text'], 'unique'],
             [['event_type_id'], 'exist', 'targetRelation' => 'eventType'],
         ];
     }

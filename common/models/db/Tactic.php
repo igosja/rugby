@@ -30,6 +30,7 @@ class Tactic extends AbstractActiveRecord
             [['name'], 'required'],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 20],
+            [['name'], 'unique'],
         ];
     }
 }

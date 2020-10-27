@@ -21,7 +21,7 @@ class M200101000031Style extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(15)->notNull(),
+                'name' => $this->string(15)->notNull()->unique(),
             ]
         );
 

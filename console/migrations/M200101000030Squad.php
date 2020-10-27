@@ -21,8 +21,8 @@ class M200101000030Squad extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'color' => $this->char(6),
-                'name' => $this->string(255)->notNull(),
+                'color' => $this->char(6)->unique(),
+                'name' => $this->string(255)->notNull()->unique(),
             ]
         );
 

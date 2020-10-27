@@ -21,7 +21,7 @@ class M200101000118VoteStatus extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(25)->notNull(),
+                'name' => $this->string(25)->notNull()->unique(),
             ]
         );
 
