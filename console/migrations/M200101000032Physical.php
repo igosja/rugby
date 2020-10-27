@@ -54,7 +54,7 @@ class M200101000032Physical extends Migration
             ]
         );
 
-        $this->addForeignKey('physical_opposite_id', self::TABLE, 'opposite_id', self::TABLE, 'id');
+        $this->addForeignKey('physical_opposite_physical_id', self::TABLE, 'opposite_physical_id', self::TABLE, 'id');
 
         return true;
     }

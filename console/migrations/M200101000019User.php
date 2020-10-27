@@ -59,7 +59,7 @@ class M200101000019User extends Migration
 
         $this->addForeignKey('user_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
         $this->addForeignKey('user_language_id', self::TABLE, 'language_id', '{{%language}}', 'id');
-        $this->addForeignKey('user_referrer_id', self::TABLE, 'referrer_id', self::TABLE, 'id');
+        $this->addForeignKey('user_referrer_user_id', self::TABLE, 'referrer_user_id', self::TABLE, 'id');
         $this->addForeignKey('user_sex_id', self::TABLE, 'sex_id', '{{%sex}}', 'id');
         $this->addForeignKey('user_user_role_id', self::TABLE, 'user_role_id', '{{%user_role}}', 'id');
 

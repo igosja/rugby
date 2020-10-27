@@ -36,7 +36,6 @@ class M200101000030Squad extends Migration
                 ['FEEFB3', '3 состав'],
                 ['FFBABA', '4 состав'],
                 ['E0E0E0', '5 состав'],
-                ['E0E0E0', '6 состав'],
             ]
         );
 

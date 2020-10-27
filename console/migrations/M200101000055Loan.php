@@ -49,7 +49,8 @@ class M200101000055Loan extends Migration
         $this->addForeignKey('loan_user_buyer_id', self::TABLE, 'user_buyer_id', '{{%user}}', 'id');
         $this->addForeignKey('loan_user_seller_id', self::TABLE, 'user_seller_id', '{{%user}}', 'id');
 
-        $this->createIndex('check', self::TABLE, 'check');
+        $this->createIndex('ready', self::TABLE, 'ready');
+        $this->createIndex('voted', self::TABLE, 'voted');
 
         return true;
     }
