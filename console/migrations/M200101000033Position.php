@@ -21,8 +21,8 @@ class M200101000033Position extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(2),
-                'name' => $this->string(2)->notNull(),
-                'text' => $this->string(255)->notNull(),
+                'name' => $this->string(2)->notNull()->unique(),
+                'text' => $this->string(255)->notNull()->unique(),
             ]
         );
 

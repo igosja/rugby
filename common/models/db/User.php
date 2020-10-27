@@ -70,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['email', 'login', 'user_role_id'], 'required'],
-            [['email', 'login'], 'unique'],
+            [['email', 'login', 'social_facebook_id', 'social_google_id'], 'unique'],
             [['email'], 'email'],
             [['is_no_vice', 'is_referrer_done'], 'boolean'],
             [

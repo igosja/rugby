@@ -28,10 +28,11 @@ class ForumChapter extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['name'], 'required'],
+            [['name', 'order'], 'required'],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 255],
             [['order'], 'integer', 'min' => 1, 'max' => 9],
+            [['name', 'order'], 'unique'],
         ];
     }
 }

@@ -36,6 +36,7 @@ class Style extends AbstractActiveRecord
             [['name'], 'required'],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 15],
+            [['name'], 'unique'],
         ];
     }
 }

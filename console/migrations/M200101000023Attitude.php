@@ -21,7 +21,7 @@ class M200101000023Attitude extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(255)->notNull(),
+                'name' => $this->string(255)->notNull()->unique(),
                 'order' => $this->integer(1)->notNull()->unique(),
             ]
         );

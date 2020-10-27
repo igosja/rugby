@@ -32,6 +32,7 @@ class Language extends AbstractActiveRecord
             [['code', 'name'], 'trim'],
             [['code'], 'string', 'max' => 2],
             [['name'], 'string', 'max' => 255],
+            [['code', 'name'], 'unique'],
         ];
     }
 }

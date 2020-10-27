@@ -21,15 +21,15 @@ class M200101000032Physical extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(2),
-                'name' => $this->string(20)->notNull(),
-                'opposite_id' => $this->integer(2)->notNull(),
+                'name' => $this->string(20)->notNull()->unique(),
+                'opposite_physical_id' => $this->integer(2)->notNull()->unique(),
                 'value' => $this->integer(3)->notNull(),
             ]
         );
 
         $this->batchInsert(
             self::TABLE,
-            ['name', 'opposite_id', 'value'],
+            ['name', 'opposite_physical_id', 'value'],
             [
                 ['125%, падает', 1, 125],
                 ['120%, падает', 20, 120],
@@ -54,7 +54,7 @@ class M200101000032Physical extends Migration
             ]
         );
 
-        $this->addForeignKey('physical_opposite_id', self::TABLE, 'opposite_id', self::TABLE, 'id');
+        $this->addForeignKey('physical_opposite_physical_id', self::TABLE, 'opposite_physical_id', self::TABLE, 'id');
 
         return true;
     }

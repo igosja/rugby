@@ -33,7 +33,8 @@ class VoteStatus extends AbstractActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'trim'],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 25],
+            [['name'], 'unique'],
         ];
     }
 }

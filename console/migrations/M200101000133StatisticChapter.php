@@ -21,8 +21,8 @@ class M200101000133StatisticChapter extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(10)->notNull(),
-                'order' => $this->integer(1)->notNull(),
+                'name' => $this->string(10)->notNull()->unique(),
+                'order' => $this->integer(1)->notNull()->unique(),
             ]
         );
 

@@ -21,8 +21,8 @@ class M200101000123RatingChapter extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(255)->notNull(),
-                'order' => $this->integer(1)->notNull(),
+                'name' => $this->string(255)->notNull()->unique(),
+                'order' => $this->integer(1)->notNull()->unique(),
             ]
         );
 

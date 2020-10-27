@@ -21,8 +21,8 @@ class M200101000011DayType extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->char(1)->notNull(),
-                'text' => $this->string(255)->notNull(),
+                'name' => $this->char(1)->notNull()->unique(),
+                'text' => $this->string(255)->notNull()->unique(),
             ]
         );
 

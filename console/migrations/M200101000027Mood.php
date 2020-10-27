@@ -21,7 +21,7 @@ class M200101000027Mood extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(10)->notNull(),
+                'name' => $this->string(10)->notNull()->unique(),
             ]
         );
 

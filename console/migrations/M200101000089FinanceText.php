@@ -21,7 +21,7 @@ class M200101000089FinanceText extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(2),
-                'text' => $this->string(255)->notNull(),
+                'text' => $this->string(255)->notNull()->unique(),
             ]
         );
 

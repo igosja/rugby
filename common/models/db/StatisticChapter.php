@@ -32,6 +32,7 @@ class StatisticChapter extends AbstractActiveRecord
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 10],
             [['order'], 'integer', 'min' => 1, 'max' => 9],
+            [['name', 'order'], 'unique'],
         ];
     }
 }

@@ -48,6 +48,7 @@ class Position extends AbstractActiveRecord
             [['name', 'text'], 'trim'],
             [['name'], 'string', 'max' => 2],
             [['text'], 'string', 'max' => 255],
+            [['name', 'text'], 'unique'],
         ];
     }
 }

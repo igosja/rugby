@@ -44,6 +44,7 @@ class TournamentType extends AbstractActiveRecord
             [['visitor'], 'integer', 'min' => 1, 'max' => 999],
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 20],
+            [['name'], 'unique'],
             [['day_type_id'], 'exist', 'targetRelation' => 'dayType'],
         ];
     }

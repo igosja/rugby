@@ -29,7 +29,8 @@ class Weather extends AbstractActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'trim'],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 20],
+            [['name'], 'unique'],
         ];
     }
 }

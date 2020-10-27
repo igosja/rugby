@@ -35,6 +35,7 @@ class Rule extends AbstractActiveRecord
             [['title', 'text'], 'trim'],
             [['title'], 'string', 'max' => 255],
             [['text'], 'string'],
+            [['order', 'title'], 'unique'],
         ];
     }
 }

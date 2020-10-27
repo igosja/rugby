@@ -32,6 +32,7 @@ class DayType extends AbstractActiveRecord
             [['name', 'text'], 'trim'],
             [['name'], 'string', 'max' => 1],
             [['text'], 'string', 'max' => 255],
+            [['name', 'text'], 'unique'],
         ];
     }
 }

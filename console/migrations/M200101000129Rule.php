@@ -22,9 +22,9 @@ class M200101000129Rule extends Migration
             [
                 'id' => $this->primaryKey(2),
                 'date' => $this->integer(11)->notNull(),
-                'order' => $this->integer(2)->notNull(),
+                'order' => $this->integer(2)->notNull()->unique(),
                 'text' => $this->text()->notNull(),
-                'title' => $this->string(255)->notNull(),
+                'title' => $this->string(255)->notNull()->unique(),
             ]
         );
 

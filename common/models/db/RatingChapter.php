@@ -32,6 +32,7 @@ class RatingChapter extends AbstractActiveRecord
             [['name'], 'trim'],
             [['name'], 'string', 'max' => 255],
             [['order'], 'integer', 'min' => 1, 'max' => 9],
+            [['name', 'order'], 'unique'],
         ];
     }
 }

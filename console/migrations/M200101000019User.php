@@ -49,8 +49,8 @@ class M200101000019User extends Migration
                 'rating' => $this->decimal(6, 2)->defaultValue(500),
                 'referrer_user_id' => $this->integer(11),
                 'sex_id' => $this->integer(1),
-                'social_facebook_id' => $this->string(255),
-                'social_google_id' => $this->string(255),
+                'social_facebook_id' => $this->string(255)->unique(),
+                'social_google_id' => $this->string(255)->unique(),
                 'surname' => $this->string(255),
                 'timezone' => $this->string(255)->defaultValue('UTC'),
                 'user_role_id' => $this->integer(1)->defaultValue(1),
@@ -59,7 +59,7 @@ class M200101000019User extends Migration
 
         $this->addForeignKey('user_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
         $this->addForeignKey('user_language_id', self::TABLE, 'language_id', '{{%language}}', 'id');
-        $this->addForeignKey('user_referrer_id', self::TABLE, 'referrer_id', self::TABLE, 'id');
+        $this->addForeignKey('user_referrer_user_id', self::TABLE, 'referrer_user_id', self::TABLE, 'id');
         $this->addForeignKey('user_sex_id', self::TABLE, 'sex_id', '{{%sex}}', 'id');
         $this->addForeignKey('user_user_role_id', self::TABLE, 'user_role_id', '{{%user_role}}', 'id');
 
