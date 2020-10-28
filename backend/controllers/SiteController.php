@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\forms\SignInForm;
+use backend\models\preparers\PaymentPrepare;
 use common\models\db\Complaint;
 use common\models\db\ForumMessage;
 use common\models\db\GameComment;
@@ -18,6 +19,7 @@ use common\models\db\Vote;
 use common\models\db\VoteStatus;
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\ErrorAction;
 use yii\web\Response;
 
 /**
@@ -53,7 +55,7 @@ class SiteController extends AbstractController
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => ErrorAction::class,
             ],
         ];
     }
@@ -64,30 +66,29 @@ class SiteController extends AbstractController
     public function actionIndex(): string
     {
         $chat = 0;
-        $complaint = Complaint::find()->where(['complaint_ready' => 0])->count();
-        $forumMessage = ForumMessage::find()->where(['forum_message_check' => 0])->count();
-        $freeTeam = Team::find()->where(['team_user_id' => 0])->andWhere(['!=', 'team_id', 0])->count();
-        $gameComment = GameComment::find()->where(['game_comment_check' => 0])->count();
-        $loanComment = LoanComment::find()->where(['loan_comment_check' => 0])->count();
-        $logo = Logo::find()->where(['!=', 'logo_team_id', 0])->count();
-        $photo = Logo::find()->where(['logo_team_id' => 0])->count();
-        $news = News::find()->where(['news_check' => 0])->count();
-        $newsComment = NewsComment::find()->where(['news_comment_check' => 0])->count();
-        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count(
-        );
-        $transferComment = TransferComment::find()->where(['transfer_comment_check' => 0])->count();
-        $poll = Vote::find()->where(['poll_poll_status_id' => VoteStatus::NEW_ONE])->count();
+        $complaint = Complaint::find()->andWhere(['ready' => 0])->count();
+        $forumMessage = ForumMessage::find()->andWhere(['check' => 0])->count();
+        $freeTeam = Team::find()->andWhere(['user_id' => 0])->andWhere(['!=', 'id', 0])->count();
+        $gameComment = GameComment::find()->andWhere(['check' => 0])->count();
+        $loanComment = LoanComment::find()->andWhere(['check' => 0])->count();
+        $logo = Logo::find()->andWhere(['not', ['team_id' => null]])->count();
+        $photo = Logo::find()->andWhere(['team_id' => null])->count();
+        $news = News::find()->andWhere(['check' => 0])->count();
+        $newsComment = NewsComment::find()->andWhere(['check' => 0])->count();
+        $support = Support::find()->andWhere(['is_question' => true, 'read' => 0, 'is_inside' => false])->count();
+        $transferComment = TransferComment::find()->andWhere(['check' => 0])->count();
+        $poll = Vote::find()->andWhere(['vote_status_id' => VoteStatus::NEW_ONE])->count();
 
         $countModeration = 0;
-        $countModeration = $countModeration + $forumMessage;
-        $countModeration = $countModeration + $gameComment;
-        $countModeration = $countModeration + $loanComment;
-        $countModeration = $countModeration + $news;
-        $countModeration = $countModeration + $newsComment;
-        $countModeration = $countModeration + $transferComment;
-        $countModeration = $countModeration + $chat;
+        $countModeration += $forumMessage;
+        $countModeration += $gameComment;
+        $countModeration += $loanComment;
+        $countModeration += $news;
+        $countModeration += $newsComment;
+        $countModeration += $transferComment;
+        $countModeration += $chat;
 
-        list($paymentCategories, $paymentData) = Payment::getPaymentHighChartsData();
+        [$paymentCategories, $paymentData] = PaymentPrepare::getPaymentHighChartsData();
 
         $paymentArray = Payment::find()
             ->with(
@@ -95,9 +96,9 @@ class SiteController extends AbstractController
                     'user',
                 ]
             )
-            ->where(['payment_status' => Payment::PAID])
+            ->andWhere(['status' => Payment::PAID])
             ->limit(10)
-            ->orderBy(['payment_id' => SORT_DESC])
+            ->orderBy(['id' => SORT_DESC])
             ->all();
 
         $this->view->title = 'Admin';

@@ -1,12 +1,12 @@
 <?php
 
-namespace frontend\models\queries;
+namespace common\models\queries;
 
 use common\models\db\Site;
 
 /**
  * Class SiteQuery
- * @package frontend\models\queries
+ * @package common\models\queries
  */
 class SiteQuery
 {
@@ -24,5 +24,17 @@ class SiteQuery
             ->limit(1)
             ->one();
         return $site;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function getStatus(): bool
+    {
+        return Site::find()
+                ->select(['status'])
+                ->andWhere(['id' => 1])
+                ->limit(1)
+                ->scalar() ?? false;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace frontend\models\preparers;
 
-use frontend\models\queries\SiteQuery;
+use common\models\queries\SiteQuery;
 use Yii;
 use yii\base\InvalidConfigException;
 
