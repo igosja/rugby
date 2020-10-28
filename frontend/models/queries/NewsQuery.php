@@ -23,21 +23,27 @@ class NewsQuery
          * @var News $result
          */
         $result = News::find()
-            ->with([
-                'user' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'user_id',
-                        'user_login',
-                    ]);
-                },
-            ])
-            ->select([
-                'news_date',
-                'news_title',
-                'news_text',
-                'news_user_id',
-            ])
-            ->where(['news_id' => $id, 'news_country_id' => $countryId])
+            ->with(
+                [
+                    'user' => static function (ActiveQuery $query) {
+                        $query->select(
+                            [
+                                'user_id',
+                                'user_login',
+                            ]
+                        );
+                    },
+                ]
+            )
+            ->select(
+                [
+                    'news_date',
+                    'news_title',
+                    'news_text',
+                    'news_user_id',
+                ]
+            )
+            ->andWhere(['news_id' => $id, 'news_country_id' => $countryId])
             ->limit(1)
             ->one();
         return $result;
@@ -50,27 +56,35 @@ class NewsQuery
     public static function getNewsListQuery(int $countryId = 0): ActiveQuery
     {
         return News::find()
-            ->with([
-                'newsComments' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'news_comment_news_id',
-                    ]);
-                },
-                'user' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'user_id',
-                        'user_login',
-                    ]);
-                },
-            ])
-            ->select([
-                'news_date',
-                'news_id',
-                'news_title',
-                'news_text',
-                'news_user_id',
-            ])
-            ->where(['news_country_id' => $countryId])
+            ->with(
+                [
+                    'newsComments' => static function (ActiveQuery $query) {
+                        $query->select(
+                            [
+                                'news_comment_news_id',
+                            ]
+                        );
+                    },
+                    'user' => static function (ActiveQuery $query) {
+                        $query->select(
+                            [
+                                'user_id',
+                                'user_login',
+                            ]
+                        );
+                    },
+                ]
+            )
+            ->select(
+                [
+                    'news_date',
+                    'news_id',
+                    'news_title',
+                    'news_text',
+                    'news_user_id',
+                ]
+            )
+            ->andWhere(['news_country_id' => $countryId])
             ->orderBy(['news_id' => SORT_DESC]);
     }
 
@@ -80,10 +94,10 @@ class NewsQuery
     public static function updateUserNewsId(User $user): void
     {
         $lastNewsId = self::getLastNewsId();
-        if ($user->user_news_id < $lastNewsId) {
+        if ($user->news_id < $lastNewsId) {
             User::updateAll(
                 ['user_news_id' => $lastNewsId],
-                ['user_id' => $user->user_id]
+                ['user_id' => $user->id]
             );
         }
     }
@@ -96,8 +110,24 @@ class NewsQuery
     {
         return News::find()
             ->select(['news_id'])
-            ->where(['news_country_id' => $countryId])
+            ->andWhere(['news_country_id' => $countryId])
             ->orderBy(['news_id' => SORT_DESC])
             ->scalar() ?: 0;
+    }
+
+    /**
+     * @return News
+     */
+    public static function getLastNews(): ?News
+    {
+        /**
+         * @var News $news
+         */
+        $news = News::find()
+            ->andWhere(['federation_id' => null])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(1)
+            ->one();
+        return $news;
     }
 }

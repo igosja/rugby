@@ -4,9 +4,9 @@ use common\models\db\ForumMessage;
 use common\models\db\News;
 use common\models\db\User;
 use yii\helpers\Html;
+
 /**
- * @var User[] $birthdays
- * @var News $countryNews
+ * @var User[] $birthdayBoys
  * @var ForumMessage[] $forumMessage
  * @var News $news
  */
@@ -135,31 +135,8 @@ use yii\helpers\Html;
                 </p>
             </div>
         </div>
-        <?php if ($countryNews): ?>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2>Новости федераций</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p class="text-justify">
-                        <span class="strong">
-                            <?= $countryNews->country->country_name; ?>: <?= $countryNews->news_title; ?>
-                        </span>
-                    </p>
-                    <p class="text-justify">
-                        <?= $countryNews->news_text; ?>
-                    </p>
-                    <?= Html::a(Html::encode($countryNews->user->user_login), ['user/view', 'id' => $countryNews->user->user_id]); ?>
-                    <p class="text-justify text-size-3">
-                        [<?= Html::a('Подробнее', ['country/news', 'id' => $countryNews->news_country_id]); ?>
-                        ]
-                    </p>
-                </div>
-            </div>
-        <?php endif; ?>
-        <?php if ($birthdays) : ?>
+        <?php
+        if ($birthdayBoys) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2>Дни рождения</h2>
@@ -171,17 +148,21 @@ use yii\helpers\Html;
                         <span class="strong">Сегодня день рождения</span> празднуют менеджеры:
                     </p>
                     <ul>
-                        <?php foreach ($birthdays as $item) : ?>
+                        <?php
+                        foreach ($birthdayBoys as $item) : ?>
                             <li>
                                 <?= $item->fullName(); ?>
                                 (<?= Html::a(Html::encode($item->user_login), ['user/view', 'id' => $item->user_id]); ?>
                                 )
-                                <?php if ($item->user_birth_year) : ?>
+                                <?php
+                                if ($item->user_birth_year) : ?>
                                     -
                                     <?= date('Y') - $item->user_birth_year ?>-я годовщина!
-                                <?php endif; ?>
+                                <?php
+                                endif; ?>
                             </li>
-                        <?php endforeach; ?>
+                        <?php
+                        endforeach; ?>
                     </ul>
                 </div>
             </div>
