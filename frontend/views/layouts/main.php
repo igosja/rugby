@@ -28,12 +28,13 @@ $this->beginPage(); ?>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags(); ?>
-    <title><?= Html::encode($this->title); ?></title>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
     <?php
-    $this->head(); ?>
+    $this->head() ?>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <?php if (YII_ENV_PROD) : ?>
+    <?php
+    if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
         <script>
@@ -77,17 +78,19 @@ $this->beginPage(); ?>
                         ['alt' => 'Виртуальная Регбийная Лига', 'class' => 'img-responsive']
                     ),
                     ['site/index']
-                ); ?>
+                ) ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
                 <br/>
-                <?php if (Yii::$app->user->isGuest): ?>
+                <?php
+                if (Yii::$app->user->isGuest): ?>
                     <?= Html::a(
                         'Войти',
                         ['site/sign-in'],
                         ['class' => 'btn margin']
-                    ); ?>
-                <?php else: ?>
+                    ) ?>
+                <?php
+                else: ?>
                     <?php
                     $teamArray = [];
                     foreach ($context->myTeamArray as $myTeam) {
@@ -104,14 +107,15 @@ $this->beginPage(); ?>
                         $context->myTeamOrVice ? $context->myTeamOrVice->team_id : 0,
                         $teamArray,
                         ['class' => 'form-control', 'onchange' => 'this.form.submit();']
-                    ); ?>
+                    ) ?>
                     <?= Html::a(
                         'Выйти',
                         ['site/sign-out'],
                         ['class' => ['btn', 'margin']]
-                    ); ?>
-                    <?= Html::endForm(); ?>
-                <?php endif; ?>
+                    ) ?>
+                    <?= Html::endForm() ?>
+                <?php
+                endif ?>
             </div>
         </div>
         <div class="row">
@@ -161,7 +165,7 @@ $this->beginPage(); ?>
                             ],
                             'style' => ['display' => 'block'],
                         ]
-                    ); ?>
+                    ) ?>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>

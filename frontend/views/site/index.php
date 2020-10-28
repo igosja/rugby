@@ -38,7 +38,7 @@ use yii\helpers\Html;
                             'Зарегистрироваться',
                             ['sign-up'],
                             ['class' => 'btn']
-                        ); ?>
+                        ) ?>
                     </p>
                 <?php endif; ?>
                 <h4>Скачивать ничего не надо!</h4>
@@ -74,15 +74,15 @@ use yii\helpers\Html;
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <p class="text-justify">
-                        <span class="strong"><?= $news->news_title; ?></span>
+                        <span class="strong"><?= $news->news_title ?></span>
                     </p>
                     <p class="text-justify">
-                        <?= $news->news_text; ?>
+                        <?= $news->news_text ?>
                     </p>
                     <?= Html::a(
                         Html::encode($news->user->user_login),
                         ['user/view', 'id' => $news->news_user_id]
-                    ); ?>
+                    ) ?>
                     <p class="text-justify text-size-3">
                         [<?= Html::a('Подробнее', ['news/index']) ?>]
                     </p>
@@ -151,13 +151,12 @@ use yii\helpers\Html;
                         <?php
                         foreach ($birthdayBoys as $item) : ?>
                             <li>
-                                <?= $item->fullName(); ?>
-                                (<?= Html::a(Html::encode($item->user_login), ['user/view', 'id' => $item->user_id]); ?>
-                                )
+                                <?= $item->fullName ?>
+                                (<?= Html::a(Html::encode($item->login), ['user/view', 'id' => $item->id]) ?>)
                                 <?php
-                                if ($item->user_birth_year) : ?>
+                                if ($item->birth_year) : ?>
                                     -
-                                    <?= date('Y') - $item->user_birth_year ?>-я годовщина!
+                                    <?= date('Y') - $item->birth_year ?>-я годовщина!
                                 <?php
                                 endif; ?>
                             </li>
@@ -179,12 +178,12 @@ use yii\helpers\Html;
                         <div class="row margin-top-small">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <?= Html::a(
-                                    $item->forumTheme->forum_theme_name,
-                                    ['forum/theme', 'id' => $item->forumTheme->forum_theme_id]
-                                ); ?>
+                                    $item->forumTheme->name,
+                                    ['forum/theme', 'id' => $item->forumTheme->id]
+                                ) ?>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <?= $item->forumTheme->forumGroup->forum_group_name; ?>
+                                <?= $item->forumTheme->forumGroup->name ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -204,7 +203,7 @@ use yii\helpers\Html;
                             'height' => 31,
                             'width' => 88,
                         ]
-                    ); ?>
+                    ) ?>
                 </fieldset>
             </div>
         </div>
@@ -225,7 +224,7 @@ use yii\helpers\Html;
                                         'border' => 0,
                                         'title' => 'WebMoney ID 274662367507',
                                     ]
-                                ); ?>
+                                ) ?>
                             </a>
                         </div>
                     </div>
@@ -239,7 +238,7 @@ use yii\helpers\Html;
                                         'border' => 0,
                                         'title' => 'Free Kassa',
                                     ]
-                                ); ?>
+                                ) ?>
                             </a>
                         </div>
                     </div>
