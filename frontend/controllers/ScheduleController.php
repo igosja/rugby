@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use common\components\helpers\FormatHelper;
 use common\models\db\Season;
-use frontend\components\AbstractController;
 use frontend\models\preparers\GamePrepare;
 use frontend\models\preparers\SchedulePrepare;
 use frontend\models\queries\ScheduleQuery;

@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\components\AbstractController;
 use common\models\db\Complaint;
 use common\models\db\Logo;
 use common\models\db\Support;
@@ -21,7 +20,7 @@ class BellController extends AbstractController
     /**
      * @return array
      */
-    public function actionIndex()
+    public function actionIndex(): array
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -35,27 +34,27 @@ class BellController extends AbstractController
 
         $bell = $support + $poll + $logo + $photo + $complaint;
 
-        if (0 == $bell) {
+        if (!$bell) {
             $bell = '';
         }
 
-        if (0 == $complaint) {
+        if (!$complaint) {
             $complaint = '';
         }
 
-        if (0 == $logo) {
+        if (!$logo) {
             $logo = '';
         }
 
-        if (0 == $photo) {
+        if (!$photo) {
             $photo = '';
         }
 
-        if (0 == $poll) {
+        if (!$poll) {
             $poll = '';
         }
 
-        if (0 == $support) {
+        if (!$support) {
             $support = '';
         }
 

@@ -8,7 +8,6 @@ use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
 use common\models\db\TournamentType;
-use frontend\components\AbstractController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

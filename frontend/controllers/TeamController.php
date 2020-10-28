@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\db\Season;
 use common\models\db\Team;
 use Exception;
-use frontend\components\AbstractController;
 use frontend\models\preparers\AchievementPrepare;
 use frontend\models\preparers\FinancePrepare;
 use frontend\models\preparers\GamePrepare;

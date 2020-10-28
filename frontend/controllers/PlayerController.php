@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\db\Player;
 use common\models\db\Position;
 use common\models\db\Season;
-use frontend\components\AbstractController;
 use frontend\models\preparers\LineupPrepare;
 use frontend\models\queries\PlayerQuery;
 use frontend\models\search\PlayerSearch;

@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\components\AbstractController;
 use backend\models\forms\SignInForm;
 use common\models\db\Complaint;
 use common\models\db\ForumMessage;
@@ -74,7 +73,8 @@ class SiteController extends AbstractController
         $photo = Logo::find()->where(['logo_team_id' => 0])->count();
         $news = News::find()->where(['news_check' => 0])->count();
         $newsComment = NewsComment::find()->where(['news_comment_check' => 0])->count();
-        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count();
+        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count(
+        );
         $transferComment = TransferComment::find()->where(['transfer_comment_check' => 0])->count();
         $poll = Vote::find()->where(['poll_poll_status_id' => VoteStatus::NEW_ONE])->count();
 
@@ -90,34 +90,39 @@ class SiteController extends AbstractController
         list($paymentCategories, $paymentData) = Payment::getPaymentHighChartsData();
 
         $paymentArray = Payment::find()
-            ->with([
-                'user',
-            ])
+            ->with(
+                [
+                    'user',
+                ]
+            )
             ->where(['payment_status' => Payment::PAID])
             ->limit(10)
             ->orderBy(['payment_id' => SORT_DESC])
             ->all();
 
         $this->view->title = 'Admin';
-        return $this->render('index', [
-            'chat' => $chat,
-            'complaint' => $complaint,
-            'countModeration' => $countModeration,
-            'forumMessage' => $forumMessage,
-            'freeTeam' => $freeTeam,
-            'gameComment' => $gameComment,
-            'loanComment' => $loanComment,
-            'logo' => $logo,
-            'news' => $news,
-            'newsComment' => $newsComment,
-            'paymentArray' => $paymentArray,
-            'paymentCategories' => $paymentCategories,
-            'paymentData' => $paymentData,
-            'photo' => $photo,
-            'poll' => $poll,
-            'support' => $support,
-            'transferComment' => $transferComment,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'chat' => $chat,
+                'complaint' => $complaint,
+                'countModeration' => $countModeration,
+                'forumMessage' => $forumMessage,
+                'freeTeam' => $freeTeam,
+                'gameComment' => $gameComment,
+                'loanComment' => $loanComment,
+                'logo' => $logo,
+                'news' => $news,
+                'newsComment' => $newsComment,
+                'paymentArray' => $paymentArray,
+                'paymentCategories' => $paymentCategories,
+                'paymentData' => $paymentData,
+                'photo' => $photo,
+                'poll' => $poll,
+                'support' => $support,
+                'transferComment' => $transferComment,
+            ]
+        );
     }
 
     /**
@@ -136,9 +141,12 @@ class SiteController extends AbstractController
 
         $this->layout = 'sign-in';
         $this->view->title = 'Sign In';
-        return $this->render('sign-in', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'sign-in',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**

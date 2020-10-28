@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\components\helpers\ErrorHelper;
 use common\models\db\NewsComment;
 use common\models\db\UserRole;
-use frontend\components\AbstractController;
 use frontend\models\preparers\NewsCommentPrepare;
 use frontend\models\preparers\NewsPrepare;
 use frontend\models\queries\NewsCommentQuery;
