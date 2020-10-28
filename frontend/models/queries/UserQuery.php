@@ -26,7 +26,7 @@ class UserQuery
     public static function getBirthdayBoys(): array
     {
         return User::find()
-            ->andWhere(['birth_day' => date('d'), 'birth_month' => date('m')])
+//            ->andWhere(['birth_day' => date('d'), 'birth_month' => date('m')])
             ->orderBy(['id' => SORT_ASC])
             ->all();
     }

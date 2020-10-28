@@ -44,6 +44,8 @@ use yii\web\IdentityInterface;
  * @property int $user_role_id
  *
  * @property-read string $authKey
+ * @property-read string $fullName
+ *
  * @property-read Country $country
  * @property-read Language $language
  * @property-read News $news
@@ -134,6 +136,26 @@ class User extends ActiveRecord implements IdentityInterface
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        $result = 'New user';
+        if ($this->name || $this->surname) {
+            $result = $this->name . ' ' . $this->surname;
+        }
+        return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVip(): bool
+    {
+        return $this->date_vip > time();
     }
 
     /**
