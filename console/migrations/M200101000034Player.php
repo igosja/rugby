@@ -37,7 +37,6 @@ class M200101000034Player extends Migration
                 'national_squad_id' => $this->integer(1),
                 'order' => $this->integer(3)->defaultValue(0),
                 'physical_id' => $this->integer(2)->notNull(),
-                'position_id' => $this->integer(2)->notNull(),
                 'power_nominal' => $this->integer(3)->defaultValue(0),
                 'power_nominal_s' => $this->integer(3)->defaultValue(0),
                 'power_old' => $this->integer(3)->defaultValue(0),
@@ -61,7 +60,6 @@ class M200101000034Player extends Migration
         $this->addForeignKey('player_national_id', self::TABLE, 'national_id', '{{%national}}', 'id');
         $this->addForeignKey('player_national_squad_id', self::TABLE, 'national_squad_id', '{{%squad}}', 'id');
         $this->addForeignKey('player_physical_id', self::TABLE, 'physical_id', '{{%physical}}', 'id');
-        $this->addForeignKey('player_position_id', self::TABLE, 'position_id', '{{%position}}', 'id');
         $this->addForeignKey('player_school_team_id', self::TABLE, 'school_team_id', '{{%team}}', 'id');
         $this->addForeignKey('player_squad_id', self::TABLE, 'squad_id', '{{%squad}}', 'id');
         $this->addForeignKey('player_style_id', self::TABLE, 'style_id', '{{%style}}', 'id');
