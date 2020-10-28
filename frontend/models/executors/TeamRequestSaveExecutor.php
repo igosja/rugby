@@ -8,14 +8,14 @@ use common\models\db\TeamRequest;
 use Exception;
 
 /**
- * Class TeamRequestSaveExecute
+ * Class TeamRequestSaveExecutor
  * @package frontend\models\executors
  *
  * @property-read int $leaveId
  * @property-read int $teamId
  * @property-read int $userId
  */
-class TeamRequestSaveExecute implements ExecuteInterface
+class TeamRequestSaveExecutor implements ExecuteInterface
 {
     /**
      * @var int $leaveId

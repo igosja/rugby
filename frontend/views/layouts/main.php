@@ -7,11 +7,12 @@
  */
 
 use common\components\helpers\ErrorHelper;
-use common\models\db\Site;
 use frontend\assets\AppAsset;
-use frontend\components\AbstractController;
 use frontend\components\widgets\Alert;
 use frontend\components\widgets\Menu;
+use frontend\controllers\AbstractController;
+use frontend\models\preparers\SitePrepare;
+use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -19,7 +20,8 @@ AppAsset::register($this);
 $context = $this->context;
 
 ?>
-<?php $this->beginPage(); ?>
+<?php
+$this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -28,7 +30,8 @@ $context = $this->context;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags(); ?>
     <title><?= Html::encode($this->title); ?></title>
-    <?php $this->head(); ?>
+    <?php
+    $this->head(); ?>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <?php if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -164,17 +167,26 @@ $context = $this->context;
                     </script>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php
+        endif; ?>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
             Страница сгенерирована за <?= round(Yii::getLogger()->getElapsedTime(), 5) ?> сек,
             <br/>
-            <?= Site::version() ?>
+            <?php
+            try {
+                print SitePrepare::getSiteVersion();
+            } catch (InvalidConfigException $e) {
+                ErrorHelper::log($e);
+            }
+            ?>
         </div>
     </div>
 </div>
-<?php $this->endBody(); ?>
+<?php
+$this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage(); ?>
+<?php
+$this->endPage(); ?>

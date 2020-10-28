@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use common\components\helpers\ErrorHelper;
 use Exception;
-use frontend\models\executors\TeamRequestSaveExecute;
+use frontend\models\executors\TeamRequestSaveExecutor;
 use frontend\models\preparers\TeamRequestPrepare;
 use frontend\models\queries\TeamQuery;
 use frontend\models\queries\TeamRequestQuery;
@@ -85,7 +85,7 @@ class TeamRequestController extends AbstractController
         }
 
         try {
-            (new TeamRequestSaveExecute($id, $this->user->user_id))->execute();
+            (new TeamRequestSaveExecutor($id, $this->user->user_id))->execute();
             $this->setSuccessFlash('Заявка успешно подана');
         } catch (Exception $e) {
             ErrorHelper::log($e);
