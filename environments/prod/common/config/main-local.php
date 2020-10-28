@@ -1,6 +1,5 @@
 <?php
 
-use yii\swiftmailer\Mailer;
 use yii\db\Connection;
 
 return [
@@ -13,10 +12,6 @@ return [
             'password' => 'JGvjBoCmVhLVzKDnYiH6',
             'schemaCacheDuration' => 3600,
             'username' => 'vrol',
-        ],
-        'mailer' => [
-            'class' => Mailer::class,
-            'viewPath' => '@common/mail',
         ],
     ],
 ];

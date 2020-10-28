@@ -31,7 +31,13 @@ return [
             'class' => Mailer::class,
             'transport' => [
                 'class' => 'Swift_SendmailTransport',
+                'encryption' => 'ssl',
+                'host' => 'smtp-pulse.com',
+                'password' => 'W93pcY9MW7L',
+                'port' => '465',
+                'username' => 'igosja@ukr.net',
             ],
+            'useFileTransport' => false,
             'viewPath' => '@common/mail',
         ],
         'redis' => [
