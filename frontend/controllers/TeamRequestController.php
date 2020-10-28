@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use common\components\helpers\ErrorHelper;
 use Exception;
-use frontend\components\AbstractController;
 use frontend\models\executors\TeamRequestSaveExecute;
 use frontend\models\preparers\TeamRequestPrepare;
 use frontend\models\queries\TeamQuery;

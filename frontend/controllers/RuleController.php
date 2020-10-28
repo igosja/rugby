@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\db\Rule;
-use frontend\components\AbstractController;
 use frontend\models\queries\RuleQuery;
 use Yii;
 use yii\data\ActiveDataProvider;

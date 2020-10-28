@@ -2,8 +2,6 @@
 
 namespace frontend\controllers;
 
-use frontend\components\AbstractController;
-
 /**
  * Class LoanController
  * @package frontend\controllers

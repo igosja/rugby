@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\components\AbstractController;
 use backend\models\search\NewsSearch;
 use common\components\helpers\ErrorHelper;
 use common\models\db\News;
@@ -29,10 +28,13 @@ class NewsController extends AbstractController
         $this->view->title = 'Новости';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
+            ]
+        );
     }
 
     /**
@@ -52,9 +54,12 @@ class NewsController extends AbstractController
         $this->view->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**
@@ -79,9 +84,12 @@ class NewsController extends AbstractController
         ];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'update',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**
@@ -98,9 +106,12 @@ class NewsController extends AbstractController
         $this->view->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
-        return $this->render('view', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'view',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**

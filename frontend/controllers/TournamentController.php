@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\db\Season;
-use frontend\components\AbstractController;
 use frontend\models\preparers\TournamentPrepare;
 use Yii;
 

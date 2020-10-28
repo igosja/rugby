@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\components;
+namespace frontend\controllers;
 
 use common\components\AbstractWebController;
 use common\models\db\National;
@@ -103,8 +103,9 @@ abstract class AbstractController extends AbstractWebController
 //        }
 
         $this->season = Season::find()
-            ->select(['season_id'])
-            ->orderBy(['season_id' => SORT_DESC])
+            ->select(['id'])
+            ->andWhere(['is_future' => false])
+            ->orderBy(['id' => SORT_DESC])
             ->one();
 
         if (!Yii::$app->user->isGuest) {
@@ -211,7 +212,10 @@ abstract class AbstractController extends AbstractWebController
             $this->myNationalOrVice = $this->myNational ?: $this->myNationalVice;
         }
 
-        $siteStatus = Site::status();
+        $siteStatus = Site::find()
+            ->select(['status'])
+            ->andWhere(['id' => 1])
+            ->column();
         if (!$siteStatus && !('site' === $action->controller->id && 'closed' === $action->id)) {
             return $this->redirect(['site/closed']);
         }

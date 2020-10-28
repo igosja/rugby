@@ -2,8 +2,6 @@
 
 namespace frontend\controllers;
 
-use frontend\components\AbstractController;
-
 /**
  * Class MessengerController
  * @package frontend\controllers

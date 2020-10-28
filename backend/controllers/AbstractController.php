@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\components;
+namespace backend\controllers;
 
 use common\components\AbstractWebController;
 use Yii;
@@ -43,27 +43,23 @@ abstract class AbstractController extends AbstractWebController
             return false;
         }
 
-        if ('en' != Yii::$app->language) {
+        if ('en' !== Yii::$app->language) {
             Yii::$app->language = 'en';
         }
 
-//        $allowedIp = [
-//            '62.205.148.101',//Peremohy-60
-//            '185.38.209.242',//Zhabaeva-7
-//            '185.38.209.205',//Zhabaeva-7
-//            '31.172.137.26',//Zhabaeva-7
-//            '127.0.0.1',
-//        ];
+        $allowedIp = [
+            '127.0.0.1',
+        ];
 
-//        $userIp = Yii::$app->request->headers->get('x-real-ip');
-//        if (!$userIp) {
-//            $userIp = Yii::$app->request->userIP;
-//        }
+        $userIp = Yii::$app->request->headers->get('x-real-ip');
+        if (!$userIp) {
+            $userIp = Yii::$app->request->userIP;
+        }
 
-//        if (!in_array($userIp, $allowedIp)) {
-//            Yii::$app->request->setBaseUrl('');
-//            return $this->redirect(['site/index']);
-//        }
+        if (!in_array($userIp, $allowedIp, true)) {
+            Yii::$app->request->setBaseUrl('');
+            return $this->redirect(['site/index']);
+        }
 
         return true;
     }

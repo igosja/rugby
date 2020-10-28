@@ -1,8 +1,6 @@
 <?php
 
 namespace frontend\controllers;
-
-use frontend\components\AbstractController;
 use frontend\models\queries\UserQuery;
 
 /**

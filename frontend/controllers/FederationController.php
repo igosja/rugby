@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\db\Federation;
-use frontend\components\AbstractController;
 use frontend\models\preparers\TeamPrepare;
 use frontend\models\queries\FederationQuery;
 use yii\web\NotFoundHttpException;
