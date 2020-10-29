@@ -2,15 +2,15 @@
 
 namespace backend\models\search;
 
-use common\models\db\User;
+use common\models\db\Team;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class UserSearch
- * @package backend\models
+ * Class TeamSearch
+ * @package backend\models\search
  */
-class UserSearch extends User
+class TeamSearch extends Team
 {
     /**
      * @return array
@@ -19,7 +19,7 @@ class UserSearch extends User
     {
         return [
             [['id'], 'integer'],
-            [['email', 'login'], 'string'],
+            [['name'], 'string'],
         ];
     }
 
@@ -37,14 +37,14 @@ class UserSearch extends User
      */
     public function search($params): ActiveDataProvider
     {
-        $query = User::find()
+        $query = Team::find()
             ->andWhere(['!=', 'id', 0]);
 
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC],
+                    'defaultOrder' => ['id' => SORT_ASC],
                 ],
             ]
         );
@@ -55,8 +55,7 @@ class UserSearch extends User
 
         $query
             ->andFilterWhere(['id' => $this->id])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'login', $this->login]);
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

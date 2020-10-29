@@ -2,28 +2,28 @@
 
 namespace backend\controllers;
 
-use backend\models\search\UserSearch;
-use common\models\db\User;
+use backend\models\search\TeamSearch;
+use common\models\db\Team;
 use Exception;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
- * Class UserController
+ * Class TeamController
  * @package backend\controllers
  */
-class UserController extends AbstractController
+class TeamController extends AbstractController
 {
     /**
      * @return string
      */
     public function actionIndex(): string
     {
-        $searchModel = new UserSearch();
+        $searchModel = new TeamSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $this->view->title = 'Users';
+        $this->view->title = 'Teams';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
@@ -42,7 +42,7 @@ class UserController extends AbstractController
      */
     public function actionUpdate(int $id)
     {
-        $model = User::find()
+        $model = Team::find()
             ->where(['id' => $id])
             ->limit(1)
             ->one();
@@ -50,14 +50,14 @@ class UserController extends AbstractController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
-            return $this->redirect(['user/view', 'id' => $model->id]);
+            return $this->redirect(['team/view', 'id' => $model->id]);
         }
 
-        $this->view->title = 'User update';
-        $this->view->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['user/index']];
+        $this->view->title = 'Team update';
+        $this->view->params['breadcrumbs'][] = ['label' => 'Teams', 'url' => ['team/index']];
         $this->view->params['breadcrumbs'][] = [
             'label' => $model->login,
-            'url' => ['user/view', 'id' => $model->id]
+            'url' => ['team/view', 'id' => $model->id]
         ];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
@@ -76,14 +76,14 @@ class UserController extends AbstractController
      */
     public function actionView(int $id): string
     {
-        $model = User::find()
+        $model = Team::find()
             ->where(['id' => $id])
             ->limit(1)
             ->one();
         $this->notFound($model);
 
-        $this->view->title = $model->login;
-        $this->view->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['user/index']];
+        $this->view->title = $model->name;
+        $this->view->params['breadcrumbs'][] = ['label' => 'Teams', 'url' => ['team/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
