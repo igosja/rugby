@@ -50,7 +50,7 @@ class UserController extends AbstractController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
-            return $this->redirect(['user/view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $this->view->title = 'User update';

@@ -20,12 +20,12 @@ class NewsController extends AbstractController
     /**
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $this->view->title = 'Новости';
+        $this->view->title = 'News';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
@@ -43,14 +43,14 @@ class NewsController extends AbstractController
      */
     public function actionCreate()
     {
-        $model = new News();
+        $model = new News(['user_id' => Yii::$app->user->id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
-            return $this->redirect(['news/view', 'id' => $model->news_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->view->title = 'Создание новости';
+        $this->view->title = 'News create';
         $this->view->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
@@ -65,22 +65,26 @@ class NewsController extends AbstractController
     /**
      * @param int $id
      * @return string|Response
-     * @throws Exception
+     * @throws NotFoundHttpException
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
-        $model = News::find()->where(['news_id' => $id])->limit(1)->one();
+        $model = News::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
+        $this->notFound($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
-            return $this->redirect(['news/view', 'id' => $model->news_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->view->title = 'Редактирование новости';
-        $this->view->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
+        $this->view->title = 'News update';
+        $this->view->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['news/index']];
         $this->view->params['breadcrumbs'][] = [
-            'label' => $model->news_title,
-            'url' => ['news/view', 'id' => $model->news_id]
+            'label' => $model->title,
+            'url' => ['news/view', 'id' => $model->id]
         ];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
@@ -97,12 +101,15 @@ class NewsController extends AbstractController
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionView($id)
+    public function actionView(int $id): string
     {
-        $model = News::find()->where(['news_id' => $id])->limit(1)->one();
+        $model = News::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
         $this->notFound($model);
 
-        $this->view->title = $model->news_title;
+        $this->view->title = $model->title;
         $this->view->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
@@ -119,9 +126,12 @@ class NewsController extends AbstractController
      * @return Response
      * @throws NotFoundHttpException
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id): Response
     {
-        $model = News::find()->where(['news_id' => $id])->limit(1)->one();
+        $model = News::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
         $this->notFound($model);
 
         try {
@@ -132,6 +142,6 @@ class NewsController extends AbstractController
             ErrorHelper::log($e);
         }
 
-        return $this->redirect(['news/index']);
+        return $this->redirect(['index']);
     }
 }

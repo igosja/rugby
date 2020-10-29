@@ -50,13 +50,13 @@ class TeamController extends AbstractController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
-            return $this->redirect(['team/view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $this->view->title = 'Team update';
         $this->view->params['breadcrumbs'][] = ['label' => 'Teams', 'url' => ['team/index']];
         $this->view->params['breadcrumbs'][] = [
-            'label' => $model->login,
+            'label' => $model->name,
             'url' => ['team/view', 'id' => $model->id]
         ];
         $this->view->params['breadcrumbs'][] = $this->view->title;
