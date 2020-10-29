@@ -45,7 +45,7 @@ $this->beginBody() ?>
             'brandUrl' => Yii::$app->homeUrl,
             'innerContainerOptions' => ['class' => ''],
             'options' => [
-                'class' => 'navbar navbar-default navbar-fixed-top',
+                'class' => 'navbar navbar-default navbar-static-top',
             ],
         ]
     );
