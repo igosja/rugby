@@ -18,15 +18,15 @@ class NewsSearch extends News
     public function rules(): array
     {
         return [
-            [['news_id'], 'integer'],
-            [['news_title'], 'safe'],
+            [['id'], 'integer'],
+            [['title'], 'string'],
         ];
     }
 
     /**
      * @return array
      */
-    public function scenarios()
+    public function scenarios(): array
     {
         return Model::scenarios();
     }
@@ -35,25 +35,27 @@ class NewsSearch extends News
      * @param $params
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         $query = News::find()
-            ->where(['news_country_id' => 0]);
+            ->andWhere(['federation_id' => null]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort' => [
-                'defaultOrder' => ['news_id' => SORT_DESC],
-            ],
-        ]);
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query' => $query,
+                'sort' => [
+                    'defaultOrder' => ['id' => SORT_DESC],
+                ],
+            ]
+        );
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query
-            ->andFilterWhere(['news_id' => $this->news_id])
-            ->andFilterWhere(['like', 'news_title', $this->news_title]);
+            ->andFilterWhere(['id' => $this->id])
+            ->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }
