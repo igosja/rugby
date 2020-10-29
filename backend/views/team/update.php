@@ -1,11 +1,11 @@
 <?php
 
-use common\models\db\User;
+use common\models\db\Team;
 use yii\helpers\Html;
 use yii\web\View;
 
 /**
- * @var User $model
+ * @var Team $model
  * @var View $this
  */
 
