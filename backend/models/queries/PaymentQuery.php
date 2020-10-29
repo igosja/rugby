@@ -3,6 +3,7 @@
 namespace backend\models\queries;
 
 use common\models\db\Payment;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\db\Query;
 
@@ -24,5 +25,17 @@ class PaymentQuery
             ->where(['status' => Payment::PAID])
             ->groupBy($expression)
             ->all();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public static function getLastTenPaidPaymentsQuery(): ActiveQuery
+    {
+        return Payment::find()
+            ->with(['user'])
+            ->andWhere(['status' => Payment::PAID])
+            ->limit(10)
+            ->orderBy(['id' => SORT_DESC]);
     }
 }

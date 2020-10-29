@@ -68,6 +68,7 @@ return [
     ],
     'controllerNamespace' => 'backend\controllers',
     'id' => 'app-backend',
+    'name' => 'Rugby admin',
     'params' => $params,
 ];
 

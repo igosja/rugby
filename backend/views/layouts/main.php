@@ -4,6 +4,7 @@ use backend\assets\AppAsset;
 use common\components\helpers\ErrorHelper;
 use common\models\queries\SiteQuery;
 use common\widgets\Alert;
+use rmrevin\yii\fontawesome\FAS;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -38,69 +39,66 @@ $this->beginPage(); ?>
 $this->beginBody() ?>
 <div id="wrapper">
     <?php
-
     NavBar::begin(
         [
-            'brandLabel' => 'Админ',
+            'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'innerContainerOptions' => ['class' => ''],
             'options' => [
-                'class' => 'navbar navbar-default navbar-static-top',
+                'class' => 'navbar navbar-default navbar-fixed-top',
             ],
         ]
     );
 
     $menuItems = [
         [
-            'label' => '<i class="fa fa-bell-o fa-fw"></i> <span class="badge" id="admin-bell" data-url="'
+            'label' => FAS::icon(FAS::_BELL)
+                . ' <span class="badge" id="admin-bell" data-url="'
                 . Url::to(['bell/index'])
                 . '"></span>',
             'items' => [
                 [
-                    'label' => '<i class="fa fa-user fa-fw"></i> Заявки на команды <span class="badge"></span>',
+                    'label' => FAS::icon(FAS::_FOOTBALL_BALL) . ' Team requests <span class="badge"></span>',
                     'url' => ['team-request/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-shield fa-fw"></i> Логотипы <span class="badge admin-logo"></span>',
+                    'label' => FAS::icon(FAS::_SHIELD_ALT) . ' Logos <span class="badge admin-logo"></span>',
                     'url' => ['logo/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-user fa-fw"></i> Фото <span class="badge admin-photo"></span>',
+                    'label' => FAS::icon(FAS::_USER) . ' Photos <span class="badge admin-photo"></span>',
                     'url' => ['photo/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-comments fa-fw"></i> Тех. поддержка <span class="badge admin-support"></span>',
+                    'label' => FAS::icon(FAS::_COMMENTS) . ' Support <span class="badge admin-support"></span>',
                     'url' => ['support/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-exclamation-circle fa-fw"></i> Жалобы <span class="badge admin-complaint"></span>',
+                    'label' => FAS::icon(
+                            FAS::_EXCLAMATION_CIRCLE
+                        ) . ' Complaints <span class="badge admin-complaint"></span>',
                     'url' => ['complaint/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-bar-chart fa-fw"></i> Опросы <span class="badge admin-poll"></span>',
-                    'url' => ['poll/index'],
+                    'label' => FAS::icon(FAS::_CHART_BAR) . ' Votes <span class="badge admin-vote"></span>',
+                    'url' => ['vote/index'],
                 ],
             ],
             'url' => 'javascript:',
         ],
         [
-            'label' => '<i class="fa fa-gear fa-fw"></i>',
+            'label' => FAS::icon(FAS::_COG),
             'items' => [
                 [
-                    'label' => '<i class="fa fa-power-off fa-fw"></i> ' . (SiteQuery::getStatus(
-                        ) ? 'Выключить' : 'Включить'),
+                    'label' => FAS::icon(FAS::_POWER_OFF) . ' Turn ' . (SiteQuery::getStatus() ? 'off' : 'on'),
                     'url' => ['site/status'],
                 ],
                 [
-                    'label' => '<i class="fa fa-signal fa-fw"></i> Версия сайта',
+                    'label' => FAS::icon(FAS::_SIGNAL) . ' Site version',
                     'url' => ['site/version'],
                 ],
                 [
-                    'label' => '<i class="fa fa-file-text-o fa-fw"></i> Логи',
-                    'url' => ['logreader'],
-                ],
-                [
-                    'label' => '<i class="fa fa-sign-out fa-fw"></i> Выход',
+                    'label' => FAS::icon(FAS::_SIGN_OUT_ALT) . ' Logout',
                     'url' => ['site/logout'],
                 ],
             ],
@@ -109,154 +107,152 @@ $this->beginBody() ?>
     ];
 
     try {
-        print Nav::widget([
-            'encodeLabels' => false,
-            'items' => $menuItems,
-            'options' => ['class' => 'nav navbar-top-links navbar-right'],
-        ]);
+        print Nav::widget(
+            [
+                'encodeLabels' => false,
+                'items' => $menuItems,
+                'options' => ['class' => 'nav navbar-top-links navbar-right'],
+            ]
+        );
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }
-
     ?>
 
+    <?php
+    NavBar::end(); ?>
     <div class="navbar-default sidebar">
         <div class="sidebar-nav navbar-collapse">
             <?php
-
             $menuItems = [
                 [
                     'label' => 'Пользователи',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Пользователи',
+                            'label' => 'Users',
                             'url' => ['user/index'],
                         ],
                         [
-                            'label' => 'Президенты федераций',
+                            'label' => 'Federation presidents',
                             'url' => ['president/index'],
                         ],
                         [
-                            'label' => 'Тренеры сборных',
+                            'label' => 'National team coaches',
                             'url' => ['coach/index'],
                         ],
                         [
-                            'label' => 'Причины блокировки',
+                            'label' => 'Blocking reasons',
                             'url' => ['block-reason/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Команды',
+                    'label' => 'Teams',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Команды',
+                            'label' => 'Teams',
                             'url' => ['team/index'],
                         ],
                         [
-                            'label' => 'Стадионы',
+                            'label' => 'Stadiums',
                             'url' => ['stadium/index'],
                         ],
                         [
-                            'label' => 'Города',
+                            'label' => 'Cities',
                             'url' => ['city/index'],
                         ],
                         [
-                            'label' => 'Страны',
+                            'label' => 'Countries',
                             'url' => ['country/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Хоккеисты',
+                    'label' => 'Rugby players',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Составы',
+                            'label' => 'Squads',
                             'url' => ['squad/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Новости',
+                    'label' => 'News',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Новости',
+                            'label' => 'News',
                             'url' => ['news/index'],
                         ],
                         [
-                            'label' => 'Предварительные новости',
+                            'label' => 'Preliminary news',
                             'url' => ['pre-news/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Правила',
+                    'label' => 'Rules',
                     'url' => ['rule/index'],
                 ],
                 [
-                    'label' => 'Опросы',
-                    'url' => ['poll/index'],
+                    'label' => 'Votes',
+                    'url' => ['vote/index'],
                 ],
                 [
-                    'label' => 'Расписание',
+                    'label' => 'Schedule',
                     'url' => ['schedule/index'],
                 ],
                 [
-                    'label' => 'Форум',
+                    'label' => 'Forum',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Разделы',
+                            'label' => 'Chapters',
                             'url' => ['forum-chapter/index'],
                         ],
                         [
-                            'label' => 'Группы',
+                            'label' => 'Groups',
                             'url' => ['forum-group/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Тексты',
+                    'label' => 'Texts',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Типы турниров',
+                            'label' => 'Tournament types',
                             'url' => ['tournament-type/index'],
                         ],
                         [
-                            'label' => 'Стадии соревнований',
+                            'label' => 'Stages',
                             'url' => ['stage/index'],
                         ],
                         [
-                            'label' => 'Типы турниров',
-                            'url' => ['tournament-type/index'],
-                        ],
-                        [
-                            'label' => 'Описания финансовых операций',
+                            'label' => 'Finance texts',
                             'url' => ['finance-text/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Показатели сайта',
+                    'label' => 'Site metrics',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Коррекция генератора',
+                            'label' => 'Generator correction',
                             'url' => ['analytics/game-statistic'],
                         ],
                         [
-                            'label' => 'Слепки состояния сайта',
+                            'label' => 'Snapshots',
                             'url' => ['analytics/snapshot'],
                         ],
                     ],
@@ -277,18 +273,16 @@ $this->beginBody() ?>
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
-
             ?>
         </div>
     </div>
-    <?php NavBar::end(); ?>
     <div id="page-wrapper">
         <?php
-
         try {
-            print Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]);
+            print Breadcrumbs::widget(
+                [
+                    'links' => $this->params['breadcrumbs'] ?? [],
+                ]);
         } catch (Exception $e) {
             ErrorHelper::log($e);
         }
@@ -300,11 +294,12 @@ $this->beginBody() ?>
         }
 
         print $content;
-
         ?>
     </div>
 </div>
-<?php $this->endBody(); ?>
+<?php
+$this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage(); ?>
+<?php
+$this->endPage() ?>

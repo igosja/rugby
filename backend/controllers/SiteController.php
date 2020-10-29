@@ -4,19 +4,14 @@ namespace backend\controllers;
 
 use backend\models\forms\SignInForm;
 use backend\models\preparers\PaymentPrepare;
-use common\models\db\Complaint;
-use common\models\db\ForumMessage;
-use common\models\db\GameComment;
-use common\models\db\LoanComment;
-use common\models\db\Logo;
-use common\models\db\News;
-use common\models\db\NewsComment;
-use common\models\db\Payment;
-use common\models\db\Support;
-use common\models\db\Team;
-use common\models\db\TransferComment;
-use common\models\db\Vote;
-use common\models\db\VoteStatus;
+use backend\models\queries\ChatQuery;
+use backend\models\queries\ForumMessageQuery;
+use backend\models\queries\GameCommentQuery;
+use backend\models\queries\LoanCommentQuery;
+use backend\models\queries\NewsCommentQuery;
+use backend\models\queries\NewsQuery;
+use backend\models\queries\TransferCommentQuery;
+use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\ErrorAction;
@@ -65,19 +60,13 @@ class SiteController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $chat = 0;
-        $complaint = Complaint::find()->andWhere(['ready' => 0])->count();
-        $forumMessage = ForumMessage::find()->andWhere(['check' => 0])->count();
-        $freeTeam = Team::find()->andWhere(['user_id' => 0])->andWhere(['!=', 'id', 0])->count();
-        $gameComment = GameComment::find()->andWhere(['check' => 0])->count();
-        $loanComment = LoanComment::find()->andWhere(['check' => 0])->count();
-        $logo = Logo::find()->andWhere(['not', ['team_id' => null]])->count();
-        $photo = Logo::find()->andWhere(['team_id' => null])->count();
-        $news = News::find()->andWhere(['check' => 0])->count();
-        $newsComment = NewsComment::find()->andWhere(['check' => 0])->count();
-        $support = Support::find()->andWhere(['is_question' => true, 'read' => 0, 'is_inside' => false])->count();
-        $transferComment = TransferComment::find()->andWhere(['check' => 0])->count();
-        $poll = Vote::find()->andWhere(['vote_status_id' => VoteStatus::NEW_ONE])->count();
+        $chat = ChatQuery::countUnchecked();
+        $forumMessage = ForumMessageQuery::countUnchecked();
+        $gameComment = GameCommentQuery::countUnchecked();
+        $loanComment = LoanCommentQuery::countUnchecked();
+        $news = NewsQuery::countUnchecked();
+        $newsComment = NewsCommentQuery::countUnchecked();
+        $transferComment = TransferCommentQuery::countUnchecked();
 
         $countModeration = 0;
         $countModeration += $forumMessage;
@@ -89,39 +78,72 @@ class SiteController extends AbstractController
         $countModeration += $chat;
 
         [$paymentCategories, $paymentData] = PaymentPrepare::getPaymentHighChartsData();
+        $paymentDataProvider = PaymentPrepare::getIndexDataProvider();
 
-        $paymentArray = Payment::find()
-            ->with(
-                [
-                    'user',
-                ]
-            )
-            ->andWhere(['status' => Payment::PAID])
-            ->limit(10)
-            ->orderBy(['id' => SORT_DESC])
-            ->all();
+        $panels = [
+            [
+                'class' => 'freeTeam',
+                'color' => 'green',
+                'icon' => FAS::_FOOTBALL_BALL,
+                'text' => 'Free teams',
+                'url' => ['team/index'],
+            ],
+            [
+                'class' => 'logo',
+                'color' => 'primary',
+                'icon' => FAS::_SHIELD_ALT,
+                'text' => 'Logos',
+                'url' => ['logo/index'],
+            ],
+            [
+                'class' => 'photo',
+                'color' => 'primary',
+                'icon' => FAS::_USER,
+                'text' => 'Photos',
+                'url' => ['photo/index'],
+            ],
+            [
+                'class' => 'support',
+                'color' => 'red',
+                'icon' => FAS::_COMMENTS,
+                'text' => 'Support',
+                'url' => ['support/index'],
+            ],
+            [
+                'class' => 'complaint',
+                'color' => 'red',
+                'icon' => FAS::_EXCLAMATION_CIRCLE,
+                'text' => 'Complaints',
+                'url' => ['complaint/index'],
+            ],
+            [
+                'class' => 'vote',
+                'color' => 'yellow',
+                'icon' => FAS::_CHART_BAR,
+                'text' => 'Voting',
+                'url' => ['vote/index'],
+            ],
+        ];
+        $moderation = [
+            ['text' => 'Chat', 'value' => $chat, 'url' => ['moderation/chat']],
+            ['text' => 'Forum', 'value' => $forumMessage, 'url' => ['moderation/forum-message']],
+            ['text' => 'Game comments', 'value' => $gameComment, 'url' => ['moderation/game-comment']],
+            ['text' => 'News', 'value' => $news, 'url' => ['moderation/news']],
+            ['text' => 'News comments', 'value' => $newsComment, 'url' => ['moderation/news-comment']],
+            ['text' => 'Loan comments', 'value' => $loanComment, 'url' => ['moderation/loan-comment']],
+            ['text' => 'Transfer comments', 'value' => $transferComment, 'url' => ['moderation/transfer-comment']],
+        ];
 
-        $this->view->title = 'Admin';
+        $this->view->title = 'Admin panel';
         return $this->render(
             'index',
             [
-                'chat' => $chat,
-                'complaint' => $complaint,
                 'countModeration' => $countModeration,
-                'forumMessage' => $forumMessage,
-                'freeTeam' => $freeTeam,
-                'gameComment' => $gameComment,
-                'loanComment' => $loanComment,
-                'logo' => $logo,
-                'news' => $news,
-                'newsComment' => $newsComment,
-                'paymentArray' => $paymentArray,
+                'moderation' => $moderation,
+                'panels' => $panels,
                 'paymentCategories' => $paymentCategories,
                 'paymentData' => $paymentData,
-                'photo' => $photo,
-                'poll' => $poll,
-                'support' => $support,
-                'transferComment' => $transferComment,
+                'paymentDataProvider' => $paymentDataProvider,
             ]
         );
     }

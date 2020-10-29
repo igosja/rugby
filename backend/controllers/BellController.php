@@ -2,12 +2,11 @@
 
 namespace backend\controllers;
 
-use common\models\db\Complaint;
-use common\models\db\Logo;
-use common\models\db\Support;
-use common\models\db\Team;
-use common\models\db\Vote;
-use common\models\db\VoteStatus;
+use backend\models\queries\ComplaintQuery;
+use backend\models\queries\LogoQuery;
+use backend\models\queries\SupportQuery;
+use backend\models\queries\TeamQuery;
+use backend\models\queries\VoteQuery;
 use Yii;
 use yii\web\Response;
 
@@ -24,38 +23,20 @@ class BellController extends AbstractController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $complaint = Complaint::find()->where(['complaint_ready' => 0])->count();
-        $freeTeam = Team::find()->where(['team_user_id' => 0])->andWhere(['!=', 'team_id', 0])->count();
-        $logo = Logo::find()->where(['!=', 'logo_team_id', 0])->count();
-        $photo = Logo::find()->where(['logo_team_id' => 0])->count();
-        $poll = Vote::find()->where(['poll_poll_status_id' => VoteStatus::NEW_ONE])->count();
-        $support = Support::find()->where(['support_question' => 1, 'support_read' => 0, 'support_inside' => 0])->count(
-        );
+        $complaint = ComplaintQuery::countNew();
+        $freeTeam = TeamQuery::countFreeTeam();
+        $logo = LogoQuery::countNewTeamLogo();
+        $photo = LogoQuery::countNewUserPhoto();
+        $vote = VoteQuery::countNew();
+        $support = SupportQuery::countNewQuestions();
 
-        $bell = $support + $poll + $logo + $photo + $complaint;
+        $bell = $support + $vote + $logo + $photo + $complaint;
 
-        if (!$bell) {
-            $bell = '';
-        }
-
-        if (!$complaint) {
-            $complaint = '';
-        }
-
-        if (!$logo) {
-            $logo = '';
-        }
-
-        if (!$photo) {
-            $photo = '';
-        }
-
-        if (!$poll) {
-            $poll = '';
-        }
-
-        if (!$support) {
-            $support = '';
+        $variables = ['bell', 'complaint', 'logo', 'photo', 'support', 'vote'];
+        foreach ($variables as $variable) {
+            if (!$$variable) {
+                $$variable = '';
+            }
         }
 
         return [
@@ -64,7 +45,7 @@ class BellController extends AbstractController
             'freeTeam' => $freeTeam,
             'logo' => $logo,
             'photo' => $photo,
-            'poll' => $poll,
+            'vote' => $vote,
             'support' => $support,
         ];
     }
