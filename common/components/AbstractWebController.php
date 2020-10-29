@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 /**
  * Class AbstractWebController
  * @package common\components
+ *
+ * @property-write string $successFlash
+ * @property-write string $errorFlash
  */
 abstract class AbstractWebController extends Controller
 {

@@ -109,12 +109,12 @@ class User extends ActiveRecord implements IdentityInterface
             ],
             [['notes'], 'string'],
             [['sex_id', 'user_role_id'], 'integer', 'min' => 1, 'max' => 9],
-            [['birth_day'], 'integer', 'min' => 1, 'max' => 31],
-            [['birth_month'], 'integer', 'min' => 1, 'max' => 12],
+            [['birth_day'], 'integer', 'min' => 0, 'max' => 31],
+            [['birth_month'], 'integer', 'min' => 0, 'max' => 12],
             [['country_id', 'language_id'], 'integer', 'min' => 1, 'max' => 999],
-            [['birth_year'], 'integer', 'min' => 1, 'max' => date('Y')],
+            [['birth_year'], 'integer', 'min' => 0, 'max' => date('Y')],
             [['rating'], 'number', 'min' => 1, 'max' => 9999],
-            [['money'], 'number', 'min' => 1, 'max' => 999999999],
+            [['money'], 'number', 'min' => 0, 'max' => 999999999],
             [
                 [
                     'date_confirm',

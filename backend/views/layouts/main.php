@@ -126,7 +126,7 @@ $this->beginBody() ?>
             <?php
             $menuItems = [
                 [
-                    'label' => 'Пользователи',
+                    'label' => 'Users',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [

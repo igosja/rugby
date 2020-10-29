@@ -8,7 +8,8 @@ use yii\web\AssetBundle;
 use yii\web\YiiAsset;
 
 /**
- * Main backend application asset bundle.
+ * Class AppAsset
+ * @package backend\assets
  */
 class AppAsset extends AssetBundle
 {
