@@ -3,6 +3,7 @@
 namespace backend\models\preparers;
 
 use backend\models\queries\PaymentQuery;
+use yii\data\ActiveDataProvider;
 
 /**
  * Class PaymentPrepare
@@ -62,4 +63,16 @@ class PaymentPrepare
         return $dateArray;
     }
 
+    /**
+     * @return ActiveDataProvider
+     */
+    public static function getIndexDataProvider(): ActiveDataProvider
+    {
+        return new ActiveDataProvider(
+            [
+                'pagination' => false,
+                'query' => PaymentQuery::getLastTenPaidPaymentsQuery(),
+            ]
+        );
+    }
 }

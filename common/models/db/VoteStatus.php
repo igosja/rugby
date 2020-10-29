@@ -14,7 +14,7 @@ use common\components\AbstractActiveRecord;
 class VoteStatus extends AbstractActiveRecord
 {
     public const CLOSE = 3;
-    public const NEW_ONE = 1;
+    public const NEW = 1;
     public const OPEN = 2;
 
     /**
