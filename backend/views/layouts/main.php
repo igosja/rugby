@@ -2,7 +2,7 @@
 
 use backend\assets\AppAsset;
 use common\components\helpers\ErrorHelper;
-use common\models\db\Site;
+use common\models\queries\SiteQuery;
 use common\widgets\Alert;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -20,30 +20,35 @@ use yii\widgets\Menu;
 AppAsset::register($this);
 
 ?>
-<?php $this->beginPage(); ?>
+<?php
+$this->beginPage(); ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language; ?>">
+<html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset; ?>">
+    <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags(); ?>
-    <title><?= Html::encode($this->title); ?></title>
-    <?php $this->head(); ?>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php
+    $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody(); ?>
+<?php
+$this->beginBody() ?>
 <div id="wrapper">
     <?php
 
-    NavBar::begin([
-        'brandLabel' => 'Админ',
-        'brandUrl' => Yii::$app->homeUrl,
-        'innerContainerOptions' => ['class' => ''],
-        'options' => [
-            'class' => 'navbar navbar-default navbar-static-top',
-        ],
-    ]);
+    NavBar::begin(
+        [
+            'brandLabel' => 'Админ',
+            'brandUrl' => Yii::$app->homeUrl,
+            'innerContainerOptions' => ['class' => ''],
+            'options' => [
+                'class' => 'navbar navbar-default navbar-static-top',
+            ],
+        ]
+    );
 
     $menuItems = [
         [
@@ -82,7 +87,8 @@ AppAsset::register($this);
             'label' => '<i class="fa fa-gear fa-fw"></i>',
             'items' => [
                 [
-                    'label' => '<i class="fa fa-power-off fa-fw"></i> ' . (Site::status() ? 'Выключить' : 'Включить'),
+                    'label' => '<i class="fa fa-power-off fa-fw"></i> ' . (SiteQuery::getStatus(
+                        ) ? 'Выключить' : 'Включить'),
                     'url' => ['site/status'],
                 ],
                 [

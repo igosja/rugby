@@ -20,6 +20,8 @@ use yii\db\ActiveQuery;
  */
 class Payment extends AbstractActiveRecord
 {
+    public const PAID = 1;
+
     /**
      * @return string
      */
