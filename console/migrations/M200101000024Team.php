@@ -90,6 +90,7 @@ class M200101000024Team extends Migration
             self::TABLE,
             [
                 'name' => 'Free team',
+                'stadium_id' => 0,
             ]
         );
 
