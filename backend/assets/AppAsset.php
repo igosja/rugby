@@ -2,7 +2,7 @@
 
 namespace backend\assets;
 
-use rmrevin\yii\fontawesome\CdnFreeAssetBundle;
+use rmrevin\yii\fontawesome\AssetBundle as FontAwesomeAssetBundle;
 use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
 use yii\web\YiiAsset;
@@ -47,6 +47,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         YiiAsset::class,
         BootstrapAsset::class,
-        CdnFreeAssetBundle::class,
+        FontAwesomeAssetBundle::class,
     ];
 }

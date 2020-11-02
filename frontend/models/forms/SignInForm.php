@@ -26,9 +26,9 @@ class SignInForm extends Model
     public $password;
 
     /**
-     * @var User $_user
+     * @var User $user
      */
-    private $_user;
+    private $user;
 
     /**
      * @return array
@@ -82,13 +82,13 @@ class SignInForm extends Model
      */
     private function getUser(): ?User
     {
-        if (!$this->_user) {
-            $this->_user = User::find()
-                ->where(['user_login' => $this->login])
+        if (!$this->user) {
+            $this->user = User::find()
+                ->where(['login' => $this->login])
                 ->limit(1)
                 ->one();
         }
 
-        return $this->_user;
+        return $this->user;
     }
 }

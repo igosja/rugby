@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\search\NewsSearch;
+use backend\models\search\RuleSearch;
 use common\components\helpers\ErrorHelper;
-use common\models\db\News;
+use common\models\db\Rule;
 use Exception;
 use Throwable;
 use Yii;
@@ -12,20 +12,20 @@ use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
- * Class NewsController
+ * Class RuleController
  * @package backend\controllers
  */
-class NewsController extends AbstractController
+class RuleController extends AbstractController
 {
     /**
      * @return string
      */
     public function actionIndex(): string
     {
-        $searchModel = new NewsSearch();
+        $searchModel = new RuleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $this->view->title = 'News';
+        $this->view->title = 'Rules';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
@@ -43,15 +43,15 @@ class NewsController extends AbstractController
      */
     public function actionCreate()
     {
-        $model = new News(['user_id' => Yii::$app->user->id]);
+        $model = new Rule();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->view->title = 'News create';
-        $this->view->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['news/index']];
+        $this->view->title = 'Rule create';
+        $this->view->params['breadcrumbs'][] = ['label' => 'Rules', 'url' => ['rule/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
@@ -76,8 +76,8 @@ class NewsController extends AbstractController
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->view->title = 'News update';
-        $this->view->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['news/index']];
+        $this->view->title = 'Rule update';
+        $this->view->params['breadcrumbs'][] = ['label' => 'Rules', 'url' => ['rule/index']];
         $this->view->params['breadcrumbs'][] = [
             'label' => $model->title,
             'url' => ['news/view', 'id' => $model->id]
@@ -94,6 +94,22 @@ class NewsController extends AbstractController
 
     /**
      * @param int $id
+     * @return Rule
+     * @throws NotFoundHttpException
+     */
+    private function getModel(int $id): Rule
+    {
+        $model = Rule::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
+        $this->notFound($model);
+
+        return $model;
+    }
+
+    /**
+     * @param int $id
      * @return string
      * @throws NotFoundHttpException
      */
@@ -102,7 +118,7 @@ class NewsController extends AbstractController
         $model = $this->getModel($id);
 
         $this->view->title = $model->title;
-        $this->view->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['news/index']];
+        $this->view->params['breadcrumbs'][] = ['label' => 'Rules', 'url' => ['rule/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render(
@@ -131,21 +147,5 @@ class NewsController extends AbstractController
         }
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * @param int $id
-     * @return News
-     * @throws NotFoundHttpException
-     */
-    private function getModel(int $id): News
-    {
-        $model = News::find()
-            ->andWhere(['id' => $id])
-            ->limit(1)
-            ->one();
-        $this->notFound($model);
-
-        return $model;
     }
 }

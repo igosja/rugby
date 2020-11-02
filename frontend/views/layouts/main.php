@@ -21,7 +21,7 @@ $context = $this->context;
 
 ?>
 <?php
-$this->beginPage(); ?>
+$this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -59,15 +59,19 @@ $this->beginPage(); ?>
         </script>
         <!--/LiveInternet-->
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
-    <?php if (!$context->user || !$context->user->isVip()) : ?>
+    <?php
+    if (!$context->user || !$context->user->isVip()) : ?>
         <!-- Google AdSense -->
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
-    <?php endif; ?>
-    <?php endif; ?>
+    <?php
+    endif ?>
+    <?php
+    endif ?>
 </head>
 <body>
-<?php $this->beginBody(); ?>
+<?php
+$this->beginBody() ?>
 <div class="main">
     <div class="content">
         <div class="row">
@@ -101,7 +105,7 @@ $this->beginPage(); ?>
                             . ')';
                     }
                     ?>
-                    <?= Html::beginForm(['team/change-my-team'], 'post', ['class' => 'form-inline']); ?>
+                    <?= Html::beginForm(['team/change-my-team'], 'post', ['class' => 'form-inline']) ?>
                     <?= Html::dropDownList(
                         'teamId',
                         $context->myTeamOrVice ? $context->myTeamOrVice->team_id : 0,
@@ -148,8 +152,9 @@ $this->beginPage(); ?>
         }
 
         ?>
-        <?= $content; ?>
-        <?php if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
+        <?= $content ?>
+        <?php
+        if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
                     <?= Html::tag(
@@ -172,7 +177,7 @@ $this->beginPage(); ?>
                 </div>
             </div>
         <?php
-        endif; ?>
+        endif ?>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
@@ -189,8 +194,8 @@ $this->beginPage(); ?>
     </div>
 </div>
 <?php
-$this->endBody(); ?>
+$this->endBody() ?>
 </body>
 </html>
 <?php
-$this->endPage(); ?>
+$this->endPage() ?>

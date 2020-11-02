@@ -75,7 +75,7 @@ class News extends AbstractActiveRecord
      */
     public function getNewsComments(): ActiveQuery
     {
-        return $this->hasMany(NewsComment::class, ['comment_id' => 'id']);
+        return $this->hasMany(NewsComment::class, ['news_id' => 'id']);
     }
 
     /**

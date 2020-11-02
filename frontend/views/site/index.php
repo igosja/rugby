@@ -32,7 +32,8 @@ use yii\helpers\Html;
                     в котором Вы получите возможность пройти увлекательный путь развития своей команды
                     от низших дивизионов до побед в национальных чемпионатах и мировых кубках!
                 </p>
-                <?php if (Yii::$app->user->isGuest) : ?>
+                <?php
+                if (Yii::$app->user->isGuest) : ?>
                     <p class="text-center">
                         <?= Html::a(
                             'Зарегистрироваться',
@@ -40,7 +41,8 @@ use yii\helpers\Html;
                             ['class' => 'btn']
                         ) ?>
                     </p>
-                <?php endif; ?>
+                <?php
+                endif ?>
                 <h4>Скачивать ничего не надо!</h4>
                 <p class="text-justify">
                     Обращаем внимание, что наш регбийный онлайн-менеджер является браузерной игрой.
@@ -74,21 +76,19 @@ use yii\helpers\Html;
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <p class="text-justify">
-                        <span class="strong"><?= $news->news_title ?></span>
+                        <span class="strong"><?= $news->title ?></span>
                     </p>
                     <p class="text-justify">
-                        <?= $news->news_text ?>
+                        <?= $news->text ?>
                     </p>
-                    <?= Html::a(
-                        Html::encode($news->user->user_login),
-                        ['user/view', 'id' => $news->news_user_id]
-                    ) ?>
+                    <?= $news->user->getUserLink() ?>
                     <p class="text-justify text-size-3">
                         [<?= Html::a('Подробнее', ['news/index']) ?>]
                     </p>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php
+        endif ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h2>Как стать менеджером регбийной команды?</h2>
@@ -158,14 +158,15 @@ use yii\helpers\Html;
                                     -
                                     <?= date('Y') - $item->birth_year ?>-я годовщина!
                                 <?php
-                                endif; ?>
+                                endif ?>
                             </li>
                         <?php
-                        endforeach; ?>
+                        endforeach ?>
                     </ul>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php
+        endif ?>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="row margin">
@@ -174,7 +175,8 @@ use yii\helpers\Html;
                     <legend class="text-center strong">
                         Форум
                     </legend>
-                    <?php foreach ($forumMessage as $item): ?>
+                    <?php
+                    foreach ($forumMessage as $item): ?>
                         <div class="row margin-top-small">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <?= Html::a(
@@ -186,7 +188,8 @@ use yii\helpers\Html;
                                 <?= $item->forumTheme->forumGroup->name ?>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    <?php
+                    endforeach ?>
                 </fieldset>
             </div>
         </div>

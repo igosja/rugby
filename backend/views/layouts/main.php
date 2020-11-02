@@ -22,7 +22,7 @@ AppAsset::register($this);
 
 ?>
 <?php
-$this->beginPage(); ?>
+$this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -120,7 +120,7 @@ $this->beginBody() ?>
     ?>
 
     <?php
-    NavBar::end(); ?>
+    NavBar::end() ?>
     <div class="navbar-default sidebar">
         <div class="sidebar-nav navbar-collapse">
             <?php
@@ -133,18 +133,6 @@ $this->beginBody() ?>
                             'label' => 'Users',
                             'url' => ['user/index'],
                         ],
-                        [
-                            'label' => 'Federation presidents',
-                            'url' => ['president/index'],
-                        ],
-                        [
-                            'label' => 'National team coaches',
-                            'url' => ['coach/index'],
-                        ],
-                        [
-                            'label' => 'Blocking reasons',
-                            'url' => ['block-reason/index'],
-                        ],
                     ],
                     'url' => 'javascript:',
                 ],
@@ -155,29 +143,6 @@ $this->beginBody() ?>
                         [
                             'label' => 'Teams',
                             'url' => ['team/index'],
-                        ],
-                        [
-                            'label' => 'Stadiums',
-                            'url' => ['stadium/index'],
-                        ],
-                        [
-                            'label' => 'Cities',
-                            'url' => ['city/index'],
-                        ],
-                        [
-                            'label' => 'Countries',
-                            'url' => ['country/index'],
-                        ],
-                    ],
-                    'url' => 'javascript:',
-                ],
-                [
-                    'label' => 'Rugby players',
-                    'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
-                    'items' => [
-                        [
-                            'label' => 'Squads',
-                            'url' => ['squad/index'],
                         ],
                     ],
                     'url' => 'javascript:',
@@ -190,73 +155,12 @@ $this->beginBody() ?>
                             'label' => 'News',
                             'url' => ['news/index'],
                         ],
-                        [
-                            'label' => 'Preliminary news',
-                            'url' => ['pre-news/index'],
-                        ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
                     'label' => 'Rules',
                     'url' => ['rule/index'],
-                ],
-                [
-                    'label' => 'Votes',
-                    'url' => ['vote/index'],
-                ],
-                [
-                    'label' => 'Schedule',
-                    'url' => ['schedule/index'],
-                ],
-                [
-                    'label' => 'Forum',
-                    'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
-                    'items' => [
-                        [
-                            'label' => 'Chapters',
-                            'url' => ['forum-chapter/index'],
-                        ],
-                        [
-                            'label' => 'Groups',
-                            'url' => ['forum-group/index'],
-                        ],
-                    ],
-                    'url' => 'javascript:',
-                ],
-                [
-                    'label' => 'Texts',
-                    'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
-                    'items' => [
-                        [
-                            'label' => 'Tournament types',
-                            'url' => ['tournament-type/index'],
-                        ],
-                        [
-                            'label' => 'Stages',
-                            'url' => ['stage/index'],
-                        ],
-                        [
-                            'label' => 'Finance texts',
-                            'url' => ['finance-text/index'],
-                        ],
-                    ],
-                    'url' => 'javascript:',
-                ],
-                [
-                    'label' => 'Site metrics',
-                    'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
-                    'items' => [
-                        [
-                            'label' => 'Generator correction',
-                            'url' => ['analytics/game-statistic'],
-                        ],
-                        [
-                            'label' => 'Snapshots',
-                            'url' => ['analytics/snapshot'],
-                        ],
-                    ],
-                    'url' => 'javascript:',
                 ],
             ];
 

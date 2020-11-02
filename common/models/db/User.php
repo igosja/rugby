@@ -5,6 +5,7 @@ namespace common\models\db;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\web\IdentityInterface;
 
 /**
@@ -151,6 +152,19 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @param array $options
+     * @return string
+     */
+    public function getUserLink(array $options = []): string
+    {
+        return Html::a(
+            Html::encode($this->login),
+            ['user/view', 'id' => $this->id],
+            $options
+        );
+    }
+
+    /**
      * @return bool
      */
     public function isVip(): bool
@@ -255,6 +269,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function getSex(): ActiveQuery
     {
         return $this->hasOne(Sex::class, ['id' => 'sex_id']);
+    }
+
+    /**
+     * @param int $userBlockTypeId
+     * @return ActiveQuery
+     */
+    public function getUserBlock(int $userBlockTypeId): ActiveQuery
+    {
+        return $this
+            ->hasOne(UserBlock::class, ['user_id' => 'id'])
+            ->andWhere(['userBlockTypeId' => $userBlockTypeId])
+            ->orderBy(['date' => SORT_DESC]);
     }
 
     /**

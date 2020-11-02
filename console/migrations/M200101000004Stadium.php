@@ -37,7 +37,9 @@ class M200101000004Stadium extends Migration
         $this->insert(
             self::TABLE,
             [
-                'name' => 'League'
+                'city_id' => 0,
+                'date' => time(),
+                'name' => 'League',
             ]
         );
 

@@ -37,7 +37,7 @@ class TeamSearch extends Team
      */
     public function search($params): ActiveDataProvider
     {
-        $query = Team::find()
+        $query = self::find()
             ->andWhere(['!=', 'id', 0]);
 
         $dataProvider = new ActiveDataProvider(

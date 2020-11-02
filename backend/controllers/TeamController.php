@@ -42,13 +42,9 @@ class TeamController extends AbstractController
      */
     public function actionUpdate(int $id)
     {
-        $model = Team::find()
-            ->where(['id' => $id])
-            ->limit(1)
-            ->one();
-        $this->notFound($model);
+        $model = $this->getModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -76,11 +72,7 @@ class TeamController extends AbstractController
      */
     public function actionView(int $id): string
     {
-        $model = Team::find()
-            ->where(['id' => $id])
-            ->limit(1)
-            ->one();
-        $this->notFound($model);
+        $model = $this->getModel($id);
 
         $this->view->title = $model->name;
         $this->view->params['breadcrumbs'][] = ['label' => 'Teams', 'url' => ['team/index']];
@@ -92,5 +84,21 @@ class TeamController extends AbstractController
                 'model' => $model,
             ]
         );
+    }
+
+    /**
+     * @param int $id
+     * @return Team
+     * @throws NotFoundHttpException
+     */
+    private function getModel(int $id): Team
+    {
+        $model = Team::find()
+            ->where(['id' => $id])
+            ->limit(1)
+            ->one();
+        $this->notFound($model);
+
+        return $model;
     }
 }

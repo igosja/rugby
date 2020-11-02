@@ -16,25 +16,33 @@ use yii\helpers\Html;
                 <h3 class="panel-title text-center">Sign In</h3>
             </div>
             <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'fieldConfig' => [
-                        'template' => '{input}{error}'
+                <?php
+                $form = ActiveForm::begin(
+                    [
+                        'fieldConfig' => [
+                            'template' => '{input}{error}'
+                        ]
                     ]
-                ]); ?>
+                ) ?>
                 <fieldset>
-                    <?= $form->field($model, 'login')->textInput([
-                        'autofocus' => true,
-                        'placeholder' => $model->getAttributeLabel('login')
-                    ]); ?>
-                    <?= $form->field($model, 'password')->passwordInput([
-                        'placeholder' => $model->getAttributeLabel('password')
-                    ]) ?>
+                    <?= $form->field($model, 'login')->textInput(
+                        [
+                            'autofocus' => true,
+                            'placeholder' => $model->getAttributeLabel('login')
+                        ]
+                    ) ?>
+                    <?= $form->field($model, 'password')->passwordInput(
+                        [
+                            'placeholder' => $model->getAttributeLabel('password')
+                        ]
+                    ) ?>
                     <?= Html::submitButton(
                         'Sign In',
                         ['class' => 'btn btn-lg btn-primary btn-block']
                     ) ?>
                 </fieldset>
-                <?php ActiveForm::end(); ?>
+                <?php
+                ActiveForm::end() ?>
             </div>
         </div>
     </div>

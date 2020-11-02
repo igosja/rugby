@@ -5,9 +5,9 @@ namespace frontend\controllers;
 use common\components\AbstractWebController;
 use common\models\db\National;
 use common\models\db\Season;
-use common\models\db\Site;
 use common\models\db\Team;
 use common\models\db\User;
+use common\models\queries\SiteQuery;
 use Yii;
 use yii\base\Action;
 use yii\helpers\ArrayHelper;
@@ -109,18 +109,9 @@ abstract class AbstractController extends AbstractWebController
             ->one();
 
         if (!Yii::$app->user->isGuest) {
-            $this->user = User::find()
-                ->select([
-                    'user_id',
-                    'user_date_confirm',
-                    'user_date_delete',
-                    'user_news_id',
-                ])
-                ->where(['user_id' => Yii::$app->user->id])
-                ->limit(1)
-                ->one();
+            $this->user = Yii::$app->user->identity;
 
-            User::updateAll(['user_date_login' => time()], ['user_id' => $this->user->user_id]);
+            User::updateAll(['date_login' => time()], ['id' => $this->user->id]);
 //            if ($userIp && (User::ADMIN_USER_ID == $this->user->user_id || !in_array($userIp, $allowedIp))) {
 //                $this->user->user_ip = $userIp;
 //            }
@@ -132,11 +123,11 @@ abstract class AbstractController extends AbstractWebController
 //                );
 //            }
 
-            if (!$this->user->user_date_confirm) {
+            if (!$this->user->date_confirm) {
                 Yii::$app->session->setFlash('warning', 'Пожалуйста, подтвердите свой почтовый адрес');
             }
 
-            if (!('restore' === $action->id && 'user' === $action->controller->id) && $this->user->user_date_delete) {
+            if (!('restore' === $action->id && 'user' === $action->controller->id) && $this->user->date_delete) {
                 return $this->redirect(['user/restore']);
             }
 
@@ -147,37 +138,41 @@ abstract class AbstractController extends AbstractWebController
              * @var Team[] $teamUserArray
              */
             $teamUserArray = Team::find()
-                ->select([
-                    'team_base_scout_id',
-                    'team_id',
-                    'team_name',
-                    'team_stadium_id',
-                    'team_user_id',
-                    'team_vice_id',
-                ])
-                ->where([
-                    'or',
-                    ['team_user_id' => $this->user->user_id],
-                    ['team_vice_id' => $this->user->user_id],
-                ])
-                ->andWhere(['!=', 'team_id', 0])
+                ->select(
+                    [
+                        'base_scout_id',
+                        'id',
+                        'name',
+                        'stadium_id',
+                        'user_id',
+                        'vice_user_id',
+                    ]
+                )
+                ->where(
+                    [
+                        'or',
+                        ['user_id' => $this->user->id],
+                        ['vice_user_id' => $this->user->id],
+                    ]
+                )
+                ->andWhere(['!=', 'id', 0])
                 ->all();
 
             $teamArray = [];
             $teamViceArray = [];
             foreach ($teamUserArray as $team) {
-                if ($this->user->user_id === $team->team_user_id) {
-                    $teamArray[$team->team_id] = $team;
-                    if ($mySessionTeamId === $team->team_id) {
+                if ($this->user->id === $team->user_id) {
+                    $teamArray[$team->id] = $team;
+                    if ($mySessionTeamId === $team->id) {
                         $this->myTeam = $team;
                     }
                     if (!$mySessionTeamId && !$this->myTeam) {
                         $this->myTeam = $team;
                     }
                 }
-                if ($this->user->user_id === $team->team_vice_id) {
-                    $teamViceArray[$team->team_id] = $team;
-                    if ($mySessionTeamId === $team->team_id) {
+                if ($this->user->id === $team->vice_user_id) {
+                    $teamViceArray[$team->id] = $team;
+                    if ($mySessionTeamId === $team->id) {
                         $this->myTeamVice = $team;
                     }
                 }
@@ -191,20 +186,20 @@ abstract class AbstractController extends AbstractWebController
              * @var National[] $nationalUserArray
              */
             $nationalUserArray = National::find()
-                ->select([
-                    'national_id',
-                ])
-                ->where([
-                    'or',
-                    ['national_user_id' => $this->user->user_id],
-                    ['national_vice_id' => $this->user->user_id],
-                ])
+                ->select(['id'])
+                ->where(
+                    [
+                        'or',
+                        ['user_id' => $this->user->id],
+                        ['vice_user_id' => $this->user->id],
+                    ]
+                )
                 ->all();
             foreach ($nationalUserArray as $national) {
-                if ($this->user->user_id === $national->national_user_id) {
+                if ($this->user->id === $national->user_id) {
                     $this->myNational = $national;
                 }
-                if ($this->user->user_id === $national->national_vice_id) {
+                if ($this->user->id === $national->vice_user_id) {
                     $this->myNationalVice = $national;
                 }
             }
@@ -212,10 +207,7 @@ abstract class AbstractController extends AbstractWebController
             $this->myNationalOrVice = $this->myNational ?: $this->myNationalVice;
         }
 
-        $siteStatus = Site::find()
-            ->select(['status'])
-            ->andWhere(['id' => 1])
-            ->column();
+        $siteStatus = SiteQuery::getStatus();
         if (!$siteStatus && !('site' === $action->controller->id && 'closed' === $action->id)) {
             return $this->redirect(['site/closed']);
         }
@@ -253,10 +245,12 @@ abstract class AbstractController extends AbstractWebController
      */
     private function seoDescription(): void
     {
-        $this->view->registerMetaTag([
-            'name' => 'description',
-            'content' => $this->view->title . ' на сайте Виртуальной Регбийной Лиги'
-        ]);
+        $this->view->registerMetaTag(
+            [
+                'name' => 'description',
+                'content' => $this->view->title . ' на сайте Виртуальной Регбийной Лиги'
+            ]
+        );
     }
 
     /**

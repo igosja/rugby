@@ -1,13 +1,13 @@
 <?php
 
 use common\components\helpers\ErrorHelper;
-use common\models\db\News;
+use common\models\db\Rule;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\DetailView;
 
 /**
- * @var News $model
+ * @var Rule $model
  * @var View $this
  */
 
@@ -44,13 +44,16 @@ use yii\widgets\DetailView;
         $attributes = [
             'id',
             'date:datetime',
+            'order:integer',
             'title',
-            'text',
+            'text:raw',
         ];
-        print DetailView::widget([
-            'attributes' => $attributes,
-            'model' => $model,
-        ]);
+        print DetailView::widget(
+            [
+                'attributes' => $attributes,
+                'model' => $model,
+            ]
+        );
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }

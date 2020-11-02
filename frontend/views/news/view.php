@@ -27,18 +27,19 @@ $user = $this->context->user;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-1 strong">
-        <?= $news->news_title; ?>
+        <?= $news->title ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 font-grey">
-        <?= FormatHelper::asDateTime($news->news_date); ?>
+        <?= FormatHelper::asDateTime($news->date) ?>
         -
-        <?= $news->user->userLink(['class' => 'strong']); ?>
+        <?= $news->user->getUserLink(['class' => 'strong']) ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $news->news_text; ?>
+        <?= $news->text ?>
     </div>
 </div>
-<?php if ($dataProvider->models) : ?>
+<?php
+if ($dataProvider->models) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <span class="strong">Последние комментарии:</span>
@@ -49,19 +50,23 @@ $user = $this->context->user;
 
         try {
             print ListView::widget([
-                'dataProvider' => $dataProvider,
-                'itemOptions' => ['class' => 'row border-top'],
-                'itemView' => '_comment',
-            ]);
+                                       'dataProvider' => $dataProvider,
+                                       'itemOptions' => ['class' => 'row border-top'],
+                                       'itemView' => '_comment',
+                                   ]
+            );
         } catch (Exception $e) {
             ErrorHelper::log($e);
         }
 
         ?>
     </div>
-<?php endif; ?>
-<?php if (!Yii::$app->user->isGuest) : ?>
-    <?php if (!$user->user_date_confirm) : ?>
+<?php
+endif ?>
+<?php
+if (!Yii::$app->user->isGuest) : ?>
+    <?php
+    if (!$user->user_date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей
@@ -69,7 +74,8 @@ $user = $this->context->user;
                 Причина - ваш почтовый адрес не подтверждён
             </div>
         </div>
-    <?php elseif ($user->getCommentNewsBlock()) : ?>
+    <?php
+    elseif ($user->getCommentNewsBlock()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей до
@@ -95,19 +101,23 @@ $user = $this->context->user;
                     </div>
                     <div class="row">{error}</div>',
             ],
-        ]); ?>
+                                        ]
+        ) ?>
         <?= $form
-            ->field($model, 'news_comment_text')
+            ->field($model, 'text')
             ->textarea()
-            ->label('Ваш комментарий:'); ?>
+            ->label('Ваш комментарий:') ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton(
                     'Комментировать',
                     ['class' => 'btn margin']
-                ); ?>
+                ) ?>
             </div>
         </div>
-        <?php ActiveForm::end(); ?>
-    <?php endif; ?>
-<?php endif; ?>
+        <?php
+        ActiveForm::end() ?>
+    <?php
+    endif ?>
+<?php
+endif ?>

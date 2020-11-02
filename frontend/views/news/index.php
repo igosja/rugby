@@ -21,7 +21,6 @@ use yii\widgets\ListView;
         print ListView::widget([
             'dataProvider' => $dataProvider,
             'itemOptions' => static function ($model, $key, $index) {
-                unset($model, $key);
                 $class = ['row', 'border-top'];
                 if ($index % 2) {
                     $class[] = 'div-odd';

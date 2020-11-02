@@ -28,11 +28,13 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-size-1 strong">
-                <?= $player->playerName(); ?>
+                <?= $player->playerName() ?>
             </div>
-            <?php if (isset($squadArray)): ?>
+            <?php
+            if (isset($squadArray)): ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <?php if ($player->myPlayer()): ?>
+                    <?php
+                    if ($player->myPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
                                 <label for="select-line">Состав:</label>
@@ -48,11 +50,13 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                                         'id' => 'select-squad',
                                         'options' => $squadStyle,
                                     ]
-                                ); ?>
+                                ) ?>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php if ($player->myNationalPlayer()): ?>
+                    <?php
+                    endif ?>
+                    <?php
+                    if ($player->myNationalPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
                                 <label for="select-line">Состав в сборной:</label>
@@ -68,12 +72,14 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                                         'id' => 'select-national-squad',
                                         'options' => $squadStyle,
                                     ]
-                                ); ?>
+                                ) ?>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php
+                    endif ?>
                 </div>
-            <?php endif; ?>
+            <?php
+            endif ?>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top">
@@ -84,8 +90,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Национальность:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->country->countryLink(); ?>
-                        <?= $player->iconNational(); ?>
+                        <?= $player->country->countryLink() ?>
+                        <?= $player->iconNational() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -93,8 +99,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Возраст:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_age; ?>
-                        <?= $player->iconPension(); ?>
+                        <?= $player->player_age ?>
+                        <?= $player->iconPension() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -102,9 +108,9 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Сила:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_power_nominal; ?>
-                        <?= $player->iconDeal(); ?>
-                        <?= $player->iconTraining(); ?>
+                        <?= $player->player_power_nominal ?>
+                        <?= $player->iconDeal() ?>
+                        <?= $player->iconTraining() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -112,8 +118,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Усталость:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->playerTire(); ?>
-                        <?= $player->iconInjury(); ?>
+                        <?= $player->playerTire() ?>
+                        <?= $player->iconInjury() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -121,7 +127,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Форма:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->playerPhysical(); ?>
+                        <?= $player->playerPhysical() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -129,11 +135,14 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Реальная сила:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?php if ($player->myPlayer()) : ?>
-                            <?= $player->player_power_real; ?>
-                        <?php else: ?>
-                            ~<?= $player->player_power_nominal; ?>
-                        <?php endif; ?>
+                        <?php
+                        if ($player->myPlayer()) : ?>
+                            <?= $player->player_power_real ?>
+                        <?php
+                        else: ?>
+                            ~<?= $player->player_power_nominal ?>
+                        <?php
+                        endif ?>
                     </div>
                 </div>
                 <div class="row">
@@ -141,8 +150,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Стиль:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->iconStyle(); ?>
-                        <?= $player->iconScout(); ?>
+                        <?= $player->iconStyle() ?>
+                        <?= $player->iconScout() ?>
                     </div>
                 </div>
             </div>
@@ -152,26 +161,28 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Команда:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->team->teamLink('img'); ?>
+                        <?= $player->team->teamLink('img') ?>
                     </div>
                 </div>
-                <?php if ($player->loanTeam->team_id) : ?>
+                <?php
+                if ($player->loanTeam->team_id) : ?>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             В аренде:
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <?= $player->loanTeam->teamLink('img'); ?>
-                            <?= $player->iconLoan(); ?>
+                            <?= $player->loanTeam->teamLink('img') ?>
+                            <?= $player->iconLoan() ?>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php
+                endif ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         Позиция:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->position(); ?>
+                        <?= $player->position() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -179,7 +190,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Спецвозможности:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->special(); ?>
+                        <?= $player->special() ?>
                     </div>
                 </div>
                 <div class="row">
@@ -187,7 +198,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Зарплата в день:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_salary); ?>
+                        <?= FormatHelper::asCurrency($player->player_salary) ?>
                     </div>
                 </div>
                 <div class="row">
@@ -195,7 +206,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Стоимость:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_price); ?>
+                        <?= FormatHelper::asCurrency($player->player_price) ?>
                     </div>
                 </div>
             </div>

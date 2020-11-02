@@ -44,7 +44,7 @@ use yii\web\View;
                     $seasonId,
                     $seasonArray,
                     ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-                ); ?>
+                ) ?>
             </div>
         </div>
     </div>

@@ -5,11 +5,13 @@ namespace frontend\controllers;
 use common\components\helpers\ErrorHelper;
 use common\models\db\NewsComment;
 use common\models\db\UserRole;
+use frontend\models\executors\NewsCommentSaveExecutor;
 use frontend\models\preparers\NewsCommentPrepare;
 use frontend\models\preparers\NewsPrepare;
 use frontend\models\queries\NewsCommentQuery;
 use frontend\models\queries\NewsQuery;
 use Throwable;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -52,9 +54,12 @@ class NewsController extends AbstractController
         }
 
         $this->seoTitle('Новости');
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'dataProvider' => $dataProvider,
+            ]
+        );
     }
 
     /**
@@ -68,8 +73,9 @@ class NewsController extends AbstractController
         $this->notFound($news);
 
         $model = new NewsComment();
-        $model->news_comment_news_id = $id;
-        if ($model->addComment()) {
+        $model->news_id = $id;
+        $model->user_id = $id;
+        if ($this->user && (new NewsCommentSaveExecutor($this->user, $model, Yii::$app->request->post()))->execute()) {
             $this->setSuccessFlash('Комментарий успешно сохранён');
             return $this->refresh();
         }
@@ -77,11 +83,14 @@ class NewsController extends AbstractController
         $dataProvider = NewsCommentPrepare::getNewsCommentDataProvider($id);
 
         $this->seoTitle('Комментарии к новости');
-        return $this->render('view', [
-            'dataProvider' => $dataProvider,
-            'model' => $model,
-            'news' => $news,
-        ]);
+        return $this->render(
+            'view',
+            [
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+                'news' => $news,
+            ]
+        );
     }
 
     /**
