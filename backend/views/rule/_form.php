@@ -1,11 +1,11 @@
 <?php
 
-use common\models\db\News;
+use common\models\db\Rule;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /**
- * @var News $model
+ * @var Rule $model
  */
 
 ?>
@@ -15,12 +15,13 @@ use yii\helpers\Html;
         $form = ActiveForm::begin() ?>
         <?= $form->field($model, 'title')->textInput() ?>
         <?= $form->field($model, 'text')->textarea(['rows' => 10]) ?>
+        <?= $form->field($model, 'order')->textInput(['type' => 'number']) ?>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-default']) ?>
             </div>
         </div>
         <?php
-        ActiveForm::end() ?>
+        ActiveForm::end(); ?>
     </div>
 </div>

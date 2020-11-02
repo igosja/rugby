@@ -57,15 +57,16 @@ print $this->render('_federation', [
             ],
         ];
         print GridView::widget([
-            'columns' => $columns,
-            'dataProvider' => $dataProvider,
-            'showFooter' => true,
-        ]);
+                                   'columns' => $columns,
+                                   'dataProvider' => $dataProvider,
+                                   'showFooter' => true,
+                               ]
+        );
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }
 
     ?>
 </div>
-<?= $this->render('//site/_show-full-table'); ?>
+<?= $this->render('//site/_show-full-table') ?>
 

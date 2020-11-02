@@ -42,13 +42,10 @@ class UserController extends AbstractController
      */
     public function actionUpdate(int $id)
     {
-        $model = User::find()
-            ->where(['id' => $id])
-            ->limit(1)
-            ->one();
-        $this->notFound($model);
+        $model = $this->getModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -76,11 +73,7 @@ class UserController extends AbstractController
      */
     public function actionView(int $id): string
     {
-        $model = User::find()
-            ->where(['id' => $id])
-            ->limit(1)
-            ->one();
-        $this->notFound($model);
+        $model = $this->getModel($id);
 
         $this->view->title = $model->login;
         $this->view->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['user/index']];
@@ -92,5 +85,21 @@ class UserController extends AbstractController
                 'model' => $model,
             ]
         );
+    }
+
+    /**
+     * @param int $id
+     * @return User
+     * @throws NotFoundHttpException
+     */
+    private function getModel(int $id): User
+    {
+        $model = User::find()
+            ->where(['id' => $id])
+            ->limit(1)
+            ->one();
+        $this->notFound($model);
+
+        return $model;
     }
 }

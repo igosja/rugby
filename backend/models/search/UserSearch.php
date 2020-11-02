@@ -37,7 +37,7 @@ class UserSearch extends User
      */
     public function search($params): ActiveDataProvider
     {
-        $query = User::find()
+        $query = self::find()
             ->andWhere(['!=', 'id', 0]);
 
         $dataProvider = new ActiveDataProvider(

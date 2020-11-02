@@ -20,11 +20,11 @@ use yii\helpers\Html;
         <h1>Расписание</h1>
     </div>
 </div>
-<?= Html::beginForm('', 'get'); ?>
+<?= Html::beginForm('', 'get') ?>
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
-        <?= Html::label('Сезон', 'seasonId'); ?>
+        <?= Html::label('Сезон', 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
         <?= Html::dropDownList(
@@ -32,11 +32,11 @@ use yii\helpers\Html;
             $seasonId,
             $seasonArray,
             ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-        ); ?>
+        ) ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
-<?= Html::endForm(); ?>
+<?= Html::endForm() ?>
 <div class="row">
     <?php
 
@@ -83,13 +83,14 @@ use yii\helpers\Html;
                 }
                 return [];
             },
-            'showFooter' => true,
-            'summary' => false,
-        ]);
+                                   'showFooter' => true,
+                                   'summary' => false,
+                               ]
+        );
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }
 
     ?>
 </div>
-<?= $this->render('//site/_show-full-table'); ?>
+<?= $this->render('//site/_show-full-table') ?>

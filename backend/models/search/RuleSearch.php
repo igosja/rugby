@@ -2,15 +2,15 @@
 
 namespace backend\models\search;
 
-use common\models\db\News;
+use common\models\db\Rule;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class NewsSearch
+ * Class RuleSearch
  * @package backend\models
  */
-class NewsSearch extends News
+class RuleSearch extends Rule
 {
     /**
      * @return array
@@ -37,14 +37,13 @@ class NewsSearch extends News
      */
     public function search($params): ActiveDataProvider
     {
-        $query = self::find()
-            ->andWhere(['federation_id' => null]);
+        $query = self::find();
 
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC],
+                    'defaultOrder' => ['order' => SORT_ASC],
                 ],
             ]
         );

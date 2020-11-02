@@ -16,15 +16,15 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1><?= $schedule->tournamentType->tournament_type_name; ?></h1>
+        <h1><?= $schedule->tournamentType->tournament_type_name ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
-            <?= FormatHelper::asDatetime($schedule->schedule_date); ?>,
-            <?= $schedule->stage->stage_name; ?>,
-            <?= $schedule->schedule_season_id; ?>
+            <?= FormatHelper::asDatetime($schedule->schedule_date) ?>,
+            <?= $schedule->stage->stage_name ?>,
+            <?= $schedule->schedule_season_id ?>
             сезон
         </p>
     </div>
