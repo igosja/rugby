@@ -27,15 +27,15 @@ $user = $this->context->user;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-1 strong">
-        <?= $news->news_title ?>
+        <?= $news->title ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 font-grey">
-        <?= FormatHelper::asDateTime($news->news_date) ?>
+        <?= FormatHelper::asDateTime($news->date) ?>
         -
-        <?= $news->user->userLink(['class' => 'strong']) ?>
+        <?= $news->user->getUserLink(['class' => 'strong']) ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $news->news_text ?>
+        <?= $news->text ?>
     </div>
 </div>
 <?php
@@ -104,7 +104,7 @@ if (!Yii::$app->user->isGuest) : ?>
                                         ]
         ) ?>
         <?= $form
-            ->field($model, 'news_comment_text')
+            ->field($model, 'text')
             ->textarea()
             ->label('Ваш комментарий:') ?>
         <div class="row">

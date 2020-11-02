@@ -81,10 +81,7 @@ use yii\helpers\Html;
                     <p class="text-justify">
                         <?= $news->text ?>
                     </p>
-                    <?= Html::a(
-                        Html::encode($news->user->login),
-                        ['user/view', 'id' => $news->id]
-                    ) ?>
+                    <?= $news->user->getUserLink() ?>
                     <p class="text-justify text-size-3">
                         [<?= Html::a('Подробнее', ['news/index']) ?>]
                     </p>
