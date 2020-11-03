@@ -3,7 +3,7 @@
 namespace common\components;
 
 use common\components\helpers\ErrorHelper;
-use Exception;
+use RuntimeException;
 use yii\db\ActiveRecord;
 
 /**
@@ -16,12 +16,14 @@ abstract class AbstractActiveRecord extends ActiveRecord
      * @param bool $runValidation
      * @param null $attributeNames
      * @return bool
-     * @throws Exception
      */
-    public function save($runValidation = true, $attributeNames = null)
+    public function save($runValidation = true, $attributeNames = null): bool
     {
+        if (!$this->validate()) {
+            return false;
+        }
         if (!parent::save($runValidation, $attributeNames)) {
-            throw new Exception(ErrorHelper::modelErrorsToString($this));
+            throw new RuntimeException(ErrorHelper::modelErrorsToString($this));
         }
 
         return true;

@@ -45,7 +45,7 @@ class RuleController extends AbstractController
     {
         $model = new Rule();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -71,7 +71,7 @@ class RuleController extends AbstractController
     {
         $model = $this->getModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
