@@ -44,7 +44,7 @@ class TeamController extends AbstractController
     {
         $model = $this->getModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash();
             return $this->redirect(['view', 'id' => $model->id]);
         }
