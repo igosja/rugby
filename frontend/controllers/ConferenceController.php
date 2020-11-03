@@ -28,7 +28,7 @@ class ConferenceController extends AbstractController
             ->where(['conference_season_id' => $seasonId])
             ->count();
 
-        $this->seoTitle('Конференция любительских клубов');
+        $this->setSeoTitle('Конференция любительских клубов');
         return $this->render('index', [
             'count' => $count,
             'seasonArray' => $this->getSeasonArray(),
@@ -70,7 +70,7 @@ class ConferenceController extends AbstractController
             'team.stadium.city.country.country_name'
         );
 
-        $this->seoTitle('Турнирная таблица конференции любительских клубов');
+        $this->setSeoTitle('Турнирная таблица конференции любительских клубов');
         return $this->render('table', [
             'countryArray' => $countryArray,
             'countryId' => $countryId,
@@ -123,7 +123,7 @@ class ConferenceController extends AbstractController
             'sort' => false,
         ]);
 
-        $this->seoTitle('Статистика конференции любительских клубов');
+        $this->setSeoTitle('Статистика конференции любительских клубов');
         return $this->render('statistics', [
             'dataProvider' => $dataProvider,
             'myTeam' => $this->myTeam,

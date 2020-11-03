@@ -12,7 +12,7 @@ use yii\web\View;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?= Yii::$app->language; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -291,7 +291,7 @@ use yii\web\View;
                                                                     Html::img(
                                                                         Url::base(true) . '/img/logo-letter.png',
                                                                         [
-                                                                            'alt' => 'Virtual Rugby League',
+                                                                            'alt' => 'Virtual Hockey League',
                                                                             'class' => 'flexibleImage',
                                                                             'style' => [
                                                                                 'max-width' => '560px',
@@ -333,14 +333,14 @@ use yii\web\View;
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                         <tr>
                                                             <td valign="top" class="textContent">
-                                                                <?= $content; ?>
+                                                                <?= $content ?>
                                                                 <br/>
                                                                 <br/>
                                                                 <?= Html::a(
-                                                                    'Virtual Rugby League',
+                                                                    'Virtual Hockey League',
                                                                     Url::base(true),
                                                                     ['target' => '_blank']
-                                                                ); ?>
+                                                                ) ?>
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -16,7 +16,7 @@ class VipController extends AbstractController
     {
         $count = UserQuery::countVipUsers();
 
-        $this->seoTitle('VIP клуб');
+        $this->setSeoTitle('VIP клуб');
         return $this->render('index', [
             'count' => $count,
         ]);

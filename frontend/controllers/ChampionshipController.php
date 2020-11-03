@@ -134,7 +134,7 @@ class ChampionshipController extends AbstractController
             ->orderBy(['game_id' => SORT_ASC])
             ->all();
 
-        $this->seoTitle($country->country_name . '. Национальный чемпионат');
+        $this->setSeoTitle($country->country_name . '. Национальный чемпионат');
 
         return $this->render('table', [
             'country' => $country,
@@ -264,14 +264,16 @@ class ChampionshipController extends AbstractController
                 ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
         }
 
-        $dataProvider = new ActiveDataProvider([
-            'pagination' => [
-                'pageSize' => Yii::$app->params['pageSizeTable'],
-            ],
-            'query' => $query,
-            'sort' => false,
-        ]);
-        $this->seoTitle($country->country_name . '. Статистика национального чемпионата');
+        $dataProvider = new ActiveDataProvider(
+            [
+                'pagination' => [
+                    'pageSize' => Yii::$app->params['pageSizeTable'],
+                ],
+                'query' => $query,
+                'sort' => false,
+            ]
+        );
+        $this->setSeoTitle($country->country_name . '. Статистика национального чемпионата');
 
         return $this->render('statistics', [
             'country' => $country,

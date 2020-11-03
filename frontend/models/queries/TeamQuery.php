@@ -21,13 +21,17 @@ class TeamQuery
          * @var Team $team
          */
         $team = Team::find()
-            ->select([
-                'team_id',
-            ])
-            ->where([
-                'team_id' => $teamId,
-                'team_user_id' => 0,
-            ])
+            ->select(
+                [
+                    'id',
+                ]
+            )
+            ->where(
+                [
+                    'id' => $teamId,
+                    'user_id' => 0,
+                ]
+            )
             ->limit(1)
             ->one();
         return $team;
@@ -42,88 +46,115 @@ class TeamQuery
             ->joinWith(['stadium.city'], false)
             ->with([
                 'base' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_id',
-                        'base_slot_max',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'slot_max',
+                        ]
+                    );
                 },
                 'baseMedical' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_medical_id',
-                        'base_medical_level',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'level',
+                        ]
+                    );
                 },
                 'basePhysical' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_physical_id',
-                        'base_physical_level',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'level',
+                        ]
+                    );
                 },
                 'baseSchool' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_school_id',
-                        'base_school_level',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'level',
+                        ]
+                    );
                 },
                 'baseScout' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_scout_id',
-                        'base_scout_level',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'level',
+                        ]
+                    );
                 },
                 'baseTraining' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'base_training_id',
-                        'base_training_level',
-                    ]);
+                    $query->select(
+                        [
+                            'id',
+                            'level',
+                        ]
+                    );
                 },
                 'stadium' => static function (ActiveQuery $query) {
                     $query
-                        ->with([
-                            'city' => static function (ActiveQuery $query) {
-                                $query
-                                    ->with([
-                                        'country' => static function (ActiveQuery $query) {
-                                            $query->select([
+                        ->with(
+                            [
+                                'city' => static function (ActiveQuery $query) {
+                                    $query
+                                        ->with(
+                                            [
+                                                'country' => static function (ActiveQuery $query) {
+                                                    $query->select(
+                                                        [
+                                                            'id',
+                                                            'name',
+                                                        ]
+                                                    );
+                                                }
+                                            ]
+                                        )
+                                        ->select(
+                                            [
                                                 'country_id',
-                                                'country_name',
-                                            ]);
-                                        }
-                                    ])
-                                    ->select([
-                                        'city_country_id',
-                                        'city_id',
-                                        'city_name',
-                                    ]);
-                            }
-                        ])
-                        ->select([
-                            'stadium_capacity',
-                            'stadium_city_id',
-                            'stadium_id',
-                        ]);
+                                                'id',
+                                                'name',
+                                            ]
+                                        );
+                                }
+                            ]
+                        )
+                        ->select(
+                            [
+                                'capacity',
+                                'city_id',
+                                'id',
+                            ]
+                        );
                 },
-                'teamRequests' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'team_request_team_id',
-                    ]);
-                }
-            ])
-            ->select([
-                'team_base_id',
-                'team_base_medical_id',
-                'team_base_physical_id',
-                'team_base_school_id',
-                'team_base_scout_id',
-                'team_base_training_id',
-                'team_finance',
-                'team_id',
-                'team_name',
-                'team_power_vs',
-                'team_stadium_id',
-            ])
-            ->where(['!=', 'team_id', 0])
-            ->andWhere(['team_user_id' => 0]);
+                       'teamRequests' => static function (ActiveQuery $query) {
+                           $query->select(
+                               [
+                                   'team_id',
+                               ]
+                           );
+                       }
+                   ]
+            )
+            ->select(
+                [
+                    'base_id',
+                    'base_medical_id',
+                    'base_physical_id',
+                    'base_school_id',
+                    'base_scout_id',
+                    'base_training_id',
+                    'finance',
+                    'team.id',
+                    'team.name',
+                    'power_vs',
+                    'stadium_id',
+                ]
+            )
+            ->where(['!=', 'team.id', 0])
+            ->andWhere(['user_id' => 0]);
     }
 
     /**

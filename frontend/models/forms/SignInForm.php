@@ -18,17 +18,17 @@ class SignInForm extends Model
     /**
      * @var string $login
      */
-    public $login;
+    public string $login = '';
 
     /**
      * @var string $password
      */
-    public $password;
+    public string $password = '';
 
     /**
-     * @var User $user
+     * @var User|null
      */
-    private $user;
+    private ?User $user = null;
 
     /**
      * @return array
@@ -37,6 +37,7 @@ class SignInForm extends Model
     {
         return [
             [['login', 'password'], 'required'],
+            [['login'], 'trim'],
             [['password'], 'validatePassword'],
         ];
     }
@@ -84,7 +85,7 @@ class SignInForm extends Model
     {
         if (!$this->user) {
             $this->user = User::find()
-                ->where(['login' => $this->login])
+                ->andWhere(['login' => $this->login])
                 ->limit(1)
                 ->one();
         }

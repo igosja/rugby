@@ -28,7 +28,7 @@ class OffSeasonController extends AbstractController
             ->where(['off_season_season_id' => $seasonId])
             ->count();
 
-        $this->seoTitle('Кубок межсезонья');
+        $this->setSeoTitle('Кубок межсезонья');
         return $this->render('index', [
             'count' => $count,
             'seasonArray' => $this->getSeasonArray(),
@@ -83,7 +83,7 @@ class OffSeasonController extends AbstractController
             'team.stadium.city.country.country_name'
         );
 
-        $this->seoTitle('Турнирная таблица кубка межсезонья');
+        $this->setSeoTitle('Турнирная таблица кубка межсезонья');
         return $this->render('table', [
             'countryArray' => $countryArray,
             'countryId' => $countryId,
@@ -136,7 +136,7 @@ class OffSeasonController extends AbstractController
             'sort' => false,
         ]);
 
-        $this->seoTitle('Статистика кубка межсезонья');
+        $this->setSeoTitle('Статистика кубка межсезонья');
         return $this->render('statistics', [
             'dataProvider' => $dataProvider,
             'myTeam' => $this->myTeam,

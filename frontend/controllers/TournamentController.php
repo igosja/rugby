@@ -23,7 +23,7 @@ class TournamentController extends AbstractController
         $tournaments = TournamentPrepare::getTournaments($seasonId);
         $seasonArray = Season::getSeasonArray();
 
-        $this->seoTitle('Турниры');
+        $this->setSeoTitle('Турниры');
         return $this->render('index', [
             'countryArray' => $countryArray,
             'seasonArray' => $seasonArray,

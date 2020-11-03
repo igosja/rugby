@@ -23,7 +23,7 @@ class FederationController extends AbstractController
         $federation = $this->getFederation($id);
         $dataProvider = TeamPrepare::getFederationTeamDataProvider($id);
 
-        $this->seoTitle('Команды федерации');
+        $this->setSeoTitle('Команды федерации');
         return $this->render('team', [
             'dataProvider' => $dataProvider,
             'federation' => $federation,

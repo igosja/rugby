@@ -4,7 +4,6 @@ use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\redis\Cache;
 use yii\redis\Connection;
-use yii\swiftmailer\Mailer;
 
 return [
     'aliases' => [
@@ -26,19 +25,6 @@ return [
                     ],
                 ],
             ],
-        ],
-        'mailer' => [
-            'class' => Mailer::class,
-            'transport' => [
-                'class' => 'Swift_SendmailTransport',
-                'encryption' => 'ssl',
-                'host' => 'smtp-pulse.com',
-                'password' => 'W93pcY9MW7L',
-                'port' => '465',
-                'username' => 'igosja@ukr.net',
-            ],
-            'useFileTransport' => false,
-            'viewPath' => '@common/mail',
         ],
         'redis' => [
             'class' => Connection::class,

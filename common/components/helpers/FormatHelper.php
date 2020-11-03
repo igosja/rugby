@@ -3,7 +3,7 @@
 namespace common\components\helpers;
 
 use Exception;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
 use Yii;
 
 /**
@@ -39,8 +39,8 @@ class FormatHelper
              * @var AbstractController $controller
              */
             $controller = Yii::$app->controller;
-            if (isset($controller->user, $controller->user->user_timezone) && $controller->user && $controller->user->user_timezone) {
-                Yii::$app->formatter->timeZone = $controller->user->user_timezone;
+            if ($controller->user && $controller->user->timezone) {
+                Yii::$app->formatter->timeZone = $controller->user->timezone;
             }
 
             $result = Yii::$app->formatter->asDate($time, 'short');
@@ -62,8 +62,8 @@ class FormatHelper
              * @var AbstractController $controller
              */
             $controller = Yii::$app->controller;
-            if (isset($controller->user, $controller->user->user_timezone) && $controller->user && $controller->user->user_timezone) {
-                Yii::$app->formatter->timeZone = $controller->user->user_timezone;
+            if ($controller->user && $controller->user->timezone) {
+                Yii::$app->formatter->timeZone = $controller->user->timezone;
             }
 
             $result = Yii::$app->formatter->asDatetime($time, 'short');

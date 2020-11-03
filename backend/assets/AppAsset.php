@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
 
     /**
-     * @var array $css
+     * @var string[] $css
      */
     public $css = [
         'css/metisMenu.css',
@@ -33,7 +33,7 @@ class AppAsset extends AssetBundle
     ];
 
     /**
-     * @var array $js
+     * @var string[] $js
      */
     public $js = [
         'js/metisMenu.js',
@@ -42,7 +42,7 @@ class AppAsset extends AssetBundle
     ];
 
     /**
-     * @var array $depends
+     * @var string[] $depends
      */
     public $depends = [
         YiiAsset::class,

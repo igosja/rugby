@@ -27,7 +27,7 @@ class ScheduleController extends AbstractController
         $scheduleId = ScheduleQuery::getCurrentScheduleIds();
         $seasonArray = Season::getSeasonArray();
 
-        $this->seoTitle('Расписание');
+        $this->setSeoTitle('Расписание');
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'seasonArray' => $seasonArray,
@@ -48,7 +48,7 @@ class ScheduleController extends AbstractController
 
         $dataProvider = GamePrepare::getGameDataProvider($id);
 
-        $this->seoTitle(
+        $this->setSeoTitle(
             'Список матчей игрового дня '
             . FormatHelper::asDate($schedule->schedule_date)
         );

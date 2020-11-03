@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Connection;
+use yii\swiftmailer\Mailer;
 
 return [
     'components' => [
@@ -12,6 +13,19 @@ return [
             'password' => 'JGvjBoCmVhLVzKDnYiH6',
             'schemaCacheDuration' => 3600,
             'username' => 'vrol',
+        ],
+        'mailer' => [
+            'class' => Mailer::class,
+            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'ssl',
+                'host' => 'smtp-pulse.com',
+                'password' => 'W93pcY9MW7L',
+                'port' => '465',
+                'username' => 'igosja@ukr.net',
+            ],
         ],
     ],
 ];

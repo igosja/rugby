@@ -20,24 +20,14 @@ class TeamRequestController extends AbstractController
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => [
-                    'index',
-                    'request',
-                    'delete',
-                ],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => [
-                            'index',
-                            'request',
-                            'delete',
-                        ],
                         'roles' => ['@'],
                     ],
                 ],
@@ -55,13 +45,16 @@ class TeamRequestController extends AbstractController
         }
 
         $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
-        $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->user_id);
+        $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
-        $this->seoTitle('Получение команды');
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'myDataProvider' => $myDataProvider,
-        ]);
+        $this->setSeoTitle('Получение команды');
+        return $this->render(
+            'index',
+            [
+                'dataProvider' => $dataProvider,
+                'myDataProvider' => $myDataProvider,
+            ]
+        );
     }
 
     /**
