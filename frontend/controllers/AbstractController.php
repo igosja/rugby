@@ -19,6 +19,8 @@ use yii\web\Response;
  * Class AbstractController
  * @package frontend\components
  *
+ * @property-write string $seoTitle
+ *
  * @property National $myNational
  * @property National $myNationalOrVice
  * @property National $myNationalVice
@@ -231,19 +233,21 @@ abstract class AbstractController extends AbstractWebController
     }
 
     /**
-     * @param $text
-     * @return void
+     * @param string $text
+     * @return bool
      */
-    public function seoTitle($text): void
+    public function setSeoTitle(string $text): bool
     {
         $this->view->title = $text;
-        $this->seoDescription();
+        $this->setSeoDescription();
+
+        return true;
     }
 
     /**
-     * @return void
+     * @return bool
      */
-    private function seoDescription(): void
+    private function setSeoDescription(): bool
     {
         $this->view->registerMetaTag(
             [
@@ -251,6 +255,8 @@ abstract class AbstractController extends AbstractWebController
                 'content' => $this->view->title . ' на сайте Виртуальной Регбийной Лиги'
             ]
         );
+
+        return true;
     }
 
     /**

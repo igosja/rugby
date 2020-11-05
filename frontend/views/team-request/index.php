@@ -31,10 +31,10 @@ use yii\web\View;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-1'],
-                'value' => function (TeamRequest $model) {
+                'value' => static function (TeamRequest $model) {
                     return Html::a(
                         '<i class="fa fa-times-circle"></i>',
-                        ['team-request/delete', 'id' => $model->team_request_id],
+                        ['team-request/delete', 'id' => $model->id],
                         ['title' => 'Удалить заявку']
                     );
                 }
@@ -43,26 +43,31 @@ use yii\web\View;
                 'footer' => 'Ваши заявки',
                 'format' => 'raw',
                 'label' => 'Ваши заявки',
-                'value' => function (TeamRequest $model) {
-                    return $model->team->teamLink('img');
+                'value' => static function (TeamRequest $model) {
+                    return Html::a(
+                        $model->team->name,
+                        ['team/view', $model->team->id]
+                    );
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Vs',
                 'label' => 'Vs',
-                'value' => function (TeamRequest $model) {
-                    return $model->team->team_power_vs;
+                'value' => static function (TeamRequest $model) {
+                    return $model->team->power_vs;
                 }
             ],
         ];
-        print GridView::widget([
-            'columns' => $columns,
-            'dataProvider' => $myDataProvider,
-            'showFooter' => true,
-            'showOnEmpty' => false,
-            'summary' => false,
-        ]);
+        print GridView::widget(
+            [
+                'columns' => $columns,
+                'dataProvider' => $myDataProvider,
+                'showFooter' => true,
+                'showOnEmpty' => false,
+                'summary' => false,
+            ]
+        );
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }
@@ -78,10 +83,10 @@ use yii\web\View;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-1'],
-                'value' => function (Team $model) {
+                'value' => static function (Team $model) {
                     return Html::a(
                         '<i class="fa fa-check-circle"></i>',
-                        ['team-request/request', 'id' => $model->team_id],
+                        ['team-request/request', 'id' => $model->id],
                         ['title' => 'Выбрать']
                     );
                 }
@@ -91,8 +96,11 @@ use yii\web\View;
                 'footer' => 'Команда',
                 'format' => 'raw',
                 'label' => 'Команда',
-                'value' => function (Team $model) {
-                    return $model->teamLink('string', true);
+                'value' => static function (Team $model) {
+                    return Html::a(
+                        $model->name,
+                        ['team/view', $model->id]
+                    );
                 }
             ],
             [
@@ -103,8 +111,11 @@ use yii\web\View;
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'Страна',
-                'value' => function (Team $model) {
-                    return $model->stadium->city->country->countryLink();
+                'value' => static function (Team $model) {
+                    return Html::a(
+                        $model->stadium->city->country->name,
+                        ['country/view', $model->stadium->city->country->id]
+                    );
                 }
             ],
             [
@@ -114,8 +125,8 @@ use yii\web\View;
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'База',
-                'value' => function (Team $model) {
-                    return $model->baseUsed() . ' из ' . $model->base->base_slot_max;
+                'value' => static function (Team $model) {
+                    return 1 . ' из ' . $model->base->slot_max;
                 }
             ],
             [
@@ -125,8 +136,8 @@ use yii\web\View;
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'Стадион',
-                'value' => function (Team $model) {
-                    return Yii::$app->formatter->asInteger($model->stadium->stadium_capacity);
+                'value' => static function (Team $model) {
+                    return Yii::$app->formatter->asInteger($model->stadium->capacity);
                 }
             ],
             [
@@ -136,8 +147,8 @@ use yii\web\View;
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'Финансы',
-                'value' => function (Team $model) {
-                    return FormatHelper::asCurrency($model->team_finance);
+                'value' => static function (Team $model) {
+                    return FormatHelper::asCurrency($model->finance);
                 }
             ],
             [
@@ -153,8 +164,8 @@ use yii\web\View;
                     'title' => 'Рейтинг силы команды в длительных соревнованиях',
                 ],
                 'label' => 'Vs',
-                'value' => function (Team $model) {
-                    return $model->team_power_vs;
+                'value' => static function (Team $model) {
+                    return Yii::$app->formatter->asInteger($model->power_vs);
                 }
             ],
             [
@@ -169,16 +180,17 @@ use yii\web\View;
                     'title' => 'Число заявок',
                 ],
                 'label' => 'ЧЗ',
-                'value' => function (Team $model) {
-                    return count($model->teamRequests);
+                'value' => static function (Team $model) {
+                    return Yii::$app->formatter->asInteger(count($model->teamRequests));
                 }
             ],
         ];
-        print GridView::widget([
-                                   'columns' => $columns,
-                                   'dataProvider' => $dataProvider,
-                                   'showFooter' => true,
-                               ]
+        print GridView::widget(
+            [
+                'columns' => $columns,
+                'dataProvider' => $dataProvider,
+                'showFooter' => true,
+            ]
         );
     } catch (Exception $e) {
         ErrorHelper::log($e);

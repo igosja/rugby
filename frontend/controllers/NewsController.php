@@ -53,7 +53,7 @@ class NewsController extends AbstractController
             NewsQuery::updateUserNewsId($this->user);
         }
 
-        $this->seoTitle('Новости');
+        $this->setSeoTitle('Новости');
         return $this->render(
             'index',
             [
@@ -82,7 +82,7 @@ class NewsController extends AbstractController
 
         $dataProvider = NewsCommentPrepare::getNewsCommentDataProvider($id);
 
-        $this->seoTitle('Комментарии к новости');
+        $this->setSeoTitle('Комментарии к новости');
         return $this->render(
             'view',
             [

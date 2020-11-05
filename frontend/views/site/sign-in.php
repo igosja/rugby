@@ -1,6 +1,9 @@
 <?php
 
+use common\components\helpers\ErrorHelper;
 use frontend\models\forms\SignInForm;
+use rmrevin\yii\fontawesome\FAS;
+use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,6 +20,7 @@ use yii\widgets\ActiveForm;
 <?php
 $form = ActiveForm::begin(
     [
+        'enableAjaxValidation' => true,
         'fieldConfig' => [
             'errorOptions' => [
                 'class' => 'col-lg-4 col-md-3 col-sm-3 col-xs-12 xs-text-center notification-error',
@@ -24,10 +28,9 @@ $form = ActiveForm::begin(
             ],
             'labelOptions' => ['class' => 'strong'],
             'options' => ['class' => 'row'],
-            'template' =>
-                '<div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">{label}</div>
-            <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">{input}</div>
-            {error}',
+            'template' => '<div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">{label}</div>
+                        <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">{input}</div>
+                        {error}',
         ],
     ]
 ) ?>
@@ -51,15 +54,27 @@ ActiveForm::end() ?>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::a(
-            '<i class="fa fa-facebook-square fa-2x"></i>',
-            'javascript:',
-            ['title' => 'Facebook']
-        ) ?>
-        <?= Html::a(
-            '<i class="fa fa-google-plus-square fa-2x"></i>',
-            'javascript:',
-            ['title' => 'Google+']
-        ) ?>
+        <?php
+        try {
+            print Html::a(
+                FAS::icon(FAS::_FACEBOOK_SQUARE)->size(FAS::SIZE_2X),
+                'javascript:',
+                ['title' => 'Facebook']
+            );
+        } catch (InvalidConfigException $e) {
+            ErrorHelper::log($e);
+        }
+        ?>
+        <?php
+        try {
+            print Html::a(
+                FAS::icon(FAS::_GOOGLE_PLUS_SQUARE)->size(FAS::SIZE_2X),
+                'javascript:',
+                ['title' => 'Google+']
+            );
+        } catch (InvalidConfigException $e) {
+            ErrorHelper::log($e);
+        }
+        ?>
     </div>
 </div>

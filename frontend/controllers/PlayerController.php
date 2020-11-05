@@ -46,7 +46,7 @@ class PlayerController extends AbstractController
             'position_name'
         );
 
-        $this->seoTitle('Список игроков');
+        $this->setSeoTitle('Список игроков');
         return $this->render('index', [
             'countryArray' => $countryArray,
             'dataProvider' => $dataProvider,
@@ -67,7 +67,7 @@ class PlayerController extends AbstractController
         $seasonId = Yii::$app->request->get('season_id', $this->season->season_id);
         $dataProvider = LineupPrepare::getPlayerDataProvider($id, $seasonId);
 
-        $this->seoTitle($player->playerName() . ' - profile');
+        $this->setSeoTitle($player->playerName() . ' - profile');
         return $this->render('view', [
             'dataProvider' => $dataProvider,
             'player' => $player,

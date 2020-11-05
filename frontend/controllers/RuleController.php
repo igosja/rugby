@@ -21,7 +21,7 @@ class RuleController extends AbstractController
     {
         $ruleArray = RuleQuery::getRuleList();
 
-        $this->seoTitle('Правила');
+        $this->setSeoTitle('Правила');
         return $this->render('index', [
             'ruleArray' => $ruleArray,
         ]);
@@ -37,7 +37,7 @@ class RuleController extends AbstractController
         $rule = RuleQuery::getRuleById($id);
         $this->notFound($rule);
 
-        $this->seoTitle($rule->rule_title . ' - Правила');
+        $this->setSeoTitle($rule->rule_title . ' - Правила');
         return $this->render('view', [
             'rule' => $rule,
         ]);
@@ -61,7 +61,7 @@ class RuleController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->seoTitle('Результаты поиска - Правила');
+        $this->setSeoTitle('Результаты поиска - Правила');
         return $this->render('search', [
             'dataProvider' => $dataProvider,
         ]);

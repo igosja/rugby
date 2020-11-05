@@ -60,6 +60,7 @@ use yii\helpers\Html;
  * @property-read Attitude $nationalAttitude
  * @property-read Attitude $presidentAttitude
  * @property-read Stadium $stadium
+ * @property-read TeamRequest[] $teamRequests
  * @property-read Attitude $u19Attitude
  * @property-read Attitude $u21Attitude
  * @property-read User $user
@@ -266,7 +267,15 @@ class Team extends AbstractActiveRecord
      */
     public function getStadium(): ActiveQuery
     {
-        return $this->hasOne(Stadium::class, ['stadium_id' => 'stadium_id']);
+        return $this->hasOne(Stadium::class, ['id' => 'stadium_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTeamRequests(): ActiveQuery
+    {
+        return $this->hasMany(TeamRequest::class, ['team_id' => 'id']);
     }
 
     /**

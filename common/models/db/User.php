@@ -2,6 +2,7 @@
 
 namespace common\models\db;
 
+use common\components\AbstractActiveRecord;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -34,7 +35,7 @@ use yii\web\IdentityInterface;
  * @property string $name
  * @property int $news_id
  * @property string $notes
- * @property int $password
+ * @property string $password
  * @property float $rating
  * @property int $referrer_user_id
  * @property int $sex_id
@@ -54,7 +55,7 @@ use yii\web\IdentityInterface;
  * @property-read Sex $sex
  * @property-read UserRole $userRole
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends AbstractActiveRecord implements IdentityInterface
 {
     public const ADMIN_USER_ID = 1;
 

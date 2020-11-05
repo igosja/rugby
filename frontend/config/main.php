@@ -2,6 +2,8 @@
 
 use frontend\components\widgets\LinkPager;
 use yii\grid\GridView;
+use yii\log\FileTarget;
+use yii\redis\Session;
 use yii\widgets\ListView;
 
 $params = array_merge(
@@ -57,7 +59,7 @@ return [
         'log' => [
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -68,7 +70,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'session' => [
-            'class' => 'yii\redis\Session',
+            'class' => Session::class,
             'name' => 'ezubukhqon',
         ],
         'urlManager' => [
@@ -79,9 +81,9 @@ return [
                 'activation/repeat' => 'site/activation-repeat',
                 'forgot-password' => 'site/forgot-password',
                 'forum' => 'forum/default/index',
-                'sign-in' => 'site/sign-in',
-                'password' => 'site/password',
                 'password/restore' => 'site/password-restore',
+                'sign-in' => 'site/sign-in',
+                'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
                 '<module:(forum)>/<controller:\w+>' => '<module>/<controller>/index',
                 '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
