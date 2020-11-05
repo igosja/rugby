@@ -7,17 +7,24 @@ use common\models\db\National;
 use common\models\db\Season;
 use common\models\db\Team;
 use common\models\db\User;
+use common\models\db\UserBlock;
+use common\models\db\UserBlockType;
 use common\models\queries\SiteQuery;
+use frontend\models\queries\NationalQuery;
+use frontend\models\queries\TeamQuery;
 use Yii;
 use yii\base\Action;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
+use yii\web\ErrorAction;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
 /**
  * Class AbstractController
  * @package frontend\components
+ *
+ * @property-read array $dropDownItems
  *
  * @property-write string $seoTitle
  *
@@ -35,59 +42,61 @@ use yii\web\Response;
 abstract class AbstractController extends AbstractWebController
 {
     /**
-     * @var National $myNational
+     * @var National|null $myNational
      */
-    public $myNational;
+    public ?National $myNational = null;
 
     /**
-     * @var National $myNationalOrVice
+     * @var National|null $myNationalOrVice
      */
-    public $myNationalOrVice;
+    public ?National $myNationalOrVice = null;
 
     /**
-     * @var National $myNationalVice
+     * @var National|null $myNationalVice
      */
-    public $myNationalVice;
+    public ?National $myNationalVice = null;
 
     /**
      * @var Team[] $myOwnTeamArray
      */
-    public $myOwnTeamArray = [];
+    public array $myOwnTeamArray = [];
 
     /**
-     * @var Team $myTeam
+     * @var Team|null $myTeam
      */
-    public $myTeam;
+    public ?Team $myTeam = null;
 
     /**
      * @var Team[] $myTeamArray
      */
-    public $myTeamArray = [];
+    public array $myTeamArray = [];
 
     /**
-     * @var Team $myTeamOrVice
+     * @var Team|null $myTeamOrVice
      */
-    public $myTeamOrVice;
+    public ?Team $myTeamOrVice = null;
 
     /**
-     * @var Team $myTeamVice
+     * @var Team|null $myTeamVice
      */
-    public $myTeamVice;
+    public ?Team $myTeamVice = null;
 
     /**
-     * @var Season $season
+     * @var Season|null $season
      */
-    public $season;
+    public ?Season $season;
 
     /**
-     * @var User $user
+     * @var User|null $user
      */
-    public $user;
+    public ?User $user = null;
 
     /**
      * @param Action $action
+     *
      * @return bool|Response
      * @throws BadRequestHttpException
+     * @throws ForbiddenHttpException
      */
     public function beforeAction($action)
     {
@@ -95,168 +104,57 @@ abstract class AbstractController extends AbstractWebController
             return false;
         }
 
-//        $allowedIp = [
-//            '127.0.0.1',
-//        ];
+        if ($redirect = $this->redirectBySiteStatus($action)) {
+            return $redirect;
+        }
 
-//        $userIp = Yii::$app->request->headers->get('x-real-ip');
-//        if (!$userIp) {
-//            $userIp = Yii::$app->request->userIP;
-//        }
-
-        $this->season = Season::find()
-            ->select(['id'])
-            ->andWhere(['is_future' => false])
-            ->orderBy(['id' => SORT_DESC])
-            ->one();
+        $this->loadCurrentSeason();
 
         if (!Yii::$app->user->isGuest) {
-            $this->user = Yii::$app->user->identity;
+            $this->loadCurrentUser();
 
-            User::updateAll(['date_login' => time()], ['id' => $this->user->id]);
-//            if ($userIp && (User::ADMIN_USER_ID == $this->user->user_id || !in_array($userIp, $allowedIp))) {
-//                $this->user->user_ip = $userIp;
-//            }
-
-//            if ($this->user->user_date_block > time() && !($action instanceof ErrorAction) && !($action->controller instanceof SupportController) && !($action->controller instanceof SiteController)) {
-//                throw new ForbiddenHttpException(
-//                    'Вам заблокирован доступ к сайту.
-//                    Причина блокировки - ' . $this->user->reasonBlock->block_reason_text
-//                );
-//            }
-
-            if (!$this->user->date_confirm) {
-                Yii::$app->session->setFlash('warning', 'Пожалуйста, подтвердите свой почтовый адрес');
+            if (!('restore' === $action->id
+                    && 'user' === $action->controller->id)
+                && $this->user->date_delete
+            ) {
+                return $this->redirect(['/user/restore']);
             }
 
-            if (!('restore' === $action->id && 'user' === $action->controller->id) && $this->user->date_delete) {
-                return $this->redirect(['user/restore']);
-            }
-
+            $this->updateLastLogin();
+            $this->checkUserBlock($action);
+            $this->checkEmailConfirmation();
+            $this->loadMyTeamArray();
             $this->checkSessionMyTeamId();
-            $mySessionTeamId = Yii::$app->session->get('myTeamId');
-
-            /**
-             * @var Team[] $teamUserArray
-             */
-            $teamUserArray = Team::find()
-                ->select(
-                    [
-                        'base_scout_id',
-                        'id',
-                        'name',
-                        'stadium_id',
-                        'user_id',
-                        'vice_user_id',
-                    ]
-                )
-                ->where(
-                    [
-                        'or',
-                        ['user_id' => $this->user->id],
-                        ['vice_user_id' => $this->user->id],
-                    ]
-                )
-                ->andWhere(['!=', 'id', 0])
-                ->all();
-
-            $teamArray = [];
-            $teamViceArray = [];
-            foreach ($teamUserArray as $team) {
-                if ($this->user->id === $team->user_id) {
-                    $teamArray[$team->id] = $team;
-                    if ($mySessionTeamId === $team->id) {
-                        $this->myTeam = $team;
-                    }
-                    if (!$mySessionTeamId && !$this->myTeam) {
-                        $this->myTeam = $team;
-                    }
-                }
-                if ($this->user->id === $team->vice_user_id) {
-                    $teamViceArray[$team->id] = $team;
-                    if ($mySessionTeamId === $team->id) {
-                        $this->myTeamVice = $team;
-                    }
-                }
-            }
-
-            $this->myTeamArray = ArrayHelper::merge($teamArray, $teamViceArray);
-            $this->myOwnTeamArray = $teamArray;
-            $this->myTeamOrVice = $this->myTeam ?: $this->myTeamVice;
-
-            /**
-             * @var National[] $nationalUserArray
-             */
-            $nationalUserArray = National::find()
-                ->select(['id'])
-                ->where(
-                    [
-                        'or',
-                        ['user_id' => $this->user->id],
-                        ['vice_user_id' => $this->user->id],
-                    ]
-                )
-                ->all();
-            foreach ($nationalUserArray as $national) {
-                if ($this->user->id === $national->user_id) {
-                    $this->myNational = $national;
-                }
-                if ($this->user->id === $national->vice_user_id) {
-                    $this->myNationalVice = $national;
-                }
-            }
-
-            $this->myNationalOrVice = $this->myNational ?: $this->myNationalVice;
-        }
-
-        $siteStatus = SiteQuery::getStatus();
-        if (!$siteStatus && !('site' === $action->controller->id && 'closed' === $action->id)) {
-            return $this->redirect(['site/closed']);
-        }
-
-        if ($siteStatus && 'site' === $action->controller->id && 'closed' === $action->id) {
-            return $this->redirect(['site/index']);
+            $this->loadTeams();
+            $this->loadNationals();
         }
 
         return true;
     }
 
     /**
-     * @return void
+     * @return array
      */
-    private function checkSessionMyTeamId(): void
+    public function getDropDownItems(): array
     {
-        $session = Yii::$app->session;
-        if ($session->get('myTeamId') && !array_key_exists($session->get('myTeamId'), $this->myTeamArray)) {
-            $session->remove('myTeamId');
+        $result = [];
+        foreach ($this->myTeamArray as $myTeam) {
+            $result[$myTeam->id] = $myTeam->name
+                . ' ('
+                . $myTeam->stadium->city->country->name
+                . ($myTeam->vice_user_id === $this->user->id ? ', зам' : '')
+                . ')';
         }
+        return $result;
     }
 
     /**
      * @param string $text
-     * @return bool
      */
-    public function setSeoTitle(string $text): bool
+    public function setSeoTitle(string $text): void
     {
         $this->view->title = $text;
         $this->setSeoDescription();
-
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    private function setSeoDescription(): bool
-    {
-        $this->view->registerMetaTag(
-            [
-                'name' => 'description',
-                'content' => $this->view->title . ' на сайте Виртуальной Регбийной Лиги'
-            ]
-        );
-
-        return true;
     }
 
     /**
@@ -264,6 +162,163 @@ abstract class AbstractController extends AbstractWebController
      */
     protected function forbiddenRole(): void
     {
-        throw new ForbiddenHttpException('Не хватает прав для выполнения этой операции');
+        throw new ForbiddenHttpException(
+            'Не хватает прав для выполнения этой операции'
+        );
+    }
+
+    private function checkEmailConfirmation(): void
+    {
+        if (!$this->user->date_confirm) {
+            Yii::$app->session->setFlash(
+                'warning',
+                'Пожалуйста, подтвердите свой почтовый адрес'
+            );
+        }
+    }
+
+    private function checkSessionMyTeamId(): void
+    {
+        $session = Yii::$app->session;
+        if ($session->get('myTeamId')
+            && !array_key_exists(
+                $session->get('myTeamId'),
+                $this->myTeamArray
+            )
+        ) {
+            $session->remove('myTeamId');
+        }
+    }
+
+    /**
+     * @param Action $action
+     * @throws ForbiddenHttpException
+     */
+    private function checkUserBlock(Action $action): void
+    {
+        if (!($action instanceof ErrorAction)) {
+            $classes = [SupportController::class, SiteController::class];
+            if (!in_array(get_class($action->controller), $classes)) {
+                /**
+                 * @var UserBlock $userBlock
+                 */
+                $userBlock = $this
+                    ->user
+                    ->getUserBlock(UserBlockType::TYPE_SITE)
+                    ->one();
+                if ($userBlock->date > time()) {
+                    throw new ForbiddenHttpException(
+                        'Вам заблокирован доступ к сайту. Причина блокировки - '
+                        . $userBlock->userBlockReason->text
+                    );
+                }
+            }
+        }
+    }
+
+    private function loadCurrentSeason(): void
+    {
+        $this->season = Season::find()
+            ->select(['id'])
+            ->andWhere(['is_future' => false])
+            ->orderBy(['id' => SORT_DESC])
+            ->one();
+    }
+
+    private function loadCurrentUser(): void
+    {
+        $this->user = Yii::$app->user->identity;
+    }
+
+    private function loadMyTeamArray(): void
+    {
+        $this->myTeamArray = TeamQuery::getTeamListByUserId($this->user->id);
+    }
+
+    private function loadNationals(): void
+    {
+        /**
+         * @var National[] $nationalUserArray
+         */
+        $nationalUserArray =
+            NationalQuery::getNationalListByUserId($this->user->id);
+        foreach ($nationalUserArray as $national) {
+            if ($this->user->id === $national->user_id) {
+                $this->myNational = $national;
+            }
+            if ($this->user->id === $national->vice_user_id) {
+                $this->myNationalVice = $national;
+            }
+        }
+
+        $this->myNationalOrVice = $this->myNational ?: $this->myNationalVice;
+    }
+
+    private function loadTeams(): void
+    {
+        $mySessionTeamId = Yii::$app->session->get('myTeamId');
+
+        $teamArray = [];
+        $teamViceArray = [];
+        foreach ($this->myTeamArray as $team) {
+            if ($this->user->id === $team->user_id) {
+                $teamArray[$team->id] = $team;
+                if ($mySessionTeamId === $team->id) {
+                    $this->myTeam = $team;
+                }
+                if (!$mySessionTeamId && !$this->myTeam) {
+                    $this->myTeam = $team;
+                }
+            }
+            if ($this->user->id === $team->vice_user_id) {
+                $teamViceArray[$team->id] = $team;
+                if ($mySessionTeamId === $team->id) {
+                    $this->myTeamVice = $team;
+                }
+            }
+        }
+
+        $this->myTeamArray = ArrayHelper::merge($teamArray, $teamViceArray);
+        $this->myOwnTeamArray = $teamArray;
+        $this->myTeamOrVice = $this->myTeam ?: $this->myTeamVice;
+    }
+
+    /**
+     * @param Action $action
+     * @return false|Response
+     */
+    private function redirectBySiteStatus(Action $action)
+    {
+        $siteStatus = SiteQuery::getStatus();
+        if (!$siteStatus
+            && !('site' === $action->controller->id
+                && 'closed' === $action->id)
+        ) {
+            return $this->redirect(['site/closed']);
+        }
+
+        if ($siteStatus && 'site' === $action->controller->id
+            && 'closed' === $action->id
+        ) {
+            return $this->redirect(['site/index']);
+        }
+        return false;
+    }
+
+    private function setSeoDescription(): void
+    {
+        $this->view->registerMetaTag(
+            [
+                'name' => 'description',
+                'content' => $this->view->title
+                    . ' на сайте Виртуальной Регбийной Лиги'
+            ]
+        );
+    }
+
+    private function updateLastLogin(): void
+    {
+        $this->user->date_login = time();
+        $this->user->save(true, ['date_login']);
     }
 }
