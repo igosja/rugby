@@ -11,12 +11,8 @@ use common\models\db\UserBlockType;
 use Exception;
 
 /**
- * Class TeamRequestSaveExecutor
+ * Class NewsCommentSaveExecutor
  * @package frontend\models\executors
- *
- * @property-read array $data
- * @property-read NewsComment $model
- * @property-read User $user
  */
 class NewsCommentSaveExecutor implements ExecuteInterface
 {

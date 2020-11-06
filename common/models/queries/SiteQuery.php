@@ -19,7 +19,6 @@ class SiteQuery
          * @var Site $site
          */
         $site = Site::find()
-            ->select(['version_1', 'version_2', 'version_3', 'version_date'])
             ->andWhere(['id' => 1])
             ->limit(1)
             ->one();

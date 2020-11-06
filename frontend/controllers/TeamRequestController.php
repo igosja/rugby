@@ -41,7 +41,7 @@ class TeamRequestController extends AbstractController
     public function actionIndex()
     {
         if ($this->myTeam) {
-            return $this->redirect(['team/view']);
+            return $this->redirectToMyTeam();
         }
 
         $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
@@ -64,7 +64,7 @@ class TeamRequestController extends AbstractController
     public function actionRequest(int $id): Response
     {
         if ($this->myTeam) {
-            return $this->redirect(['team/view']);
+            return $this->redirectToMyTeam();
         }
 
         if (!TeamQuery::getFreeTeamById($id)) {
@@ -72,15 +72,16 @@ class TeamRequestController extends AbstractController
             return $this->redirect(['team-request/index']);
         }
 
-        if (TeamRequestQuery::getTeamRequestByIdAndUser($id, $this->user->user_id)) {
+        if (TeamRequestQuery::getTeamRequestByIdAndUser($id, $this->user->id)) {
             $this->setErrorFlash('Вы уже подали заявку на эту команду');
             return $this->redirect(['team-request/index']);
         }
 
         try {
-            (new TeamRequestSaveExecutor($id, $this->user->user_id))->execute();
+            (new TeamRequestSaveExecutor($id, $this->user->id))->execute();
             $this->setSuccessFlash('Заявка успешно подана');
         } catch (Exception $e) {
+            $this->setErrorFlash('Не удалось подать заявку');
             ErrorHelper::log($e);
         }
 
@@ -94,10 +95,10 @@ class TeamRequestController extends AbstractController
     public function actionDelete(int $id): Response
     {
         if ($this->myTeam) {
-            return $this->redirect(['team-request/index']);
+            return $this->redirectToMyTeam();
         }
 
-        TeamRequestQuery::deleteTeamRequest($id, $this->user->user_id);
+        TeamRequestQuery::deleteTeamRequest($id, $this->user->id);
         $this->setSuccessFlash('Заявка успешно удалена');
 
         return $this->redirect(['team-request/index']);

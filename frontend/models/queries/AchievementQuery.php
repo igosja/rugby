@@ -18,9 +18,6 @@ class AchievementQuery
     public static function getTeamAchievementListQuery(int $teamId): ActiveQuery
     {
         return Achievement::find()
-            ->select([
-                'achievement_id',
-            ])
             ->where(['achievement_team_id' => $teamId])
             ->orderBy(['achievement_id' => SORT_DESC]);
     }
@@ -32,9 +29,6 @@ class AchievementQuery
     public static function getTeamTrophyListQuery(int $teamId): ActiveQuery
     {
         return Achievement::find()
-            ->select([
-                'achievement_id',
-            ])
             ->where([
                 'achievement_team_id' => $teamId,
                 'achievement_place' => [0, 1],

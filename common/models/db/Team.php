@@ -168,6 +168,29 @@ class Team extends AbstractActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function getNumberOfUseSlot(): int
+    {
+        return $this->baseMedical->level
+            + $this->basePhysical->level
+            + $this->baseSchool->level
+            + $this->baseScout->level
+            + $this->baseTraining->level;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeamLink(): string
+    {
+        return Html::a(
+            $this->name,
+            ['team/view', 'id' => $this->id],
+        );
+    }
+
+    /**
      * @return string
      */
     public function rosterPhrase(): string
@@ -275,7 +298,9 @@ class Team extends AbstractActiveRecord
      */
     public function getTeamRequests(): ActiveQuery
     {
-        return $this->hasMany(TeamRequest::class, ['team_id' => 'id']);
+        return $this
+            ->hasMany(TeamRequest::class, ['team_id' => 'id'])
+            ->andWhere(['ready' => null]);
     }
 
     /**

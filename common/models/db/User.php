@@ -280,7 +280,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
     {
         return $this
             ->hasOne(UserBlock::class, ['user_id' => 'id'])
-            ->andWhere(['userBlockTypeId' => $userBlockTypeId])
+            ->andWhere(['user_block_type_id' => $userBlockTypeId])
             ->orderBy(['date' => SORT_DESC]);
     }
 

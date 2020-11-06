@@ -22,7 +22,6 @@ class NewsCommentQuery
          * @var NewsComment $result
          */
         $result = NewsComment::find()
-            ->select(['id'])
             ->andWhere(['id' => $id, 'news_id' => $newsId])
             ->limit(1)
             ->one();
@@ -38,12 +37,9 @@ class NewsCommentQuery
         return NewsComment::find()
             ->with(
                 [
-                    'user' => static function (ActiveQuery $query) {
-                        $query->select(['id', 'login', 'user_role_id']);
-                    },
+                    'user',
                 ]
             )
-            ->select(['date', 'text', 'user_id'])
             ->andWhere(['news_id' => $newsId])
             ->orderBy(['id' => SORT_ASC]);
     }

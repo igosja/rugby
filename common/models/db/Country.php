@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\helpers\Html;
 
 /**
  * Class Country
@@ -34,5 +35,45 @@ class Country extends AbstractActiveRecord
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageLink(): string
+    {
+        return $this->getLink(
+            Html::img('@country12/' . $this->id . '.png')
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageTextLink(): string
+    {
+        return $this->getLink(
+            Html::img('@country12/' . $this->id . '.png') . ' ' . $this->name
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextLink(): string
+    {
+        return $this->getLink($this->name);
+    }
+
+    /**
+     * @param string $text
+     * @return string
+     */
+    private function getLink(string $text): string
+    {
+        return Html::a(
+            $text,
+            ['/federation/team', $this->id]
+        );
     }
 }

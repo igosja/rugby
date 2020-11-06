@@ -6,39 +6,36 @@ use common\components\helpers\ErrorHelper;
 use common\components\interfaces\ExecuteInterface;
 use common\models\db\TeamRequest;
 use Exception;
+use yii\base\InvalidArgumentException;
 
 /**
  * Class TeamRequestSaveExecutor
  * @package frontend\models\executors
- *
- * @property-read int $leaveId
- * @property-read int $teamId
- * @property-read int $userId
  */
 class TeamRequestSaveExecutor implements ExecuteInterface
 {
     /**
-     * @var int $leaveId
+     * @var int|null
      */
-    private $leaveId;
+    private ?int $leaveId;
 
     /**
      * @var int $teamId
      */
-    private $teamId;
+    private int $teamId;
 
     /**
      * @var int $userId
      */
-    private $userId;
+    private int $userId;
 
     /**
-     * TeamAskRequestExecute constructor.
+     * TeamRequestSaveExecutor constructor.
      * @param int $teamId
      * @param int $userId
-     * @param int $leaveId
+     * @param int|null $leaveId
      */
-    public function __construct(int $teamId, int $userId, int $leaveId = 0)
+    public function __construct(int $teamId, int $userId, int $leaveId = null)
     {
         $this->leaveId = $leaveId;
         $this->teamId = $teamId;
@@ -52,16 +49,14 @@ class TeamRequestSaveExecutor implements ExecuteInterface
     public function execute(): bool
     {
         $model = new TeamRequest();
-        $model->team_request_leave_id = $this->leaveId;
-        $model->team_request_team_id = $this->teamId;
-        $model->team_request_user_id = $this->userId;
+        $model->leave_team_id = $this->leaveId;
+        $model->ready = null;
+        $model->team_id = $this->teamId;
+        $model->user_id = $this->userId;
         if (!$model->save()) {
-            ErrorHelper::log(
-                new Exception(
-                    ErrorHelper::modelErrorsToString($model)
-                )
+            throw new InvalidArgumentException(
+                ErrorHelper::modelErrorsToString($model)
             );
-            return false;
         }
         return true;
     }

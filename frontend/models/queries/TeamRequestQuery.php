@@ -22,6 +22,7 @@ class TeamRequestQuery
             [
                 'id' => $teamRequestId,
                 'user_id' => $userId,
+                'ready' => null,
             ]
         );
         return true;
@@ -34,20 +35,15 @@ class TeamRequestQuery
      */
     public static function getTeamRequestByIdAndUser(int $teamId, int $userId): ?TeamRequest
     {
-        return TeamRequest::find()
-            ->select(
-                [
-                    'id',
-                ]
-            )
-            ->where(
-                [
-                    'team_id' => $teamId,
-                    'user_id' => $userId,
-                ]
-            )
+        /**
+         * @var TeamRequest|null $teamRequest
+         */
+        $teamRequest = TeamRequest::find()
+            ->andWhere(['team_id' => $teamId, 'user_id' => $userId])
+            ->andWhere(['not', ['ready' => null]])
             ->limit(1)
             ->one();
+        return $teamRequest;
     }
 
     /**
@@ -59,51 +55,10 @@ class TeamRequestQuery
         return TeamRequest::find()
             ->with(
                 [
-                    'team' => function (ActiveQuery $query) {
-                        return $query->select(
-                            [
-                                'id',
-                                'name',
-                                'power_vs',
-                                'stadium_id',
-                            ]
-                        );
-                    },
-                    'team.stadium' => function (ActiveQuery $query) {
-                        return $query->select(
-                            [
-                                'capacity',
-                                'city_id',
-                                'id',
-                            ]
-                        );
-                    },
-                    'team.stadium.city' => function (ActiveQuery $query) {
-                        return $query->select(
-                            [
-                                'country_id',
-                                'id',
-                                'name',
-                            ]
-                        );
-                    },
-                    'team.stadium.city.country' => function (ActiveQuery $query) {
-                        return $query->select(
-                            [
-                                'id',
-                                'name',
-                            ]
-                        );
-                    },
+                    'team.stadium.city.country',
                 ]
             )
-            ->select(
-                [
-                    'id',
-                    'team_id',
-                ]
-            )
-            ->where(['user_id' => $userId])
+            ->where(['user_id' => $userId, 'ready' => null])
             ->orderBy(['date' => SORT_ASC]);
     }
 }

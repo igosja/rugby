@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -11,6 +12,7 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property string $agent
+ * @property int $date
  * @property string $ip
  * @property int $user_id
  *
@@ -24,6 +26,20 @@ class UserLogin extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%user_login}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => 'date',
+            ],
+        ];
     }
 
     /**
