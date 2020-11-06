@@ -10,7 +10,7 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $division_id
  * @property int $national_id
  * @property int $place
@@ -20,7 +20,7 @@ use yii\db\ActiveQuery;
  * @property int $team_id
  * @property int $tournament_type_id
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read Division $division
  * @property-read National $national
  * @property-read Player $player
@@ -48,7 +48,7 @@ class AchievementPlayer extends AbstractActiveRecord
             [['player_id', 'season_id', 'tournament_type_id'], 'required'],
             [
                 [
-                    'country_id',
+                    'federation_id',
                     'division_id',
                     'national_id',
                     'player_id',
@@ -61,7 +61,7 @@ class AchievementPlayer extends AbstractActiveRecord
                 'min' => 0,
             ],
             [['place'], 'integer', 'min' => 1, 'max' => 99],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['division_id'], 'exist', 'targetRelation' => 'division'],
             [['national_id'], 'exist', 'targetRelation' => 'national'],
             [['player_id'], 'exist', 'targetRelation' => 'player'],
@@ -75,9 +75,9 @@ class AchievementPlayer extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

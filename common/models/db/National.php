@@ -10,7 +10,7 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $finance
  * @property int $mood_rest
  * @property int $mood_super
@@ -28,7 +28,7 @@ use yii\db\ActiveQuery;
  * @property int $vice_user_id
  * @property int $visitor
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read NationalType $nationalType
  * @property-read Stadium $stadium
  * @property-read User $user
@@ -50,9 +50,9 @@ class National extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['country_id', 'national_type_id'], 'required'],
+            [['federation_id', 'national_type_id'], 'required'],
             [['mood_rest', 'mood_super', 'national_type_id'], 'integer', 'min' => 1, 'max' => 9],
-            [['country_id', 'visitor'], 'integer', 'min' => 1, 'max' => 999],
+            [['federation_id', 'visitor'], 'integer', 'min' => 1, 'max' => 999],
             [
                 [
                     'power_c_15',
@@ -70,7 +70,7 @@ class National extends AbstractActiveRecord
             ],
             [['finance'], 'integer', 'min' => 0],
             [['stadium_id', 'user_id', 'vice_user_id'], 'integer', 'min' => 1],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['national_type_id'], 'exist', 'targetRelation' => 'nationalType'],
             [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
@@ -81,9 +81,9 @@ class National extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

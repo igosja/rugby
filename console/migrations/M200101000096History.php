@@ -22,7 +22,7 @@ class M200101000096History extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'building_id' => $this->integer(1),
-                'country_id' => $this->integer(3),
+                'federation_id' => $this->integer(3),
                 'date' => $this->integer(11)->notNull(),
                 'fire_reason_id' => $this->integer(2),
                 'game_id' => $this->integer(11),
@@ -41,7 +41,7 @@ class M200101000096History extends Migration
         );
 
         $this->addForeignKey('history_building_id', self::TABLE, 'building_id', '{{%building}}', 'id');
-        $this->addForeignKey('history_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('history_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('history_fire_reason_id', self::TABLE, 'fire_reason_id', '{{%fire_reason}}', 'id');
         $this->addForeignKey('history_game_id', self::TABLE, 'game_id', '{{%game}}', 'id');
         $this->addForeignKey('history_history_text_id', self::TABLE, 'history_text_id', '{{%history_text}}', 'id');

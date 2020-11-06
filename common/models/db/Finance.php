@@ -13,7 +13,7 @@ use yii\db\ActiveQuery;
  * @property int $building_id
  * @property int $capacity
  * @property string $comment
- * @property int $country_id
+ * @property int $federation_id
  * @property int $date
  * @property int $finance_text_id
  * @property int $level
@@ -29,7 +29,7 @@ use yii\db\ActiveQuery;
  * @property int $value_before
  *
  * @property-read Building $building
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read FinanceText $financeText
  * @property-read Loan $loan
  * @property-read National $national
@@ -58,11 +58,11 @@ class Finance extends AbstractActiveRecord
             [['season_id', 'value', 'value_after', 'value_before'], 'required'],
             [['building_id'], 'integer', 'min' => 0, 'max' => 9],
             [['finance_text_id', 'level'], 'integer', 'min' => 0, 'max' => 99],
-            [['country_id', 'national_id', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['federation_id', 'national_id', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
             [['capacity'], 'integer', 'min' => 0, 'max' => 99999],
             [['loan_id', 'player_id', 'transfer_id', 'user_id'], 'integer', 'min' => 0],
             [['building_id'], 'exist', 'targetRelation' => 'building'],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['finance_text_id'], 'exist', 'targetRelation' => 'financeText'],
             [['loan_id'], 'exist', 'targetRelation' => 'loan'],
             [['national_id'], 'exist', 'targetRelation' => 'national'],
@@ -85,9 +85,9 @@ class Finance extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

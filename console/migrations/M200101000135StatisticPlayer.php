@@ -25,7 +25,7 @@ class M200101000135StatisticPlayer extends Migration
                 'assist_power' => $this->integer(3)->defaultValue(0),
                 'assist_short' => $this->integer(3)->defaultValue(0),
                 'shootout_win' => $this->integer(2)->defaultValue(0),
-                'country_id' => $this->integer(3),
+                'federation_id' => $this->integer(3),
                 'division_id' => $this->integer(1),
                 'face_off' => $this->integer(3)->defaultValue(0),
                 'face_off_percent' => $this->decimal(5, 2)->defaultValue(0),
@@ -59,7 +59,7 @@ class M200101000135StatisticPlayer extends Migration
             ]
         );
 
-        $this->addForeignKey('statistic_player_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('statistic_player_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('statistic_player_division_id', self::TABLE, 'division_id', '{{%division}}', 'id');
         $this->addForeignKey('statistic_player_national_id', self::TABLE, 'national_id', '{{%national}}', 'id');
         $this->addForeignKey('statistic_player_player_id', self::TABLE, 'player_id', '{{%player}}', 'id');

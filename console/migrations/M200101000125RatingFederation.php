@@ -5,12 +5,12 @@ namespace console\migrations;
 use yii\db\Migration;
 
 /**
- * Class M200101000125RatingCountry
+ * Class M200101000125RatingFederation
  * @package console\migrations
  */
-class M200101000125RatingCountry extends Migration
+class M200101000125RatingFederation extends Migration
 {
-    private const TABLE = '{{%rating_country}}';
+    private const TABLE = '{{%rating_federation}}';
 
     /**
      * @return bool|void
@@ -22,13 +22,13 @@ class M200101000125RatingCountry extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'auto_place' => $this->integer(3)->defaultValue(0),
-                'country_id' => $this->integer(3)->notNull(),
+                'federation_id' => $this->integer(3)->notNull(),
                 'league_place' => $this->integer(3)->defaultValue(0),
                 'stadium_place' => $this->integer(3)->defaultValue(0),
             ]
         );
 
-        $this->addForeignKey('rating_country_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('rating_federation_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
 
         return true;
     }

@@ -10,7 +10,7 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $division_id
  * @property int $game
  * @property int $game_no_pass

@@ -21,7 +21,7 @@ class M200101000035Achievement extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'country_id' => $this->integer(3),
+                'federation_id' => $this->integer(3),
                 'division_id' => $this->integer(5),
                 'national_id' => $this->integer(5),
                 'place' => $this->integer(2),
@@ -33,7 +33,7 @@ class M200101000035Achievement extends Migration
             ]
         );
 
-        $this->addForeignKey('achievement_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('achievement_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('achievement_division_id', self::TABLE, 'division_id', '{{%division}}', 'id');
         $this->addForeignKey('achievement_national_id', self::TABLE, 'national_id', '{{%national}}', 'id');
         $this->addForeignKey('achievement_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');

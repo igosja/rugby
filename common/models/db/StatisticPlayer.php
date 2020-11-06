@@ -14,7 +14,7 @@ use yii\db\ActiveQuery;
  * @property int $assist_power
  * @property int $assist_short
  * @property int $shootout_win
- * @property int $country_id
+ * @property int $federation_id
  * @property int $division_id
  * @property int $face_off
  * @property float $face_off_percent

@@ -23,7 +23,7 @@ class M200101000042Championship extends Migration
                 'id' => $this->primaryKey(11),
                 'bonus_loose' => $this->integer(2)->defaultValue(0),
                 'bonus_tries' => $this->integer(2)->defaultValue(0),
-                'country_id' => $this->integer(3)->notNull(),
+                'federation_id' => $this->integer(3)->notNull(),
                 'difference' => $this->integer(3)->defaultValue(0),
                 'division_id' => $this->integer(1)->notNull(),
                 'draw' => $this->integer(2)->defaultValue(0),
@@ -41,7 +41,7 @@ class M200101000042Championship extends Migration
             ]
         );
 
-        $this->addForeignKey('championship_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('championship_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('championship_division_id', self::TABLE, 'division_id', '{{%division}}', 'id');
         $this->addForeignKey('championship_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
         $this->addForeignKey('championship_team_id', self::TABLE, 'team_id', '{{%team}}', 'id');
@@ -51,7 +51,7 @@ class M200101000042Championship extends Migration
         $this->batchInsert(
             self::TABLE,
             [
-                'country_id',
+                'federation_id',
                 'division_id',
                 'place',
                 'season_id',

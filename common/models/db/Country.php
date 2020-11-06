@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
 /**
@@ -11,6 +12,8 @@ use yii\helpers\Html;
  *
  * @property int $id
  * @property string $name
+ *
+ * @property-read Federation $federation
  */
 class Country extends AbstractActiveRecord
 {
@@ -75,5 +78,13 @@ class Country extends AbstractActiveRecord
             $text,
             ['/federation/team', $this->id]
         );
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFederation(): ActiveQuery
+    {
+        return $this->hasOne(Federation::class, ['country_id' => 'id']);
     }
 }

@@ -12,7 +12,7 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $building_id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $date
  * @property int $fire_reason_id
  * @property int $game_id
@@ -29,7 +29,7 @@ use yii\db\ActiveQuery;
  * @property int $value
  *
  * @property-read Building $building
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read FireReason $fireReason
  * @property-read Game $game
  * @property-read HistoryText $historyText
@@ -75,14 +75,14 @@ class History extends AbstractActiveRecord
         return [
             [['building_id'], 'integer', 'min' => 1, 'max' => 9],
             [['fire_reason_id', 'history_text_id', 'position_id', 'special_id'], 'integer', 'min' => 1, 'max' => 99],
-            [['country_id', 'national_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['federation_id', 'national_id'], 'integer', 'min' => 1, 'max' => 999],
             [
                 ['game_id', 'player_id', 'second_team_id', 'second_user_id', 'team_id', 'user_id', 'value'],
                 'integer',
                 'min' => 1
             ],
             [['building_id'], 'exist', 'targetRelation' => 'building'],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['fire_reason_id'], 'exist', 'targetRelation' => 'fireReason'],
             [['game_id'], 'exist', 'targetRelation' => 'game'],
             [['history_text_id'], 'exist', 'targetRelation' => 'historyText'],
@@ -109,9 +109,9 @@ class History extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id'])->cache();
+        return $this->hasOne(Federation::class, ['id' => 'federation_id'])->cache();
     }
 
     /**

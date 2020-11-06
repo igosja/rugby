@@ -10,11 +10,11 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $date
  * @property int $election_status_id
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read ElectionStatus $electionStatus
  */
 class ElectionPresident extends AbstractActiveRecord
@@ -33,10 +33,10 @@ class ElectionPresident extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['country_id', 'election_status_id'], 'required'],
-            [['country_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['federation_id', 'election_status_id'], 'required'],
+            [['federation_id'], 'integer', 'min' => 0, 'max' => 999],
             [['election_status_id'], 'integer', 'min' => 0, 'max' => 9],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['election_status_id'], 'exist', 'targetRelation' => 'electionStatus'],
         ];
     }
@@ -44,9 +44,9 @@ class ElectionPresident extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

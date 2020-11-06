@@ -21,7 +21,7 @@ class M200101000136StatisticTeam extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'country_id' => $this->integer(3),
+                'federation_id' => $this->integer(3),
                 'division_id' => $this->integer(1),
                 'game' => $this->integer(2)->defaultValue(0),
                 'game_no_pass' => $this->integer(2)->defaultValue(0),
@@ -44,7 +44,7 @@ class M200101000136StatisticTeam extends Migration
             ]
         );
 
-        $this->addForeignKey('statistic_team_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('statistic_team_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('statistic_team_division_id', self::TABLE, 'division_id', '{{%division}}', 'id');
         $this->addForeignKey('statistic_team_national_id', self::TABLE, 'national_id', '{{%national}}', 'id');
         $this->addForeignKey('statistic_team_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');

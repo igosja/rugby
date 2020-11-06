@@ -10,14 +10,14 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property int $group
  * @property int $qualification_3
  * @property int $qualification_2
  * @property int $qualification_1
  * @property int $season_id
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read Season $season
  */
 class LeagueDistribution extends AbstractActiveRecord
@@ -36,10 +36,10 @@ class LeagueDistribution extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['country_id', 'season_id'], 'required'],
+            [['federation_id', 'season_id'], 'required'],
             [['group', 'qualification_3', 'qualification_2', 'qualification_1'], 'integer', 'min' => 0, 'max' => 9],
-            [['country_id', 'season_id'], 'integer', 'min' => 1, 'max' => 999],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id', 'season_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['season_id'], 'exist', 'targetRelation' => 'season'],
         ];
     }
@@ -47,9 +47,9 @@ class LeagueDistribution extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**
