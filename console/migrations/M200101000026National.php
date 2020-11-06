@@ -21,7 +21,7 @@ class M200101000026National extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(3),
-                'country_id' => $this->integer(3)->notNull(),
+                'federation_id' => $this->integer(3)->notNull(),
                 'finance' => $this->integer(11)->defaultValue(0),
                 'mood_rest' => $this->integer(1)->defaultValue(0),
                 'mood_super' => $this->integer(1)->defaultValue(0),
@@ -41,7 +41,7 @@ class M200101000026National extends Migration
             ]
         );
 
-        $this->addForeignKey('national_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('national_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('national_national_type_id', self::TABLE, 'national_type_id', '{{%national_type}}', 'id');
         $this->addForeignKey('national_stadium_id', self::TABLE, 'stadium_id', '{{%stadium}}', 'id');
         $this->addForeignKey('national_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');
@@ -49,7 +49,7 @@ class M200101000026National extends Migration
 
         $this->batchInsert(
             self::TABLE,
-            ['country_id', 'national_type_id'],
+            ['federation_id', 'national_type_id'],
             [
                 [7, 1],
                 [7, 2],

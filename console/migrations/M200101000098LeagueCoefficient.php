@@ -21,7 +21,7 @@ class M200101000098LeagueCoefficient extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'country_id' => $this->integer(3)->notNull(),
+                'federation_id' => $this->integer(3)->notNull(),
                 'loose' => $this->integer(2)->defaultValue(0),
                 'point' => $this->integer(2)->defaultValue(0),
                 'season_id' => $this->integer(3)->notNull(),
@@ -30,7 +30,7 @@ class M200101000098LeagueCoefficient extends Migration
             ]
         );
 
-        $this->addForeignKey('league_coefficient_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('league_coefficient_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('league_coefficient_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
         $this->addForeignKey('league_coefficient_team_id', self::TABLE, 'team_id', '{{%team}}', 'id');
 

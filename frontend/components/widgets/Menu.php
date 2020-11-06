@@ -2,7 +2,14 @@
 
 namespace frontend\components\widgets;
 
-use frontend\components\AbstractController;
+use common\models\db\Message;
+use common\models\db\News;
+use common\models\db\Support;
+use common\models\db\Vote;
+use common\models\db\VoteAnswer;
+use common\models\db\VoteStatus;
+use common\models\db\VoteUser;
+use frontend\controllers\AbstractController;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -230,95 +237,90 @@ class Menu extends Widget
         $messenger = 0;
         $news = 0;
         $support = 0;
-        $poll = 0;
+        $vote = 0;
         if (!Yii::$app->user->isGuest) {
-            $support = 0;
-            $messenger = 0;
-            $news = 0;
-            $poll = 0;
-//            $support = Support::find()
-//                ->where(['support_user_id' => Yii::$app->user->id, 'support_question' => 0, 'support_read' => 0, 'support_inside' => 0])
-//                ->count();
-//
-//            $messenger = Message::find()
-//                ->where(['message_user_id_to' => Yii::$app->user->id, 'message_read' => 0])
-//                ->count();
-//
-//            $news = News::find()
-//                ->where(['news_country_id' => 0])
-//                ->andWhere(['>', 'news_id', $controller->user->user_news_id])
-//                ->count();
-//
-//            $poll = Vote::find()
-//                ->where(['poll_poll_status_id' => VoteStatus::OPEN, 'poll_country_id' => 0])
-//                ->andWhere([
-//                    'not',
-//                    [
-//                        'poll_id' => VoteAnswer::find()
-//                            ->select(['poll_answer_poll_id'])
-//                            ->where([
-//                                'poll_answer_id' => VoteUser::find()
-//                                    ->select(['poll_user_poll_answer_id'])
-//                                    ->where(['poll_user_user_id' => Yii::$app->user->id])
-//                            ])
-//                    ]
-//                ])
-//                ->count();
-//            if ($controller->myTeam) {
-//                $countryNews = News::find()
-//                    ->where(['news_country_id' => $controller->myTeam->stadium->city->country->country_id])
-//                    ->andWhere(['>', 'news_id', $controller->myTeam->team_news_id])
-//                    ->count();
-//
-//                $supportManager = Support::find()
-//                    ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
-//                    ->count();
-//
-//                $supportAdmin = 0;
-//                $supportPresident = 0;
-//
-//                if (in_array($controller->user->user_id, [$controller->myTeam->stadium->city->country->country_president_id, $controller->myTeam->stadium->city->country->country_president_vice_id])) {
-//                    $supportAdmin = Support::find()
-//                        ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
-//                        ->count();
-//
-//                    $supportPresident = Support::find()
-//                        ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
-//                        ->count();
-//                }
-//
-//                $countryInfo = $countryNews + $supportManager + $supportAdmin + $supportPresident;
-//
-//                if (!$poll) {
-//                    $poll = Vote::find()
-//                        ->where([
-//                            'poll_poll_status_id' => VoteStatus::OPEN,
-//                            'poll_country_id' => $controller->myTeam->stadium->city->country->country_id,
-//                        ])
-//                        ->andWhere([
-//                            'not',
-//                            [
-//                                'poll_id' => VoteAnswer::find()
-//                                    ->select(['poll_answer_poll_id'])
-//                                    ->where([
-//                                        'poll_answer_id' => VoteUser::find()
-//                                            ->select(['poll_user_poll_answer_id'])
-//                                            ->where(['poll_user_user_id' => Yii::$app->user->id])
-//                                    ])
-//                            ]
-//                        ])
-//                        ->count();
-//                }
-//            }
+            $support = Support::find()
+                ->andWhere([
+                    'user_id' => $controller->user->id,
+                    'is_question' => false,
+                    'read' => null,
+                    'is_inside' => false
+                ])
+                ->count();
+
+            $messenger = Message::find()
+                ->andWhere(['to_user_id' => $controller->user->id, 'read' => null])
+                ->count();
+
+            $news = News::find()
+                ->andWhere(['federation_id' => null])
+                ->andWhere(['>', 'id', $controller->user->news_id])
+                ->count();
+
+            $vote = Vote::find()
+                ->andWhere(['vote_status_id' => VoteStatus::OPEN, 'country_id' => null])
+                ->andWhere([
+                    'not',
+                    [
+                        'id' => VoteAnswer::find()
+                            ->select(['vote_id'])
+                            ->andWhere([
+                                'id' => VoteUser::find()
+                                    ->select(['vote_answer_id'])
+                                    ->andWhere(['user_id' => $controller->user->id])
+                            ])
+                    ]
+                ])
+                ->count();
+            if ($controller->myTeam) {
+                $countryNews = News::find()
+                    ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id])
+                    ->andWhere(['>', 'news_id', $controller->myTeam->federation_news_id])
+                    ->count();
+
+                $supportManager = Support::find()
+                    ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
+                    ->count();
+
+                $supportAdmin = 0;
+                $supportPresident = 0;
+
+                if (in_array($controller->user->user_id, [$controller->myTeam->stadium->city->country->country_president_id, $controller->myTeam->stadium->city->country->country_president_vice_id])) {
+                    $supportAdmin = Support::find()
+                        ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
+                        ->count();
+
+                    $supportPresident = Support::find()
+                        ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
+                        ->count();
+                }
+
+                $countryInfo = $countryNews + $supportManager + $supportAdmin + $supportPresident;
+
+                if (!$vote) {
+                    $vote = Vote::find()
+                        ->andWhere([
+                            'poll_poll_status_id' => VoteStatus::OPEN,
+                            'poll_country_id' => $controller->myTeam->stadium->city->country->country_id,
+                        ])
+                        ->andWhere([
+                            'not',
+                            [
+                                'poll_id' => VoteAnswer::find()
+                                    ->select(['poll_answer_poll_id'])
+                                    ->andWhere([
+                                        'poll_answer_id' => VoteUser::find()
+                                            ->select(['poll_user_poll_answer_id'])
+                                            ->andWhere(['poll_user_user_id' => Yii::$app->user->id])
+                                    ])
+                            ]
+                        ])
+                        ->count();
+                }
+            }
         }
 
-        $nationalId = 0;
-        if ($controller->myNational) {
-            $nationalId = $controller->myNational->national_id;
-        }
-        if ($controller->myNationalVice) {
-            $nationalId = $controller->myNationalVice->national_id;
-        }
+        $nationalId = $controller->myNationalVice->id ?? $controller->myNational->id ?? 0;
 
         $this->menuItemList = [
             self::ITEM_CHANGE_TEAM => [
@@ -372,9 +374,9 @@ class Menu extends Widget
                 'url' => ['player/index'],
             ],
             self::ITEM_POLL => [
-                'css' => $poll ? 'red' : '',
-                'label' => 'Опросы' . ($poll ? '<sup class="text-size-4">' . $poll . '</sup>' : ''),
-                'url' => ['poll/index'],
+                'css' => $vote ? 'red' : '',
+                'label' => 'Опросы' . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
+                'url' => ['vote/index'],
             ],
             self::ITEM_PROFILE => [
                 'label' => 'Профиль',

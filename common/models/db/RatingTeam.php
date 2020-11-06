@@ -11,28 +11,28 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $age_place
- * @property int $age_place_country
+ * @property int $age_place_federation
  * @property int $base_place
- * @property int $base_place_country
+ * @property int $base_place_federation
  * @property int $finance_place
- * @property int $finance_place_country
+ * @property int $finance_place_federation
  * @property int $player_place
- * @property int $player_place_country
+ * @property int $player_place_federation
  * @property int $power_vs_place
- * @property int $power_vs_place_country
+ * @property int $power_vs_place_federation
  * @property int $price_base_place
- * @property int $price_base_place_country
+ * @property int $price_base_place_federation
  * @property int $price_stadium_place
- * @property int $price_stadium_place_country
+ * @property int $price_stadium_place_federation
  * @property int $price_total_place
- * @property int $price_total_place_country
+ * @property int $price_total_place_federation
  * @property int $salary_place
- * @property int $salary_place_country
+ * @property int $salary_place_federation
  * @property int $stadium_place
- * @property int $stadium_place_country
+ * @property int $stadium_place_federation
  * @property int $team_id
  * @property int $visitor_place
- * @property int $visitor_place_country
+ * @property int $visitor_place_federation
  *
  * @property-read Team $team
  */
@@ -56,28 +56,28 @@ class RatingTeam extends AbstractActiveRecord
             [
                 [
                     'age_place',
-                    'age_place_country',
+                    'age_place_federation',
                     'base_place',
-                    'base_place_country',
+                    'base_place_federation',
                     'finance_place',
-                    'finance_place_country',
+                    'finance_place_federation',
                     'player_place',
-                    'player_place_country',
+                    'player_place_federation',
                     'power_vs_place',
-                    'power_vs_place_country',
+                    'power_vs_place_federation',
                     'price_base_place',
-                    'price_base_place_country',
+                    'price_base_place_federation',
                     'price_stadium_place',
-                    'price_stadium_place_country',
+                    'price_stadium_place_federation',
                     'price_total_place',
-                    'price_total_place_country',
+                    'price_total_place_federation',
                     'salary_place',
-                    'salary_place_country',
+                    'salary_place_federation',
                     'stadium_place',
-                    'stadium_place_country',
+                    'stadium_place_federation',
                     'team_id',
                     'visitor_place',
-                    'visitor_place_country',
+                    'visitor_place_federation',
                 ],
                 'integer',
                 'min' => 0

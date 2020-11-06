@@ -17,7 +17,7 @@ use yii\db\ActiveQuery;
  * @property float $base_school
  * @property float $base_scout
  * @property float $base_training
- * @property int $country
+ * @property int $federation
  * @property int $date
  * @property int $manager
  * @property float $manager_vip_percent
@@ -82,7 +82,7 @@ class Snapshot extends AbstractActiveRecord
                     'base_school',
                     'base_scout',
                     'base_training',
-                    'country',
+                    'federation',
                     'date',
                     'manager',
                     'manager_vip_percent',

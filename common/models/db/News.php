@@ -57,7 +57,7 @@ class News extends AbstractActiveRecord
             [['text', 'title'], 'trim'],
             [['title'], 'string', 'max' => 255],
             [['text'], 'string'],
-            [['federation_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
     }

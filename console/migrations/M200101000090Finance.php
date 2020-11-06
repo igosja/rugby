@@ -24,7 +24,7 @@ class M200101000090Finance extends Migration
                 'building_id' => $this->integer(1),
                 'capacity' => $this->integer(5),
                 'comment' => $this->text(),
-                'country_id' => $this->integer(3),
+                'federation_id' => $this->integer(3),
                 'date' => $this->integer(11)->notNull(),
                 'finance_text_id' => $this->integer(2)->notNull(),
                 'level' => $this->integer(2),
@@ -42,7 +42,7 @@ class M200101000090Finance extends Migration
         );
 
         $this->addForeignKey('finance_building_id', self::TABLE, 'building_id', '{{%building}}', 'id');
-        $this->addForeignKey('finance_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('finance_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('finance_finance_text_id', self::TABLE, 'finance_text_id', '{{%finance_text}}', 'id');
         $this->addForeignKey('finance_loan_id', self::TABLE, 'loan_id', '{{%loan}}', 'id');
         $this->addForeignKey('finance_national_id', self::TABLE, 'national_id', '{{%national}}', 'id');

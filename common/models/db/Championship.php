@@ -12,7 +12,7 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property int $bonus_loose
  * @property int $bonus_tries
- * @property int $country_id
+ * @property int $federation_id
  * @property int $difference
  * @property int $division_id
  * @property int $draw
@@ -28,7 +28,7 @@ use yii\db\ActiveQuery;
  * @property int $tries_for
  * @property int $win
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read Division $division
  * @property-read Season $season
  * @property-read Team $team
@@ -49,10 +49,10 @@ class Championship extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['country_id', 'division_id', 'place', 'season_id', 'team_id'], 'required'],
+            [['federation_id', 'division_id', 'place', 'season_id', 'team_id'], 'required'],
             [['bonus_loose', 'bonus_tries', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [
-                ['country_id', 'difference', 'season_id', 'tries_against', 'tries_for'],
+                ['federation_id', 'difference', 'season_id', 'tries_against', 'tries_for'],
                 'integer',
                 'min' => 0,
                 'max' => 999
@@ -62,7 +62,7 @@ class Championship extends AbstractActiveRecord
             [['division_id'], 'integer', 'min' => 0, 'max' => 9],
             [['team_id'], 'integer', 'min' => 1],
             [['point_against', 'point_for'], 'integer', 'min' => 0, 'max' => 9999],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['division_id'], 'exist', 'targetRelation' => 'division'],
             [['season_id'], 'exist', 'targetRelation' => 'season'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
@@ -72,9 +72,9 @@ class Championship extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

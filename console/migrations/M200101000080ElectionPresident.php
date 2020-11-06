@@ -21,13 +21,13 @@ class M200101000080ElectionPresident extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'country_id' => $this->integer(3)->defaultValue(0),
+                'federation_id' => $this->integer(3)->defaultValue(0),
                 'date' => $this->integer(11)->notNull(),
                 'election_status_id' => $this->integer(1)->defaultValue(0),
             ]
         );
 
-        $this->addForeignKey('election_president_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('election_president_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey(
             'election_president_election_status_id',
             self::TABLE,

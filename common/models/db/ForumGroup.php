@@ -10,13 +10,13 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
- * @property int $country_id
+ * @property int $federation_id
  * @property string $description
  * @property int $forum_chapter_id
  * @property string $name
  * @property int $order
  *
- * @property-read Country $country
+ * @property-read Federation $federation
  * @property-read ForumChapter $forumChapter
  */
 class ForumGroup extends AbstractActiveRecord
@@ -36,13 +36,13 @@ class ForumGroup extends AbstractActiveRecord
     {
         return [
             [['description', 'forum_chapter_id', 'name', 'order'], 'required'],
-            [['country_id', 'order'], 'integer', 'min' => 0, 'max' => 999],
+            [['federation_id', 'order'], 'integer', 'min' => 0, 'max' => 999],
             [['forum_chapter_id'], 'integer', 'min' => 0, 'max' => 9],
             [['description', 'name'], 'trim'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['forum_chapter_id'], 'exist', 'targetRelation' => 'forumChapter'],
         ];
     }
@@ -50,9 +50,9 @@ class ForumGroup extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['id' => 'country_id']);
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

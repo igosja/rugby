@@ -21,7 +21,7 @@ class M200101000099LeagueDistribution extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'country_id' => $this->integer(3)->notNull(),
+                'federation_id' => $this->integer(3)->notNull(),
                 'group' => $this->integer(1)->defaultValue(0),
                 'qualification_3' => $this->integer(1)->defaultValue(0),
                 'qualification_2' => $this->integer(1)->defaultValue(0),
@@ -30,15 +30,15 @@ class M200101000099LeagueDistribution extends Migration
             ]
         );
 
-        $this->addForeignKey('league_distribution_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
+        $this->addForeignKey('league_distribution_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('league_distribution_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
 
-        $this->createIndex('country_season', self::TABLE, ['country_id', 'season_id'], true);
+        $this->createIndex('federation_season', self::TABLE, ['federation_id', 'season_id'], true);
 
         $this->batchInsert(
             self::TABLE,
             [
-                'country_id',
+                'federation_id',
                 'group',
                 'qualification_3',
                 'qualification_2',
