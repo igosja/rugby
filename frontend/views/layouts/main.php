@@ -20,8 +20,7 @@ AppAsset::register($this);
 $context = $this->context;
 
 ?>
-<?php
-$this->beginPage() ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -30,14 +29,11 @@ $this->beginPage() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php
-    $this->head() ?>
+    <?php $this->head() ?>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <?php
-    if (YII_ENV_PROD) : ?>
+    <?php if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
 
@@ -60,25 +56,19 @@ $this->beginPage() ?>
         </script>
         <!--/LiveInternet-->
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
-    <?php
-    if (!$context->user || !$context->user->isVip()): ?>
+    <?php if (!$context->user || !$context->user->isVip()): ?>
         <!-- Google AdSense -->
-        <script async
-                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
-    <?php
-    endif ?>
-    <?php
-    endif ?>
+    <?php endif ?>
+    <?php endif ?>
 </head>
 <body>
-<?php
-$this->beginBody() ?>
+<?php $this->beginBody() ?>
 <div class="main">
     <div class="content">
         <div class="row">
-            <div
-                class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left xs-text-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left xs-text-center">
                 <?= Html::a(
                     Html::img(
                         '/img/logo.png',
@@ -90,20 +80,16 @@ $this->beginBody() ?>
                     ['site/index']
                 ) ?>
             </div>
-            <div
-                class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
                 <br/>
-                <?php
-                if (Yii::$app->user->isGuest): ?>
+                <?php if (Yii::$app->user->isGuest): ?>
                     <?= Html::a(
                         'Войти',
                         ['/site/sign-in'],
                         ['class' => 'btn margin']
                     ) ?>
-                <?php
-                else: ?>
-                    <?php
-                    if ($context->myTeamArray): ?>
+                <?php else: ?>
+                    <?php if ($context->myTeamArray): ?>
                         <?= Html::beginForm(
                             ['/team/change-my-team'],
                             'post',
@@ -118,20 +104,16 @@ $this->beginBody() ?>
                                 'onchange' => 'this.form.submit();'
                             ]
                         ) ?>
-                    <?php
-                    endif ?>
+                    <?php endif ?>
                     <?= Html::a(
                         'Выйти',
                         ['site/sign-out'],
                         ['class' => ['btn', 'margin']]
                     ) ?>
-                    <?php
-                    if ($context->myTeamArray): ?>
+                    <?php if ($context->myTeamArray): ?>
                         <?= Html::endForm() ?>
-                    <?php
-                    endif ?>
-                <?php
-                endif ?>
+                    <?php endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
@@ -167,8 +149,7 @@ $this->beginBody() ?>
 
         ?>
         <?= $content ?>
-        <?php
-        if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
+        <?php if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
             <div class="row">
                 <div
                     class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
@@ -191,15 +172,11 @@ $this->beginBody() ?>
                     </script>
                 </div>
             </div>
-        <?php
-        endif ?>
+        <?php endif ?>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
-            Страница сгенерирована за <?= round(
-                Yii::getLogger()->getElapsedTime(),
-                5
-            ) ?> сек,
+            Страница сгенерирована за <?= round(Yii::getLogger()->getElapsedTime(), 5) ?> сек,
             <br/>
             <?php
             try {
@@ -211,9 +188,7 @@ $this->beginBody() ?>
         </div>
     </div>
 </div>
-<?php
-$this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php
-$this->endPage() ?>
+<?php $this->endPage() ?>
