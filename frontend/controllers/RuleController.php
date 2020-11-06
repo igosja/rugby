@@ -37,7 +37,7 @@ class RuleController extends AbstractController
         $rule = RuleQuery::getRuleById($id);
         $this->notFound($rule);
 
-        $this->setSeoTitle($rule->rule_title . ' - Правила');
+        $this->setSeoTitle($rule->title . ' - Правила');
         return $this->render('view', [
             'rule' => $rule,
         ]);
@@ -49,11 +49,6 @@ class RuleController extends AbstractController
     public function actionSearch(): string
     {
         $query = Rule::find()
-            ->select([
-                'rule_id',
-                'rule_text',
-                'rule_title',
-            ])
             ->filterWhere(['like', 'rule_text', Yii::$app->request->get('q')])
             ->orderBy(['rule_id' => SORT_ASC]);
         $dataProvider = new ActiveDataProvider([

@@ -19,7 +19,7 @@ class TeamRequestHandleExecute implements ExecuteInterface
     /**
      * @var TeamRequest $teamRequest
      */
-    private $teamRequest;
+    private TeamRequest $teamRequest;
 
     /**
      * TeamRequestHandleExecute constructor.
@@ -38,17 +38,17 @@ class TeamRequestHandleExecute implements ExecuteInterface
     public function execute(): bool
     {
         $teamToEmploy = Team::find()
-            ->where(['team_id' => $this->teamRequest->team_request_team_id, 'team_user_id' => 0])
+            ->where(['id' => $this->teamRequest->team_id, 'user_id' => 0])
             ->limit(1)
             ->one();
         if (!$teamToEmploy) {
-            TeamRequest::deleteAll(['team_request_id' => $this->teamRequest->team_request_id]);
+            TeamRequest::deleteAll(['id' => $this->teamRequest->id]);
             return false;
         }
 
-        if ($this->teamRequest->team_request_leave_id) {
+        if ($this->teamRequest->leave_team_id) {
             $teamToFire = Team::find()
-                ->where(['team_id' => $this->teamRequest->team_request_leave_id])
+                ->where(['id' => $this->teamRequest->leave_team_id])
                 ->limit(1)
                 ->one();
             if ($teamToFire) {
@@ -57,9 +57,6 @@ class TeamRequestHandleExecute implements ExecuteInterface
         }
 
         (new TeamManagerEmployExecute($teamToEmploy, $this->teamRequest->user))->execute();
-
-        TeamRequest::deleteAll(['team_request_team_id' => $this->teamRequest->team_request_team_id]);
-        TeamRequest::deleteAll(['team_request_user_id' => $this->teamRequest->team_request_user_id]);
 
         return true;
     }

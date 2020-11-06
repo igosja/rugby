@@ -32,15 +32,6 @@ class GameQuery
                     self::withTeamQuery($query);
                 },
             ])
-            ->select([
-                'game_id',
-                'game_guest_auto',
-                'game_guest_national_id',
-                'game_guest_team_id',
-                'game_home_auto',
-                'game_home_national_id',
-                'game_home_team_id',
-            ])
             ->where(['game_schedule_id' => $scheduleId])
             ->orderBy(['game_id' => SORT_DESC]);
     }
@@ -54,40 +45,14 @@ class GameQuery
         return Game::find()
             ->joinWith(['schedule'], false)
             ->with([
-                'teamGuest' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'team_id',
-                        'team_name',
-                    ]);
-                },
-                'teamHome' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'team_id',
-                        'team_name',
-                    ]);
-                },
+                'teamGuest',
+                'teamHome',
                 'schedule' => static function (ActiveQuery $query) {
                     $query
                         ->with([
-                            'tournamentType' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'tournament_type_id',
-                                    'tournament_type_name',
-                                ]);
-                            }
-                        ])
-                        ->select([
-                            'schedule_date',
-                            'schedule_id',
-                            'schedule_tournament_type_id',
+                            'tournamentType',
                         ]);
                 },
-            ])
-            ->select([
-                'game_guest_team_id',
-                'game_home_team_id',
-                'game_id',
-                'game_schedule_id',
             ])
             ->where(['or', ['game_home_team_id' => $teamId], ['game_guest_team_id' => $teamId]])
             ->andWhere(['!=', 'game_played', 0])
@@ -105,42 +70,14 @@ class GameQuery
         return Game::find()
             ->joinWith(['schedule'], false)
             ->with([
-                'teamGuest' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'team_id',
-                        'team_name',
-                    ]);
-                },
-                'teamHome' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'team_id',
-                        'team_name',
-                    ]);
-                },
+                'teamGuest',
+                'teamHome',
                 'schedule' => static function (ActiveQuery $query) {
                     $query
                         ->with([
-                            'tournamentType' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'tournament_type_id',
-                                    'tournament_type_name',
-                                ]);
-                            }
-                        ])
-                        ->select([
-                            'schedule_date',
-                            'schedule_id',
-                            'schedule_tournament_type_id',
+                            'tournamentType',
                         ]);
                 },
-            ])
-            ->select([
-                'game_guest_tactic_id',
-                'game_guest_team_id',
-                'game_home_tactic_id',
-                'game_home_team_id',
-                'game_id',
-                'game_schedule_id',
             ])
             ->where(['or', ['game_home_team_id' => $teamId], ['game_guest_team_id' => $teamId]])
             ->andWhere(['game_played' => 0])
@@ -162,24 +99,8 @@ class GameQuery
                 'schedule' => static function (ActiveQuery $query) {
                     $query
                         ->with([
-                            'stage' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'stage_id',
-                                    'stage_name',
-                                ]);
-                            },
-                            'tournamentType' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'tournament_type_id',
-                                    'tournament_type_name',
-                                ]);
-                            },
-                        ])
-                        ->select([
-                            'schedule_date',
-                            'schedule_id',
-                            'schedule_stage_id',
-                            'schedule_tournament_type_id',
+                            'stage',
+                            'tournamentType',
                         ]);
                 },
                 'teamHome' => static function (ActiveQuery $query) {
@@ -188,21 +109,6 @@ class GameQuery
                 'teamGuest' => static function (ActiveQuery $query) {
                     self::withTeamQuery($query);
                 },
-            ])
-            ->select([
-                'game_guest_auto',
-                'game_guest_national_id',
-                'game_guest_plus_minus',
-                'game_guest_points',
-                'game_guest_team_id',
-                'game_home_auto',
-                'game_home_national_id',
-                'game_home_plus_minus',
-                'game_home_points',
-                'game_home_team_id',
-                'game_id',
-                'game_played',
-                'game_schedule_id',
             ])
             ->where(['or', ['game_home_team_id' => $teamId], ['game_guest_team_id' => $teamId]])
             ->andWhere(['schedule_season_id' => $seasonId])
@@ -216,23 +122,8 @@ class GameQuery
     {
         $query
             ->with([
-                'country' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'country_id',
-                        'country_name',
-                    ]);
-                },
-                'nationalType' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'national_type_id',
-                        'national_type_name',
-                    ]);
-                },
-            ])
-            ->select([
-                'national_id',
-                'national_country_id',
-                'national_national_type_id',
+                'country',
+                'nationalType',
             ]);
     }
 
@@ -249,30 +140,11 @@ class GameQuery
                             'city' => static function (ActiveQuery $query) {
                                 $query
                                     ->with([
-                                        'country' => static function (ActiveQuery $query) {
-                                            $query->select([
-                                                'country_id',
-                                                'country_name',
-                                            ]);
-                                        },
-                                    ])
-                                    ->select([
-                                        'city_id',
-                                        'city_country_id',
-                                        'city_name',
+                                        'country',
                                     ]);
                             },
-                        ])
-                        ->select([
-                            'stadium_id',
-                            'stadium_city_id',
                         ]);
                 },
-            ])
-            ->select([
-                'team_id',
-                'team_name',
-                'team_stadium_id',
             ]);
     }
 }

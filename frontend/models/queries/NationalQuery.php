@@ -17,7 +17,6 @@ class NationalQuery
     public static function getNationalListByUserId(int $userId): array
     {
         return National::find()
-            ->select(['id'])
             ->where(
                 [
                     'or',

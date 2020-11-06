@@ -23,23 +23,8 @@ class HistoryQuery
                 'player' => static function (ActiveQuery $query) {
                     $query
                         ->with([
-                            'name' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'name_id',
-                                    'name_name',
-                                ]);
-                            },
-                            'surname' => static function (ActiveQuery $query) {
-                                $query->select([
-                                    'surname_id',
-                                    'surname_name',
-                                ]);
-                            },
-                        ])
-                        ->select([
-                            'player_id',
-                            'player_name_id',
-                            'player_surname_id',
+                            'name',
+                            'surname',
                         ]);
                 },
                 'team' => static function (ActiveQuery $query) {
@@ -51,46 +36,14 @@ class HistoryQuery
                                         'city' => static function (ActiveQuery $query) {
                                             $query
                                                 ->with([
-                                                    'country' => static function (ActiveQuery $query) {
-                                                        $query->select([
-                                                            'country_id',
-                                                            'country_name',
-                                                        ]);
-                                                    },
-                                                ])
-                                                ->select([
-                                                    'city_country_id',
-                                                    'city_id',
-                                                    'city_name',
+                                                    'country',
                                                 ]);
                                         },
-                                    ])
-                                    ->select([
-                                        'stadium_city_id',
-                                        'stadium_id',
                                     ]);
                             },
-                        ])
-                        ->select([
-                            'team_id',
-                            'team_name',
-                            'team_stadium_id',
                         ]);
                 },
-                'user' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'user_id',
-                        'user_login',
-                    ]);
-                }
-            ])
-            ->select([
-                'history_date',
-                'history_history_text_id',
-                'history_id',
-                'history_player_id',
-                'history_team_id',
-                'history_user_id',
+                'user',
             ])
             ->where([
                 'or',

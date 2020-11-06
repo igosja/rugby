@@ -149,6 +149,14 @@ abstract class AbstractController extends AbstractWebController
     }
 
     /**
+     * @return Response
+     */
+    public function redirectToMyTeam(): Response
+    {
+        return $this->redirect(['team/view', 'id' => $this->myTeam->id]);
+    }
+
+    /**
      * @param string $text
      */
     public function setSeoTitle(string $text): void
@@ -206,7 +214,7 @@ abstract class AbstractController extends AbstractWebController
                     ->user
                     ->getUserBlock(UserBlockType::TYPE_SITE)
                     ->one();
-                if ($userBlock->date > time()) {
+                if ($userBlock && $userBlock->date > time()) {
                     throw new ForbiddenHttpException(
                         'Вам заблокирован доступ к сайту. Причина блокировки - '
                         . $userBlock->userBlockReason->text
@@ -219,7 +227,6 @@ abstract class AbstractController extends AbstractWebController
     private function loadCurrentSeason(): void
     {
         $this->season = Season::find()
-            ->select(['id'])
             ->andWhere(['is_future' => false])
             ->orderBy(['id' => SORT_DESC])
             ->one();

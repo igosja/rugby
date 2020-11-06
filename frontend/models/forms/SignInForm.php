@@ -3,6 +3,7 @@
 namespace frontend\models\forms;
 
 use common\models\db\User;
+use common\models\db\UserLogin;
 use Yii;
 use yii\base\Model;
 
@@ -61,21 +62,40 @@ class SignInForm extends Model
     public function login(): bool
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+            if (!Yii::$app->user->login($this->getUser(), 3600 * 24 * 30)) {
+                return false;
+            }
+            return $this->updateLastUserLogin();
         }
 
         return false;
     }
 
-    /**
-     * @return array
-     */
-    public function attributeLabels(): array
+    private function updateLastUserLogin(): bool
     {
-        return [
-            'login' => 'Логин',
-            'password' => 'Пароль',
-        ];
+        $userId = Yii::$app->user->id;
+        $userIp = Yii::$app->request->headers->get('x-real-ip');
+        if (!$userIp) {
+            $userIp = Yii::$app->request->userIP;
+        }
+        $userAgent = Yii::$app->request->userAgent;
+        $userLogin = UserLogin::find()
+            ->andWhere(
+                [
+                    'user_id' => $userId,
+                    'ip' => $userIp,
+                    'agent' => $userAgent
+                ]
+            )
+            ->limit(1)
+            ->one();
+        if (!$userLogin) {
+            $userLogin = new UserLogin();
+            $userLogin->user_id = $userId;
+            $userLogin->ip = $userIp;
+            $userLogin->agent = $userAgent;
+        }
+        return $userLogin->save();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -16,6 +17,7 @@ use yii\db\ActiveQuery;
  * @property int $user_id
  *
  * @property-read Team $leaveTeam
+ * @property-read Recommendation $recommendation
  * @property-read Team $team
  * @property-read User $user
  */
@@ -27,6 +29,20 @@ class TeamRequest extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%team_request}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
     }
 
     /**
@@ -49,6 +65,14 @@ class TeamRequest extends AbstractActiveRecord
     public function getLeaveTeam(): ActiveQuery
     {
         return $this->hasOne(Team::class, ['id' => 'leave_team_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getRecommendation(): ActiveQuery
+    {
+        return $this->hasOne(Recommendation::class, ['team_id' => 'team_id', 'user_id' => 'user_id']);
     }
 
     /**

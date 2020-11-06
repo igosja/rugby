@@ -5,13 +5,13 @@ namespace common\models\executors;
 use common\components\interfaces\ExecuteInterface;
 use common\models\db\Attitude;
 use common\models\db\FireReason;
-use common\models\db\History;
 use common\models\db\HistoryText;
 use common\models\db\Loan;
 use common\models\db\LoanApplication;
 use common\models\db\Team;
 use common\models\db\Transfer;
 use common\models\db\TransferApplication;
+use frontend\models\executors\HistoryLogExecutor;
 use Throwable;
 use yii\db\StaleObjectException;
 
@@ -27,12 +27,12 @@ class TeamManagerFireExecute implements ExecuteInterface
     /**
      * @var int $fireReasonId
      */
-    private $fireReasonId;
+    private int $fireReasonId;
 
     /**
      * @var Team $team
      */
-    private $team;
+    private Team $team;
 
     /**
      * TeamManagerFireExecute constructor.
@@ -52,81 +52,85 @@ class TeamManagerFireExecute implements ExecuteInterface
      */
     public function execute(): bool
     {
-        $userId = $this->team->team_user_id;
-        $viceId = $this->team->team_vice_id;
+        $userId = $this->team->user_id;
+        $viceId = $this->team->vice_user_id;
 
-        $this->team->team_auto = 0;
-        $this->team->team_attitude_national = Attitude::NEUTRAL;
-        $this->team->team_attitude_president = Attitude::NEUTRAL;
-        $this->team->team_attitude_u19 = Attitude::NEUTRAL;
-        $this->team->team_attitude_u21 = Attitude::NEUTRAL;
-        $this->team->team_user_id = 0;
-        $this->team->team_vice_id = 0;
+        $this->team->auto_number = 0;
+        $this->team->national_attitude_id = Attitude::NEUTRAL;
+        $this->team->president_attitude_id = Attitude::NEUTRAL;
+        $this->team->u19_attitude_id = Attitude::NEUTRAL;
+        $this->team->u21_attitude_id = Attitude::NEUTRAL;
+        $this->team->user_id = 0;
+        $this->team->vice_user_id = 0;
         $this->team->save(true, [
-            'team_auto',
-            'team_attitude_national',
-            'team_attitude_president',
-            'team_attitude_u19',
-            'team_attitude_u21',
-            'team_user_id',
-            'team_vice_id',
+            'auto_number',
+            'national_attitude_id',
+            'president_attitude_id',
+            'u19_attitude_id',
+            'u21_attitude_id',
+            'user_id',
+            'vice_user_id',
         ]);
 
         TransferApplication::deleteAll([
-            'transfer_application_team_id' => $this->team->team_id,
-            'transfer_application_transfer_id' => Transfer::find()
-                ->select(['transfer_id'])
-                ->where(['transfer_ready' => 0])
+            'team_id' => $this->team->id,
+            'transfer_id' => Transfer::find()
+                ->select(['id'])
+                ->andWhere(['ready' => null])
         ]);
 
         TransferApplication::deleteAll([
-            'transfer_application_transfer_id' => Transfer::find()
-                ->select(['transfer_id'])
-                ->where(['transfer_ready' => 0, 'transfer_team_seller_id' => $this->team->team_id])
+            'transfer_id' => Transfer::find()
+                ->select(['id'])
+                ->andWhere(['ready' => null, 'team_seller_id' => $this->team->id])
         ]);
 
         $transferArray = Transfer::find()
-            ->where(['transfer_team_seller_id' => $this->team->team_id, 'transfer_ready' => 0])
+            ->andWhere(['team_seller_id' => $this->team->id, 'ready' => null])
             ->all();
         foreach ($transferArray as $transfer) {
             $transfer->delete();
         }
 
         LoanApplication::deleteAll([
-            'loan_application_team_id' => $this->team->team_id,
-            'loan_application_loan_id' => Loan::find()
-                ->select(['loan_id'])
-                ->where(['loan_ready' => 0])
+            'team_id' => $this->team->id,
+            'loan_id' => Loan::find()
+                ->select(['id'])
+                ->andWhere(['ready' => null])
         ]);
 
         LoanApplication::deleteAll([
-            'loan_application_loan_id' => Loan::find()
-                ->select(['loan_id'])
-                ->where(['loan_ready' => 0, 'loan_team_seller_id' => $this->team->team_id])
+            'loan_id' => Loan::find()
+                ->select(['id'])
+                ->andWhere(['ready' => null, 'team_seller_id' => $this->team->id])
         ]);
 
         $loanArray = Loan::find()
-            ->where(['loan_team_seller_id' => $this->team->team_id, 'loan_ready' => 0])
+            ->andWhere(['team_seller_id' => $this->team->id, 'ready' => null])
             ->all();
         foreach ($loanArray as $loan) {
             $loan->delete();
         }
 
         if ($userId) {
-            History::log([
-                'history_fire_reason' => $this->fireReasonId,
-                'history_history_text_id' => HistoryText::USER_MANAGER_TEAM_OUT,
-                'history_team_id' => $this->team->team_id,
-                'history_user_id' => $userId,
-            ]);
+            (new HistoryLogExecutor(
+                [
+                    'fire_reason_id' => $this->fireReasonId,
+                    'history_text_id' => HistoryText::USER_MANAGER_TEAM_OUT,
+                    'team_id' => $this->team->id,
+                    'user_id' => $userId,
+                ]
+            ))->execute();
         }
 
         if ($viceId) {
-            History::log([
-                'history_history_text_id' => HistoryText::USER_VICE_TEAM_OUT,
-                'history_team_id' => $this->team->team_id,
-                'history_user_id' => $viceId,
-            ]);
+            (new HistoryLogExecutor(
+                [
+                    'history_text_id' => HistoryText::USER_VICE_TEAM_OUT,
+                    'team_id' => $this->team->id,
+                    'user_id' => $viceId,
+                ]
+            ))->execute();
         }
 
         return true;

@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -50,6 +51,20 @@ class History extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%history}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
     }
 
     /**
@@ -120,7 +135,7 @@ class History extends AbstractActiveRecord
      */
     public function getHistoryText(): ActiveQuery
     {
-        return $this->hasOne(HistoryText::class, ['id' => 'text_id'])->cache();
+        return $this->hasOne(HistoryText::class, ['id' => 'history_text_id'])->cache();
     }
 
     /**

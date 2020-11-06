@@ -3,7 +3,6 @@
 namespace frontend\models\queries;
 
 use common\models\db\Championship;
-use yii\db\ActiveQuery;
 
 /**
  * Class ChampionshipQuery
@@ -19,23 +18,8 @@ class ChampionshipQuery
     {
         return Championship::find()
             ->with([
-                'country' => function (ActiveQuery $query) {
-                    $query->select([
-                        'country_id',
-                        'country_name',
-                    ]);
-                },
-                'division' => function (ActiveQuery $query) {
-                    $query->select([
-                        'division_id',
-                        'division_name',
-                    ]);
-                },
-            ])
-            ->select([
-                'championship_country_id',
-                'championship_division_id',
-                'championship_id',
+                'country',
+                'division',
             ])
             ->where(['championship_season_id' => $seasonId])
             ->groupBy(['championship_country_id', 'championship_division_id'])

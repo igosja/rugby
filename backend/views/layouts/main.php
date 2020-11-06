@@ -144,6 +144,10 @@ $this->beginBody() ?>
                             'label' => 'Teams',
                             'url' => ['team/index'],
                         ],
+                        [
+                            'label' => 'Team requests',
+                            'url' => ['team-request/index'],
+                        ],
                     ],
                     'url' => 'javascript:',
                 ],

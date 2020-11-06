@@ -44,10 +44,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Ваши заявки',
                 'value' => static function (TeamRequest $model) {
-                    return Html::a(
-                        $model->team->name,
-                        ['team/view', $model->team->id]
-                    );
+                    return $model->team->getTeamLink();
                 }
             ],
             [
@@ -112,10 +109,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'Страна',
                 'value' => static function (Team $model) {
-                    return Html::a(
-                        $model->stadium->city->country->name,
-                        ['country/view', $model->stadium->city->country->id]
-                    );
+                    return $model->stadium->city->country->getImageTextLink();
                 }
             ],
             [
@@ -126,7 +120,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'База',
                 'value' => static function (Team $model) {
-                    return 1 . ' из ' . $model->base->slot_max;
+                    return $model->getNumberOfUseSlot() . ' из ' . $model->base->slot_max;
                 }
             ],
             [

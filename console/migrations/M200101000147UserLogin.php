@@ -22,6 +22,7 @@ class M200101000147UserLogin extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'agent' => $this->string(255)->notNull(),
+                'date' => $this->integer(11)->defaultValue(0),
                 'ip' => $this->string(255)->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
             ]
