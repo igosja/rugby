@@ -75,7 +75,7 @@ class NewsCommentSaveExecutor implements ExecuteInterface
         }
 
         try {
-            if (!$this->model->validate() || !$this->model->save()) {
+            if (!$this->model->save()) {
                 return false;
             }
         } catch (Exception $e) {

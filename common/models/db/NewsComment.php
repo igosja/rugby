@@ -3,6 +3,10 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\ErrorHelper;
+use Exception;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -32,6 +36,20 @@ class NewsComment extends AbstractActiveRecord
     /**
      * @return array
      */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public function rules(): array
     {
         return [
@@ -39,9 +57,55 @@ class NewsComment extends AbstractActiveRecord
             [['check', 'news_id', 'user_id'], 'integer'],
             [['text'], 'trim'],
             [['text'], 'string'],
-            [['news_id'], 'exist', 'targetRelation' => 'news',],
-            [['user_id'], 'exist', 'targetRelation' => 'user',],
+            [['news_id'], 'exist', 'targetRelation' => 'news'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function addComment(): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        /**
+         * @var User $user
+         */
+        $user = Yii::$app->user->identity;
+
+        if (!$user->date_confirm) {
+            return false;
+        }
+
+        /**
+         * @var UserBlock $userBlock
+         */
+        $userBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT_NEWS)->one();
+        if ($userBlock && $userBlock->date >= time()) {
+            return false;
+        }
+
+        $userBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one();
+        if ($userBlock && $userBlock->date >= time()) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        try {
+            if (!$this->save()) {
+                return false;
+            }
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+            return false;
+        }
+
+        return true;
     }
 
     /**

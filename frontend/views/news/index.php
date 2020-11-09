@@ -22,7 +22,7 @@ use yii\widgets\ListView;
             'dataProvider' => $dataProvider,
             'itemOptions' => static function ($model, $key, $index) {
                 $class = ['row', 'border-top'];
-                if ($index % 2) {
+                if ($model && $key && $index % 2) {
                     $class[] = 'div-odd';
                 }
                 return ['class' => $class];

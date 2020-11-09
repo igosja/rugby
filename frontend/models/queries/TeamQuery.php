@@ -46,64 +46,13 @@ class TeamQuery
             ->joinWith(['stadium.city'], false)
             ->with(
                 [
-                    'base' => static function (ActiveQuery $query) {
-                        $query->select(
-                            [
-                                'id',
-                                'slot_max',
-                            ]
-                        );
-                    },
-                    'baseMedical' => static function (ActiveQuery $query) {
-                        $query->select(
-                            [
-                                'id',
-                                'level',
-                            ]
-                        );
-                    },
-                    'basePhysical' => static function (ActiveQuery $query) {
-                        $query->select(
-                            [
-                                'id',
-                                'level',
-                            ]
-                        );
-                    },
-                    'baseSchool' => static function (ActiveQuery $query) {
-                        $query->select(
-                            [
-                                'id',
-                                'level',
-                            ]
-                        );
-                    },
-                    'baseScout' => static function (ActiveQuery $query) {
-                        $query->select(
-                            [
-                                'id',
-                                'level',
-                            ]
-                        );
-                    },
+                    'base',
+                    'baseMedical',
+                    'basePhysical',
+                    'baseSchool',
+                    'baseScout',
                     'baseTraining',
-                    'stadium' => static function (ActiveQuery $query) {
-                        $query
-                            ->with(
-                                [
-                                    'city' => static function (
-                                        ActiveQuery $query
-                                    ) {
-                                        $query
-                                            ->with(
-                                                [
-                                                    'country',
-                                                ]
-                                            );
-                                    }
-                                ]
-                            );
-                    },
+                    'stadium',
                     'teamRequests'
                 ]
             )

@@ -298,9 +298,7 @@ class Team extends AbstractActiveRecord
      */
     public function getTeamRequests(): ActiveQuery
     {
-        return $this
-            ->hasMany(TeamRequest::class, ['team_id' => 'id'])
-            ->andWhere(['ready' => null]);
+        return $this->hasMany(TeamRequest::class, ['team_id' => 'id']);
     }
 
     /**
