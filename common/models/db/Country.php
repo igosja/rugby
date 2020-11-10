@@ -76,7 +76,7 @@ class Country extends AbstractActiveRecord
     {
         return Html::a(
             $text,
-            ['/federation/team', $this->id]
+            ['/federation/team', 'id' => $this->id]
         );
     }
 
