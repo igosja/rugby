@@ -4,6 +4,7 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Player
@@ -26,7 +27,6 @@ use yii\db\ActiveQuery;
  * @property int $national_squad_id
  * @property int $order
  * @property int $physical_id
- * @property int $position_id
  * @property int $power_nominal
  * @property int $power_nominal_s
  * @property int $power_old
@@ -48,7 +48,8 @@ use yii\db\ActiveQuery;
  * @property-read National $national
  * @property-read Squad $nationalSquad
  * @property-read Physical $physical
- * @property-read Position $position
+ * @property-read PlayerPosition[] $playerPositions
+ * @property-read PlayerSpecial[] $playerSpecials
  * @property-read Team $schoolTeam
  * @property-read Squad $squad
  * @property-read Style $style
@@ -125,6 +126,51 @@ class Player extends AbstractActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function position(): string
+    {
+        $result = [];
+        foreach ($this->playerPositions as $playerPosition) {
+            $result[] = Html::tag(
+                'span',
+                $playerPosition->position->name,
+                ['title' => $playerPosition->position->text]
+            );
+        }
+        return implode('/', $result);
+    }
+
+    /**
+     * @return string
+     */
+    public function special(): string
+    {
+        $result = [];
+        foreach ($this->playerSpecials as $playerSpecial) {
+            $result[] = Html::tag(
+                'span',
+                $playerSpecial->special->name . $playerSpecial->level,
+                ['title' => $playerSpecial->special->text]
+            );
+        }
+        return implode(' ', $result);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function getPlayerLink(array $options = []): string
+    {
+        return Html::a(
+            $this->name->name . ' ' . $this->surname->name,
+            ['/player/view', 'id' => $this->id],
+            $options
+        );
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getCountry(): ActiveQuery
@@ -183,9 +229,17 @@ class Player extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getPosition(): ActiveQuery
+    public function getPlayerPositions(): ActiveQuery
     {
-        return $this->hasOne(Position::class, ['id' => 'position_id']);
+        return $this->hasMany(PlayerPosition::class, ['player_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getPlayerSpecials(): ActiveQuery
+    {
+        return $this->hasMany(PlayerSpecial::class, ['player_id' => 'id']);
     }
 
     /**
