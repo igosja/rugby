@@ -40,6 +40,6 @@ class Season extends AbstractActiveRecord
         $result = self::find()
             ->orderBy(['id' => SORT_DESC])
             ->all();
-        return ArrayHelper::map($result, 'season_id', 'season_id');
+        return ArrayHelper::map($result, 'id', 'id');
     }
 }

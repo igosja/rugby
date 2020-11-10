@@ -2,6 +2,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -36,8 +37,14 @@ class M200101000020Federation extends Migration
         $this->addForeignKey('federation_president_user_id', self::TABLE, 'president_user_id', '{{%user}}', 'id');
         $this->addForeignKey('federation_vice_user_id', self::TABLE, 'vice_user_id', '{{%user}}', 'id');
 
+        $this->insert(self::TABLE, ['country_id' => 0]);
+
+        $this->update(self::TABLE, ['id' => 0], ['id' => 1]);
+
+        Yii::$app->db->createCommand('ALTER TABLE ' . self::TABLE . ' AUTO_INCREMENT=1')->execute();
+
         $data = [];
-        for ($i = 0; $i <= self::MAX_COUNTRY_ID; $i++) {
+        for ($i = 1; $i <= self::MAX_COUNTRY_ID; $i++) {
             $data[] = [$i];
         }
         $this->batchInsert(self::TABLE, ['country_id'], $data);
