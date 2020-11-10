@@ -16,7 +16,7 @@ class UserQuery
     public static function countVipUsers()
     {
         return User::find()
-            ->andWhere(['>', 'user_date_vip', time()])
+            ->andWhere(['>', 'date_vip', time()])
             ->count();
     }
 
@@ -26,7 +26,7 @@ class UserQuery
     public static function getBirthdayBoys(): array
     {
         return User::find()
-//            ->andWhere(['birth_day' => date('d'), 'birth_month' => date('m')])
+            ->andWhere(['birth_day' => date('d'), 'birth_month' => date('m')])
             ->orderBy(['id' => SORT_ASC])
             ->all();
     }
