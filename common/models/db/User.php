@@ -6,6 +6,7 @@ use common\components\AbstractActiveRecord;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\IdentityInterface;
 
@@ -158,6 +159,11 @@ class User extends AbstractActiveRecord implements IdentityInterface
      */
     public function getUserLink(array $options = []): string
     {
+        if (isset($options['color']) && UserRole::ADMIN === $this->user_role_id && $options['color']) {
+            unset($options['color']);
+            $options = ArrayHelper::merge($options, ['class' => 'red']);
+        }
+
         return Html::a(
             Html::encode($this->login),
             ['user/view', 'id' => $this->id],

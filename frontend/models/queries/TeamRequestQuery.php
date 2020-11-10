@@ -58,7 +58,7 @@ class TeamRequestQuery
                     'team.stadium.city.country',
                 ]
             )
-            ->where(['user_id' => $userId, 'ready' => null])
+            ->where(['user_id' => $userId])
             ->orderBy(['date' => SORT_ASC]);
     }
 }

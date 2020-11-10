@@ -23,14 +23,6 @@ class NewsQuery
          * @var News $result
          */
         $result = News::find()
-            ->with(
-                [
-                    'user' => static function (ActiveQuery $query) {
-                        $query->select(['id', 'login']);
-                    },
-                ]
-            )
-            ->select(['date', 'title', 'text', 'user_id'])
             ->andWhere(['id' => $id])
             ->andFilterWhere(['federation_id' => $federationId])
             ->limit(1)
@@ -45,17 +37,6 @@ class NewsQuery
     public static function getNewsListQuery(int $federationId = null): ActiveQuery
     {
         return News::find()
-            ->with(
-                [
-                    'newsComments' => static function (ActiveQuery $query) {
-                        $query->select(['id']);
-                    },
-                    'user' => static function (ActiveQuery $query) {
-                        $query->select(['id', 'login']);
-                    },
-                ]
-            )
-            ->select(['date', 'id', 'title', 'text', 'user_id'])
             ->andFilterWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC]);
     }
@@ -68,8 +49,8 @@ class NewsQuery
         $lastNewsId = self::getLastNewsId();
         if ($user->id < $lastNewsId) {
             User::updateAll(
-                ['user_id' => $lastNewsId],
-                ['user_id' => $user->id]
+                ['news_id' => $lastNewsId],
+                ['id' => $user->id]
             );
         }
     }
@@ -82,7 +63,7 @@ class NewsQuery
     {
         return News::find()
             ->select(['id'])
-            ->andFilterWhere(['country_id' => $federationId])
+            ->andFilterWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC])
             ->scalar() ?: 0;
     }

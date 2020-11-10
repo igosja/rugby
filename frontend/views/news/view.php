@@ -5,15 +5,19 @@ use common\components\helpers\FormatHelper;
 use common\models\db\News;
 use common\models\db\NewsComment;
 use common\models\db\User;
+use common\models\db\UserBlock;
+use common\models\db\UserBlockType;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 
 /**
+ * @var UserBlock $allCommentBlock
  * @var ActiveDataProvider $dataProvider
  * @var NewsComment $model
  * @var News $news
+ * @var UserBlock $newsCommentBlock
  * @var User $user
  */
 
@@ -38,8 +42,7 @@ $user = $this->context->user;
         <?= $news->text ?>
     </div>
 </div>
-<?php
-if ($dataProvider->models) : ?>
+<?php if ($dataProvider->models) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <span class="strong">Последние комментарии:</span>
@@ -50,10 +53,10 @@ if ($dataProvider->models) : ?>
 
         try {
             print ListView::widget([
-                                       'dataProvider' => $dataProvider,
-                                       'itemOptions' => ['class' => 'row border-top'],
-                                       'itemView' => '_comment',
-                                   ]
+                    'dataProvider' => $dataProvider,
+                    'itemOptions' => ['class' => 'row border-top'],
+                    'itemView' => '_comment',
+                ]
             );
         } catch (Exception $e) {
             ErrorHelper::log($e);
@@ -61,12 +64,9 @@ if ($dataProvider->models) : ?>
 
         ?>
     </div>
-<?php
-endif ?>
-<?php
-if (!Yii::$app->user->isGuest) : ?>
-    <?php
-    if (!$user->user_date_confirm) : ?>
+<?php endif ?>
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <?php if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей
@@ -74,39 +74,44 @@ if (!Yii::$app->user->isGuest) : ?>
                 Причина - ваш почтовый адрес не подтверждён
             </div>
         </div>
-    <?php
-    elseif ($user->getCommentNewsBlock()) : ?>
+    <?php elseif ($newsCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT_NEWS)->one()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей до
-                <?= FormatHelper::asDateTime($user->getCommentNewsBlock()->user_block_date) ?>
+                <?= FormatHelper::asDateTime($newsCommentBlock->date) ?>
                 <br/>
-                Причина - <?= $user->getCommentNewsBlock()->userBlockReason->user_block_reason_text ?>
+                Причина - <?= $newsCommentBlock->userBlockReason->text ?>
+            </div>
+        </div>
+    <?php elseif ($allCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one()) : ?>
+        <div class="row margin-top">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
+                Вам заблокирован доступ к комментированию новостей до
+                <?= FormatHelper::asDateTime($allCommentBlock->date) ?>
+                <br/>
+                Причина - <?= $allCommentBlock->userBlockReason->text ?>
             </div>
         </div>
     <?php else : ?>
         <?php $form = ActiveForm::begin([
-            'fieldConfig' => [
-                'errorOptions' => [
-                    'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error',
-                    'tag' => 'div'
-                ],
-                'options' => ['class' => 'row'],
-                'template' =>
-                    '<div class="row">
+                'fieldConfig' => [
+                    'errorOptions' => [
+                        'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error',
+                        'tag' => 'div'
+                    ],
+                    'options' => ['class' => 'row'],
+                    'template' =>
+                        '<div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center strong">{label}</div>
                     </div>
                     <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
                     </div>
                     <div class="row">{error}</div>',
-            ],
-                                        ]
+                ],
+            ]
         ) ?>
-        <?= $form
-            ->field($model, 'text')
-            ->textarea()
-            ->label('Ваш комментарий:') ?>
+        <?= $form->field($model, 'text')->textarea()->label('Ваш комментарий:') ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton(
@@ -115,9 +120,6 @@ if (!Yii::$app->user->isGuest) : ?>
                 ) ?>
             </div>
         </div>
-        <?php
-        ActiveForm::end() ?>
-    <?php
-    endif ?>
-<?php
-endif ?>
+        <?php ActiveForm::end() ?>
+    <?php endif ?>
+<?php endif ?>

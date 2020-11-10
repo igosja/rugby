@@ -258,7 +258,7 @@ class Menu extends Widget
                 ->count();
 
             $vote = Vote::find()
-                ->andWhere(['vote_status_id' => VoteStatus::OPEN, 'country_id' => null])
+                ->andWhere(['vote_status_id' => VoteStatus::OPEN, 'federation_id' => null])
                 ->andWhere([
                     'not',
                     [
@@ -279,7 +279,7 @@ class Menu extends Widget
                     ->count();
 
                 $supportManager = Support::find()
-                    ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
+                    ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
                     ->count();
 
                 $supportAdmin = 0;
@@ -287,11 +287,11 @@ class Menu extends Widget
 
                 if (in_array($controller->user->user_id, [$controller->myTeam->stadium->city->country->country_president_id, $controller->myTeam->stadium->city->country->country_president_vice_id])) {
                     $supportAdmin = Support::find()
-                        ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
+                        ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
                         ->count();
 
                     $supportPresident = Support::find()
-                        ->andWhere(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
+                        ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
                         ->count();
                 }
 
@@ -301,7 +301,7 @@ class Menu extends Widget
                     $vote = Vote::find()
                         ->andWhere([
                             'poll_poll_status_id' => VoteStatus::OPEN,
-                            'poll_country_id' => $controller->myTeam->stadium->city->country->country_id,
+                            'poll_federation_id' => $controller->myTeam->stadium->city->country->country_id,
                         ])
                         ->andWhere([
                             'not',

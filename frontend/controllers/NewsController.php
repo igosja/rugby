@@ -74,7 +74,7 @@ class NewsController extends AbstractController
 
         $model = new NewsComment();
         $model->news_id = $id;
-        $model->user_id = $id;
+        $model->user_id = $this->user->id;
         if ($this->user && (new NewsCommentSaveExecutor($this->user, $model, Yii::$app->request->post()))->execute()) {
             $this->setSuccessFlash('Комментарий успешно сохранён');
             return $this->refresh();
@@ -100,10 +100,9 @@ class NewsController extends AbstractController
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
-    public function actionDeleteComment($id, $newsId): Response
+    public function actionDeleteComment(int $id, int $newsId): Response
     {
-        $user = $this->user;
-        if (UserRole::ADMIN !== $user->user_user_role_id) {
+        if (UserRole::ADMIN !== $this->user->user_role_id) {
             $this->forbiddenRole();
         }
 
