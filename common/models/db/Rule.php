@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -17,6 +18,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Rule extends AbstractActiveRecord
 {
+    public const SEARCH_SYMBOLS = 200;
+
     /**
      * @return string
      */
@@ -52,5 +55,26 @@ class Rule extends AbstractActiveRecord
             [['text'], 'string'],
             [['order', 'title'], 'unique'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function formatSearchText(): string
+    {
+        $text = strip_tags($this->text);
+        $startPosition = mb_stripos($text, Yii::$app->request->get('q')) - self::SEARCH_SYMBOLS;
+        if ($startPosition < 0) {
+            $startPosition = 0;
+        }
+        $length = mb_strlen(Yii::$app->request->get('q')) + self::SEARCH_SYMBOLS * 2;
+        $text = '...' . mb_substr($text, $startPosition, $length) . '...';
+        $text = str_ireplace(
+            Yii::$app->request->get('q'),
+            '<span class="info">' . Yii::$app->request->get('q') . '</span>',
+            $text
+        );
+
+        return $text;
     }
 }
