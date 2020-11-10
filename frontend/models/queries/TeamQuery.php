@@ -124,37 +124,16 @@ class TeamQuery
     public static function getTeamGroupByCountryListQuery(): ActiveQuery
     {
         return Team::find()
-            ->with(
-                [
-                    'stadium' => static function (ActiveQuery $query) {
-                        $query
-                            ->with(
-                                [
-                                    'city' => static function (
-                                        ActiveQuery $query
-                                    ) {
-                                        $query
-                                            ->with(
-                                                [
-                                                    'country',
-                                                ]
-                                            );
-                                    }
-                                ]
-                            );
-                    }
-                ]
-            )
             ->joinWith(['stadium.city.country'], false)
             ->select(
                 [
-                    'team_player' => 'COUNT(team_id)',
-                    'team_stadium_id',
+                    'player_number' => 'COUNT(team.id)',
+                    'stadium_id',
                 ]
             )
-            ->where(['!=', 'team_id', 0])
-            ->orderBy(['country_name' => SORT_ASC])
-            ->groupBy(['country_id']);
+            ->where(['!=', 'team.id', 0])
+            ->orderBy(['country.name' => SORT_ASC])
+            ->groupBy(['country.id']);
     }
 
     /**

@@ -4,7 +4,6 @@ use common\components\helpers\ErrorHelper;
 use common\models\db\Team;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
-use yii\helpers\Html;
 
 /**
  * @var ActiveDataProvider $dataProvider
@@ -25,12 +24,8 @@ use yii\helpers\Html;
                 'footer' => 'Страна',
                 'format' => 'raw',
                 'label' => 'Страна',
-                'value' => function (Team $model) {
-                    return $model->stadium->city->country->countryImage()
-                        . ' ' . Html::a(
-                            $model->stadium->city->country->country_name,
-                            ['federation/team', 'id' => $model->stadium->city->country->country_id]
-                        );
+                'value' => static function (Team $model) {
+                    return $model->stadium->city->country->getImageTextLink();
                 }
             ],
             [
@@ -38,8 +33,8 @@ use yii\helpers\Html;
                 'footer' => 'Команды',
                 'headerOptions' => ['class' => 'col-25'],
                 'label' => 'Команды',
-                'value' => function (Team $model) {
-                    return $model->team_player;
+                'value' => static function (Team $model) {
+                    return $model->player_number;
                 }
             ],
         ];
