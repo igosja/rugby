@@ -3,6 +3,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Season
@@ -29,5 +30,16 @@ class Season extends AbstractActiveRecord
         return [
             [['is_future'], 'boolean'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSeasonArray(): array
+    {
+        $result = self::find()
+            ->orderBy(['id' => SORT_DESC])
+            ->all();
+        return ArrayHelper::map($result, 'season_id', 'season_id');
     }
 }
