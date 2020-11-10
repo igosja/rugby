@@ -47,10 +47,10 @@ use yii\helpers\Html;
                 <tr>
                     <td>
                         <?= Html::a(
-                            Html::img('/img/country/12/' . $item['countryId'] . '.png'),
-                            ['federation/team', 'id' => $item['countryId']]
+                            Html::img('@country12/' . $item['federationId'] . '.png'),
+                            ['federation/team', 'id' => $item['federationId']]
                         ) ?>
-                        <?= Html::a($item['countryName'], ['federation/team', 'id' => $item['countryId']]) ?>
+                        <?= Html::a($item['countryName'], ['federation/team', 'id' => $item['federationId']]) ?>
                     </td>
                     <?php foreach ($item['division'] as $key => $value) : ?>
                         <td class="text-center col-10">
@@ -61,7 +61,7 @@ use yii\helpers\Html;
                                     $value,
                                     [
                                         'championship/index',
-                                        'countryId' => $item['countryId'],
+                                        'federationId' => $item['federationId'],
                                         'divisionId' => $key,
                                         'seasonId' => $seasonId
                                     ]
