@@ -16,15 +16,15 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1><?= $schedule->tournamentType->tournament_type_name ?></h1>
+        <h1><?= $schedule->tournamentType->name ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
-            <?= FormatHelper::asDatetime($schedule->schedule_date) ?>,
-            <?= $schedule->stage->stage_name ?>,
-            <?= $schedule->schedule_season_id ?>
+            <?= FormatHelper::asDatetime($schedule->date) ?>,
+            <?= $schedule->stage->name ?>,
+            <?= $schedule->season_id ?>
             сезон
         </p>
     </div>
@@ -37,24 +37,24 @@ use yii\helpers\Html;
             [
                 'contentOptions' => ['class' => 'col-47 text-right'],
                 'format' => 'raw',
-                'value' => function (Game $model) {
+                'value' => static function (Game $model) {
                     return $model->teamOrNationalLink() . $model->formatAuto();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'col-6 text-center'],
                 'format' => 'raw',
-                'value' => function (Game $model) {
+                'value' => static function (Game $model) {
                     return Html::a(
                         $model->formatScore(),
-                        ['game/view', 'id' => $model->game_id]
+                        ['game/view', 'id' => $model->id]
                     );
                 }
             ],
             [
                 'contentOptions' => ['class' => 'col-47'],
                 'format' => 'raw',
-                'value' => function (Game $model) {
+                'value' => static function (Game $model) {
                     return $model->teamOrNationalLink('guest') . $model->formatAuto('guest');
                 }
             ],

@@ -5,6 +5,7 @@ namespace common\models\db;
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Game
@@ -236,6 +237,94 @@ class Game extends AbstractActiveRecord
             [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
             [['weather_id'], 'exist', 'targetRelation' => 'weather'],
         ];
+    }
+
+    /**
+     * @param string $side
+     * @param bool $full
+     * @param bool $link
+     * @return string
+     */
+    public function teamOrNationalLink(string $side = 'home', bool $full = true, bool $link = true): string
+    {
+        if ('home' === $side) {
+            $team = $this->homeTeam;
+            $national = $this->homeNational;
+        } else {
+            $team = $this->guestTeam;
+            $national = $this->guestNational;
+        }
+        if ($team->id) {
+            $name = $team->name;
+
+            if (true === $full) {
+                $name .= ' ' . Html::tag(
+                        'span',
+                        '(' . $team->stadium->city->name . ', ' . $team->stadium->city->country->name . ')',
+                        ['class' => 'hidden-xs']
+                    );
+            }
+
+            if (true === $link) {
+                return Html::a($name, ['team/view', 'id' => $team->id]);
+            }
+
+            return $name;
+        }
+
+        if ($national->id) {
+            $name = $national->federation->country->name;
+
+            if ($full) {
+                $name .= ' ' . Html::tag(
+                        'span',
+                        '(' . $national->nationalType->name . ')',
+                        ['class' => 'hidden-xs']
+                    );
+            }
+
+            if (true === $link) {
+                return Html::a($name, ['national/view', 'id' => $national->id]);
+            }
+
+            return $name;
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $side
+     * @return string
+     */
+    public function formatAuto(string $side = 'home'): string
+    {
+        if ('home' === $side) {
+            $auto = $this->home_auto;
+        } else {
+            $auto = $this->guest_auto;
+        }
+        if ($auto) {
+            return '*';
+        }
+        return '';
+    }
+
+    /**
+     * @param string $first
+     * @return string
+     */
+    public function formatScore($first = 'home'): string
+    {
+        if ($this->played) {
+            if ('home' === $first) {
+                return $this->home_points . ':' . $this->guest_points;
+            }
+
+            return $this->guest_points . ':' . $this->home_points;
+        }
+
+        return '?:?';
     }
 
     /**

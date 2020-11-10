@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /**
  * @var ActiveDataProvider $dataProvider
  * @var array $seasonArray
- * @var integer $seasonId
+ * @var int $seasonId
  * @var array $scheduleId
  */
 
@@ -47,8 +47,8 @@ use yii\helpers\Html;
                 'footer' => 'Дата',
                 'headerOptions' => ['class' => 'col-20'],
                 'label' => 'Дата',
-                'value' => function (Schedule $model) {
-                    return FormatHelper::asDateTime($model->schedule_date);
+                'value' => static function (Schedule $model) {
+                    return FormatHelper::asDateTime($model->date);
                 }
             ],
             [
@@ -56,10 +56,10 @@ use yii\helpers\Html;
                 'footer' => 'Турнир',
                 'format' => 'raw',
                 'label' => 'Турнир',
-                'value' => function (Schedule $model) {
+                'value' => static function (Schedule $model) {
                     return Html::a(
-                        $model->tournamentType->tournament_type_name,
-                        ['view', 'id' => $model->schedule_id]
+                        $model->tournamentType->name,
+                        ['view', 'id' => $model->id]
                     );
                 }
             ],
@@ -69,23 +69,23 @@ use yii\helpers\Html;
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-20 hidden-xs'],
                 'label' => 'Стадия',
-                'value' => function (Schedule $model) {
-                    return $model->stage->stage_name;
+                'value' => static function (Schedule $model) {
+                    return $model->stage->name;
                 }
             ],
         ];
         print GridView::widget([
-            'columns' => $columns,
-            'dataProvider' => $dataProvider,
-            'rowOptions' => function (Schedule $model) use ($scheduleId) {
-                if (in_array($model->schedule_id, $scheduleId)) {
-                    return ['class' => 'info'];
-                }
-                return [];
-            },
-                                   'showFooter' => true,
-                                   'summary' => false,
-                               ]
+                'columns' => $columns,
+                'dataProvider' => $dataProvider,
+                'rowOptions' => static function (Schedule $model) use ($scheduleId) {
+                    if (in_array($model->id, $scheduleId, true)) {
+                        return ['class' => 'info'];
+                    }
+                    return [];
+                },
+                'showFooter' => true,
+                'summary' => false,
+            ]
         );
     } catch (Exception $e) {
         ErrorHelper::log($e);
