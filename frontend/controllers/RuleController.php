@@ -34,6 +34,9 @@ class RuleController extends AbstractController
      */
     public function actionView(int $id): string
     {
+        /**
+         * @var Rule $rule
+         */
         $rule = RuleQuery::getRuleById($id);
         $this->notFound($rule);
 
@@ -49,8 +52,8 @@ class RuleController extends AbstractController
     public function actionSearch(): string
     {
         $query = Rule::find()
-            ->filterWhere(['like', 'rule_text', Yii::$app->request->get('q')])
-            ->orderBy(['rule_id' => SORT_ASC]);
+            ->filterWhere(['like', 'text', Yii::$app->request->get('q')])
+            ->orderBy(['id' => SORT_ASC]);
         $dataProvider = new ActiveDataProvider([
             'pagination' => false,
             'query' => $query,

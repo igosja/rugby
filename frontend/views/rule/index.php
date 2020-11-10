@@ -20,11 +20,9 @@ use yii\helpers\Html;
         <?= Html::submitButton('Поиск', ['class' => 'btn']) ?>
         <?= Html::endForm() ?>
         <ul>
-            <?php
-            foreach ($ruleArray as $rule) : ?>
-                <li><?= Html::a($rule->rule_title, ['view', 'id' => $rule->rule_id]) ?></li>
-            <?php
-            endforeach ?>
+            <?php foreach ($ruleArray as $rule) : ?>
+                <li><?= Html::a($rule->title, ['view', 'id' => $rule->id]) ?></li>
+            <?php endforeach ?>
         </ul>
     </div>
 </div>
