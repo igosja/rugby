@@ -3,7 +3,10 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Throwable;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\StaleObjectException;
 
 /**
  * Class ForumTheme
@@ -18,6 +21,7 @@ use yii\db\ActiveQuery;
  * @property int $user_id
  *
  * @property-read ForumGroup $forumGroup
+ * @property ForumMessage[] $forumMessages
  * @property-read User $user
  */
 class ForumTheme extends AbstractActiveRecord
@@ -28,6 +32,20 @@ class ForumTheme extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%forum_theme}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
     }
 
     /**
@@ -46,11 +64,34 @@ class ForumTheme extends AbstractActiveRecord
     }
 
     /**
+     * @return bool
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function beforeDelete(): bool
+    {
+        foreach ($this->forumMessages as $forumMessage) {
+            $forumMessage->delete();
+        }
+        return parent::beforeDelete();
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getForumGroup(): ActiveQuery
     {
         return $this->hasOne(ForumGroup::class, ['id' => 'forum_group_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getForumMessages(): ActiveQuery
+    {
+        return $this
+            ->hasMany(ForumMessage::class, ['forum_theme_id' => 'id'])
+            ->orderBy(['id' => SORT_DESC]);
     }
 
     /**

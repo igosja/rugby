@@ -18,6 +18,8 @@ use yii\db\ActiveQuery;
  *
  * @property-read Federation $federation
  * @property-read ForumChapter $forumChapter
+ * @property-read ForumTheme[] $forumThemes
+ * @property-read ForumMessage $lastForumMessage
  */
 class ForumGroup extends AbstractActiveRecord
 {
@@ -48,6 +50,26 @@ class ForumGroup extends AbstractActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function countMessage(): int
+    {
+        $result = 0;
+        foreach ($this->forumThemes as $forumTheme) {
+            $result += count($forumTheme->forumMessages);
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function countTheme(): int
+    {
+        return count($this->forumThemes);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getFederation(): ActiveQuery
@@ -61,5 +83,24 @@ class ForumGroup extends AbstractActiveRecord
     public function getForumChapter(): ActiveQuery
     {
         return $this->hasOne(ForumChapter::class, ['id' => 'forum_chapter_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getForumThemes(): ActiveQuery
+    {
+        return $this->hasMany(ForumTheme::class, ['forum_group_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLastForumMessage(): ActiveQuery
+    {
+        return $this
+            ->hasOne(ForumMessage::class, ['forum_theme_id' => 'id'])
+            ->via('forumThemes')
+            ->orderBy(['id' => SORT_DESC]);
     }
 }
