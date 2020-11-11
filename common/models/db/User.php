@@ -54,6 +54,7 @@ use yii\web\IdentityInterface;
  * @property-read News $news
  * @property-read User $referrerUser
  * @property-read Sex $sex
+ * @property-read Team[] $teams
  * @property-read UserRole $userRole
  */
 class User extends AbstractActiveRecord implements IdentityInterface
@@ -139,6 +140,27 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function forumLogo(): string
+    {
+        $result = '';
+
+        if (file_exists(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png')) {
+            $result = Html::img(
+                    '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->user_id . '.png'),
+                    [
+                        'alt' => $this->login,
+                        'class' => 'user-logo-small',
+                        'title' => $this->login,
+                    ]
+                ) . '<br/>';
+        }
+
+        return $result;
     }
 
     /**
@@ -276,6 +298,14 @@ class User extends AbstractActiveRecord implements IdentityInterface
     public function getSex(): ActiveQuery
     {
         return $this->hasOne(Sex::class, ['id' => 'sex_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTeams(): ActiveQuery
+    {
+        return $this->hasMany(Team::class, ['user_id' => 'id']);
     }
 
     /**
