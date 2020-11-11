@@ -31,19 +31,19 @@ class PlayerController extends AbstractController
                 ->joinWith([
                     'country',
                 ])
-                ->groupBy(['player_country_id'])
-                ->orderBy(['country_name' => SORT_ASC])
+                ->groupBy(['country_id'])
+                ->orderBy(['country.name' => SORT_ASC])
                 ->all(),
-            'country.country_id',
-            'country.country_name'
+            'country.id',
+            'country.name'
         );
 
         $positionArray = ArrayHelper::map(
             Position::find()
-                ->orderBy(['position_id' => SORT_ASC])
+                ->orderBy(['id' => SORT_ASC])
                 ->all(),
-            'position_id',
-            'position_name'
+            'id',
+            'name'
         );
 
         $this->setSeoTitle('Список игроков');

@@ -126,7 +126,7 @@ use yii\widgets\ActiveForm;
                     'format' => 'raw',
                     'label' => 'Игрок',
                     'value' => static function (Player $model) {
-                        return $model->playerLink();
+                        return $model->getPlayerLink();
                     }
                 ],
                 [
@@ -138,7 +138,7 @@ use yii\widgets\ActiveForm;
                     'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => 'Национальность'],
                     'label' => 'Нац',
                     'value' => static function (Player $model) {
-                        return $model->country->countryImageLink();
+                        return $model->country->getImageLink();
                     }
                 ],
                 [
@@ -161,7 +161,7 @@ use yii\widgets\ActiveForm;
                     'headerOptions' => ['title' => 'Возраст'],
                     'label' => 'В',
                     'value' => static function (Player $model) {
-                        return $model->player_age;
+                        return $model->age;
                     }
                 ],
                 [
@@ -172,7 +172,7 @@ use yii\widgets\ActiveForm;
                     'headerOptions' => ['title' => 'Сила'],
                     'label' => 'С',
                     'value' => static function (Player $model) {
-                        return $model->player_power_nominal;
+                        return $model->power_nominal;
                     }
                 ],
                 [
@@ -191,7 +191,7 @@ use yii\widgets\ActiveForm;
                     'format' => 'raw',
                     'label' => 'Команда',
                     'value' => static function (Player $model) {
-                        return $model->team->teamLink('img');
+                        return $model->team->getTeamLink();
                     }
                 ],
                 [
@@ -200,7 +200,7 @@ use yii\widgets\ActiveForm;
                     'footer' => 'Цена',
                     'label' => 'Цена',
                     'value' => static function (Player $model) {
-                        return FormatHelper::asCurrency($model->player_price);
+                        return FormatHelper::asCurrency($model->price);
                     }
                 ],
             ];

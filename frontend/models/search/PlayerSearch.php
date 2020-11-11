@@ -15,54 +15,54 @@ use yii\data\ActiveDataProvider;
 class PlayerSearch extends Player
 {
     /**
-     * @var int $ageMax
+     * @var int|null $ageMax
      */
-    public $ageMax;
+    public ?int $ageMax = null;
 
     /**
-     * @var int $ageMin
+     * @var int|null $ageMin
      */
-    public $ageMin;
+    public ?int $ageMin = null;
 
     /**
-     * @var int $country
+     * @var int|null $country
      */
-    public $country;
+    public ?int $country = null;
 
     /**
-     * @var string $name
+     * @var string|null $name
      */
-    public $name;
+    public ?string $name = null;
 
     /**
-     * @var int $position
+     * @var int|null $position
      */
-    public $position;
+    public ?int $position = null;
 
     /**
-     * @var int $powerMax
+     * @var int|null $powerMax
      */
-    public $powerMax;
+    public ?int $powerMax = null;
 
     /**
-     * @var int $powerMin
+     * @var int|null $powerMin
      */
-    public $powerMin;
+    public ?int $powerMin = null;
 
     /**
-     * @var int $priceMax
+     * @var int|null $priceMax
      */
-    public $priceMax;
+    public ?int $priceMax = null;
 
     /**
-     * @var int $priceMin
+     * @var int|null $priceMin
      */
-    public $priceMin;
+    public ?int $priceMin = null;
 
     /**
-     * @var string $surname
+     * @var string|null $surname
      */
-    public $surname;
+    public ?string $surname = null;
 
     /**
      * @return array
@@ -76,10 +76,14 @@ class PlayerSearch extends Player
                 'min' => 0
             ],
             [['name', 'surname'], 'trim'],
+            [['name', 'surname'], 'string'],
         ];
     }
 
-    public function formName()
+    /**
+     * @return string
+     */
+    public function formName(): string
     {
         return '';
     }
@@ -87,7 +91,7 @@ class PlayerSearch extends Player
     /**
      * @return array
      */
-    public function scenarios()
+    public function scenarios(): array
     {
         return Model::scenarios();
     }
@@ -100,15 +104,8 @@ class PlayerSearch extends Player
     {
         $query = Player::find()
             ->joinWith(['country', 'name', 'surname', 'team'])
-            ->with([
-                'playerPositions.position',
-                'playerSpecials.special',
-                'team.stadium',
-                'team.stadium.city',
-                'team.stadium.city.country',
-            ])
-            ->where(['<=', 'player_age', Player::AGE_READY_FOR_PENSION])
-            ->andWhere(['!=', 'player_team_id', 0]);
+            ->where(['<=', 'age', Player::AGE_READY_FOR_PENSION + 1])
+            ->andWhere(['!=', 'team_id', 0]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -118,60 +115,71 @@ class PlayerSearch extends Player
             'sort' => [
                 'attributes' => [
                     'age' => [
-                        'asc' => ['player_age' => SORT_ASC],
-                        'desc' => ['player_age' => SORT_DESC],
+                        'asc' => ['age' => SORT_ASC],
+                        'desc' => ['age' => SORT_DESC],
                     ],
                     'country' => [
-                        'asc' => ['country_name' => SORT_ASC],
-                        'desc' => ['country_name' => SORT_DESC],
+                        'asc' => ['country.name' => SORT_ASC],
+                        'desc' => ['country.name' => SORT_DESC],
                     ],
                     'price' => [
-                        'asc' => ['player_price' => SORT_ASC],
-                        'desc' => ['player_price' => SORT_DESC],
-                    ],
-                    'position' => [
-                        'asc' => ['player_position_id' => SORT_ASC],
-                        'desc' => ['player_position_id' => SORT_DESC],
+                        'asc' => ['price' => SORT_ASC],
+                        'desc' => ['price' => SORT_DESC],
                     ],
                     'power' => [
-                        'asc' => ['player_power_nominal' => SORT_ASC],
-                        'desc' => ['player_power_nominal' => SORT_DESC],
+                        'asc' => ['power_nominal' => SORT_ASC],
+                        'desc' => ['power_nominal' => SORT_DESC],
                     ],
                     'surname' => [
-                        'asc' => ['surname.surname_name' => SORT_ASC],
-                        'desc' => ['surname.surname_name' => SORT_DESC],
+                        'asc' => ['surname.name' => SORT_ASC],
+                        'desc' => ['surname.name' => SORT_DESC],
                     ],
                     'team' => [
-                        'asc' => ['team.team_name' => SORT_ASC],
-                        'desc' => ['team.team_name' => SORT_DESC],
+                        'asc' => ['team.name' => SORT_ASC],
+                        'desc' => ['team.name' => SORT_DESC],
                     ],
                 ]
             ]
         ]);
 
+        $params = $this->clearParams($params);
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query
-            ->andFilterWhere(['player_country_id' => $this->country])
-            ->andFilterWhere(['<=', 'player_age', $this->ageMax])
-            ->andFilterWhere(['>=', 'player_age', $this->ageMin])
-            ->andFilterWhere(['<=', 'player_power_nominal', $this->powerMax])
-            ->andFilterWhere(['>=', 'player_power_nominal', $this->powerMin])
-            ->andFilterWhere(['<=', 'player_price', $this->priceMax])
-            ->andFilterWhere(['>=', 'player_price', $this->priceMin])
-            ->andFilterWhere(['like', 'name_name', $this->name])
-            ->andFilterWhere(['like', 'surname_name', $this->surname]);
+            ->andFilterWhere(['country_id' => $this->country])
+            ->andFilterWhere(['<=', 'age', $this->ageMax])
+            ->andFilterWhere(['>=', 'age', $this->ageMin])
+            ->andFilterWhere(['<=', 'power_nominal', $this->powerMax])
+            ->andFilterWhere(['>=', 'power_nominal', $this->powerMin])
+            ->andFilterWhere(['<=', 'price', $this->priceMax])
+            ->andFilterWhere(['>=', 'price', $this->priceMin])
+            ->andFilterWhere(['like', 'name.name', $this->name])
+            ->andFilterWhere(['like', 'surname.name', $this->surname]);
 
         if ($this->position) {
             $query->andWhere([
-                'player_id' => PlayerPosition::find()
-                    ->select(['player_position_player_id'])
-                    ->where(['player_position_position_id' => $this->position])
+                'player.id' => PlayerPosition::find()
+                    ->select(['player_id'])
+                    ->where(['position_id' => $this->position])
             ]);
         }
 
         return $dataProvider;
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    private function clearParams(array $params): array
+    {
+        foreach ($params as $key => $value) {
+            if ('' === trim($value)) {
+                $params[$key] = null;
+            }
+        }
+        return $params;
     }
 }
