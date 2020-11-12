@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\News;
@@ -42,7 +44,9 @@ $user = $this->context->user;
         <?= $news->text ?>
     </div>
 </div>
-<?php if ($dataProvider->models) : ?>
+<?php
+
+// TODO refactor if ($dataProvider->models) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <span class="strong">Последние комментарии:</span>
@@ -50,6 +54,8 @@ $user = $this->context->user;
     </div>
     <div class="row">
         <?php
+
+// TODO refactor
 
         try {
             print ListView::widget([
@@ -64,9 +70,15 @@ $user = $this->context->user;
 
         ?>
     </div>
-<?php endif ?>
-<?php if (!Yii::$app->user->isGuest) : ?>
-    <?php if (!$user->date_confirm) : ?>
+<?php
+
+// TODO refactor endif ?>
+<?php
+
+// TODO refactor if (!Yii::$app->user->isGuest) : ?>
+    <?php
+
+// TODO refactor if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей
@@ -74,7 +86,9 @@ $user = $this->context->user;
                 Причина - ваш почтовый адрес не подтверждён
             </div>
         </div>
-    <?php elseif ($newsCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT_NEWS)->one()) : ?>
+    <?php
+
+// TODO refactor elseif ($newsCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT_NEWS)->one()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей до
@@ -83,7 +97,9 @@ $user = $this->context->user;
                 Причина - <?= $newsCommentBlock->userBlockReason->text ?>
             </div>
         </div>
-    <?php elseif ($allCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one()) : ?>
+    <?php
+
+// TODO refactor elseif ($allCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к комментированию новостей до
@@ -92,8 +108,12 @@ $user = $this->context->user;
                 Причина - <?= $allCommentBlock->userBlockReason->text ?>
             </div>
         </div>
-    <?php else : ?>
-        <?php $form = ActiveForm::begin([
+    <?php
+
+// TODO refactor else : ?>
+        <?php
+
+// TODO refactor $form = ActiveForm::begin([
                 'fieldConfig' => [
                     'errorOptions' => [
                         'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error',
@@ -120,6 +140,12 @@ $user = $this->context->user;
                 ) ?>
             </div>
         </div>
-        <?php ActiveForm::end() ?>
-    <?php endif ?>
-<?php endif ?>
+        <?php
+
+// TODO refactor ActiveForm::end() ?>
+    <?php
+
+// TODO refactor endif ?>
+<?php
+
+// TODO refactor endif ?>

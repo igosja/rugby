@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\preparers;
 
 use frontend\models\queries\GameQuery;

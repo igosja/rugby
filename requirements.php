@@ -1,4 +1,6 @@
 <?php
+
+// TODO refactor
 /**
  * Application requirement checker script.
  *

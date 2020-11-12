@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\User;
 use yii\helpers\Html;
@@ -27,6 +29,8 @@ use yii\widgets\DetailView;
 </ul>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $attributes = [

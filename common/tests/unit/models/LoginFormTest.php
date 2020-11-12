@@ -1,18 +1,22 @@
 <?php
 
+// TODO refactor
+
 namespace common\tests\unit\models;
 
+use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
 use common\models\LoginForm;
+use common\tests\UnitTester;
 use Yii;
 
 /**
  * Login form test
  */
-class LoginFormTest extends \Codeception\Test\Unit
+class LoginFormTest extends Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
 

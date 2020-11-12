@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\ForumMessage;
 use yii\helpers\Html;
@@ -30,9 +32,13 @@ use yii\helpers\Html;
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             Команды:
-            <?php foreach ($model->user->teams as $team) : ?>
+            <?php
+
+// TODO refactor foreach ($model->user->teams as $team) : ?>
                 <?= $team->getTeamLink() ?>
-            <?php endforeach; ?>
+            <?php
+
+// TODO refactor endforeach; ?>
         </div>
     </div>
 </div>

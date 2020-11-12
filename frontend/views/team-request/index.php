@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
@@ -25,6 +27,8 @@ use yii\web\View;
 <div class="row">
     <?php
 
+// TODO refactor
+
     try {
         $columns = [
             [
@@ -34,7 +38,7 @@ use yii\web\View;
                 'value' => static function (TeamRequest $model) {
                     return Html::a(
                         '<i class="fa fa-times-circle"></i>',
-                        ['team-request/delete', 'id' => $model->id],
+                        ['delete', 'id' => $model->id],
                         ['title' => 'Удалить заявку']
                     );
                 }
@@ -74,6 +78,8 @@ use yii\web\View;
 <div class="row">
     <?php
 
+// TODO refactor
+
     try {
         $columns = [
             [
@@ -83,7 +89,7 @@ use yii\web\View;
                 'value' => static function (Team $model) {
                     return Html::a(
                         '<i class="fa fa-check-circle"></i>',
-                        ['team-request/request', 'id' => $model->id],
+                        ['request', 'id' => $model->id],
                         ['title' => 'Выбрать']
                     );
                 }

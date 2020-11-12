@@ -1,4 +1,6 @@
 <?php
+
+// TODO refactor
 return [
     'id' => 'app-frontend-tests',
     'components' => [

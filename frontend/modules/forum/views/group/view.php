@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\ForumGroup;
 use common\models\db\User;
@@ -43,13 +45,17 @@ use yii\widgets\ListView;
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?php if ($user && $user->date_confirm && (!$userBlockForum || $userBlockForum->date < time()) && (!$userBlockComment || $userBlockComment->date < time())) : ?>
+                <?php
+
+// TODO refactor if ($user && $user->date_confirm && (!$userBlockForum || $userBlockForum->date < time()) && (!$userBlockComment || $userBlockComment->date < time())) : ?>
                     <?= Html::a(
                         'Создать тему',
                         ['theme/create', 'groupId' => Yii::$app->request->get('id')],
                         ['class' => 'btn margin']
                     ) ?>
-                <?php endif; ?>
+                <?php
+
+// TODO refactor endif; ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
                 <?= $this->render('/default/_searchForm') ?>
@@ -72,6 +78,8 @@ use yii\widgets\ListView;
             </div>
         </div>
         <?php
+
+// TODO refactor
 
         try {
             print ListView::widget([

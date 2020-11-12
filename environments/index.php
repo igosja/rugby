@@ -1,4 +1,6 @@
 <?php
+
+// TODO refactor
 /**
  * The manifest of files that are local to specific environment.
  * This file returns a list of environments that the application

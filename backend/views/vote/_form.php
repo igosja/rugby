@@ -1,7 +1,8 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\Vote;
-use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /**
@@ -11,16 +12,24 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?php $form = ActiveForm::begin() ?>
+        <?php
+
+// TODO refactor $form = ActiveForm::begin() ?>
         <?= $form->field($model, 'text')->textarea() ?>
-        <?php for ($i = 0; $i < 15; $i++) : ?>
+        <?php
+
+// TODO refactor for ($i = 0; $i < 15; $i++) : ?>
             <?= $form->field($model, 'answers[' . $i . ']')->textarea() ?>
-        <?php endfor ?>
+        <?php
+
+// TODO refactor endfor ?>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-default']) ?>
             </div>
         </div>
-        <?php ActiveForm::end() ?>
+        <?php
+
+// TODO refactor ActiveForm::end() ?>
     </div>
 </div>

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\components\widgets;
 
 use common\models\db\Message;
@@ -48,9 +50,20 @@ class Menu extends Widget
     public const ITEM_TRANSFER = 'transfer';
     public const ITEM_VIP = 'vip';
 
-    private $menuItemList;
-    private $menuItems;
-    private $menu;
+    /**
+     * @var array $menuItemList
+     */
+    private array $menuItemList = [];
+
+    /**
+     * @var array $menuItems
+     */
+    private array $menuItems = [];
+
+    /**
+     * @var string $menu
+     */
+    private string $menu = '';
 
     /**
      * @return string
@@ -233,7 +246,7 @@ class Menu extends Widget
          * @var AbstractController $controller
          */
         $controller = Yii::$app->controller;
-        $countryInfo = 0;
+        $federationInfo = 0;
         $messenger = 0;
         $news = 0;
         $support = 0;
@@ -273,45 +286,45 @@ class Menu extends Widget
                 ])
                 ->count();
             if ($controller->myTeam) {
-                $countryNews = News::find()
+                $federationNews = News::find()
                     ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id])
-                    ->andWhere(['>', 'news_id', $controller->myTeam->federation_news_id])
+                    ->andWhere(['>', 'id', $controller->myTeam->federation_news_id])
                     ->count();
 
                 $supportManager = Support::find()
-                    ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
+                    ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->id, 'is_inside' => true, 'is_question' => false, 'read' => 0, 'user_id' => $controller->user->id])
                     ->count();
 
                 $supportAdmin = 0;
                 $supportPresident = 0;
 
-                if (in_array($controller->user->user_id, [$controller->myTeam->stadium->city->country->country_president_id, $controller->myTeam->stadium->city->country->country_president_vice_id])) {
+                if (in_array($controller->user->id, [$controller->myTeam->stadium->city->country->federation->president_user_id, $controller->myTeam->stadium->city->country->federation->vice_user_id], true)) {
                     $supportAdmin = Support::find()
-                        ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
+                        ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id, 'is_inside' => false, 'is_question' => false, 'read' => 0])
                         ->count();
 
                     $supportPresident = Support::find()
-                        ->andWhere(['support_federation_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
+                        ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id, 'is_inside' => true, 'is_question' => true, 'read' => 0])
                         ->count();
                 }
 
-                $countryInfo = $countryNews + $supportManager + $supportAdmin + $supportPresident;
+                $federationInfo = $federationNews + $supportManager + $supportAdmin + $supportPresident;
 
                 if (!$vote) {
                     $vote = Vote::find()
                         ->andWhere([
-                            'poll_poll_status_id' => VoteStatus::OPEN,
-                            'poll_federation_id' => $controller->myTeam->stadium->city->country->country_id,
+                            'vote_status_id' => VoteStatus::OPEN,
+                            'federation_id' => $controller->myTeam->stadium->city->country->federation->id,
                         ])
                         ->andWhere([
                             'not',
                             [
-                                'poll_id' => VoteAnswer::find()
-                                    ->select(['poll_answer_poll_id'])
+                                'id' => VoteAnswer::find()
+                                    ->select(['vote_id'])
                                     ->andWhere([
-                                        'poll_answer_id' => VoteUser::find()
-                                            ->select(['poll_user_poll_answer_id'])
-                                            ->andWhere(['poll_user_user_id' => Yii::$app->user->id])
+                                        'id' => VoteUser::find()
+                                            ->select(['vote_answer_id'])
+                                            ->andWhere(['user_id' => Yii::$app->user->id])
                                     ])
                             ]
                         ])
@@ -325,105 +338,105 @@ class Menu extends Widget
         $this->menuItemList = [
             self::ITEM_CHANGE_TEAM => [
                 'label' => 'Сменить клуб',
-                'url' => ['team/change'],
+                'url' => ['/team-change/index'],
             ],
             self::ITEM_CHAT => [
                 'label' => 'Чат',
                 'target' => '_blank',
-                'url' => ['chat/index'],
+                'url' => ['/chat/index'],
             ],
             self::ITEM_FEDERATION => [
-                'css' => $countryInfo ? 'red' : '',
-                'label' => 'Федерация' . ($countryInfo ? ' <sup class="text-size-4">' . $countryInfo . '</sup>' : ''),
-                'url' => ['federation/news'],
+                'css' => $federationInfo ? 'red' : '',
+                'label' => 'Федерация' . ($federationInfo ? ' <sup class="text-size-4">' . $federationInfo . '</sup>' : ''),
+                'url' => ['/federation/news'],
             ],
             self::ITEM_FORUM => [
                 'label' => 'Форум',
                 'target' => '_blank',
-                'url' => ['forum/default/index'],
+                'url' => ['/forum/default/index'],
             ],
             self::ITEM_HOME => [
                 'label' => 'Главная',
-                'url' => ['site/index'],
+                'url' => ['/site/index'],
             ],
             self::ITEM_LOAN => [
                 'label' => 'Аренда',
-                'url' => ['loan/index'],
+                'url' => ['/loan/index'],
             ],
             self::ITEM_MESSENGER => [
                 'css' => $messenger ? 'red' : '',
                 'label' => 'Сообщения' . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
-                'url' => ['messenger/index'],
+                'url' => ['*messenger/index'],
             ],
             self::ITEM_NATIONAL_TEAM => [
                 'css' => $nationalId ? 'red' : 'hidden',
                 'label' => 'Сборная',
-                'url' => ['national/view', 'id' => $nationalId],
+                'url' => ['/national/view', 'id' => $nationalId],
             ],
             self::ITEM_NEWS => [
                 'css' => $news ? 'red' : '',
                 'label' => 'Новости' . ($news ? '<sup class="text-size-4">' . $news . '</sup>' : ''),
-                'url' => ['news/index'],
+                'url' => ['/news/index'],
             ],
             self::ITEM_PASSWORD => [
                 'label' => 'Забыли пароль?',
-                'url' => ['site/forgot-password'],
+                'url' => ['/site/forgot-password'],
             ],
             self::ITEM_PLAYER => [
                 'label' => 'Игроки',
-                'url' => ['player/index'],
+                'url' => ['/player/index'],
             ],
             self::ITEM_POLL => [
                 'css' => $vote ? 'red' : '',
                 'label' => 'Опросы' . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
-                'url' => ['vote/index'],
+                'url' => ['/vote/index'],
             ],
             self::ITEM_PROFILE => [
                 'label' => 'Профиль',
-                'url' => ['user/view'],
+                'url' => ['/user/view'],
             ],
             self::ITEM_RATING => [
                 'label' => 'Рейтинги',
-                'url' => ['rating/index'],
+                'url' => ['/rating/index'],
             ],
             self::ITEM_ROSTER => [
                 'css' => 'red',
                 'label' => 'Ростер',
-                'url' => ['team/view'],
+                'url' => ['/team/view'],
             ],
             self::ITEM_RULE => [
                 'label' => 'Правила',
-                'url' => ['rule/index'],
+                'url' => ['/rule/index'],
             ],
             self::ITEM_SCHEDULE => [
                 'label' => 'Рассписание',
-                'url' => ['schedule/index'],
+                'url' => ['/schedule/index'],
             ],
             self::ITEM_SING_UP => [
                 'css' => 'red',
                 'label' => 'Регистрация',
-                'url' => ['site/sign-up'],
+                'url' => ['/site/sign-up'],
             ],
             self::ITEM_SUPPORT => [
                 'css' => $support ? 'red' : '',
                 'label' => 'Тех.поддержка' . ($support ? ' <sup class="text-size-4">' . $support . '</sup>' : ''),
-                'url' => ['support/index'],
+                'url' => ['/support/index'],
             ],
             self::ITEM_TEAM => [
                 'label' => 'Команды',
-                'url' => ['team/index'],
+                'url' => ['/team/index'],
             ],
             self::ITEM_TOURNAMENT => [
                 'label' => 'Турниры',
-                'url' => ['tournament/index'],
+                'url' => ['/tournament/index'],
             ],
             self::ITEM_TRANSFER => [
                 'label' => 'Трансфер',
-                'url' => ['transfer/index'],
+                'url' => ['/transfer/index'],
             ],
             self::ITEM_VIP => [
                 'label' => 'VIP клуб',
-                'url' => ['vip/index'],
+                'url' => ['/vip/index'],
             ],
         ];
     }

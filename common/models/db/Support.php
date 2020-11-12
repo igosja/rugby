@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use codeonyii\yii2validators\AtLeastValidator;

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use backend\models\forms\SignInForm;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
@@ -17,6 +19,8 @@ use yii\helpers\Html;
             </div>
             <div class="panel-body">
                 <?php
+
+// TODO refactor
                 $form = ActiveForm::begin(
                     [
                         'fieldConfig' => [
@@ -42,6 +46,8 @@ use yii\helpers\Html;
                     ) ?>
                 </fieldset>
                 <?php
+
+// TODO refactor
                 ActiveForm::end() ?>
             </div>
         </div>

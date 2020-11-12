@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\models\preparers;
 
 use backend\models\queries\PaymentQuery;

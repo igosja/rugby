@@ -1,8 +1,9 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Vote;
-use common\models\db\VoteStatus;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -22,11 +23,15 @@ use yii\widgets\DetailView;
     </div>
 </div>
 <ul class="list-inline preview-links text-center">
-    <?php if (VoteStatus::NEW === $model->vote_status_id) : ?>
+    <?php
+
+// TODO refactor if (VoteStatus::NEW === $model->vote_status_id) : ?>
         <li>
             <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
         </li>
-    <?php endif; ?>
+    <?php
+
+// TODO refactor endif; ?>
     <li>
         <?= Html::a('List', ['index'], ['class' => 'btn btn-default']) ?>
     </li>
@@ -39,6 +44,8 @@ use yii\widgets\DetailView;
 </ul>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $attributes = [
@@ -76,6 +83,8 @@ use yii\widgets\DetailView;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

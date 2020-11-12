@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 return [
     'pageSizeForum' => 20,
     'pageSizeGame' => 50,

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var common\models\db\User $model
  */

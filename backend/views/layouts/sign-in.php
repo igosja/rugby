@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use backend\assets\SignInAsset;
 use yii\helpers\Html;
 use yii\web\View;
@@ -13,6 +15,8 @@ SignInAsset::register($this);
 
 ?>
 <?php
+
+// TODO refactor
 $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -23,17 +27,25 @@ $this->beginPage() ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php
+
+// TODO refactor
     $this->head() ?>
 </head>
 <body>
 <?php
+
+// TODO refactor
 $this->beginBody() ?>
 <div class="container">
     <?= $content ?>
 </div>
 <?php
+
+// TODO refactor
 $this->endBody() ?>
 </body>
 </html>
 <?php
+
+// TODO refactor
 $this->endPage() ?>

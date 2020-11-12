@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\ForumMessage;
@@ -57,6 +59,8 @@ use yii\widgets\ListView;
         </div>
         <?php
 
+// TODO refactor
+
         try {
             print ListView::widget([
                 'dataProvider' => $dataProvider,
@@ -71,8 +75,12 @@ use yii\widgets\ListView;
         ?>
     </div>
 </div>
-<?php if (!Yii::$app->user->isGuest) : ?>
-    <?php if (!$user->date_confirm) : ?>
+<?php
+
+// TODO refactor if (!Yii::$app->user->isGuest) : ?>
+    <?php
+
+// TODO refactor if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму
@@ -80,7 +88,9 @@ use yii\widgets\ListView;
                 Причина - ваш почтовый адрес не подтверждён
             </div>
         </div>
-    <?php elseif ($userBlockForum && $userBlockForum->date >= time()) : ?>
+    <?php
+
+// TODO refactor elseif ($userBlockForum && $userBlockForum->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму до
@@ -89,7 +99,9 @@ use yii\widgets\ListView;
                 Причина - <?= $userBlockForum->userBlockReason->text ?>
             </div>
         </div>
-    <?php elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
+    <?php
+
+// TODO refactor elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму до
@@ -98,8 +110,12 @@ use yii\widgets\ListView;
                 Причина - <?= $userBlockComment->userBlockReason->text ?>
             </div>
         </div>
-    <?php else: ?>
-        <?php $form = ActiveForm::begin([
+    <?php
+
+// TODO refactor else: ?>
+        <?php
+
+// TODO refactor $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error',
@@ -115,13 +131,19 @@ use yii\widgets\ListView;
                     </div>
                     <div class="row">{error}</div>',
             ],
-        ]); ?>
+        ]) ?>
         <?= $form->field($model, 'text')->textarea(['raw' => 10])->label('Ваш ответ:') ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton('Ответить', ['class' => 'btn margin']) ?>
             </div>
         </div>
-        <?php ActiveForm::end(); ?>
-    <?php endif; ?>
-<?php endif; ?>
+        <?php
+
+// TODO refactor ActiveForm::end(); ?>
+    <?php
+
+// TODO refactor endif; ?>
+<?php
+
+// TODO refactor endif; ?>

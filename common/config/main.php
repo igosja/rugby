@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\redis\Cache;

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 return [
     'components' => [
         'request' => [

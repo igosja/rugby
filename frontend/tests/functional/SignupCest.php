@@ -1,7 +1,10 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\tests\functional;
 
+use common\models\User;
 use frontend\tests\FunctionalTester;
 
 class SignupCest
@@ -50,7 +53,7 @@ class SignupCest
         $I->seeRecord('common\models\User', [
             'username' => 'tester',
             'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'status' => User::STATUS_INACTIVE
         ]);
 
         $I->seeEmailIsSent();

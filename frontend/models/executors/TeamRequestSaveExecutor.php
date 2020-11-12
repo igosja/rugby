@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\executors;
 
 use common\components\helpers\ErrorHelper;
@@ -50,7 +52,6 @@ class TeamRequestSaveExecutor implements ExecuteInterface
     {
         $model = new TeamRequest();
         $model->leave_team_id = $this->leaveId;
-        $model->ready = null;
         $model->team_id = $this->teamId;
         $model->user_id = $this->userId;
         if (!$model->save()) {

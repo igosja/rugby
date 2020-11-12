@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\components\widgets;
 
 use yii\helpers\ArrayHelper;

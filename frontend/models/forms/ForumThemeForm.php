@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\forms;
 
 use common\models\db\ForumMessage;

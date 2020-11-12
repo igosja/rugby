@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
 use yii\web\View;

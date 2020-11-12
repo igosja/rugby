@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\User;
 use yii\grid\GridView;
 use yii\log\FileTarget;

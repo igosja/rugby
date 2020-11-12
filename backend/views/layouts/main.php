@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use backend\assets\AppAsset;
 use common\components\helpers\ErrorHelper;
 use common\models\queries\SiteQuery;
@@ -22,6 +24,8 @@ AppAsset::register($this);
 
 ?>
 <?php
+
+// TODO refactor
 $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -32,13 +36,19 @@ $this->beginPage() ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php
+
+// TODO refactor
     $this->head() ?>
 </head>
 <body>
 <?php
+
+// TODO refactor
 $this->beginBody() ?>
 <div id="wrapper">
     <?php
+
+// TODO refactor
     NavBar::begin(
         [
             'brandLabel' => Yii::$app->name,
@@ -120,10 +130,14 @@ $this->beginBody() ?>
     ?>
 
     <?php
+
+// TODO refactor
     NavBar::end() ?>
     <div class="navbar-default sidebar">
         <div class="sidebar-nav navbar-collapse">
             <?php
+
+// TODO refactor
             $menuItems = [
                 [
                     'label' => 'Users',
@@ -190,6 +204,8 @@ $this->beginBody() ?>
     </div>
     <div id="page-wrapper">
         <?php
+
+// TODO refactor
         try {
             print Breadcrumbs::widget(
                 [
@@ -210,8 +226,12 @@ $this->beginBody() ?>
     </div>
 </div>
 <?php
+
+// TODO refactor
 $this->endBody() ?>
 </body>
 </html>
 <?php
+
+// TODO refactor
 $this->endPage() ?>

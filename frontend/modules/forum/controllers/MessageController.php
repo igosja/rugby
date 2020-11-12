@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\modules\forum\controllers;
 
 use common\models\db\Complaint;

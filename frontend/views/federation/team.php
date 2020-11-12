@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Federation;
 use common\models\db\Team;
@@ -20,6 +22,8 @@ print $this->render('_federation', [
 ?>
 <div class="row margin-top">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

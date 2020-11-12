@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+
+// TODO refactor
 /**
  * Yii Application Initialization Tool
  *

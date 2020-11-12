@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Game;
@@ -76,6 +78,8 @@ use yii\web\View;
 </div>
 <div class="row margin-top">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

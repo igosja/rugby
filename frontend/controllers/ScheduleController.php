@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\components\helpers\FormatHelper;

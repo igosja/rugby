@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace console\controllers;
 
 use common\components\helpers\ErrorHelper;

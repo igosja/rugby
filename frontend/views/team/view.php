@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
@@ -31,17 +33,25 @@ $controller = Yii::$app->controller;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?php if ($notificationArray) : ?>
+<?php
+
+// TODO refactor if ($notificationArray) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <ul>
-                <?php foreach ($notificationArray as $item) : ?>
+                <?php
+
+// TODO refactor foreach ($notificationArray as $item) : ?>
                     <li><?= $item ?></li>
-                <?php endforeach ?>
+                <?php
+
+// TODO refactor endforeach ?>
             </ul>
         </div>
     </div>
-<?php endif ?>
+<?php
+
+// TODO refactor endif ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
@@ -49,6 +59,8 @@ $controller = Yii::$app->controller;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [
@@ -310,9 +322,15 @@ $controller = Yii::$app->controller;
         </div>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
-    <?php if ($team->myTeam()) : ?>
+    <?php
+
+// TODO refactor if ($team->myTeam()) : ?>
         <?= $this->render('_team-bottom-forum', ['team' => $team]) ?>
-    <?php elseif ($controller->myTeam): ?>
+    <?php
+
+// TODO refactor elseif ($controller->myTeam): ?>
         <?= $this->render('_team-bottom-my-team') ?>
-    <?php endif ?>
+    <?php
+
+// TODO refactor endif ?>
 </div>

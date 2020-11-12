@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Payment;
 use miloschuman\highcharts\Highcharts;
@@ -28,6 +30,8 @@ use yii\web\View;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
     foreach ($panels as $panel): ?>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 panel-<?= $panel['class'] ?>">
             <div class="panel panel-<?= $panel['color'] ?>">
@@ -35,6 +39,8 @@ use yii\web\View;
                     <div class="row">
                         <div class="col-xs-3">
                             <?php
+
+// TODO refactor
                             try {
                                 print FAS::icon($panel['icon'])->size(FAS::SIZE_5X);
                             } catch (InvalidConfigException $e) {
@@ -59,6 +65,8 @@ use yii\web\View;
             </div>
         </div>
     <?php
+
+// TODO refactor
     endforeach ?>
 </div>
 <div class="row">
@@ -69,6 +77,8 @@ use yii\web\View;
             </div>
             <div class="panel-body">
                 <?php
+
+// TODO refactor
                 try {
                     print Highcharts::widget(
                         [
@@ -95,6 +105,8 @@ use yii\web\View;
                 ?>
                 <div id="chart-payment"></div>
                 <?php
+
+// TODO refactor
                 try {
                     $columns = [
                         [
@@ -140,6 +152,8 @@ use yii\web\View;
             <div class="panel-body">
                 <div class="list-group">
                     <?php
+
+// TODO refactor
                     foreach ($moderation as $item): ?>
                         <?= Html::a(
                             $item['text'] . ' <span class="pull-right text-muted small"><em>'
@@ -149,6 +163,8 @@ use yii\web\View;
                             ['class' => 'list-group-item']
                         ) ?>
                     <?php
+
+// TODO refactor
                     endforeach ?>
                 </div>
             </div>
