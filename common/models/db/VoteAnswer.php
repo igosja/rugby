@@ -14,6 +14,7 @@ use yii\db\ActiveQuery;
  * @property int $vote_id
  *
  * @property-read Vote $vote
+ * @property-read VoteUser[] $voteUsers
  */
 class VoteAnswer extends AbstractActiveRecord
 {
@@ -45,5 +46,13 @@ class VoteAnswer extends AbstractActiveRecord
     public function getVote(): ActiveQuery
     {
         return $this->hasOne(Vote::class, ['id' => 'vote_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getVoteUsers(): ActiveQuery
+    {
+        return $this->hasMany(VoteUser::class, ['vote_answer_id' => 'id']);
     }
 }

@@ -3,6 +3,10 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\ErrorHelper;
+use Exception;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -28,6 +32,20 @@ class VoteUser extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -38,6 +56,28 @@ class VoteUser extends AbstractActiveRecord
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vote_answer_id'], 'exist', 'targetRelation' => 'voteAnswer'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function addAnswer(): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+        try {
+            if (!$this->save()) {
+                return false;
+            }
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+            return false;
+        }
+        return true;
     }
 
     /**

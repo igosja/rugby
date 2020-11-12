@@ -6,6 +6,6 @@ return [
     'pageSizeMessage' => 50,
     'pageSizeNews' => 10,
     'pageSizeNewsComment' => 20,
-    'pageSizePoll' => 10,
     'pageSizeTable' => 50,
+    'pageSizeVote' => 10,
 ];
