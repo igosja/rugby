@@ -50,7 +50,6 @@ class TeamRequestSaveExecutor implements ExecuteInterface
     {
         $model = new TeamRequest();
         $model->leave_team_id = $this->leaveId;
-        $model->ready = null;
         $model->team_id = $this->teamId;
         $model->user_id = $this->userId;
         if (!$model->save()) {

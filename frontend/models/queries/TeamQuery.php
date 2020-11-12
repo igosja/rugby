@@ -43,20 +43,7 @@ class TeamQuery
     public static function getFreeTeamListQuery(): ActiveQuery
     {
         return Team::find()
-            ->joinWith(['stadium.city'], false)
-            ->with(
-                [
-                    'base',
-                    'baseMedical',
-                    'basePhysical',
-                    'baseSchool',
-                    'baseScout',
-                    'baseTraining',
-                    'stadium',
-                    'teamRequests'
-                ]
-            )
-            ->where(['!=', 'team.id', 0])
+            ->where(['!=', 'id', 0])
             ->andWhere(['user_id' => 0]);
     }
 
@@ -70,49 +57,7 @@ class TeamQuery
          * @var Team $team
          */
         $team = Team::find()
-            ->with(
-                [
-                    'base',
-                    'baseMedical',
-                    'basePhysical',
-                    'baseSchool',
-                    'baseScout',
-                    'baseTraining',
-                    'buildingBase',
-                    'buildingStadium',
-                    'championship' => static function (ActiveQuery $query) {
-                        $query
-                            ->with(
-                                [
-                                    'country',
-                                    'division',
-                                ]
-                            );
-                    },
-                    'conference',
-                    'manager',
-                    'offSeason',
-                    'stadium' => static function (ActiveQuery $query) {
-                        $query
-                            ->with(
-                                [
-                                    'city' => static function (
-                                        ActiveQuery $query
-                                    ) {
-                                        $query
-                                            ->with(
-                                                [
-                                                    'country',
-                                                ]
-                                            );
-                                    }
-                                ]
-                            );
-                    },
-                    'vice',
-                ]
-            )
-            ->where(['team_id' => $teamId])
+            ->where(['id' => $teamId])
             ->limit(1)
             ->one();
         return $team;

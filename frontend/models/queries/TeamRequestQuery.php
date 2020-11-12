@@ -40,7 +40,6 @@ class TeamRequestQuery
          */
         $teamRequest = TeamRequest::find()
             ->andWhere(['team_id' => $teamId, 'user_id' => $userId])
-            ->andWhere(['not', ['ready' => null]])
             ->limit(1)
             ->one();
         return $teamRequest;
@@ -53,11 +52,6 @@ class TeamRequestQuery
     public static function getTeamRequestListQuery(int $userId): ActiveQuery
     {
         return TeamRequest::find()
-            ->with(
-                [
-                    'team.stadium.city.country',
-                ]
-            )
             ->where(['user_id' => $userId])
             ->orderBy(['date' => SORT_ASC]);
     }

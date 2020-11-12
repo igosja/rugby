@@ -58,6 +58,9 @@ class TeamRequestHandleExecute implements ExecuteInterface
 
         (new TeamManagerEmployExecute($teamToEmploy, $this->teamRequest->user))->execute();
 
+        TeamRequest::deleteAll(['team_id' => $this->teamRequest->team_id]);
+        TeamRequest::deleteAll(['user_id' => $this->teamRequest->user_id]);
+
         return true;
     }
 }

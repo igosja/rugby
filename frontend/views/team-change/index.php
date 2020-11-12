@@ -83,7 +83,7 @@ use yii\web\View;
                 'value' => static function (Team $model) {
                     return Html::a(
                         '<i class="fa fa-check-circle"></i>',
-                        ['request', 'id' => $model->id],
+                        ['confirm', 'id' => $model->id],
                         ['title' => 'Выбрать']
                     );
                 }
