@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Schedule;
@@ -39,6 +41,8 @@ use yii\helpers\Html;
 <?= Html::endForm() ?>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

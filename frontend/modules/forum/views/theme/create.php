@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\ForumGroup;
 use frontend\models\forms\ForumThemeForm;
 use yii\helpers\Html;
@@ -38,7 +40,9 @@ use yii\widgets\ActiveForm;
                 <h1>Создание темы</h1>
             </div>
         </div>
-        <?php $form = ActiveForm::begin([
+        <?php
+
+// TODO refactor $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 xs-text-center notification-error',
@@ -61,6 +65,8 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Создать', ['class' => 'btn margin']) ?>
             </div>
         </div>
-        <?php ActiveForm::end() ?>
+        <?php
+
+// TODO refactor ActiveForm::end() ?>
     </div>
 </div>

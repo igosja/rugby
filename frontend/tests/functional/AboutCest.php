@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;

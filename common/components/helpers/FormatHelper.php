@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\components\helpers;
 
 use Exception;

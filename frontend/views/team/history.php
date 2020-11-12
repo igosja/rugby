@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\History;
@@ -50,6 +52,8 @@ use yii\web\View;
 <?= Html::endForm() ?>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

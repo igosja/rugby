@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\ForumTheme;
 use yii\data\ActiveDataProvider;
@@ -26,6 +28,8 @@ use yii\widgets\ListView;
             </div>
         </div>
         <?php
+
+// TODO refactor
 
         try {
             print ListView::widget([

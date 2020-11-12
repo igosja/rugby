@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use frontend\models\forms\SignInForm;
 use rmrevin\yii\fontawesome\FAS;
@@ -18,6 +20,8 @@ use yii\widgets\ActiveForm;
     </div>
 </div>
 <?php
+
+// TODO refactor
 $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
@@ -46,6 +50,8 @@ $form = ActiveForm::begin(
     </div>
 </div>
 <?php
+
+// TODO refactor
 ActiveForm::end() ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -55,6 +61,8 @@ ActiveForm::end() ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <?php
+
+// TODO refactor
         try {
             print Html::a(
                 FAS::icon(FAS::_FACEBOOK_SQUARE)->size(FAS::SIZE_2X),
@@ -66,6 +74,8 @@ ActiveForm::end() ?>
         }
         ?>
         <?php
+
+// TODO refactor
         try {
             print Html::a(
                 FAS::icon(FAS::_GOOGLE_PLUS_SQUARE)->size(FAS::SIZE_2X),

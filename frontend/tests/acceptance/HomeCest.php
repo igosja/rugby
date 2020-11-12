@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\tests\acceptance;
 
 use frontend\tests\AcceptanceTester;

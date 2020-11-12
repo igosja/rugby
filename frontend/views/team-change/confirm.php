@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var array $leaveArray
  * @var TeamChangeForm $model
@@ -32,7 +34,9 @@ use yii\widgets\ActiveForm;
         </p>
     </div>
 </div>
-<?php $form = ActiveForm::begin([
+<?php
+
+// TODO refactor $form = ActiveForm::begin([
     'action' => ['confirm', 'id' => $team->id, 'ok' => 1],
     'fieldConfig' => [
         'errorOptions' => [
@@ -43,7 +47,7 @@ use yii\widgets\ActiveForm;
         'template' => '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label} {input} {error}</div>',
     ],
     'options' => ['class' => 'form-inline'],
-]); ?>
+]) ?>
 <?= $form
     ->field($model, 'leaveId')
     ->dropDownList($leaveArray, ['class' => 'form-control'])
@@ -56,4 +60,6 @@ use yii\widgets\ActiveForm;
         <?= Html::a('Вернуться', ['index'], ['class' => 'btn margin']) ?>
     </div>
 </div>
-<?php ActiveForm::end() ?>
+<?php
+
+// TODO refactor ActiveForm::end() ?>

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace console\components;
 
 use yii\console\Controller;

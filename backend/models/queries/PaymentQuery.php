@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\models\queries;
 
 use common\models\db\Payment;

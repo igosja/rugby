@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\ForumChapter;
 use yii\helpers\ArrayHelper;
@@ -25,7 +27,9 @@ use yii\web\View;
                 <?= $this->render('/default/_searchForm') ?>
             </div>
         </div>
-        <?php foreach ($forumChapterArray as $forumChapter) : ?>
+        <?php
+
+// TODO refactor foreach ($forumChapterArray as $forumChapter) : ?>
             <div class="row margin-top forum-row-head">
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <?= Html::a(
@@ -45,8 +49,12 @@ use yii\web\View;
                     Последнее сообщение
                 </div>
             </div>
-            <?php if (ForumChapter::NATIONAL !== $forumChapter->id): ?>
-                <?php foreach ($forumChapter->forumGroups as $forumGroup) : ?>
+            <?php
+
+// TODO refactor if (ForumChapter::NATIONAL !== $forumChapter->id): ?>
+                <?php
+
+// TODO refactor foreach ($forumChapter->forumGroups as $forumGroup) : ?>
                     <div class="row forum-row">
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="row">
@@ -70,7 +78,9 @@ use yii\web\View;
                             <?= $forumGroup->countMessage() ?>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-size-2">
-                            <?php if ($forumGroup->lastForumMessage) : ?>
+                            <?php
+
+// TODO refactor if ($forumGroup->lastForumMessage) : ?>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <?= Html::a(
@@ -92,13 +102,23 @@ use yii\web\View;
                                         <?= $forumGroup->lastForumMessage->user->getUserLink(['color' => true]) ?>
                                     </div>
                                 </div>
-                            <?php endif; ?>
+                            <?php
+
+// TODO refactor endif; ?>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <?php foreach ($forumChapter->forumGroups as $forumGroup) : ?>
-                    <?php if (ArrayHelper::isIn($forumGroup->federation_id, $myFederationArray, true)) : ?>
+                <?php
+
+// TODO refactor endforeach; ?>
+            <?php
+
+// TODO refactor else: ?>
+                <?php
+
+// TODO refactor foreach ($forumChapter->forumGroups as $forumGroup) : ?>
+                    <?php
+
+// TODO refactor if (ArrayHelper::isIn($forumGroup->federation_id, $myFederationArray, true)) : ?>
                         <div class="row forum-row">
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                 <div class="row">
@@ -122,7 +142,9 @@ use yii\web\View;
                                 <?= $forumGroup->countMessage() ?>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-size-2">
-                                <?php if ($forumGroup->lastForumMessage) : ?>
+                                <?php
+
+// TODO refactor if ($forumGroup->lastForumMessage) : ?>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <?= Html::a(
@@ -144,12 +166,22 @@ use yii\web\View;
                                             <?= $forumGroup->lastForumMessage->user->getUserLink(['color' => true]) ?>
                                         </div>
                                     </div>
-                                <?php endif; ?>
+                                <?php
+
+// TODO refactor endif; ?>
                             </div>
                         </div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        <?php endforeach; ?>
+                    <?php
+
+// TODO refactor endif; ?>
+                <?php
+
+// TODO refactor endforeach; ?>
+            <?php
+
+// TODO refactor endif; ?>
+        <?php
+
+// TODO refactor endforeach; ?>
     </div>
 </div>

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\db\Connection;
 use yii\swiftmailer\Mailer;
 

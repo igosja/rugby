@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Championship;
 use common\models\db\Country;
@@ -99,7 +101,9 @@ $user = Yii::$app->user->identity;
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
-            <?php foreach ($gameArray as $item) : ?>
+            <?php
+
+// TODO refactor foreach ($gameArray as $item) : ?>
                 <tr>
                     <td class="text-right col-45">
                         <?= $item->teamHome->teamLink('string', true) ?>
@@ -116,12 +120,16 @@ $user = Yii::$app->user->identity;
                         <?= $item->formatAuto('guest') ?>
                     </td>
                 </tr>
-            <?php endforeach ?>
+            <?php
+
+// TODO refactor endforeach ?>
         </table>
     </div>
 </div>
 <div class="row margin-top-small">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

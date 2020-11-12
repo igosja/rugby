@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Country;
 use common\models\db\StatisticPlayer;
@@ -58,6 +60,8 @@ use yii\helpers\Html;
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
 <?php
+
+// TODO refactor
 
 if ($statisticType->isTeamChapter()) {
     $columns = [
@@ -123,6 +127,8 @@ if ($statisticType->isTeamChapter()) {
 ?>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         print GridView::widget([

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Squad;
@@ -31,9 +33,13 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 <?= $player->playerName() ?>
             </div>
             <?php
+
+// TODO refactor
             if (isset($squadArray)): ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <?php
+
+// TODO refactor
                     if ($player->myPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
@@ -54,8 +60,12 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             </div>
                         </div>
                     <?php
+
+// TODO refactor
                     endif ?>
                     <?php
+
+// TODO refactor
                     if ($player->myNationalPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
@@ -76,9 +86,13 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             </div>
                         </div>
                     <?php
+
+// TODO refactor
                     endif ?>
                 </div>
             <?php
+
+// TODO refactor
             endif ?>
         </div>
     </div>
@@ -136,12 +150,18 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?php
+
+// TODO refactor
                         if ($player->myPlayer()) : ?>
                             <?= $player->player_power_real ?>
                         <?php
+
+// TODO refactor
                         else: ?>
                             ~<?= $player->player_power_nominal ?>
                         <?php
+
+// TODO refactor
                         endif ?>
                     </div>
                 </div>
@@ -165,6 +185,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                     </div>
                 </div>
                 <?php
+
+// TODO refactor
                 if ($player->loanTeam->team_id) : ?>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -176,6 +198,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         </div>
                     </div>
                 <?php
+
+// TODO refactor
                 endif ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">

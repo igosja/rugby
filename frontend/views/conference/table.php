@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Conference;
 use common\models\db\User;
@@ -58,6 +60,8 @@ $user = $this->context->user;
 <?= Html::endForm() ?>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

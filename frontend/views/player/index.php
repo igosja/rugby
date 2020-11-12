@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
@@ -27,7 +29,9 @@ use yii\widgets\ActiveForm;
             </h1>
         </div>
     </div>
-<?php $form = ActiveForm::begin([
+<?php
+
+// TODO refactor $form = ActiveForm::begin([
     'action' => ['player/index'],
     'fieldConfig' => [
         'template' => '{input}',
@@ -108,9 +112,13 @@ use yii\widgets\ActiveForm;
             <?= Html::submitButton('Поиск', ['class' => 'form-control submit-blue']) ?>
         </div>
     </div>
-<?php ActiveForm::end() ?>
+<?php
+
+// TODO refactor ActiveForm::end() ?>
     <div class="row">
         <?php
+
+// TODO refactor
 
         try {
             $columns = [

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\Rule;
 use yii\helpers\Html;
 

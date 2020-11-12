@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\Vote;
 use yii\helpers\Html;
@@ -28,7 +30,9 @@ use yii\helpers\Html;
             <?= FormatHelper::asDateTime($model->date) ?>
         </div>
     </div>
-    <?php foreach ($model->answers() as $answer) : ?>
+    <?php
+
+// TODO refactor foreach ($model->answers() as $answer) : ?>
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                 <?= $answer['answer'] ?>
@@ -38,5 +42,7 @@ use yii\helpers\Html;
                 (<?= $answer['percent'] ?>%)
             </div>
         </div>
-    <?php endforeach ?>
+    <?php
+
+// TODO refactor endforeach ?>
 </div>

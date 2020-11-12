@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Achievement;
 use common\models\db\Team;
@@ -29,6 +31,8 @@ use yii\web\View;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

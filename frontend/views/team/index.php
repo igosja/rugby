@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Team;
 use yii\data\ActiveDataProvider;
@@ -17,6 +19,8 @@ use yii\grid\GridView;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

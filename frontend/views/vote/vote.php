@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\Vote;
 use common\models\db\VoteUser;
 use yii\helpers\ArrayHelper;
@@ -33,7 +35,9 @@ use yii\widgets\ActiveForm;
                 <?= $vote->user->getUserLink(['color' => true]) ?>
             </div>
         </div>
-        <?php $form = ActiveForm::begin([
+        <?php
+
+// TODO refactor $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 notification-error',
@@ -59,6 +63,8 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Голосовать', ['class' => 'btn margin']) ?>
             </div>
         </div>
-        <?php ActiveForm::end() ?>
+        <?php
+
+// TODO refactor ActiveForm::end() ?>
     </div>
 </div>

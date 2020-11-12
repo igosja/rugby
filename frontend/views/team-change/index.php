@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
@@ -24,6 +26,8 @@ use yii\web\View;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [
@@ -73,6 +77,8 @@ use yii\web\View;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

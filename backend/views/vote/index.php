@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use backend\models\search\VoteSearch;
 use common\components\helpers\ErrorHelper;
 use common\models\db\Vote;
@@ -30,6 +32,8 @@ use yii\web\View;
 </ul>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

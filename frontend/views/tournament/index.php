@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\helpers\Html;
 
 /**
@@ -43,7 +45,9 @@ use yii\helpers\Html;
             <tr>
                 <th colspan="5">Национальные чемпионаты</th>
             </tr>
-            <?php foreach ($countryArray as $item): ?>
+            <?php
+
+// TODO refactor foreach ($countryArray as $item): ?>
                 <tr>
                     <td>
                         <?= Html::a(
@@ -52,11 +56,17 @@ use yii\helpers\Html;
                         ) ?>
                         <?= Html::a($item['countryName'], ['federation/team', 'id' => $item['federationId']]) ?>
                     </td>
-                    <?php foreach ($item['division'] as $key => $value) : ?>
+                    <?php
+
+// TODO refactor foreach ($item['division'] as $key => $value) : ?>
                         <td class="text-center col-10">
-                            <?php if ('-' === $value) : ?>
+                            <?php
+
+// TODO refactor if ('-' === $value) : ?>
                                 -
-                            <?php else: ?>
+                            <?php
+
+// TODO refactor else: ?>
                                 <?= Html::a(
                                     $value,
                                     [
@@ -66,11 +76,17 @@ use yii\helpers\Html;
                                         'seasonId' => $seasonId
                                     ]
                                 ) ?>
-                            <?php endif ?>
+                            <?php
+
+// TODO refactor endif ?>
                         </td>
-                    <?php endforeach ?>
+                    <?php
+
+// TODO refactor endforeach ?>
                 </tr>
-            <?php endforeach ?>
+            <?php
+
+// TODO refactor endforeach ?>
             <tr>
                 <th colspan="5">Национальные чемпионаты</th>
             </tr>

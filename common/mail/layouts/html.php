@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -10,7 +12,9 @@ use yii\web\View;
  */
 
 ?>
-<?php $this->beginPage() ?>
+<?php
+
+// TODO refactor $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -260,10 +264,14 @@ use yii\web\View;
         }
     </style>
     <![endif]-->
-    <?php $this->head() ?>
+    <?php
+
+// TODO refactor $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php
+
+// TODO refactor $this->beginBody() ?>
 <center>
     <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
         <tr>
@@ -362,7 +370,11 @@ use yii\web\View;
         </tr>
     </table>
 </center>
-<?php $this->endBody() ?>
+<?php
+
+// TODO refactor $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php
+
+// TODO refactor $this->endPage() ?>

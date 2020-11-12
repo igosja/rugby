@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var ActiveDataProvider $dataProvider
  */
@@ -16,6 +18,8 @@ use yii\widgets\ListView;
 </div>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         print ListView::widget([

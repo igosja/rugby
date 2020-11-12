@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var string $content
  * @var AbstractController $context
@@ -20,7 +22,9 @@ AppAsset::register($this);
 $context = $this->context;
 
 ?>
-<?php $this->beginPage() ?>
+<?php
+
+// TODO refactor $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -29,9 +33,13 @@ $context = $this->context;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php
+
+// TODO refactor $this->head() ?>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <?php if (YII_ENV_PROD) : ?>
+    <?php
+
+// TODO refactor if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
         <script>
@@ -56,15 +64,23 @@ $context = $this->context;
         </script>
         <!--/LiveInternet-->
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
-    <?php if (!$context->user || !$context->user->isVip()): ?>
+    <?php
+
+// TODO refactor if (!$context->user || !$context->user->isVip()): ?>
         <!-- Google AdSense -->
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
-    <?php endif ?>
-    <?php endif ?>
+    <?php
+
+// TODO refactor endif ?>
+    <?php
+
+// TODO refactor endif ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php
+
+// TODO refactor $this->beginBody() ?>
 <div class="main">
     <div class="content">
         <div class="row">
@@ -82,14 +98,20 @@ $context = $this->context;
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
                 <br/>
-                <?php if (Yii::$app->user->isGuest): ?>
+                <?php
+
+// TODO refactor if (Yii::$app->user->isGuest): ?>
                     <?= Html::a(
                         'Войти',
                         ['/site/sign-in'],
                         ['class' => 'btn margin']
                     ) ?>
-                <?php else: ?>
-                    <?php if ($context->myTeamArray): ?>
+                <?php
+
+// TODO refactor else: ?>
+                    <?php
+
+// TODO refactor if ($context->myTeamArray): ?>
                         <?= Html::beginForm(
                             ['/team/change-my-team'],
                             'post',
@@ -104,21 +126,31 @@ $context = $this->context;
                                 'onchange' => 'this.form.submit();'
                             ]
                         ) ?>
-                    <?php endif ?>
+                    <?php
+
+// TODO refactor endif ?>
                     <?= Html::a(
                         'Выйти',
                         ['site/sign-out'],
                         ['class' => ['btn', 'margin']]
                     ) ?>
-                    <?php if ($context->myTeamArray): ?>
+                    <?php
+
+// TODO refactor if ($context->myTeamArray): ?>
                         <?= Html::endForm() ?>
-                    <?php endif ?>
-                <?php endif ?>
+                    <?php
+
+// TODO refactor endif ?>
+                <?php
+
+// TODO refactor endif ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 text-center menu">
                 <?php
+
+// TODO refactor
 
                 try {
                     print Menu::widget();
@@ -141,6 +173,8 @@ $context = $this->context;
         </noscript>
         <?php
 
+// TODO refactor
+
         try {
             print Alert::widget();
         } catch (Exception $e) {
@@ -149,7 +183,9 @@ $context = $this->context;
 
         ?>
         <?= $content ?>
-        <?php if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
+        <?php
+
+// TODO refactor if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
             <div class="row">
                 <div
                     class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
@@ -172,13 +208,17 @@ $context = $this->context;
                     </script>
                 </div>
             </div>
-        <?php endif ?>
+        <?php
+
+// TODO refactor endif ?>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
             Страница сгенерирована за <?= round(Yii::getLogger()->getElapsedTime(), 5) ?> сек,
             <br/>
             <?php
+
+// TODO refactor
             try {
                 print SitePrepare::getSiteVersion();
             } catch (InvalidConfigException $e) {
@@ -188,7 +228,11 @@ $context = $this->context;
         </div>
     </div>
 </div>
-<?php $this->endBody() ?>
+<?php
+
+// TODO refactor $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php
+
+// TODO refactor $this->endPage() ?>

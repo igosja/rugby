@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\queries;
 
 use common\models\db\Transfer;

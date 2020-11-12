@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Lineup;
 use common\models\db\Player;
@@ -44,6 +46,8 @@ print $this->render('//player/_player', ['player' => $player]);
 <?= Html::endForm() ?>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [

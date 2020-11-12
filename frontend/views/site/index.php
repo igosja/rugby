@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\ForumMessage;
 use common\models\db\News;
 use common\models\db\User;
@@ -33,6 +35,8 @@ use yii\helpers\Html;
                     от низших дивизионов до побед в национальных чемпионатах и мировых кубках!
                 </p>
                 <?php
+
+// TODO refactor
                 if (Yii::$app->user->isGuest) : ?>
                     <p class="text-center">
                         <?= Html::a(
@@ -42,6 +46,8 @@ use yii\helpers\Html;
                         ) ?>
                     </p>
                 <?php
+
+// TODO refactor
                 endif ?>
                 <h4>Скачивать ничего не надо!</h4>
                 <p class="text-justify">
@@ -72,7 +78,9 @@ use yii\helpers\Html;
                 <h2>Последние игровые новости</h2>
             </div>
         </div>
-        <?php if ($news) : ?>
+        <?php
+
+// TODO refactor if ($news) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <p class="text-justify">
@@ -88,6 +96,8 @@ use yii\helpers\Html;
                 </div>
             </div>
         <?php
+
+// TODO refactor
         endif ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -136,6 +146,8 @@ use yii\helpers\Html;
             </div>
         </div>
         <?php
+
+// TODO refactor
         if ($birthdayBoys) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -149,23 +161,33 @@ use yii\helpers\Html;
                     </p>
                     <ul>
                         <?php
+
+// TODO refactor
                         foreach ($birthdayBoys as $item) : ?>
                             <li>
                                 <?= $item->fullName ?>
                                 (<?= Html::a(Html::encode($item->login), ['user/view', 'id' => $item->id]) ?>)
                                 <?php
+
+// TODO refactor
                                 if ($item->birth_year) : ?>
                                     -
                                     <?= date('Y') - $item->birth_year ?>-я годовщина!
                                 <?php
+
+// TODO refactor
                                 endif ?>
                             </li>
                         <?php
+
+// TODO refactor
                         endforeach ?>
                     </ul>
                 </div>
             </div>
         <?php
+
+// TODO refactor
         endif ?>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -176,6 +198,8 @@ use yii\helpers\Html;
                         Форум
                     </legend>
                     <?php
+
+// TODO refactor
                     foreach ($forumMessage as $item): ?>
                         <div class="row margin-top-small">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -189,6 +213,8 @@ use yii\helpers\Html;
                             </div>
                         </div>
                     <?php
+
+// TODO refactor
                     endforeach ?>
                 </fieldset>
             </div>

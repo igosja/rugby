@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\ForumChapter;
 use yii\helpers\Html;
@@ -50,7 +52,9 @@ use yii\web\View;
                 Последнее сообщение
             </div>
         </div>
-        <?php foreach ($forumChapter->forumGroups as $forumGroup) : ?>
+        <?php
+
+// TODO refactor foreach ($forumChapter->forumGroups as $forumGroup) : ?>
             <div class="row forum-row">
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                     <div class="row">
@@ -74,7 +78,9 @@ use yii\web\View;
                     <?= $forumGroup->countMessage() ?>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-size-2">
-                    <?php if ($forumGroup->lastForumMessage) : ?>
+                    <?php
+
+// TODO refactor if ($forumGroup->lastForumMessage) : ?>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <?= Html::a(
@@ -96,9 +102,13 @@ use yii\web\View;
                                 <?= $forumGroup->lastForumMessage->user->getUserLink(['color' => true]) ?>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php
+
+// TODO refactor endif; ?>
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php
+
+// TODO refactor endforeach; ?>
     </div>
 </div>

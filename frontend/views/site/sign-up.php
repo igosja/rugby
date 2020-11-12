@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var SignUpForm $model
  * @var View $this
@@ -26,6 +28,8 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 <?php
+
+// TODO refactor
 $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
@@ -84,4 +88,6 @@ $form = ActiveForm::begin(
         </div>
     </div>
 <?php
+
+// TODO refactor
 ActiveForm::end() ?>

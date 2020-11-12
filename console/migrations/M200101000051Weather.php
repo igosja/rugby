@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace console\migrations;
 
 use yii\db\Migration;

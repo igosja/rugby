@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var Team $team
  */
@@ -36,6 +38,8 @@ use yii\helpers\Html;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Менеджер:
                 <?php
+
+// TODO refactor
                 if ($team->manager->canDialog()) : ?>
                     <?= Html::a(
                         '<i class="fa fa-envelope-o"></i>',
@@ -43,6 +47,8 @@ use yii\helpers\Html;
                         ['title' => 'Написать']
                     ) ?>
                 <?php
+
+// TODO refactor
                 endif ?>
                 <?= Html::a(
                     $team->manager->fullName(),
@@ -59,11 +65,15 @@ use yii\helpers\Html;
             </div>
         </div>
         <?php
+
+// TODO refactor
         if ($team->team_vice_id) : ?>
             <div class="row margin-top-small">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     Заместитель:
                     <?php
+
+// TODO refactor
                     if ($team->vice->canDialog()) : ?>
                         <?= Html::a(
                             '<i class="fa fa-envelope-o"></i>',
@@ -71,6 +81,8 @@ use yii\helpers\Html;
                             ['title' => 'Написать']
                         ) ?>
                     <?php
+
+// TODO refactor
                     endif ?>
                     <?= Html::a(
                         $team->vice->fullName(),
@@ -85,6 +97,8 @@ use yii\helpers\Html;
                     <?= $team->vice->iconVip() ?>
                     <?= $team->vice->userLink(['class' => 'strong']) ?>
                     <?php
+
+// TODO refactor
                     if ($team->canViceLeave()) : ?>
                         <?= Html::a(
                             '<i class="fa fa-sign-out"></i>',
@@ -92,10 +106,14 @@ use yii\helpers\Html;
                             ['title' => 'Отказаться от заместительства']
                         ) ?>
                     <?php
+
+// TODO refactor
                     endif ?>
                 </div>
             </div>
         <?php
+
+// TODO refactor
         endif ?>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -103,17 +121,25 @@ use yii\helpers\Html;
                 <?= $team->stadium->stadium_name ?>,
                 <strong><?= Yii::$app->formatter->asInteger($team->stadium->stadium_capacity) ?></strong>
                 <?php
+
+// TODO refactor
                 if ($team->myTeam()) : ?>
                     <?= Html::a(
                         '<i class="fa fa-search" aria-hidden="true"></i>',
                         ['stadium/increase']
                     ) ?>
                 <?php
+
+// TODO refactor
                 endif ?>
                 <?php
+
+// TODO refactor
                 if ($team->buildingStadium) : ?>
                     <i class="fa fa-cog" aria-hidden="true" title="На стадионе идет строительство"></i>
                 <?php
+
+// TODO refactor
                 endif ?>
             </div>
         </div>
@@ -128,9 +154,13 @@ use yii\helpers\Html;
                     ['base/view', 'id' => $team->team_id]
                 ) ?>
                 <?php
+
+// TODO refactor
                 if ($team->buildingBase) : ?>
                     <i class="fa fa-cog" aria-hidden="true" title="На базе идет строительство"></i>
                 <?php
+
+// TODO refactor
                 endif ?>
             </div>
         </div>

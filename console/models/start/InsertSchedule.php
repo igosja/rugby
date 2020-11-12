@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace console\models\start;
 
 use common\models\db\Schedule;

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\queries;
 
 use common\models\db\Site;

@@ -1,16 +1,20 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use common\fixtures\UserFixture as UserFixture;
 use common\models\User;
 use frontend\models\PasswordResetRequestForm;
+use frontend\tests\UnitTester;
 use Yii;
 
-class PasswordResetRequestFormTest extends \Codeception\Test\Unit
+class PasswordResetRequestFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
 

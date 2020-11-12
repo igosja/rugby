@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\components\widgets;
 
 use common\models\db\Message;

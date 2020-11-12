@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\models\search;
 
 use common\models\db\News;

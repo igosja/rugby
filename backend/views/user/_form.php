@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\User;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
@@ -12,6 +14,8 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?php
+
+// TODO refactor
         $form = ActiveForm::begin() ?>
         <?= $form->field($model, 'login')->textInput() ?>
         <div class="form-group">
@@ -20,6 +24,8 @@ use yii\helpers\Html;
             </div>
         </div>
         <?php
+
+// TODO refactor
         ActiveForm::end() ?>
     </div>
 </div>

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\gii\Module as GiiModule;
 use yii\debug\Module as DebugModule;
 

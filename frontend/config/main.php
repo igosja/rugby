@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use frontend\components\widgets\LinkPager;
 use yii\grid\GridView;
 use yii\log\FileTarget;

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\Vote;
 use yii\helpers\Html;
 use yii\web\View;

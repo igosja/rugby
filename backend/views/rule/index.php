@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use backend\models\search\RuleSearch;
 use common\components\helpers\ErrorHelper;
 use yii\data\ActiveDataProvider;
@@ -27,6 +29,8 @@ use yii\web\View;
 </ul>
 <div class="row">
     <?php
+
+// TODO refactor
 
     try {
         $columns = [
