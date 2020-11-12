@@ -166,6 +166,10 @@ $this->beginBody() ?>
                     'label' => 'Rules',
                     'url' => ['rule/index'],
                 ],
+                [
+                    'label' => 'Votes',
+                    'url' => ['vote/index'],
+                ],
             ];
 
             try {

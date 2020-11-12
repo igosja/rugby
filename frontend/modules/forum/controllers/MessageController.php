@@ -11,16 +11,35 @@ use frontend\controllers\AbstractController;
 use Throwable;
 use Yii;
 use yii\db\StaleObjectException;
+use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
- * Class ThemeController
+ * Class MessageController
  * @package frontend\modules\forum\controllers
  */
 class MessageController extends AbstractController
 {
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @param $id
      * @return Response
