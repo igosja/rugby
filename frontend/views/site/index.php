@@ -45,10 +45,7 @@ use yii\helpers\Html;
                             ['class' => 'btn']
                         ) ?>
                     </p>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
                 <h4>Скачивать ничего не надо!</h4>
                 <p class="text-justify">
                     Обращаем внимание, что наш регбийный онлайн-менеджер является браузерной игрой.
@@ -78,9 +75,7 @@ use yii\helpers\Html;
                 <h2>Последние игровые новости</h2>
             </div>
         </div>
-        <?php
-
-// TODO refactor if ($news) : ?>
+        <?php if ($news) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <p class="text-justify">
@@ -95,10 +90,7 @@ use yii\helpers\Html;
                     </p>
                 </div>
             </div>
-        <?php
-
-// TODO refactor
-        endif ?>
+        <?php endif ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h2>Как стать менеджером регбийной команды?</h2>
@@ -173,22 +165,13 @@ use yii\helpers\Html;
                                 if ($item->birth_year) : ?>
                                     -
                                     <?= date('Y') - $item->birth_year ?>-я годовщина!
-                                <?php
-
-// TODO refactor
-                                endif ?>
+                                <?php endif ?>
                             </li>
-                        <?php
-
-// TODO refactor
-                        endforeach ?>
+                        <?php endforeach ?>
                     </ul>
                 </div>
             </div>
-        <?php
-
-// TODO refactor
-        endif ?>
+        <?php endif ?>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="row margin">
@@ -212,10 +195,7 @@ use yii\helpers\Html;
                                 <?= $item->forumTheme->forumGroup->name ?>
                             </div>
                         </div>
-                    <?php
-
-// TODO refactor
-                    endforeach ?>
+                    <?php endforeach ?>
                 </fieldset>
             </div>
         </div>

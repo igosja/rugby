@@ -33,25 +33,17 @@ $controller = Yii::$app->controller;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?php
-
-// TODO refactor if ($notificationArray) : ?>
+<?php if ($notificationArray) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <ul>
-                <?php
-
-// TODO refactor foreach ($notificationArray as $item) : ?>
+                <?php foreach ($notificationArray as $item) : ?>
                     <li><?= $item ?></li>
-                <?php
-
-// TODO refactor endforeach ?>
+                <?php endforeach ?>
             </ul>
         </div>
     </div>
-<?php
-
-// TODO refactor endif ?>
+<?php endif ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
@@ -322,15 +314,9 @@ $controller = Yii::$app->controller;
         </div>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
-    <?php
-
-// TODO refactor if ($team->myTeam()) : ?>
+    <?php if ($team->myTeam()) : ?>
         <?= $this->render('_team-bottom-forum', ['team' => $team]) ?>
-    <?php
-
-// TODO refactor elseif ($controller->myTeam): ?>
+    <?php elseif ($controller->myTeam): ?>
         <?= $this->render('_team-bottom-my-team') ?>
-    <?php
-
-// TODO refactor endif ?>
+    <?php endif ?>
 </div>

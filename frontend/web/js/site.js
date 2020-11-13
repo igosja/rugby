@@ -133,7 +133,7 @@ jQuery(document).ready(function () {
                     type: 'post',
                     url: chatForm.attr('action'),
                     success: function () {
-                        chatForm.find('textarea').val('').htmlcode('');
+                        chatForm.find('textarea').val('');
                         chatMessage(false);
                     }
                 });
@@ -158,39 +158,39 @@ jQuery(document).ready(function () {
         });
     });
 
-    function getIncreasePrice(capacityNew, capacityCurrent, oneSitPrice) {
-        return parseInt((Math.pow(capacityNew, 1.1) - Math.pow(capacityCurrent, 1.1)) * oneSitPrice);
-    }
-
-    function getDecreasePrice(capacityNew, capacityCurrent, oneSitPrice) {
-        return parseInt((Math.pow(capacityCurrent, 1.1) - Math.pow(capacityNew, 1.1)) * oneSitPrice);
-    }
-
-    function chatMessage(scroll) {
-        var messageChat = $('.chat-scroll');
-        $.ajax({
-            url: messageChat.data('url') + '?lastDate=' + messageChat.data('date'),
-            success: function (data) {
-                var html = '';
-                for (var i = 0; i < data.message.length; i++) {
-                    html = html + '<div class="row margin-top">'
-                        + '<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-size-3">'
-                        + data.message[i].date
-                        + ', '
-                        + data.message[i].userLink
-                        + '</div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message '
-                        + data.message[i].class
-                        + '">'
-                        + data.message[i].text
-                        + '</div></div>';
-                }
-                messageChat.append(html);
-                messageChat.data('date', data.date);
-                if (scroll) {
-                    messageChat.scrollTop(messageChat.prop('scrollHeight'));
-                }
-            }
-        });
-    }
-
 });
+
+function getIncreasePrice(capacityNew, capacityCurrent, oneSitPrice) {
+    return parseInt((Math.pow(capacityNew, 1.1) - Math.pow(capacityCurrent, 1.1)) * oneSitPrice);
+}
+
+function getDecreasePrice(capacityNew, capacityCurrent, oneSitPrice) {
+    return parseInt((Math.pow(capacityCurrent, 1.1) - Math.pow(capacityNew, 1.1)) * oneSitPrice);
+}
+
+function chatMessage(scroll) {
+    var messageChat = $('.chat-scroll');
+    $.ajax({
+        url: messageChat.data('url') + '?lastDate=' + messageChat.data('date'),
+        success: function (data) {
+            var html = '';
+            for (var i = 0; i < data.message.length; i++) {
+                html = html + '<div class="row margin-top">'
+                    + '<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-size-3">'
+                    + data.message[i].date
+                    + ', '
+                    + data.message[i].userLink
+                    + '</div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message '
+                    + data.message[i].class
+                    + '">'
+                    + data.message[i].text
+                    + '</div></div>';
+            }
+            messageChat.append(html);
+            messageChat.data('date', data.date);
+            if (scroll) {
+                messageChat.scrollTop(messageChat.prop('scrollHeight'));
+            }
+        }
+    });
+}

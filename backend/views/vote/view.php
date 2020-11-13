@@ -23,15 +23,11 @@ use yii\widgets\DetailView;
     </div>
 </div>
 <ul class="list-inline preview-links text-center">
-    <?php
-
-// TODO refactor if (VoteStatus::NEW === $model->vote_status_id) : ?>
+    <?php if (VoteStatus::NEW === $model->vote_status_id) : ?>
         <li>
             <?= Html::a('Approve', ['approve', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
         </li>
-    <?php
-
-// TODO refactor endif; ?>
+    <?php endif; ?>
     <li>
         <?= Html::a('List', ['index'], ['class' => 'btn btn-default']) ?>
     </li>

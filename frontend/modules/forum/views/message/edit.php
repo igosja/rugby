@@ -43,9 +43,7 @@ use yii\widgets\ActiveForm;
                 <h1>Редактирование сообщения</h1>
             </div>
         </div>
-        <?php
-
-// TODO refactor $form = ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 xs-text-center notification-error',

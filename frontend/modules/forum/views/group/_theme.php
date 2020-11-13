@@ -23,18 +23,14 @@ use yii\helpers\Html;
                 $model->name,
                 ['theme/view', 'id' => $model->id]
             ) ?>
-            <?php
-
-// TODO refactor if ($user && UserRole::ADMIN === $user->user_role_id) : ?>
+            <?php if ($user && UserRole::ADMIN === $user->user_role_id) : ?>
                 |
                 <?= Html::a(
                     FAS::icon(FAS::_TRASH),
                     ['theme/delete', 'id' => $model->id],
                     ['class' => 'font-grey']
                 ) ?>
-            <?php
-
-// TODO refactor endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row text-size-2">
@@ -55,9 +51,7 @@ use yii\helpers\Html;
     <?= $model->count_view ?>
 </div>
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-size-2">
-    <?php
-
-// TODO refactor if (isset($model->forumMessages[0])) : ?>
+    <?php if (isset($model->forumMessages[0])) : ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?= $model->forumMessages[0]->user->getUserLink(['color' => true]) ?>
@@ -68,7 +62,5 @@ use yii\helpers\Html;
                 <?= FormatHelper::asDateTime($model->forumMessages[0]->date) ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor endif; ?>
+    <?php endif; ?>
 </div>

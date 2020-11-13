@@ -34,9 +34,7 @@ use yii\widgets\ActiveForm;
         </p>
     </div>
 </div>
-<?php
-
-// TODO refactor $form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
     'action' => ['confirm', 'id' => $team->id, 'ok' => 1],
     'fieldConfig' => [
         'errorOptions' => [

@@ -22,9 +22,7 @@ AppAsset::register($this);
 $context = $this->context;
 
 ?>
-<?php
-
-// TODO refactor $this->beginPage() ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -33,13 +31,9 @@ $context = $this->context;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php
-
-// TODO refactor $this->head() ?>
+    <?php $this->head() ?>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <?php
-
-// TODO refactor if (YII_ENV_PROD) : ?>
+    <?php if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
         <script>
@@ -64,23 +58,15 @@ $context = $this->context;
         </script>
         <!--/LiveInternet-->
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
-    <?php
-
-// TODO refactor if (!$context->user || !$context->user->isVip()): ?>
+    <?php if (!$context->user || !$context->user->isVip()): ?>
         <!-- Google AdSense -->
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
-    <?php
-
-// TODO refactor endif ?>
-    <?php
-
-// TODO refactor endif ?>
+    <?php endif ?>
+    <?php endif ?>
 </head>
 <body>
-<?php
-
-// TODO refactor $this->beginBody() ?>
+<?php $this->beginBody() ?>
 <div class="main">
     <div class="content">
         <div class="row">
@@ -98,20 +84,14 @@ $context = $this->context;
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
                 <br/>
-                <?php
-
-// TODO refactor if (Yii::$app->user->isGuest): ?>
+                <?php if (Yii::$app->user->isGuest): ?>
                     <?= Html::a(
                         'Войти',
                         ['/site/sign-in'],
                         ['class' => 'btn margin']
                     ) ?>
-                <?php
-
-// TODO refactor else: ?>
-                    <?php
-
-// TODO refactor if ($context->myTeamArray): ?>
+                <?php else: ?>
+                    <?php if ($context->myTeamArray): ?>
                         <?= Html::beginForm(
                             ['/team/change-my-team'],
                             'post',
@@ -126,24 +106,16 @@ $context = $this->context;
                                 'onchange' => 'this.form.submit();'
                             ]
                         ) ?>
-                    <?php
-
-// TODO refactor endif ?>
+                    <?php endif ?>
                     <?= Html::a(
                         'Выйти',
                         ['site/sign-out'],
                         ['class' => ['btn', 'margin']]
                     ) ?>
-                    <?php
-
-// TODO refactor if ($context->myTeamArray): ?>
+                    <?php if ($context->myTeamArray): ?>
                         <?= Html::endForm() ?>
-                    <?php
-
-// TODO refactor endif ?>
-                <?php
-
-// TODO refactor endif ?>
+                    <?php endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
@@ -183,9 +155,7 @@ $context = $this->context;
 
         ?>
         <?= $content ?>
-        <?php
-
-// TODO refactor if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
+        <?php if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
             <div class="row">
                 <div
                     class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
@@ -208,9 +178,7 @@ $context = $this->context;
                     </script>
                 </div>
             </div>
-        <?php
-
-// TODO refactor endif ?>
+        <?php endif ?>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
@@ -228,11 +196,7 @@ $context = $this->context;
         </div>
     </div>
 </div>
-<?php
-
-// TODO refactor $this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php
-
-// TODO refactor $this->endPage() ?>
+<?php $this->endPage() ?>

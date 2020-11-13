@@ -46,10 +46,7 @@ use yii\helpers\Html;
                         ['messenger/view', 'id' => $team->manager->user_id],
                         ['title' => 'Написать']
                     ) ?>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
                 <?= Html::a(
                     $team->manager->fullName(),
                     ['user/view', 'id' => $team->manager->user_id],
@@ -80,10 +77,7 @@ use yii\helpers\Html;
                             ['messenger/view', 'id' => $team->vice->user_id],
                             ['title' => 'Написать']
                         ) ?>
-                    <?php
-
-// TODO refactor
-                    endif ?>
+                    <?php endif ?>
                     <?= Html::a(
                         $team->vice->fullName(),
                         ['user/view', 'id' => $team->vice->user_id],
@@ -105,16 +99,10 @@ use yii\helpers\Html;
                             ['team/vice-leave', 'id' => $team->team_id],
                             ['title' => 'Отказаться от заместительства']
                         ) ?>
-                    <?php
-
-// TODO refactor
-                    endif ?>
+                    <?php endif ?>
                 </div>
             </div>
-        <?php
-
-// TODO refactor
-        endif ?>
+        <?php endif ?>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Стадион:
@@ -128,19 +116,13 @@ use yii\helpers\Html;
                         '<i class="fa fa-search" aria-hidden="true"></i>',
                         ['stadium/increase']
                     ) ?>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
                 <?php
 
 // TODO refactor
                 if ($team->buildingStadium) : ?>
                     <i class="fa fa-cog" aria-hidden="true" title="На стадионе идет строительство"></i>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
@@ -158,10 +140,7 @@ use yii\helpers\Html;
 // TODO refactor
                 if ($team->buildingBase) : ?>
                     <i class="fa fa-cog" aria-hidden="true" title="На базе идет строительство"></i>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row margin-top-small">

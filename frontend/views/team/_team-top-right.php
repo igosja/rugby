@@ -27,9 +27,7 @@ foreach ($controller->myTeamArray as $item) {
         - <?= $team->rosterPhrase() ?> -
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-small">
-        <?php
-
-// TODO refactor if (!$controller->user) : ?>
+        <?php if (!$controller->user) : ?>
             <?= Html::a(
                 Html::img(
                     '/img/roster/questionnaire.png',
@@ -41,12 +39,8 @@ foreach ($controller->myTeamArray as $item) {
                 ['site/sign-up'],
                 ['class' => 'no-underline']
             ) ?>
-        <?php
-
-// TODO refactor else: ?>
-            <?php
-
-// TODO refactor if ($team->myTeam()) : ?>
+        <?php else: ?>
+            <?php if ($team->myTeam()) : ?>
                 <?= Html::a(
                     Html::img(
                         '/img/roster/friendly.png',
@@ -102,9 +96,7 @@ foreach ($controller->myTeamArray as $item) {
                     ['school/index'],
                     ['class' => 'no-underline']
                 ) ?>
-                <?php
-
-// TODO refactor if ($team->manager->isVip()): ?>
+                <?php if ($team->manager->isVip()): ?>
                     <?= Html::a(
                         Html::img(
                             '/img/roster/planning.png',
@@ -116,12 +108,8 @@ foreach ($controller->myTeamArray as $item) {
                         ['planning/index'],
                         ['class' => 'no-underline']
                     ) ?>
-                <?php
-
-// TODO refactor endif ?>
-            <?php
-
-// TODO refactor elseif (!$team->team_user_id && !in_array($team->team_id, $myTeamIds, true)): ?>
+                <?php endif ?>
+            <?php elseif (!$team->team_user_id && !in_array($team->team_id, $myTeamIds, true)): ?>
                 <?= Html::a(
                     Html::img(
                         '/img/roster/free-team.png',
@@ -133,9 +121,7 @@ foreach ($controller->myTeamArray as $item) {
                     [($controller->myTeam ? 'team/change' : 'team-request/index'), 'id' => $team->team_id],
                     ['class' => 'no-underline']
                 ) ?>
-            <?php
-
-// TODO refactor endif ?>
+            <?php endif ?>
             <?= Html::a(
                 Html::img(
                     '/img/roster/questionnaire.png',
@@ -147,13 +133,9 @@ foreach ($controller->myTeamArray as $item) {
                 ['user/questionnaire'],
                 ['class' => 'no-underline']
             ) ?>
-        <?php
-
-// TODO refactor endif ?>
+        <?php endif ?>
     </div>
-    <?php
-
-// TODO refactor foreach ($team->latestGame() as $item) : ?>
+    <?php foreach ($team->latestGame() as $item) : ?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 italic">
             <?= FormatHelper::asDatetime($item->schedule->schedule_date) ?>
             -
@@ -179,15 +161,11 @@ foreach ($controller->myTeamArray as $item) {
                 ['game/view', 'id' => $item->game_id]
             ) ?>
         </div>
-    <?php
-
-// TODO refactor endforeach ?>
+    <?php endforeach ?>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row text-size-4">&nbsp;</div>
     </div>
-    <?php
-
-// TODO refactor foreach ($team->nearestGame() as $item) : ?>
+    <?php foreach ($team->nearestGame() as $item) : ?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 italic">
             <?= FormatHelper::asDatetime($item->schedule->schedule_date) ?>
             -
@@ -206,9 +184,7 @@ foreach ($controller->myTeamArray as $item) {
                 ]
             ) ?>
             -
-            <?php
-
-// TODO refactor if ($team->myTeamOrVice()) : ?>
+            <?php if ($team->myTeamOrVice()) : ?>
                 <?= Html::a(
                     (($item->game_home_team_id === $team->team_id && $item->game_home_tactic_id)
                         || ($item->game_guest_team_id === $team->team_id && $item->game_guest_tactic_id))
@@ -216,18 +192,12 @@ foreach ($controller->myTeamArray as $item) {
                         : 'Ред.',
                     ['lineup/view', 'id' => $item->game_id]
                 ) ?>
-            <?php
-
-// TODO refactor else: ?>
+            <?php else: ?>
                 <?= Html::a(
                     '?:?',
                     ['game/preview', 'id' => $item->game_id]
                 ) ?>
-            <?php
-
-// TODO refactor endif ?>
+            <?php endif ?>
         </div>
-    <?php
-
-// TODO refactor endforeach ?>
+    <?php endforeach ?>
 </div>

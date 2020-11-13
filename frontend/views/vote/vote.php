@@ -35,9 +35,7 @@ use yii\widgets\ActiveForm;
                 <?= $vote->user->getUserLink(['color' => true]) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor $form = ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 notification-error',
