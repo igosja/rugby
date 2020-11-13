@@ -55,22 +55,16 @@ $controller = Yii::$app->controller;
         ]) ?>
     </div>
 </div>
-<?php
-
-// TODO refactor if ('country_national' == $file_name) : ?>
+<?php if ('country_national' == $file_name) : ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <?= $this->render('_country-national-links') ?>
         </div>
     </div>
-<?php
-
-// TODO refactor endif ?>
+<?php endif ?>
 <div class="row margin-top">
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center team-logo-div">
-        <?php
-
-// TODO refactor if (file_exists(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->federation_country_id . '.png')) : ?>
+        <?php if (file_exists(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->federation_country_id . '.png')) : ?>
             <?= Html::img(
                 '/img/country/100/' . $federation->federation_country_id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->federation_country_id . '.png'),
                 [
@@ -79,25 +73,17 @@ $controller = Yii::$app->controller;
                     'title' => $federation->country->country_name,
                 ]
             ) ?>
-        <?php
-
-// TODO refactor endif ?>
+        <?php endif ?>
     </div>
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Президент:
-                <?php
-
-// TODO refactor if ($federation->federation_president_id) : ?>
+                <?php if ($federation->federation_president_id) : ?>
                     <?= $federation->president->userLink(['class' => 'strong']) ?>
-                <?php
-
-// TODO refactor else : ?>
+                <?php else : ?>
                     -
-                <?php
-
-// TODO refactor endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
@@ -119,17 +105,11 @@ $controller = Yii::$app->controller;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Заместитель президента:
-                <?php
-
-// TODO refactor if ($federation->federation_vice_id) : ?>
+                <?php if ($federation->federation_vice_id) : ?>
                     <?= $federation->vice->userLink(['class' => 'strong']) ?>
-                <?php
-
-// TODO refactor else : ?>
+                <?php else : ?>
                     -
-                <?php
-
-// TODO refactor endif ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
@@ -148,12 +128,8 @@ $controller = Yii::$app->controller;
         </div>
     </div>
 </div>
-<?php
-
-// TODO refactor if ($controller->myTeam && $controller->myTeam->stadium->city->city_country_id === $federation->federation_country_id) : ?>
-    <?php
-
-// TODO refactor $form = ActiveForm::begin([
+<?php if ($controller->myTeam && $controller->myTeam->stadium->city->city_country_id === $federation->federation_country_id) : ?>
+    <?php $form = ActiveForm::begin([
         'action' => ['country/attitude-president', 'id' => $federation->federation_country_id],
         'fieldConfig' => [
             'labelOptions' => ['class' => 'strong'],
@@ -204,12 +180,8 @@ $controller = Yii::$app->controller;
             ) ?>
         </div>
     </div>
-<?php
-
-// TODO refactor endif ?>
-<?php
-
-// TODO refactor if (!Yii::$app->user->isGuest && in_array(Yii::$app->user->id, [$federation->federation_president_id, $federation->federation_vice_id], true)) : ?>
+<?php endif ?>
+<?php if (!Yii::$app->user->isGuest && in_array(Yii::$app->user->id, [$federation->federation_president_id, $federation->federation_vice_id], true)) : ?>
     <div class="row margin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
             <?= Html::a(
@@ -240,30 +212,20 @@ $controller = Yii::$app->controller;
                 'Свободные команды',
                 ['country/free-team', 'id' => $federation->federation_country_id]
             ) ?>
-            <?php
-
-// TODO refactor if (Yii::$app->user->id === $federation->federation_president_id): ?>
+            <?php if (Yii::$app->user->id === $federation->federation_president_id): ?>
                 |
                 <?= Html::a(
                     'Распределить фонд',
                     ['country/money-transfer', 'id' => $federation->federation_country_id]
                 ) ?>
-            <?php
-
-// TODO refactor endif ?>
-            <?php
-
-// TODO refactor if ((Yii::$app->user->id === $federation->federation_president_id && $federation->federation_vice_id) || Yii::$app->user->id === $federation->federation_vice_id) : ?>
+            <?php endif ?>
+            <?php if ((Yii::$app->user->id === $federation->federation_president_id && $federation->federation_vice_id) || Yii::$app->user->id === $federation->federation_vice_id) : ?>
                 |
                 <?= Html::a(
                     'Отказаться от должности',
                     ['country/fire', 'id' => $federation->federation_country_id]
                 ) ?>
-            <?php
-
-// TODO refactor endif ?>
+            <?php endif ?>
         </div>
     </div>
-<?php
-
-// TODO refactor endif ?>
+<?php endif ?>

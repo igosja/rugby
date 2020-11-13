@@ -35,14 +35,10 @@ use common\models\db\ForumMessage;
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             Команды:
-            <?php
-
-// TODO refactor foreach ($model->user->teams as $team): ?>
+            <?php foreach ($model->user->teams as $team): ?>
                 <br/>
                 <?= $team->getTeamLink() ?>
-            <?php
-
-// TODO refactor endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -60,16 +56,12 @@ use common\models\db\ForumMessage;
             <?= nl2br($model->text) ?>
         </div>
     </div>
-    <?php
-
-// TODO refactor if ($model->date_update) : ?>
+    <?php if ($model->date_update) : ?>
         <div class="row text-size-2 font-grey">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 Отредактировано в
                 <?= FormatHelper::asDatetime($model->date_update) ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor endif; ?>
+    <?php endif; ?>
 </div>

@@ -12,9 +12,7 @@ use yii\web\View;
  */
 
 ?>
-<?php
-
-// TODO refactor $this->beginPage() ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -264,14 +262,10 @@ use yii\web\View;
         }
     </style>
     <![endif]-->
-    <?php
-
-// TODO refactor $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
-<?php
-
-// TODO refactor $this->beginBody() ?>
+<?php $this->beginBody() ?>
 <center>
     <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
         <tr>
@@ -370,11 +364,7 @@ use yii\web\View;
         </tr>
     </table>
 </center>
-<?php
-
-// TODO refactor $this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php
-
-// TODO refactor $this->endPage() ?>
+<?php $this->endPage() ?>

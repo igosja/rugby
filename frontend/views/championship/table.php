@@ -101,9 +101,7 @@ $user = Yii::$app->user->identity;
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
-            <?php
-
-// TODO refactor foreach ($gameArray as $item) : ?>
+            <?php foreach ($gameArray as $item) : ?>
                 <tr>
                     <td class="text-right col-45">
                         <?= $item->teamHome->teamLink('string', true) ?>
@@ -120,9 +118,7 @@ $user = Yii::$app->user->identity;
                         <?= $item->formatAuto('guest') ?>
                     </td>
                 </tr>
-            <?php
-
-// TODO refactor endforeach ?>
+            <?php endforeach ?>
         </table>
     </div>
 </div>

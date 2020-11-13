@@ -64,10 +64,7 @@ use yii\web\View;
                 ) ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor
-    endforeach ?>
+    <?php endforeach ?>
 </div>
 <div class="row">
     <div class="col-lg-8">
@@ -162,10 +159,7 @@ use yii\web\View;
                             ['moderation/chat'],
                             ['class' => 'list-group-item']
                         ) ?>
-                    <?php
-
-// TODO refactor
-                    endforeach ?>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>

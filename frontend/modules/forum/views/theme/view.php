@@ -75,12 +75,8 @@ use yii\widgets\ListView;
         ?>
     </div>
 </div>
-<?php
-
-// TODO refactor if (!Yii::$app->user->isGuest) : ?>
-    <?php
-
-// TODO refactor if (!$user->date_confirm) : ?>
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <?php if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму
@@ -88,9 +84,7 @@ use yii\widgets\ListView;
                 Причина - ваш почтовый адрес не подтверждён
             </div>
         </div>
-    <?php
-
-// TODO refactor elseif ($userBlockForum && $userBlockForum->date >= time()) : ?>
+    <?php elseif ($userBlockForum && $userBlockForum->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму до
@@ -99,9 +93,7 @@ use yii\widgets\ListView;
                 Причина - <?= $userBlockForum->userBlockReason->text ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
+    <?php elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
                 Вам заблокирован доступ к форуму до
@@ -110,12 +102,8 @@ use yii\widgets\ListView;
                 Причина - <?= $userBlockComment->userBlockReason->text ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor else: ?>
-        <?php
-
-// TODO refactor $form = ActiveForm::begin([
+    <?php else: ?>
+        <?php $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
                     'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error',
@@ -141,9 +129,5 @@ use yii\widgets\ListView;
         <?php
 
 // TODO refactor ActiveForm::end(); ?>
-    <?php
-
-// TODO refactor endif; ?>
-<?php
-
-// TODO refactor endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

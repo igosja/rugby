@@ -29,9 +29,7 @@ use yii\widgets\ActiveForm;
             </h1>
         </div>
     </div>
-<?php
-
-// TODO refactor $form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
     'action' => ['player/index'],
     'fieldConfig' => [
         'template' => '{input}',

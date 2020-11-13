@@ -59,10 +59,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                                 ) ?>
                             </div>
                         </div>
-                    <?php
-
-// TODO refactor
-                    endif ?>
+                    <?php endif ?>
                     <?php
 
 // TODO refactor
@@ -85,15 +82,9 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                                 ) ?>
                             </div>
                         </div>
-                    <?php
-
-// TODO refactor
-                    endif ?>
+                    <?php endif ?>
                 </div>
-            <?php
-
-// TODO refactor
-            endif ?>
+            <?php endif ?>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top">
@@ -159,10 +150,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
 // TODO refactor
                         else: ?>
                             ~<?= $player->player_power_nominal ?>
-                        <?php
-
-// TODO refactor
-                        endif ?>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="row">
@@ -197,10 +185,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             <?= $player->iconLoan() ?>
                         </div>
                     </div>
-                <?php
-
-// TODO refactor
-                endif ?>
+                <?php endif ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         Позиция:

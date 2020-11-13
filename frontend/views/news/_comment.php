@@ -24,15 +24,11 @@ $context = $this->context;
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 font-grey">
     <?= FormatHelper::asDateTime($model->date) ?>
-    <?php
-
-// TODO refactor if ($context->user && UserRole::ADMIN === $context->user->user_role_id): ?>
+    <?php if ($context->user && UserRole::ADMIN === $context->user->user_role_id): ?>
         <?= Html::a(
             FAS::icon(FAS::_TRASH),
             ['news/delete-comment', 'id' => $model->id, 'newsId' => $model->news_id],
             ['title' => 'Удалить']
         ) ?>
-    <?php
-
-// TODO refactor endif ?>
+    <?php endif ?>
 </div>

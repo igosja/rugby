@@ -13,9 +13,7 @@ use yii\helpers\Html;
 ?>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-size-2">
     <span class="italic">Последние темы на форуме федерации:</span>
-    <?php
-
-// TODO refactor foreach ($team->forumLastArray() as $item) : ?>
+    <?php foreach ($team->forumLastArray() as $item) : ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?= Html::a(
@@ -27,8 +25,5 @@ use yii\helpers\Html;
                 <?= FormatHelper::asDateTime($item->forum_message_date) ?>
             </div>
         </div>
-    <?php
-
-// TODO refactor
-    endforeach ?>
+    <?php endforeach ?>
 </div>

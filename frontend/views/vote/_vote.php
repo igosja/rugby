@@ -30,9 +30,7 @@ use yii\helpers\Html;
             <?= FormatHelper::asDateTime($model->date) ?>
         </div>
     </div>
-    <?php
-
-// TODO refactor foreach ($model->answers() as $answer) : ?>
+    <?php foreach ($model->answers() as $answer) : ?>
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                 <?= $answer['answer'] ?>
@@ -42,7 +40,5 @@ use yii\helpers\Html;
                 (<?= $answer['percent'] ?>%)
             </div>
         </div>
-    <?php
-
-// TODO refactor endforeach ?>
+    <?php endforeach ?>
 </div>
