@@ -6,6 +6,8 @@ namespace common\models\db;
 
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
+use rmrevin\yii\fontawesome\FAS;
+use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 
 /**
@@ -66,6 +68,21 @@ class Lineup extends AbstractActiveRecord
             [['position_id'], 'exist', 'targetRelation' => 'position'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
         ];
+    }
+
+    /**
+     * @return string
+     * @throws InvalidConfigException
+     */
+    public function iconPowerChange(): string
+    {
+        $result = '';
+        if ($this->power_change > 0) {
+            $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => '+1 балл по результатам матча'])->addCssClass('font-green');
+        } elseif ($this->power_change < 0) {
+            $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => '-1 балл по результатам матча'])->addCssClass('font-red');
+        }
+        return $result;
     }
 
     /**

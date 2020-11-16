@@ -22,18 +22,9 @@ class LineupQuery
     {
         return Lineup::find()
             ->joinWith(['game.schedule'])
-            ->with([
-                'game.nationalGuest',
-                'game.nationalHome',
-                'game.schedule.stage',
-                'game.schedule.tournamentType',
-                'game.teamGuest',
-                'game.teamHome',
-                'position',
-            ])
-            ->where(['lineup_player_id' => $playerId])
-            ->andWhere(['schedule.schedule_season_id' => $seasonId])
-            ->andWhere(['!=', 'game.game_played', 0])
-            ->orderBy(['schedule_date' => SORT_ASC]);
+            ->where(['player_id' => $playerId])
+            ->andWhere(['season_id' => $seasonId])
+            ->andWhere(['not', ['played' => null]])
+            ->orderBy(['date' => SORT_ASC]);
     }
 }

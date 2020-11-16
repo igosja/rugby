@@ -22,10 +22,10 @@ use yii\web\View;
 print $this->render('//player/_player', ['player' => $player]);
 
 ?>
-<?= Html::beginForm(['player/view', 'id' => $player->player_id], 'get') ?>
+<?= Html::beginForm(['player/view', 'id' => $player->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <?= $this->render('//player/_links', ['id' => $player->player_id]) ?>
+        <?= $this->render('//player/_links', ['id' => $player->id]) ?>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
@@ -57,7 +57,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Дата',
                 'value' => static function (Lineup $model) {
-                    return Yii::$app->formatter->asDate($model->game->schedule->schedule_date, 'short');
+                    return Yii::$app->formatter->asDate($model->game->schedule->date, 'short');
                 }
             ],
             [
@@ -81,7 +81,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'value' => static function (Lineup $model) {
                     return Html::a(
                         $model->game->formatScore(),
-                        ['game/view', 'id' => $model->game->game_id]
+                        ['game/view', 'id' => $model->game->id]
                     );
                 }
             ],
@@ -91,7 +91,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-13'],
                 'label' => 'Тип матча',
                 'value' => static function (Lineup $model) {
-                    return $model->game->schedule->tournamentType->tournament_type_name;
+                    return $model->game->schedule->tournamentType->name;
                 }
             ],
             [
@@ -100,7 +100,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Стадия',
                 'value' => static function (Lineup $model) {
-                    return $model->game->schedule->stage->stage_name;
+                    return $model->game->schedule->stage->name;
                 }
             ],
             [
@@ -110,7 +110,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Lineup $model) {
-                    return $model->position->position_name;
+                    return $model->position->name;
                 }
             ],
             [
@@ -120,7 +120,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Сила'],
                 'label' => 'С',
                 'value' => static function (Lineup $model) {
-                    return $model->lineup_power_real;
+                    return $model->power_real;
                 }
             ],
             [
@@ -130,17 +130,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Шайбы'],
                 'label' => 'Ш',
                 'value' => static function (Lineup $model) {
-                    return $model->lineup_point;
-                }
-            ],
-            [
-                'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => '+/-',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Плюс/минус'],
-                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Плюс/минус'],
-                'label' => '+/-',
-                'value' => static function (Lineup $model) {
-                    return $model->lineup_plus_minus;
+                    return $model->point;
                 }
             ],
             [
@@ -167,7 +157,7 @@ print $this->render('//player/_player', ['player' => $player]);
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//player/_links', ['id' => $player->player_id]) ?>
+        <?= $this->render('//player/_links', ['id' => $player->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

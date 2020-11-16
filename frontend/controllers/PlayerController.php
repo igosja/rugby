@@ -66,7 +66,7 @@ class PlayerController extends AbstractController
     {
         $player = $this->getPlayer($id);
 
-        $seasonId = Yii::$app->request->get('season_id', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('season_id', $this->season->id);
         $dataProvider = LineupPrepare::getPlayerDataProvider($id, $seasonId);
 
         $this->setSeoTitle($player->playerName() . ' - profile');

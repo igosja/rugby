@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7ac1c97a12d41cb965bbbfdb17ed156",
+    "content-hash": "015e8c4f0d9aad1e77229c9614e6bd1a",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1042,12 +1042,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "e73da6f894fa401a17f7f66e15c068bb7571e063"
+                "reference": "453db1f6585fddc7156dacc29a10a3c8d623b3a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/e73da6f894fa401a17f7f66e15c068bb7571e063",
-                "reference": "e73da6f894fa401a17f7f66e15c068bb7571e063",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/453db1f6585fddc7156dacc29a10a3c8d623b3a7",
+                "reference": "453db1f6585fddc7156dacc29a10a3c8d623b3a7",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1156,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-02T10:13:11+00:00"
+            "time": "2020-11-15T19:16:20+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
