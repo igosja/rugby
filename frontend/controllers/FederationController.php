@@ -23,7 +23,7 @@ class FederationController extends AbstractController
     public function actionTeam(int $id): string
     {
         $federation = $this->getFederation($id);
-        $dataProvider = TeamPrepare::getFederationTeamDataProvider($id);
+        $dataProvider = TeamPrepare::getFederationTeamDataProvider($federation->country_id);
 
         $this->setSeoTitle('Команды федерации');
         return $this->render('team', [
@@ -39,7 +39,7 @@ class FederationController extends AbstractController
      */
     private function getFederation(int $id): Federation
     {
-        $federation = FederationQuery::getFederationByCountryId($id);
+        $federation = FederationQuery::getFederationById($id);
         $this->notFound($federation);
 
         return $federation;

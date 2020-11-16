@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\FormatHelper;
 use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
@@ -143,6 +144,32 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function lastVisit(): string
+    {
+        $date = $this->date_login;
+        $min_5 = $date + 5 * 60;
+        $min_60 = $date + 60 * 60;
+        $now = time();
+
+        if ($min_5 >= $now) {
+            $date = '<span class="red">online</span>';
+        } elseif ($min_60 >= $now) {
+            $difference = $now - $date;
+            $difference /= 60;
+            $difference = round($difference, 0);
+            $date = $difference . ' минут назад';
+        } elseif (!$date) {
+            $date = '-';
+        } else {
+            $date = FormatHelper::asDateTime($date);
+        }
+
+        return $date;
     }
 
     /**

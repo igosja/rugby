@@ -23,8 +23,6 @@ print $this->render('_federation', [
 <div class="row margin-top">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -32,19 +30,19 @@ print $this->render('_federation', [
                 'footer' => 'Команда',
                 'format' => 'raw',
                 'label' => 'Команда',
-                'value' => function (Team $model) {
-                    return $model->iconFreeTeam() . $model->teamLink('string', true);
+                'value' => static function (Team $model) {
+                    return $model->iconFreeTeam() . $model->getTeamLink();
                 }
             ],
             [
-                'attribute' => 'manager',
+                'attribute' => 'user',
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Менеджер',
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-40'],
                 'label' => 'Менеджер',
-                'value' => function (Team $model) {
-                    return $model->manager->iconVip() . ' ' . $model->manager->userLink();
+                'value' => static function (Team $model) {
+                    return $model->user->iconVip() . ' ' . $model->user->getUserLink();
                 }
             ],
             [
@@ -55,16 +53,16 @@ print $this->render('_federation', [
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-20 hidden-xs'],
                 'label' => 'Последний визит',
-                'value' => function (Team $model) {
-                    return $model->manager->lastVisit();
+                'value' => static function (Team $model) {
+                    return $model->user->lastVisit();
                 }
             ],
         ];
         print GridView::widget([
-                                   'columns' => $columns,
-                                   'dataProvider' => $dataProvider,
-                                   'showFooter' => true,
-                               ]
+                'columns' => $columns,
+                'dataProvider' => $dataProvider,
+                'showFooter' => true,
+            ]
         );
     } catch (Exception $e) {
         ErrorHelper::log($e);
@@ -73,4 +71,3 @@ print $this->render('_federation', [
     ?>
 </div>
 <?= $this->render('//site/_show-full-table') ?>
-

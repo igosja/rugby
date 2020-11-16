@@ -25,16 +25,16 @@ class TeamPrepare
             'sort' => [
                 'attributes' => [
                     'last_visit' => [
-                        'asc' => ['user_date_login' => SORT_ASC],
-                        'desc' => ['user_date_login' => SORT_DESC],
+                        'asc' => ['date_login' => SORT_ASC],
+                        'desc' => ['date_login' => SORT_DESC],
                     ],
-                    'manager' => [
-                        'asc' => ['user_login' => SORT_ASC],
-                        'desc' => ['user_login' => SORT_DESC],
+                    'user' => [
+                        'asc' => ['login' => SORT_ASC],
+                        'desc' => ['login' => SORT_DESC],
                     ],
                     'team' => [
-                        'asc' => ['team_name' => SORT_ASC],
-                        'desc' => ['team_name' => SORT_DESC],
+                        'asc' => ['name' => SORT_ASC],
+                        'desc' => ['name' => SORT_DESC],
                     ],
                 ],
                 'defaultOrder' => ['team' => SORT_ASC],

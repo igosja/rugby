@@ -16,6 +16,7 @@ use yii\db\ActiveQuery;
  * @property string $name
  *
  * @property-read Country $country
+ * @property-read Stadium[] $stadiums
  */
 class City extends AbstractActiveRecord
 {
@@ -47,5 +48,13 @@ class City extends AbstractActiveRecord
     public function getCountry(): ActiveQuery
     {
         return $this->hasOne(Country::class, ['id' => 'country_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getStadiums(): ActiveQuery
+    {
+        return $this->hasMany(Stadium::class, ['city_id' => 'id']);
     }
 }

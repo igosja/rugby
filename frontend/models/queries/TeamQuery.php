@@ -108,26 +108,7 @@ class TeamQuery
     public static function getTeamListQuery(int $countryId): ActiveQuery
     {
         return Team::find()
-            ->joinWith(
-                [
-                    'manager',
-                    'stadium.city'
-                ],
-                false
-            )
-            ->with(
-                [
-                    'stadium' => static function (ActiveQuery $query) {
-                        $query
-                            ->with(
-                                [
-                                    'city',
-                                ]
-                            );
-                    },
-                    'manager',
-                ]
-            )
-            ->where(['city_country_id' => $countryId]);
+            ->joinWith(['user', 'stadium.city'], false)
+            ->where(['city.country_id' => $countryId]);
     }
 }

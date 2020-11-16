@@ -18,7 +18,7 @@ class AttitudeQuery
     public static function getAttitudeList(): array
     {
         return Attitude::find()
-            ->orderBy(['attitude_order' => SORT_ASC])
+            ->orderBy(['order' => SORT_ASC])
             ->cache()
             ->all();
     }
