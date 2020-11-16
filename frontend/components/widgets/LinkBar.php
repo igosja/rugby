@@ -7,6 +7,7 @@ namespace frontend\components\widgets;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * Class LinkBar
@@ -130,8 +131,7 @@ class LinkBar extends Widget
                                 if (!isset($this->params[$name])) {
                                     continue;
                                 }
-
-                                if ($this->params[$name] !== $value) {
+                                if ($this->params[$name] !== (string)$value) {
                                     return false;
                                 }
                             }

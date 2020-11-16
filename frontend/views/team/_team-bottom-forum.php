@@ -17,12 +17,12 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?= Html::a(
-                    $item->forumTheme->forum_theme_name,
-                    ['forum/theme', 'id' => $item->forumTheme->forum_theme_id]
+                    $item->forumTheme->name,
+                    ['forum/theme/view', 'id' => $item->forumTheme->id]
                 ) ?>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <?= FormatHelper::asDateTime($item->forum_message_date) ?>
+                <?= FormatHelper::asDateTime($item->date) ?>
             </div>
         </div>
     <?php endforeach ?>

@@ -6,6 +6,7 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Physical
@@ -42,6 +43,20 @@ class Physical extends AbstractActiveRecord
             [['opposite_id'], 'exist', 'targetRelation' => 'opposite'],
             [['name', 'opposite_physical_id'], 'unique'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function image(): string
+    {
+        return Html::img(
+            '/img/physical/' . $this->id . '.png',
+            [
+                'alt' => $this->name,
+                'title' => $this->name,
+            ]
+        );
     }
 
     /**
