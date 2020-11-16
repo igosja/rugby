@@ -15,6 +15,7 @@ use yii\helpers\Html;
  * @property int $id
  * @property string $name
  *
+ * @property-read City[] $cities
  * @property-read Federation $federation
  */
 class Country extends AbstractActiveRecord
@@ -80,6 +81,14 @@ class Country extends AbstractActiveRecord
             $text,
             ['/federation/team', 'id' => $this->id]
         );
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCities(): ActiveQuery
+    {
+        return $this->hasMany(City::class, ['country_id' => 'id']);
     }
 
     /**

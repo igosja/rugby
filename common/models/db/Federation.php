@@ -50,6 +50,73 @@ class Federation extends AbstractActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function attitudePresident(): int
+    {
+        $result = 0;
+        foreach ($this->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if ($stadium->team->user) {
+                    $result++;
+                }
+            }
+        }
+        if (!$result) {
+            $result = 1;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudePresidentNegative(): int
+    {
+        $result = 0;
+        foreach ($this->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if (Attitude::NEGATIVE === $stadium->team->president_attitude_id && $stadium->team->user_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudePresident() * 100);
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudePresidentNeutral(): int
+    {
+        $result = 0;
+        foreach ($this->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if (Attitude::NEUTRAL === $stadium->team->president_attitude_id && $stadium->team->user_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudePresident() * 100);
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudePresidentPositive(): int
+    {
+        $result = 0;
+        foreach ($this->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if (Attitude::POSITIVE === $stadium->team->president_attitude_id && $stadium->team->user_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudePresident() * 100);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getCountry(): ActiveQuery

@@ -19,6 +19,7 @@ use yii\db\ActiveQuery;
  * @property string $name
  *
  * @property-read City $city
+ * @property-read Team $team
  */
 class Stadium extends AbstractActiveRecord
 {
@@ -54,5 +55,13 @@ class Stadium extends AbstractActiveRecord
     public function getCity(): ActiveQuery
     {
         return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTeam(): ActiveQuery
+    {
+        return $this->hasOne(Team::class, ['stadium_id' => 'id']);
     }
 }

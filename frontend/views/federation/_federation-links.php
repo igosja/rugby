@@ -6,7 +6,7 @@ use common\components\helpers\ErrorHelper;
 use frontend\components\widgets\LinkBar;
 
 /**
- * @var int $countryId
+ * @var int $id
  */
 
 try {
@@ -14,27 +14,27 @@ try {
         'items' => [
             [
                 'text' => 'Команды',
-                'url' => ['country/team', 'id' => $countryId],
+                'url' => ['federation/team', 'id' => $id],
             ],
             [
                 'text' => 'Сборные',
-                'url' => ['country/national', 'id' => $countryId],
+                'url' => ['federation/national', 'id' => $id],
             ],
             [
                 'text' => 'Новости',
-                'url' => ['country/news', 'id' => $countryId],
+                'url' => ['federation/news', 'id' => $id],
             ],
             [
                 'text' => 'Фонд',
-                'url' => ['country/finance', 'id' => $countryId],
+                'url' => ['federation/finance', 'id' => $id],
             ],
             [
                 'text' => 'Опросы',
-                'url' => ['country/poll', 'id' => $countryId],
+                'url' => ['federation/poll', 'id' => $id],
             ],
             [
                 'text' => 'Лига Чемпионов',
-                'url' => ['country/league', 'id' => $countryId],
+                'url' => ['federation/league', 'id' => $id],
             ],
         ]
     ]);
