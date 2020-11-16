@@ -20,7 +20,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
         $squadArray = Squad::find()->all();
         $squadStyle = [];
         foreach ($squadArray as $item) {
-            $squadStyle[$item->squad_id] = ['style' => ['background-color' => '#' . $item->squad_color]];
+            $squadStyle[$item->id] = ['style' => ['background-color' => '#' . $item->color]];
         }
     }
 }
@@ -32,15 +32,9 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-size-1 strong">
                 <?= $player->playerName() ?>
             </div>
-            <?php
-
-// TODO refactor
-            if (isset($squadArray)): ?>
+            <?php if (isset($squadArray)): ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <?php
-
-// TODO refactor
-                    if ($player->myPlayer()): ?>
+                    <?php if ($player->myPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
                                 <label for="select-line">Состав:</label>
@@ -48,11 +42,11 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
                                     'squad_id',
-                                    $player->player_squad_id,
-                                    ArrayHelper::map($squadArray, 'squad_id', 'squad_name'),
+                                    $player->squad_id,
+                                    ArrayHelper::map($squadArray, 'id', 'name'),
                                     [
                                         'class' => 'form-control',
-                                        'data' => ['url' => Url::to(['squad', 'id' => $player->player_id])],
+                                        'data' => ['url' => Url::to(['squad', 'id' => $player->id])],
                                         'id' => 'select-squad',
                                         'options' => $squadStyle,
                                     ]
@@ -60,10 +54,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             </div>
                         </div>
                     <?php endif ?>
-                    <?php
-
-// TODO refactor
-                    if ($player->myNationalPlayer()): ?>
+                    <?php if ($player->myNationalPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
                                 <label for="select-line">Состав в сборной:</label>
@@ -71,11 +62,11 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
                                     'squad_id',
-                                    $player->player_national_squad_id,
-                                    ArrayHelper::map($squadArray, 'squad_id', 'squad_name'),
+                                    $player->national_squad_id,
+                                    ArrayHelper::map($squadArray, 'id', 'name'),
                                     [
                                         'class' => 'form-control',
-                                        'data' => ['url' => Url::to(['national-squad', 'id' => $player->player_id])],
+                                        'data' => ['url' => Url::to(['national-squad', 'id' => $player->id])],
                                         'id' => 'select-national-squad',
                                         'options' => $squadStyle,
                                     ]
@@ -95,7 +86,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Национальность:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->country->countryLink() ?>
+                        <?= $player->country->getTextLink() ?>
                         <?= $player->iconNational() ?>
                     </div>
                 </div>
@@ -104,7 +95,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Возраст:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_age ?>
+                        <?= $player->age ?>
                         <?= $player->iconPension() ?>
                     </div>
                 </div>
@@ -113,7 +104,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Сила:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_power_nominal ?>
+                        <?= $player->power_nominal ?>
                         <?= $player->iconDeal() ?>
                         <?= $player->iconTraining() ?>
                     </div>
@@ -140,16 +131,10 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Реальная сила:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?php
-
-// TODO refactor
-                        if ($player->myPlayer()) : ?>
-                            <?= $player->player_power_real ?>
-                        <?php
-
-// TODO refactor
-                        else: ?>
-                            ~<?= $player->player_power_nominal ?>
+                        <?php if ($player->myPlayer()) : ?>
+                            <?= $player->power_real ?>
+                        <?php else: ?>
+                            ~<?= $player->power_nominal ?>
                         <?php endif ?>
                     </div>
                 </div>
@@ -169,19 +154,16 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Команда:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->team->teamLink('img') ?>
+                        <?= $player->team->getTeamLink() ?>
                     </div>
                 </div>
-                <?php
-
-// TODO refactor
-                if ($player->loanTeam->team_id) : ?>
+                <?php if ($player->loan_team_id) : ?>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             В аренде:
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <?= $player->loanTeam->teamLink('img') ?>
+                            <?= $player->loanTeam->getTeamLink() ?>
                             <?= $player->iconLoan() ?>
                         </div>
                     </div>
@@ -207,7 +189,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Зарплата в день:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_salary) ?>
+                        <?= FormatHelper::asCurrency($player->salary) ?>
                     </div>
                 </div>
                 <div class="row">
@@ -215,7 +197,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                         Стоимость:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_price) ?>
+                        <?= FormatHelper::asCurrency($player->price) ?>
                     </div>
                 </div>
             </div>

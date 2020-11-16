@@ -135,6 +135,14 @@ class Player extends AbstractActiveRecord
     /**
      * @return string
      */
+    public function playerName(): string
+    {
+        return $this->name->name . ' ' . $this->surname->name;
+    }
+
+    /**
+     * @return string
+     */
     public function playerGameRow(): string
     {
         /**
