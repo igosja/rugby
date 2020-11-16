@@ -8,14 +8,15 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAS;
 use yii\helpers\Html;
 
 ?>
 <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-3 col-xs-4 text-center team-logo-div">
         <?= Html::a(
-            $team->logo(),
-            ['team/logo', 'id' => $team->team_id],
+            $team->getLogo(),
+            ['team/logo', 'id' => $team->id],
             ['class' => 'team-logo-link']
         ) ?>
     </div>
@@ -37,19 +38,16 @@ use yii\helpers\Html;
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Менеджер:
-                <?php
-
-// TODO refactor
-                if ($team->manager->canDialog()) : ?>
+                <?php if ($team->user->canDialog()) : ?>
                     <?= Html::a(
-                        '<i class="fa fa-envelope-o"></i>',
-                        ['messenger/view', 'id' => $team->manager->user_id],
+                        FAS::icon(FAS::_ENVELOPE),
+                        ['messenger/view', 'id' => $team->user->id],
                         ['title' => 'Написать']
                     ) ?>
                 <?php endif ?>
                 <?= Html::a(
-                    $team->manager->fullName(),
-                    ['user/view', 'id' => $team->manager->user_id],
+                    $team->user->getFullName(),
+                    ['user/view', 'id' => $team->user->id],
                     ['class' => 'strong']
                 ) ?>
             </div>
@@ -57,30 +55,24 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Ник:
-                <?= $team->manager->iconVip() ?>
-                <?= $team->manager->userLink(['class' => 'strong']) ?>
+                <?= $team->user->iconVip() ?>
+                <?= $team->user->getUserLink(['class' => 'strong']) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor
-        if ($team->team_vice_id) : ?>
+        <?php if ($team->vice_user_id) : ?>
             <div class="row margin-top-small">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     Заместитель:
-                    <?php
-
-// TODO refactor
-                    if ($team->vice->canDialog()) : ?>
+                    <?php if ($team->viceUser->canDialog()) : ?>
                         <?= Html::a(
-                            '<i class="fa fa-envelope-o"></i>',
-                            ['messenger/view', 'id' => $team->vice->user_id],
+                            FAS::icon(FAS::_ENVELOPE),
+                            ['messenger/view', 'id' => $team->viceUser->id],
                             ['title' => 'Написать']
                         ) ?>
                     <?php endif ?>
                     <?= Html::a(
-                        $team->vice->fullName(),
-                        ['user/view', 'id' => $team->vice->user_id],
+                        $team->viceUser->getFullName(),
+                        ['user/view', 'id' => $team->viceUser->id],
                         ['class' => 'strong']
                     ) ?>
                 </div>
@@ -88,14 +80,11 @@ use yii\helpers\Html;
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     Ник:
-                    <?= $team->vice->iconVip() ?>
-                    <?= $team->vice->userLink(['class' => 'strong']) ?>
-                    <?php
-
-// TODO refactor
-                    if ($team->canViceLeave()) : ?>
+                    <?= $team->viceUser->iconVip() ?>
+                    <?= $team->viceUser->getUserLink(['class' => 'strong']) ?>
+                    <?php if ($team->canViceLeave()) : ?>
                         <?= Html::a(
-                            '<i class="fa fa-sign-out"></i>',
+                            FAS::icon(FAS::_SIGN_OUT_ALT),
                             ['team/vice-leave', 'id' => $team->team_id],
                             ['title' => 'Отказаться от заместительства']
                         ) ?>
@@ -106,40 +95,31 @@ use yii\helpers\Html;
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Стадион:
-                <?= $team->stadium->stadium_name ?>,
-                <strong><?= Yii::$app->formatter->asInteger($team->stadium->stadium_capacity) ?></strong>
-                <?php
-
-// TODO refactor
-                if ($team->myTeam()) : ?>
+                <?= $team->stadium->name ?>,
+                <strong><?= Yii::$app->formatter->asInteger($team->stadium->capacity) ?></strong>
+                <?php if ($team->myTeam()) : ?>
                     <?= Html::a(
-                        '<i class="fa fa-search" aria-hidden="true"></i>',
+                        FAS::icon(FAS::_SEARCH),
                         ['stadium/increase']
                     ) ?>
                 <?php endif ?>
-                <?php
-
-// TODO refactor
-                if ($team->buildingStadium) : ?>
-                    <i class="fa fa-cog" aria-hidden="true" title="На стадионе идет строительство"></i>
+                <?php if ($team->buildingStadium) : ?>
+                    <?= FAS::icon(FAS::_COG, ['title' => 'На стадионе идет строительство']) ?>
                 <?php endif ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 База:
-                <span class="strong"><?= $team->base->base_level ?></span> уровень
+                <span class="strong"><?= $team->base->level ?></span> уровень
                 (<span class="strong"><?= $team->baseUsed() ?></span> из
-                <span class="strong"><?= $team->base->base_slot_max ?></span>)
+                <span class="strong"><?= $team->base->slot_max ?></span>)
                 <?= Html::a(
-                    '<i class="fa fa-search" aria-hidden="true"></i>',
-                    ['base/view', 'id' => $team->team_id]
+                    FAS::icon(FAS::_SEARCH),
+                    ['base/view', 'id' => $team->id]
                 ) ?>
-                <?php
-
-// TODO refactor
-                if ($team->buildingBase) : ?>
-                    <i class="fa fa-cog" aria-hidden="true" title="На базе идет строительство"></i>
+                <?php if ($team->buildingBase) : ?>
+                    <?= FAS::icon(FAS::_COG, ['title' => 'На базе идет строительство']) ?>
                 <?php endif ?>
             </div>
         </div>
@@ -147,7 +127,7 @@ use yii\helpers\Html;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Финансы:
                 <span class="strong">
-                    <?= FormatHelper::asCurrency($team->team_finance) ?>
+                    <?= FormatHelper::asCurrency($team->finance) ?>
                 </span>
             </div>
         </div>

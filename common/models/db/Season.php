@@ -44,4 +44,12 @@ class Season extends AbstractActiveRecord
             ->all();
         return ArrayHelper::map($result, 'id', 'id');
     }
+
+    /**
+     * @return int
+     */
+    public static function getCurrentSeason(): int
+    {
+        return self::find()->andWhere(['is_future' => false])->max('id');
+    }
 }

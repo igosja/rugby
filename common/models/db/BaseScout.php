@@ -36,6 +36,14 @@ class BaseScout extends AbstractActiveRecord
     public const START_LEVEL = 1;
 
     /**
+     * @return string
+     */
+    public static function tableName(): string
+    {
+        return '{{%base_scout}}';
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -91,11 +99,51 @@ class BaseScout extends AbstractActiveRecord
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public static function tableName(): string
+    public function canSeeDealGameRow(): bool
     {
-        return '{{%base_scout}}';
+        return $this->is_market_game_row;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSeeDealTire(): bool
+    {
+        return $this->is_market_tire;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSeeDealPhysical(): bool
+    {
+        return $this->is_market_physical;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSeeOpponentGameRow(): bool
+    {
+        return $this->is_opponent_game_row;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSeeOpponentTire(): bool
+    {
+        return $this->is_opponent_tire;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSeeOpponentPhysical(): bool
+    {
+        return $this->is_opponent_physical;
     }
 
     /**

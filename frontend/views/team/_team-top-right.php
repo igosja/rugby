@@ -10,14 +10,14 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
 use yii\helpers\Html;
 use yii\web\View;
 
 $controller = $this->context;
 $myTeamIds = [];
 foreach ($controller->myTeamArray as $item) {
-    $myTeamIds[] = $item->team_id;
+    $myTeamIds[] = $item->id;
 }
 
 ?>
@@ -96,7 +96,7 @@ foreach ($controller->myTeamArray as $item) {
                     ['school/index'],
                     ['class' => 'no-underline']
                 ) ?>
-                <?php if ($team->manager->isVip()): ?>
+                <?php if ($team->user->isVip()): ?>
                     <?= Html::a(
                         Html::img(
                             '/img/roster/planning.png',
@@ -109,7 +109,7 @@ foreach ($controller->myTeamArray as $item) {
                         ['class' => 'no-underline']
                     ) ?>
                 <?php endif ?>
-            <?php elseif (!$team->team_user_id && !in_array($team->team_id, $myTeamIds, true)): ?>
+            <?php elseif (!$team->user_id && !in_array($team->id, $myTeamIds, true)): ?>
                 <?= Html::a(
                     Html::img(
                         '/img/roster/free-team.png',
@@ -118,7 +118,7 @@ foreach ($controller->myTeamArray as $item) {
                             'title' => 'Подать заявку на получение команды',
                         ]
                     ),
-                    [($controller->myTeam ? 'team/change' : 'team-request/index'), 'id' => $team->team_id],
+                    [($controller->myTeam ? 'team-change/change' : 'team-request/index'), 'id' => $team->id],
                     ['class' => 'no-underline']
                 ) ?>
             <?php endif ?>
@@ -137,28 +137,28 @@ foreach ($controller->myTeamArray as $item) {
     </div>
     <?php foreach ($team->latestGame() as $item) : ?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 italic">
-            <?= FormatHelper::asDatetime($item->schedule->schedule_date) ?>
+            <?= FormatHelper::asDatetime($item->schedule->date) ?>
             -
-            <?= $item->schedule->tournamentType->tournament_type_name ?>
+            <?= $item->schedule->tournamentType->name ?>
             -
-            <?= $item->game_home_team_id === $team->team_id ? 'Д' : 'Г' ?>
+            <?= $item->home_team_id === $team->id ? 'Д' : 'Г' ?>
             -
             <?= Html::a(
-                $item->game_home_team_id === $team->team_id ? $item->teamGuest->team_name : $item->teamHome->team_name,
+                $item->home_team_id === $team->id ? $item->guestTeam->name : $item->homeTeam->name,
                 [
                     'team/view',
                     'id' =>
-                        $item->game_home_team_id === $team->team_id
-                            ? $item->game_guest_team_id
-                            : $item->game_home_team_id
+                        $item->home_team_id === $team->id
+                            ? $item->guest_team_id
+                            : $item->home_team_id
                 ]
             ) ?>
             -
             <?= Html::a(
-                $item->game_home_team_id === $team->team_id
-                    ? $item->game_home_points . ':' . $item->game_guest_points
-                    : $item->game_guest_points . ':' . $item->game_home_points,
-                ['game/view', 'id' => $item->game_id]
+                $item->home_team_id === $team->id
+                    ? $item->home_points . ':' . $item->guest_points
+                    : $item->guest_points . ':' . $item->home_points,
+                ['game/view', 'id' => $item->id]
             ) ?>
         </div>
     <?php endforeach ?>
@@ -167,35 +167,35 @@ foreach ($controller->myTeamArray as $item) {
     </div>
     <?php foreach ($team->nearestGame() as $item) : ?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 italic">
-            <?= FormatHelper::asDatetime($item->schedule->schedule_date) ?>
+            <?= FormatHelper::asDatetime($item->schedule->date) ?>
             -
-            <?= $item->schedule->tournamentType->tournament_type_name ?>
+            <?= $item->schedule->tournamentType->name ?>
             -
-            <?= $item->game_home_team_id === $team->team_id ? 'Д' : 'Г' ?>
+            <?= $item->home_team_id === $team->id ? 'Д' : 'Г' ?>
             -
             <?= Html::a(
-                $item->game_home_team_id === $team->team_id ? $item->teamGuest->team_name : $item->teamHome->team_name,
+                $item->home_team_id === $team->id ? $item->guestTeam->name : $item->homeTeam->name,
                 [
                     'team/view',
                     'id' =>
-                        $item->game_home_team_id === $team->team_id
-                            ? $item->game_guest_team_id
-                            : $item->game_home_team_id
+                        $item->home_team_id === $team->id
+                            ? $item->guest_team_id
+                            : $item->home_team_id
                 ]
             ) ?>
             -
             <?php if ($team->myTeamOrVice()) : ?>
                 <?= Html::a(
-                    (($item->game_home_team_id === $team->team_id && $item->game_home_tactic_id)
-                        || ($item->game_guest_team_id === $team->team_id && $item->game_guest_tactic_id))
+                    (($item->home_team_id === $team->id && $item->home_tactic_id)
+                        || ($item->guest_team_id === $team->id && $item->guest_tactic_id))
                         ? 'Отпр.'
                         : 'Ред.',
-                    ['lineup/view', 'id' => $item->game_id]
+                    ['lineup/view', 'id' => $item->id]
                 ) ?>
             <?php else: ?>
                 <?= Html::a(
                     '?:?',
-                    ['game/preview', 'id' => $item->game_id]
+                    ['game/preview', 'id' => $item->id]
                 ) ?>
             <?php endif ?>
         </div>

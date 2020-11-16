@@ -106,7 +106,7 @@ class PlayerSearch extends Player
     {
         $query = Player::find()
             ->joinWith(['country', 'name', 'surname', 'team'])
-            ->where(['<=', 'age', Player::AGE_READY_FOR_PENSION + 1])
+            ->where(['<=', 'age', Player::AGE_READY_FOR_PENSION])
             ->andWhere(['!=', 'team_id', 0]);
 
         $dataProvider = new ActiveDataProvider([

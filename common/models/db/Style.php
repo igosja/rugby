@@ -41,4 +41,19 @@ class Style extends AbstractActiveRecord
             [['name'], 'unique'],
         ];
     }
+
+    /**
+     * @param array|null $notIn
+     * @return false|string|null
+     */
+    public static function getRandStyleId(array $notIn = null)
+    {
+        return self::find()
+            ->select(['id'])
+            ->where(['!=', 'id', self::NORMAL])
+            ->andFilterWhere(['not', ['id' => $notIn]])
+            ->orderBy('RAND()')
+            ->limit(1)
+            ->scalar();
+    }
 }

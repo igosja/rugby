@@ -5,6 +5,9 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
@@ -57,8 +60,13 @@ use yii\helpers\Html;
  * @property-read BaseSchool $baseSchool
  * @property-read BaseScout $baseScout
  * @property-read BaseTraining $baseTraining
+ * @property-read BuildingBase $buildingBase
+ * @property-read BuildingStadium $buildingStadium
  * @property-read News $federationNews
+ * @property-read Championship $championship
+ * @property-read Conference $conference
  * @property-read FriendlyStatus $friendlyStatus
+ * @property-read OffSeason $offSeason
  * @property-read Attitude $nationalAttitude
  * @property-read Attitude $presidentAttitude
  * @property-read Stadium $stadium
@@ -170,6 +178,212 @@ class Team extends AbstractActiveRecord
     }
 
     /**
+     * @return ForumMessage[]
+     */
+    public function forumLastArray(): array
+    {
+        return ForumMessage::find()
+            ->select([
+                '*',
+                'id' => 'MAX(forum_message.id)',
+                'date' => 'MAX(forum_message.date)',
+            ])
+            ->joinWith(['forumTheme.forumGroup'])
+            ->where([
+                'forum_group.federation_id' => $this->stadium->city->country->federation->id
+            ])
+            ->groupBy(['forum_theme_id'])
+            ->orderBy(['forum_message.id' => SORT_DESC])
+            ->limit(5)
+            ->all();
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function nearestGame(): array
+    {
+        return Game::find()
+            ->joinWith(['schedule'])
+            ->andWhere(['or', ['home_team_id' => $this->id], ['guest_team_id' => $this->id]])
+            ->andWhere(['played' => null])
+            ->orderBy(['date' => SORT_ASC])
+            ->limit(2)
+            ->all();
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function latestGame(): array
+    {
+        return array_reverse(Game::find()
+            ->joinWith(['schedule'])
+            ->andWhere(['or', ['home_team_id' => $this->id], ['guest_team_id' => $this->id]])
+            ->andWhere(['not', ['played' => null]])
+            ->orderBy(['date' => SORT_DESC])
+            ->limit(3)
+            ->all());
+    }
+
+    /**
+     * @return int
+     */
+    public function baseMaintenance(): int
+    {
+        return $this->base->maintenance_base + $this->base->maintenance_slot * $this->baseUsed();
+    }
+
+    /**
+     * @return int
+     */
+    public function baseUsed(): int
+    {
+        return $this->baseMedical->level
+            + $this->basePhysical->level
+            + $this->baseSchool->level
+            + $this->baseScout->level
+            + $this->baseTraining->level;
+    }
+
+    /**
+     * @return bool
+     */
+    public function myTeam(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+
+        if (!$controller->myTeam) {
+            return false;
+        }
+
+        if ($controller->myTeam->id !== $this->id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function myTeamOrVice(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+
+        if (!$controller->myTeamOrVice) {
+            return false;
+        }
+
+        if ($controller->myTeamOrVice->id !== $this->id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canViceLeave(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        return $controller->user && $controller->user->id === $this->vice_user_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo(): string
+    {
+        $result = 'Добавить<br/>эмблему';
+        if (file_exists(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png')) {
+            $result = Html::img(
+                '/img/team/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png'),
+                [
+                    'alt' => $this->name,
+                    'class' => 'team-logo',
+                    'title' => $this->name,
+                ]
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconFreeTeam(): string
+    {
+        $result = '';
+        if (!$this->user_id) {
+            $result = FAS::icon(FAS::_FLAG, ['title' => 'Free team']) . ' ';
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return $this->name
+            . ' (' . $this->stadium->city->name
+            . ', ' . $this->stadium->city->country->name
+            . ')';
+    }
+
+    /**
+     * @return string
+     */
+    public function offSeason(): string
+    {
+        $result = '-';
+        if ($this->offSeason) {
+            $result = Html::a(
+                $this->offSeason->place . ' место',
+                ['off-season/table']
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function division(): string
+    {
+        if ($this->championship) {
+            $result = Html::a(
+                $this->championship->federation->country->name . ', ' .
+                $this->championship->division->name . ', ' .
+                $this->championship->place . ' ' .
+                'место',
+                [
+                    'championship/index',
+                    'countryId' => $this->championship->federation->country->id,
+                    'divisionId' => $this->championship->division->id,
+                ]
+            );
+        } else {
+            $result = Html::a(
+                'Конференция' . ', ' . $this->conference->place . ' место',
+                ['conference/table']
+            );
+        }
+        return $result;
+    }
+
+    /**
      * @return int
      */
     public function getNumberOfUseSlot(): int
@@ -258,6 +472,46 @@ class Team extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getBuildingBase(): ActiveQuery
+    {
+        return $this
+            ->hasOne(BuildingBase::class, ['team_id' => 'id'])
+            ->andWhere(['ready' => null]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getBuildingStadium(): ActiveQuery
+    {
+        return $this
+            ->hasOne(BuildingStadium::class, ['team_id' => 'id'])
+            ->andWhere(['ready' => null]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getChampionship(): ActiveQuery
+    {
+        return $this
+            ->hasOne(Championship::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getConference(): ActiveQuery
+    {
+        return $this
+            ->hasOne(Conference::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getFederationNews(): ActiveQuery
     {
         return $this->hasOne(News::class, ['id' => 'federation_news_id']);
@@ -277,6 +531,16 @@ class Team extends AbstractActiveRecord
     public function getNationalAttitude(): ActiveQuery
     {
         return $this->hasOne(Attitude::class, ['id' => 'national_attitude_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getOffSeason(): ActiveQuery
+    {
+        return $this
+            ->hasOne(OffSeason::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
     }
 
     /**

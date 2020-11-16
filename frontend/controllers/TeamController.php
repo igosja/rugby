@@ -47,7 +47,7 @@ class TeamController extends AbstractController
     public function actionView(int $id = null)
     {
         if (!$id && $this->myTeamOrVice) {
-            return $this->redirect(['team/view', 'id' => $this->myTeamOrVice->team_id]);
+            return $this->redirect(['team/view', 'id' => $this->myTeamOrVice->id]);
         }
 
         if (!$id) {
@@ -57,13 +57,13 @@ class TeamController extends AbstractController
         $team = $this->getTeam($id);
 
         $notificationArray = [];
-        if ($this->myTeam && $id === $this->myTeam->team_id) {
+        if ($this->myTeam && $id === $this->myTeam->id) {
             $notificationArray = $this->notificationArray();
         }
 
         $dataProvider = PlayerPrepare::getPlayerTeamDataProvider($team);
 
-        $this->setSeoTitle($team->fullName() . ' Профиль команды');
+        $this->setSeoTitle($team->name . ' Профиль команды');
         return $this->render('view', [
             'dataProvider' => $dataProvider,
             'notificationArray' => $notificationArray,

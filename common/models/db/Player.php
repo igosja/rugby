@@ -5,6 +5,9 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
@@ -44,6 +47,7 @@ use yii\helpers\Html;
  * @property int $training_ability
  *
  * @property-read Country $country
+ * @property-read Loan $loan
  * @property-read Team $loanTeam
  * @property-read Mood $mood
  * @property-read Name $name
@@ -57,10 +61,11 @@ use yii\helpers\Html;
  * @property-read Style $style
  * @property-read Surname $surname
  * @property-read Team $team
+ * @property-read Transfer $transfer
  */
 class Player extends AbstractActiveRecord
 {
-    public const AGE_READY_FOR_PENSION = 34;
+    public const AGE_READY_FOR_PENSION = 35;
     public const START_NUMBER_OF_PLAYERS = 30;
 
     /**
@@ -130,6 +135,363 @@ class Player extends AbstractActiveRecord
     /**
      * @return string
      */
+    public function playerGameRow(): string
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $realGameRow = $this->game_row;
+
+        if (!$controller->myTeam) {
+            return '?';
+        }
+
+        if ($this->myPlayer()) {
+            return $realGameRow;
+        }
+
+        if ($this->myNationalPlayer()) {
+            return $realGameRow;
+        }
+
+        if ($controller->myTeam->baseScout->canSeeOpponentGameRow()) {
+            return $realGameRow;
+        }
+
+        if (!$this->loan && !$this->transfer) {
+            return '?';
+        }
+
+        if ($controller->myTeam->baseScout->canSeeDealGameRow()) {
+            return $realGameRow;
+        }
+
+        return '?';
+    }
+
+    /**
+     * @return string
+     */
+    public function playerPhysical(): string
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $realPhysical = $this->physical->image();
+
+        if (!$controller->myTeam) {
+            return '?';
+        }
+
+        if ($this->myPlayer()) {
+            return $realPhysical;
+        }
+
+        if ($this->myNationalPlayer()) {
+            return $realPhysical;
+        }
+
+        if ($controller->myTeam->baseScout->canSeeOpponentPhysical()) {
+            return $realPhysical;
+        }
+
+        if (!$this->loan && !$this->transfer) {
+            return '?';
+        }
+
+        if ($controller->myTeam->baseScout->canSeeDealPhysical()) {
+            return $realPhysical;
+        }
+
+        return '?';
+    }
+
+    /**
+     * @return bool
+     */
+    public function myPlayer(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        if (!$controller->myTeam) {
+            return false;
+        }
+        if ($controller->myTeamOrVice->id !== $this->team_id) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function myNationalPlayer(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        if (!$controller->myNational) {
+            return false;
+        }
+        if ($controller->myNational->id !== $this->national_id) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function playerTire(): string
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $realTire = $this->tire . '%';
+
+        if (!$controller->myTeam) {
+            return '?';
+        }
+
+        if ($this->myPlayer()) {
+            return $realTire;
+        }
+
+        if ($this->myNationalPlayer()) {
+            return $realTire;
+        }
+
+        if ($controller->myTeam->baseScout->canSeeOpponentTire()) {
+            return $realTire;
+        }
+
+        if (!$this->loan && !$this->transfer) {
+            return '?';
+        }
+
+        if ($controller->myTeam->baseScout->canSeeDealTire()) {
+            return $realTire;
+        }
+
+        return '?';
+    }
+
+    /**
+     * @return string
+     */
+    public function powerNominal(): string
+    {
+        $class = '';
+        if ($this->power_nominal > $this->power_old) {
+            $class = 'font-green';
+        } elseif ($this->power_nominal < $this->power_old) {
+            $class = 'font-red';
+        }
+        return '<span class="' . $class . '">' . $this->power_nominal . '</span>';
+    }
+
+    /**
+     * @return string
+     */
+    public function iconInjury(): string
+    {
+        $result = '';
+        if ($this->is_injury) {
+            $result = ' ' . FAS::icon(FAS::_AMBULANCE, ['title' => 'Травмирован на ' . $this->injury_day . ' дн.']);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconDeal(): string
+    {
+        $result = '';
+        if ($this->loan || $this->transfer) {
+            $result = ' ' . FAS::icon(FAS::_BALANCE_SCALE, ['title' => 'Выставлен на трансфер/аренду']);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconNational(): string
+    {
+        $result = '';
+        if ($this->national_id) {
+            if (NationalType::MAIN === $this->national->national_type_id) {
+                $text = 'национальной сборной';
+            } else {
+                $text = 'сборной ' . $this->national->nationalType->name;
+            }
+            $result = ' ' . FAS::icon(FAS::_FLAG, ['title' => 'Игрок ' . $text]);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconPension(): string
+    {
+        $result = '';
+        if (self::AGE_READY_FOR_PENSION === $this->age) {
+            $result = ' ' . FAS::icon(FAS::_HOME, ['title' => 'Заканчивает карьеру в конце текущего сезона']);
+        }
+        return $result;
+    }
+
+    /**
+     * @param boolean $showOnlyIfStudied
+     * @return string
+     */
+    public function iconStyle(bool $showOnlyIfStudied = false): string
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $myTeam = $controller->myTeam;
+
+        if (!$myTeam) {
+            if (!$showOnlyIfStudied) {
+                $styleArray = Style::find()
+                    ->andWhere(['!=', 'id', Style::NORMAL])
+                    ->orderBy(['id' => SORT_ASC])
+                    ->all();
+            } else {
+                $styleArray = [];
+            }
+        } else {
+            $countScout = Scout::find()
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id])
+                ->andWhere(['not', ['ready' => null]])
+                ->count();
+
+            if (2 === $countScout) {
+                $styleArray = Style::find()
+                    ->andWhere(['id' => $this->style_id])
+                    ->orderBy(['id' => SORT_ASC])
+                    ->all();
+            } elseif (!$showOnlyIfStudied) {
+                $in = [$this->style_id];
+                for ($i = 1; $i < 3 - $countScout; $i++) {
+                    $styleToIn = Style::getRandStyleId($in);
+                    $in[] = $styleToIn;
+                }
+                $styleArray = Style::find()
+                    ->where(['id' => $in])
+                    ->orderBy(['id' => SORT_ASC])
+                    ->limit(3 - $countScout)
+                    ->all();
+            } else {
+                $styleArray = [];
+            }
+        }
+
+        /**
+         * @var Style[] $styleArray
+         */
+        $result = [];
+        foreach ($styleArray as $item) {
+            $result[] = Html::img(
+                '/img/style/' . $item->id . '.png',
+                [
+                    'alt' => $item->name,
+                    'title' => ucfirst($item->name),
+                ]
+            );
+        }
+
+        return implode(' ', $result);
+    }
+
+    /**
+     * @return int
+     */
+    public function countScout(): int
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $myTeam = $controller->myTeam;
+
+        if ($myTeam) {
+            return Scout::find()
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id])
+                ->andWhere(['not', ['ready' => null]])
+                ->count();
+        }
+
+        return 0;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconTraining(): string
+    {
+        $countTraining = Training::find()
+            ->andWhere(['player_id' => $this->id, 'team_id' => $this->team_id, 'ready' => null])
+            ->count();
+
+        $result = '';
+        if ($countTraining) {
+            $result = ' ' . FAS::icon(FAS::_LEVEL_UP_ALT, ['title' => 'На тренировке']);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconScout(): string
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $myTeam = $controller->myTeam;
+
+        if ($myTeam) {
+            $countScout = Scout::find()
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id, 'ready' => null])
+                ->count();
+        } else {
+            $countScout = 0;
+        }
+
+        $result = '';
+        if ($countScout) {
+            $result = ' ' . FAS::icon(FAS::_SEARCH, ['title' => 'Изучается в скаутцентре вашей команды']);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconLoan(): string
+    {
+        $result = '';
+        if ($this->loan_day) {
+            $result = ' <span title="В аренде">(' . $this->loan_day . ')</i>';
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
     public function position(): string
     {
         $result = [];
@@ -178,6 +540,14 @@ class Player extends AbstractActiveRecord
     public function getCountry(): ActiveQuery
     {
         return $this->hasOne(Country::class, ['id' => 'country_id'])->cache();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLoan(): ActiveQuery
+    {
+        return $this->hasOne(Loan::class, ['player_id' => 'id'])->andWhere(['ready' => null]);
     }
 
     /**
@@ -282,5 +652,13 @@ class Player extends AbstractActiveRecord
     public function getTeam(): ActiveQuery
     {
         return $this->hasOne(Team::class, ['id' => 'team_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransfer(): ActiveQuery
+    {
+        return $this->hasOne(Transfer::class, ['player_id' => 'id'])->andWhere(['ready' => null]);
     }
 }

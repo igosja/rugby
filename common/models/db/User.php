@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -142,6 +143,35 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDialog(): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        if (!$this->id) {
+            return false;
+        }
+        if ($this->id === Yii::$app->user->id) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconVip(): string
+    {
+        $result = '';
+        if ($this->isVip()) {
+            $result = ' ' . FAS::icon(FAS::_STAR, ['title' => 'vip']);
+        }
+        return $result;
     }
 
     /**

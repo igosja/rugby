@@ -3,7 +3,7 @@
 // TODO refactor
 
 use common\components\helpers\FormatHelper;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
 
 /**
  * @var AbstractController $controller
@@ -20,7 +20,7 @@ $model = $controller->myTeamOrVice;
             - Рейтинг силы команды (Vs)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= $model->team_power_vs ?>
+            <?= $model->power_vs ?>
         </div>
     </div>
     <div class="row">
@@ -28,7 +28,7 @@ $model = $controller->myTeamOrVice;
             - Сила 15 лучших (s15)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= $model->team_power_s_15 ?>
+            <?= $model->power_s_15 ?>
         </div>
     </div>
     <div class="row">
@@ -36,7 +36,7 @@ $model = $controller->myTeamOrVice;
             - Сила 19 лучших (s19)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= $model->team_power_s_19 ?>
+            <?= $model->power_s_19 ?>
         </div>
     </div>
     <div class="row">
@@ -44,7 +44,7 @@ $model = $controller->myTeamOrVice;
             - Сила 24 лучших (s24)
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= $model->team_power_s_24 ?>
+            <?= $model->power_s_24 ?>
         </div>
     </div>
     <div class="row">
@@ -52,7 +52,7 @@ $model = $controller->myTeamOrVice;
             - Стоимость строений
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= FormatHelper::asCurrency($model->team_price_base) ?>
+            <?= FormatHelper::asCurrency($model->price_base) ?>
         </div>
     </div>
     <div class="row">
@@ -60,7 +60,7 @@ $model = $controller->myTeamOrVice;
             - Общая стоимость
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-            <?= FormatHelper::asCurrency($model->team_price_total) ?>
+            <?= FormatHelper::asCurrency($model->price_total) ?>
         </div>
     </div>
 </div>

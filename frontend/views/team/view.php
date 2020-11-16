@@ -6,7 +6,9 @@ use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Team;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
+use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -46,13 +48,11 @@ $controller = Yii::$app->controller;
 <?php endif ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
     <?php
-
-// TODO refactor
 
     try {
         $columns = [
@@ -68,7 +68,7 @@ $controller = Yii::$app->controller;
                 'format' => 'raw',
                 'label' => 'Игрок',
                 'value' => static function (Player $model) {
-                    return $model->playerLink()
+                    return $model->getPlayerLink()
                         . $model->iconPension()
                         . $model->iconInjury()
                         . $model->iconNational()
@@ -87,7 +87,7 @@ $controller = Yii::$app->controller;
                 'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => 'Национальность'],
                 'label' => 'Нац',
                 'value' => static function (Player $model) {
-                    return $model->country->countryImageLink();
+                    return $model->country->getImageLink();
                 }
             ],
             [
@@ -110,7 +110,7 @@ $controller = Yii::$app->controller;
                 'headerOptions' => ['title' => 'Возраст'],
                 'label' => 'В',
                 'value' => static function (Player $model) {
-                    return $model->player_age;
+                    return $model->age;
                 }
             ],
             [
@@ -156,7 +156,7 @@ $controller = Yii::$app->controller;
                 'headerOptions' => ['title' => 'Реальная сила'],
                 'label' => 'РС',
                 'value' => static function (Player $model) use ($team) {
-                    return $team->myTeam() ? $model->player_power_real : '~' . $model->player_power_nominal;
+                    return $team->myTeam() ? $model->power_real : '~' . $model->power_nominal;
                 }
             ],
             [
@@ -200,22 +200,18 @@ $controller = Yii::$app->controller;
                 'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Игры'],
                 'label' => 'И',
                 'value' => static function (Player $model) {
-                    $result = 0;
-                    foreach ($model->statisticPlayer as $statisticPlayer) {
-                        $result += $statisticPlayer->statistic_player_game;
-                    }
-                    return $result;
+                    return 0;
                 }
             ],
             [
-                'attribute' => 'player_price',
+                'attribute' => 'price',
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
                 'footer' => 'Цена',
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'label' => 'Цена',
                 'value' => static function (Player $model) {
-                    return FormatHelper::asCurrency($model->player_price);
+                    return FormatHelper::asCurrency($model->price);
                 }
             ],
         ];
@@ -225,7 +221,7 @@ $controller = Yii::$app->controller;
             'rowOptions' => static function (Player $model) use ($team) {
                 $result = [];
                 if ($model->squad && $team->myTeam()) {
-                    $result['style'] = ['background-color' => '#' . $model->squad->squad_color];
+                    $result['style'] = ['background-color' => '#' . $model->squad->color];
                 }
                 return $result;
             },
@@ -240,7 +236,7 @@ $controller = Yii::$app->controller;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>
@@ -252,7 +248,7 @@ $controller = Yii::$app->controller;
                 - Рейтинг силы команды (Vs)
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_vs ?>
+                <?= $team->power_vs ?>
             </div>
         </div>
         <div class="row">
@@ -260,7 +256,7 @@ $controller = Yii::$app->controller;
                 - Сила 15 лучших (s15)
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_15 ?>
+                <?= $team->power_s_15 ?>
             </div>
         </div>
         <div class="row">
@@ -268,7 +264,7 @@ $controller = Yii::$app->controller;
                 - Сила 19 лучших (s19)
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_19 ?>
+                <?= $team->power_s_19 ?>
             </div>
         </div>
         <div class="row">
@@ -276,7 +272,7 @@ $controller = Yii::$app->controller;
                 - Сила 24 лучших (s24)
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_24 ?>
+                <?= $team->power_s_24 ?>
             </div>
         </div>
         <div class="row">
@@ -284,7 +280,7 @@ $controller = Yii::$app->controller;
                 - Стоимость строений
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= FormatHelper::asCurrency($team->team_price_base) ?>
+                <?= FormatHelper::asCurrency($team->price_base) ?>
             </div>
         </div>
         <div class="row">
@@ -292,23 +288,28 @@ $controller = Yii::$app->controller;
                 - Общая стоимость
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= FormatHelper::asCurrency($team->team_price_total) ?>
+                <?= FormatHelper::asCurrency($team->price_total) ?>
             </div>
         </div>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 Расскажите друзьям о Лиге:
                 <p>
-                    <?= Html::a(
-                        '<i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>',
-                        'https://www.facebook.com/sharer/sharer.php?u=' . Url::to(['site/index'], true),
-                        ['class' => ['no-underline'], 'target' => '_blank']
-                    ) ?>
-                    <?= Html::a(
-                        '<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>',
-                        'https://twitter.com/intent/tweet?text=Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер.&url=' . Url::to(['site/index'], true),
-                        ['class' => ['no-underline'], 'target' => '_blank']
-                    ) ?>
+                    <?php try {
+                        print Html::a(
+                                FAS::icon(FAS::_FACEBOOK)->size(FAS::SIZE_2X),
+                                'https://www.facebook.com/sharer/sharer.php?u=' . Url::to(['site/index'], true),
+                                ['class' => ['no-underline'], 'target' => '_blank']
+                            )
+                            . ' '
+                            . Html::a(
+                                FAS::icon(FAS::_TWITTER)->size(FAS::SIZE_2X),
+                                'https://twitter.com/intent/tweet?text=Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер.&url=' . Url::to(['site/index'], true),
+                                ['class' => ['no-underline'], 'target' => '_blank']
+                            );
+                    } catch (InvalidConfigException $e) {
+                        ErrorHelper::log($e);
+                    } ?>
                 </p>
             </div>
         </div>
