@@ -27,7 +27,7 @@ class OffSeasonController extends AbstractController
     {
         $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $count = OffSeason::find()
-            ->where(['off_season_season_id' => $seasonId])
+            ->where(['season_id' => $seasonId])
             ->count();
 
         $this->setSeoTitle('Кубок межсезонья');
@@ -44,11 +44,11 @@ class OffSeasonController extends AbstractController
     private function getSeasonArray(): array
     {
         $season = OffSeason::find()
-            ->select(['off_season_season_id'])
-            ->groupBy(['off_season_season_id'])
-            ->orderBy(['off_season_season_id' => SORT_DESC])
+            ->select(['season_id'])
+            ->groupBy(['season_id'])
+            ->orderBy(['season_id' => SORT_DESC])
             ->all();
-        return ArrayHelper::map($season, 'off_season_season_id', 'off_season_season_id');
+        return ArrayHelper::map($season, 'season_id', 'season_id');
     }
 
     /**
@@ -57,13 +57,13 @@ class OffSeasonController extends AbstractController
     public function actionTable(): string
     {
         $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
-        $countryId = Yii::$app->request->get('countryId');
+        $federationId = Yii::$app->request->get('federationId');
 
         $query = OffSeason::find()
-            ->joinWith(['team.stadium.city'])
-            ->where(['off_season_season_id' => $seasonId])
-            ->andFilterWhere(['city_country_id' => $countryId])
-            ->orderBy(['off_season_place' => SORT_ASC]);
+            ->joinWith(['team.stadium.city.country.federation'])
+            ->where(['season_id' => $seasonId])
+            ->andFilterWhere(['federation.id' => $federationId])
+            ->orderBy(['place' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'pagination' => [
@@ -75,20 +75,20 @@ class OffSeasonController extends AbstractController
 
         $countryArray = OffSeason::find()
             ->joinWith(['team.stadium.city.country'])
-            ->where(['off_season_season_id' => $seasonId])
-            ->groupBy(['country_id'])
-            ->orderBy(['country_name' => SORT_ASC])
+            ->where(['season_id' => $seasonId])
+            ->groupBy(['country.id'])
+            ->orderBy(['country.name' => SORT_ASC])
             ->all();
         $countryArray = ArrayHelper::map(
             $countryArray,
-            'team.stadium.city.country.country_id',
-            'team.stadium.city.country.country_name'
+            'team.stadium.city.country.id',
+            'team.stadium.city.country.name'
         );
 
         $this->setSeoTitle('Турнирная таблица кубка межсезонья');
         return $this->render('table', [
             'countryArray' => $countryArray,
-            'countryId' => $countryId,
+            'federationId' => $federationId,
             'dataProvider' => $dataProvider,
             'seasonArray' => $this->getSeasonArray(),
             'seasonId' => $seasonId,
@@ -104,30 +104,30 @@ class OffSeasonController extends AbstractController
         $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
 
         $statisticType = StatisticType::find()
-            ->where(['statistic_type_id' => $id])
+            ->where(['id' => $id])
             ->limit(1)
             ->one();
         if (!$statisticType) {
             $statisticType = StatisticType::find()
-                ->where(['statistic_type_id' => 1])
+                ->where(['id' => 1])
                 ->limit(1)
                 ->one();
         }
 
-        if ($statisticType->isTeamChapter()) {
+        if (1 === $statisticType->statistic_chapter_id) {
             $query = StatisticTeam::find()
                 ->where([
-                    'statistic_team_tournament_type_id' => TournamentType::CONFERENCE,
-                    'statistic_team_season_id' => $seasonId,
+                    'tournament_type_id' => TournamentType::OFF_SEASON,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => $statisticType->order]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
-                    'statistic_player_tournament_type_id' => TournamentType::CONFERENCE,
-                    'statistic_player_season_id' => $seasonId,
+                    'tournament_type_id' => TournamentType::OFF_SEASON,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => $statisticType->order]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -138,7 +138,7 @@ class OffSeasonController extends AbstractController
             'sort' => false,
         ]);
 
-        $this->setSeoTitle('Статистика кубка межсезонья');
+        $this->setSeoTitle('Статистика конференции любительских клубов');
         return $this->render('statistics', [
             'dataProvider' => $dataProvider,
             'myTeam' => $this->myTeam,
