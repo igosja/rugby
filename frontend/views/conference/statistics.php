@@ -28,7 +28,7 @@ use yii\helpers\Html;
         </h1>
     </div>
 </div>
-<?= Html::beginForm('', 'get') ?>
+<?= Html::beginForm(null, 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
@@ -46,9 +46,7 @@ use yii\helpers\Html;
 </div>
 <?php
 
-// TODO refactor
-
-if ($statisticType->isTeamChapter()) {
+if (1 === $statisticType->statistic_chapter_id) {
     $columns = [
         [
             'class' => SerialColumn::class,
@@ -62,14 +60,14 @@ if ($statisticType->isTeamChapter()) {
             'format' => 'raw',
             'label' => 'Команда',
             'value' => static function (StatisticTeam $model) {
-                return $model->team->teamLink('img');
+                return $model->team->getTeamLink();
             }
         ],
         [
             'contentOptions' => ['class' => 'text-center'],
             'headerOptions' => ['class' => 'col-10'],
-            'value' => function (StatisticTeam $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+            'value' => static function (StatisticTeam $model) use ($statisticType) {
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
@@ -87,22 +85,22 @@ if ($statisticType->isTeamChapter()) {
             'footer' => 'Игрок',
             'format' => 'raw',
             'label' => 'Игрок',
-            'value' => function (StatisticPlayer $model) {
-                return $model->player->playerLink();
+            'value' => static function (StatisticPlayer $model) {
+                return $model->player->getPlayerLink();
             }
         ],
         [
             'footer' => 'Команда',
             'format' => 'raw',
             'label' => 'Команда',
-            'value' => function (StatisticPlayer $model) {
-                return $model->team->teamLink('img');
+            'value' => static function (StatisticPlayer $model) {
+                return $model->team->getTeamLink();
             }
         ],
         [
             'contentOptions' => ['class' => 'text-center'],
-            'value' => function (StatisticPlayer $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+            'value' => static function (StatisticPlayer $model) use ($statisticType) {
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
@@ -113,20 +111,18 @@ if ($statisticType->isTeamChapter()) {
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         print GridView::widget([
             'columns' => $columns,
             'dataProvider' => $dataProvider,
-            'rowOptions' => function ($model) use ($myTeam, $statisticType): array {
+            'rowOptions' => static function ($model) use ($myTeam, $statisticType): array {
                 if (!$myTeam) {
                     return [];
                 }
                 $class = '';
-                if ($statisticType->isTeamChapter() && $model->statistic_team_team_id == $myTeam->team_id) {
+                if (1 === $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
                     $class = 'info';
-                } elseif (!$statisticType->isTeamChapter() && $model->statistic_player_team_id == $myTeam->team_id) {
+                } elseif (1 !== $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];

@@ -11,7 +11,7 @@ use yii\helpers\Html;
 
 /**
  * @var array $countryArray
- * @var int $countryId
+ * @var int $federationId
  * @var ActiveDataProvider $dataProvider
  * @var array $seasonArray
  * @var int $seasonId
@@ -26,7 +26,7 @@ $user = $this->context->user;
         <h1>Конференция любительских клубов</h1>
     </div>
 </div>
-<?= Html::beginForm('', 'get') ?>
+<?= Html::beginForm(null, 'get') ?>
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
@@ -49,10 +49,10 @@ $user = $this->context->user;
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
         <?= Html::dropDownList(
-            'countryId',
-            $countryId,
+            'federationId',
+            $federationId,
             $countryArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'countryId', 'prompt' => 'Все']
+            ['class' => 'form-control submit-on-change', 'id' => 'federationId', 'prompt' => 'Все']
         ) ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
@@ -60,8 +60,6 @@ $user = $this->context->user;
 <?= Html::endForm() ?>
 <div class="row">
     <?php
-
-// TODO refactor
 
     try {
         $columns = [
@@ -72,7 +70,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Место'],
                 'label' => 'М',
                 'value' => static function (Conference $model) {
-                    return $model->conference_place;
+                    return $model->place;
                 }
             ],
             [
@@ -80,7 +78,7 @@ $user = $this->context->user;
                 'format' => 'raw',
                 'label' => 'Команда',
                 'value' => static function (Conference $model) {
-                    return $model->team->iconFreeTeam() . $model->team->teamLink('img');
+                    return $model->team->iconFreeTeam() . $model->team->getTeamLink();
                 }
             ],
             [
@@ -90,7 +88,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Игры'],
                 'label' => 'И',
                 'value' => static function (Conference $model) {
-                    return $model->conference_game;
+                    return $model->game;
                 }
             ],
             [
@@ -100,7 +98,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Победы'],
                 'label' => 'B',
                 'value' => static function (Conference $model) {
-                    return $model->conference_win;
+                    return $model->win;
                 }
             ],
             [
@@ -110,7 +108,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Ничьи'],
                 'label' => 'Н',
                 'value' => static function (Conference $model) {
-                    return $model->conference_draw;
+                    return $model->draw;
                 }
             ],
             [
@@ -120,7 +118,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Поражения'],
                 'label' => 'П',
                 'value' => static function (Conference $model) {
-                    return $model->conference_loose;
+                    return $model->loose;
                 }
             ],
             [
@@ -130,7 +128,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'hidden-xs col-6', 'title' => 'Разность'],
                 'label' => 'Р',
                 'value' => static function (Conference $model) {
-                    return $model->conference_point_for . '-' . $model->conference_point_against;
+                    return $model->point_for . '-' . $model->point_against;
                 }
             ],
             [
@@ -140,7 +138,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Бонус'],
                 'label' => 'Б',
                 'value' => static function (Conference $model) {
-                    return $model->conference_bonus_loose + $model->conference_bonus_tries;
+                    return $model->bonus_loose + $model->bonus_tries;
                 }
             ],
             [
@@ -150,7 +148,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Очки'],
                 'label' => 'О',
                 'value' => static function (Conference $model) {
-                    return $model->conference_point;
+                    return $model->point;
                 }
             ],
             [
@@ -160,7 +158,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Рейтинг силы команды в длительных соревнованиях'],
                 'label' => 'Vs',
                 'value' => static function (Conference $model) {
-                    return $model->team->team_power_vs;
+                    return $model->team->power_vs;
                 },
                 'visible' => $user && $user->isVip(),
             ],

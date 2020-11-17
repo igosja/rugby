@@ -45,7 +45,7 @@ $user = Yii::$app->user->identity;
         <?= $this->render('//championship/_division-links', ['divisionArray' => $divisionArray]) ?>
     </div>
 </div>
-<?= Html::beginForm('', 'get') ?>
+<?= Html::beginForm(null, 'get') ?>
 <?= Html::hiddenInput('divisionId', $divisionId) ?>
 <?= Html::hiddenInput('federationId', $federation->id) ?>
 <div class="row margin-top-small">

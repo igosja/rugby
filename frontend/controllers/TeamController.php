@@ -122,7 +122,7 @@ class TeamController extends AbstractController
     {
         $team = $this->getTeam($id);
 
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $dataProvider = FinancePrepare::getTeamDataProvider($team->team_id, $seasonId);
 
         $this->setSeoTitle($team->fullName() . ' - finance');
@@ -143,7 +143,7 @@ class TeamController extends AbstractController
     {
         $team = $this->getTeam($id);
 
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $dataProvider = GamePrepare::getTeamGameDataProvider($team->team_id, $seasonId);
 
         $this->setSeoTitle($team->fullName() . ' - games');
@@ -164,7 +164,7 @@ class TeamController extends AbstractController
     {
         $team = $this->getTeam($id);
 
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $dataProvider = HistoryPrepare::getTeamDataProvider($team->team_id, $seasonId);
 
         $this->setSeoTitle($team->fullName() . ' - history');

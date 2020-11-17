@@ -28,7 +28,7 @@ use yii\helpers\Html;
         </h1>
     </div>
 </div>
-<?= Html::beginForm('', 'get') ?>
+<?= Html::beginForm(null, 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">

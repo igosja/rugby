@@ -25,7 +25,7 @@ class OffSeasonController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $count = OffSeason::find()
             ->where(['off_season_season_id' => $seasonId])
             ->count();
@@ -56,7 +56,7 @@ class OffSeasonController extends AbstractController
      */
     public function actionTable(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $countryId = Yii::$app->request->get('countryId');
 
         $query = OffSeason::find()
@@ -101,7 +101,7 @@ class OffSeasonController extends AbstractController
      */
     public function actionStatistics($id = 1): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
 
         $statisticType = StatisticType::find()
             ->where(['statistic_type_id' => $id])
