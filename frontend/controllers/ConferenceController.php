@@ -25,9 +25,9 @@ class ConferenceController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $count = Conference::find()
-            ->where(['conference_season_id' => $seasonId])
+            ->where(['season_id' => $seasonId])
             ->count();
 
         $this->setSeoTitle('Конференция любительских клубов');
@@ -43,14 +43,14 @@ class ConferenceController extends AbstractController
      */
     public function actionTable(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
-        $countryId = Yii::$app->request->get('countryId');
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
+        $federationId = Yii::$app->request->get('federationId');
 
         $query = Conference::find()
-            ->joinWith(['team.stadium.city'])
-            ->where(['conference_season_id' => $seasonId])
-            ->andFilterWhere(['city_country_id' => $countryId])
-            ->orderBy(['conference_place' => SORT_ASC]);
+            ->joinWith(['team.stadium.city.country.federation'])
+            ->where(['season_id' => $seasonId])
+            ->andFilterWhere(['federation.id' => $federationId])
+            ->orderBy(['place' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'pagination' => [
@@ -62,20 +62,20 @@ class ConferenceController extends AbstractController
 
         $countryArray = Conference::find()
             ->joinWith(['team.stadium.city.country'])
-            ->where(['conference_season_id' => $seasonId])
-            ->groupBy(['country_id'])
-            ->orderBy(['country_name' => SORT_ASC])
+            ->where(['season_id' => $seasonId])
+            ->groupBy(['country.id'])
+            ->orderBy(['country.name' => SORT_ASC])
             ->all();
         $countryArray = ArrayHelper::map(
             $countryArray,
-            'team.stadium.city.country.country_id',
-            'team.stadium.city.country.country_name'
+            'team.stadium.city.country.id',
+            'team.stadium.city.country.name'
         );
 
         $this->setSeoTitle('Турнирная таблица конференции любительских клубов');
         return $this->render('table', [
             'countryArray' => $countryArray,
-            'countryId' => $countryId,
+            'federationId' => $federationId,
             'dataProvider' => $dataProvider,
             'seasonArray' => $this->getSeasonArray(),
             'seasonId' => $seasonId,
@@ -88,33 +88,33 @@ class ConferenceController extends AbstractController
      */
     public function actionStatistics($id = 1): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
 
         $statisticType = StatisticType::find()
-            ->where(['statistic_type_id' => $id])
+            ->where(['id' => $id])
             ->limit(1)
             ->one();
         if (!$statisticType) {
             $statisticType = StatisticType::find()
-                ->where(['statistic_type_id' => 1])
+                ->where(['id' => 1])
                 ->limit(1)
                 ->one();
         }
 
-        if ($statisticType->isTeamChapter()) {
+        if (1 === $statisticType->statistic_chapter_id) {
             $query = StatisticTeam::find()
                 ->where([
-                    'statistic_team_tournament_type_id' => TournamentType::CONFERENCE,
-                    'statistic_team_season_id' => $seasonId,
+                    'tournament_type_id' => TournamentType::CONFERENCE,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => $statisticType->order]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
-                    'statistic_player_tournament_type_id' => TournamentType::CONFERENCE,
-                    'statistic_player_season_id' => $seasonId,
+                    'tournament_type_id' => TournamentType::CONFERENCE,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => $statisticType->order]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -141,10 +141,10 @@ class ConferenceController extends AbstractController
     private function getSeasonArray(): array
     {
         $season = Conference::find()
-            ->select(['conference_season_id'])
-            ->groupBy(['conference_season_id'])
-            ->orderBy(['conference_season_id' => SORT_DESC])
+            ->select(['season_id'])
+            ->groupBy(['season_id'])
+            ->orderBy(['season_id' => SORT_DESC])
             ->all();
-        return ArrayHelper::map($season, 'conference_season_id', 'conference_season_id');
+        return ArrayHelper::map($season, 'season_id', 'season_id');
     }
 }
