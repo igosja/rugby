@@ -4,6 +4,7 @@
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\Country;
+use common\models\db\Federation;
 use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
@@ -14,7 +15,7 @@ use yii\grid\SerialColumn;
 use yii\helpers\Html;
 
 /**
- * @var Country $country
+ * @var Federation $federation
  * @var ActiveDataProvider $dataProvider
  * @var array $divisionArray
  * @var int $divisionId
@@ -29,8 +30,8 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
             <?= Html::a(
-                $country->country_name,
-                ['federation/news', 'id' => $country->country_id],
+                $federation->country->name,
+                ['federation/news', 'id' => $federation->country->id],
                 ['class' => 'country-header-link']
             ) ?>
         </h1>
@@ -44,7 +45,7 @@ use yii\helpers\Html;
 <?= Html::beginForm([''], 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <?= Html::hiddenInput('divisionId', $divisionId) ?>
-<?= Html::hiddenInput('countryId', $country->country_id) ?>
+<?= Html::hiddenInput('federationId', $federation->country_id) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
         <?= Html::label('Статистика', 'statisticType') ?>
@@ -61,9 +62,7 @@ use yii\helpers\Html;
 </div>
 <?php
 
-// TODO refactor
-
-if ($statisticType->isTeamChapter()) {
+if (1 === $statisticType->statistic_chapter_id) {
     $columns = [
         [
             'class' => SerialColumn::class,
@@ -77,14 +76,14 @@ if ($statisticType->isTeamChapter()) {
             'format' => 'raw',
             'label' => 'Команда',
             'value' => static function (StatisticTeam $model) {
-                return $model->team->teamLink('img');
+                return $model->team->getTeamLink();
             }
         ],
         [
             'contentOptions' => ['class' => 'text-center'],
             'headerOptions' => ['class' => 'col-10'],
             'value' => static function (StatisticTeam $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
@@ -103,7 +102,7 @@ if ($statisticType->isTeamChapter()) {
             'format' => 'raw',
             'label' => 'Игрок',
             'value' => static function (StatisticPlayer $model) {
-                return $model->player->playerLink();
+                return $model->player->getPlayerLink();
             }
         ],
         [
@@ -111,7 +110,7 @@ if ($statisticType->isTeamChapter()) {
             'format' => 'raw',
             'label' => 'Команда',
             'value' => static function (StatisticPlayer $model) {
-                return $model->team->teamLink('img');
+                return $model->team->getTeamLink();
             }
         ],
         [
@@ -128,8 +127,6 @@ if ($statisticType->isTeamChapter()) {
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         print GridView::widget([
             'columns' => $columns,
@@ -139,9 +136,9 @@ if ($statisticType->isTeamChapter()) {
                     return [];
                 }
                 $class = '';
-                if ($statisticType->isTeamChapter() && $model->statistic_team_team_id == $myTeam->team_id) {
+                if (1 === $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
                     $class = 'info';
-                } elseif (!$statisticType->isTeamChapter() && $model->statistic_player_team_id == $myTeam->team_id) {
+                } elseif (1 !== $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];
@@ -162,7 +159,7 @@ if ($statisticType->isTeamChapter()) {
                 'Турнирная таблица',
                 [
                     'index',
-                    'countryId' => $country->country_id,
+                    'federationId' => $federation->id,
                     'divisionId' => $divisionId,
                     'seasonId' => $seasonId,
                 ],

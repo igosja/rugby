@@ -47,8 +47,6 @@ print $this->render('//player/_player', ['player' => $player]);
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
