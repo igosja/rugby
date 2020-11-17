@@ -122,7 +122,7 @@ if (1 === $statisticType->statistic_chapter_id) {
                 $class = '';
                 if (1 === $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
                     $class = 'info';
-                } elseif (1 !== $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
+                } elseif (1 !== $statisticType->statistic_chapter_id && $model->team_id == $myTeam->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];
