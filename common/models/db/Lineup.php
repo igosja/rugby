@@ -60,7 +60,7 @@ class Lineup extends AbstractActiveRecord
             [['is_captain'], 'boolean'],
             [['drop_goal', 'red_card', 'try', 'yellow_card'], 'integer', 'min' => 0, 'max' => 9],
             [['conversion', 'minute', 'point', 'position_id'], 'integer', 'min' => 0, 'max' => 99],
-            [['national_id', 'power_nominal', 'power_real', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
+            [['national_id', 'power_nominal', 'power_real'], 'integer', 'min' => 0, 'max' => 999],
             [['game_id', 'player_id', 'team_id'], 'integer', 'min' => 1],
             [['game_id'], 'exist', 'targetRelation' => 'game'],
             [['national_id'], 'exist', 'targetRelation' => 'national'],

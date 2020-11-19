@@ -15,6 +15,12 @@ use common\components\AbstractActiveRecord;
  */
 class Tactic extends AbstractActiveRecord
 {
+    public const ALL_DEFENCE = 1;
+    public const DEFENCE = 2;
+    public const NORMAL = 3;
+    public const ATTACK = 4;
+    public const ALL_ATTACK = 5;
+
     /**
      * @return string
      */

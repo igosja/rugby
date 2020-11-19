@@ -21,6 +21,7 @@ use yii\helpers\Html;
  */
 class Physical extends AbstractActiveRecord
 {
+    public const DEFAULT_ID = 16;
     /**
      * @return string
      */

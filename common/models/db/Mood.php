@@ -15,6 +15,10 @@ use common\components\AbstractActiveRecord;
  */
 class Mood extends AbstractActiveRecord
 {
+    public const NORMAL = 2;
+    public const REST = 3;
+    public const SUPER = 1;
+
     public const START_REST = 3;
     public const START_SUPER = 3;
 

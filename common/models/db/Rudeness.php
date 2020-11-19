@@ -15,6 +15,8 @@ use common\components\AbstractActiveRecord;
  */
 class Rudeness extends AbstractActiveRecord
 {
+    public const NORMAL = 1;
+
     /**
      * @return string
      */

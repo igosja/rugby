@@ -103,6 +103,9 @@ use yii\helpers\Html;
  */
 class Game extends AbstractActiveRecord
 {
+    public const TICKET_PRICE_MAX = 50;
+    public const TICKET_PRICE_MIN = 10;
+
     /**
      * @return string
      */
@@ -157,7 +160,7 @@ class Game extends AbstractActiveRecord
                     'home_conversion',
                     'home_possession',
                     'home_try',
-                    'ticket',
+                    'ticket_price',
                 ],
                 'integer',
                 'min' => 0,

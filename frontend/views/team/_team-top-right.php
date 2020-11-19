@@ -188,8 +188,8 @@ foreach ($controller->myTeamArray as $item) {
                 <?= Html::a(
                     (($item->home_team_id === $team->id && $item->home_tactic_id)
                         || ($item->guest_team_id === $team->id && $item->guest_tactic_id))
-                        ? 'Отпр.'
-                        : 'Ред.',
+                        ? 'Ред.'
+                        : 'Отпр.',
                     ['lineup/view', 'id' => $item->id]
                 ) ?>
             <?php else: ?>
