@@ -15,6 +15,10 @@ use common\components\AbstractActiveRecord;
  */
 class ElectionStatus extends AbstractActiveRecord
 {
+    public const CANDIDATES = 1;
+    public const CLOSE = 3;
+    public const OPEN = 2;
+
     /**
      * @return string
      */

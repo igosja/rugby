@@ -13,6 +13,8 @@ use backend\models\queries\LoanCommentQuery;
 use backend\models\queries\NewsCommentQuery;
 use backend\models\queries\NewsQuery;
 use backend\models\queries\TransferCommentQuery;
+use common\models\db\Site;
+use console\models\generator\SiteOpen;
 use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\filters\AccessControl;
@@ -33,10 +35,10 @@ class SiteController extends AbstractController
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['sign-out', 'index'],
+                'only' => ['sign-out', 'index', 'status'],
                 'rules' => [
                     [
-                        'actions' => ['sign-out', 'index'],
+                        'actions' => ['sign-out', 'index', 'status'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -55,6 +57,12 @@ class SiteController extends AbstractController
                 'class' => ErrorAction::class,
             ],
         ];
+    }
+
+    public function actionGen()
+    {
+        $model = new SiteOpen;
+        $model->execute();
     }
 
     /**
@@ -172,6 +180,16 @@ class SiteController extends AbstractController
                 'model' => $model,
             ]
         );
+    }
+
+    /**
+     * @return Response
+     */
+    public function actionStatus(): Response
+    {
+        Site::switchStatus();
+
+        return $this->redirect(Yii::$app->request->referrer ?: ['index']);
     }
 
     /**

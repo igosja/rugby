@@ -156,8 +156,8 @@ foreach ($controller->myTeamArray as $item) {
             -
             <?= Html::a(
                 $item->home_team_id === $team->id
-                    ? $item->home_points . ':' . $item->guest_points
-                    : $item->guest_points . ':' . $item->home_points,
+                    ? $item->home_point . ':' . $item->guest_point
+                    : $item->guest_point . ':' . $item->home_point,
                 ['game/view', 'id' => $item->id]
             ) ?>
         </div>

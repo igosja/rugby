@@ -39,4 +39,18 @@ class Site extends AbstractActiveRecord
             [['date_cron', 'version_date'], 'string', 'min' => 0],
         ];
     }
+
+    /**
+     * @return bool
+     */
+    public static function switchStatus(): bool
+    {
+        $model = self::find()
+            ->where(['id' => 1])
+            ->one();
+        $model->status = 1 - $model->status;
+        $model->save(true, ['status']);
+
+        return true;
+    }
 }

@@ -18,6 +18,8 @@ use yii\db\ActiveQuery;
  * @property int $user_id
  *
  * @property-read ElectionNational $electionNational
+ * @property-read ElectionNationalPlayer[] $electionNationalPlayers
+ * @property-read ElectionNationalVote $electionNationalVotes
  * @property-read User $user
  */
 class ElectionNationalApplication extends AbstractActiveRecord
@@ -51,6 +53,22 @@ class ElectionNationalApplication extends AbstractActiveRecord
     public function getElectionNational(): ActiveQuery
     {
         return $this->hasOne(ElectionNational::class, ['id' => 'election_national_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getElectionNationalPlayers(): ActiveQuery
+    {
+        return $this->hasMany(ElectionNationalPlayer::class, ['election_national_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getElectionNationalVotes(): ActiveQuery
+    {
+        return $this->hasMany(ElectionNationalVote::class, ['election_national_id' => 'id']);
     }
 
     /**

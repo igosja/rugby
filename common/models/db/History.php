@@ -100,6 +100,14 @@ class History extends AbstractActiveRecord
         ];
     }
 
+    public static function log(array $data)
+    {
+        $history = new self();
+        $history->setAttributes($data);
+        $history->season_id = Season::getCurrentSeason();
+        return $history->save();
+    }
+
     /**
      * @return ActiveQuery
      */

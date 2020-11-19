@@ -17,6 +17,7 @@ use yii\db\ActiveQuery;
  * @property int $election_status_id
  *
  * @property-read Federation $federation
+ * @property-read ElectionPresidentViceApplication[] $electionPresidentViceApplications
  * @property-read ElectionStatus $electionStatus
  */
 class ElectionPresidentVice extends AbstractActiveRecord
@@ -49,6 +50,14 @@ class ElectionPresidentVice extends AbstractActiveRecord
     public function getFederation(): ActiveQuery
     {
         return $this->hasOne(Federation::class, ['id' => 'federation_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getElectionPresidentViceApplications(): ActiveQuery
+    {
+        return $this->hasMany(ElectionPresidentViceApplication::class, ['election_president_vice_id' => 'id']);
     }
 
     /**

@@ -4,7 +4,6 @@
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\Championship;
-use common\models\db\Country;
 use common\models\db\Federation;
 use common\models\db\Game;
 use common\models\db\User;
@@ -203,7 +202,7 @@ $user = Yii::$app->user->identity;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Бонус'],
                 'label' => 'Б',
                 'value' => static function (Championship $model) {
-                    return $model->bonus_loose + $model->bonus_tries;
+                    return $model->bonus_loose + $model->bonus_try;
                 }
             ],
             [

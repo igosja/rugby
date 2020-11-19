@@ -22,35 +22,39 @@ use yii\db\ActiveQuery;
  * @property int $federation
  * @property int $date
  * @property int $manager
- * @property float $manager_vip_percent
+ * @property float $manager_vip
  * @property int $manager_with_team
  * @property int $player
  * @property float $player_age
- * @property float $player_c
- * @property float $player_gk
  * @property float $player_in_team
- * @property float $player_ld
- * @property float $player_lw
- * @property float $player_rd
- * @property float $player_rw
+ * @property float $player_position_centre
+ * @property float $player_position_eight
+ * @property float $player_position_flanker
+ * @property float $player_position_fly_half
+ * @property float $player_position_full_back
+ * @property float $player_position_hooker
+ * @property float $player_position_lock
+ * @property float $player_position_prop
+ * @property float $player_position_scrum_half
+ * @property float $player_position_wing
  * @property float $player_power
- * @property float $player_special_percent_no
- * @property float $player_special_percent_one
- * @property float $player_special_percent_two
- * @property float $player_special_percent_three
- * @property float $player_special_percent_four
- * @property float $player_special_percent_athletic
- * @property float $player_special_percent_combine
- * @property float $player_special_percent_idol
- * @property float $player_special_percent_leader
- * @property float $player_special_percent_position
- * @property float $player_special_percent_power
- * @property float $player_special_percent_reaction
- * @property float $player_special_percent_shot
- * @property float $player_special_percent_speed
- * @property float $player_special_percent_stick
- * @property float $player_special_percent_tackle
- * @property float $player_with_position_percent
+ * @property float $player_special_no
+ * @property float $player_special_one
+ * @property float $player_special_two
+ * @property float $player_special_three
+ * @property float $player_special_four
+ * @property float $player_special_athletic
+ * @property float $player_special_combine
+ * @property float $player_special_idol
+ * @property float $player_special_leader
+ * @property float $player_special_moul
+ * @property float $player_special_pass
+ * @property float $player_special_power
+ * @property float $player_special_ruck
+ * @property float $player_special_scrum
+ * @property float $player_special_speed
+ * @property float $player_special_tackle
+ * @property float $player_with_position
  * @property int $season_id
  * @property int $team
  * @property int $team_finance

@@ -19,6 +19,13 @@ use yii\db\ActiveQuery;
  */
 class EventText extends AbstractActiveRecord
 {
+    public const TRY = 1;
+    public const CONVERSION = 2;
+    public const PENALTY_KICK = 3;
+    public const DROP_GOAL = 4;
+    public const YELLOW_CARD = 5;
+    public const RED_CARD = 6;
+
     /**
      * @return string
      */

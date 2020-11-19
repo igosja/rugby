@@ -23,6 +23,7 @@ class M200101000098LeagueCoefficient extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
+                'draw' => $this->integer(2)->defaultValue(0),
                 'federation_id' => $this->integer(3)->notNull(),
                 'loose' => $this->integer(2)->defaultValue(0),
                 'point' => $this->integer(2)->defaultValue(0),

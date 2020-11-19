@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Exception;
 use frontend\controllers\AbstractController;
 use rmrevin\yii\fontawesome\FAS;
 use Yii;
@@ -78,6 +79,7 @@ use yii\helpers\Html;
  */
 class Team extends AbstractActiveRecord
 {
+    public const MAX_AUTO_GAMES = 5;
     public const START_MONEY = 10000000;
 
     /**
@@ -175,6 +177,61 @@ class Team extends AbstractActiveRecord
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function updatePower(): bool
+    {
+        $player15 = Player::find()
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
+            ->limit(15)
+            ->column();
+        $player19 = Player::find()
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
+            ->limit(19)
+            ->column();
+        $player24 = Player::find()
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
+            ->limit(24)
+            ->column();
+        $power_c_15 = Player::find()->where(['id' => $player15])->sum('power_nominal');
+        $power_c_19 = Player::find()->where(['id' => $player19])->sum('power_nominal');
+        $power_c_24 = Player::find()->where(['id' => $player24])->sum('power_nominal');
+        $power_s_15 = Player::find()->where(['id' => $player15])->sum('power_nominal_s');
+        $power_s_19 = Player::find()->where(['id' => $player19])->sum('power_nominal_s');
+        $power_s_24 = Player::find()->where(['id' => $player24])->sum('power_nominal_s');
+        $power_v = round(($power_c_15 + $power_c_19 + $power_c_24) / 58 * 15);
+        $power_vs = round(($power_s_15 + $power_s_19 + $power_s_24) / 58 * 15);
+
+        $this->power_c_15 = $power_c_15;
+        $this->power_c_19 = $power_c_19;
+        $this->power_c_24 = $power_c_24;
+        $this->power_s_15 = $power_s_15;
+        $this->power_s_19 = $power_s_19;
+        $this->power_s_24 = $power_s_24;
+        $this->power_v = $power_v;
+        $this->power_vs = $power_vs;
+        $this->save(true, [
+            'power_c_15',
+            'power_c_19',
+            'power_c_24',
+            'power_s_15',
+            'power_s_19',
+            'power_s_24',
+            'power_v',
+            'power_vs',
+        ]);
+
+        return true;
     }
 
     /**

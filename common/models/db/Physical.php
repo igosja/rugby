@@ -22,6 +22,7 @@ use yii\helpers\Html;
 class Physical extends AbstractActiveRecord
 {
     public const DEFAULT_ID = 16;
+
     /**
      * @return string
      */
@@ -58,6 +59,18 @@ class Physical extends AbstractActiveRecord
                 'title' => $this->name,
             ]
         );
+    }
+
+    /**
+     * @return int
+     */
+    public static function getRandPhysicalId(): int
+    {
+        return self::find()
+            ->select(['id'])
+            ->andWhere(['!=', 'id', 21])
+            ->orderBy('RAND()')
+            ->scalar();
     }
 
     /**

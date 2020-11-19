@@ -25,12 +25,12 @@ class M200101000088Event extends Migration
                 'id' => $this->primaryKey(11),
                 'event_text_id' => $this->integer(1)->notNull(),
                 'game_id' => $this->integer(11)->notNull(),
-                'guest_points' => $this->integer(3)->defaultValue(0),
-                'home_points' => $this->integer(3)->defaultValue(0),
+                'guest_point' => $this->integer(3)->defaultValue(0),
+                'home_point' => $this->integer(3)->defaultValue(0),
                 'minute' => $this->integer(2)->notNull(),
-                'national_id' => $this->integer(5)->notNull(),
+                'national_id' => $this->integer(5),
                 'player_id' => $this->integer(11)->notNull(),
-                'team_id' => $this->integer(11)->notNull(),
+                'team_id' => $this->integer(11),
             ]
         );
 

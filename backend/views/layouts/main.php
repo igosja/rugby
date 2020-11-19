@@ -33,11 +33,12 @@ $this->beginPage() ?>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="<?= Yii::$app->request->baseUrl ?>/favicon.ico"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php
 
-// TODO refactor
+    // TODO refactor
     $this->head() ?>
 </head>
 <body>
@@ -92,6 +93,24 @@ $this->beginBody() ?>
                 [
                     'label' => FAS::icon(FAS::_CHART_BAR) . ' Votes <span class="badge admin-vote"></span>',
                     'url' => ['vote/index'],
+                ],
+            ],
+            'url' => 'javascript:',
+        ],
+        [
+            'label' => FAS::icon(FAS::_FILE_ALT),
+            'items' => [
+                [
+                    'label' => 'Logs backend',
+                    'url' => ['log/backend'],
+                ],
+                [
+                    'label' => 'Logs console',
+                    'url' => ['log/console'],
+                ],
+                [
+                    'label' => 'Logs frontend',
+                    'url' => ['log/frontend'],
                 ],
             ],
             'url' => 'javascript:',
@@ -183,6 +202,10 @@ $this->beginBody() ?>
                 [
                     'label' => 'Votes',
                     'url' => ['vote/index'],
+                ],
+                [
+                    'label' => 'Schedule',
+                    'url' => ['schedule/index'],
                 ],
             ];
 

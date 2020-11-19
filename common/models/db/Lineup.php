@@ -16,12 +16,16 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $age
+ * @property int $clean_break
  * @property int $conversion
+ * @property int $defender_beaten
  * @property int $drop_goal
  * @property int $game_id
  * @property bool $is_captain
- * @property int $minute
+ * @property int $metre_gained
  * @property int $national_id
+ * @property int $pass
+ * @property int $penalty_kick
  * @property int $player_id
  * @property int $point
  * @property int $position_id
@@ -29,18 +33,21 @@ use yii\db\ActiveQuery;
  * @property int $power_nominal
  * @property int $power_real
  * @property int $red_card
+ * @property int $tackle
  * @property int $team_id
  * @property int $try
+ * @property int $turnover_won
  * @property int $yellow_card
  *
  * @property-read Game $game
  * @property-read National $national
  * @property-read Player $player
- * @property-read Position $position
  * @property-read Team $team
  */
 class Lineup extends AbstractActiveRecord
 {
+    public const GAME_QUANTITY = 15;
+
     /**
      * @return string
      */
@@ -59,13 +66,30 @@ class Lineup extends AbstractActiveRecord
             [['national_id'], AtLeastValidator::class, 'in' => ['national_id', 'team_id']],
             [['is_captain'], 'boolean'],
             [['drop_goal', 'red_card', 'try', 'yellow_card'], 'integer', 'min' => 0, 'max' => 9],
-            [['conversion', 'minute', 'point', 'position_id'], 'integer', 'min' => 0, 'max' => 99],
-            [['national_id', 'power_nominal', 'power_real'], 'integer', 'min' => 0, 'max' => 999],
+            [
+                [
+                    'clean_break',
+                    'conversion',
+                    'penalty_kick',
+                    'point',
+                    'position_id',
+                    'tackle',
+                    'turnover_won',
+                ],
+                'integer',
+                'min' => 0,
+                'max' => 99,
+            ],
+            [
+                ['metre_gained', 'national_id', 'pass', 'power_nominal', 'power_real'],
+                'integer',
+                'min' => 0,
+                'max' => 999,
+            ],
             [['game_id', 'player_id', 'team_id'], 'integer', 'min' => 1],
             [['game_id'], 'exist', 'targetRelation' => 'game'],
             [['national_id'], 'exist', 'targetRelation' => 'national'],
             [['player_id'], 'exist', 'targetRelation' => 'player'],
-            [['position_id'], 'exist', 'targetRelation' => 'position'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
         ];
     }
@@ -107,14 +131,6 @@ class Lineup extends AbstractActiveRecord
     public function getPlayer(): ActiveQuery
     {
         return $this->hasOne(Player::class, ['id' => 'player_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getPosition(): ActiveQuery
-    {
-        return $this->hasOne(Position::class, ['id' => 'position_id']);
     }
 
     /**

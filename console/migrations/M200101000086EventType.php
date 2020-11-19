@@ -31,7 +31,8 @@ class M200101000086EventType extends Migration
             self::TABLE,
             ['text'],
             [
-                ['Score'],
+                ['Point'],
+                ['Card'],
             ]
         );
 

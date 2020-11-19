@@ -15,6 +15,12 @@ use common\components\AbstractActiveRecord;
  */
 class DealReason extends AbstractActiveRecord
 {
+    public const MANAGER_LIMIT = 1;
+    public const TEAM_LIMIT = 2;
+    public const NO_MONEY = 3;
+    public const NOT_BEST = 4;
+    public const REFERRER = 5;
+
     /**
      * @return string
      */

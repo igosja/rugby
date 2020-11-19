@@ -42,8 +42,8 @@ class Stadium extends AbstractActiveRecord
     {
         return [
             [['capacity', 'city_id', 'name'], 'required'],
-            [['capacity'], 'min' => 0, 'max' => 99999],
-            [['city_id', 'maintenance'], 'min' => 1],
+            [['capacity'], 'integer', 'min' => 0, 'max' => 99999],
+            [['city_id', 'maintenance'], 'integer', 'min' => 1],
             [['name'], 'trim'],
             [['city_id'], 'exist', 'targetRelation' => 'city'],
         ];

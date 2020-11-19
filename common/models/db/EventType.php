@@ -16,6 +16,7 @@ use common\components\AbstractActiveRecord;
 class EventType extends AbstractActiveRecord
 {
     public const TYPE_GOAL = 1;
+    public const TYPE_CARD = 2;
 
     /**
      * @return string
