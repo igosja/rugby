@@ -24,7 +24,7 @@ class M200101000042Championship extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'bonus_loose' => $this->integer(2)->defaultValue(0),
-                'bonus_tries' => $this->integer(2)->defaultValue(0),
+                'bonus_try' => $this->integer(2)->defaultValue(0),
                 'federation_id' => $this->integer(3)->notNull(),
                 'difference' => $this->integer(3)->defaultValue(0),
                 'division_id' => $this->integer(1)->notNull(),

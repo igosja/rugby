@@ -9,6 +9,7 @@
     RewriteRule ^qTwnVrXEBN/assets/(.*)$ backend/web/assets/$1 [L]
     RewriteRule ^qTwnVrXEBN/css/(.*)$ backend/web/css/$1 [L]
     RewriteRule ^qTwnVrXEBN/js/(.*)$ backend/web/js/$1 [L]
+    RewriteRule ^qTwnVrXEBN/(.*)$ backend/web/$1 [L]
     RewriteCond %{REQUEST_URI} !^/backend/web/(assets|js|css|js)/
     RewriteCond %{REQUEST_URI} ^/(qTwnVrXEBN)
     RewriteRule ^.*$ backend/web/index.php [L]

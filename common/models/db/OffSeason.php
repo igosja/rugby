@@ -13,7 +13,7 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $bonus_loose
- * @property int $bonus_tries
+ * @property int $bonus_try
  * @property int $difference
  * @property int $draw
  * @property int $game
@@ -50,7 +50,7 @@ class OffSeason extends AbstractActiveRecord
     {
         return [
             [['place', 'season_id', 'team_id'], 'required'],
-            [['bonus_loose', 'bonus_tries', 'point'], 'integer', 'min' => 0, 'max' => 99],
+            [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [['difference', 'season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
             [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 12],
             [['place', 'team_id'], 'integer', 'min' => 1],

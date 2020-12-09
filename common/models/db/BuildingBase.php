@@ -42,7 +42,7 @@ class BuildingBase extends AbstractActiveRecord
             [['building_id', 'construction_type_id', 'day', 'team_id'], 'required'],
             [['building_id', 'construction_type_id'], 'integer', 'min' => 0, 'max' => 9],
             [['day'], 'integer', 'min' => 0, 'max' => 99],
-            [['date', 'ready', 'team_id'], 'min' => 0, 'integer'],
+            [['date', 'ready', 'team_id'], 'integer', 'min' => 0, 'integer'],
             [['building_id'], 'exist', 'targetRelation' => 'building'],
             [['construction_type_id'], 'exist', 'targetRelation' => 'constructionType'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],

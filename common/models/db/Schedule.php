@@ -38,9 +38,9 @@ class Schedule extends AbstractActiveRecord
     {
         return [
             [['season_id', 'stage_id', 'tournament_type_id'], 'required'],
-            [['tournament_type_id'], 'min' => 1, 'max' => 9],
-            [['stage_id'], 'min' => 1, 'max' => 99],
-            [['season_id'], 'min' => 1, 'max' => 999],
+            [['tournament_type_id'], 'integer', 'min' => 1, 'max' => 9],
+            [['stage_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['season_id'], 'integer', 'min' => 1, 'max' => 999],
             [['season_id'], 'exist', 'targetRelation' => 'season'],
             [['stage_id'], 'exist', 'targetRelation' => 'stage'],
             [['tournament_type_id'], 'exist', 'targetRelation' => 'tournamentType'],

@@ -4,6 +4,7 @@
 
 use backend\assets\SignInAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 
 /**
@@ -24,11 +25,12 @@ $this->beginPage() ?>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="<?= Url::to('favicon.ico') ?>"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php
 
-// TODO refactor
+    // TODO refactor
     $this->head() ?>
 </head>
 <body>

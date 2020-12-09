@@ -16,6 +16,17 @@ use common\components\AbstractActiveRecord;
  */
 class Position extends AbstractActiveRecord
 {
+    public const CENTRE = 9;
+    public const EIGHT = 5;
+    public const FLANKER = 4;
+    public const FLY_HALF = 7;
+    public const FULL_BACK = 10;
+    public const HOOKER = 2;
+    public const LOCK = 3;
+    public const PROP = 1;
+    public const SCRUM_HALF = 6;
+    public const WING = 8;
+
     public const POS_01 = 1;
     public const POS_02 = 2;
     public const POS_03 = 3;

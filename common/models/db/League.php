@@ -13,7 +13,7 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $bonus_loose
- * @property int $bonus_tries
+ * @property int $bonus_try
  * @property int $difference
  * @property int $draw
  * @property int $game
@@ -52,7 +52,7 @@ class League extends AbstractActiveRecord
             [['place'], 'integer', 'min' => 1, 'max' => 4],
             [['draw', 'game', 'loose', 'win'], 'integer', 'min' => 0, 'max' => 6],
             [['group'], 'integer', 'min' => 1, 'max' => 8],
-            [['bonus_loose', 'bonus_tries', 'place'], 'integer', 'min' => 0, 'max' => 9],
+            [['bonus_loose', 'bonus_try', 'place'], 'integer', 'min' => 0, 'max' => 9],
             [['point', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 99],
             [['difference', 'point_against', 'point_for', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
             [['team_id'], 'integer', 'min' => 1],

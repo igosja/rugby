@@ -21,6 +21,8 @@ use yii\db\ActiveQuery;
  */
 class Swiss extends AbstractActiveRecord
 {
+    public $opponent;
+
     /**
      * @return string
      */

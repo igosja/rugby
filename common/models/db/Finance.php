@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -52,6 +53,20 @@ class Finance extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -74,6 +89,18 @@ class Finance extends AbstractActiveRecord
             [['transfer_id'], 'exist', 'targetRelation' => 'transfer'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public static function log(array $data): bool
+    {
+        $finance = new self();
+        $finance->setAttributes($data);
+        $finance->season_id = Season::getCurrentSeason();
+        return $finance->save();
     }
 
     /**

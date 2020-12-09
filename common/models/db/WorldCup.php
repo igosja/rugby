@@ -13,7 +13,7 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $bonus_loose
- * @property int $bonus_tries
+ * @property int $bonus_try
  * @property int $difference
  * @property int $division_id
  * @property int $draw
@@ -53,7 +53,7 @@ class WorldCup extends AbstractActiveRecord
         return [
             [['division_id', 'national_id', 'national_type_id', 'place', 'season_id'], 'required'],
             [['national_type_id'], 'integer', 'min' => 0, 'max' => 1],
-            [['bonus_loose', 'bonus_tries', 'point'], 'integer', 'min' => 0, 'max' => 99],
+            [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [
                 ['difference', 'national_id', 'season_id', 'tries_against', 'tries_for'],
                 'integer',

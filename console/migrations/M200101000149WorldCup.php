@@ -24,7 +24,7 @@ class M200101000149WorldCup extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'bonus_loose' => $this->integer(2)->defaultValue(0),
-                'bonus_tries' => $this->integer(2)->defaultValue(0),
+                'bonus_try' => $this->integer(2)->defaultValue(0),
                 'difference' => $this->integer(3)->defaultValue(0),
                 'division_id' => $this->integer(1)->notNull(),
                 'draw' => $this->integer(2)->defaultValue(0),

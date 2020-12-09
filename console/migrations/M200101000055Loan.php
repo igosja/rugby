@@ -24,7 +24,7 @@ class M200101000055Loan extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'age' => $this->integer(2)->defaultValue(0),
-                'cancel' => $this->integer(11)->defaultValue(0),
+                'cancel' => $this->integer(11),
                 'date' => $this->integer(11)->notNull(),
                 'day' => $this->integer(1),
                 'day_max' => $this->integer(1)->notNull(),

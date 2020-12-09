@@ -299,16 +299,11 @@ abstract class AbstractController extends AbstractWebController
     private function redirectBySiteStatus(Action $action)
     {
         $siteStatus = SiteQuery::getStatus();
-        if (!$siteStatus
-            && !('site' === $action->controller->id
-                && 'closed' === $action->id)
-        ) {
+        if (!$siteStatus && !('site' === $action->controller->id && 'closed' === $action->id)) {
             return $this->redirect(['site/closed']);
         }
 
-        if ($siteStatus && 'site' === $action->controller->id
-            && 'closed' === $action->id
-        ) {
+        if ($siteStatus && 'site' === $action->controller->id && 'closed' === $action->id) {
             return $this->redirect(['site/index']);
         }
         return false;

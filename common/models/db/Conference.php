@@ -13,10 +13,12 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property int $bonus_loose
- * @property int $bonus_tries
+ * @property int $bonus_try
  * @property int $difference
  * @property int $draw
  * @property int $game
+ * @property int $guest
+ * @property int $home
  * @property int $loose
  * @property int $place
  * @property int $point
@@ -48,9 +50,9 @@ class Conference extends AbstractActiveRecord
     {
         return [
             [['place', 'season_id', 'team_id'], 'required'],
-            [['bonus_loose', 'bonus_tries', 'point'], 'integer', 'min' => 0, 'max' => 99],
+            [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [['difference', 'season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
-            [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 30],
+            [['draw', 'guest', 'hoem', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 30],
             [['place'], 'integer', 'min' => 0, 'max' => 16],
             [['team_id'], 'integer', 'min' => 0],
             [['point_against', 'point_for'], 'integer', 'min' => 0, 'max' => 9999],

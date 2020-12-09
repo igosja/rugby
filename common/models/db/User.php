@@ -64,6 +64,8 @@ use yii\web\IdentityInterface;
 class User extends AbstractActiveRecord implements IdentityInterface
 {
     public const ADMIN_USER_ID = 1;
+    public const MAX_HOLIDAY = 30;
+    public const MAX_VIP_HOLIDAY = 60;
 
     /**
      * @return string

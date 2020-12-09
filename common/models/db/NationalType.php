@@ -16,6 +16,8 @@ use common\components\AbstractActiveRecord;
 class NationalType extends AbstractActiveRecord
 {
     public const MAIN = 1;
+    public const U21 = 2;
+    public const U19 = 3;
 
     /**
      * @return string

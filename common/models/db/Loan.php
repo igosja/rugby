@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -49,6 +50,20 @@ class Loan extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -60,6 +75,14 @@ class Loan extends AbstractActiveRecord
             [['power', 'season_id'], 'integer', 'min' => 1, 'max' => 999],
             [
                 [
+                    'team_seller_id',
+                    'user_seller_id',
+                ],
+                'integer',
+                'min' => 0
+            ],
+            [
+                [
                     'cancel',
                     'player_id',
                     'player_price',
@@ -67,9 +90,7 @@ class Loan extends AbstractActiveRecord
                     'price_seller',
                     'ready',
                     'team_buyer_id',
-                    'team_seller_id',
                     'user_buyer_id',
-                    'user_seller_id',
                     'voted',
                 ],
                 'integer',

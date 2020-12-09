@@ -15,16 +15,22 @@ use yii\helpers\Html;
  *
  * @property int $id
  * @property int $bonus_home
- * @property int $guest_auto
+ * @property bool $guest_auto
+ * @property int $guest_carry
+ * @property int $guest_clean_break
  * @property int $guest_collision
  * @property int $guest_conversion
+ * @property int $guest_defender_beaten
  * @property int $guest_drop_goal
  * @property int $guest_forecast
+ * @property int $guest_metre_gained
  * @property int $guest_mood_id
  * @property int $guest_national_id
  * @property int $guest_optimality_1
  * @property int $guest_optimality_2
- * @property int $guest_penalty
+ * @property int $guest_pass
+ * @property int $guest_penalty_conceded
+ * @property int $guest_penalty_kick
  * @property int $guest_plus_minus
  * @property float $guest_plus_minus_competition
  * @property float $guest_plus_minus_mood
@@ -32,29 +38,37 @@ use yii\helpers\Html;
  * @property float $guest_plus_minus_optimality_2
  * @property float $guest_plus_minus_power
  * @property float $guest_plus_minus_score
- * @property int $guest_points
+ * @property int $guest_point
  * @property int $guest_possession
  * @property int $guest_power
  * @property int $guest_power_percent
  * @property int $guest_red_card
  * @property int $guest_rudeness_id
  * @property int $guest_style_id
+ * @property int $guest_tackle
  * @property int $guest_tactic_id
  * @property int $guest_team_id
  * @property float $guest_teamwork
  * @property int $guest_try
+ * @property int $guest_turnover_won
  * @property int $guest_user_id
  * @property int $guest_yellow_card
- * @property int $home_auto
+ * @property bool $home_auto
+ * @property int $home_carry
+ * @property int $home_clean_break
  * @property int $home_collision
  * @property int $home_conversion
+ * @property int $home_defender_beaten
  * @property int $home_drop_goal
  * @property int $home_forecast
+ * @property int $home_metre_gained
  * @property int $home_mood_id
  * @property int $home_national_id
  * @property int $home_optimality_1
  * @property int $home_optimality_2
- * @property int $home_penalty
+ * @property int $home_pass
+ * @property int $home_penalty_conceded
+ * @property int $home_penalty_kick
  * @property int $home_plus_minus
  * @property float $home_plus_minus_competition
  * @property float $home_plus_minus_mood
@@ -62,16 +76,18 @@ use yii\helpers\Html;
  * @property float $home_plus_minus_optimality_2
  * @property float $home_plus_minus_power
  * @property float $home_plus_minus_score
- * @property int $home_points
+ * @property int $home_point
  * @property int $home_possession
  * @property int $home_power
  * @property int $home_power_percent
  * @property int $home_red_card
  * @property int $home_rudeness_id
  * @property int $home_style_id
+ * @property int $home_tackle
  * @property int $home_tactic_id
  * @property int $home_team_id
  * @property float $home_teamwork
+ * @property int $home_turnover_won
  * @property int $home_try
  * @property int $home_user_id
  * @property int $home_yellow_card
@@ -97,6 +113,7 @@ use yii\helpers\Html;
  * @property-read Tactic $homeTactic
  * @property-read Team $homeTeam
  * @property-read User $homeUser
+ * @property-read Lineup[] $lineups
  * @property-read Schedule $schedule
  * @property-read Stadium $stadium
  * @property-read Weather $weather
@@ -105,6 +122,8 @@ class Game extends AbstractActiveRecord
 {
     public const TICKET_PRICE_MAX = 50;
     public const TICKET_PRICE_MIN = 10;
+    public const TICKET_PRICE_DEFAULT = 20;
+    public const TICKET_PRICE_BASE = 9;
 
     /**
      * @return string
@@ -129,8 +148,6 @@ class Game extends AbstractActiveRecord
                     'guest_collision',
                     'guest_drop_goal',
                     'guest_mood_id',
-                    'guest_penalty',
-                    'guest_plus_minus',
                     'guest_red_card',
                     'guest_rudeness_id',
                     'guest_style_id',
@@ -139,8 +156,6 @@ class Game extends AbstractActiveRecord
                     'home_collision',
                     'home_drop_goal',
                     'home_mood_id',
-                    'home_penalty',
-                    'home_plus_minus',
                     'home_red_card',
                     'home_rudeness_id',
                     'home_style_id',
@@ -154,12 +169,22 @@ class Game extends AbstractActiveRecord
             ],
             [
                 [
+                    'guest_clean_break',
                     'guest_conversion',
+                    'guest_defender_beaten',
+                    'guest_penalty_conceded',
+                    'guest_penalty_kick',
                     'guest_possession',
                     'guest_try',
+                    'guest_turnover_won',
+                    'home_clean_break',
                     'home_conversion',
+                    'home_defender_beaten',
+                    'home_penalty_conceded',
+                    'home_penalty_kick',
                     'home_possession',
                     'home_try',
+                    'home_turnover_won',
                     'ticket_price',
                 ],
                 'integer',
@@ -168,14 +193,22 @@ class Game extends AbstractActiveRecord
             ],
             [
                 [
+                    'guest_carry',
+                    'guest_metre_gained',
                     'guest_optimality_1',
                     'guest_optimality_2',
-                    'guest_points',
+                    'guest_pass',
+                    'guest_point',
                     'guest_power_percent',
+                    'guest_tackle',
+                    'home_carry',
+                    'home_metre_gained',
                     'home_optimality_1',
                     'home_optimality_2',
-                    'home_points',
+                    'home_pass',
+                    'home_point',
                     'home_power_percent',
+                    'home_tackle',
                 ],
                 'integer',
                 'min' => 0,
@@ -190,11 +223,13 @@ class Game extends AbstractActiveRecord
             ],
             [
                 [
+                    'guest_plus_minus',
                     'guest_plus_minus_competition',
                     'guest_plus_minus_mood',
                     'guest_plus_minus_optimality_1',
                     'guest_plus_minus_power',
                     'guest_plus_minus_score',
+                    'home_plus_minus',
                     'home_plus_minus_competition',
                     'home_plus_minus_mood',
                     'home_plus_minus_optimality_1',
@@ -202,13 +237,13 @@ class Game extends AbstractActiveRecord
                     'home_plus_minus_score',
                 ],
                 'number',
-                'min' => 0,
+                'min' => -9,
                 'max' => 9
             ],
             [
                 ['guest_plus_minus_optimality_2', 'guest_teamwork', 'home_plus_minus_optimality_2', 'home_teamwork'],
                 'number',
-                'min' => 0,
+                'min' => -99,
                 'max' => 99
             ],
             [
@@ -323,10 +358,10 @@ class Game extends AbstractActiveRecord
     {
         if ($this->played) {
             if ('home' === $first) {
-                return $this->home_points . ':' . $this->guest_points;
+                return $this->home_point . ':' . $this->guest_point;
             }
 
-            return $this->guest_points . ':' . $this->home_points;
+            return $this->guest_point . ':' . $this->home_point;
         }
 
         return '?:?';
@@ -345,7 +380,7 @@ class Game extends AbstractActiveRecord
      */
     public function getGuestNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['id' => 'guest_national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'guest_national_id']);
     }
 
     /**
@@ -377,7 +412,7 @@ class Game extends AbstractActiveRecord
      */
     public function getGuestTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['id' => 'guest_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'guest_team_id']);
     }
 
     /**
@@ -401,7 +436,7 @@ class Game extends AbstractActiveRecord
      */
     public function getHomeNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['id' => 'home_national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'home_national_id']);
     }
 
     /**
@@ -433,7 +468,7 @@ class Game extends AbstractActiveRecord
      */
     public function getHomeTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['id' => 'home_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'home_team_id']);
     }
 
     /**
@@ -442,6 +477,14 @@ class Game extends AbstractActiveRecord
     public function getHomeUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'home_user_id'])->cache();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLineups(): ActiveQuery
+    {
+        return $this->hasMany(Lineup::class, ['game_id' => 'id']);
     }
 
     /**

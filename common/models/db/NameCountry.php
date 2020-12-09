@@ -49,6 +49,20 @@ class NameCountry extends AbstractActiveRecord
     }
 
     /**
+     * @param int $countryId
+     * @return int
+     */
+    public static function getRandNameId(int $countryId): int
+    {
+        return self::find()
+            ->select(['name_id'])
+            ->where(['country_id' => $countryId])
+            ->orderBy('RAND()')
+            ->limit(1)
+            ->scalar();
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getCountry(): ActiveQuery

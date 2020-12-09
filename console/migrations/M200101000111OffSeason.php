@@ -24,7 +24,7 @@ class M200101000111OffSeason extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'bonus_loose' => $this->integer(2)->defaultValue(0),
-                'bonus_tries' => $this->integer(2)->defaultValue(0),
+                'bonus_try' => $this->integer(2)->defaultValue(0),
                 'difference' => $this->integer(3)->defaultValue(0),
                 'draw' => $this->integer(2)->defaultValue(0),
                 'game' => $this->integer(2)->defaultValue(0),

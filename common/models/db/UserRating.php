@@ -15,13 +15,13 @@ use yii\db\ActiveQuery;
  * @property int $auto
  * @property int $collision_loose
  * @property int $collision_win
+ * @property int $draw
+ * @property int $draw_equal
+ * @property int $draw_strong
+ * @property int $draw_weak
  * @property int $game
  * @property int $loose
  * @property int $loose_equal
- * @property int $loose_overtime
- * @property int $loose_overtime_equal
- * @property int $loose_overtime_strong
- * @property int $loose_overtime_weak
  * @property int $loose_strong
  * @property int $loose_super
  * @property int $loose_weak
@@ -32,10 +32,6 @@ use yii\db\ActiveQuery;
  * @property int $vs_rest
  * @property int $win
  * @property int $win_equal
- * @property int $win_overtime
- * @property int $win_overtime_equal
- * @property int $win_overtime_strong
- * @property int $win_overtime_weak
  * @property int $win_strong
  * @property int $win_super
  * @property int $win_weak
@@ -59,7 +55,7 @@ class UserRating extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['season_id', 'user_id'], 'required'],
+            [['user_id'], 'required'],
             [['season_id'], 'integer', 'min' => 1, 'max' => 999],
             [['rating'], 'number', 'min' => -9999, 'max' => 9999],
             [
@@ -67,13 +63,13 @@ class UserRating extends AbstractActiveRecord
                     'auto',
                     'collision_loose',
                     'collision_win',
+                    'draw',
+                    'draw_equal',
+                    'draw_strong',
+                    'draw_weak',
                     'game',
                     'loose',
                     'loose_equal',
-                    'loose_overtime',
-                    'loose_overtime_equal',
-                    'loose_overtime_strong',
-                    'loose_overtime_weak',
                     'loose_strong',
                     'loose_super',
                     'loose_weak',
@@ -83,15 +79,12 @@ class UserRating extends AbstractActiveRecord
                     'win',
                     'win_equal',
                     'win_overtime',
-                    'win_overtime_equal',
-                    'win_overtime_strong',
-                    'win_overtime_weak',
                     'win_strong',
                     'win_super',
                     'win_weak',
                 ],
                 'integer',
-                'min' => 1
+                'min' => 0
             ],
             [['season_id'], 'exist', 'targetRelation' => 'season'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],

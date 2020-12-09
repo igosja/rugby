@@ -42,9 +42,9 @@ class Scout extends AbstractActiveRecord
         return [
             [['player_id', 'season_id', 'team_id'], 'required'],
             [['is_school', 'is_style'], 'boolean'],
-            [['percent'], 'min' => 0, 'max' => 100],
-            [['season_id'], 'min' => 1, 'max' => 999],
-            [['player_id', 'ready', 'team_id'], 'min' => 1],
+            [['percent'], 'integer', 'min' => 0, 'max' => 100],
+            [['season_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['player_id', 'ready', 'team_id'], 'integer', 'min' => 1],
             [['player_id'], 'exist', 'targetRelation' => 'player'],
             [['season_id'], 'exist', 'targetRelation' => 'season'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],

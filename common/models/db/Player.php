@@ -67,6 +67,8 @@ class Player extends AbstractActiveRecord
 {
     public const AGE_READY_FOR_PENSION = 35;
     public const START_NUMBER_OF_PLAYERS = 30;
+    public const TIRE_DEFAULT = 50;
+    public const TIRE_MAX_FOR_LINEUP = 90;
 
     /**
      * @return string
@@ -88,7 +90,6 @@ class Player extends AbstractActiveRecord
                     'country_id',
                     'name_id',
                     'physical_id',
-                    'position_id',
                     'school_team_id',
                     'style_id',
                     'surname_id',
@@ -97,13 +98,14 @@ class Player extends AbstractActiveRecord
                 'required'
             ],
             [['is_injury', 'is_no_deal'], 'boolean'],
+            [['loan_day'], 'integer', 'min' => 0, 'max' => 9],
             [
-                ['loan_day', 'mood_id', 'national_squad_id', 'squad_id', 'style_id', 'training_ability'],
+                ['mood_id', 'national_squad_id', 'squad_id', 'style_id', 'training_ability'],
                 'integer',
                 'min' => 1,
                 'max' => 9
             ],
-            [['age', 'physical_id', 'position_id', 'tire'], 'integer', 'min' => 1, 'max' => 99],
+            [['age', 'physical_id', 'tire'], 'integer', 'min' => 1, 'max' => 99],
             [['game_row', 'game_row_old'], 'integer', 'min' => -99, 'max' => 99],
             [
                 ['country_id', 'national_id', 'order', 'power_nominal', 'power_nominal_s', 'power_old', 'power_real'],
@@ -123,7 +125,6 @@ class Player extends AbstractActiveRecord
             [['national_id'], 'exist', 'targetRelation' => 'national'],
             [['national_squad_id'], 'exist', 'targetRelation' => 'nationalSquad'],
             [['physical_id'], 'exist', 'targetRelation' => 'physical'],
-            [['position_id'], 'exist', 'targetRelation' => 'position'],
             [['school_team_id'], 'exist', 'targetRelation' => 'schoolTeam'],
             [['squad_id'], 'exist', 'targetRelation' => 'squad'],
             [['style_id'], 'exist', 'targetRelation' => 'style'],

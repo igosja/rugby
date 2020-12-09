@@ -16,6 +16,10 @@ use common\components\AbstractActiveRecord;
  */
 class DayType extends AbstractActiveRecord
 {
+    public const A = 1;
+    public const B = 2;
+    public const C = 3;
+
     /**
      * @return string
      */

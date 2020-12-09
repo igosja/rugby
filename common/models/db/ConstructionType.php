@@ -15,6 +15,9 @@ use common\components\AbstractActiveRecord;
  */
 class ConstructionType extends AbstractActiveRecord
 {
+    public const BUILD = 1;
+    public const DESTROY = 2;
+
     /**
      * @return string
      */

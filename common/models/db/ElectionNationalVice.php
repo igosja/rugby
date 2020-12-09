@@ -17,8 +17,10 @@ use yii\db\ActiveQuery;
  * @property int $election_status_id
  * @property int $national_type_id
  *
- * @property-read Federation $federation
+ * @property-read ElectionNationalViceApplication[] $electionNationalViceApplications
  * @property-read ElectionStatus $electionStatus
+ * @property-read Federation $federation
+ * @property-read National $national
  * @property-read NationalType $nationalType
  */
 class ElectionNationalVice extends AbstractActiveRecord
@@ -49,9 +51,9 @@ class ElectionNationalVice extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getFederation(): ActiveQuery
+    public function getElectionNationalViceApplications(): ActiveQuery
     {
-        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
+        return $this->hasMany(ElectionNationalViceApplication::class, ['election_national_vice_id' => 'id']);
     }
 
     /**
@@ -60,6 +62,25 @@ class ElectionNationalVice extends AbstractActiveRecord
     public function getElectionStatus(): ActiveQuery
     {
         return $this->hasOne(ElectionStatus::class, ['id' => 'election_status_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFederation(): ActiveQuery
+    {
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getNational(): ActiveQuery
+    {
+        return $this->hasOne(
+            National::class,
+            ['national_type_id' => 'national_type_id', 'federation_id' => 'federation_id']
+        );
     }
 
     /**

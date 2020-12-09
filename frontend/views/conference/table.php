@@ -138,7 +138,7 @@ $user = $this->context->user;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Бонус'],
                 'label' => 'Б',
                 'value' => static function (Conference $model) {
-                    return $model->bonus_loose + $model->bonus_tries;
+                    return $model->bonus_loose + $model->bonus_try;
                 }
             ],
             [

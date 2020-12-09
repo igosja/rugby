@@ -16,6 +16,7 @@ use yii\db\ActiveQuery;
  * @property int $player_id
  * @property int $special_id
  *
+ * @property-read Lineup $lineup
  * @property-read Player $player
  * @property-read Special $special
  */
@@ -42,6 +43,14 @@ class PlayerSpecial extends AbstractActiveRecord
             [['player_id'], 'exist', 'targetRelation' => 'player'],
             [['special_id'], 'exist', 'targetRelation' => 'special'],
         ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLineup(): ActiveQuery
+    {
+        return $this->hasMany(Lineup::class, ['player_id' => 'player_id']);
     }
 
     /**

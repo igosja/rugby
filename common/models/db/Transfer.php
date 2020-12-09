@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -47,6 +48,20 @@ class Transfer extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -58,16 +73,22 @@ class Transfer extends AbstractActiveRecord
             [
                 [
                     'cancel',
+                    'user_buyer_id',
+                    'user_seller_id',
+                    'team_buyer_id',
+                    'team_seller_id',
+                    'voted',
+                ],
+                'integer',
+                'min' => 0
+            ],
+            [
+                [
                     'player_id',
                     'player_price',
                     'price_buyer',
                     'price_seller',
                     'ready',
-                    'team_buyer_id',
-                    'team_seller_id',
-                    'user_buyer_id',
-                    'user_seller_id',
-                    'voted',
                 ],
                 'integer',
                 'min' => 1

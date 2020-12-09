@@ -20,6 +20,22 @@ use yii\db\ActiveQuery;
  */
 class RatingType extends AbstractActiveRecord
 {
+    public const FEDERATION_AUTO = 12;
+    public const FEDERATION_LEAGUE = 13;
+    public const FEDERATION_STADIUM = 11;
+    public const TEAM_AGE = 2;
+    public const TEAM_BASE = 5;
+    public const TEAM_FINANCE = 15;
+    public const TEAM_PLAYER = 8;
+    public const TEAM_POWER = 1;
+    public const TEAM_PRICE_BASE = 6;
+    public const TEAM_PRICE_STADIUM = 7;
+    public const TEAM_PRICE_TOTAL = 9;
+    public const TEAM_SALARY = 14;
+    public const TEAM_STADIUM = 3;
+    public const TEAM_VISITOR = 4;
+    public const USER_RATING = 10;
+
     /**
      * @return string
      */

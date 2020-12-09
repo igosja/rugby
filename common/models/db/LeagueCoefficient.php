@@ -12,6 +12,7 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
+ * @property int $draw
  * @property int $federation_id
  * @property int $loose
  * @property int $point
@@ -40,7 +41,7 @@ class LeagueCoefficient extends AbstractActiveRecord
     {
         return [
             [['federation_id', 'season_id', 'team_id'], 'required'],
-            [['loose', 'point', 'win'], 'integer', 'min' => 0, 'max' => 99],
+            [['draw', 'loose', 'point', 'win'], 'integer', 'min' => 0, 'max' => 99],
             [['federation_id', 'season_id'], 'integer', 'min' => 1, 'max' => 999],
             [['team_id'], 'integer', 'min' => 1],
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],

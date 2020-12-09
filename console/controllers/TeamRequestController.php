@@ -10,7 +10,6 @@ use common\models\db\HistoryText;
 use common\models\db\TeamRequest;
 use common\models\executors\TeamRequestHandleExecute;
 use common\models\queries\SiteQuery;
-use console\components\AbstractController;
 use Throwable;
 use Yii;
 use yii\db\Exception;

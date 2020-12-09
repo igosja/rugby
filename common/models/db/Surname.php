@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\db\ActiveQuery;
 
 /**
  * Class Surname
@@ -12,6 +13,8 @@ use common\components\AbstractActiveRecord;
  *
  * @property int $id
  * @property string $name
+ *
+ * @property Player[] $players
  */
 class Surname extends AbstractActiveRecord
 {
@@ -34,5 +37,13 @@ class Surname extends AbstractActiveRecord
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getPlayers(): ActiveQuery
+    {
+        return $this->hasMany(Player::class, ['surname_id' => 'id']);
     }
 }

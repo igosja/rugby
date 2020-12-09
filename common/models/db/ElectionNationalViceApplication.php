@@ -18,6 +18,7 @@ use yii\db\ActiveQuery;
  * @property int $user_id
  *
  * @property-read ElectionNationalVice $electionNationalVice
+ * @property-read ElectionNationalViceVote[] $electionNationalViceVotes
  * @property-read User $user
  */
 class ElectionNationalViceApplication extends AbstractActiveRecord
@@ -51,6 +52,14 @@ class ElectionNationalViceApplication extends AbstractActiveRecord
     public function getElectionNationalVice(): ActiveQuery
     {
         return $this->hasOne(ElectionNationalVice::class, ['id' => 'election_national_vice_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getElectionNationalViceVotes(): ActiveQuery
+    {
+        return $this->hasMany(ElectionNationalViceVote::class, ['election_national_vice_application_id' => 'id']);
     }
 
     /**

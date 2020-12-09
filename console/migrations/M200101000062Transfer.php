@@ -24,7 +24,7 @@ class M200101000062Transfer extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'age' => $this->integer(2),
-                'cancel' => $this->integer(11)->defaultValue(0),
+                'cancel' => $this->integer(11),
                 'date' => $this->integer(11)->notNull(),
                 'is_to_league' => $this->boolean()->defaultValue(false),
                 'player_id' => $this->integer(11)->notNull(),
@@ -38,7 +38,7 @@ class M200101000062Transfer extends Migration
                 'team_seller_id' => $this->integer(11)->notNull(),
                 'user_buyer_id' => $this->integer(11),
                 'user_seller_id' => $this->integer(11)->notNull(),
-                'voted' => $this->integer(11)->defaultValue(0),
+                'voted' => $this->integer(11),
             ]
         );
 
