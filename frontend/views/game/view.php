@@ -173,15 +173,15 @@ $user = Yii::$app->user->identity;
             </tr>
             <tr>
                 <td class="text-center">
-                        <span class="<?= $game->cssStyle('home') ?>">
-                            <?= $game->homeStyle->name ?>
-                        </span>
+                    <span class="<?= $game->cssStyle('home') ?>">
+                        <?= $game->homeStyle->name ?>
+                    </span>
                 </td>
                 <td class="text-center">Стиль</td>
                 <td class="text-center">
-                        <span class="<?= $game->cssStyle('guest') ?>">
-                            <?= $game->guestStyle->name ?>
-                        </span>
+                    <span class="<?= $game->cssStyle('guest') ?>">
+                        <?= $game->guestStyle->name ?>
+                    </span>
                 </td>
             </tr>
             <tr>
@@ -195,15 +195,15 @@ $user = Yii::$app->user->identity;
             </tr>
             <tr>
                 <td class="text-center">
-                        <span class="<?= $game->cssMood('home') ?>">
-                            <?= $game->homeMood->name ?>
-                        </span>
+                    <span class="<?= $game->cssMood('home') ?>">
+                        <?= $game->homeMood->name ?>
+                    </span>
                 </td>
                 <td class="text-center">Настрой</td>
                 <td class="text-center">
-                        <span class="<?= $game->cssMood('guest') ?>">
-                            <?= $game->guestMood->name ?>
-                        </span>
+                    <span class="<?= $game->cssMood('guest') ?>">
+                        <?= $game->guestMood->name ?>
+                    </span>
                 </td>
             </tr>
             <tr>
@@ -218,14 +218,12 @@ $user = Yii::$app->user->identity;
             <tr>
                 <td class="text-center">
                     <span title="Расстановка сил по позициям"><?= $game->home_optimality_1 ?>%</span> |
-                    <span title="Соотношение силы состава к ретингу команды"><?= $game->home_optimality_2 ?>
-                            %</span>
+                    <span title="Соотношение силы состава к ретингу команды"><?= $game->home_optimality_2 ?>%</span>
                 </td>
                 <td class="text-center">Оптимальность</td>
                 <td class="text-center">
                     <span title="Расстановка сил по позициям"><?= $game->guest_optimality_1 ?>%</span> |
-                    <span title="Соотношение силы состава к ретингу команды"><?= $game->guest_optimality_2 ?>
-                            %</span>
+                    <span title="Соотношение силы состава к ретингу команды"><?= $game->guest_optimality_2 ?>%</span>
                 </td>
             </tr>
             <tr>
@@ -235,6 +233,69 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">Сыгранность</td>
                 <td class="text-center">
                     <?= $game->guest_teamwork ?>%
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_carry ?>
+                </td>
+                <td class="text-center">Carries</td>
+                <td class="text-center">
+                    <?= $game->guest_carry ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_clean_break ?>
+                </td>
+                <td class="text-center">Clean breaks</td>
+                <td class="text-center">
+                    <?= $game->guest_clean_break ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_defender_beaten ?>
+                </td>
+                <td class="text-center">Defenders beaten</td>
+                <td class="text-center">
+                    <?= $game->guest_defender_beaten ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_metre_gained ?>
+                </td>
+                <td class="text-center">Metres gained</td>
+                <td class="text-center">
+                    <?= $game->guest_metre_gained ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_pass ?>
+                </td>
+                <td class="text-center">Passes</td>
+                <td class="text-center">
+                    <?= $game->guest_pass ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_penalty_conceded ?>
+                </td>
+                <td class="text-center">Penalty conceded</td>
+                <td class="text-center">
+                    <?= $game->guest_penalty_conceded ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_turnover_won ?>
+                </td>
+                <td class="text-center">Turnover won</td>
+                <td class="text-center">
+                    <?= $game->guest_turnover_won ?>
                 </td>
             </tr>
             <tr>
@@ -273,55 +334,58 @@ $user = Yii::$app->user->identity;
                     <?= $game->guest_drop_goal ?>
                 </td>
             </tr>
-        </table>
-    </div>
-</div>
-<div class="row margin-top">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
-        <table class="table table-bordered">
             <tr>
-                <td class="text-center">Прогноз на матч</td>
-                <td
-                        class="col-35 text-center
-                    <?php if ($game->home_forecast > $game->guest_forecast) : ?>
-                        font-green
-                    <?php elseif ($game->home_forecast < $game->guest_forecast) : ?>
-                        font-red
-                    <?php endif ?>"
-                >
+                <td class="text-center">
+                    <?= $game->home_red_card ?>
+                </td>
+                <td class="text-center">Red cards</td>
+                <td class="text-center">
+                    <?= $game->guest_red_card ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_yellow_card ?>
+                </td>
+                <td class="text-center">Yellow cards</td>
+                <td class="text-center">
+                    <?= $game->guest_yellow_card ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_red_card ?>
+                </td>
+                <td class="text-center">Red cards</td>
+                <td class="text-center">
+                    <?= $game->guest_red_card ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
                     <?= $game->home_forecast ?>
                 </td>
-                <td
-                        class="col-35 text-center
-                    <?php if ($game->home_forecast < $game->guest_forecast) : ?>
-                        font-green
-                    <?php elseif ($game->home_forecast > $game->guest_forecast): ?>
-                        font-red
-                    <?php endif ?>"
-                >
+                <td class="text-center">Прогноз на матч</td>
+                <td class="text-center">
                     <?= $game->guest_forecast ?>
                 </td>
             </tr>
             <tr>
-                <td class="text-center">Сила состава</td>
-                <td class="text-center
-                    <?php if ($game->home_power > $game->guest_power) : ?>
-                        font-green
-                    <?php elseif ($game->home_power < $game->guest_power) : ?>
-                        font-red
-                    <?php endif ?>"
-                >
+                <td class="text-center">
                     <?= $game->home_power ?>
                 </td>
-                <td
-                        class="text-center
-                    <?php if ($game->home_power < $game->guest_power) : ?>
-                        font-green
-                    <?php elseif ($game->home_power > $game->guest_power) : ?>
-                        font-red
-                    <?php endif ?>"
-                >
+                <td class="text-center">Сила состава</td>
+                <td class="text-center">
                     <?= $game->guest_power ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <?= $game->home_possession ?>%
+                </td>
+                <td class="text-center">Possession</td>
+                <td class="text-center">
+                    <?= $game->guest_possession ?>%
                 </td>
             </tr>
         </table>

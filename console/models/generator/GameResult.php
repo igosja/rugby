@@ -716,6 +716,10 @@ class GameResult
                     ->select(['position_id'])
                     ->where(['player_id' => $playerId])
                     ->column();
+                foreach ($positionArray as $key => $value) {
+                    $positionArray[$key] = (int)$value;
+                }
+
                 if (in_array($positionCoefficients[$position][0], $positionArray, true)) {
                     $coefficient = 1;
                 } else {
@@ -946,7 +950,7 @@ class GameResult
      */
     private function eventYellowCard(string $team): void
     {
-        $this->result['event'][] = array(
+        $this->result['event'][] = [
             'event_text_id' => EventText::YELLOW_CARD,
             'event_type_id' => EventType::TYPE_YELLOW,
             'game_id' => $this->result['game_info']['id'],
@@ -956,7 +960,7 @@ class GameResult
             'national_id' => $this->result['game_info'][$team . '_national_id'],
             'player_id' => $this->result['player'],
             'team_id' => $this->result['game_info'][$team . '_team_id'],
-        );
+        ];
     }
 
     /**
@@ -996,7 +1000,7 @@ class GameResult
      */
     private function eventRedCard(string $team): void
     {
-        $this->result['event'][] = array(
+        $this->result['event'][] = [
             'event_text_id' => EventText::RED_CARD,
             'event_type_id' => EventType::TYPE_RED,
             'game_id' => $this->result['game_info']['id'],
@@ -1006,7 +1010,7 @@ class GameResult
             'national_id' => $this->result['game_info'][$team . '_national_id'],
             'player_id' => $this->result['player'],
             'team_id' => $this->result['game_info'][$team . '_team_id'],
-        );
+        ];
     }
 
     /**
@@ -1243,7 +1247,7 @@ class GameResult
      */
     private function eventGoal(string $team, int $eventText): void
     {
-        $this->result['event'][] = array(
+        $this->result['event'][] = [
             'event_text_id' => $eventText,
             'event_type_id' => EventType::TYPE_GOAL,
             'game_id' => $this->result['game_info']['id'],
@@ -1253,7 +1257,7 @@ class GameResult
             'national_id' => $this->result['game_info'][$team . '_national_id'],
             'player_id' => $this->result['player'],
             'team_id' => $this->result['game_info'][$team . '_team_id'],
-        );
+        ];
     }
 
     /**
@@ -1577,7 +1581,7 @@ class GameResult
         $this->game->guest_conversion = $this->result['guest']['team']['conversion'];
         $this->game->guest_defender_beaten = $this->result['guest']['team']['defender_beaten'];
         $this->game->guest_drop_goal = $this->result['guest']['team']['drop_goal'];
-        $this->game->guest_forecast = $this->result['guest']['team']['metre_gained'];
+        $this->game->guest_forecast = $this->result['guest']['team']['forecast'];
         $this->game->guest_metre_gained = $this->result['guest']['team']['metre_gained'];
         $this->game->guest_optimality_1 = $this->result['guest']['team']['optimality_1'];
         $this->game->guest_optimality_2 = $this->result['guest']['team']['optimality_2'];
@@ -1600,7 +1604,7 @@ class GameResult
         $this->game->home_conversion = $this->result['home']['team']['conversion'];
         $this->game->home_defender_beaten = $this->result['home']['team']['defender_beaten'];
         $this->game->home_drop_goal = $this->result['home']['team']['drop_goal'];
-        $this->game->home_forecast = $this->result['home']['team']['metre_gained'];
+        $this->game->home_forecast = $this->result['home']['team']['forecast'];
         $this->game->home_metre_gained = $this->result['home']['team']['metre_gained'];
         $this->game->home_optimality_1 = $this->result['home']['team']['optimality_1'];
         $this->game->home_optimality_2 = $this->result['home']['team']['optimality_2'];

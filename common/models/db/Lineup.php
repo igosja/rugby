@@ -118,7 +118,7 @@ class Lineup extends AbstractActiveRecord
         if ($this->power_change > 0) {
             $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => '+1 балл по результатам матча'])->addCssClass('font-green');
         } elseif ($this->power_change < 0) {
-            $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => '-1 балл по результатам матча'])->addCssClass('font-red');
+            $result = FAS::icon(FAS::_MINUS_SQUARE, ['title' => '-1 балл по результатам матча'])->addCssClass('font-red');
         }
         return $result;
     }

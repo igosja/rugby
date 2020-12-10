@@ -11,7 +11,9 @@ use yii\helpers\Html;
 
 /**
  * @var ActiveDataProvider $dataProvider
+ * @var int $homeForecast
  * @var Game $game
+ * @var int $guestForecast
  * @var int $draw
  * @var int $loose
  * @var int $pointAgainst
@@ -87,69 +89,22 @@ use yii\helpers\Html;
         <?php endif ?>
     </div>
 </div>
-<div class="row margin-top">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
-                Прогноз на матч
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 table-responsive">
-                <?php if ($game->homeTeam->id) : ?>
-                    <table class="table table-bordered">
-                        <tr>
-                            <td
-                                    class="text-center
-                                <?php if ($game->homeTeam->power_vs > $game->guestTeam->power_vs) : ?>
-                                    font-green
-                                <?php elseif ($game->homeTeam->power_vs < $game->guestTeam->power_vs) : ?>
-                                    font-red
-                                <?php endif ?>"
-                            >
-                                <?= $game->homeTeam->power_vs ?>
-                            </td>
-                            <td
-                                    class="text-center
-                                <?php if ($game->homeTeam->power_vs < $game->guestTeam->power_vs) : ?>
-                                    font-green
-                                <?php elseif ($game->homeTeam->power_vs > $game->guestTeam->power_vs) : ?>
-                                    font-red
-                                <?php endif ?>"
-                            >
-                                <?= $game->guestTeam->power_vs ?>
-                            </td>
-                        </tr>
-                    </table>
-                <?php else: ?>
-                    <table class="table table-bordered">
-                        <tr>
-                            <td
-                                    class="text-center
-                                <?php if ($game->homeNational->power_vs > $game->guestNational->power_vs) : ?>
-                                    font-green
-                                <?php elseif ($game->homeNational->power_vs < $game->guestNational->power_vs) : ?>
-                                    font-red
-                                <?php endif ?>"
-                            >
-                                <?= $game->homeNational->power_vs ?>
-                            </td>
-                            <td
-                                    class="text-center
-                                <?php if ($game->homeNational->power_vs < $game->guestNational->power_vs) : ?>
-                                    font-green
-                                <?php elseif ($game->homeNational->power_vs > $game->guestNational->power_vs) : ?>
-                                    font-red
-                                <?php endif ?>"
-                            >
-                                <?= $game->guestNational->power_vs ?>
-                            </td>
-                        </tr>
-                    </table>
-                <?php endif ?>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <td class="col-35 text-center">
+                    <?= $homeForecast ?>
+                </td>
+                <td class="text-center">Прогноз на матч</td>
+                <td class="col-35 text-center">
+                    <?= $guestForecast ?>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
-<div class="row">
+<div class="row margin-top">
     <?php
 
     try {
