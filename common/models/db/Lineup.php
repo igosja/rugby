@@ -9,6 +9,7 @@ use common\components\AbstractActiveRecord;
 use rmrevin\yii\fontawesome\FAS;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Lineup
@@ -40,6 +41,7 @@ use yii\db\ActiveQuery;
  * @property int $yellow_card
  *
  * @property-read Game $game
+ * @property-read LineupSpecial[] $lineupSpecials
  * @property-read National $national
  * @property-read Player $player
  * @property-read Team $team
@@ -96,6 +98,18 @@ class Lineup extends AbstractActiveRecord
 
     /**
      * @return string
+     */
+    public function iconCaptain(): string
+    {
+        $result = '';
+        if ($this->is_captain) {
+            $result = FAS::icon(FAS::_COPYRIGHT, ['title' => 'Капитан']);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
      * @throws InvalidConfigException
      */
     public function iconPowerChange(): string
@@ -110,11 +124,35 @@ class Lineup extends AbstractActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function special(): string
+    {
+        $result = [];
+        foreach ($this->lineupSpecials as $lineupSpecial) {
+            $result[] = Html::tag(
+                'span',
+                $lineupSpecial->special->name . $lineupSpecial->level,
+                ['title' => $lineupSpecial->special->text]
+            );
+        }
+        return implode(' ', $result);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getGame(): ActiveQuery
     {
         return $this->hasOne(Game::class, ['id' => 'game_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLineupSpecials(): ActiveQuery
+    {
+        return $this->hasMany(LineupSpecial::class, ['lineup_id' => 'id']);
     }
 
     /**

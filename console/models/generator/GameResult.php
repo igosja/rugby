@@ -505,13 +505,13 @@ class GameResult
                 (Style::CHAMPAGNE === $this->result[$team]['team']['style'] && Style::DOWN_THE_MIDDLE === $this->result[$opponent]['team']['style']) ||
                 (Style::MAN_15 === $this->result[$team]['team']['style'] && Style::CHAMPAGNE === $this->result[$opponent]['team']['style'])) {
                 $this->result[$team]['team']['collision'] = 1;
-                $this->result[$team]['opponent']['collision'] = -1;
+                $this->result[$opponent]['team']['collision'] = -1;
             } elseif ((Style::MAN_15 === $this->result[$team]['team']['style'] && Style::MAN_10 === $this->result[$opponent]['team']['style']) ||
                 (Style::MAN_10 === $this->result[$team]['team']['style'] && Style::DOWN_THE_MIDDLE === $this->result[$opponent]['team']['style']) ||
                 (Style::DOWN_THE_MIDDLE === $this->result[$team]['team']['style'] && Style::CHAMPAGNE === $this->result[$opponent]['team']['style']) ||
                 (Style::CHAMPAGNE === $this->result[$team]['team']['style'] && Style::MAN_15 === $this->result[$opponent]['team']['style'])) {
                 $this->result[$team]['team']['collision'] = -1;
-                $this->result[$team]['opponent']['collision'] = 1;
+                $this->result[$opponent]['team']['collision'] = 1;
             }
         }
     }
@@ -948,7 +948,7 @@ class GameResult
     {
         $this->result['event'][] = array(
             'event_text_id' => EventText::YELLOW_CARD,
-            'event_type_id' => EventType::TYPE_CARD,
+            'event_type_id' => EventType::TYPE_YELLOW,
             'game_id' => $this->result['game_info']['id'],
             'guest_point' => $this->result['guest']['team']['point'],
             'home_point' => $this->result['home']['team']['point'],
@@ -998,7 +998,7 @@ class GameResult
     {
         $this->result['event'][] = array(
             'event_text_id' => EventText::RED_CARD,
-            'event_type_id' => EventType::TYPE_CARD,
+            'event_type_id' => EventType::TYPE_RED,
             'game_id' => $this->result['game_info']['id'],
             'guest_point' => $this->result['guest']['team']['point'],
             'home_point' => $this->result['home']['team']['point'],

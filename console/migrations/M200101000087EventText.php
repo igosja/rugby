@@ -39,7 +39,7 @@ class M200101000087EventText extends Migration
                 [1, 'Penalty'],
                 [1, 'Drop Goal'],
                 [2, 'Yellow card'],
-                [2, 'Red card'],
+                [3, 'Red card'],
             ]
         );
 
