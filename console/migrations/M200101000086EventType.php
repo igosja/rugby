@@ -32,7 +32,8 @@ class M200101000086EventType extends Migration
             ['text'],
             [
                 ['Point'],
-                ['Card'],
+                ['Yellow card'],
+                ['Red card'],
             ]
         );
 

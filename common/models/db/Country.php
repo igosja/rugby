@@ -46,6 +46,24 @@ class Country extends AbstractActiveRecord
     /**
      * @return string
      */
+    public function getImage(): string
+    {
+        return Html::img(
+            '/img/country/12/' . $this->id . '.png',
+            [
+                'alt' => $this->name,
+                'title' => $this->name,
+                'style' => [
+                    'position' => 'relative',
+                    'top' => '1px',
+                ],
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function getImageLink(): string
     {
         return $this->getLink(

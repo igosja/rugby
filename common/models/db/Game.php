@@ -99,6 +99,10 @@ use yii\helpers\Html;
  * @property int $visitor
  * @property int $weather_id
  *
+ * @property-read Championship $championship
+ * @property-read GameVote[] $gameVote
+ * @property-read GameVote[] $gameVoteMinus
+ * @property-read GameVote[] $gameVotePlus
  * @property-read Mood $guestMood
  * @property-read National $guestNational
  * @property-read Rudeness $guestRudeness
@@ -117,6 +121,7 @@ use yii\helpers\Html;
  * @property-read Schedule $schedule
  * @property-read Stadium $stadium
  * @property-read Weather $weather
+ * @property-read WorldCup $worldCup
  */
 class Game extends AbstractActiveRecord
 {
@@ -280,6 +285,159 @@ class Game extends AbstractActiveRecord
     }
 
     /**
+     * @param string $team
+     * @return string
+     */
+    public function cssMood(string $team): string
+    {
+        $classLoose = 'font-red';
+        $classWin = 'font-green';
+
+        $mood = $team . '_mood_id';
+        $mood = $this->$mood;
+
+        if (Mood::SUPER === $mood) {
+            return $classWin;
+        }
+        if (Mood::REST === $mood) {
+            return $classLoose;
+        }
+        return '';
+    }
+
+    /**
+     * @param string $team
+     * @return string
+     */
+    public function cssStyle(string $team): string
+    {
+        $classLoose = 'font-red';
+        $classWin = 'font-green';
+
+        if ('home' === $team) {
+            $opponent = 'guest';
+        } else {
+            $opponent = 'home';
+        }
+
+        $style1 = $team . '_style_id';
+        $style1 = $this->$style1;
+        $style2 = $opponent . '_style_id';
+        $style2 = $this->$style2;
+
+        if (Style::MAN_10 === $style1 && Style::MAN_15 === $style2) {
+            return $classWin;
+        }
+        if (Style::DOWN_THE_MIDDLE === $style1 && Style::MAN_10 === $style2) {
+            return $classWin;
+        }
+        if (Style::CHAMPAGNE === $style1 && Style::DOWN_THE_MIDDLE === $style2) {
+            return $classWin;
+        }
+        if (Style::MAN_15 === $style1 && Style::CHAMPAGNE === $style2) {
+            return $classWin;
+        }
+        if (Style::MAN_15 === $style1 && Style::MAN_10 === $style2) {
+            return $classLoose;
+        }
+        if (Style::MAN_10 === $style1 && Style::DOWN_THE_MIDDLE === $style2) {
+            return $classLoose;
+        }
+        if (Style::DOWN_THE_MIDDLE === $style1 && Style::CHAMPAGNE === $style2) {
+            return $classLoose;
+        }
+        if (Style::CHAMPAGNE === $style1 && Style::MAN_15 === $style2) {
+            return $classLoose;
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function rating(): string
+    {
+        $returnArray = [
+            '<span class="font-green">' . count($this->gameVotePlus) . '</span>',
+            '<span class="font-red">' . count($this->gameVoteMinus) . '</span>',
+        ];
+
+        return implode(' | ', $returnArray);
+    }
+
+    /**
+     * @return string
+     */
+    public function tournamentLink(): string
+    {
+        if (TournamentType::NATIONAL === $this->schedule->tournament_type_id) {
+            $result = Html::a(
+                $this->schedule->tournamentType->name . ', ' . $this->schedule->stage->name,
+                [
+                    'world-championship/index',
+                    'seasonId' => $this->schedule->season_id,
+                    'stageId' => $this->schedule->stage_id,
+                    'divisionId' => $this->worldCup->division_id,
+                    'nationalTypeId' => $this->homeNational->national_type_id,
+                ]
+            );
+        } elseif (TournamentType::LEAGUE === $this->schedule->tournament_type_id) {
+            if ($this->schedule->stage_id <= Stage::QUALIFY_3) {
+                $round = 'qualification';
+            } elseif ($this->schedule->stage_id <= Stage::TOUR_LEAGUE_6) {
+                $round = 'table';
+            } else {
+                $round = 'playoff';
+            }
+
+            $result = Html::a(
+                $this->schedule->tournamentType->name . ', ' . $this->schedule->stage->name,
+                [
+                    'champions-league/' . $round,
+                    'seasonId' => $this->schedule->season_id,
+                ]
+            );
+        } elseif (TournamentType::CHAMPIONSHIP === $this->schedule->tournament_type_id) {
+            if ($this->schedule->stage_id <= Stage::TOUR_30) {
+                $round = 'table';
+            } else {
+                $round = 'playoff';
+            }
+
+            $result = Html::a(
+                $this->schedule->tournamentType->name . ', ' . $this->schedule->stage->name,
+                [
+                    'championship/' . $round,
+                    'seasonId' => $this->schedule->season_id,
+                    'divisionId' => $this->championship->division_id,
+                    'federation_id' => $this->championship->federation_id,
+                    'stageId' => $this->schedule->stage_id,
+                ]
+            );
+        } elseif (TournamentType::CONFERENCE === $this->schedule->tournament_type_id) {
+            $result = Html::a(
+                $this->schedule->tournamentType->name . ', ' . $this->schedule->stage->name,
+                [
+                    'conference/table',
+                    'seasonId' => $this->schedule->season_id,
+                ]
+            );
+        } elseif (TournamentType::OFF_SEASON === $this->schedule->tournament_type_id) {
+            $result = Html::a(
+                $this->schedule->tournamentType->name . ', ' . $this->schedule->stage->name,
+                [
+                    'off-season/table',
+                    'seasonId' => $this->schedule->season_id,
+                ]
+            );
+        } else {
+            $result = $this->schedule->tournamentType->name;
+        }
+
+        return $result;
+    }
+
+    /**
      * @param string $side
      * @param bool $full
      * @param bool $link
@@ -365,6 +523,40 @@ class Game extends AbstractActiveRecord
         }
 
         return '?:?';
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getChampionship(): ActiveQuery
+    {
+        return $this
+            ->hasOne(Championship::class, ['team_id' => 'home_team_id'])
+            ->andWhere(['season_id' => $this->schedule->season_id]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getGameVote(): ActiveQuery
+    {
+        return $this->hasMany(GameVote::class, ['game_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getGameVoteMinus(): ActiveQuery
+    {
+        return $this->getGameVote()->andWhere(['<', 'rating', 0]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getGameVotePlus(): ActiveQuery
+    {
+        return $this->getGameVote()->andWhere(['>', 'rating', 0]);
     }
 
     /**
@@ -509,5 +701,15 @@ class Game extends AbstractActiveRecord
     public function getWeather(): ActiveQuery
     {
         return $this->hasOne(Weather::class, ['id' => 'weather_id'])->cache();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getWorldCup(): ActiveQuery
+    {
+        return $this
+            ->hasOne(WorldCup::class, ['national_id' => 'home_national_id'])
+            ->andWhere(['season_id' => $this->schedule->season_id]);
     }
 }

@@ -8,6 +8,7 @@ use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
 use yii\db\Exception;
+use yii\helpers\Html;
 
 /**
  * Class Event
@@ -64,6 +65,22 @@ class Event extends AbstractActiveRecord
             [['player_id'], 'exist', 'targetRelation' => 'player'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function icon(): string
+    {
+        $iconId = $this->eventText->event_type_id;
+
+        return Html::img(
+            '/img/event_type/' . $iconId . '.png',
+            [
+                'alt' => $this->eventText->text,
+                'title' => $this->eventText->text,
+            ]
+        );
     }
 
     /**
