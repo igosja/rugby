@@ -12,6 +12,7 @@ use common\models\db\GameVote;
 use common\models\db\Lineup;
 use common\models\db\UserBlockType;
 use common\models\db\UserRole;
+use console\models\generator\GameResult;
 use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -60,6 +61,9 @@ class GameController extends AbstractController
      */
     public function actionPreview(int $id): string
     {
+        /**
+         * @var Game $game
+         */
         $game = Game::find()
             ->where(['id' => $id])
             ->limit(1)
@@ -125,12 +129,26 @@ class GameController extends AbstractController
             }
         }
 
+        $homeForecast = $game->home_forecast;
+        $guestForecast = $game->guest_forecast;
+        if (!$game->played) {
+            if ($game->homeTeam) {
+                $homeForecast = $game->homeTeam->power_vs;
+                $guestForecast = $game->guestTeam->power_vs;
+            } else {
+                $homeForecast = $game->homeNational->power_vs;
+                $guestForecast = $game->guestNational->power_vs;
+            }
+        }
+
         $this->setSeoTitle('Матч');
 
         return $this->render('preview', [
             'dataProvider' => $dataProvider,
             'draw' => $draw,
             'game' => $game,
+            'guestForecast' => $guestForecast,
+            'homeForecast' => $homeForecast,
             'loose' => $loose,
             'pointAgainst' => $pointAgainst,
             'pointFor' => $pointFor,
@@ -146,6 +164,7 @@ class GameController extends AbstractController
      */
     public function actionView(int $id)
     {
+        (new GameResult)->execute();
         $game = Game::find()
             ->where(['id' => $id])
             ->limit(1)
