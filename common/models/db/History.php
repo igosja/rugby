@@ -7,6 +7,8 @@ namespace common\models\db;
 use common\components\AbstractActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
+use yii\helpers\Html;
 
 /**
  * Class History
@@ -100,12 +102,121 @@ class History extends AbstractActiveRecord
         ];
     }
 
-    public static function log(array $data)
+    /**
+     * @param array $data
+     * @return bool
+     * @throws Exception
+     */
+    public static function log(array $data): bool
     {
         $history = new self();
         $history->setAttributes($data);
         $history->season_id = Season::getCurrentSeason();
         return $history->save();
+    }
+
+    /**
+     * @return string
+     */
+    public function text(): string
+    {
+        $text = $this->historyText->text;
+        if (false !== strpos($text, '{team}')) {
+            $text = str_replace(
+                '{team}',
+                $this->team->getTeamLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{team2}')) {
+            $text = str_replace(
+                '{team2}',
+                $this->secondTeam->getTeamLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{national}')) {
+            $text = str_replace(
+                '{national}',
+                $this->national->nationalLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{country}')) {
+            $text = str_replace(
+                '{country}',
+                Html::a($this->federation->country->name, ['federation/news', 'id' => $this->federation_id]),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{player}')) {
+            $text = str_replace(
+                '{player}',
+                Html::a(
+                    $this->player->playerName(),
+                    ['player/view', 'id' => $this->player_id]
+                ),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{user}')) {
+            $text = str_replace(
+                '{user}',
+                $this->user->getUserLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{game}')) {
+            $text = str_replace(
+                '{game}',
+                Html::a(
+                    $this->game->teamOrNationalLink('home', false, false) . ' - ' . $this->game->teamOrNationalLink('guest', false, false),
+                    ['game/view', 'id' => $this->game->id]
+                ),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{position}')) {
+            $text = str_replace(
+                '{position}',
+                $this->position->text,
+                $text
+            );
+        }
+        if (false !== strpos($text, '{special}')) {
+            $text = str_replace(
+                '{special}',
+                $this->special->text,
+                $text
+            );
+        }
+        if (false !== strpos($text, '{building}')) {
+            $building = '';
+            if (Building::BASE === $this->building_id) {
+                $building = 'база';
+            } elseif (Building::MEDICAL === $this->building_id) {
+                $building = 'медцентр';
+            } elseif (Building::PHYSICAL === $this->building_id) {
+                $building = 'центр физподготовки';
+            } elseif (Building::SCHOOL === $this->building_id) {
+                $building = 'спортшкола';
+            } elseif (Building::SCOUT === $this->building_id) {
+                $building = 'скаут-центр';
+            } elseif (Building::TRAINING === $this->building_id) {
+                $building = 'тренировочный центр';
+            }
+            $text = str_replace(
+                '{building}',
+                $building,
+                $text
+            );
+        }
+        $text = str_replace(
+            ['{capacity}', '{level}', '{day}'],
+            [$this->value, $this->value, $this->value . ' дн.'],
+            $text
+        );
+        return $text;
     }
 
     /**

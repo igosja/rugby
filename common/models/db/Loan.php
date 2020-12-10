@@ -7,6 +7,7 @@ namespace common\models\db;
 use common\components\AbstractActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Loan
@@ -32,6 +33,8 @@ use yii\db\ActiveQuery;
  * @property int $user_seller_id
  * @property int $voted
  *
+ * @property-read LoanPosition[] $loanPositions
+ * @property-read LoanSpecial[] $loanSpecials
  * @property-read Player $player
  * @property-read Season $season
  * @property-read Team $teamBuyer
@@ -103,6 +106,54 @@ class Loan extends AbstractActiveRecord
             [['user_buyer_id'], 'exist', 'targetRelation' => 'userBuyer'],
             [['user_seller_id'], 'exist', 'targetRelation' => 'userSeller'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function position(): string
+    {
+        $result = [];
+        foreach ($this->loanPositions as $loanPosition) {
+            $result[] = Html::tag(
+                'span',
+                $loanPosition->position->name,
+                ['title' => $loanPosition->position->text]
+            );
+        }
+        return implode('/', $result);
+    }
+
+    /**
+     * @return string
+     */
+    public function special(): string
+    {
+        $result = [];
+        foreach ($this->loanSpecials as $loanSpecial) {
+            $result[] = Html::tag(
+                'span',
+                $loanSpecial->special->name . $loanSpecial->level,
+                ['title' => $loanSpecial->special->text]
+            );
+        }
+        return implode(' ', $result);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLoanPositions(): ActiveQuery
+    {
+        return $this->hasMany(LoanPosition::class, ['loan_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLoanSpecials(): ActiveQuery
+    {
+        return $this->hasMany(LoanSpecial::class, ['loan_id' => 'id']);
     }
 
     /**

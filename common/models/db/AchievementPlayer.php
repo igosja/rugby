@@ -75,6 +75,64 @@ class AchievementPlayer extends AbstractActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getPosition(): string
+    {
+        if ($this->place) {
+            $result = $this->place;
+            if ($this->place <= 3) {
+                if (1 === $this->place) {
+                    $color = 'gold';
+                } elseif (2 === $this->place) {
+                    $color = 'silver';
+                } else {
+                    $color = '#6A3805';
+                }
+                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
+            }
+        } elseif ($this->stage) {
+            $result = $this->stage->name;
+            if (in_array($this->stage_id, [Stage::FINAL_GAME, Stage::SEMI], true)) {
+                if (Stage::FINAL_GAME === $this->stage_id) {
+                    $color = 'silver';
+                } else {
+                    $color = '#6A3805';
+                }
+                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
+            }
+        } else {
+            $result = 'Чемпион <i class="fa fa-trophy" style="color: gold;"></i>';
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTournament(): string
+    {
+        $result = $this->tournamentType->name;
+
+        if ($this->federation_id || $this->division_id) {
+            $additional = [];
+
+            if ($this->federation_id) {
+                $additional[] = $this->federation->country->name;
+            }
+
+            if ($this->division_id) {
+                $additional[] = $this->division->name;
+            }
+
+            $result .= ' (' . implode(', ', $additional) . ')';
+        }
+
+        return $result;
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getFederation(): ActiveQuery

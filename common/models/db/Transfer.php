@@ -7,6 +7,7 @@ namespace common\models\db;
 use common\components\AbstractActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class Transfer
@@ -34,6 +35,8 @@ use yii\db\ActiveQuery;
  * @property-read Season $season
  * @property-read Team $teamBuyer
  * @property-read Team $teamSeller
+ * @property-read TransferPosition[] $transferPositions
+ * @property-read TransferSpecial[] $transferSpecials
  * @property-read User $userBuyer
  * @property-read User $userSeller
  */
@@ -103,6 +106,38 @@ class Transfer extends AbstractActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function position(): string
+    {
+        $result = [];
+        foreach ($this->transferPositions as $transferPosition) {
+            $result[] = Html::tag(
+                'span',
+                $transferPosition->position->name,
+                ['title' => $transferPosition->position->text]
+            );
+        }
+        return implode('/', $result);
+    }
+
+    /**
+     * @return string
+     */
+    public function special(): string
+    {
+        $result = [];
+        foreach ($this->transferSpecials as $transferSpecial) {
+            $result[] = Html::tag(
+                'span',
+                $transferSpecial->special->name . $transferSpecial->level,
+                ['title' => $transferSpecial->special->text]
+            );
+        }
+        return implode(' ', $result);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getPlayer(): ActiveQuery
@@ -132,6 +167,22 @@ class Transfer extends AbstractActiveRecord
     public function getTeamSeller(): ActiveQuery
     {
         return $this->hasOne(Team::class, ['id' => 'team_seller_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransferPositions(): ActiveQuery
+    {
+        return $this->hasMany(TransferPosition::class, ['transfer_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransferSpecials(): ActiveQuery
+    {
+        return $this->hasMany(TransferSpecial::class, ['transfer_id' => 'id']);
     }
 
     /**

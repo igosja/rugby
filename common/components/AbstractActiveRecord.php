@@ -23,9 +23,6 @@ abstract class AbstractActiveRecord extends ActiveRecord
     public function save($runValidation = true, $attributeNames = null): bool
     {
         if (!parent::save($runValidation, $attributeNames)) {
-            print '<pre>';
-            print_r($this);
-            exit;
             throw new Exception(ErrorHelper::modelErrorsToString($this));
         }
         return true;

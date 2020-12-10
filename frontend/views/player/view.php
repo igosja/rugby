@@ -108,7 +108,7 @@ print $this->render('//player/_player', ['player' => $player]);
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Lineup $model) {
-                    return $model->position->name;
+                    return $model->position_id;
                 }
             ],
             [
