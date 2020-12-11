@@ -16,6 +16,8 @@ use common\components\AbstractActiveRecord;
  */
 class Squad extends AbstractActiveRecord
 {
+    public const SQUAD_DEFAULT = 1;
+
     /**
      * @return string
      */

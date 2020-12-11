@@ -7,6 +7,7 @@ namespace common\models\db;
 use common\components\AbstractActiveRecord;
 use Exception;
 use yii\db\ActiveQuery;
+use yii\helpers\Html;
 
 /**
  * Class National
@@ -80,6 +81,29 @@ class National extends AbstractActiveRecord
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
         ];
+    }
+
+    /**
+     * @param bool $image
+     * @return string
+     */
+    public function nationalLink(bool $image = false): string
+    {
+        $result = '';
+        if ($image) {
+            $result .= Html::img(
+                    '/img/country/12/' . $this->federation->country_id . '.png',
+                    [
+                        'alt' => $this->federation->country->name,
+                        'title' => $this->federation->country->name,
+                    ]
+                ) . ' ';
+        }
+        $result .= Html::a(
+            $this->federation->country->name . ' (' . $this->nationalType->name . ')',
+            ['national/view', 'id' => $this->id]
+        );
+        return $result;
     }
 
     /**

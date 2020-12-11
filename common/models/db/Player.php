@@ -392,14 +392,14 @@ class Player extends AbstractActiveRecord
                     ->all();
             } elseif (!$showOnlyIfStudied) {
                 $in = [$this->style_id];
-                for ($i = 1; $i < 3 - $countScout; $i++) {
+                for ($i = 1; $i < 4 - $countScout; $i++) {
                     $styleToIn = Style::getRandStyleId($in);
                     $in[] = $styleToIn;
                 }
                 $styleArray = Style::find()
                     ->where(['id' => $in])
                     ->orderBy(['id' => SORT_ASC])
-                    ->limit(3 - $countScout)
+                    ->limit(4 - $countScout)
                     ->all();
             } else {
                 $styleArray = [];
@@ -412,12 +412,12 @@ class Player extends AbstractActiveRecord
         $result = [];
         foreach ($styleArray as $item) {
             $result[] = Html::img(
-                '/img/style/' . $item->id . '.png',
-                [
-                    'alt' => $item->name,
-                    'title' => ucfirst($item->name),
-                ]
-            );
+                    '/img/style/' . $item->id . '.png',
+                    [
+                        'alt' => $item->name,
+                        'title' => ucfirst($item->name),
+                    ]
+                ) . $item->id;
         }
 
         return implode(' ', $result);
