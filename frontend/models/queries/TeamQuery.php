@@ -98,6 +98,7 @@ class TeamQuery
                 ]
             )
             ->andWhere(['!=', 'id', 0])
+            ->indexBy('id')
             ->all();
     }
 

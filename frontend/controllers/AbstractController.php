@@ -16,6 +16,7 @@ use frontend\models\queries\NationalQuery;
 use frontend\models\queries\TeamQuery;
 use Yii;
 use yii\base\Action;
+use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\ErrorAction;
@@ -95,9 +96,9 @@ abstract class AbstractController extends AbstractWebController
 
     /**
      * @param Action $action
-     *
      * @return bool|Response
      * @throws BadRequestHttpException
+     * @throws Exception
      * @throws ForbiddenHttpException
      */
     public function beforeAction($action)
@@ -190,12 +191,7 @@ abstract class AbstractController extends AbstractWebController
     private function checkSessionMyTeamId(): void
     {
         $session = Yii::$app->session;
-        if ($session->get('myTeamId')
-            && !array_key_exists(
-                $session->get('myTeamId'),
-                $this->myTeamArray
-            )
-        ) {
+        if ($session->get('myTeamId') && !array_key_exists($session->get('myTeamId'), $this->myTeamArray)) {
             $session->remove('myTeamId');
         }
     }
@@ -249,8 +245,7 @@ abstract class AbstractController extends AbstractWebController
         /**
          * @var National[] $nationalUserArray
          */
-        $nationalUserArray =
-            NationalQuery::getNationalListByUserId($this->user->id);
+        $nationalUserArray = NationalQuery::getNationalListByUserId($this->user->id);
         foreach ($nationalUserArray as $national) {
             if ($this->user->id === $national->user_id) {
                 $this->myNational = $national;
@@ -265,7 +260,7 @@ abstract class AbstractController extends AbstractWebController
 
     private function loadTeams(): void
     {
-        $mySessionTeamId = Yii::$app->session->get('myTeamId');
+        $mySessionTeamId = (int)Yii::$app->session->get('myTeamId');
 
         $teamArray = [];
         $teamViceArray = [];
@@ -309,6 +304,9 @@ abstract class AbstractController extends AbstractWebController
         return false;
     }
 
+    /**
+     * @return void
+     */
     private function setSeoDescription(): void
     {
         $this->view->registerMetaTag(
@@ -320,6 +318,9 @@ abstract class AbstractController extends AbstractWebController
         );
     }
 
+    /**
+     * @throws Exception
+     */
     private function updateLastLogin(): void
     {
         $this->user->date_login = time();
