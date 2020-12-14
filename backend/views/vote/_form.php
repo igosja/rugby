@@ -4,6 +4,7 @@
 
 use common\models\db\Vote;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /**
  * @var Vote $model
@@ -22,8 +23,6 @@ use yii\helpers\Html;
                 <?= Html::submitButton('Save', ['class' => 'btn btn-default']) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor ActiveForm::end() ?>
+        <?php ActiveForm::end() ?>
     </div>
 </div>

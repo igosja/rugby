@@ -53,8 +53,6 @@ $user = $this->context->user;
     <div class="row">
         <?php
 
-// TODO refactor
-
         try {
             print ListView::widget([
                     'dataProvider' => $dataProvider,
@@ -124,8 +122,6 @@ $user = $this->context->user;
                 ) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor ActiveForm::end() ?>
+        <?php ActiveForm::end() ?>
     <?php endif ?>
 <?php endif ?>

@@ -58,6 +58,4 @@ use yii\widgets\ActiveForm;
         <?= Html::a('Вернуться', ['index'], ['class' => 'btn margin']) ?>
     </div>
 </div>
-<?php
-
-// TODO refactor ActiveForm::end() ?>
+<?php ActiveForm::end() ?>

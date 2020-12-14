@@ -5,6 +5,9 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\FormatHelper;
+use DateTime;
+use DateTimeZone;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
@@ -37,6 +40,9 @@ use yii\helpers\Html;
  * @property-read Team $teamSeller
  * @property-read TransferPosition[] $transferPositions
  * @property-read TransferSpecial[] $transferSpecials
+ * @property-read TransferVote[] $transferVotes
+ * @property-read TransferVote[] $transferVotesMinus
+ * @property-read TransferVote[] $transferVotesPlus
  * @property-read User $userBuyer
  * @property-read User $userSeller
  */
@@ -103,6 +109,196 @@ class Transfer extends AbstractActiveRecord
             [['user_buyer_id'], 'exist', 'targetRelation' => 'userBuyer'],
             [['user_seller_id'], 'exist', 'targetRelation' => 'userSeller'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function alerts(): array
+    {
+        $result = [
+            'success' => [],
+            'warning' => [],
+            'error' => [],
+        ];
+
+        for ($i = 0; $i < 2; $i++) {
+            if (0 === $i) {
+                $teamId = $this->team_buyer_id;
+                $userId = $this->user_buyer_id;
+            } else {
+                $teamId = $this->team_seller_id;
+                $userId = $this->user_seller_id;
+            }
+
+            if ($userId && $teamId) {
+                /**
+                 * @var History $history
+                 */
+                $history = History::find()
+                    ->where([
+                        'history_text_id' => [
+                            HistoryText::USER_MANAGER_TEAM_IN,
+                            HistoryText::USER_MANAGER_TEAM_OUT,
+                        ],
+                        'team_id' => $teamId,
+                        'user_id' => $userId,
+                    ])
+                    ->orderBy(['id' => SORT_DESC])
+                    ->limit(1)
+                    ->one();
+                if ($history) {
+                    if (HistoryText::USER_MANAGER_TEAM_OUT === $history->history_text_id) {
+                        $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> покинул команду <span class="strong">' . $history->team->name . '</span>.';
+                    } elseif ($history->date > time() - 2592000) {
+                        $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> менее 1 месяца в команде.';
+                    } elseif ($history->date > time() - 5184000) {
+                        $result['warning'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> менее 2 месяцев в команде.';
+                    }
+                }
+
+                $user = User::find()
+                    ->where(['id' => $userId])
+                    ->limit(1)
+                    ->one();
+                if ($user->date_login < time() - 604800) {
+                    $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> больше недели не заходил на сайт.';
+                }
+
+                if ($user->date_register > time() - 2592000) {
+                    $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> менее 1 месяца в Лиге.';
+                } elseif ($user->date_register > time() - 5184000) {
+                    $result['warning'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> менее 2 месяцев в Лиге.';
+                }
+
+                $team = Team::find()
+                    ->where(['id' => $teamId])
+                    ->limit(1)
+                    ->one();
+
+                if ($team->auto_number) {
+                    $result['warning'][] = 'Команда <span class="strong">' . $team->name . '</span> сыграла ' . $team->auto_number . ' последних матчей автосоставом.';
+                }
+
+                $transfer = self::find()
+                    ->where([
+                        'or',
+                        ['user_buyer_id' => $userId],
+                        ['user_seller_id' => $userId],
+                    ])
+                    ->andWhere(['not', ['cancel' => null]])
+                    ->andWhere(['season_id' => Season::getCurrentSeason()])
+                    ->count();
+
+                $loan = Loan::find()
+                    ->where([
+                        'or',
+                        ['user_buyer_id' => $userId],
+                        ['user_seller_id' => $userId],
+                    ])
+                    ->andWhere(['not', ['cancel' => null]])
+                    ->andWhere(['season_id' => Season::getCurrentSeason()])
+                    ->count();
+
+                if ($transfer + $loan) {
+                    $result['warning'][] = 'У менеджера <span class="strong">' . Html::encode($user->login) . '</span> в этом сезоне уже отменяли <span class="strong">' . ($transfer + $loan) . ' сделок</span>.';
+                }
+            }
+        }
+
+        if ($this->team_buyer_id && $this->user_buyer_id && $this->team_seller_id && $this->user_seller_id) {
+            $transfer = Transfer::find()
+                ->where([
+                    'or',
+                    [
+                        'user_buyer_id' => $this->user_buyer_id,
+                        'user_seller_id' => $this->user_seller_id,
+                    ],
+                    [
+                        'user_buyer_id' => $this->user_seller_id,
+                        'user_seller_id' => $this->user_buyer_id,
+                    ],
+                ])
+                ->andWhere(['cancel' => null])
+                ->andWhere(['not', ['ready' => null]])
+                ->andWhere(['<', 'ready', $this->ready])
+                ->andWhere(['!=', 'id', $this->id])
+                ->count();
+            $loan = Loan::find()
+                ->where([
+                    'or',
+                    [
+                        'loan_user_buyer_id' => $this->user_buyer_id,
+                        'loan_user_seller_id' => $this->user_seller_id,
+                    ],
+                    [
+                        'loan_user_buyer_id' => $this->user_seller_id,
+                        'loan_user_seller_id' => $this->user_buyer_id,
+                    ],
+                ])
+                ->andWhere(['cancel' => null])
+                ->andWhere(['not', ['ready' => null]])
+                ->andWhere(['<', 'ready', $this->ready])
+                ->count();
+
+
+            if ($transfer + $loan) {
+                $result['warning'][] = 'Менеджеры уже заключали <span class="strong">' . ($transfer + $loan) . ' сделок</span> между собой.';
+            }
+
+            $user = User::find()
+                ->where(['<', 'date_register', time() - 5184000])
+                ->andWhere(['id' => [$this->user_buyer_id, $this->user_seller_id]])
+                ->count();
+
+            if (2 === $user) {
+                $result['success'][] = 'Оба менеджера достаточно давно играют в Лиге.';
+            }
+        }
+
+        if (0 === count($result['success'])) {
+            unset($result['success']);
+        }
+
+        if (0 === count($result['warning'])) {
+            unset($result['warning']);
+        }
+
+        if (0 === count($result['error'])) {
+            unset($result['error']);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function rating(): string
+    {
+        $returnArray = [
+            '<span class="font-green">' . count($this->transferVotesPlus) . '</span>',
+            '<span class="font-red">' . count($this->transferVotesMinus) . '</span>',
+        ];
+
+        return implode(' | ', $returnArray);
+    }
+
+    /**
+     * @return string
+     */
+    public function dealDate(): string
+    {
+        $today = (new DateTime())
+            ->setTimezone(new DateTimeZone('UTC'))
+            ->setTime(9, 0)
+            ->getTimestamp();
+
+        if ($today < $this->date + 86400 || $today < time()) {
+            $today += 86400;
+        }
+
+        return FormatHelper::asDate($today);
     }
 
     /**
@@ -183,6 +379,30 @@ class Transfer extends AbstractActiveRecord
     public function getTransferSpecials(): ActiveQuery
     {
         return $this->hasMany(TransferSpecial::class, ['transfer_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransferVotes(): ActiveQuery
+    {
+        return $this->hasMany(TransferVote::class, ['transfer_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransferVotesMinus(): ActiveQuery
+    {
+        return $this->getTransferVotes()->andWhere(['<', 'rating', 0]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTransferVotesPlus(): ActiveQuery
+    {
+        return $this->getTransferVotes()->andWhere(['>', 'rating', 0]);
     }
 
     /**

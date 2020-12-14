@@ -126,8 +126,6 @@ use yii\widgets\ListView;
                 <?= Html::submitButton('Ответить', ['class' => 'btn margin']) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
     <?php endif; ?>
 <?php endif; ?>
