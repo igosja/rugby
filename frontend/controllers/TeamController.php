@@ -7,6 +7,7 @@ namespace frontend\controllers;
 use common\models\db\Season;
 use common\models\db\Team;
 use Exception;
+use frontend\models\forms\ChangeMyTeam;
 use frontend\models\preparers\AchievementPrepare;
 use frontend\models\preparers\FinancePrepare;
 use frontend\models\preparers\GamePrepare;
@@ -40,6 +41,19 @@ class TeamController extends AbstractController
     }
 
     /**
+     * @return Response
+     */
+    public function actionChangeMyTeam()
+    {
+        $model = new ChangeMyTeam();
+        if ($model->load(Yii::$app->request->post(), '')) {
+            $model->changeMyTeam();
+        }
+
+        return $this->redirect(['view']);
+    }
+
+    /**
      * @param int|null $id
      * @return string|Response
      * @throws Exception
@@ -47,7 +61,7 @@ class TeamController extends AbstractController
     public function actionView(int $id = null)
     {
         if (!$id && $this->myTeamOrVice) {
-            return $this->redirect(['team/view', 'id' => $this->myTeamOrVice->id]);
+            return $this->redirect(['view', 'id' => $this->myTeamOrVice->id]);
         }
 
         if (!$id) {
