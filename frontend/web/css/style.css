@@ -711,6 +711,10 @@ td.table-bordered-right {
     color: #00529B;
 }
 
+.info a {
+    color: #00529B;
+}
+
 .success {
     background-color: #DFF2BF;
     border-color: #4F8A10;

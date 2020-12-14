@@ -63,8 +63,6 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Создать', ['class' => 'btn margin']) ?>
             </div>
         </div>
-        <?php
-
-// TODO refactor ActiveForm::end() ?>
+        <?php ActiveForm::end() ?>
     </div>
 </div>

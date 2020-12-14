@@ -1,11 +1,9 @@
 <?php
 
-// TODO refactor
-
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
-use common\models\db\Player;
-use frontend\models\search\PlayerSearch;
+use common\models\db\Loan;
+use frontend\models\search\LoanHistorySearch;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -16,7 +14,7 @@ use yii\widgets\ActiveForm;
 /**
  * @var array $countryArray
  * @var ActiveDataProvider $dataProvider
- * @var PlayerSearch $model
+ * @var LoanHistorySearch $model
  * @var array $positionArray
  * @var View $this
  */
@@ -24,13 +22,16 @@ use yii\widgets\ActiveForm;
 ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1>
-                Список игроков
-            </h1>
+            <h1>Список хоккеистов, отданных в аренду</h1>
+        </div>
+    </div>
+    <div class="row margin-top-small text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <?= $this->render('//loan/_links') ?>
         </div>
     </div>
 <?php $form = ActiveForm::begin([
-    'action' => ['player/index'],
+    'action' => ['history'],
     'fieldConfig' => [
         'template' => '{input}',
     ],
@@ -114,8 +115,6 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <?php
 
-        // TODO refactor
-
         try {
             $columns = [
                 [
@@ -125,87 +124,115 @@ use yii\widgets\ActiveForm;
                     'header' => '№',
                 ],
                 [
-                    'attribute' => 'surname',
                     'footer' => 'Игрок',
                     'format' => 'raw',
                     'label' => 'Игрок',
-                    'value' => static function (Player $model) {
-                        return $model->getPlayerLink();
+                    'value' => static function (Loan $model) {
+                        return Html::a(
+                            $model->player->playerName(),
+                            ['view', 'id' => $model->id]
+                        );
                     }
                 ],
                 [
-                    'attribute' => 'country',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
                     'footer' => 'Нац',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Национальность'],
+                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => 'Национальность'],
+                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
                     'label' => 'Нац',
-                    'value' => static function (Player $model) {
-                        return $model->country->getImageLink();
+                    'value' => static function (Loan $model) {
+                        return $model->player->country->getImageLink();
                     }
                 ],
                 [
-                    'attribute' => 'position',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'Поз',
                     'footerOptions' => ['title' => 'Позиция'],
                     'format' => 'raw',
                     'headerOptions' => ['title' => 'Позиция'],
                     'label' => 'Поз',
-                    'value' => static function (Player $model) {
+                    'value' => static function (Loan $model) {
                         return $model->position();
                     }
                 ],
                 [
-                    'attribute' => 'age',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'В',
                     'footerOptions' => ['title' => 'Возраст'],
                     'headerOptions' => ['title' => 'Возраст'],
                     'label' => 'В',
-                    'value' => static function (Player $model) {
+                    'value' => static function (Loan $model) {
                         return $model->age;
                     }
                 ],
                 [
-                    'attribute' => 'power',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'С',
                     'footerOptions' => ['title' => 'Сила'],
                     'headerOptions' => ['title' => 'Сила'],
                     'label' => 'С',
-                    'value' => static function (Player $model) {
-                        return $model->power_nominal;
+                    'value' => static function (Loan $model) {
+                        return $model->power;
                     }
                 ],
                 [
-                    'contentOptions' => ['class' => 'hidden-xs text-center'],
+                    'contentOptions' => ['class' => 'text-center hidden-xs'],
                     'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецсозможности'],
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
                     'format' => 'raw',
-                    'header' => 'Спец',
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецсозможности'],
-                    'value' => static function (Player $model) {
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                    'label' => 'Спец',
+                    'value' => static function (Loan $model) {
                         return $model->special();
                     }
                 ],
                 [
-                    'attribute' => 'team',
-                    'footer' => 'Команда',
+                    'contentOptions' => ['class' => 'hidden-xs'],
+                    'footer' => 'Арендодатель',
+                    'footerOptions' => ['class' => 'hidden-xs'],
                     'format' => 'raw',
-                    'label' => 'Команда',
-                    'value' => static function (Player $model) {
-                        return $model->team->getTeamLink();
+                    'headerOptions' => ['class' => 'hidden-xs'],
+                    'label' => 'Арендодатель',
+                    'value' => function (Loan $model) {
+                        return $model->teamSeller->getTeamImageLink();
                     }
                 ],
                 [
-                    'attribute' => 'price',
-                    'contentOptions' => ['class' => 'hidden-xs text-right'],
+                    'contentOptions' => ['class' => 'hidden-xs'],
+                    'footer' => 'Арендатор',
+                    'footerOptions' => ['class' => 'hidden-xs'],
+                    'format' => 'raw',
+                    'headerOptions' => ['class' => 'hidden-xs'],
+                    'label' => 'Арендатор',
+                    'value' => static function (Loan $model) {
+                        return $model->teamBuyer->getTeamImageLink();
+                    }
+                ],
+                [
+                    'contentOptions' => ['class' => 'text-right'],
                     'footer' => 'Цена',
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Общая стоимость аренды'],
+                    'format' => 'raw',
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Общая стоимость аренды'],
                     'label' => 'Цена',
-                    'value' => static function (Player $model) {
-                        return FormatHelper::asCurrency($model->price);
+                    'value' => static function (Loan $model) {
+                        $class = '';
+                        if ($model->cancel) {
+                            $class = 'del';
+                        }
+                        return '<span class="' . $class . '">' . FormatHelper::asCurrency($model->price_buyer) . '</span>';
+                    }
+                ],
+                [
+                    'contentOptions' => ['class' => 'text-center'],
+                    'footer' => '+/-',
+                    'footerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'format' => 'raw',
+                    'headerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'label' => '+/-',
+                    'value' => static function (Loan $model) {
+                        return $model->rating();
                     }
                 ],
             ];

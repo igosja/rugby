@@ -4,8 +4,8 @@
 
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
-use common\models\db\Player;
-use frontend\models\search\PlayerSearch;
+use common\models\db\Transfer;
+use frontend\models\search\TransferHistorySearch;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 /**
  * @var array $countryArray
  * @var ActiveDataProvider $dataProvider
- * @var PlayerSearch $model
+ * @var TransferHistorySearch $model
  * @var array $positionArray
  * @var View $this
  */
@@ -24,18 +24,21 @@ use yii\widgets\ActiveForm;
 ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1>
-                Список игроков
-            </h1>
+            <h1>Список хоккеистов, проданных на трансфере</h1>
+        </div>
+    </div>
+    <div class="row margin-top-small text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <?= $this->render('//transfer/_links') ?>
         </div>
     </div>
 <?php $form = ActiveForm::begin([
-    'action' => ['player/index'],
+    'action' => ['transfer/history'],
     'fieldConfig' => [
         'template' => '{input}',
     ],
     'method' => 'get',
-]) ?>
+]); ?>
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
             Условия поиска:
@@ -44,77 +47,75 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'country')->dropDownList(
                 $countryArray,
                 ['class' => 'form-control', 'prompt' => 'Национальность']
-            ) ?>
+            ); ?>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
             <?= $form->field($model, 'name')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Имя',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
             <?= $form->field($model, 'surname')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Фамилия',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'position')->dropDownList(
                 $positionArray,
                 ['class' => 'form-control', 'prompt' => 'Позиция']
-            ) ?>
+            ); ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMin')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Возраст, от',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMax')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Возраст, до',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMin')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Сила, от',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMax')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Сила, до',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'priceMin')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Цена, от',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'priceMax')->textInput([
                 'class' => 'form-control',
                 'placeholder' => 'Цена, до',
                 'type' => 'number',
-            ]) ?>
+            ]); ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-            <?= Html::submitButton('Поиск', ['class' => 'form-control submit-blue']) ?>
+            <?= Html::submitButton('Поиск', ['class' => 'form-control submit-blue']); ?>
         </div>
     </div>
-<?php ActiveForm::end() ?>
+<?php ActiveForm::end(); ?>
     <div class="row">
         <?php
-
-        // TODO refactor
 
         try {
             $columns = [
@@ -125,87 +126,113 @@ use yii\widgets\ActiveForm;
                     'header' => '№',
                 ],
                 [
-                    'attribute' => 'surname',
                     'footer' => 'Игрок',
                     'format' => 'raw',
                     'label' => 'Игрок',
-                    'value' => static function (Player $model) {
-                        return $model->getPlayerLink();
+                    'value' => static function (Transfer $model) {
+                        return Html::a(
+                            $model->player->playerName(),
+                            ['view', 'id' => $model->id]
+                        );
                     }
                 ],
                 [
-                    'attribute' => 'country',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
                     'footer' => 'Нац',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Национальность'],
+                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => 'Национальность'],
+                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
                     'label' => 'Нац',
-                    'value' => static function (Player $model) {
-                        return $model->country->getImageLink();
+                    'value' => static function (Transfer $model) {
+                        return $model->player->country->getImageLink();
                     }
                 ],
                 [
-                    'attribute' => 'position',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'Поз',
                     'footerOptions' => ['title' => 'Позиция'],
                     'format' => 'raw',
                     'headerOptions' => ['title' => 'Позиция'],
                     'label' => 'Поз',
-                    'value' => static function (Player $model) {
+                    'value' => static function (Transfer $model) {
                         return $model->position();
                     }
                 ],
                 [
-                    'attribute' => 'age',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'В',
                     'footerOptions' => ['title' => 'Возраст'],
                     'headerOptions' => ['title' => 'Возраст'],
                     'label' => 'В',
-                    'value' => static function (Player $model) {
+                    'value' => static function (Transfer $model) {
                         return $model->age;
                     }
                 ],
                 [
-                    'attribute' => 'power',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'С',
                     'footerOptions' => ['title' => 'Сила'],
                     'headerOptions' => ['title' => 'Сила'],
                     'label' => 'С',
-                    'value' => static function (Player $model) {
-                        return $model->power_nominal;
+                    'value' => static function (Transfer $model) {
+                        return $model->power;
                     }
                 ],
                 [
-                    'contentOptions' => ['class' => 'hidden-xs text-center'],
+                    'contentOptions' => ['class' => 'text-center hidden-xs'],
                     'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецсозможности'],
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
                     'format' => 'raw',
-                    'header' => 'Спец',
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецсозможности'],
-                    'value' => static function (Player $model) {
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                    'label' => 'Спец',
+                    'value' => static function (Transfer $model) {
                         return $model->special();
                     }
                 ],
                 [
-                    'attribute' => 'team',
-                    'footer' => 'Команда',
+                    'contentOptions' => ['class' => 'hidden-xs'],
+                    'footer' => 'Продавец',
+                    'footerOptions' => ['class' => 'hidden-xs'],
                     'format' => 'raw',
-                    'label' => 'Команда',
-                    'value' => static function (Player $model) {
-                        return $model->team->getTeamLink();
+                    'headerOptions' => ['class' => 'hidden-xs'],
+                    'label' => 'Продавец',
+                    'value' => static function (Transfer $model) {
+                        return $model->teamSeller->getTeamLink();
                     }
                 ],
                 [
-                    'attribute' => 'price',
-                    'contentOptions' => ['class' => 'hidden-xs text-right'],
+                    'contentOptions' => ['class' => 'hidden-xs'],
+                    'footer' => 'Покупатель',
+                    'footerOptions' => ['class' => 'hidden-xs'],
+                    'format' => 'raw',
+                    'headerOptions' => ['class' => 'hidden-xs'],
+                    'label' => 'Покупатель',
+                    'value' => static function (Transfer $model) {
+                        return $model->teamBuyer->getTeamLink();
+                    }
+                ],
+                [
+                    'contentOptions' => ['class' => 'text-right'],
                     'footer' => 'Цена',
+                    'format' => 'raw',
                     'label' => 'Цена',
-                    'value' => static function (Player $model) {
-                        return FormatHelper::asCurrency($model->price);
+                    'value' => static function (Transfer $model) {
+                        $class = '';
+                        if ($model->cancel) {
+                            $class = 'del';
+                        }
+                        return '<span class="' . $class . '">' . FormatHelper::asCurrency($model->price_buyer) . '</span>';
+                    }
+                ],
+                [
+                    'contentOptions' => ['class' => 'text-center'],
+                    'footer' => '+/-',
+                    'footerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'format' => 'raw',
+                    'headerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'label' => '+/-',
+                    'value' => static function (Transfer $model) {
+                        return $model->rating();
                     }
                 ],
             ];

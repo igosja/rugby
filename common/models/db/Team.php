@@ -466,6 +466,22 @@ class Team extends AbstractActiveRecord
     /**
      * @return string
      */
+    public function getTeamImageLink(): string
+    {
+        return $this->stadium->city->country->getImage()
+            . ' '
+            . Html::a(
+                $this->name
+                . ' <span class="hidden-xs">('
+                . $this->stadium->city->name
+                . ')</span>',
+                ['team/view', 'id' => $this->id]
+            );
+    }
+
+    /**
+     * @return string
+     */
     public function rosterPhrase(): string
     {
         $data = [
