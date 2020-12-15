@@ -24,6 +24,7 @@ use yii\db\Exception;
  * @property int $vice_user_id
  *
  * @property-read Country $country
+ * @property-read LeagueCoefficient[] $leagueCoefficients
  * @property-read User $presidentUser
  * @property-read User $viceUser
  */
@@ -203,6 +204,14 @@ class Federation extends AbstractActiveRecord
     public function getCountry(): ActiveQuery
     {
         return $this->hasOne(Country::class, ['id' => 'country_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLeagueCoefficients(): ActiveQuery
+    {
+        return $this->hasMany(LeagueCoefficient::class, ['federation_id' => 'id']);
     }
 
     /**

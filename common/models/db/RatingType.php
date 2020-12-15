@@ -12,6 +12,7 @@ use yii\db\ActiveQuery;
  * @package common\models\db
  *
  * @property int $id
+ * @property string $field
  * @property string $name
  * @property int $order
  * @property int $rating_chapter_id
@@ -50,9 +51,9 @@ class RatingType extends AbstractActiveRecord
     public function rules(): array
     {
         return [
-            [['name', 'order', 'rating_chapter_id'], 'required'],
-            [['name'], 'trim'],
-            [['name'], 'string', 'max' => 255],
+            [['field', 'name', 'order', 'rating_chapter_id'], 'required'],
+            [['field', 'name'], 'trim'],
+            [['field', 'name'], 'string', 'max' => 255],
             [['rating_chapter_id'], 'integer', 'min' => 1, 'max' => 9],
             [['order'], 'integer', 'min' => 1, 'max' => 99],
             [['rating_chapter_id'], 'exist', 'targetRelation' => 'ratingChapter'],

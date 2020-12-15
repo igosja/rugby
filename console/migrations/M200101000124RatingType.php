@@ -17,12 +17,13 @@ class M200101000124RatingType extends Migration
     /**
      * @return bool
      */
-    public function safeUp()
+    public function safeUp(): bool
     {
         $this->createTable(
             self::TABLE,
             [
                 'id' => $this->primaryKey(2),
+                'field' => $this->string(255)->notNull(),
                 'name' => $this->string(255)->notNull(),
                 'order' => $this->integer(2)->notNull(),
                 'rating_chapter_id' => $this->integer(1)->notNull(),
@@ -39,23 +40,23 @@ class M200101000124RatingType extends Migration
 
         $this->batchInsert(
             self::TABLE,
-            ['name', 'order', 'rating_chapter_id'],
+            ['field', 'name', 'order', 'rating_chapter_id'],
             [
-                ['Сила состава', 0, 1],
-                ['Средний возраст', 1, 1],
-                ['Стадионы', 2, 1],
-                ['Посещаемость', 3, 1],
-                ['Базы и строения', 4, 1],
-                ['Стоимость баз', 5, 1],
-                ['Стоимость стадионов', 6, 1],
-                ['Игроки', 7, 1],
-                ['Общая стоимость', 8, 1],
-                ['Рейтинг', 9, 2],
-                ['Стадионы', 10, 3],
-                ['Автосоставы', 11, 3],
-                ['Лига Чемпионов', 12, 3],
-                ['Зарплата игроков', 13, 1],
-                ['Денег в кассе', 14, 1],
+                ['power_vs_place', 'Сила состава', 0, 1],
+                ['age_place', 'Средний возраст', 1, 1],
+                ['stadium_place', 'Стадионы', 2, 1],
+                ['visitor_place', 'Посещаемость', 3, 1],
+                ['base_place', 'Базы и строения', 4, 1],
+                ['price_base_place', 'Стоимость баз', 5, 1],
+                ['price_stadium_place', 'Стоимость стадионов', 6, 1],
+                ['player_place', 'Игроки', 7, 1],
+                ['price_total_place', 'Общая стоимость', 8, 1],
+                ['rating_place', 'Рейтинг', 9, 2],
+                ['stadium_place', 'Стадионы', 10, 3],
+                ['auto_place', 'Автосоставы', 11, 3],
+                ['league_place', 'Лига Чемпионов', 12, 3],
+                ['salary_place', 'Зарплата игроков', 13, 1],
+                ['finance_place', 'Денег в кассе', 14, 1],
             ]
         );
 
