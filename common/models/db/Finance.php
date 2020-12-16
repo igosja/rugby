@@ -7,6 +7,7 @@ namespace common\models\db;
 use common\components\AbstractActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 
 /**
  * Class Finance
@@ -92,8 +93,66 @@ class Finance extends AbstractActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getText(): string
+    {
+        $text = $this->financeText->text;
+        if (false !== strpos($text, '{player}')) {
+            $text = str_replace(
+                '{player}',
+                $this->player->getPlayerLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{team}')) {
+            $text = str_replace(
+                '{team}',
+                $this->team->getTeamLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{user}')) {
+            $text = str_replace(
+                '{user}',
+                $this->user->getUserLink(),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{building}')) {
+            $building = '';
+            if (Building::BASE === $this->building_id) {
+                $building = 'база';
+            } elseif (Building::MEDICAL === $this->building_id) {
+                $building = 'медцентр';
+            } elseif (Building::PHYSICAL === $this->building_id) {
+                $building = 'центр физподготовки';
+            } elseif (Building::SCHOOL === $this->building_id) {
+                $building = 'спортшкола';
+            } elseif (Building::SCOUT === $this->building_id) {
+                $building = 'скаут-центр';
+            } elseif (Building::TRAINING === $this->building_id) {
+                $building = 'тренировочный центр';
+            }
+            $text = str_replace(
+                '{building}',
+                $building,
+                $text
+            );
+        }
+        $text = str_replace(['{capacity}', '{level}'], [$this->capacity, $this->level], $text);
+
+        if ($this->comment) {
+            $text .= ' (' . $this->comment . ')';
+        }
+
+        return $text;
+    }
+
+    /**
      * @param array $data
      * @return bool
+     * @throws Exception
      */
     public static function log(array $data): bool
     {

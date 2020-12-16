@@ -9,6 +9,7 @@ use frontend\controllers\AbstractController;
 use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 use yii\helpers\Html;
 
 /**
@@ -131,6 +132,36 @@ class Player extends AbstractActiveRecord
             [['surname_id'], 'exist', 'targetRelation' => 'surname'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function makeFree(): bool
+    {
+        History::log([
+            'history_text_id' => HistoryText::PLAYER_FREE,
+            'player_id' => $this->id,
+            'team_id' => $this->team_id,
+        ]);
+
+        $this->loan_day = null;
+        $this->loan_team_id = null;
+        $this->national_squad_id = Squad::SQUAD_DEFAULT;
+        $this->order = 0;
+        $this->squad_id = Squad::SQUAD_DEFAULT;
+        $this->team_id = 0;
+        $this->save(true, [
+            'loan_day',
+            'loan_team_id',
+            'national_squad_id',
+            'order',
+            'squad_id',
+            'team_id',
+        ]);
+
+        return true;
     }
 
     /**

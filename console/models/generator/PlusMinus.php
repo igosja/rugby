@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace console\models\generator;
 
 use common\models\db\Game;

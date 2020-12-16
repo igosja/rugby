@@ -4,7 +4,10 @@
 
 namespace common\models\db;
 
+use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -31,17 +34,50 @@ class Logo extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
     {
         return [
-            [['team_id', 'text', 'user_id'], 'required'],
+            [['text'], 'required'],
+            [['team_id'], AtLeastValidator::class, 'in' => ['team_id', 'user_id']],
             [['text'], 'string'],
             [['team_id', 'user_id'], 'integer', 'min' => 1],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function beforeDelete(): bool
+    {
+        if ($this->team_id) {
+            $file = Yii::getAlias('@frontend') . '/web/upload/img/team/125/' . $this->team_id . '.png';
+        } else {
+            $file = Yii::getAlias('@frontend') . '/web/upload/img/user/125/' . $this->user_id . '.png';
+        }
+
+        if (file_exists($file)) {
+            unlink($file);
+        }
+
+        return parent::beforeDelete();
     }
 
     /**

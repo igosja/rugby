@@ -50,6 +50,14 @@ class Stadium extends AbstractActiveRecord
     }
 
     /**
+     * @return void
+     */
+    public function countMaintenance(): void
+    {
+        $this->maintenance = round(($this->capacity / 60) ** 2);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getCity(): ActiveQuery

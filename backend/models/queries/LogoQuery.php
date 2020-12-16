@@ -28,7 +28,7 @@ class LogoQuery
     public static function countNewUserPhoto(): int
     {
         return Logo::find()
-            ->andWhere(['not', ['team_id' => null]])
+            ->andWhere(['not', ['user_id' => null]])
             ->count();
     }
 }

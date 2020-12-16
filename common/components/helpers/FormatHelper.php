@@ -4,8 +4,8 @@
 
 namespace common\components\helpers;
 
+use common\components\AbstractWebController;
 use Exception;
-use frontend\controllers\AbstractController;
 use Yii;
 
 /**
@@ -38,7 +38,7 @@ class FormatHelper
         $result = '';
         try {
             /**
-             * @var AbstractController $controller
+             * @var AbstractWebController $controller
              */
             $controller = Yii::$app->controller;
             if ($controller->user && $controller->user->timezone) {
@@ -61,7 +61,7 @@ class FormatHelper
         $result = '';
         try {
             /**
-             * @var AbstractController $controller
+             * @var AbstractWebController $controller
              */
             $controller = Yii::$app->controller;
             if ($controller->user && $controller->user->timezone) {

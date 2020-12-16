@@ -34,7 +34,7 @@ class TeamRequestSearch extends TeamRequest
             [
                 'query' => $query,
                 'sort' => [
-                    'defaultOrder' => ['ready' => SORT_DESC, 'id' => SORT_DESC],
+                    'defaultOrder' => ['id' => SORT_DESC],
                 ],
             ]
         );

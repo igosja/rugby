@@ -6,6 +6,7 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -41,6 +42,18 @@ class Country extends AbstractActiveRecord
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function selectOptions(): array
+    {
+        return ArrayHelper::map(
+            self::find()->where(['!=', 'id', 0])->orderBy(['name' => SORT_ASC])->all(),
+            'id',
+            'name'
+        );
     }
 
     /**

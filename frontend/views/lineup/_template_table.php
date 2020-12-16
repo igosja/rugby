@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\models\LineupTemplate;
 use frontend\controllers\AbstractController;
 use yii\helpers\Html;
