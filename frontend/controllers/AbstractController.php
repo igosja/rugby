@@ -114,12 +114,7 @@ abstract class AbstractController extends AbstractWebController
         $this->loadCurrentSeason();
 
         if (!Yii::$app->user->isGuest) {
-            $this->loadCurrentUser();
-
-            if (!('restore' === $action->id
-                    && 'user' === $action->controller->id)
-                && $this->user->date_delete
-            ) {
+            if (!('restore' === $action->id && 'user' === $action->controller->id) && $this->user->date_delete) {
                 return $this->redirect(['/user/restore']);
             }
 
@@ -228,11 +223,6 @@ abstract class AbstractController extends AbstractWebController
             ->andWhere(['is_future' => false])
             ->orderBy(['id' => SORT_DESC])
             ->one();
-    }
-
-    private function loadCurrentUser(): void
-    {
-        $this->user = Yii::$app->user->identity;
     }
 
     private function loadMyTeamArray(): void

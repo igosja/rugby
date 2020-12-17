@@ -24,9 +24,9 @@ class M200101000103Logo extends Migration
             [
                 'id' => $this->primaryKey(11),
                 'date' => $this->integer(11)->notNull(),
-                'team_id' => $this->integer(11)->notNull(),
+                'team_id' => $this->integer(11),
                 'text' => $this->text()->notNull(),
-                'user_id' => $this->integer(11)->notNull(),
+                'user_id' => $this->integer(11),
             ]
         );
 

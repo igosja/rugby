@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Sex
@@ -34,5 +35,13 @@ class Sex extends AbstractActiveRecord
             [['name'], 'string', 'max' => 10],
             [['name'], 'unique'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function selectOptions(): array
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

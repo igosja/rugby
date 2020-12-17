@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\ErrorHelper;
 use Exception;
 use frontend\controllers\AbstractController;
 use rmrevin\yii\fontawesome\FAS;
@@ -177,6 +178,279 @@ class Team extends AbstractActiveRecord
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
         ];
+    }
+
+    /**
+     * @return array
+     * @throws \yii\db\Exception
+     */
+    public function reRegister(): array
+    {
+        if ($this->base->level >= 5) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: база команды достигла 5-го уровня.'
+            ];
+        }
+
+        if ($this->buildingBase) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: на базе идет строительство.'
+            ];
+        }
+
+        if ($this->buildingStadium) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: на стадионе идет строительство.'
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['loan_team_id' => $this->id])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: в команде находятся арендованные игроки.'
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['team_id' => $this->id])
+            ->andWhere(['not', ['loan_team_id' => null]])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: игроки команды находятся в аренде.'
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['team_id' => $this->id])
+            ->andWhere(['not', ['national_id' => null]])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: в команде есть игроки сборной.'
+            ];
+        }
+
+        $transfer = Transfer::find()
+            ->where(['team_seller_id' => $this->id, 'ready' => null])
+            ->count();
+        if ($transfer) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: игроки команды выставлены на продажу.'
+            ];
+        }
+
+        $loan = Loan::find()
+            ->where(['team_seller_id' => $this->id, 'ready' => null])
+            ->count();
+        if ($loan) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: игроки команды выставлены на аренду.'
+            ];
+        }
+
+        $transfer = Transfer::find()
+            ->where(['voted' => null])
+            ->andWhere([
+                'or',
+                ['team_buyer_id' => $this->id],
+                ['team_seller_id' => $this->id]
+            ])
+            ->count();
+        if ($transfer) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: по совершенным трансферам команды еще идет голосование.'
+            ];
+        }
+
+        $loan = Loan::find()
+            ->where(['voted' => null])
+            ->andWhere([
+                'or',
+                ['team_buyer_id' => $this->id],
+                ['team_seller_id' => $this->id]
+            ])
+            ->count();
+        if ($loan) {
+            return [
+                'status' => false,
+                'message' => 'Перерегистрировать нельзя: по совершенным арендам команды еще идет голосование.'
+            ];
+        }
+
+        try {
+            $playerArray = Player::find()
+                ->where(['team_id' => $this->id])
+                ->all();
+            foreach ($playerArray as $player) {
+                /**
+                 * @var Player $player
+                 */
+                $player->makeFree();
+            }
+
+            Training::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            Scout::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            School::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            PhysicalChange::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+
+            Finance::log([
+                'finance_text_id' => FinanceText::TEAM_RE_REGISTER,
+                'team_id' => $this->id,
+                'value' => self::START_MONEY - $this->finance,
+                'value_after' => self::START_MONEY,
+                'value_before' => $this->finance,
+            ]);
+
+            $this->base_id = 2;
+            $this->base_medical_id = 1;
+            $this->base_physical_id = 1;
+            $this->base_school_id = 1;
+            $this->base_scout_id = 1;
+            $this->base_training_id = 1;
+            $this->finance = self::START_MONEY;
+            $this->free_base_number = 5;
+            $this->mood_rest = 3;
+            $this->mood_super = 3;
+            $this->visitor = 100;
+            $this->save(true, [
+                'base_id',
+                'base_medical_id',
+                'base_physical_id',
+                'base_school_id',
+                'base_scout_id',
+                'base_training_id',
+                'finance',
+                'free_base_number',
+                'mood_rest',
+                'mood_super',
+                'visitor',
+            ]);
+
+            $this->stadium->capacity = 100;
+            $this->stadium->countMaintenance();
+            $this->stadium->save(true, [
+                'capacity',
+                'maintenance',
+            ]);
+
+            History::log([
+                'history_text_id' => HistoryText::TEAM_RE_REGISTER,
+                'team_id' => $this->id,
+            ]);
+
+            $this->createPlayers();
+            $this->updatePower();
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+            return [
+                'status' => false,
+                'message' => 'Не удалось провести перерегистрацию команды',
+            ];
+        }
+
+        return [
+            'status' => true,
+            'message' => 'Команда успешно перерегистрирована.',
+        ];
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    private function createPlayers(): bool
+    {
+        $positions = [
+            Position::PROP,
+            Position::PROP,
+            Position::HOOKER,
+            Position::HOOKER,
+            Position::PROP,
+            Position::PROP,
+            Position::LOCK,
+            Position::LOCK,
+            Position::LOCK,
+            Position::LOCK,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::EIGHT,
+            Position::EIGHT,
+            Position::SCRUM_HALF,
+            Position::SCRUM_HALF,
+            Position::FLY_HALF,
+            Position::FLY_HALF,
+            Position::WING,
+            Position::WING,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::WING,
+            Position::WING,
+            Position::FULL_BACK,
+            Position::FULL_BACK,
+        ];
+
+        shuffle($positions);
+
+        foreach ($positions as $i => $position) {
+            $age = 17 + $i;
+
+            if ($age > 35) {
+                $age -= 17;
+            }
+
+            $player = new Player();
+            $player->age = $age;
+            $player->country_id = $this->stadium->city->country_id;
+            $player->name_id = NameCountry::getRandNameId($this->stadium->city->country_id);
+            $player->physical_id = Physical::getRandPhysicalId();
+            $player->power_nominal = $age * 2;
+            $player->power_nominal_s = $age * 2;
+            $player->school_team_id = $this->id;
+            $player->style_id = Style::getRandStyleId();
+            $player->surname_id = SurnameCountry::getRandFreeSurnameId(
+                $this->id,
+                $this->stadium->city->country_id
+            );
+            $player->team_id = $this->id;
+            $player->tire = Player::TIRE_DEFAULT;
+            $player->training_ability = random_int(1, 5);
+            $player->save();
+
+            $playerPosition = new PlayerPosition();
+            $playerPosition->player_id = $player->id;
+            $playerPosition->position_id = $position;
+            $playerPosition->save();
+        }
+
+        return true;
     }
 
     /**
@@ -419,6 +693,7 @@ class Team extends AbstractActiveRecord
      */
     public function division(): string
     {
+        $result = '';
         if ($this->championship) {
             $result = Html::a(
                 $this->championship->federation->country->name . ', ' .
@@ -431,7 +706,7 @@ class Team extends AbstractActiveRecord
                     'divisionId' => $this->championship->division->id,
                 ]
             );
-        } else {
+        } elseif ($this->conference) {
             $result = Html::a(
                 'Конференция' . ', ' . $this->conference->place . ' место',
                 ['conference/table']

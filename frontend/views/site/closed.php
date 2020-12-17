@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use yii\helpers\Html;
 
 $this->title = 'Forbidden (#403)';

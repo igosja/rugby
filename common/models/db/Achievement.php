@@ -6,6 +6,7 @@ namespace common\models\db;
 
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
+use rmrevin\yii\fontawesome\FAS;
 use yii\db\ActiveQuery;
 
 /**
@@ -64,7 +65,7 @@ class Achievement extends AbstractActiveRecord
                 'min' => 0,
             ],
             [['national_id'], AtLeastValidator::class, 'in' => ['national_id', 'team_id']],
-            [['place'], AtLeastValidator::class, 'in' => ['place', 'stage_id']],
+            [['place'], AtLeastValidator::class, 'in' => ['place', 'id']],
             [['place'], 'integer', 'min' => 1, 'max' => 99],
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['division_id'], 'exist', 'targetRelation' => 'division'],
@@ -75,6 +76,64 @@ class Achievement extends AbstractActiveRecord
             [['tournament_type_id'], 'exist', 'targetRelation' => 'tournamentType'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition(): string
+    {
+        if ($this->place) {
+            $result = $this->place;
+            if ($this->place <= 3) {
+                if (1 === $this->place) {
+                    $color = 'gold';
+                } elseif (2 === $this->place) {
+                    $color = 'silver';
+                } else {
+                    $color = '#6A3805';
+                }
+                $result .= ' ' . FAS::icon(FAS::_TROPHY, ['style' => ['color' => $color]]);
+            }
+        } elseif ($this->stage) {
+            $result = $this->stage->name;
+            if (in_array($this->id, [Stage::FINAL_GAME, Stage::SEMI], true)) {
+                if (Stage::FINAL_GAME === $this->id) {
+                    $color = 'silver';
+                } else {
+                    $color = '#6A3805';
+                }
+                $result .= ' ' . FAS::icon(FAS::_TROPHY, ['style' => ['color' => $color]]);
+            }
+        } else {
+            $result = FAS::icon(FAS::_TROPHY, ['style' => ['color' => 'gold']]);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTournament(): string
+    {
+        $result = $this->tournamentType->name;
+
+        if ($this->federation_id || $this->division_id) {
+            $additional = [];
+
+            if ($this->federation_id) {
+                $additional[] = $this->federation->country->name;
+            }
+
+            if ($this->division_id) {
+                $additional[] = $this->division->name;
+            }
+
+            $result .= ' (' . implode(', ', $additional) . ')';
+        }
+
+        return $result;
     }
 
     /**

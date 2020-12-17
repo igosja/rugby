@@ -10,6 +10,7 @@ use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\IdentityInterface;
@@ -53,6 +54,7 @@ use yii\web\IdentityInterface;
  * @property-read string $authKey
  * @property-read string $fullName
  *
+ * @property-read UserHoliday $activeUserHoliday
  * @property-read Country $country
  * @property-read Language $language
  * @property-read News $news
@@ -146,6 +148,154 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function updateQuestionnaire(): bool
+    {
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+        if (!$this->save(true, [
+            'birth_day',
+            'birth_month',
+            'birth_year',
+            'city',
+            'country_id',
+            'is_no_vice',
+            'name',
+            'sex_id',
+            'surname',
+            'timezone',
+        ])) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function updateNotes(): bool
+    {
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+        if (!$this->save(true, ['notes'])) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function socialLinks(): string
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function userFrom(): string
+    {
+        $countryName = $this->country->name ?? '';
+
+        if ($this->city && $countryName) {
+            $result = $this->city . ', ' . $countryName;
+        } elseif ($this->city) {
+            $result = $this->city;
+        } elseif ($countryName) {
+            $result = $countryName;
+        } else {
+            $result = 'Не указано';
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function birthDay(): string
+    {
+        if ($this->birth_day && $this->birth_month && $this->birth_year) {
+            $result = $this->birth_day . '.' . $this->birth_month . '.' . $this->birth_year;
+        } else {
+            $result = 'Не указан';
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function blacklistIcon(): string
+    {
+        $blacklist = Blacklist::find()
+            ->where([
+                'owner_user_id' => Yii::$app->user->id,
+                'blocked_user_id' => $this->id,
+            ])
+            ->limit(1)
+            ->one();
+        if ($blacklist) {
+            return FAS::icon(FAS::_FILE_ALT, ['title' => 'Удалить из черного списка']);
+        }
+
+        return FAS::icon(FAS::_FILE_ALT, ['title' => 'Добавить в черный список']);
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        $result = 'Новый менеджер';
+        if ($this->name || $this->surname) {
+            $result = $this->name . ' ' . $this->surname;
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function logo(): string
+    {
+        $result = 'Нет<br/>фото';
+        if (file_exists(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png')) {
+            $result = Html::img(
+                '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png'),
+                [
+                    'alt' => $this->login,
+                    'class' => 'user-logo',
+                    'title' => $this->login,
+                ]
+            );
+        }
+
+        if (Yii::$app->user->id === $this->id) {
+            $result = Html::a(
+                $result,
+                ['user/logo'],
+                ['class' => 'team-logo-link']
+            );
+        } else {
+            $result = Html::tag(
+                'span',
+                $result,
+                ['class' => 'team-logo-link']
+            );
+        }
+
+        return $result;
     }
 
     /**
@@ -319,6 +469,14 @@ class User extends AbstractActiveRecord implements IdentityInterface
     public function validatePassword(string $password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getActiveUserHoliday(): ActiveQuery
+    {
+        return $this->hasOne(UserHoliday::class, ['user_id' => 'id'])->andWhere(['date_end' => null]);
     }
 
     /**
