@@ -281,7 +281,7 @@ class MakeLoan
                     'history_text_id' => HistoryText::PLAYER_LOAN,
                     'player_id' => $loan->player_id,
                     'team_id' => $loan->team_seller_id,
-                    'team_2_id' => $loanApplication->team_id,
+                    'second_team_id' => $loanApplication->team_id,
                     'value' => $price,
                 ]);
 

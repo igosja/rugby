@@ -37,7 +37,7 @@ use common\models\db\ForumMessage;
             Команды:
             <?php foreach ($model->user->teams as $team): ?>
                 <br/>
-                <?= $team->getTeamLink() ?>
+                <?= $team->getTeamImageLink() ?>
             <?php endforeach; ?>
         </div>
     </div>

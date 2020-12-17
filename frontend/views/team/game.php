@@ -14,11 +14,11 @@ use yii\web\View;
 /**
  * @var ActiveDataProvider $dataProvider
  * @var array $seasonArray
- * @var integer $seasonId
+ * @var int $seasonId
  * @var Team $team
  * @var View $this
  * @var array $totalGameResult
- * @var integer $totalPoint
+ * @var int $totalPoint
  */
 
 ?>
@@ -30,10 +30,10 @@ use yii\web\View;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?= Html::beginForm(['team/game', 'id' => $team->team_id], 'get') ?>
+<?= Html::beginForm(['team/game', 'id' => $team->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
@@ -59,19 +59,15 @@ use yii\web\View;
                 <th>Итоги сезона</th>
                 <th class="col-10" title="Матчи">М</th>
                 <th class="col-10 hidden-xs" title="Победы">В</th>
-                <th class="col-10 hidden-xs" title="Победы в овертайме">ВО</th>
-                <th class="col-10 hidden-xs" title="Ничьи и победы/поражения по буллитам">Н</th>
-                <th class="col-10 hidden-xs" title="Поражения в овертайме">ПО</th>
+                <th class="col-10 hidden-xs" title="Ничьи">Н</th>
                 <th class="col-10 hidden-xs" title="Поражения">П</th>
             </tr>
             <tr>
                 <td>Всего сыграно матчей</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
+                <td class="text-center"><?= $totalGameResult['game'] ?></td>
+                <td class="text-center"><?= $totalGameResult['win'] ?></td>
+                <td class="text-center"><?= $totalGameResult['draw'] ?></td>
+                <td class="text-center"><?= $totalGameResult['loose'] ?></td>
             </tr>
         </table>
     </div>
@@ -79,7 +75,7 @@ use yii\web\View;
 <div class="row margin-top">
     <?php
 
-// TODO refactor
+    // TODO refactor
 
     try {
         $columns = [
@@ -89,7 +85,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-15'],
                 'label' => 'Дата',
                 'value' => static function (Game $model): string {
-                    return FormatHelper::asDate($model->schedule->schedule_date);
+                    return FormatHelper::asDate($model->schedule->date);
                 }
             ],
             [
@@ -99,7 +95,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-30 hidden-xs'],
                 'label' => 'Турнир',
                 'value' => static function (Game $model): string {
-                    return $model->schedule->tournamentType->tournament_type_name;
+                    return $model->schedule->tournamentType->name;
                 }
             ],
             [
@@ -109,7 +105,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
                 'label' => 'Стадия',
                 'value' => static function (Game $model): string {
-                    return $model->schedule->stage->stage_name;
+                    return $model->schedule->stage->name;
                 }
             ],
             [
@@ -117,7 +113,7 @@ use yii\web\View;
                 'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Дома/В гостях'],
                 'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Дома/В гостях'],
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gameHomeGuest($team->team_id);
+                    return $model->gameHomeGuest($team);
                 }
             ],
             [
@@ -133,7 +129,7 @@ use yii\web\View;
                 ],
                 'label' => 'С/С',
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gamePowerPercent($team->team_id);
+                    return $model->gamePowerPercent($team);
                 }
             ],
             [
@@ -141,7 +137,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Соперник',
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->opponentLink($team->team_id);
+                    return $model->opponentLink($team);
                 }
             ],
             [
@@ -151,7 +147,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Автосостав'],
                 'label' => 'А',
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gameAuto($team->team_id);
+                    return $model->gameAuto($team);
                 }
             ],
             [
@@ -161,18 +157,18 @@ use yii\web\View;
                 'label' => 'Счёт',
                 'value' => static function (Game $model) use ($team): string {
                     return Html::a(
-                        $model->formatTeamScore($team->team_id),
-                        ['game/view', 'id' => $model->game_id]
+                        $model->formatTeamScore($team),
+                        ['game/view', 'id' => $model->id]
                     );
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 0,
+                'footer' => $totalPoint,
                 'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Количество набранных/потерянных баллов'],
                 'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Количество набранных/потерянных баллов'],
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gamePlusMinus($team->team_id);
+                    return $model->gamePlusMinus($team);
                 }
             ],
         ];
@@ -190,7 +186,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

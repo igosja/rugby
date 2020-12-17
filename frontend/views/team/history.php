@@ -28,10 +28,10 @@ use yii\web\View;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?= Html::beginForm(['team/event', 'id' => $team->team_id], 'get') ?>
+<?= Html::beginForm(['team/event', 'id' => $team->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
@@ -63,7 +63,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-15'],
                 'label' => 'Дата',
                 'value' => static function (History $model) {
-                    return FormatHelper::asDate($model->history_date);
+                    return FormatHelper::asDate($model->date);
                 }
             ],
             [
@@ -89,7 +89,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

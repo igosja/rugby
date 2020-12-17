@@ -20,9 +20,9 @@ class TransferQuery
     public static function getTeamBuyerTransferList(int $teamId): ActiveQuery
     {
         return Transfer::find()
-            ->where(['transfer_team_buyer_id' => $teamId])
-            ->andWhere(['!=', 'transfer_ready', 0])
-            ->orderBy(['transfer_ready' => SORT_DESC]);
+            ->where(['team_buyer_id' => $teamId])
+            ->andWhere(['not', ['ready' => null]])
+            ->orderBy(['ready' => SORT_DESC]);
     }
 
     /**
@@ -32,8 +32,8 @@ class TransferQuery
     public static function getTeamSellerTransferList(int $teamId): ActiveQuery
     {
         return Transfer::find()
-            ->where(['transfer_team_seller_id' => $teamId])
-            ->andWhere(['!=', 'transfer_ready', 0])
-            ->orderBy(['transfer_ready' => SORT_DESC]);
+            ->where(['team_seller_id' => $teamId])
+            ->andWhere(['not', ['ready' => null]])
+            ->orderBy(['ready' => SORT_DESC]);
     }
 }

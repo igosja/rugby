@@ -59,8 +59,6 @@ use yii\widgets\ListView;
         </div>
         <?php
 
-// TODO refactor
-
         try {
             print ListView::widget([
                 'dataProvider' => $dataProvider,

@@ -64,7 +64,7 @@ class GameQuery
         return Game::find()
             ->joinWith(['schedule'], false)
             ->where(['or', ['home_team_id' => $teamId], ['guest_team_id' => $teamId]])
-            ->andWhere(['schedule_season_id' => $seasonId])
-            ->orderBy(['schedule_date' => SORT_ASC]);
+            ->andWhere(['season_id' => $seasonId])
+            ->orderBy(['date' => SORT_ASC]);
     }
 }

@@ -22,9 +22,9 @@ class FinanceQuery
     {
         return Finance::find()
             ->where([
-                'finance_team_id' => $teamId,
-                'finance_season_id' => $seasonId,
+                'team_id' => $teamId,
+                'season_id' => $seasonId,
             ])
-            ->orderBy(['finance_id' => SORT_DESC]);
+            ->orderBy(['id' => SORT_DESC]);
     }
 }

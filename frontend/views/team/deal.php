@@ -31,7 +31,7 @@ use yii\web\View;
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
@@ -42,8 +42,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -52,7 +50,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Дата',
                 'value' => static function (Transfer $model) {
-                    return FormatHelper::asDate($model->transfer_ready);
+                    return FormatHelper::asDate($model->ready);
                 }
             ],
             [
@@ -61,7 +59,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-20'],
                 'label' => 'Игрок',
                 'value' => static function (Transfer $model) {
-                    return $model->player->playerLink();
+                    return $model->player->getPlayerLink();
                 }
             ],
             [
@@ -72,13 +70,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1 hidden-xs'],
                 'label' => 'Нац',
                 'value' => static function (Transfer $model) {
-                    return $model->player->country->countryImageLink();
+                    return $model->player->country->getImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Поз',
                 'footerOptions' => ['title' => 'Позиция'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Transfer $model) {
@@ -92,7 +91,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
                 'label' => 'В',
                 'value' => static function (Transfer $model) {
-                    return $model->transfer_age;
+                    return $model->age;
                 }
             ],
             [
@@ -102,13 +101,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Сила'],
                 'label' => 'С',
                 'value' => static function (Transfer $model) {
-                    return $model->transfer_power;
+                    return $model->power;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Спец',
                 'footerOptions' => ['title' => 'Спецвозможности'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Спецвозможности'],
                 'label' => 'Спец',
                 'value' => static function (Transfer $model) {
@@ -120,7 +120,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Покупатель',
                 'value' => static function (Transfer $model) {
-                    return $model->buyer->teamLink('img');
+                    return $model->teamBuyer->getTeamImageLink();
                 }
             ],
             [
@@ -129,7 +129,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-13'],
                 'label' => 'Цена',
                 'value' => static function (Transfer $model) {
-                    return FormatHelper::asCurrency($model->transfer_price_buyer);
+                    return FormatHelper::asCurrency($model->price_buyer);
                 }
             ],
         ];
@@ -153,8 +153,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -163,7 +161,7 @@ use yii\web\View;
                 'label' => 'Дата',
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Transfer $model) {
-                    return FormatHelper::asDate($model->transfer_ready);
+                    return FormatHelper::asDate($model->ready);
                 }
             ],
             [
@@ -172,7 +170,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-20'],
                 'label' => 'Игрок',
                 'value' => static function (Transfer $model) {
-                    return $model->player->playerLink();
+                    return $model->player->getPlayerLink();
                 }
             ],
             [
@@ -183,13 +181,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1 hidden-xs'],
                 'label' => 'Нац',
                 'value' => static function (Transfer $model) {
-                    return $model->player->country->countryImageLink();
+                    return $model->player->country->getImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Поз',
                 'footerOptions' => ['title' => 'Позиция'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Transfer $model) {
@@ -203,7 +202,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
                 'label' => 'В',
                 'value' => static function (Transfer $model) {
-                    return $model->transfer_age;
+                    return $model->age;
                 }
             ],
             [
@@ -213,13 +212,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Сила'],
                 'label' => 'С',
                 'value' => static function (Transfer $model) {
-                    return $model->transfer_power;
+                    return $model->power;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Спец',
                 'footerOptions' => ['title' => 'Спецвозможности'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Спецвозможности'],
                 'label' => 'Спец',
                 'value' => static function (Transfer $model) {
@@ -231,7 +231,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Продавец',
                 'value' => static function (Transfer $model) {
-                    return $model->seller->teamLink('img');
+                    return $model->teamSeller->getTeamImageLink();
                 }
             ],
             [
@@ -240,7 +240,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-13'],
                 'label' => 'Цена',
                 'value' => static function (Transfer $model) {
-                    return FormatHelper::asCurrency($model->transfer_price_buyer);
+                    return FormatHelper::asCurrency($model->price_buyer);
                 }
             ],
         ];
@@ -264,8 +264,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -274,7 +272,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Дата',
                 'value' => static function (Loan $model) {
-                    return FormatHelper::asDate($model->loan_ready);
+                    return FormatHelper::asDate($model->ready);
                 }
             ],
             [
@@ -283,7 +281,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-20'],
                 'label' => 'Игрок',
                 'value' => static function (Loan $model) {
-                    return $model->player->playerLink();
+                    return $model->player->getPlayerLink();
                 }
             ],
             [
@@ -294,13 +292,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1 hidden-xs'],
                 'label' => 'Нац',
                 'value' => static function (Loan $model) {
-                    return $model->player->country->countryImageLink();
+                    return $model->player->country->getImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Поз',
                 'footerOptions' => ['title' => 'Позиция'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Loan $model) {
@@ -314,7 +313,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
                 'label' => 'В',
                 'value' => static function (Loan $model) {
-                    return $model->loan_age;
+                    return $model->age;
                 }
             ],
             [
@@ -324,13 +323,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Сила'],
                 'label' => 'С',
                 'value' => static function (Loan $model) {
-                    return $model->loan_power;
+                    return $model->power;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Спец',
                 'footerOptions' => ['title' => 'Спецвозможности'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Спецвозможности'],
                 'label' => 'Спец',
                 'value' => static function (Loan $model) {
@@ -342,7 +342,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Арендатор',
                 'value' => static function (Loan $model) {
-                    return $model->buyer->teamLink('img');
+                    return $model->teamBuyer->getTeamLink();
                 }
             ],
             [
@@ -351,7 +351,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5'],
                 'label' => 'Срок',
                 'value' => static function (Loan $model) {
-                    return $model->loan_day;
+                    return $model->day;
                 }
             ],
             [
@@ -360,7 +360,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Цена',
                 'value' => static function (Loan $model) {
-                    return FormatHelper::asCurrency($model->loan_price_buyer);
+                    return FormatHelper::asCurrency($model->price_buyer);
                 }
             ],
         ];
@@ -384,8 +384,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -394,7 +392,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Дата',
                 'value' => static function (Loan $model) {
-                    return FormatHelper::asDate($model->loan_ready);
+                    return FormatHelper::asDate($model->ready);
                 }
             ],
             [
@@ -403,7 +401,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-20'],
                 'label' => 'Игрок',
                 'value' => static function (Loan $model) {
-                    return $model->player->playerLink();
+                    return $model->player->getPlayerLink();
                 }
             ],
             [
@@ -414,13 +412,14 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1 hidden-xs'],
                 'label' => 'Нац',
                 'value' => static function (Loan $model) {
-                    return $model->player->country->countryImageLink();
+                    return $model->player->country->getImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Поз',
                 'footerOptions' => ['title' => 'Позиция'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Позиция'],
                 'label' => 'Поз',
                 'value' => static function (Loan $model) {
@@ -434,7 +433,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
                 'label' => 'В',
                 'value' => static function (Loan $model) {
-                    return $model->loan_age;
+                    return $model->age;
                 }
             ],
             [
@@ -444,13 +443,14 @@ use yii\web\View;
                 'label' => 'С',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Сила'],
                 'value' => static function (Loan $model) {
-                    return $model->loan_power;
+                    return $model->power;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footer' => 'Спец',
                 'footerOptions' => ['title' => 'Спецвозможности'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'col-10', 'title' => 'Спецвозможности'],
                 'label' => 'Спец',
                 'value' => static function (Loan $model) {
@@ -462,7 +462,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Владелец',
                 'value' => static function (Loan $model) {
-                    return $model->seller->teamLink('img');
+                    return $model->teamSeller->getTeamImageLink();
                 }
             ],
             [
@@ -471,7 +471,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-5'],
                 'label' => 'Срок',
                 'value' => static function (Loan $model) {
-                    return $model->loan_day;
+                    return $model->day;
                 }
             ],
             [
@@ -480,7 +480,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-10'],
                 'label' => 'Цена',
                 'value' => static function (Loan $model) {
-                    return FormatHelper::asCurrency($model->loan_price_buyer);
+                    return FormatHelper::asCurrency($model->price_buyer);
                 }
             ],
         ];
@@ -488,9 +488,8 @@ use yii\web\View;
             'columns' => $columns,
             'dataProvider' => $dataProviderLoanTo,
             'showFooter' => true,
-                                   'summary' => false,
-                               ]
-        );
+            'summary' => false,
+        ]);
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }
@@ -499,7 +498,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

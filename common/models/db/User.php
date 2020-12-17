@@ -362,7 +362,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
 
         if (file_exists(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png')) {
             $result = Html::img(
-                    '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->user_id . '.png'),
+                    '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png'),
                     [
                         'alt' => $this->login,
                         'class' => 'user-logo-small',

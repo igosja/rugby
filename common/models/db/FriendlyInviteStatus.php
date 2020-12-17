@@ -15,6 +15,10 @@ use common\components\AbstractActiveRecord;
  */
 class FriendlyInviteStatus extends AbstractActiveRecord
 {
+    public const ACCEPTED = 2;
+    public const CANCELED = 3;
+    public const NEW_ONE = 1;
+
     /**
      * @return string
      */

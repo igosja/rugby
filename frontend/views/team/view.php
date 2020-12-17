@@ -164,6 +164,7 @@ $controller = Yii::$app->controller;
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footer' => 'Спец',
                 'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                'format' => 'raw',
                 'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
                 'label' => 'Спец',
                 'value' => static function (Player $model) {
