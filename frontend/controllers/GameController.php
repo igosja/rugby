@@ -12,7 +12,6 @@ use common\models\db\GameVote;
 use common\models\db\Lineup;
 use common\models\db\UserBlockType;
 use common\models\db\UserRole;
-use console\models\generator\GameResult;
 use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -164,7 +163,6 @@ class GameController extends AbstractController
      */
     public function actionView(int $id)
     {
-        (new GameResult)->execute();
         $game = Game::find()
             ->where(['id' => $id])
             ->limit(1)

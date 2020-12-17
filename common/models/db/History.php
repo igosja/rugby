@@ -128,7 +128,7 @@ class History extends AbstractActiveRecord
                 $text
             );
         }
-        if (false !== strpos($text, '{team2}')) {
+        if ($this->second_team_id && false !== strpos($text, '{team2}')) {
             $text = str_replace(
                 '{team2}',
                 $this->secondTeam->getTeamLink(),

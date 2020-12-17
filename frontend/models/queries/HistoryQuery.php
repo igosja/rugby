@@ -21,38 +21,12 @@ class HistoryQuery
     public static function getTeamHistoryListQuery(int $teamId, int $seasonId): ActiveQuery
     {
         return History::find()
-            ->with([
-                'player' => static function (ActiveQuery $query) {
-                    $query
-                        ->with([
-                            'name',
-                            'surname',
-                        ]);
-                },
-                'team' => static function (ActiveQuery $query) {
-                    $query
-                        ->with([
-                            'stadium' => static function (ActiveQuery $query) {
-                                $query
-                                    ->with([
-                                        'city' => static function (ActiveQuery $query) {
-                                            $query
-                                                ->with([
-                                                    'country',
-                                                ]);
-                                        },
-                                    ]);
-                            },
-                        ]);
-                },
-                'user',
-            ])
             ->where([
                 'or',
-                ['history_team_id' => $teamId],
-                ['history_team_2_id' => $teamId],
+                ['team_id' => $teamId],
+                ['second_team_id' => $teamId],
             ])
-            ->andWhere(['history_season_id' => $seasonId])
-            ->orderBy(['history_id' => SORT_DESC]);
+            ->andWhere(['season_id' => $seasonId])
+            ->orderBy(['id' => SORT_DESC]);
     }
 }

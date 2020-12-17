@@ -20,8 +20,6 @@ use yii\grid\GridView;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [

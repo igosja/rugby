@@ -285,6 +285,141 @@ class Game extends AbstractActiveRecord
     }
 
     /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function gameHomeGuest($teamOrNational): string
+    {
+        if (in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
+            $result = 'Д';
+        } else {
+            $result = 'Г';
+        }
+        return $result;
+    }
+
+    /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function gamePowerPercent($teamOrNational): string
+    {
+        if (in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
+            if ($this->played) {
+                $result = $this->powerPercent($this->guest_power / ($this->home_power ?: 1) * 100);
+            } else {
+                if ($this->home_team_id === $teamOrNational->id) {
+                    $result = $this->powerPercent($this->guestTeam->power_vs / ($this->homeTeam->power_vs ?: 1) * 100);
+                } else {
+                    $result = $this->powerPercent($this->guestNational->power_vs / ($this->homeNational->power_vs ?: 1) * 100);
+                }
+            }
+        } else {
+            if ($this->played) {
+                $result = $this->powerPercent($this->home_power / ($this->guest_power ?: 1) * 100);
+            } else {
+                if ($this->guest_team_id === $teamOrNational->id) {
+                    $result = $this->powerPercent($this->homeTeam->power_vs / ($this->guestTeam->power_vs ?: 1) * 100);
+                } else {
+                    $result = $this->powerPercent($this->homeNational->power_vs / ($this->guestNational->power_vs ?: 1) * 100);
+                }
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param int $percent
+     * @return string
+     */
+    public function powerPercent(int $percent): string
+    {
+        return ($percent ? round($percent) : 100) . '%';
+    }
+
+    /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function gamePlusMinus($teamOrNational)
+    {
+        if ($this->played) {
+            if (in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
+                $result = $this->plusNecessary($this->home_plus_minus);
+            } else {
+                $result = $this->plusNecessary($this->guest_plus_minus);
+            }
+        } else {
+            $result = '';
+        }
+        return $result;
+    }
+
+    /**
+     * @param int $value
+     * @return string
+     */
+    public function plusNecessary(int $value)
+    {
+        if ($value > 0) {
+            $result = '+' . $value;
+        } else {
+            $result = $value;
+        }
+        return $result;
+    }
+
+    /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function gameAuto($teamOrNational): string
+    {
+        if ($this->home_auto && in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
+            return 'А';
+        }
+
+        if ($this->guest_auto && in_array($teamOrNational->id, [$this->guest_team_id, $this->guest_national_id], true)) {
+            return 'А';
+        }
+        return '';
+    }
+
+    /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function opponentLink($teamOrNational): string
+    {
+        if ($this->home_team_id) {
+            if ($this->home_team_id === $teamOrNational->id) {
+                return $this->guestTeam->getTeamImageLink();
+            }
+
+            return $this->homeTeam->getTeamImageLink();
+        }
+
+        if ($this->home_national_id === $teamOrNational->id) {
+            return $this->guestNational->nationalLink();
+        }
+
+        return $this->guestNational->nationalLink();
+    }
+
+    /**
+     * @param Team|National $teamOrNational
+     * @return string
+     */
+    public function formatTeamScore($teamOrNational): string
+    {
+        if (in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
+            return $this->formatScore();
+        }
+
+        return $this->formatScore('guest');
+    }
+
+    /**
      * @param string $team
      * @return string
      */

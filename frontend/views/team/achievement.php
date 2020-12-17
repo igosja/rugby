@@ -26,13 +26,13 @@ use yii\web\View;
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
     <?php
 
-// TODO refactor
+    // TODO refactor
 
     try {
         $columns = [
@@ -43,14 +43,14 @@ use yii\web\View;
                 'label' => 'С',
                 'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
                 'value' => static function (Achievement $model) {
-                    return $model->achievement_season_id;
+                    return $model->season_id;
                 }
             ],
             [
                 'footer' => 'Турнир',
                 'label' => 'Турнир',
                 'value' => static function (Achievement $model) {
-                    return $model->tournament();
+                    return $model->getTournament();
                 }
             ],
             [
@@ -60,7 +60,7 @@ use yii\web\View;
                 'label' => 'Место',
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Achievement $model) {
-                    return $model->position();
+                    return $model->getPosition();
                 }
             ],
         ];
@@ -78,7 +78,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

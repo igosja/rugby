@@ -297,7 +297,7 @@ class MakeTransfer
                     'history_text_id' => HistoryText::PLAYER_TRANSFER,
                     'player_id' => $transfer->player_id,
                     'team_id' => $transfer->team_seller_id,
-                    'team_2_id' => $transferApplication->team_id,
+                    'second_team_id' => $transferApplication->team_id,
                     'value' => $transferApplication->price,
                 ]);
 
@@ -403,7 +403,7 @@ class MakeTransfer
                     'history_text_id' => HistoryText::PLAYER_FREE,
                     'player_id' => $transfer->player_id,
                     'team_id' => $transfer->team_seller_id,
-                    'team_2_id' => 0,
+                    'second_team_id' => 0,
                     'value' => $price,
                 ]);
 

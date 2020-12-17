@@ -20,9 +20,9 @@ class LoanQuery
     public static function getTeamBuyerTransferList(int $teamId): ActiveQuery
     {
         return Loan::find()
-            ->where(['loan_team_buyer_id' => $teamId])
-            ->andWhere(['!=', 'loan_ready', 0])
-            ->orderBy(['loan_ready' => SORT_DESC]);
+            ->where(['team_buyer_id' => $teamId])
+            ->andWhere(['not', ['ready' => null]])
+            ->orderBy(['ready' => SORT_DESC]);
     }
 
     /**
@@ -32,8 +32,8 @@ class LoanQuery
     public static function getTeamSellerTransferList(int $teamId): ActiveQuery
     {
         return Loan::find()
-            ->where(['loan_team_seller_id' => $teamId])
-            ->andWhere(['!=', 'loan_ready', 0])
-            ->orderBy(['loan_ready' => SORT_DESC]);
+            ->where(['team_seller_id' => $teamId])
+            ->andWhere(['not', ['ready' => null]])
+            ->orderBy(['ready' => SORT_DESC]);
     }
 }
