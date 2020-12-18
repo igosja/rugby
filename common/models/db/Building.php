@@ -15,6 +15,9 @@ use common\components\AbstractActiveRecord;
  */
 class Building extends AbstractActiveRecord
 {
+    public const MAX_LEVEL = 10;
+    public const MIN_LEVEL = 0;
+
     public const BASE = 1;
     public const MEDICAL = 2;
     public const PHYSICAL = 3;
