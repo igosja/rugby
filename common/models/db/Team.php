@@ -182,8 +182,219 @@ class Team extends AbstractActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function availablePhysical(): int
+    {
+        return $this->basePhysical->change_count - $this->usedPhysical();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableSchool(): int
+    {
+        return $this->baseSchool->player_count - $this->usedSchool();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableSchoolWithSpecial(): int
+    {
+        return $this->baseSchool->with_special - $this->usedSchoolWithSpecial();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableSchoolWithStyle(): int
+    {
+        return $this->baseSchool->with_style - $this->usedSchoolWithStyle();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableScout(): int
+    {
+        return $this->baseScout->my_style_count - $this->usedScout();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingPower(): int
+    {
+        $result = $this->baseTraining->power_count - $this->usedTrainingPower();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingSpecial(): int
+    {
+        $result = $this->baseTraining->special_count - $this->usedTrainingSpecial();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingPosition(): int
+    {
+        $result = $this->baseTraining->position_count - $this->usedTrainingPosition();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSchool(): bool
+    {
+        $onSchool = School::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onSchool ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScout(): bool
+    {
+        $onScout = Scout::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onScout ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTraining(): bool
+    {
+        $onScout = Training::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onScout ? true : false;
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingPower(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['is_power' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingSpecial(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['not', ['special_id' => 0]])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingPosition(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['not', ['position_id' => 0]])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchool(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchoolWithSpecial(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_with_special' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchoolWithStyle(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_with_style' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedScout(): int
+    {
+        return Scout::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_school' => false])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedPhysical(): int
+    {
+        return PhysicalChange::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function planPhysical(): int
+    {
+        return PhysicalChange::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere([
+                '>',
+                'schedule_id',
+                Schedule::find()
+                    ->select(['id'])
+                    ->where(['season_id' => Season::getCurrentSeason()])
+                    ->andWhere(['>', 'date', time()])
+                    ->orderBy(['date' => SORT_DESC])
+                    ->limit(1)
+            ])
+            ->count();
+    }
+
+    /**
      * @return array
-     * @throws \yii\db\Exception
      */
     public function reRegister(): array
     {

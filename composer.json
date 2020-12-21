@@ -27,7 +27,8 @@
     "rmrevin/yii2-fontawesome": "~3.5",
     "miloschuman/yii2-highcharts-widget": "dev-master",
     "codeonyii/yii2-at-least-validator": "dev-master",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "ext-gd": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

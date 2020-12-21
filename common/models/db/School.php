@@ -32,6 +32,8 @@ use yii\db\ActiveQuery;
  */
 class School extends AbstractActiveRecord
 {
+    public const AGE = 17;
+
     /**
      * @return string
      */

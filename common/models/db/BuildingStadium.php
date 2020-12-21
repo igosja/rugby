@@ -5,6 +5,11 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\FormatHelper;
+use DateInterval;
+use DateTime;
+use Exception;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -33,6 +38,20 @@ class BuildingStadium extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -46,6 +65,26 @@ class BuildingStadium extends AbstractActiveRecord
             [['construction_type_id'], 'exist', 'targetRelation' => 'constructionType'],
             [['team_id'], 'exist', 'targetRelation' => 'team'],
         ];
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function endDate(): string
+    {
+        $day = $this->day;
+
+        $today = (new DateTime())->setTime(9, 0)->getTimestamp();
+
+        if ($today > time()) {
+            $day--;
+        }
+
+        $interval = new DateInterval('P' . $day . 'D');
+        $end = (new DateTime())->add($interval)->getTimestamp();
+
+        return FormatHelper::asDate($end);
     }
 
     /**
