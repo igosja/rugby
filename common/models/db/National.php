@@ -6,6 +6,8 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use Exception;
+use frontend\controllers\AbstractController;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
@@ -81,6 +83,87 @@ class National extends AbstractActiveRecord
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function division(): string
+    {
+        $result = '-';
+        if ($this->worldCup) {
+            $result = Html::a(
+                $this->worldCup->division->name . ', ' .
+                $this->worldCup->place . ' ' .
+                'место',
+                [
+                    'world-championship/index',
+                    'divisionId' => $this->worldCup->division->id,
+                    'nationalTypeId' => $this->national_type_id,
+                ]
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return $this->federation->country->name
+            . ' (' . $this->nationalType->name
+            . ')';
+    }
+
+    /**
+     * @return bool
+     */
+    public function myTeam(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+
+        if (!$controller->myNational) {
+            return false;
+        }
+
+        if ($this->id !== $controller->myNational->id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function myTeamOrVice(): bool
+    {
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+
+        if (!$controller->myNational && !$controller->myNationalVice) {
+            return false;
+        }
+
+        $myNationalArray = [];
+        if ($controller->myNational) {
+            $myNationalArray[] = $controller->myNational->id;
+        }
+        if ($controller->myNationalVice) {
+            $myNationalArray[] = $controller->myNationalVice->id;
+        }
+
+        if (!in_array($this->id, $myNationalArray, true)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -235,6 +318,101 @@ class National extends AbstractActiveRecord
         ]);
 
         return true;
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function latestGame(): array
+    {
+        return array_reverse(Game::find()
+            ->joinWith(['schedule'])
+            ->where(['or', ['home_national_id' => $this->id], ['guest_national_id' => $this->id]])
+            ->andWhere(['not', ['played' => null]])
+            ->orderBy(['date' => SORT_DESC])
+            ->limit(3)
+            ->all());
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function nearestGame(): array
+    {
+        return Game::find()
+            ->joinWith(['schedule'])
+            ->where(['or', ['home_national_id' => $this->id], ['guest_national_id' => $this->id]])
+            ->andWhere(['played' => null])
+            ->orderBy(['date' => SORT_ASC])
+            ->limit(2)
+            ->all();
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudeNational(): int
+    {
+        $result = 0;
+        foreach ($this->federation->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if ($stadium->team->user_id) {
+                    $result++;
+                }
+            }
+        }
+        if (!$result) {
+            $result = 1;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudeNationalNegative(): int
+    {
+        $result = 0;
+        foreach ($this->federation->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if ($stadium->team->user_id && Attitude::NEGATIVE === $stadium->team->national_attitude_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudeNational() * 100);
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudeNationalNeutral(): int
+    {
+        $result = 0;
+        foreach ($this->federation->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if ($stadium->team->user_id && Attitude::NEUTRAL === $stadium->team->national_attitude_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudeNational() * 100);
+    }
+
+    /**
+     * @return int
+     */
+    public function attitudeNationalPositive(): int
+    {
+        $result = 0;
+        foreach ($this->federation->country->cities as $city) {
+            foreach ($city->stadiums as $stadium) {
+                if ($stadium->team->user_id && Attitude::POSITIVE === $stadium->team->national_attitude_id) {
+                    $result++;
+                }
+            }
+        }
+        return round($result / $this->attitudeNational() * 100);
     }
 
     /**
