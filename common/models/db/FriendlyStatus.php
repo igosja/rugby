@@ -15,6 +15,9 @@ use common\components\AbstractActiveRecord;
  */
 class FriendlyStatus extends AbstractActiveRecord
 {
+    public const ALL = 1;
+    public const NONE = 3;
+
     /**
      * @return string
      */
