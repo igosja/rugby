@@ -5,8 +5,10 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Throwable;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\StaleObjectException;
 
 /**
  * Class News
@@ -62,6 +64,21 @@ class News extends AbstractActiveRecord
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function beforeDelete(): bool
+    {
+        foreach ($this->newsComments as $newsComment) {
+            $newsComment->delete();
+        }
+        Team::updateAll(['federation_news_id' => null], ['federation_news_id' => $this->id]);
+        User::updateAll(['news_id' => null], ['news_id' => $this->id]);
+        return parent::beforeDelete();
     }
 
     /**

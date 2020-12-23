@@ -189,7 +189,7 @@ $controller = Yii::$app->controller;
             |
             <?= Html::a(
                 'Создать опрос',
-                ['federation/poll-create', 'id' => $federation->id]
+                ['federation/vote-create', 'id' => $federation->id]
             ) ?>
             |
             <?= Html::a(
