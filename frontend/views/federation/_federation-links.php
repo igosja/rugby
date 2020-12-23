@@ -30,7 +30,7 @@ try {
             ],
             [
                 'text' => 'Опросы',
-                'url' => ['federation/poll', 'id' => $id],
+                'url' => ['federation/vote', 'id' => $id],
             ],
             [
                 'text' => 'Лига Чемпионов',

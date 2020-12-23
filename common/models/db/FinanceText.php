@@ -15,7 +15,7 @@ use common\components\AbstractActiveRecord;
  */
 class FinanceText extends AbstractActiveRecord
 {
-    public const COUNTRY_TRANSFER = 29;
+    public const FEDERATION_TRANSFER = 29;
     public const INCOME_BUILDING_BASE = 17;
     public const INCOME_BUILDING_STADIUM = 15;
     public const INCOME_COACH = 35;

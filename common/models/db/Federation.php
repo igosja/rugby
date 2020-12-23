@@ -6,7 +6,6 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use common\components\helpers\ErrorHelper;
-use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Exception;
 
@@ -60,8 +59,6 @@ class Federation extends AbstractActiveRecord
      */
     public function firePresident(int $reason = FireReason::FIRE_REASON_SELF): bool
     {
-        $transaction = Yii::$app->db->beginTransaction();
-
         try {
             History::log([
                 'fire_reason_id' => $reason,
@@ -92,13 +89,9 @@ class Federation extends AbstractActiveRecord
             }
         } catch (Exception $e) {
             ErrorHelper::log($e);
-            if ($transaction) {
-                $transaction->rollBack();
-            }
             return false;
         }
 
-        $transaction->commit();
         return true;
     }
 
@@ -108,8 +101,6 @@ class Federation extends AbstractActiveRecord
      */
     public function fireVicePresident(): bool
     {
-        $transaction = Yii::$app->db->beginTransaction();
-
         try {
             History::log([
                 'federation_id' => $this->id,
@@ -121,13 +112,9 @@ class Federation extends AbstractActiveRecord
             $this->save(true, ['vice_user_id']);
         } catch (Exception $e) {
             ErrorHelper::log($e);
-            if ($transaction) {
-                $transaction->rollBack();
-            }
             return false;
         }
 
-        $transaction->commit();
         return true;
     }
 
@@ -139,7 +126,7 @@ class Federation extends AbstractActiveRecord
         $result = 0;
         foreach ($this->country->cities as $city) {
             foreach ($city->stadiums as $stadium) {
-                if ($stadium->team->user) {
+                if ($stadium->team->user_id) {
                     $result++;
                 }
             }

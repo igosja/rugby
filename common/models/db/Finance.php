@@ -74,6 +74,7 @@ class Finance extends AbstractActiveRecord
     {
         return [
             [['season_id', 'value', 'value_after', 'value_before'], 'required'],
+            [['comment'], 'string'],
             [['building_id'], 'integer', 'min' => 0, 'max' => 9],
             [['finance_text_id', 'level'], 'integer', 'min' => 0, 'max' => 99],
             [['federation_id', 'national_id', 'season_id'], 'integer', 'min' => 0, 'max' => 999],
