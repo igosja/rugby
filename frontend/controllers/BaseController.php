@@ -395,7 +395,7 @@ class BaseController extends AbstractController
                 return $this->redirect(['view', 'id' => $team->id]);
             }
 
-            $baseLevel = 'level';
+            $baseLevel = 'min_base_level';
             $basePrice = 'price_buy';
             $baseSpeed = 'build_speed';
 
@@ -411,7 +411,7 @@ class BaseController extends AbstractController
             } elseif (Building::SCOUT === $building) {
                 $level = $team->baseScout->level + 1;
                 $base = BaseScout::find()->where(['level' => $level]);
-            } elseif (Building::TRAINING === $building) {
+            } else {
                 $level = $team->baseTraining->level + 1;
                 $base = BaseTraining::find()->where(['level' => $level]);
             }
@@ -486,7 +486,6 @@ class BaseController extends AbstractController
      * @param int $building
      * @return string|Response
      * @throws NotFoundHttpException
-     * @throws \yii\db\Exception
      */
     public function actionDestroy(int $building)
     {
@@ -666,7 +665,6 @@ class BaseController extends AbstractController
     /**
      * @param $id
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionCancel($id)
     {
