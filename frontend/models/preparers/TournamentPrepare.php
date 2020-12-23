@@ -49,7 +49,7 @@ class TournamentPrepare
                 $route = ['world-cup/index'];
                 $params = ArrayHelper::merge($params, ['divisionId' => Division::D1, 'nationalTypeId' => NationalType::MAIN]);
             } elseif (TournamentType::LEAGUE === $schedule->tournament_type_id) {
-                $route = ['champions-league/index'];
+                $route = ['league/index'];
             } elseif (TournamentType::CONFERENCE === $schedule->tournament_type_id) {
                 $route = ['conference/index'];
             } else {

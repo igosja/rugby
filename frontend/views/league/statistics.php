@@ -3,7 +3,6 @@
 // TODO refactor
 
 use common\components\helpers\ErrorHelper;
-use common\models\db\Federation;
 use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
@@ -14,11 +13,12 @@ use yii\grid\SerialColumn;
 use yii\helpers\Html;
 
 /**
- * @var Federation $federation
  * @var ActiveDataProvider $dataProvider
  * @var array $divisionArray
  * @var int $divisionId
  * @var Team $myTeam
+ * @var array $roundArray
+ * @var int $roundId
  * @var int $seasonId
  * @var StatisticType $statisticType
  * @var array $statisticTypeArray
@@ -28,23 +28,12 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            <?= Html::a(
-                $federation->country->name,
-                ['federation/news', 'id' => $federation->country->id],
-                ['class' => 'country-header-link']
-            ) ?>
+            Лига Чемпионов
         </h1>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= $this->render('//championship/_division-links', ['divisionArray' => $divisionArray]) ?>
-    </div>
-</div>
-<?= Html::beginForm([''], 'get') ?>
+<?= Html::beginForm(['league/statistics'], 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
-<?= Html::hiddenInput('divisionId', $divisionId) ?>
-<?= Html::hiddenInput('federationId', $federation->country_id) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
         <?= Html::label('Статистика', 'statisticType') ?>
@@ -154,12 +143,7 @@ if (1 === $statisticType->statistic_chapter_id) {
         <p>
             <?= Html::a(
                 'Турнирная таблица',
-                [
-                    'index',
-                    'federationId' => $federation->id,
-                    'divisionId' => $divisionId,
-                    'seasonId' => $seasonId,
-                ],
+                ['league/index', 'seasonId' => $seasonId],
                 ['class' => 'btn margin']
             ) ?>
         </p>
