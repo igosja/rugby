@@ -694,14 +694,14 @@ class GameResult
             Position::POS_05 => [Position::LOCK, $positionF],
             Position::POS_06 => [Position::FLANKER, $positionF],
             Position::POS_07 => [Position::FLANKER, $positionF],
-            Position::POS_08 => [Position::PROP, $positionF],
+            Position::POS_08 => [Position::EIGHT, $positionF],
             Position::POS_09 => [Position::SCRUM_HALF, $positionB],
             Position::POS_10 => [Position::FLY_HALF, $positionB],
             Position::POS_11 => [Position::WING, $positionB],
             Position::POS_12 => [Position::CENTRE, $positionB],
             Position::POS_13 => [Position::CENTRE, $positionB],
             Position::POS_14 => [Position::WING, $positionB],
-            Position::POS_15 => [Position::PROP, $positionB],
+            Position::POS_15 => [Position::FULL_BACK, $positionB],
         ];
         for ($i = 0; $i < 2; $i++) {
             if (0 === $i) {

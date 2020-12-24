@@ -2,7 +2,7 @@
 
 // TODO refactor
 
-use common\models\LineupTemplate;
+use common\models\db\LineupTemplate;
 use frontend\controllers\AbstractController;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -24,7 +24,7 @@ $controller = Yii::$app->controller;
         <?php foreach ($lineupTemplateArray as $lineupTemplate) : ?>
             <tr>
                 <td>
-                    <?= $lineupTemplate->lineup_template_name; ?>
+                    <?= $lineupTemplate->name ?>
                 </td>
                 <td class="text-center">
                     <?= Html::a(

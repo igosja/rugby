@@ -13,11 +13,10 @@ use common\models\db\Rudeness;
 use common\models\db\Style;
 use common\models\db\Tactic;
 use common\models\db\TournamentType;
-use Exception;
+use frontend\models\forms\GameNationalSend;
 use frontend\models\forms\GameSend;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
@@ -27,7 +26,7 @@ use yii\web\Response;
  * Class LineupController
  * @package frontend\controllers
  */
-class LineupController extends AbstractController
+class LineupNationalController extends AbstractController
 {
     /**
      * @return array
@@ -54,25 +53,24 @@ class LineupController extends AbstractController
      */
     public function actionView(int $id)
     {
-        if (!$this->myTeamOrVice) {
+        if (!$this->myNationalOrVice) {
             return $this->redirect(['team/view']);
         }
 
         $game = $this->getGame($id);
 
-        $model = new GameSend(['game' => $game, 'team' => $this->myTeamOrVice]);
+        $model = new GameNationalSend(['game' => $game, 'national' => $this->myNationalOrVice]);
         if ($model->saveLineup()) {
             $this->setSuccessFlash('Состав успешно отправлен.');
             return $this->refresh();
         }
 
         $query = Game::find()
-            ->joinWith(['schedule'])
             ->where(['played' => null])
             ->andWhere([
                 'or',
-                ['guest_team_id' => $this->myTeamOrVice->id],
-                ['home_team_id' => $this->myTeamOrVice->id]
+                ['guest_national_id' => $this->myNationalOrVice->id],
+                ['home_national_id' => $this->myNationalOrVice->id]
             ])
             ->orderBy(['date' => SORT_ASC])
             ->limit(5);
@@ -83,11 +81,7 @@ class LineupController extends AbstractController
 
         $query = Player::find()
             ->joinWith(['country', 'playerPositions'])
-            ->andWhere([
-                'or',
-                ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],
-                ['loan_team_id' => $this->myTeamOrVice->id]
-            ]);
+            ->andWhere(['national_id' => $this->myNationalOrVice->id]);
         $playerDataProvider = new ActiveDataProvider([
             'pagination' => false,
             'query' => $query,
@@ -153,11 +147,7 @@ class LineupController extends AbstractController
          * @var Player[] $playerArray
          */
         $playerArray = Player::find()
-            ->where([
-                'or',
-                ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],
-                ['loan_team_id' => $this->myTeamOrVice->id]
-            ])
+            ->where(['national_id' => $this->myNationalOrVice->id])
             ->orderBy(['power_real' => SORT_DESC])
             ->all();
         foreach ($playerArray as $player) {
@@ -244,39 +234,21 @@ class LineupController extends AbstractController
                 }
             }
 
-            if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) {
-                $player01->power_real = round($player01->power_real * $pos01Coefficient * 0.75);
-                $player02->power_real = round($player02->power_real * $pos02Coefficient * 0.75);
-                $player03->power_real = round($player03->power_real * $pos03Coefficient * 0.75);
-                $player04->power_real = round($player04->power_real * $pos04Coefficient * 0.75);
-                $player05->power_real = round($player05->power_real * $pos05Coefficient * 0.75);
-                $player06->power_real = round($player06->power_real * $pos06Coefficient * 0.75);
-                $player07->power_real = round($player07->power_real * $pos07Coefficient * 0.75);
-                $player08->power_real = round($player08->power_real * $pos08Coefficient * 0.75);
-                $player09->power_real = round($player09->power_real * $pos09Coefficient * 0.75);
-                $player10->power_real = round($player10->power_real * $pos10Coefficient * 0.75);
-                $player11->power_real = round($player11->power_real * $pos11Coefficient * 0.75);
-                $player12->power_real = round($player12->power_real * $pos12Coefficient * 0.75);
-                $player13->power_real = round($player13->power_real * $pos13Coefficient * 0.75);
-                $player14->power_real = round($player14->power_real * $pos14Coefficient * 0.75);
-                $player15->power_real = round($player15->power_real * $pos15Coefficient * 0.75);
-            } else {
-                $player01->power_real = round($player01->power_real * $pos01Coefficient);
-                $player02->power_real = round($player02->power_real * $pos02Coefficient);
-                $player03->power_real = round($player03->power_real * $pos03Coefficient);
-                $player04->power_real = round($player04->power_real * $pos04Coefficient);
-                $player05->power_real = round($player05->power_real * $pos05Coefficient);
-                $player06->power_real = round($player06->power_real * $pos06Coefficient);
-                $player07->power_real = round($player07->power_real * $pos07Coefficient);
-                $player08->power_real = round($player08->power_real * $pos08Coefficient);
-                $player09->power_real = round($player09->power_real * $pos09Coefficient);
-                $player10->power_real = round($player10->power_real * $pos10Coefficient);
-                $player11->power_real = round($player11->power_real * $pos11Coefficient);
-                $player12->power_real = round($player12->power_real * $pos12Coefficient);
-                $player13->power_real = round($player13->power_real * $pos13Coefficient);
-                $player14->power_real = round($player14->power_real * $pos14Coefficient);
-                $player15->power_real = round($player15->power_real * $pos15Coefficient);
-            }
+            $player01->power_real = round($player01->power_real * $pos01Coefficient);
+            $player02->power_real = round($player02->power_real * $pos02Coefficient);
+            $player03->power_real = round($player03->power_real * $pos03Coefficient);
+            $player04->power_real = round($player04->power_real * $pos04Coefficient);
+            $player05->power_real = round($player05->power_real * $pos05Coefficient);
+            $player06->power_real = round($player06->power_real * $pos06Coefficient);
+            $player07->power_real = round($player07->power_real * $pos07Coefficient);
+            $player08->power_real = round($player08->power_real * $pos08Coefficient);
+            $player09->power_real = round($player09->power_real * $pos09Coefficient);
+            $player10->power_real = round($player10->power_real * $pos10Coefficient);
+            $player11->power_real = round($player11->power_real * $pos11Coefficient);
+            $player12->power_real = round($player12->power_real * $pos12Coefficient);
+            $player13->power_real = round($player13->power_real * $pos13Coefficient);
+            $player14->power_real = round($player14->power_real * $pos14Coefficient);
+            $player15->power_real = round($player15->power_real * $pos15Coefficient);
 
             $player1array[] = $player01;
             $player2array[] = $player02;
@@ -332,9 +304,9 @@ class LineupController extends AbstractController
         if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) {
             $noSuper = Mood::SUPER;
             $noRest = Mood::REST;
-        } elseif ($this->myTeamOrVice->mood_rest <= 0) {
+        } elseif ($this->myNationalOrVice->mood_rest <= 0) {
             $noRest = Mood::REST;
-        } elseif ($this->myTeamOrVice->mood_super <= 0) {
+        } elseif ($this->myNationalOrVice->mood_super <= 0) {
             $noSuper = Mood::SUPER;
         }
         $moodArray = Mood::find()
@@ -346,9 +318,9 @@ class LineupController extends AbstractController
 
         foreach ($moodArray as $moodId => $moodName) {
             if (Mood::SUPER === $moodId) {
-                $moodArray[$moodId] = $moodName . ' (' . $this->myTeamOrVice->mood_super . ')';
+                $moodArray[$moodId] = $moodName . ' (' . $this->myNationalOrVice->mood_super . ')';
             } elseif (Mood::REST === $moodId) {
-                $moodArray[$moodId] = $moodName . ' (' . $this->myTeamOrVice->mood_rest . ')';
+                $moodArray[$moodId] = $moodName . ' (' . $this->myNationalOrVice->mood_rest . ')';
             }
         }
 
@@ -397,7 +369,7 @@ class LineupController extends AbstractController
             'rudenessArray' => $rudenessArray,
             'styleArray' => $styleArray,
             'tacticArray' => $tacticArray,
-            'team' => $this->myTeamOrVice,
+            'national' => $this->myNationalOrVice,
         ]);
     }
 
@@ -415,8 +387,8 @@ class LineupController extends AbstractController
             ->where(['id' => $id, 'played' => null])
             ->andWhere([
                 'or',
-                ['guest_team_id' => $this->myTeamOrVice->id],
-                ['home_team_id' => $this->myTeamOrVice->id]
+                ['guest_national_id' => $this->myNationalOrVice->id],
+                ['home_national_id' => $this->myNationalOrVice->id]
             ])
             ->limit(1)
             ->one();
@@ -498,8 +470,8 @@ class LineupController extends AbstractController
                         }
                     }
 
-                    $power += round(((TournamentType::FRIENDLY === $game->schedule->tournament_type_id) ? ($player->power_nominal * 0.75) : $player->power_real) * $coefficient);
-                    $position += round((TournamentType::FRIENDLY === $game->schedule->tournament_type_id) ? ($player->power_nominal * 0.75) : $player->power_real);
+                    $power += round($player->power_real * $coefficient);
+                    $position += round($player->power_real);
                 }
             }
 
@@ -512,8 +484,8 @@ class LineupController extends AbstractController
                 ->andWhere(['!=', 'tournament_type_id', TournamentType::FRIENDLY])
                 ->andWhere([
                     'or',
-                    ['home_team_id' => $this->myTeamOrVice->id],
-                    ['guest_team_id' => $this->myTeamOrVice->id]
+                    ['home_national_id' => $this->myNationalOrVice->id],
+                    ['guest_national_id' => $this->myNationalOrVice->id]
                 ])
                 ->orderBy(['date' => SORT_DESC])
                 ->limit(25)
@@ -524,7 +496,7 @@ class LineupController extends AbstractController
                  */
                 $count = Lineup::find()
                     ->andWhere(['game_id' => $game->id, 'player_id' => $data])
-                    ->andWhere(['team_id' => $this->myTeamOrVice->id])
+                    ->andWhere(['national_id' => $this->myNationalOrVice->id])
                     ->count();
                 if ($count <= 5) {
                     break;
@@ -540,7 +512,7 @@ class LineupController extends AbstractController
 
             $position = round($power / $position * 100);
 
-            $lineup = round($power / $this->myTeamOrVice->power_vs * 100);
+            $lineup = round($power / $this->myNationalOrVice->power_vs * 100);
 
             $result = [
                 'power' => $power,
@@ -559,70 +531,7 @@ class LineupController extends AbstractController
      */
     public function getModel(): string
     {
-        return GameSend::class;
-    }
-
-    /**
-     * @return string
-     */
-    public function actionTemplate(): string
-    {
-        if (!$this->user->isVip()) {
-            return '';
-        }
-        $lineupTemplateArray = LineupTemplate::find()
-            ->where(['lineup_template_team_id' => $this->myTeamOrVice->id])
-            ->orderBy(['lineup_template_name' => SORT_ASC])
-            ->all();
-        return $this->renderPartial('_template_table', [
-            'lineupTemplateArray' => $lineupTemplateArray,
-        ]);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function actionTemplateSave(): void
-    {
-        if (!$this->user->isVip()) {
-            return;
-        }
-        $model = new GameSend();
-        $model->saveLineupTemplate();
-    }
-
-    /**
-     * @param $id
-     */
-    public function actionTemplateDelete($id): void
-    {
-        if (!$this->user->isVip()) {
-            return;
-        }
-        $model = LineupTemplate::find()
-            ->where(['lineup_template_id' => $id, 'lineup_template_team_id' => $this->myTeam->id])
-            ->limit(1)
-            ->one();
-        if ($model) {
-            $model->delete();
-        }
-    }
-
-    /**
-     * @param $id
-     * @return array|LineupTemplate|ActiveRecord|null
-     */
-    public function actionTemplateLoad($id)
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $model = LineupTemplate::find()
-            ->where(['lineup_template_id' => $id, 'lineup_template_team_id' => $this->myTeamOrVice->id])
-            ->limit(1)
-            ->one();
-        if (!$model) {
-            return (new LineupTemplate())->attributes;
-        }
-        return $model->attributes;
+        return GameNationalSend::class;
     }
 
     /**

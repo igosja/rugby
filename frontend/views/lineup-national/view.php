@@ -5,9 +5,9 @@
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Game;
+use common\models\db\National;
 use common\models\db\Physical;
 use common\models\db\Player;
-use common\models\db\Team;
 use common\models\db\TournamentType;
 use frontend\assets\LineupAsset;
 use frontend\models\forms\GameSend;
@@ -59,7 +59,7 @@ use yii\widgets\Pjax;
  * @var array $rudenessArray
  * @var array $styleArray
  * @var array $tacticArray
- * @var Team $team
+ * @var National $national
  * @var View $this
  */
 
@@ -143,8 +143,8 @@ LineupAsset::register($this);
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'value' => static function (Game $model) use ($team) {
-                    return $model->home_team_id === $team->id ? 'Д' : 'Г';
+                'value' => static function (Game $model) use ($national) {
+                    return $model->home_national_id === $national->id ? 'Д' : 'Г';
                 }
             ],
             [
@@ -152,12 +152,12 @@ LineupAsset::register($this);
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'label' => '',
-                'value' => static function (Game $model) use ($team) {
-                    if ($model->home_team_id === $team->id) {
-                        return $model->guestTeam->getTeamLink();
+                'value' => static function (Game $model) use ($national) {
+                    if ($model->home_national_id === $national->id) {
+                        return $model->guestNational->nationalLink();
                     }
 
-                    return $model->homeTeam->getTeamLink();
+                    return $model->homeNational->nationalLink();
                 }
             ],
             [
@@ -168,12 +168,12 @@ LineupAsset::register($this);
                     'class' => 'hidden-xs',
                     'title' => 'Соотношение сил (чем больше это число, тем сильнее ваш соперник)',
                 ],
-                'value' => static function (Game $model) use ($team): string {
-                    if ($model->home_team_id === $team->id) {
-                        return round($model->guestTeam->power_vs / $team->power_vs * 100) . '%';
+                'value' => static function (Game $model) use ($national): string {
+                    if ($model->home_national_id === $national->id) {
+                        return round($model->guestNational->power_vs / $national->power_vs * 100) . '%';
                     }
 
-                    return round($model->homeTeam->power_vs / $team->power_vs * 100) . '%';
+                    return round($model->homeNational->power_vs / $national->power_vs * 100) . '%';
                 }
             ],
             [
@@ -192,9 +192,9 @@ LineupAsset::register($this);
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'label' => '',
-                'value' => static function (Game $model) use ($team) {
+                'value' => static function (Game $model) use ($national) {
                     return Html::a(
-                        $model->home_team_id === $team->id
+                        $model->home_national_id === $national->id
                             ? ($model->home_tactic_id ? '+' : '-')
                             : ($model->guest_tactic_id ? '+' : '-'),
                         ['lineup/view', 'id' => $model->id]
@@ -456,7 +456,6 @@ LineupAsset::register($this);
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => 'Спец',
                     'footerOptions' => ['title' => 'Спецвозможности'],
-                    'format' => 'raw',
                     'headerOptions' => ['title' => 'Спецвозможности'],
                     'label' => 'Спец',
                     'value' => static function (Player $model) {
