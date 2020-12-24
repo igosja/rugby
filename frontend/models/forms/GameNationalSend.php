@@ -4,28 +4,24 @@
 
 namespace frontend\models\forms;
 
-use common\components\helpers\FormatHelper;
 use common\models\db\Game;
 use common\models\db\Lineup;
-use common\models\db\LineupTemplate;
 use common\models\db\Mood;
+use common\models\db\National;
 use common\models\db\Player;
 use common\models\db\Rudeness;
 use common\models\db\Style;
 use common\models\db\Tactic;
-use common\models\db\Team;
-use common\models\db\TournamentType;
 use Exception;
-use frontend\controllers\AbstractController;
 use Yii;
 use yii\base\Model;
 use yii\db\Query;
 
 /**
- * Class GameSend
+ * Class GameNationalSend
  * @package frontend\models
  */
-class GameSend extends Model
+class GameNationalSend extends Model
 {
     public $captain;
 
@@ -43,9 +39,9 @@ class GameSend extends Model
     public $ticket = 20;
 
     /**
-     * @var Team $team
+     * @var National $national
      */
-    public $team;
+    public $national;
 
     /**
      * GameSend constructor.
@@ -55,14 +51,14 @@ class GameSend extends Model
     {
         parent::__construct($config);
 
-        if (!$this->game || !$this->team) {
+        if (!$this->game || !$this->national) {
             return;
         }
         /**
          * @var Lineup[] $lineupArray
          */
         $lineupArray = Lineup::find()
-            ->where(['game_id' => $this->game->id, 'team_id' => $this->team->id])
+            ->where(['game_id' => $this->game->id, 'national_id' => $this->national->id])
             ->all();
         foreach ($lineupArray as $item) {
             $this->line[$item->position_id] = $item->player_id;
@@ -73,7 +69,7 @@ class GameSend extends Model
 
         $this->ticket = $this->game->ticket_price ?: $this->ticket;
 
-        if ($this->game->guest_team_id === $this->team->id) {
+        if ($this->game->guest_national_id === $this->national->id) {
             $this->home = false;
             $this->mood = $this->game->guest_mood_id ?: $this->mood;
             $this->rudeness = $this->game->guest_rudeness_id ?: $this->rudeness;
@@ -115,11 +111,7 @@ class GameSend extends Model
                     'targetClass' => Player::class,
                     'targetAttribute' => 'id',
                     'filter' => function (Query $query) {
-                        $query->andWhere([
-                            'or',
-                            ['team_id' => $this->team->id, 'loan_team_id' => null],
-                            ['loan_team_id' => $this->team->id]
-                        ]);
+                        $query->andWhere(['national_id' => $this->national->id]);
                     }
                 ]
             ],
@@ -147,7 +139,7 @@ class GameSend extends Model
             return false;
         }
 
-        if ((Mood::SUPER === $this->mood && $this->team->mood_super <= 0) || (Mood::REST === $this->mood && $this->team->mood_rest <= 0) || (Mood::NORMAL !== $this->mood && TournamentType::FRIENDLY === $this->game->schedule->tournament_type_id)) {
+        if ((Mood::SUPER === $this->mood && $this->national->mood_super <= 0) || (Mood::REST === $this->mood && $this->national->mood_rest <= 0)) {
             $this->mood = Mood::NORMAL;
         }
 
@@ -172,7 +164,7 @@ class GameSend extends Model
                 ->where([
                     'game_id' => $this->game->id,
                     'position_id' => $positionId,
-                    'team_id' => $this->team->id,
+                    'national_id' => $this->national->id,
                 ])
                 ->limit(1)
                 ->one();
@@ -180,7 +172,7 @@ class GameSend extends Model
                 $lineup = new Lineup();
                 $lineup->game_id = $this->game->id;
                 $lineup->position_id = $positionId;
-                $lineup->team_id = $this->team->id;
+                $lineup->national_id = $this->national->id;
             }
             $lineup->is_captain = false;
             $lineup->player_id = $positionId;
@@ -192,7 +184,7 @@ class GameSend extends Model
                 ->where([
                     'game_id' => $this->game->id,
                     'position_id' => $positionId,
-                    'team_id' => $this->team->id,
+                    'national_id' => $this->national->id,
                 ])
                 ->limit(1)
                 ->one();
@@ -206,95 +198,6 @@ class GameSend extends Model
         }
 
         return true;
-    }
-
-    /**
-     * @return bool
-     * @throws Exception
-     */
-    public function saveLineupTemplate()
-    {
-        if (!$this->load(Yii::$app->request->post())) {
-            return false;
-        }
-
-        if (!$this->validate()) {
-            return false;
-        }
-
-        /**
-         * @var AbstractController $controller
-         */
-        $controller = Yii::$app->controller;
-        $gk_1_id = $this->line[0][0];
-        $gk_2_id = $this->line[1][0];
-        $ld_1_id = $this->line[1][1];
-        $rd_1_id = $this->line[1][2];
-        $lw_1_id = $this->line[1][3];
-        $cf_1_id = $this->line[1][4];
-        $rw_1_id = $this->line[1][5];
-        $ld_2_id = $this->line[2][1];
-        $rd_2_id = $this->line[2][2];
-        $lw_2_id = $this->line[2][3];
-        $cf_2_id = $this->line[2][4];
-        $rw_2_id = $this->line[2][5];
-        $ld_3_id = $this->line[3][1];
-        $rd_3_id = $this->line[3][2];
-        $lw_3_id = $this->line[3][3];
-        $cf_3_id = $this->line[3][4];
-        $rw_3_id = $this->line[3][5];
-        $ld_4_id = $this->line[4][1];
-        $rd_4_id = $this->line[4][2];
-        $lw_4_id = $this->line[4][3];
-        $cf_4_id = $this->line[4][4];
-        $rw_4_id = $this->line[4][5];
-
-        $model = LineupTemplate::find()
-            ->where(['lineup_template_team_id' => $controller->myTeamOrVice->team_id, 'lineup_template_name' => $this->name])
-            ->limit(1)
-            ->one();
-        if (!$model) {
-            $model = new LineupTemplate();
-            $model->lineup_template_name = $this->name ?: FormatHelper::asDateTime(time());
-            $model->lineup_template_team_id = $controller->myTeamOrVice->team_id;
-        }
-        $model->lineup_template_captain = $this->captain;
-        $model->lineup_template_national_id = 0;
-        $model->lineup_template_player_cf_1 = $cf_1_id;
-        $model->lineup_template_player_cf_2 = $cf_2_id;
-        $model->lineup_template_player_cf_3 = $cf_3_id;
-        $model->lineup_template_player_cf_4 = $cf_4_id;
-        $model->lineup_template_player_gk_1 = $gk_1_id;
-        $model->lineup_template_player_gk_2 = $gk_2_id;
-        $model->lineup_template_player_ld_1 = $ld_1_id;
-        $model->lineup_template_player_ld_2 = $ld_2_id;
-        $model->lineup_template_player_ld_3 = $ld_3_id;
-        $model->lineup_template_player_ld_4 = $ld_4_id;
-        $model->lineup_template_player_lw_1 = $lw_1_id;
-        $model->lineup_template_player_lw_2 = $lw_2_id;
-        $model->lineup_template_player_lw_3 = $lw_3_id;
-        $model->lineup_template_player_lw_4 = $lw_4_id;
-        $model->lineup_template_player_rd_1 = $rd_1_id;
-        $model->lineup_template_player_rd_2 = $rd_2_id;
-        $model->lineup_template_player_rd_3 = $rd_3_id;
-        $model->lineup_template_player_rd_4 = $rd_4_id;
-        $model->lineup_template_player_rw_1 = $rw_1_id;
-        $model->lineup_template_player_rw_2 = $rw_2_id;
-        $model->lineup_template_player_rw_3 = $rw_3_id;
-        $model->lineup_template_player_rw_4 = $rw_4_id;
-        $model->lineup_template_rudeness_id_1 = $this->rudeness_1;
-        $model->lineup_template_rudeness_id_2 = $this->rudeness_2;
-        $model->lineup_template_rudeness_id_3 = $this->rudeness_3;
-        $model->lineup_template_rudeness_id_4 = $this->rudeness_4;
-        $model->lineup_template_style_id_1 = $this->style_1;
-        $model->lineup_template_style_id_2 = $this->style_2;
-        $model->lineup_template_style_id_3 = $this->style_3;
-        $model->lineup_template_style_id_4 = $this->style_4;
-        $model->lineup_template_tactic_id_1 = $this->tactic_1;
-        $model->lineup_template_tactic_id_2 = $this->tactic_2;
-        $model->lineup_template_tactic_id_3 = $this->tactic_3;
-        $model->lineup_template_tactic_id_4 = $this->tactic_4;
-        return $model->save();
     }
 
     /**
