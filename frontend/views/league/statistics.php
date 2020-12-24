@@ -104,7 +104,7 @@ if (1 === $statisticType->statistic_chapter_id) {
         [
             'contentOptions' => ['class' => 'text-center'],
             'value' => static function (StatisticPlayer $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
