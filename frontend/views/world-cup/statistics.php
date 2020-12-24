@@ -3,22 +3,20 @@
 // TODO refactor
 
 use common\components\helpers\ErrorHelper;
-use common\models\db\Federation;
+use common\models\db\National;
 use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
-use common\models\db\Team;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
 
 /**
- * @var Federation $federation
  * @var ActiveDataProvider $dataProvider
  * @var array $divisionArray
  * @var int $divisionId
- * @var Team $myTeam
+ * @var National $myNational
  * @var int $seasonId
  * @var StatisticType $statisticType
  * @var array $statisticTypeArray
@@ -28,23 +26,18 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            <?= Html::a(
-                $federation->country->name,
-                ['federation/news', 'id' => $federation->country->id],
-                ['class' => 'country-header-link']
-            ) ?>
+            Чемпионат мира среди сборных
         </h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= $this->render('//championship/_division-links', ['divisionArray' => $divisionArray]) ?>
+        <?= $this->render('//world-cup/_division-links', ['divisionArray' => $divisionArray]) ?>
     </div>
 </div>
-<?= Html::beginForm([''], 'get') ?>
+<?= Html::beginForm(['world-cup/statistics'], 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <?= Html::hiddenInput('divisionId', $divisionId) ?>
-<?= Html::hiddenInput('federationId', $federation->country_id) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
         <?= Html::label('Статистика', 'statisticType') ?>
@@ -75,7 +68,7 @@ if (1 === $statisticType->statistic_chapter_id) {
             'format' => 'raw',
             'label' => 'Команда',
             'value' => static function (StatisticTeam $model) {
-                return $model->team->getTeamLink();
+                return $model->national->nationalLink();
             }
         ],
         [
@@ -109,7 +102,7 @@ if (1 === $statisticType->statistic_chapter_id) {
             'format' => 'raw',
             'label' => 'Команда',
             'value' => static function (StatisticPlayer $model) {
-                return $model->team->getTeamLink();
+                return $model->national->nationalLink();
             }
         ],
         [
@@ -130,12 +123,12 @@ if (1 === $statisticType->statistic_chapter_id) {
         print GridView::widget([
             'columns' => $columns,
             'dataProvider' => $dataProvider,
-            'rowOptions' => static function ($model) use ($myTeam) {
-                if (!$myTeam) {
+            'rowOptions' => static function ($model) use ($myNational) {
+                if (!$myNational) {
                     return [];
                 }
                 $class = '';
-                if ($model->team_id === $myTeam->id) {
+                if ($model->national_id === $myNational->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];
@@ -155,8 +148,7 @@ if (1 === $statisticType->statistic_chapter_id) {
             <?= Html::a(
                 'Турнирная таблица',
                 [
-                    'index',
-                    'federationId' => $federation->id,
+                    'world-cup/index',
                     'divisionId' => $divisionId,
                     'seasonId' => $seasonId,
                 ],
