@@ -6,7 +6,6 @@ namespace console\models\generator;
 
 use common\models\db\ElectionPresident;
 use common\models\db\ElectionPresidentApplication;
-use common\models\db\ElectionPresidentViceApplication;
 use common\models\db\ElectionStatus;
 use common\models\db\Federation;
 use common\models\db\History;
@@ -60,9 +59,10 @@ class PresidentVoteStatus
      */
     private function toOpen(ElectionPresident $electionPresident): void
     {
-        $model = new ElectionPresidentViceApplication();
-        $model->election_president_vice_id = $electionPresident->id;
+        $model = new ElectionPresidentApplication();
+        $model->election_president_id = $electionPresident->id;
         $model->text = '-';
+        $model->user_id = 0;
         $model->save();
 
         $electionPresident->election_status_id = ElectionStatus::OPEN;
@@ -91,10 +91,10 @@ class PresidentVoteStatus
             ])
             ->select(['epa.*', 'COUNT(election_president_application_id) AS vote'])
             ->where(['election_president_id' => $electionPresident->id])
-            ->andWhere(['not', ['user_id' => null]])
+            ->andWhere(['not', ['epa.user_id' => null]])
             ->andWhere([
                 'not',
-                ['user_id' => Federation::find()->select(['president_user_id'])]
+                ['epa.user_id' => Federation::find()->select(['president_user_id'])]
             ])
             ->orderBy([
                 'vote' => SORT_DESC,
@@ -103,48 +103,46 @@ class PresidentVoteStatus
                 'election_president_application_id' => SORT_ASC,
             ])
             ->all();
-        if ($electionPresidentApplicationArray) {
-            if ($electionPresidentApplicationArray[0]->user_id) {
-                /**
-                 * @var Federation[] $federationViceArray
-                 */
-                $federationViceArray = Federation::find()
-                    ->where(['vice_user_id' => $electionPresidentApplicationArray[0]->user_id])
-                    ->all();
-                foreach ($federationViceArray as $countryVice) {
-                    History::log([
-                        'history_text_id' => HistoryText::USER_VICE_PRESIDENT_OUT,
-                        'federation_id' => $countryVice->id,
-                        'user_id' => $electionPresidentApplicationArray[0]->user_id,
-                    ]);
-
-                    $countryVice->vice_user_id = null;
-                    $countryVice->save(true, ['vice_user_id']);
-                }
-
+        if ($electionPresidentApplicationArray && $electionPresidentApplicationArray[0]->user_id) {
+            /**
+             * @var Federation[] $federationViceArray
+             */
+            $federationViceArray = Federation::find()
+                ->where(['vice_user_id' => $electionPresidentApplicationArray[0]->user_id])
+                ->all();
+            foreach ($federationViceArray as $countryVice) {
                 History::log([
-                    'history_text_id' => HistoryText::USER_PRESIDENT_IN,
-                    'federation_id' => $electionPresident->federation_id,
+                    'history_text_id' => HistoryText::USER_VICE_PRESIDENT_OUT,
+                    'federation_id' => $countryVice->id,
                     'user_id' => $electionPresidentApplicationArray[0]->user_id,
                 ]);
 
-                if (isset($electionPresidentApplicationArray[1])) {
-                    $check = Federation::find()
-                        ->where(['vice_user_id' => $electionPresidentApplicationArray[1]->user_id])
-                        ->count();
-                    if (!$check) {
-                        History::log([
-                            'federation_id' => $electionPresident->federation_id,
-                            'history_text_id' => HistoryText::USER_VICE_PRESIDENT_IN,
-                            'user_id' => $electionPresidentApplicationArray[1]->user_id,
-                        ]);
-                    }
-                }
-
-                $electionPresident->federation->president_user_id = $electionPresidentApplicationArray[0]->user_id;
-                $electionPresident->federation->vice_user_id = $electionPresidentApplicationArray[1]->user_id ?? 0;
-                $electionPresident->federation->save(true, ['president_user_id', 'vice_user_id']);
+                $countryVice->vice_user_id = null;
+                $countryVice->save(true, ['vice_user_id']);
             }
+
+            History::log([
+                'history_text_id' => HistoryText::USER_PRESIDENT_IN,
+                'federation_id' => $electionPresident->federation_id,
+                'user_id' => $electionPresidentApplicationArray[0]->user_id,
+            ]);
+
+            if (isset($electionPresidentApplicationArray[1])) {
+                $check = Federation::find()
+                    ->where(['vice_user_id' => $electionPresidentApplicationArray[1]->user_id])
+                    ->count();
+                if (!$check) {
+                    History::log([
+                        'federation_id' => $electionPresident->federation_id,
+                        'history_text_id' => HistoryText::USER_VICE_PRESIDENT_IN,
+                        'user_id' => $electionPresidentApplicationArray[1]->user_id,
+                    ]);
+                }
+            }
+
+            $electionPresident->federation->president_user_id = $electionPresidentApplicationArray[0]->user_id;
+            $electionPresident->federation->vice_user_id = $electionPresidentApplicationArray[1]->user_id ?? 0;
+            $electionPresident->federation->save(true, ['president_user_id', 'vice_user_id']);
         }
 
         $electionPresident->election_status_id = ElectionStatus::CLOSE;

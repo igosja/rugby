@@ -445,7 +445,7 @@ class TeamController extends AbstractController
             } elseif (ElectionStatus::OPEN === $electionPresident->election_status_id) {
                 $electionPresidentVote = ElectionPresidentVote::find()
                     ->where([
-                        'application_id' => ElectionPresidentApplication::find()
+                        'election_president_application_id' => ElectionPresidentApplication::find()
                             ->select(['id'])
                             ->where(['election_president_id' => $electionPresident->id]),
                         'user_id' => $this->user->id,

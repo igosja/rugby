@@ -53,7 +53,7 @@ class ElectionPresidentViceApplication extends AbstractActiveRecord
     {
         return [
             [['election_president_vice_id', 'text', 'user_id'], 'required'],
-            [['election_president_vice_id', 'user_id'], 'integer', 'min' => 1],
+            [['election_president_vice_id', 'user_id'], 'integer', 'min' => 0],
             [['text'], 'trim'],
             [['text'], 'string'],
             [['election_president_vice_id'], 'exist', 'targetRelation' => 'electionPresidentVice'],

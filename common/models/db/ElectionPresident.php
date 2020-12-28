@@ -60,6 +60,31 @@ class ElectionPresident extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function applications(): array
+    {
+        $result = [];
+        $total = 0;
+        foreach ($this->electionPresidentApplications as $electionPresidentApplication) {
+            $count = count($electionPresidentApplication->electionPresidentVotes);
+            $result[] = [
+                'count' => $count,
+                'user' => $electionPresidentApplication->user_id ? $electionPresidentApplication->user->getUserLink() : 'Против всех',
+                'logo' => $electionPresidentApplication->user_id ? $electionPresidentApplication->user->smallLogo() : '',
+            ];
+            $total += $count;
+        }
+        foreach ($result as $key => $value) {
+            $result[$key]['percent'] = $total ? round($result[$key]['count'] / $total * 100) : 0;
+        }
+        usort($result, static function ($a, $b) {
+            return $b['count'] > $a['count'] ? 1 : 0;
+        });
+        return $result;
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getFederation(): ActiveQuery
