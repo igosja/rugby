@@ -267,6 +267,27 @@ class User extends AbstractActiveRecord implements IdentityInterface
     /**
      * @return string
      */
+    public function smallLogo(): string
+    {
+        $result = '<span class="user-logo-small-span"></span>';
+
+        if (file_exists(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png')) {
+            $result = Html::img(
+                '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png'),
+                [
+                    'alt' => $this->login,
+                    'class' => 'user-logo-small',
+                    'title' => $this->login,
+                ]
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
     public function logo(): string
     {
         $result = 'Нет<br/>фото';
