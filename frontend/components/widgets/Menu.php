@@ -366,7 +366,7 @@ class Menu extends Widget
             self::ITEM_MESSENGER => [
                 'css' => $messenger ? 'red' : '',
                 'label' => 'Сообщения' . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
-                'url' => ['*messenger/index'],
+                'url' => ['messenger/index'],
             ],
             self::ITEM_NATIONAL_TEAM => [
                 'css' => $nationalId ? 'red' : 'hidden',

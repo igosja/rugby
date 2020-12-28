@@ -5,7 +5,10 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 
 /**
  * Class Message
@@ -32,6 +35,20 @@ class Message extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -43,6 +60,53 @@ class Message extends AbstractActiveRecord
             [['from_user_id'], 'exist', 'targetRelation' => 'fromUser'],
             [['to_user_id'], 'exist', 'targetRelation' => 'toUser'],
         ];
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     * @throws Exception
+     */
+    public function addMessage(int $userId): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        /**
+         * @var User $user
+         */
+        $user = Yii::$app->user->identity;
+
+        if (!$user->date_confirm) {
+            return false;
+        }
+
+        $inBlacklistOwner = Blacklist::find()
+            ->where(['owner_user_id' => $user->id, 'blocked_user_id' => $userId])
+            ->count();
+        if ($inBlacklistOwner) {
+            return false;
+        }
+
+        $inBlacklistBlocked = Blacklist::find()
+            ->where(['owner_user_id' => $userId, 'blocked_user_id' => $user->id])
+            ->count();
+        if ($inBlacklistBlocked) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->from_user_id = Yii::$app->user->id;
+        $this->to_user_id = $userId;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
