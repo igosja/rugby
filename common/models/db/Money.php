@@ -5,7 +5,9 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 
 /**
  * Class Money
@@ -33,6 +35,20 @@ class Money extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
      * @return array[]
      */
     public function rules(): array
@@ -45,6 +61,20 @@ class Money extends AbstractActiveRecord
             [['money_text_id'], 'exist', 'targetRelation' => 'moneyText'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws Exception
+     */
+    public static function log(array $data): bool
+    {
+        $money = new self();
+        $money->setAttributes($data);
+        $money->save();
+
+        return true;
     }
 
     /**

@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -24,12 +25,30 @@ class Payment extends AbstractActiveRecord
 {
     public const PAID = 1;
 
+    public const MERCHANT_ID = 27937;
+    public const MERCHANT_SECRET = 'h8lzyqfr';
+    public const MERCHANT_SECRET_KEY = 's3lyp66r';
+
     /**
      * @return string
      */
     public static function tableName(): string
     {
         return '{{%payment}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
     }
 
     /**
@@ -46,6 +65,26 @@ class Payment extends AbstractActiveRecord
             [['log'], 'string'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function paymentUrl(): string
+    {
+        $merchantId = self::MERCHANT_ID;
+        $secretKey = self::MERCHANT_SECRET_KEY;
+        $orderId = $this->id;
+
+        $params = [
+            'm' => $merchantId,
+            'oa' => $this->sum * 50,
+            'o' => $orderId,
+            's' => md5($merchantId . ':' . $this->sum * 50 . ':' . $secretKey . ':' . $orderId),
+            'lang' => 'ru',
+        ];
+
+        return 'http://www.free-kassa.ru/merchant/cash.php?' . http_build_query($params);
     }
 
     /**

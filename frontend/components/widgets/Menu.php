@@ -44,6 +44,7 @@ class Menu extends Widget
     public const ITEM_RULE = 'rule';
     public const ITEM_SCHEDULE = 'schedule';
     public const ITEM_SING_UP = 'signUp';
+    public const ITEM_STORE = 'store';
     public const ITEM_SUPPORT = 'support';
     public const ITEM_TEAM = 'team';
     public const ITEM_TOURNAMENT = 'tournament';
@@ -173,9 +174,10 @@ class Menu extends Widget
                 [
                     self::ITEM_MESSENGER,
                     self::ITEM_FEDERATION,
-                    self::ITEM_SUPPORT,
+                    self::ITEM_STORE,
                 ],
                 [
+                    self::ITEM_SUPPORT,
                     self::ITEM_FORUM,
                     self::ITEM_CHAT,
                     self::ITEM_RATING,
@@ -416,6 +418,10 @@ class Menu extends Widget
                 'css' => 'red',
                 'label' => 'Регистрация',
                 'url' => ['/site/sign-up'],
+            ],
+            self::ITEM_STORE => [
+                'label' => 'Магазин',
+                'url' => ['store/index'],
             ],
             self::ITEM_SUPPORT => [
                 'css' => $support ? 'red' : '',
