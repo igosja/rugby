@@ -60,6 +60,7 @@ class PresidentViceVoteStatus
         $model = new ElectionPresidentViceApplication();
         $model->election_president_vice_id = $electionPresidentVice->id;
         $model->text = '-';
+        $model->user_id = 0;
         $model->save();
 
         $electionPresidentVice->date = time();
@@ -90,14 +91,14 @@ class PresidentViceVoteStatus
                 'COUNT(election_president_vice_application_id) AS vote'
             ])
             ->where(['election_president_vice_id' => $electionPresidentVice->id])
-            ->andWhere(['not', ['user_id' => 0]])
+            ->andWhere(['not', ['epa.user_id' => 0]])
             ->andWhere([
                 'not',
-                ['user_id' => Federation::find()->select(['president_user_id'])]
+                ['epa.user_id' => Federation::find()->select(['president_user_id'])]
             ])
             ->andWhere([
                 'not',
-                ['user_id' => Federation::find()->select(['vice_user_id'])]
+                ['epa.user_id' => Federation::find()->select(['vice_user_id'])]
             ])
             ->orderBy([
                 'vote' => SORT_DESC,
