@@ -151,6 +151,57 @@ class User extends AbstractActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return float
+     */
+    public function getStoreCoefficient(): float
+    {
+        $result = [100];
+        foreach ($this->teams as $team) {
+            if (1 === $team->ratingTeam->power_vs_place) {
+                $result[] = 500;
+            } elseif ($team->ratingTeam->power_vs_place <= 3) {
+                $result[] = 400;
+            } elseif ($team->ratingTeam->power_vs_place <= 5) {
+                $result[] = 300;
+            } elseif ($team->ratingTeam->power_vs_place <= 10) {
+                $result[] = 200;
+            } elseif ($team->ratingTeam->power_vs_place <= 20) {
+                $result[] = 150;
+            } elseif ($team->ratingTeam->power_vs_place <= 30) {
+                $result[] = 125;
+            }
+        }
+        rsort($result);
+        return $result[0] / 100;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStoreCoefficientText(): string
+    {
+        $result = [100 => ''];
+        foreach ($this->teams as $team) {
+            if (1 === $team->ratingTeam->power_vs_place) {
+                $result[500] = 'Вы управляете лучшей командой Лиги';
+            } elseif ($team->ratingTeam->power_vs_place <= 3) {
+                $result[400] = 'Вы управляете командой из тройки лучших в Лиге';
+            } elseif ($team->ratingTeam->power_vs_place <= 5) {
+                $result[300] = 'Вы управляете командой из пятерки лучших в Лиге';
+            } elseif ($team->ratingTeam->power_vs_place <= 10) {
+                $result[200] = 'Вы управляете командой из десятки лучших в Лиге';
+            } elseif ($team->ratingTeam->power_vs_place <= 20) {
+                $result[150] = 'Вы управляете командой из двадцатки лучших в Лиге';
+            } elseif ($team->ratingTeam->power_vs_place <= 30) {
+                $result[125] = 'Вы управляете командой из тридцатки лучших в Лиге';
+            }
+        }
+        krsort($result);
+        $result = array_values($result);
+        return $result[0];
+    }
+
+    /**
      * @return bool
      * @throws Exception
      */
