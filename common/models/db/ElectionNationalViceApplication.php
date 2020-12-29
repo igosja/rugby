@@ -53,7 +53,7 @@ class ElectionNationalViceApplication extends AbstractActiveRecord
     {
         return [
             [['election_national_vice_id', 'text', 'user_id'], 'required'],
-            [['election_national_vice_id', 'user_id'], 'integer', 'min' => 1],
+            [['election_national_vice_id', 'user_id'], 'integer', 'min' => 0],
             [['text'], 'trim'],
             [['text'], 'string'],
             [['election_national_vice_id'], 'exist', 'targetRelation' => 'electionNationalVice'],

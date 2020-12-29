@@ -64,6 +64,31 @@ class ElectionNationalVice extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function applications(): array
+    {
+        $result = [];
+        $total = 0;
+        foreach ($this->electionNationalViceApplications as $electionNationalViceApplication) {
+            $count = count($electionNationalViceApplication->electionNationalViceVotes);
+            $result[] = [
+                'count' => $count,
+                'user' => $electionNationalViceApplication->user_id ? $electionNationalViceApplication->user->getUserLink() : 'Против всех',
+                'logo' => $electionNationalViceApplication->user_id ? $electionNationalViceApplication->user->smallLogo() : '',
+            ];
+            $total += $count;
+        }
+        foreach ($result as $key => $value) {
+            $result[$key]['percent'] = $total ? round($result[$key]['count'] / $total * 100) : 0;
+        }
+        usort($result, static function ($a, $b) {
+            return $b['count'] > $a['count'] ? 1 : 0;
+        });
+        return $result;
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getElectionNationalViceApplications(): ActiveQuery

@@ -60,6 +60,7 @@ class NationalVoteStatus
         $model = new ElectionNationalApplication();
         $model->election_national_id = $electionNational->id;
         $model->text = '-';
+        $model->user_id = 0;
         $model->save();
 
         $electionNational->date = time();
@@ -87,10 +88,10 @@ class NationalVoteStatus
             ])
             ->select(['ena.*', 'COUNT(election_national_application_id) AS vote'])
             ->where(['election_national_id' => $electionNational->id])
-            ->andWhere(['not', ['user_id' => null]])
+            ->andWhere(['not', ['ena.user_id' => 0]])
             ->andWhere([
                 'not',
-                ['user_id' => National::find()->select(['user_id'])]
+                ['ena.user_id' => National::find()->select(['user_id'])->andWhere(['not', ['user_id' => null]])]
             ])
             ->orderBy([
                 'vote' => SORT_DESC,
@@ -138,7 +139,7 @@ class NationalVoteStatus
                 }
 
                 $electionNational->national->user_id = $electionNationalApplicationArray[0]->user_id;
-                $electionNational->national->vice_user_id = $electionNationalApplicationArray[1]->user_id ?? 0;
+                $electionNational->national->vice_user_id = $electionNationalApplicationArray[1]->user_id ?? null;
                 $electionNational->national->save(true, ['user_id', 'vice_user_id']);
 
                 foreach ($electionNationalApplicationArray[0]->electionNationalPlayers as $electionNationalPlayer) {

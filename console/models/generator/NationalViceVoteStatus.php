@@ -60,6 +60,7 @@ class NationalViceVoteStatus
         $model = new ElectionNationalViceApplication();
         $model->election_national_vice_id = $electionNationalVice->id;
         $model->text = '-';
+        $model->user_id = 0;
         $model->save();
 
         $electionNationalVice->date = time();
@@ -90,14 +91,14 @@ class NationalViceVoteStatus
                 'COUNT(election_national_vice_application_id) AS vote'
             ])
             ->where(['election_national_vice_id' => $electionNationalVice->id])
-            ->andWhere(['not', ['user_id' => null]])
+            ->andWhere(['not', ['ena.user_id' => null]])
             ->andWhere([
                 'not',
-                ['user_id' => National::find()->select(['user_id'])]
+                ['ena.user_id' => National::find()->select(['user_id'])->andWhere(['not', ['user_id' => null]])]
             ])
             ->andWhere([
                 'not',
-                ['user_id' => National::find()->select(['vice_user_id'])]
+                ['ena.user_id' => National::find()->select(['vice_user_id'])->andWhere(['not', ['vice_user_id' => null]])]
             ])
             ->orderBy([
                 'vote' => SORT_DESC,

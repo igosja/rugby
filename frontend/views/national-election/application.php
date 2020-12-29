@@ -2,14 +2,16 @@
 
 // TODO refactor
 
-use common\models\db\National;
+use common\models\db\ElectionNationalApplication;
+use common\models\db\Federation;
 use common\models\db\Player;
 use common\models\db\Position;
-use frontend\models\forms\NationalPlayer;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
+ * @var Federation $federation
+ * @var ElectionNationalApplication $model
  * @var Player[] $propArray
  * @var Player[] $hookerArray
  * @var Player[] $lockArray
@@ -20,32 +22,45 @@ use yii\widgets\ActiveForm;
  * @var Player[] $wingArray
  * @var Player[] $centreArray
  * @var Player[] $fullBackArray
- * @var NationalPlayer $model
- * @var National $national
  */
 
+print $this->render('//federation/_federation', ['federation' => $federation]);
+
 ?>
-<div class="row margin-top">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <?= $this->render('//national/_national-top-left', ['national' => $national]) ?>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-        <?= $this->render('//national/_national-top-right', ['national' => $national]) ?>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h4>Подача заявки на пост тренера сборной</h4>
     </div>
 </div>
 <?php $form = ActiveForm::begin([
     'fieldConfig' => [
-        'errorOptions' => ['class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error'],
+        'errorOptions' => ['class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 notification-error'],
+        'labelOptions' => ['class' => 'strong'],
         'options' => ['class' => 'row'],
-        'template' => '{error}',
+        'template' =>
+            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
+            {error}',
     ],
 ]) ?>
+<?= $form
+    ->field($model, 'text')
+    ->textarea(['rows' => 5])
+    ->label('Ваша программа') ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <p>В сборной должно быть 30 игрока - 2 игрока на непарные позиции и 4 на парные позиции.</p>
+        <p>В заявке обязательно должно быть 30 игрока - 2 игрока на непарные позиции и 4 на парные позиции.</p>
     </div>
 </div>
-<?= $form->field($model, 'player[]')->error() ?>
+<?= $form->field(
+    $model,
+    'player[]',
+    [
+        'errorOptions' => [
+            'class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center notification-error'
+        ],
+        'template' => '{error}'
+    ])->error() ?>
 <?php for ($i = Position::PROP; $i <= Position::FULL_BACK; $i++) : ?>
     <?php
 
@@ -90,7 +105,7 @@ use yii\widgets\ActiveForm;
                     <tr>
                         <td class="text-center">
                             <?= Html::checkbox(
-                                'NationalPlayer[player][' . $i . '][]',
+                                'ElectionNationalApplication[player][' . $i . '][]',
                                 in_array($item->id, $model->playerArray, true),
                                 [
                                     'value' => $item->id,
@@ -128,6 +143,9 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+        <?php if (!$model->isNewRecord) : ?>
+            <?= Html::a('Удалить', ['delete-application'], ['class' => 'btn margin']) ?>
+        <?php endif ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>
