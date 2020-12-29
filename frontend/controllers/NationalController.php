@@ -59,11 +59,11 @@ class NationalController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return Response
-     * @throws Exception
+     * @throws \yii\db\Exception
      */
-    public function actionAttitudeNational($id)
+    public function actionAttitudeNational(int $id): Response
     {
         if (!$this->myTeam) {
             return $this->redirect(['national/view', 'id' => $id]);
@@ -81,6 +81,7 @@ class NationalController extends AbstractController
      * @param int $id
      * @return string
      * @throws NotFoundHttpException
+     * @throws Exception
      */
     public function actionView(int $id): string
     {
