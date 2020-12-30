@@ -43,6 +43,7 @@ class ScheduleQuery
     public static function getScheduleListQuery(int $seasonId): ActiveQuery
     {
         return Schedule::find()
+            ->with(['tournamentType', 'stage'])
             ->andWhere(['season_id' => $seasonId])
             ->orderBy(['date' => SORT_ASC, 'id' => SORT_ASC]);
     }

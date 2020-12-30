@@ -20,6 +20,12 @@ class GameQuery
     public static function getGameListQuery(int $scheduleId): ActiveQuery
     {
         return Game::find()
+            ->with([
+                'guestTeam.stadium.city.country',
+                'guestNational.federation.country',
+                'homeTeam.stadium.city.country',
+                'homeNational.federation.country',
+            ])
             ->where(['schedule_id' => $scheduleId])
             ->orderBy(['id' => SORT_DESC]);
     }
