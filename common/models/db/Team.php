@@ -954,6 +954,17 @@ class Team extends AbstractActiveRecord
     /**
      * @return string
      */
+    public function getTeamCityLink(): string
+    {
+        return Html::a(
+            $this->name . ' (' . $this->stadium->city->name . ')',
+            ['team/view', 'id' => $this->id],
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function getTeamImageLink(): string
     {
         return $this->stadium->city->country->getImage()

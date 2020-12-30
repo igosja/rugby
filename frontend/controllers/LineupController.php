@@ -67,8 +67,14 @@ class LineupController extends AbstractController
         }
 
         $query = Game::find()
-            ->joinWith(['schedule'])
-            ->where(['played' => null])
+            ->joinWith(['schedule'], false)
+            ->with([
+                'schedule.tournamentType',
+                'schedule.stage',
+                'guestTeam',
+                'homeTeam',
+            ])
+            ->andWhere(['played' => null])
             ->andWhere([
                 'or',
                 ['guest_team_id' => $this->myTeamOrVice->id],
@@ -82,7 +88,16 @@ class LineupController extends AbstractController
         ]);
 
         $query = Player::find()
-            ->joinWith(['country', 'playerPositions'])
+            ->joinWith(['country', 'playerPositions'], false)
+            ->with([
+                'country',
+                'name',
+                'physical',
+                'playerPositions.position',
+                'playerSpecials.special',
+                'squad',
+                'surname',
+            ])
             ->andWhere([
                 'or',
                 ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],
@@ -153,6 +168,7 @@ class LineupController extends AbstractController
          * @var Player[] $playerArray
          */
         $playerArray = Player::find()
+            ->with(['playerPositions.position', 'playerSpecials.special', 'squad'])
             ->where([
                 'or',
                 ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],

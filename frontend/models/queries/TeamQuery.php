@@ -120,6 +120,7 @@ class TeamQuery
     {
         return Team::find()
             ->joinWith(['user', 'stadium.city'], false)
+            ->with(['user', 'stadium.city'])
             ->where(['city.country_id' => $countryId]);
     }
 }

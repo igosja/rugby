@@ -60,7 +60,8 @@ class OffSeasonController extends AbstractController
         $federationId = Yii::$app->request->get('federationId');
 
         $query = OffSeason::find()
-            ->joinWith(['team.stadium.city.country.federation'])
+            ->joinWith(['team.stadium.city.country.federation'], false)
+            ->with(['team.stadium.city.country.federation'])
             ->where(['season_id' => $seasonId])
             ->andFilterWhere(['federation.id' => $federationId])
             ->orderBy(['place' => SORT_ASC]);
