@@ -6,7 +6,10 @@ namespace common\models\db;
 
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 
 /**
  * Class Support
@@ -41,6 +44,20 @@ class Support extends AbstractActiveRecord
     /**
      * @return array
      */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public function rules(): array
     {
         return [
@@ -56,6 +73,31 @@ class Support extends AbstractActiveRecord
             [['president_user_id'], 'exist', 'targetRelation' => 'presidentUser'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function addQuestion(): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->user_id = Yii::$app->user->id;
+        $this->is_inside = false;
+        $this->is_question = true;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
