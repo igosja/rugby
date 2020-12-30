@@ -26,7 +26,7 @@ class UserFireExtraTeam
         $userArray = Team::find()
             ->joinWith(['user'])
             ->andWhere([
-                'not', ['user_id' => UserHoliday::find()->where(['date_end' => null])]
+                'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
             ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['<', 'date_vip', time()])
@@ -62,7 +62,7 @@ class UserFireExtraTeam
         $userArray = Team::find()
             ->joinWith(['user'])
             ->andWhere([
-                'not', ['user_id' => UserHoliday::find()->where(['date_end' => null])]
+                'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
             ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['>=', 'date_vip', time()])

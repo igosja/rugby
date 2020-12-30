@@ -558,6 +558,8 @@ class LineupController extends AbstractController
 
             $lineup = round($power / $this->myTeamOrVice->power_vs * 100);
 
+            $teamwork = round($teamwork, 2);
+
             $result = [
                 'power' => $power,
                 'position' => $position,

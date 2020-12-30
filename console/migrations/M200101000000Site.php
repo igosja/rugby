@@ -35,6 +35,7 @@ class M200101000000Site extends Migration
         $this->insert(
             self::TABLE,
             [
+                'date_cron' => 1,
                 'version_3' => 1,
                 'version_date' => time(),
             ]

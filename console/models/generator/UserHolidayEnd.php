@@ -23,7 +23,7 @@ class UserHolidayEnd
             [
                 'and',
                 ['date_end' => null],
-                ['not', ['user_id' => User::find()->andWhere(['<', 'user_date_vip', time()])]],
+                ['not', ['user_id' => User::find()->select(['id'])->andWhere(['<', 'date_vip', time()])]],
                 ['<=', 'date_start', time() - User::MAX_HOLIDAY * 86400],
             ]
         );
@@ -32,7 +32,7 @@ class UserHolidayEnd
             [
                 'and',
                 ['date_end' => null],
-                ['not', ['user_id' => User::find()->andWhere(['>=', 'user_date_vip', time()])]],
+                ['not', ['user_id' => User::find()->select(['id'])->andWhere(['>=', 'date_vip', time()])]],
                 ['<=', 'date_start', time() - User::MAX_VIP_HOLIDAY * 86400],
             ]
         );

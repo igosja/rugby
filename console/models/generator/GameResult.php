@@ -1583,7 +1583,7 @@ class GameResult
         $this->game->guest_conversion = $this->result['guest']['team']['conversion'];
         $this->game->guest_defender_beaten = $this->result['guest']['team']['defender_beaten'];
         $this->game->guest_drop_goal = $this->result['guest']['team']['drop_goal'];
-        $this->game->guest_forecast = $this->result['guest']['team']['forecast'];
+        $this->game->guest_forecast = $this->result['guest']['team']['power']['forecast'];
         $this->game->guest_metre_gained = $this->result['guest']['team']['metre_gained'];
         $this->game->guest_optimality_1 = $this->result['guest']['team']['optimality_1'];
         $this->game->guest_optimality_2 = $this->result['guest']['team']['optimality_2'];
@@ -1606,7 +1606,7 @@ class GameResult
         $this->game->home_conversion = $this->result['home']['team']['conversion'];
         $this->game->home_defender_beaten = $this->result['home']['team']['defender_beaten'];
         $this->game->home_drop_goal = $this->result['home']['team']['drop_goal'];
-        $this->game->home_forecast = $this->result['home']['team']['forecast'];
+        $this->game->home_forecast = $this->result['home']['team']['power']['forecast'];
         $this->game->home_metre_gained = $this->result['home']['team']['metre_gained'];
         $this->game->home_optimality_1 = $this->result['home']['team']['optimality_1'];
         $this->game->home_optimality_2 = $this->result['home']['team']['optimality_2'];

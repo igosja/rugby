@@ -69,7 +69,7 @@ class InsertSwiss
                 LEFT JOIN `team`
                 ON `home_team_id`=`team`.`id`
                 SET `game`.`stadium_id`=`team`.`stadium_id`
-                WHERE `game`.`id`=" . $schedule->id;
+                WHERE `game`.`schedule_id`=" . $schedule->id;
         Yii::$app->db->createCommand($sql)->execute();
     }
 
