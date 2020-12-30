@@ -78,7 +78,6 @@ class UserRating extends AbstractActiveRecord
                     'vs_rest',
                     'win',
                     'win_equal',
-                    'win_overtime',
                     'win_strong',
                     'win_super',
                     'win_weak',
