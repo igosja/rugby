@@ -61,7 +61,8 @@ class ConferenceController extends AbstractController
         ]);
 
         $countryArray = Conference::find()
-            ->joinWith(['team.stadium.city.country'])
+            ->joinWith(['team.stadium.city.country'], false)
+            ->with(['team.stadium.city.country'])
             ->where(['season_id' => $seasonId])
             ->groupBy(['country.id'])
             ->orderBy(['country.name' => SORT_ASC])
