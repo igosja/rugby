@@ -37,11 +37,7 @@ class NewsCommentQuery
     public static function getNewsCommentListQuery(int $newsId): ActiveQuery
     {
         return NewsComment::find()
-            ->with(
-                [
-                    'user',
-                ]
-            )
+            ->with(['user'])
             ->andWhere(['news_id' => $newsId])
             ->orderBy(['id' => SORT_ASC]);
     }

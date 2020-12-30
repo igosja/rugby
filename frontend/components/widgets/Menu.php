@@ -37,7 +37,6 @@ class Menu extends Widget
     public const ITEM_NEWS = 'news';
     public const ITEM_PASSWORD = 'password';
     public const ITEM_PLAYER = 'player';
-    public const ITEM_POLL = 'poll';
     public const ITEM_PROFILE = 'profile';
     public const ITEM_RATING = 'rating';
     public const ITEM_ROSTER = 'roster';
@@ -50,6 +49,7 @@ class Menu extends Widget
     public const ITEM_TOURNAMENT = 'tournament';
     public const ITEM_TRANSFER = 'transfer';
     public const ITEM_VIP = 'vip';
+    public const ITEM_VOTE = 'vote';
 
     /**
      * @var array $menuItemList
@@ -107,7 +107,7 @@ class Menu extends Widget
                     self::ITEM_HOME,
                     self::ITEM_NEWS,
                     self::ITEM_RULE,
-                    self::ITEM_POLL,
+                    self::ITEM_VOTE,
                 ],
                 [
                     self::ITEM_SING_UP,
@@ -149,7 +149,7 @@ class Menu extends Widget
                 ],
                 [
                     self::ITEM_VIP,
-                    self::ITEM_POLL,
+                    self::ITEM_VOTE,
                     self::ITEM_CHANGE_TEAM,
                 ],
             ],
@@ -269,7 +269,7 @@ class Menu extends Widget
 
             $news = News::find()
                 ->andWhere(['federation_id' => null])
-                ->andWhere(['>', 'id', $controller->user->news_id])
+                ->andFilterWhere(['>', 'id', $controller->user->news_id])
                 ->count();
 
             $vote = Vote::find()
@@ -388,7 +388,7 @@ class Menu extends Widget
                 'label' => 'Игроки',
                 'url' => ['/player/index'],
             ],
-            self::ITEM_POLL => [
+            self::ITEM_VOTE => [
                 'css' => $vote ? 'red' : '',
                 'label' => 'Опросы' . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
                 'url' => ['/vote/index'],
