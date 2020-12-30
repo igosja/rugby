@@ -28,7 +28,7 @@ use yii\widgets\ListView;
     <div class="row">
         <div class="col-lg-12">
             <?php try {
-                ListView::widget([
+                print ListView::widget([
                     'dataProvider' => $dataProvider,
                     'itemView' => '_log',
                 ]);

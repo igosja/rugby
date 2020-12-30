@@ -86,7 +86,7 @@ class News extends AbstractActiveRecord
      */
     public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Federation::class, ['id' => 'federation_id'])->cache();
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**
@@ -102,6 +102,6 @@ class News extends AbstractActiveRecord
      */
     public function getUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['id' => 'user_id'])->cache();
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

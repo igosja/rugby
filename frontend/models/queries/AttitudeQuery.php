@@ -19,7 +19,6 @@ class AttitudeQuery
     {
         return Attitude::find()
             ->orderBy(['order' => SORT_ASC])
-            ->cache()
             ->all();
     }
 }
