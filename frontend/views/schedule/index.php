@@ -42,8 +42,6 @@ use yii\helpers\Html;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [

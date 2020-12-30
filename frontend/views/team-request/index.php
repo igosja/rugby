@@ -27,8 +27,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -77,8 +75,6 @@ use yii\web\View;
 </div>
 <div class="row">
     <?php
-
-// TODO refactor
 
     try {
         $columns = [

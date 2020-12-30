@@ -61,8 +61,6 @@ $user = $this->context->user;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
