@@ -1,6 +1,8 @@
 <?php
 
-use common\components\ErrorHelper;
+// TODO refactor
+
+use common\components\helpers\ErrorHelper;
 use miloschuman\highcharts\Highcharts;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
