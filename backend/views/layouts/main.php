@@ -23,10 +23,7 @@ use yii\widgets\Menu;
 AppAsset::register($this);
 
 ?>
-<?php
-
-// TODO refactor
-$this->beginPage() ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -36,10 +33,7 @@ $this->beginPage() ?>
     <link rel="icon" href="<?= Yii::$app->request->baseUrl ?>/favicon.ico"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php
-
-    // TODO refactor
-    $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php
@@ -49,7 +43,6 @@ $this->beginBody() ?>
 <div id="wrapper">
     <?php
 
-// TODO refactor
     NavBar::begin(
         [
             'brandLabel' => Yii::$app->name,
@@ -148,15 +141,11 @@ $this->beginBody() ?>
     }
     ?>
 
-    <?php
-
-// TODO refactor
-    NavBar::end() ?>
+    <?php NavBar::end() ?>
     <div class="navbar-default sidebar">
         <div class="sidebar-nav navbar-collapse">
             <?php
 
-// TODO refactor
             $menuItems = [
                 [
                     'label' => 'Users',
@@ -207,6 +196,21 @@ $this->beginBody() ?>
                     'label' => 'Schedule',
                     'url' => ['schedule/index'],
                 ],
+                [
+                    'label' => 'Показатели сайта',
+                    'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
+                    'items' => [
+                        [
+                            'label' => 'Коррекция генератора',
+                            'url' => ['analytics/game-statistic'],
+                        ],
+                        [
+                            'label' => 'Слепки состояния сайта',
+                            'url' => ['analytics/snapshot'],
+                        ],
+                    ],
+                    'url' => 'javascript:',
+                ],
             ];
 
             try {
@@ -228,7 +232,6 @@ $this->beginBody() ?>
     <div id="page-wrapper">
         <?php
 
-// TODO refactor
         try {
             print Breadcrumbs::widget(
                 [
@@ -245,16 +248,11 @@ $this->beginBody() ?>
         }
 
         print $content;
+
         ?>
     </div>
 </div>
-<?php
-
-// TODO refactor
-$this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php
-
-// TODO refactor
-$this->endPage() ?>
+<?php $this->endPage() ?>

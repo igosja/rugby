@@ -915,7 +915,7 @@ class Team extends AbstractActiveRecord
                 'место',
                 [
                     'championship/index',
-                    'countryId' => $this->championship->federation->country->id,
+                    'federationId' => $this->championship->federation->id,
                     'divisionId' => $this->championship->division->id,
                 ]
             );

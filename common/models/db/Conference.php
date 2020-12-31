@@ -54,7 +54,7 @@ class Conference extends AbstractActiveRecord
             [['season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
             [['difference'], 'integer', 'min' => -999, 'max' => 999],
             [['draw', 'guest', 'home', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 30],
-            [['place'], 'integer', 'min' => 0, 'max' => 16],
+            [['place'], 'integer', 'min' => 0, 'max' => 99],
             [['team_id'], 'integer', 'min' => 0],
             [['point_against', 'point_for'], 'integer', 'min' => 0, 'max' => 9999],
             [['season_id'], 'exist', 'targetRelation' => 'season'],

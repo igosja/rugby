@@ -80,11 +80,8 @@ class History extends AbstractActiveRecord
             [['building_id'], 'integer', 'min' => 1, 'max' => 9],
             [['fire_reason_id', 'history_text_id', 'position_id', 'special_id'], 'integer', 'min' => 1, 'max' => 99],
             [['federation_id', 'national_id'], 'integer', 'min' => 1, 'max' => 999],
-            [
-                ['game_id', 'player_id', 'second_team_id', 'second_user_id', 'team_id', 'user_id', 'value'],
-                'integer',
-                'min' => 1
-            ],
+            [['game_id', 'player_id', 'value'], 'integer', 'min' => 1],
+            [['second_team_id', 'second_user_id', 'team_id', 'user_id'], 'integer', 'min' => 0],
             [['building_id'], 'exist', 'targetRelation' => 'building'],
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['fire_reason_id'], 'exist', 'targetRelation' => 'fireReason'],

@@ -54,11 +54,12 @@ class Championship extends AbstractActiveRecord
             [['federation_id', 'division_id', 'place', 'season_id', 'team_id'], 'required'],
             [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [
-                ['federation_id', 'difference', 'season_id', 'tries_against', 'tries_for'],
+                ['federation_id', 'season_id', 'tries_against', 'tries_for'],
                 'integer',
                 'min' => 0,
                 'max' => 999
             ],
+            [['difference'], 'integer', 'min' => -999, 'max' => 999],
             [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 30],
             [['place'], 'integer', 'min' => 0, 'max' => 16],
             [['division_id'], 'integer', 'min' => 0, 'max' => 9],
