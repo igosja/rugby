@@ -101,14 +101,14 @@ class InsertSwiss
                     SELECT `guest`, `home`, `place`, `team_id`
                     FROM `off_season`
                     WHERE `season_id`=" . Season::getCurrentSeason() . "
-                    ORDER BY `place`";
+                    ORDER BY `id`";
             Yii::$app->db->createCommand($sql)->execute();
         } else {
             $sql = "INSERT INTO `swiss` (`guest`, `home`, `place`, `team_id`)
                     SELECT `guest`, `home`, `place`, `team_id`
                     FROM `conference`
                     WHERE `season_id`=" . Season::getCurrentSeason() . "
-                    ORDER BY `team_id`";
+                    ORDER BY `id`";
             Yii::$app->db->createCommand($sql)->execute();
         }
 
@@ -169,11 +169,7 @@ class InsertSwiss
     private function swiss(int $tournamentTypeId, int $positionDifference, array $teamArray, int $stageId): array
     {
         if (TournamentType::OFF_SEASON === $tournamentTypeId) {
-            if (!$gameArray = $this->swissOne($tournamentTypeId, $positionDifference, $teamArray)) {
-                $positionDifference++;
-
-                $gameArray = $this->swiss($tournamentTypeId, $positionDifference, $teamArray, $stageId);
-            }
+            $gameArray = $this->swissOffseason($teamArray, $stageId);
         } else {
             $gameArray = $this->swissConference($teamArray, $stageId);
         }
@@ -263,6 +259,61 @@ class InsertSwiss
         }
 
         return [];
+    }
+
+    /**
+     * @param Swiss[] $teamArray
+     * @param int $stageId
+     * @return array
+     */
+    private function swissOffseason(array $teamArray, int $stageId): array
+    {
+        $stage = $stageId - 1;
+        $countTeam = count($teamArray);
+
+        $scheme = 1;
+        if (0 === $stage % 2) {
+            $scheme = 2;
+        }
+
+        $keyArray = [];
+
+        if (1 === $scheme) {
+            for ($one = 0, $two = $stage; $one < $two; $one++, $two--) {
+                $keyArray[] = [$one, $two];
+            }
+
+            for ($one = $countTeam - 2, $two = $stage + 1; $one > $two + 1; $one--, $two++) {
+                $keyArray[] = [$one, $two];
+            }
+
+            if ($countTeam / 2 + ($stage - 1) / 2 !== $countTeam - 1) {
+                $keyArray[] = [$countTeam / 2 + ($stage - 1) / 2, $countTeam - 1];
+            }
+        } else {
+            for ($one = $stage, $two = 0; $one > $two + 1; $one--, $two++) {
+                $keyArray[] = [$one, $two];
+            }
+
+            for ($one = $stage + 1, $two = $countTeam - 2; $one < $two; $one++, $two--) {
+                $keyArray[] = [$one, $two];
+            }
+
+            if ($stage / 2 !== $countTeam - 1) {
+                $keyArray[] = [$stage / 2, $countTeam - 1];
+            }
+        }
+
+        $gameArray = [];
+
+        foreach ($keyArray as $item) {
+            $gameArray[] = [
+                'home' => $teamArray[$item[0]]->team_id,
+                'guest' => $teamArray[$item[1]]->team_id,
+            ];
+        }
+
+        return $gameArray;
     }
 
     /**

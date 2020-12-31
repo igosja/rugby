@@ -38,7 +38,7 @@ class InsertConference
                 ]
             ])
             ->andWhere(['!=', 'team_id', 0])
-            ->orderBy(['team_id' => SORT_ASC])
+            ->orderBy('RAND()')
             ->each();
 
         $data = [];
@@ -72,7 +72,7 @@ class InsertConference
         $conferenceArray = Conference::find()
             ->with(['team'])
             ->where(['conference_season_id' => $seasonId])
-            ->orderBy(['conference_team_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->all();
 
         $stage = Stage::TOUR_1 - 1;
