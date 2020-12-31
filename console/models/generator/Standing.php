@@ -164,8 +164,8 @@ class Standing
                 }
 
                 $model = Championship::find()->where([
-                    'championship_team_id' => $game->game_guest_team_id,
-                    'championship_season_id' => $game->schedule->schedule_season_id,
+                    'team_id' => $game->guest_team_id,
+                    'season_id' => $game->schedule->season_id,
                 ])->one();
                 if ($model) {
                     $model->bonus_loose += $guestBonusLoose;
