@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\controllers;
 
 use common\models\db\Game;
@@ -57,212 +59,232 @@ class AnalyticsController extends AbstractController
             1 => array(
                 'id' => 1,
                 'name' => 'Средний размер базы',
-                'select' => 'snapshot_base',
+                'select' => 'base',
             ),
             2 => array(
                 'id' => 2,
                 'name' => 'Средний размер баз (все строения)',
-                'select' => 'snapshot_base_total',
+                'select' => 'base_total',
             ),
             3 => array(
                 'id' => 3,
                 'name' => 'Средний размер мед. центра',
-                'select' => 'snapshot_base_medical',
+                'select' => 'base_medical',
             ),
             4 => array(
                 'id' => 4,
                 'name' => 'Средний размер физиоцентра',
-                'select' => 'snapshot_base_physical',
+                'select' => 'base_physical',
             ),
             5 => array(
                 'id' => 5,
                 'name' => 'Средний размер спортшколы',
-                'select' => 'snapshot_base_school',
+                'select' => 'base_school',
             ),
             6 => array(
                 'id' => 6,
                 'name' => 'Средний размер скаутцентра',
-                'select' => 'snapshot_base_scout',
+                'select' => 'base_scout',
             ),
             7 => array(
                 'id' => 7,
                 'name' => 'Средний размер трен. центра',
-                'select' => 'snapshot_base_training',
+                'select' => 'base_training',
             ),
             8 => array(
                 'id' => 8,
                 'name' => 'Всего федераций',
-                'select' => 'snapshot_country',
+                'select' => 'federation',
             ),
             9 => array(
                 'id' => 9,
                 'name' => 'Всего менеджеров',
-                'select' => 'snapshot_manager',
+                'select' => 'manager',
             ),
             10 => array(
                 'id' => 10,
                 'name' => 'VIP менеджеров',
-                'select' => 'snapshot_manager_vip_percent',
+                'select' => 'manager_vip',
             ),
             11 => array(
                 'id' => 11,
                 'name' => 'Менеджеров с командами',
-                'select' => 'snapshot_manager_with_team',
+                'select' => 'manager_with_team',
             ),
             12 => array(
                 'id' => 12,
                 'name' => 'Число игроков в командах',
-                'select' => 'snapshot_player',
+                'select' => 'player',
             ),
             13 => array(
                 'id' => 13,
                 'name' => 'Средний возраст игрока',
-                'select' => 'snapshot_player_age',
-            ),
-            14 => array(
-                'id' => 14,
-                'name' => 'Пизиция C',
-                'select' => 'snapshot_player_c',
-            ),
-            15 => array(
-                'id' => 15,
-                'name' => 'Пизиция GK',
-                'select' => 'snapshot_player_gk',
+                'select' => 'player_age',
             ),
             16 => array(
                 'id' => 16,
                 'name' => 'Игроков в команде в среднем',
-                'select' => 'snapshot_player_in_team',
+                'select' => 'player_in_team',
             ),
-            17 => array(
-                'id' => 17,
-                'name' => 'Пизиция LD',
-                'select' => 'snapshot_player_ld',
+            14 => array(
+                'id' => 14,
+                'name' => 'Пизиция C',
+                'select' => 'player_position_centre',
             ),
-            18 => array(
-                'id' => 18,
-                'name' => 'Пизиция LW',
-                'select' => 'snapshot_player_lw',
+            15 => array(
+                'id' => 15,
+                'name' => 'Пизиция 8',
+                'select' => 'player_position_eight',
+            ),
+            43 => array(
+                'id' => 43,
+                'name' => 'Пизиция FL',
+                'select' => 'player_position_flanker',
+            ),
+            44 => array(
+                'id' => 44,
+                'name' => 'Пизиция FH',
+                'select' => 'player_position_fly_half',
             ),
             19 => array(
                 'id' => 19,
-                'name' => 'Пизиция RD',
-                'select' => 'snapshot_player_rd',
+                'name' => 'Пизиция FB',
+                'select' => 'player_position_full_back',
             ),
-            20 => array(
-                'id' => 20,
-                'name' => 'Пизиция RW',
-                'select' => 'snapshot_player_rw',
+            45 => array(
+                'id' => 45,
+                'name' => 'Пизиция H',
+                'select' => 'player_position_hooker',
+            ),
+            46 => array(
+                'id' => 46,
+                'name' => 'Пизиция L',
+                'select' => 'player_position_lock',
+            ),
+            47 => array(
+                'id' => 47,
+                'name' => 'Пизиция P',
+                'select' => 'player_position_prop',
+            ),
+            48 => array(
+                'id' => 48,
+                'name' => 'Пизиция SH',
+                'select' => 'player_position_scrum_half',
+            ),
+            49 => array(
+                'id' => 49,
+                'name' => 'Пизиция W',
+                'select' => 'player_position_wing',
             ),
             21 => array(
                 'id' => 21,
                 'name' => 'Средняя сила игрока',
-                'select' => 'snapshot_player_power',
+                'select' => 'player_power',
             ),
             22 => array(
                 'id' => 22,
                 'name' => 'Игроков без спецвозможностей',
-                'select' => 'snapshot_player_special_percent_no',
+                'select' => 'player_special_no',
             ),
             23 => array(
                 'id' => 23,
                 'name' => 'Игроков с одной спецвозможностью',
-                'select' => 'snapshot_player_special_percent_one',
+                'select' => 'player_special_one',
             ),
             24 => array(
                 'id' => 24,
                 'name' => 'Игроков с двумя спецвозможностями',
-                'select' => 'snapshot_player_special_percent_two',
+                'select' => 'player_special_two',
             ),
             25 => array(
                 'id' => 25,
                 'name' => 'Игроков с тремя спецвозможностями',
-                'select' => 'snapshot_player_special_percent_three',
+                'select' => 'player_special_three',
             ),
             26 => array(
                 'id' => 26,
                 'name' => 'Игроков с четырьмя спецвозможностями',
-                'select' => 'snapshot_player_special_percent_four',
+                'select' => 'player_special_four',
             ),
             27 => array(
                 'id' => 27,
                 'name' => 'Игроков со спецвозможностью Атлетизм (Ат)',
-                'select' => 'snapshot_player_special_percent_athletic',
+                'select' => 'player_special_athletic',
             ),
             28 => array(
                 'id' => 28,
-                'name' => 'Игроков со спецвозможностью Техника (Т)',
-                'select' => 'snapshot_player_special_percent_combine',
+                'name' => 'Игроков со спецвозможностью Комбинирование (Км)',
+                'select' => 'player_special_combine',
             ),
             29 => array(
                 'id' => 29,
                 'name' => 'Игроков со спецвозможностью Кумир (К)',
-                'select' => 'snapshot_player_special_percent_idol',
+                'select' => 'player_special_idol',
             ),
             30 => array(
                 'id' => 30,
                 'name' => 'Игроков со спецвозможностью Лидер (Л)',
-                'select' => 'snapshot_player_special_percent_leader',
+                'select' => 'player_special_leader',
             ),
             31 => array(
                 'id' => 31,
-                'name' => 'Игроков со спецвозможностью Силовая борьба (Сб)',
-                'select' => 'snapshot_player_special_percent_power',
+                'name' => 'Игроков со спецвозможностью Мол (М)',
+                'select' => 'player_special_moul',
             ),
             32 => array(
                 'id' => 32,
-                'name' => 'Игроков со спецвозможностью Реакция (Р)',
-                'select' => 'snapshot_player_special_percent_reaction',
+                'name' => 'Игроков со спецвозможностью Пас (П)',
+                'select' => 'player_special_pass',
             ),
             33 => array(
                 'id' => 33,
-                'name' => 'Игроков со спецвозможностью Бросок (Бр)',
-                'select' => 'snapshot_player_special_percent_shot',
+                'name' => 'Игроков со спецвозможностью Сила (Сл)',
+                'select' => 'player_special_power',
             ),
             34 => array(
                 'id' => 34,
-                'name' => 'Игроков со спецвозможностью Скорость (Ск)',
-                'select' => 'snapshot_player_special_percent_speed',
+                'name' => 'Игроков со спецвозможностью Рак (Р)',
+                'select' => 'player_special_ruck',
             ),
             35 => array(
                 'id' => 35,
-                'name' => 'Игроков со спецвозможностью Отбор (От)',
-                'select' => 'snapshot_player_special_percent_tackle',
+                'name' => 'Игроков со спецвозможностью Схватка (Сх)',
+                'select' => 'player_special_scrum',
             ),
             36 => array(
                 'id' => 36,
-                'name' => 'Игроков со спецвозможностью Игра клюшкой (Кл)',
-                'select' => 'snapshot_player_special_percent_stick',
+                'name' => 'Игроков со спецвозможностью Скорость (Ск)',
+                'select' => 'player_special_speed',
             ),
             37 => array(
                 'id' => 37,
-                'name' => 'Игроков со спецвозможностью Выбор позиции (П)',
-                'select' => 'snapshot_player_special_percent_position',
+                'name' => 'Игроков со спецвозможностью Отбор (От)',
+                'select' => 'player_special_tackle',
             ),
             38 => array(
                 'id' => 38,
                 'name' => 'Игроков с совмещениями',
-                'select' => 'snapshot_player_with_position_percent',
+                'select' => 'player_with_position',
             ),
             39 => array(
                 'id' => 39,
                 'name' => 'Всего команд',
-                'select' => 'snapshot_team',
+                'select' => 'team',
             ),
             40 => array(
                 'id' => 40,
                 'name' => 'Денег в среднем в кассе команды',
-                'select' => 'snapshot_team_finance',
+                'select' => 'team_finance',
             ),
             41 => array(
                 'id' => 41,
                 'name' => 'Среднее число команд у менеджеров',
-                'select' => 'snapshot_team_to_manager',
+                'select' => 'team_to_manager',
             ),
             42 => array(
                 'id' => 42,
                 'name' => 'Средний размер стадиона',
-                'select' => 'snapshot_stadium',
+                'select' => 'stadium',
             ),
         );
 
@@ -273,11 +295,11 @@ class AnalyticsController extends AbstractController
 
         $snapshotArray = Snapshot::find()
             ->select([
-                'date' => new Expression('FROM_UNIXTIME(`snapshot_date`, \'%d %m %Y\')'),
+                'date' => new Expression('FROM_UNIXTIME(`date`, \'%d %m %Y\')'),
                 'total' => $category_array[$id]['select'],
             ])
-            ->where(['snapshot_season_id' => $seasonId])
-            ->orderBy(['snapshot_id' => SORT_ASC])
+            ->where(['season_id' => $seasonId])
+            ->orderBy(['id' => SORT_ASC])
             ->asArray()
             ->all();
 
