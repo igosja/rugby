@@ -45,6 +45,8 @@ class FillLineup
             ->orderBy(['id' => SORT_ASC])
             ->each();
         foreach ($gameArray as $game) {
+            $insertData = [];
+            $playerIds = [];
             /**
              * @var Game $game
              */
@@ -126,6 +128,7 @@ class FillLineup
                                     ->andWhere(['position_id' => $playerPositionId])
                             ])
                             ->andWhere(['not', ['id' => $subQuery]])
+                            ->andFilterWhere(['not', ['id' => $playerIds]])
                             ->andWhere(['<=', 'age', Player::AGE_READY_FOR_PENSION])
                             ->andWhere(['<=', 'tire', Player::TIRE_MAX_FOR_LINEUP])
                             ->andFilterWhere(['country_id' => $countryId])
@@ -143,6 +146,7 @@ class FillLineup
                                         ->andWhere(['position_id' => $playerPositionId])
                                 ])
                                 ->andWhere(['not', ['id' => $subQuery]])
+                                ->andFilterWhere(['not', ['id' => $playerIds]])
                                 ->andWhere(['<=', 'age', Player::AGE_READY_FOR_PENSION])
                                 ->andWhere(['<=', 'tire', Player::TIRE_MAX_FOR_LINEUP])
                                 ->andWhere([
@@ -163,6 +167,7 @@ class FillLineup
                                         ->andWhere(['position_id' => $playerPositionId])
                                 ])
                                 ->andWhere(['not', ['id' => $subQuery]])
+                                ->andFilterWhere(['not', ['id' => $playerIds]])
                                 ->andWhere(['<=', 'age', Player::AGE_READY_FOR_PENSION])
                                 ->andWhere(['<=', 'tire', Player::TIRE_MAX_FOR_LINEUP]);
                         }
@@ -181,25 +186,26 @@ class FillLineup
                          */
                         $player = $players[0];
 
-                        if (!$lineup) {
-                            $lineup = new Lineup();
-                            $lineup->position_id = $lineupPositionId;
-                            $lineup->team_id = $teamId;
-                            $lineup->national_id = $nationalId;
-                            $lineup->game_id = $game->id;
+                        if ($lineup) {
+                            $lineup->player_id = $player->id;
+                            $lineup->save(false, [
+                                'player_id',
+                            ]);
+                        } else {
+                            $insertData[] = [$lineupPositionId, $teamId, $nationalId, $game->id, $player->id];
+                            $playerIds[] = $player->id;
                         }
 
-                        $lineup->player_id = $player->id;
-                        $lineup->save(false, [
-                            'position_id',
-                            'team_id',
-                            'national_id',
-                            'game_id',
-                            'player_id',
-                        ]);
                     }
                 }
             }
+
+            Yii::$app->db->createCommand()->batchInsert(
+                Lineup::tableName(),
+                ['position_id', 'team_id', 'national_id', 'game_id', 'player_id'],
+                $insertData
+            )->execute();
+
             Yii::$app->controller->stdout('.');
         }
     }

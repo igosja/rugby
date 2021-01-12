@@ -9,6 +9,7 @@ use common\models\db\Schedule;
 use common\models\db\StatisticPlayer;
 use common\models\db\TournamentType;
 use Exception;
+use Yii;
 
 /**
  * Class LineupToStatistic
@@ -22,6 +23,8 @@ class LineupToStatistic
      */
     public function execute(): void
     {
+        $insertData = [];
+
         $gameArray = Game::find()
             ->with(['schedule', 'lineups', 'homeNational.worldCup', 'homeTeam.championship'])
             ->where(['played' => null])
@@ -65,17 +68,23 @@ class LineupToStatistic
                 ])->count();
 
                 if (!$check) {
-                    $model = new StatisticPlayer();
-                    $model->federation_id = $federationId;
-                    $model->division_id = $divisionId;
-                    $model->national_id = $lineup->national_id;
-                    $model->player_id = $lineup->player_id;
-                    $model->season_id = $game->schedule->season_id;
-                    $model->team_id = $lineup->team_id;
-                    $model->tournament_type_id = $game->schedule->tournament_type_id;
-                    $model->save();
+                    $insertData[] = [
+                        $federationId,
+                        $divisionId,
+                        $lineup->national_id,
+                        $lineup->player_id,
+                        $game->schedule->season_id,
+                        $lineup->team_id,
+                        $game->schedule->tournament_type_id,
+                    ];
                 }
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            StatisticPlayer::tableName(),
+            ['federation_id', 'division_id', 'national_id', 'player_id', 'season_id', 'team_id', 'tournament_type_id'],
+            $insertData
+        )->execute();
     }
 }

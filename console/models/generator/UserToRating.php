@@ -8,6 +8,7 @@ use common\models\db\Season;
 use common\models\db\Team;
 use common\models\db\UserRating;
 use Exception;
+use Yii;
 
 /**
  * Class UserToRating
@@ -21,6 +22,8 @@ class UserToRating
     public function execute(): void
     {
         $seasonId = Season::getCurrentSeason();
+
+        $insertData = [];
 
         $teamArray = Team::find()
             ->where(['!=', 'user_id', 0])
@@ -36,9 +39,7 @@ class UserToRating
             ])->count();
 
             if (!$check) {
-                $model = new UserRating();
-                $model->user_id = $team->user_id;
-                $model->save();
+                $insertData[] = [$team->user_id, null];
             }
 
             $check = UserRating::find()->where([
@@ -47,11 +48,14 @@ class UserToRating
             ])->count();
 
             if (!$check) {
-                $model = new UserRating();
-                $model->user_id = $team->user_id;
-                $model->season_id = $seasonId;
-                $model->save();
+                $insertData[] = [$team->user_id, $seasonId];
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            UserRating::tableName(),
+            ['user_id', 'season_id'],
+            $insertData
+        )->execute();
     }
 }

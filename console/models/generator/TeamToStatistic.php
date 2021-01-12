@@ -9,6 +9,7 @@ use common\models\db\Schedule;
 use common\models\db\StatisticTeam;
 use common\models\db\TournamentType;
 use Exception;
+use Yii;
 
 /**
  * Class TeamToStatistic
@@ -22,6 +23,8 @@ class TeamToStatistic
      */
     public function execute(): void
     {
+        $insertData = [];
+
         $gameArray = Game::find()
             ->with(['schedule', 'stadium.team', 'homeNational.worldCup', 'homeTeam.championship'])
             ->where(['played' => null])
@@ -63,14 +66,14 @@ class TeamToStatistic
             ])->count();
 
             if (!$check) {
-                $model = new StatisticTeam();
-                $model->federation_id = $federationId;
-                $model->division_id = $divisionId;
-                $model->national_id = $game->home_national_id;
-                $model->season_id = $game->schedule->season_id;
-                $model->team_id = $game->home_team_id;
-                $model->tournament_type_id = $game->schedule->tournament_type_id;
-                $model->save();
+                $insertData[] = [
+                    $federationId,
+                    $divisionId,
+                    $game->home_national_id,
+                    $game->schedule->season_id,
+                    $game->home_team_id,
+                    $game->schedule->tournament_type_id,
+                ];
             }
 
             $check = StatisticTeam::find()->where([
@@ -83,15 +86,21 @@ class TeamToStatistic
             ])->count();
 
             if (!$check) {
-                $model = new StatisticTeam();
-                $model->federation_id = $federationId;
-                $model->division_id = $divisionId;
-                $model->national_id = $game->guest_national_id;
-                $model->season_id = $game->schedule->season_id;
-                $model->team_id = $game->guest_team_id;
-                $model->tournament_type_id = $game->schedule->tournament_type_id;
-                $model->save();
+                $insertData[] = [
+                    $federationId,
+                    $divisionId,
+                    $game->guest_national_id,
+                    $game->schedule->season_id,
+                    $game->guest_team_id,
+                    $game->schedule->tournament_type_id,
+                ];
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            StatisticTeam::tableName(),
+            ['federation_id', 'division_id', 'national_id', 'season_id', 'team_id', 'tournament_type_id'],
+            $insertData
+        )->execute();
     }
 }
