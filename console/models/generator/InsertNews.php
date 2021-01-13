@@ -136,6 +136,7 @@ class InsertNews
         $preNews->save();
 
         $model = new News();
+        $model->check = time();
         $model->text = $text;
         $model->title = $title;
         $model->user_id = User::ADMIN_USER_ID;

@@ -168,7 +168,13 @@ class LineupController extends AbstractController
          * @var Player[] $playerArray
          */
         $playerArray = Player::find()
-            ->with(['playerPositions.position', 'playerSpecials.special', 'squad'])
+            ->with([
+                'name',
+                'playerPositions.position',
+                'playerSpecials.special',
+                'squad',
+                'surname',
+            ])
             ->where([
                 'or',
                 ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],

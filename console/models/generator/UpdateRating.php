@@ -132,7 +132,7 @@ class UpdateRating
                     /**
                      * @var Team $team
                      */
-                    if (!isset($teamInsertData[$team->id])) {
+                    if (!array_key_exists($team->id, $teamInsertData)) {
                         $teamInsertData[$team->id] = [$team->id];
                     }
                     $teamInsertData[$team->id][] = $position;
@@ -180,9 +180,9 @@ class UpdateRating
                      * @var User $user
                      */
                     if (!isset($userInsertData[$user->id])) {
-                        $teamInsertData[$user->id] = [$user->id];
+                        $userInsertData[$user->id] = [$user->id];
                     }
-                    $teamInsertData[$user->id][] = $position;
+                    $userInsertData[$user->id][] = $position;
                     $position++;
                 }
             } elseif (in_array($ratingType->id, [RatingType::FEDERATION_AUTO, RatingType::FEDERATION_STADIUM], true)) {
@@ -272,12 +272,12 @@ class UpdateRating
             RatingTeam::tableName(),
             $teamInsertKeys,
             $teamInsertData,
-        );
+        )->execute();
 
         Yii::$app->db->createCommand()->batchInsert(
             RatingUser::tableName(),
             $userInsertKeys,
             $userInsertData,
-        );
+        )->execute();
     }
 }
