@@ -206,7 +206,6 @@ class TeamController extends AbstractController
             if ($team->id === $game->home_team_id) {
                 if ($game->home_point > $game->guest_point) {
                     $totalGameResult['win']++;
-                    $totalGameResult['winOver']++;
                 } elseif ($game->home_point === $game->guest_point) {
                     $totalGameResult['draw']++;
                 } else {

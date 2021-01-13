@@ -108,14 +108,14 @@ class ConferenceController extends AbstractController
                     'tournament_type_id' => TournamentType::CONFERENCE,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
                     'tournament_type_id' => TournamentType::CONFERENCE,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
         $dataProvider = new ActiveDataProvider([

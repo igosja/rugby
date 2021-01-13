@@ -121,14 +121,14 @@ class OffSeasonController extends AbstractController
                     'tournament_type_id' => TournamentType::OFF_SEASON,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
                     'tournament_type_id' => TournamentType::OFF_SEASON,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
         $dataProvider = new ActiveDataProvider([

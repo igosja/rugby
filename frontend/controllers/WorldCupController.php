@@ -271,7 +271,7 @@ class WorldCupController extends AbstractController
                     'tournament_type_id' => TournamentType::NATIONAL,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
@@ -279,7 +279,7 @@ class WorldCupController extends AbstractController
                     'tournament_type_id' => TournamentType::CHAMPIONSHIP,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
         $dataProvider = new ActiveDataProvider([
