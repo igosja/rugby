@@ -50,23 +50,10 @@ class UpdateRating
                 ORDER BY `federation`.`id`";
         Yii::$app->db->createCommand($sql)->execute();
 
-        $sql = "INSERT INTO `rating_team` (`team_id`)
-                SELECT `id`
-                FROM `team`
-                WHERE `id`!=0
-                ORDER BY `id`";
-        Yii::$app->db->createCommand($sql)->execute();
-
-        $sql = "INSERT INTO `rating_user` (`user_id`)
-                SELECT `user`.`id`
-                FROM `user`
-                LEFT JOIN `team`
-                ON `user`.`id`=`user_id`
-                WHERE `team`.`id` IS NOT NULL
-                AND `user`.`id`!=0
-                GROUP BY `user`.`id`
-                ORDER BY `user`.`id`";
-        Yii::$app->db->createCommand($sql)->execute();
+        $teamInsertData = [];
+        $teamInsertKeys = ['team_id'];
+        $userInsertData = [];
+        $userInsertKeys = ['user_id'];
 
         $ratingTypeArray = RatingType::find()
             ->orderBy(['rating_chapter_id' => SORT_ASC, 'id' => SORT_ASC])
@@ -134,6 +121,8 @@ class UpdateRating
                 RatingType::TEAM_STADIUM,
                 RatingType::TEAM_VISITOR,
             ], true)) {
+                $teamInsertKeys[] = $place;
+
                 $position = 1;
                 $teamArray = Team::find()
                     ->where(['!=', 'id', 0])
@@ -143,13 +132,17 @@ class UpdateRating
                     /**
                      * @var Team $team
                      */
-                    RatingTeam::updateAll([$place => $position], ['team_id' => $team->id]);
+                    if (!isset($teamInsertData[$team->id])) {
+                        $teamInsertData[$team->id] = [$team->id];
+                    }
+                    $teamInsertData[$team->id][] = $position;
                     $position++;
                 }
 
                 $place .= '_federation';
+                $teamInsertKeys[] = $place;
                 $federationArray = Federation::find()
-                    ->joinWith(['country.cities.stadiums.team'])
+                    ->joinWith(['country.cities.stadiums.team'], false)
                     ->where(['!=', 'team.id', 0])
                     ->groupBy(['federation.id'])
                     ->orderBy(['federation.id' => SORT_ASC])
@@ -160,7 +153,7 @@ class UpdateRating
                      */
                     $position = 1;
                     $teamArray = Team::find()
-                        ->joinWith(['stadium.city'])
+                        ->joinWith(['stadium.city'], false)
                         ->where(['country_id' => $federation->country_id])
                         ->orderBy(new Expression($order . ', `id`'))
                         ->each();
@@ -168,14 +161,15 @@ class UpdateRating
                         /**
                          * @var Team $team
                          */
-                        RatingTeam::updateAll([$place => $position], ['team_id' => $team->id]);
+                        $teamInsertData[$team->id][] = $position;
                         $position++;
                     }
                 }
             } elseif (RatingType::USER_RATING === $ratingType->id) {
+                $userInsertKeys[] = $place;
                 $position = 1;
                 $userArray = User::find()
-                    ->joinWith(['teams'])
+                    ->joinWith(['teams'], false)
                     ->where(['not', ['team.id' => null]])
                     ->andWhere(['!=', 'user.id', 0])
                     ->groupBy(['user.id'])
@@ -185,13 +179,16 @@ class UpdateRating
                     /**
                      * @var User $user
                      */
-                    RatingUser::updateAll([$place => $position], ['user_id' => $user->id]);
+                    if (!isset($userInsertData[$user->id])) {
+                        $teamInsertData[$user->id] = [$user->id];
+                    }
+                    $teamInsertData[$user->id][] = $position;
                     $position++;
                 }
             } elseif (in_array($ratingType->id, [RatingType::FEDERATION_AUTO, RatingType::FEDERATION_STADIUM], true)) {
                 $position = 1;
                 $federationArray = Federation::find()
-                    ->joinWith(['country.cities'])
+                    ->joinWith(['country.cities'], false)
                     ->where(['!=', 'city.id', 0])
                     ->groupBy(['federation.id'])
                     ->orderBy(new Expression($order . ', `federation`.`id`'))
@@ -200,10 +197,7 @@ class UpdateRating
                     /**
                      * @var Federation $federation
                      */
-                    RatingFederation::updateAll(
-                        [$place => $position],
-                        ['federation_id' => $federation->id]
-                    );
+                    RatingFederation::updateAll([$place => $position], ['federation_id' => $federation->id]);
                     $position++;
                 }
             } elseif (RatingType::FEDERATION_LEAGUE === $ratingType->id) {
@@ -273,5 +267,17 @@ class UpdateRating
                 }
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            RatingTeam::tableName(),
+            $teamInsertKeys,
+            $teamInsertData,
+        );
+
+        Yii::$app->db->createCommand()->batchInsert(
+            RatingUser::tableName(),
+            $userInsertKeys,
+            $userInsertData,
+        );
     }
 }

@@ -93,7 +93,17 @@ class Standing
                     $model->point_against += $game->guest_point;
                     $model->point_for += $game->home_point;
                     $model->win += $homeWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'home',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
 
                 $model = Conference::find()->where([
@@ -110,7 +120,17 @@ class Standing
                     $model->point_against += $game->home_point;
                     $model->point_for += $game->guest_point;
                     $model->win += $guestWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'guest',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
             } elseif (TournamentType::OFF_SEASON === $game->schedule->tournament_type_id) {
                 $model = OffSeason::find()->where([
@@ -127,7 +147,17 @@ class Standing
                     $model->point_against += $game->guest_point;
                     $model->point_for += $game->home_point;
                     $model->win += $homeWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'home',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
 
                 $model = OffSeason::find()->where([
@@ -144,7 +174,17 @@ class Standing
                     $model->point_against += $game->home_point;
                     $model->point_for += $game->guest_point;
                     $model->win += $guestWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'guest',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
             } elseif (TournamentType::CHAMPIONSHIP === $game->schedule->tournament_type_id) {
                 $model = Championship::find()->where([
@@ -160,7 +200,16 @@ class Standing
                     $model->point_against += $game->guest_point;
                     $model->point_for += $game->home_point;
                     $model->win += $homeWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
 
                 $model = Championship::find()->where([
@@ -176,7 +225,16 @@ class Standing
                     $model->point_against += $game->home_point;
                     $model->point_for += $game->guest_point;
                     $model->win += $guestWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
             } elseif (TournamentType::LEAGUE === $game->schedule->tournament_type_id &&
                 $game->schedule->stage_id >= Stage::TOUR_LEAGUE_1 &&
@@ -194,7 +252,16 @@ class Standing
                     $model->point_against += $game->guest_point;
                     $model->point_for += $game->home_point;
                     $model->win += $homeWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
 
                 $model = League::find()->where([
@@ -210,7 +277,16 @@ class Standing
                     $model->point_against += $game->home_point;
                     $model->point_for += $game->guest_point;
                     $model->win += $guestWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
             } elseif (TournamentType::NATIONAL === $game->schedule->tournament_type_id) {
                 $model = WorldCup::find()->where([
@@ -226,7 +302,16 @@ class Standing
                     $model->point_against += $game->guest_point;
                     $model->point_for += $game->home_point;
                     $model->win += $homeWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
 
                 $model = WorldCup::find()->where([
@@ -242,7 +327,16 @@ class Standing
                     $model->point_against += $game->home_point;
                     $model->point_for += $game->guest_point;
                     $model->win += $guestWin;
-                    $model->save();
+                    $model->save(true, [
+                        'bonus_loose',
+                        'bonus_try',
+                        'draw',
+                        'game',
+                        'loose',
+                        'point_against',
+                        'point_for',
+                        'win',
+                    ]);
                 }
             }
         }
