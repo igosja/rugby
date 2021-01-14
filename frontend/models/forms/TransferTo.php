@@ -15,7 +15,6 @@ use common\models\db\Transfer;
 use Throwable;
 use Yii;
 use yii\base\Model;
-use yii\db\Exception;
 
 /**
  * Class TransferTo
@@ -67,37 +66,36 @@ class TransferTo extends Model
     public function attributeLabels(): array
     {
         return [
-            'price' => 'Начальная цена',
-            'toLeague' => 'Продать Лиге',
+            'price' => Yii::t('frontend', 'models.forms.transfer-to.label.price'),
+            'toLeague' => Yii::t('frontend', 'models.forms.transfer-to.label.to-league'),
         ];
     }
 
     /**
      * @return bool
-     * @throws Exception
      */
-    public function execute()
+    public function execute(): bool
     {
         if (!$this->validate()) {
             return false;
         }
 
         if ($this->player->transfer) {
-            Yii::$app->session->setFlash('error', 'Игрок уже выставлен на трансфер.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.transfer-to.error.on-transfer'));
             return false;
         }
 
         if ($this->player->national_id) {
-            Yii::$app->session->setFlash('error', 'Нельзя продать игрока сборной.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.transfer-to.error.national'));
             return false;
         }
 
         if ($this->player->date_no_action > time()) {
             Yii::$app->session->setFlash(
                 'error',
-                'С игроком нельзя совершать никаких действий до '
-                . FormatHelper::asDate($this->player->date_no_action)
-                . '.'
+                Yii::t('frontend', 'models.forms.transfer-to.error.no-action', [
+                    'value' => FormatHelper::asDate($this->player->date_no_action)
+                ])
             );
             return false;
         }
@@ -105,7 +103,7 @@ class TransferTo extends Model
         if ($this->player->is_no_deal) {
             Yii::$app->session->setFlash(
                 'error',
-                'Игрока нельзя выставить на трансфер до конца сезона.'
+                Yii::t('frontend', 'models.forms.transfer-to.error.no-deal')
             );
             return false;
         }
@@ -113,7 +111,7 @@ class TransferTo extends Model
         if ($this->player->loan_team_id) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя выставить на трансфер игроков, отданных в данный момент в аренду.'
+                Yii::t('frontend', 'models.forms.transfer-to.error.in-loan')
             );
             return false;
         }
@@ -125,7 +123,7 @@ class TransferTo extends Model
         if ($count > 5) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя одновременно выставлять на трансферный рынок более пяти игроков.'
+                Yii::t('frontend', 'models.forms.transfer-to.error.limit-on-market')
             );
             return false;
         }
@@ -147,18 +145,8 @@ class TransferTo extends Model
         if ($count < 25) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя продать полевого игрока, если у вас в команде останется менее двадцати полевых игроков.'
+                Yii::t('frontend', 'models.forms.transfer-to.error.limit-in-team')
             );
-            return false;
-        }
-
-        if ($this->player->age < 18) {
-            Yii::$app->session->setFlash('error', 'Нельзя продавать игроков младше 18 лет.');
-            return false;
-        }
-
-        if ($this->player->age > 33) {
-            Yii::$app->session->setFlash('error', 'Нельзя продавать игроков старше 34 лет.');
             return false;
         }
 
@@ -167,7 +155,7 @@ class TransferTo extends Model
             ->count();
 
         if ($count) {
-            Yii::$app->session->setFlash('error', 'You can not sell a player who is in training.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.transfer-to.error.training'));
             return false;
         }
 
@@ -187,7 +175,7 @@ class TransferTo extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Игрок успешно выставлен на трансфер.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.transfer-to.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();
