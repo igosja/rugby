@@ -33,8 +33,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [

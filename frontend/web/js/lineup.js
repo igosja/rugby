@@ -289,16 +289,9 @@ function send_ajax() {
         url: url,
         success: function (data) {
             $('.span-power').html(data.power);
-            $('.span-power-line-1').html(data.power_line_1);
-            $('.span-power-line-2').html(data.power_line_2);
-            $('.span-power-line-3').html(data.power_line_3);
-            $('.span-power-line-4').html(data.power_line_4);
             $('.span-position-percent').html(data.position);
             $('.span-lineup-percent').html(data.lineup);
-            $('.span-teamwork-1').html(data.teamwork_1);
-            $('.span-teamwork-2').html(data.teamwork_2);
-            $('.span-teamwork-3').html(data.teamwork_3);
-            $('.span-teamwork-4').html(data.teamwork_4);
+            $('.span-teamwork').html(data.teamwork);
         }
     });
 }

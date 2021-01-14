@@ -7,8 +7,10 @@ namespace console\models\generator;
 use common\models\db\Finance;
 use common\models\db\FinanceText;
 use common\models\db\Player;
+use common\models\db\Season;
 use common\models\db\Team;
 use Exception;
+use Yii;
 
 /**
  * Class TakeSalary
@@ -22,6 +24,9 @@ class TakeSalary
      */
     public function execute(): void
     {
+        $insertData = [];
+        $seasonId = Season::getCurrentSeason();
+
         $teamArray = Team::find()
             ->where(['!=', 'id', 0])
             ->orderBy(['id' => SORT_ASC])
@@ -35,16 +40,24 @@ class TakeSalary
                 ->orWhere(['loan_team_id' => $team->id])
                 ->sum('salary');
 
-            Finance::log([
-                'finance_text_id' => FinanceText::OUTCOME_SALARY,
-                'team_id' => $team->id,
-                'value' => -$salary,
-                'value_after' => $team->finance - $salary,
-                'value_before' => $team->finance,
-            ]);
+            $insertData[] = [
+                FinanceText::OUTCOME_SALARY,
+                $team->id,
+                -$salary,
+                $team->finance - $salary,
+                $team->finance,
+                time(),
+                $seasonId,
+            ];
 
             $team->finance -= $salary;
-            $team->save();
+            $team->save(true, ['finance']);
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            Finance::tableName(),
+            ['finance_text_id', 'team_id', 'value', 'value_after', 'value_before', 'date', 'season_id'],
+            $insertData
+        )->execute();
     }
 }

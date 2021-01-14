@@ -60,7 +60,8 @@ class OffSeasonController extends AbstractController
         $federationId = Yii::$app->request->get('federationId');
 
         $query = OffSeason::find()
-            ->joinWith(['team.stadium.city.country.federation'])
+            ->joinWith(['team.stadium.city.country.federation'], false)
+            ->with(['team.stadium.city.country.federation'])
             ->where(['season_id' => $seasonId])
             ->andFilterWhere(['federation.id' => $federationId])
             ->orderBy(['place' => SORT_ASC]);
@@ -120,14 +121,14 @@ class OffSeasonController extends AbstractController
                     'tournament_type_id' => TournamentType::OFF_SEASON,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
                     'tournament_type_id' => TournamentType::OFF_SEASON,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
         $dataProvider = new ActiveDataProvider([

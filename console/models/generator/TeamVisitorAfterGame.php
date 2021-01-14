@@ -9,6 +9,7 @@ use common\models\db\Schedule;
 use common\models\db\TeamVisitor;
 use common\models\db\TournamentType;
 use Exception;
+use Yii;
 
 /**
  * Class TeamVisitorAfterGame
@@ -21,6 +22,8 @@ class TeamVisitorAfterGame
      */
     public function execute(): void
     {
+        $insertData = [];
+
         $gameArray = Game::find()
             ->where(['played' => null])
             ->andWhere([
@@ -48,15 +51,14 @@ class TeamVisitorAfterGame
             $homeVisitor = round(95 + ($homePoints - $guestPoints) * 5 / 8);
             $guestVisitor = round(95 + ($guestPoints - $homePoints) * 5 / 8);
 
-            $model = new TeamVisitor();
-            $model->team_id = $game->home_team_id;
-            $model->visitor = $homeVisitor;
-            $model->save();
-
-            $model = new TeamVisitor();
-            $model->team_id = $game->guest_team_id;
-            $model->visitor = $guestVisitor;
-            $model->save();
+            $insertData[] = [$game->home_team_id, $homeVisitor];
+            $insertData[] = [$game->guest_team_id, $guestVisitor];
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            TeamVisitor::tableName(),
+            ['team_id', 'visitor'],
+            $insertData
+        )->execute();
     }
 }

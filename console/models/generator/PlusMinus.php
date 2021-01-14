@@ -10,8 +10,10 @@ use common\models\db\HistoryText;
 use common\models\db\Lineup;
 use common\models\db\Mood;
 use common\models\db\Schedule;
+use common\models\db\Season;
 use common\models\db\TournamentType;
 use Exception;
+use Yii;
 use yii\db\Expression;
 
 /**
@@ -33,6 +35,9 @@ class PlusMinus
      */
     public function execute(): void
     {
+        $insertData = [];
+        $seasonId = Season::getCurrentSeason();
+
         $gameArray = Game::find()
             ->with(['schedule'])
             ->where(['played' => null])
@@ -105,7 +110,22 @@ class PlusMinus
             $this->game->home_plus_minus_optimality_2 = $homeOptimality2;
             $this->game->home_plus_minus_power = $homePower;
             $this->game->home_plus_minus_score = $homePoints;
-            $this->game->save();
+            $this->game->save(true, [
+                'guest_plus_minus',
+                'guest_plus_minus_competition',
+                'guest_plus_minus_mood',
+                'guest_plus_minus_optimality_1',
+                'guest_plus_minus_optimality_2',
+                'guest_plus_minus_power',
+                'guest_plus_minus_score',
+                'home_plus_minus',
+                'home_plus_minus_competition',
+                'home_plus_minus_mood',
+                'home_plus_minus_optimality_1',
+                'home_plus_minus_optimality_2',
+                'home_plus_minus_power',
+                'home_plus_minus_score',
+            ]);
         }
 
         $subQuery = Schedule::find()
@@ -155,11 +175,13 @@ class PlusMinus
                     $lineup->power_change = -1;
                     $lineup->save(true, ['power_change']);
 
-                    History::log([
-                        'game_id' => $this->game->id,
-                        'history_text_id' => HistoryText::PLAYER_GAME_POINT_MINUS,
-                        'player_id' => $lineup->player_id,
-                    ]);
+                    $insertData[] = [
+                        $this->game->id,
+                        HistoryText::PLAYER_GAME_POINT_MINUS,
+                        $lineup->player_id,
+                        time(),
+                        $seasonId,
+                    ];
                 }
             } elseif ($this->game->home_plus_minus > 0) {
                 /**
@@ -183,11 +205,13 @@ class PlusMinus
                     $lineup->power_change = 1;
                     $lineup->save(true, ['power_change']);
 
-                    History::log([
-                        'game_id' => $this->game->id,
-                        'history_text_id' => HistoryText::PLAYER_GAME_POINT_PLUS,
-                        'player_id' => $lineup->player_id,
-                    ]);
+                    $insertData[] = [
+                        $this->game->id,
+                        HistoryText::PLAYER_GAME_POINT_PLUS,
+                        $lineup->player_id,
+                        time(),
+                        $seasonId,
+                    ];
                 }
             }
 
@@ -213,11 +237,13 @@ class PlusMinus
                     $lineup->power_change = -1;
                     $lineup->save(true, ['power_change']);
 
-                    History::log([
-                        'game_id' => $this->game->id,
-                        'history_text_id' => HistoryText::PLAYER_GAME_POINT_MINUS,
-                        'player_id' => $lineup->player_id,
-                    ]);
+                    $insertData[] = [
+                        $this->game->id,
+                        HistoryText::PLAYER_GAME_POINT_MINUS,
+                        $lineup->player_id,
+                        time(),
+                        $seasonId,
+                    ];
                 }
             } elseif ($this->game->guest_plus_minus > 0) {
                 /**
@@ -241,14 +267,22 @@ class PlusMinus
                     $lineup->power_change = 1;
                     $lineup->save(true, ['power_change']);
 
-                    History::log([
-                        'game_id' => $this->game->id,
-                        'history_text_id' => HistoryText::PLAYER_GAME_POINT_MINUS,
-                        'player_id' => $lineup->player_id,
-                    ]);
+                    $insertData[] = [
+                        $this->game->id,
+                        HistoryText::PLAYER_GAME_POINT_PLUS,
+                        $lineup->player_id,
+                        time(),
+                        $seasonId,
+                    ];
                 }
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            History::tableName(),
+            ['game_id', 'history_text_id', 'player_id', 'date', 'season_id'],
+            $insertData
+        )->execute();
     }
 
     /**

@@ -8,8 +8,10 @@ use common\models\db\Finance;
 use common\models\db\FinanceText;
 use common\models\db\Game;
 use common\models\db\Schedule;
+use common\models\db\Season;
 use common\models\db\TournamentType;
 use Exception;
+use Yii;
 
 /**
  * Class FinanceStadium
@@ -31,10 +33,22 @@ class FinanceStadium
     private $income;
 
     /**
+     * @var array $logData
+     */
+    private $logData;
+
+    /**
+     * @var int $seasonId
+     */
+    private $seasonId;
+
+    /**
      * @throws Exception
      */
     public function execute(): void
     {
+        $this->seasonId = Season::getCurrentSeason();
+
         $gameArray = Game::find()
             ->with(['schedule', 'stadium.team', 'homeNational', 'guestNational', 'homeTeam', 'guestTeam'])
             ->where(['played' => null])
@@ -57,6 +71,12 @@ class FinanceStadium
                 $this->defaultGame();
             }
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            Finance::tableName(),
+            ['finance_text_id', 'national_id', 'team_id', 'value', 'value_after', 'value_before', 'date', 'season_id'],
+            $this->logData
+        )->execute();
     }
 
     /**
@@ -67,40 +87,52 @@ class FinanceStadium
         $income = floor($this->income / 2);
         $outcome = floor($this->game->stadium->maintenance / 2);
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'team_id' => $this->game->homeTeam->id,
-            'value' => $income,
-            'value_after' => $this->game->homeTeam->finance + $income,
-            'value_before' => $this->game->homeTeam->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            null,
+            $this->game->homeTeam->id,
+            $income,
+            $this->game->homeTeam->finance + $income,
+            $this->game->homeTeam->finance,
+            time(),
+            $this->seasonId,
+        ];
 
-        Finance::log([
-            'finance_text_id' => FinanceText::OUTCOME_GAME,
-            'team_id' => $this->game->homeTeam->id,
-            'value' => -$outcome,
-            'value_after' => $this->game->homeTeam->finance + $income - $outcome,
-            'value_before' => $this->game->homeTeam->finance + $income,
-        ]);
+        $this->logData[] = [
+            FinanceText::OUTCOME_GAME,
+            null,
+            $this->game->homeTeam->id,
+            -$outcome,
+            $this->game->homeTeam->finance + $income - $outcome,
+            $this->game->homeTeam->finance + $income,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->homeTeam->finance = $this->game->homeTeam->finance + $income - $outcome;
         $this->game->homeTeam->save(true, ['finance']);
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'team_id' => $this->game->guestTeam->id,
-            'value' => $income,
-            'value_after' => $this->game->guestTeam->finance + $income,
-            'value_before' => $this->game->guestTeam->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            null,
+            $this->game->guestTeam->id,
+            $income,
+            $this->game->guestTeam->finance + $income,
+            $this->game->guestTeam->finance,
+            time(),
+            $this->seasonId,
+        ];
 
-        Finance::log([
-            'finance_text_id' => FinanceText::OUTCOME_GAME,
-            'team_id' => $this->game->guestTeam->id,
-            'value' => -$outcome,
-            'value_after' => $this->game->guestTeam->finance + $income - $outcome,
-            'value_before' => $this->game->guestTeam->finance + $income,
-        ]);
+        $this->logData[] = [
+            FinanceText::OUTCOME_GAME,
+            null,
+            $this->game->guestTeam->id,
+            -$outcome,
+            $this->game->guestTeam->finance + $income - $outcome,
+            $this->game->guestTeam->finance + $income,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->guestTeam->finance = $this->game->guestTeam->finance + $income - $outcome;
         $this->game->guestTeam->save(true, ['finance']);
@@ -113,35 +145,44 @@ class FinanceStadium
     {
         $income = floor($this->income / 3);
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'national_id' => $this->game->homeNational->id,
-            'value' => $income,
-            'value_after' => $this->game->homeNational->finance + $income,
-            'value_before' => $this->game->homeNational->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            $this->game->homeNational->id,
+            null,
+            $income,
+            $this->game->homeNational->finance + $income,
+            $this->game->homeNational->finance,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->homeNational->finance += $income;
         $this->game->homeNational->save(true, ['finance']);
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'national_id' => $this->game->guestNational->id,
-            'value' => $income,
-            'value_after' => $this->game->guestNational->finance + $income,
-            'value_before' => $this->game->guestNational->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            $this->game->guestNational->id,
+            null,
+            $income,
+            $this->game->guestNational->finance + $income,
+            $this->game->guestNational->finance,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->guestNational->finance += $income;
         $this->game->guestNational->save(true, ['finance']);
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'team_id' => $this->game->stadium->team->id,
-            'value' => $income,
-            'value_after' => $this->game->stadium->team->finance + $income,
-            'value_before' => $this->game->stadium->team->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            null,
+            $this->game->stadium->team->id,
+            $income,
+            $this->game->stadium->team->finance + $income,
+            $this->game->stadium->team->finance,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->stadium->team->finance += $income;
         $this->game->stadium->team->save(true, ['finance']);
@@ -155,21 +196,27 @@ class FinanceStadium
         $income = $this->income;
         $outcome = $this->game->stadium->maintenance;
 
-        Finance::log([
-            'finance_text_id' => FinanceText::INCOME_TICKET,
-            'team_id' => $this->game->homeTeam->id,
-            'value' => $income,
-            'value_after' => $this->game->homeTeam->finance + $income,
-            'value_before' => $this->game->homeTeam->finance,
-        ]);
+        $this->logData[] = [
+            FinanceText::INCOME_TICKET,
+            null,
+            $this->game->homeTeam->id,
+            $income,
+            $this->game->homeTeam->finance + $income,
+            $this->game->homeTeam->finance,
+            time(),
+            $this->seasonId,
+        ];
 
-        Finance::log([
-            'finance_text_id' => FinanceText::OUTCOME_GAME,
-            'team_id' => $this->game->homeTeam->id,
-            'value' => -$outcome,
-            'value_after' => $this->game->homeTeam->finance + $income - $outcome,
-            'value_before' => $this->game->homeTeam->finance + $income,
-        ]);
+        $this->logData[] = [
+            FinanceText::OUTCOME_GAME,
+            null,
+            $this->game->homeTeam->id,
+            -$outcome,
+            $this->game->homeTeam->finance + $income - $outcome,
+            $this->game->homeTeam->finance + $income,
+            time(),
+            $this->seasonId,
+        ];
 
         $this->game->homeTeam->finance = $this->game->homeTeam->finance + $income - $outcome;
         $this->game->homeTeam->save(true, ['finance']);

@@ -27,7 +27,7 @@ class UserFire
         $teamArray = Team::find()
             ->joinWith(['user'])
             ->andWhere([
-                'not', ['user_id' => UserHoliday::find()->where(['date_end' => null])]
+                'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
             ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['<', 'date_vip', time()])
@@ -44,9 +44,9 @@ class UserFire
         $teamArray = Team::find()
             ->joinWith(['user'])
             ->andWhere([
-                'not', ['user_id' => UserHoliday::find()->where(['date_end' => null])]
+                'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
-            ->andWhere(['!=', 'team_user_id', 0])
+            ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['<', 'date_vip', time()])
             ->andWhere(['<', 'date_login', time() - 1296000])//15 days
             ->orderBy(['team.id' => SORT_ASC])
@@ -59,11 +59,11 @@ class UserFire
         }
 
         $teamArray = Team::find()
-            ->joinWith(['manager'])
+            ->joinWith(['user'])
             ->andWhere([
-                'not', ['user_id' => UserHoliday::find()->where(['date_end' => null])]
+                'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
-            ->andWhere(['!=', 'team_user_id', 0])
+            ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['>=', 'date_vip', time()])
             ->andWhere(['<', 'date_login', time() - 5184000])//60 days
             ->orderBy(['team.id' => SORT_ASC])

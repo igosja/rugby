@@ -455,14 +455,14 @@ class LeagueController extends AbstractController
         if (1 === $statisticType->statistic_chapter_id) {
             $query = StatisticTeam::find()
                 ->where(['tournament_type_id' => TournamentType::LEAGUE])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
                     'tournament_type_id' => TournamentType::LEAGUE,
                     'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->select_field => $statisticType->order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
         $dataProvider = new ActiveDataProvider([

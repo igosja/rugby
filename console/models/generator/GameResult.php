@@ -6,7 +6,6 @@ namespace console\models\generator;
 
 use common\models\db\Event;
 use common\models\db\EventText;
-use common\models\db\EventType;
 use common\models\db\Game;
 use common\models\db\Lineup;
 use common\models\db\National;
@@ -24,6 +23,7 @@ use common\models\db\Team;
 use common\models\db\TournamentType;
 use Exception;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class GameResult
@@ -31,6 +31,7 @@ use Yii;
  *
  * @property Game $game
  * @property array $result
+ * @property array $playerIds
  * @property array $positions
  * @property array $positions_forward
  * @property array $positions_back
@@ -60,6 +61,11 @@ class GameResult
      * @var array $result
      */
     private array $result = [];
+
+    /**
+     * @var array $playerIds
+     */
+    private array $playerIds = [];
 
     /**
      * @var array $positions
@@ -321,6 +327,7 @@ class GameResult
              * @var Lineup[] $lineupArray
              */
             $lineupArray = Lineup::find()
+                ->with(['player'])
                 ->where([
                     'game_id' => $this->result['game_info']['id'],
                     'national_id' => $this->result['game_info'][$team . '_national_id'],
@@ -342,6 +349,8 @@ class GameResult
                 } else {
                     $this->result[$team]['player']['field'][$position]['power_optimal'] = $lineupArray[$key]->player->power_real;
                 }
+
+                $this->playerIds[] = $lineupArray[$key]->player_id;
             }
 
             foreach ($lineupArray as $lineup) {
@@ -355,9 +364,15 @@ class GameResult
 
     /**
      * @return void
+     * @throws Exception
      */
     private function countPlayerBonus(): void
     {
+        $playerSpecials = PlayerSpecial::find()
+            ->where(['player_id' => $this->playerIds])
+            ->all();
+        $playerSpecialArray = ArrayHelper::index($playerSpecials, null, 'player_id');
+
         // TODO implement
         for ($i = 0; $i < 2; $i++) {
             if (0 === $i) {
@@ -376,9 +391,7 @@ class GameResult
                 /**
                  * @var PlayerSpecial[] $specialArray
                  */
-                $specialArray = PlayerSpecial::find()
-                    ->where(['player_id' => $playerId])
-                    ->all();
+                $specialArray = ArrayHelper::getValue($playerSpecialArray, $playerId, []);
 
                 foreach ($specialArray as $special) {
                     if (Special::POWER === $special->special_id) {
@@ -452,7 +465,7 @@ class GameResult
             $teamwork = 0;
 
             $games = Game::find()
-                ->joinWith(['schedule'])
+                ->joinWith(['schedule'], false)
                 ->andWhere(['not', ['played' => null]])
                 ->andWhere(['season_id' => $this->game->schedule->season_id])
                 ->andWhere(['!=', 'tournament_type_id', TournamentType::FRIENDLY])
@@ -681,6 +694,7 @@ class GameResult
 
     /**
      * @return void
+     * @throws Exception
      */
     private function playerRealPower(): void
     {
@@ -703,6 +717,12 @@ class GameResult
             Position::POS_14 => [Position::WING, $positionB],
             Position::POS_15 => [Position::FULL_BACK, $positionB],
         ];
+
+        $playerPositions = PlayerPosition::find()
+            ->where(['player_id' => $this->playerIds])
+            ->all();
+        $playerPositionArray = ArrayHelper::index($playerPositions, null, 'player_id');
+
         for ($i = 0; $i < 2; $i++) {
             if (0 === $i) {
                 $team = 'home';
@@ -714,12 +734,13 @@ class GameResult
                 $playerId = $this->result[$team]['player']['field'][$position]['player_id'];
                 $playerPower = $this->result[$team]['player']['field'][$position]['power_optimal'];
 
-                $positionArray = PlayerPosition::find()
-                    ->select(['position_id'])
-                    ->where(['player_id' => $playerId])
-                    ->column();
-                foreach ($positionArray as $key => $value) {
-                    $positionArray[$key] = (int)$value;
+                /**
+                 * @var PlayerPosition[] $positionModelArray
+                 */
+                $positionModelArray = ArrayHelper::getValue($playerPositionArray, $playerId, []);
+                $positionArray = [];
+                foreach ($positionModelArray as $playerPosition) {
+                    $positionArray[] = $playerPosition->position_id;
                 }
 
                 if (in_array($positionCoefficients[$position][0], $positionArray, true)) {
@@ -954,7 +975,6 @@ class GameResult
     {
         $this->result['event'][] = [
             'event_text_id' => EventText::YELLOW_CARD,
-            'event_type_id' => EventType::TYPE_YELLOW,
             'game_id' => $this->result['game_info']['id'],
             'guest_point' => $this->result['guest']['team']['point'],
             'home_point' => $this->result['home']['team']['point'],
@@ -1004,7 +1024,6 @@ class GameResult
     {
         $this->result['event'][] = [
             'event_text_id' => EventText::RED_CARD,
-            'event_type_id' => EventType::TYPE_RED,
             'game_id' => $this->result['game_info']['id'],
             'guest_point' => $this->result['guest']['team']['point'],
             'home_point' => $this->result['home']['team']['point'],
@@ -1251,7 +1270,6 @@ class GameResult
     {
         $this->result['event'][] = [
             'event_text_id' => $eventText,
-            'event_type_id' => EventType::TYPE_GOAL,
             'game_id' => $this->result['game_info']['id'],
             'guest_point' => $this->result['guest']['team']['point'],
             'home_point' => $this->result['home']['team']['point'],
@@ -1583,7 +1601,7 @@ class GameResult
         $this->game->guest_conversion = $this->result['guest']['team']['conversion'];
         $this->game->guest_defender_beaten = $this->result['guest']['team']['defender_beaten'];
         $this->game->guest_drop_goal = $this->result['guest']['team']['drop_goal'];
-        $this->game->guest_forecast = $this->result['guest']['team']['forecast'];
+        $this->game->guest_forecast = $this->result['guest']['team']['power']['forecast'];
         $this->game->guest_metre_gained = $this->result['guest']['team']['metre_gained'];
         $this->game->guest_optimality_1 = $this->result['guest']['team']['optimality_1'];
         $this->game->guest_optimality_2 = $this->result['guest']['team']['optimality_2'];
@@ -1606,7 +1624,7 @@ class GameResult
         $this->game->home_conversion = $this->result['home']['team']['conversion'];
         $this->game->home_defender_beaten = $this->result['home']['team']['defender_beaten'];
         $this->game->home_drop_goal = $this->result['home']['team']['drop_goal'];
-        $this->game->home_forecast = $this->result['home']['team']['forecast'];
+        $this->game->home_forecast = $this->result['home']['team']['power']['forecast'];
         $this->game->home_metre_gained = $this->result['home']['team']['metre_gained'];
         $this->game->home_optimality_1 = $this->result['home']['team']['optimality_1'];
         $this->game->home_optimality_2 = $this->result['home']['team']['optimality_2'];
@@ -1623,7 +1641,54 @@ class GameResult
         $this->game->home_try = $this->result['home']['team']['try'];
         $this->game->home_turnover_won = $this->result['home']['team']['turnover_won'];
         $this->game->home_yellow_card = $this->result['home']['team']['yellow_card'];
-        $this->game->save();
+        $this->game->save(true, [
+            'guest_carry',
+            'guest_clean_break',
+            'guest_collision',
+            'guest_conversion',
+            'guest_defender_beaten',
+            'guest_drop_goal',
+            'guest_forecast',
+            'guest_metre_gained',
+            'guest_optimality_1',
+            'guest_optimality_2',
+            'guest_pass',
+            'guest_penalty_conceded',
+            'guest_penalty_kick',
+            'guest_point',
+            'guest_possession',
+            'guest_power',
+            'guest_power_percent',
+            'guest_red_card',
+            'guest_tackle',
+            'guest_teamwork',
+            'guest_try',
+            'guest_turnover_won',
+            'guest_yellow_card',
+            'home_carry',
+            'home_clean_break',
+            'home_collision',
+            'home_conversion',
+            'home_defender_beaten',
+            'home_drop_goal',
+            'home_forecast',
+            'home_metre_gained',
+            'home_optimality_1',
+            'home_optimality_2',
+            'home_pass',
+            'home_penalty_conceded',
+            'home_penalty_kick',
+            'home_point',
+            'home_possession',
+            'home_power',
+            'home_power_percent',
+            'home_red_card',
+            'home_tackle',
+            'home_teamwork',
+            'home_try',
+            'home_turnover_won',
+            'home_yellow_card',
+        ]);
     }
 
     /**
@@ -1632,9 +1697,35 @@ class GameResult
      */
     private function eventToDataBase(): void
     {
+        $insertData = [];
+
         foreach ($this->result['event'] as $event) {
-            Event::log($event);
+            $insertData[] = [
+                $event['event_text_id'],
+                $event['game_id'],
+                $event['guest_point'],
+                $event['home_point'],
+                $event['minute'],
+                $event['national_id'],
+                $event['player_id'],
+                $event['team_id'],
+            ];
         }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            Event::tableName(),
+            [
+                'event_text_id',
+                'game_id',
+                'guest_point',
+                'home_point',
+                'minute',
+                'national_id',
+                'player_id',
+                'team_id',
+            ],
+            $insertData
+        )->execute();
     }
 
     /**
@@ -1673,7 +1764,24 @@ class GameResult
                         $model->try = $player['try'];
                         $model->turnover_won = $player['turnover_won'];
                         $model->yellow_card = $player['yellow_card'];
-                        $model->save();
+                        $model->save(true, [
+                            'age',
+                            'clean_break',
+                            'conversion',
+                            'defender_beaten',
+                            'drop_goal',
+                            'metre_gained',
+                            'pass',
+                            'penalty_kick',
+                            'point',
+                            'power_nominal',
+                            'power_real',
+                            'red_card',
+                            'tackle',
+                            'try',
+                            'turnover_won',
+                            'yellow_card',
+                        ]);
                     }
                 }
             }
@@ -1736,7 +1844,22 @@ class GameResult
                         $model->turnover_won += $player['turnover_won'];
                         $model->win += $player['win'];
                         $model->yellow_card += $player['yellow_card'];
-                        $model->save();
+                        $model->save(true, [
+                            'clean_break',
+                            'defender_beaten',
+                            'draw',
+                            'game',
+                            'loose',
+                            'metre_gained',
+                            'pass',
+                            'point',
+                            'red_card',
+                            'tackle',
+                            'try',
+                            'turnover_won',
+                            'win',
+                            'yellow_card',
+                        ]);
                     }
                 }
             }
@@ -1767,7 +1890,25 @@ class GameResult
                 $model->turnover_won += $this->result[$team]['team']['turnover_won'];
                 $model->win += $this->result[$team]['team']['win'];
                 $model->yellow_card += $this->result[$team]['team']['yellow_card'];
-                $model->save();
+                $model->save(true, [
+                    'carry',
+                    'clean_break',
+                    'defender_beaten',
+                    'draw',
+                    'drop_goal',
+                    'game',
+                    'loose',
+                    'metre_gained',
+                    'pass',
+                    'penalty_conceded',
+                    'point',
+                    'red_card',
+                    'tackle',
+                    'try',
+                    'turnover_won',
+                    'win',
+                    'yellow_card',
+                ]);
             }
         }
     }

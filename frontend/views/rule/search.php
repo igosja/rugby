@@ -22,11 +22,11 @@ use yii\widgets\ListView;
         </div>
         <?php
 
-// TODO refactor
-
         try {
             print ListView::widget([
                 'dataProvider' => $dataProvider,
+                'emptyText' => 'No results were found for "' . Yii::$app->request->get('q') . '"',
+                'emptyTextOptions' => ['class' => 'text-center'],
                 'itemOptions' => ['class' => 'row'],
                 'itemView' => '_search',
             ]);

@@ -19,8 +19,6 @@ use yii\widgets\ListView;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         print ListView::widget([
             'dataProvider' => $dataProvider,

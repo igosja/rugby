@@ -78,7 +78,7 @@ $user = $this->context->user;
                 'format' => 'raw',
                 'label' => 'Команда',
                 'value' => static function (Conference $model) {
-                    return $model->team->iconFreeTeam() . $model->team->getTeamLink();
+                    return $model->team->iconFreeTeam() . $model->team->getTeamImageLink();
                 }
             ],
             [

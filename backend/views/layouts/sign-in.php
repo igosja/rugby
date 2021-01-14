@@ -15,10 +15,7 @@ use yii\web\View;
 SignInAsset::register($this);
 
 ?>
-<?php
-
-// TODO refactor
-$this->beginPage() ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -28,26 +25,14 @@ $this->beginPage() ?>
     <link rel="icon" href="<?= Url::to('favicon.ico') ?>"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php
-
-    // TODO refactor
-    $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
-<?php
-
-// TODO refactor
-$this->beginBody() ?>
+<?php $this->beginBody() ?>
 <div class="container">
     <?= $content ?>
 </div>
-<?php
-
-// TODO refactor
-$this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php
-
-// TODO refactor
-$this->endPage() ?>
+<?php $this->endPage() ?>

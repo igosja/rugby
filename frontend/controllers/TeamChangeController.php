@@ -44,9 +44,10 @@ class TeamChangeController extends AbstractController
 
     /**
      * @param Action $action
-     * @return Response|bool
+     * @return bool|Response
      * @throws BadRequestHttpException
      * @throws ForbiddenHttpException
+     * @throws \yii\db\Exception
      */
     public function beforeAction($action)
     {

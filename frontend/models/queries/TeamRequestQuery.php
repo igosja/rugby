@@ -24,7 +24,6 @@ class TeamRequestQuery
             [
                 'id' => $teamRequestId,
                 'user_id' => $userId,
-                'ready' => null,
             ]
         );
         return true;

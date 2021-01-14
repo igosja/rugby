@@ -42,7 +42,7 @@ class LogSearch extends Model
      */
     private function models(string $chapter): array
     {
-        $path = Yii::getAlias($chapter);
+        $path = Yii::getAlias('@' . $chapter);
         if (!file_exists($path . '/runtime/logs/app.log')) {
             return [];
         }

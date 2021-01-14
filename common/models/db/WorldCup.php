@@ -55,11 +55,12 @@ class WorldCup extends AbstractActiveRecord
             [['national_type_id'], 'integer', 'min' => 0, 'max' => 1],
             [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
             [
-                ['difference', 'national_id', 'season_id', 'tries_against', 'tries_for'],
+                ['national_id', 'season_id', 'tries_against', 'tries_for'],
                 'integer',
                 'min' => 0,
                 'max' => 999
             ],
+            [['difference'], 'integer', 'min' => -999, 'max' => 999],
             [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 10],
             [['place'], 'integer', 'min' => 0, 'max' => 10],
             [['division_id'], 'integer', 'min' => 0, 'max' => 9],

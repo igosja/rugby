@@ -51,7 +51,8 @@ class OffSeason extends AbstractActiveRecord
         return [
             [['place', 'season_id', 'team_id'], 'required'],
             [['bonus_loose', 'bonus_try', 'point'], 'integer', 'min' => 0, 'max' => 99],
-            [['difference', 'season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
+            [['season_id', 'tries_against', 'tries_for'], 'integer', 'min' => 0, 'max' => 999],
+            [['difference'], 'integer', 'min' => -999, 'max' => 999],
             [['draw', 'loose', 'game', 'win'], 'integer', 'min' => 0, 'max' => 12],
             [['place', 'team_id'], 'integer', 'min' => 1],
             [['point_against', 'point_for'], 'integer', 'min' => 0, 'max' => 9999],

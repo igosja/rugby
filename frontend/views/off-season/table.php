@@ -61,8 +61,6 @@ $user = $this->context->user;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -80,7 +78,7 @@ $user = $this->context->user;
                 'format' => 'raw',
                 'label' => 'Команда',
                 'value' => static function (OffSeason $model) {
-                    return $model->team->iconFreeTeam() . $model->team->getTeamLink();
+                    return $model->team->iconFreeTeam() . $model->team->getTeamImageLink();
                 }
             ],
             [

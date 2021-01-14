@@ -30,7 +30,7 @@ class InsertOffSeason
 
         $teamArray = Team::find()
             ->where(['!=', 'team_id', 0])
-            ->orderBy(['team_id' => SORT_ASC])
+            ->orderBy('RAND()')
             ->each();
 
         $data = [];
@@ -64,7 +64,7 @@ class InsertOffSeason
         $offSeasonArray = OffSeason::find()
             ->with(['team.stadium'])
             ->where(['off_season_season_id' => $seasonId])
-            ->orderBy('RAND()')
+            ->orderBy(['id' => SORT_ASC])
             ->all();
         $countOffSeason = count($offSeasonArray);
 

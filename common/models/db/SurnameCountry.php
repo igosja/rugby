@@ -111,6 +111,6 @@ class SurnameCountry extends AbstractActiveRecord
      */
     public function getSurname(): ActiveQuery
     {
-        return $this->hasOne(Surname::class, ['id' => 'surname_id'])->cache();
+        return $this->hasOne(Surname::class, ['id' => 'surname_id']);
     }
 }

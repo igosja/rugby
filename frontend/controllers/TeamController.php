@@ -206,7 +206,6 @@ class TeamController extends AbstractController
             if ($team->id === $game->home_team_id) {
                 if ($game->home_point > $game->guest_point) {
                     $totalGameResult['win']++;
-                    $totalGameResult['winOver']++;
                 } elseif ($game->home_point === $game->guest_point) {
                     $totalGameResult['draw']++;
                 } else {
@@ -521,128 +520,130 @@ class TeamController extends AbstractController
             }
         }
 
-        $national = National::find()
-            ->where(['federation_id' => $federation->id, 'national_type_id' => NationalType::MAIN])
-            ->limit(1)
-            ->one();
-
-        if ($national && !$national->user_id && !$national->vice_user_id) {
-            $electionNational = ElectionNational::find()
-                ->where([
-                    'federation_id' => $federation->id,
-                    'national_type_id' => NationalType::MAIN,
-                    'election_status_id' => [
-                        ElectionStatus::CANDIDATES,
-                        ElectionStatus::OPEN,
-                    ],
-                ])
+        if ($this->season->id > 1) {
+            $national = National::find()
+                ->where(['federation_id' => $federation->id, 'national_type_id' => NationalType::MAIN])
                 ->limit(1)
                 ->one();
 
-            if (!$electionNational) {
-                $electionNational = new ElectionNational();
-                $electionNational->election_status_id = ElectionStatus::CANDIDATES;
-                $electionNational->federation_id = $federation->id;
-                $electionNational->national_type_id = NationalType::MAIN;
-                $electionNational->save();
+            if ($national && !$national->user_id && !$national->vice_user_id) {
+                $electionNational = ElectionNational::find()
+                    ->where([
+                        'federation_id' => $federation->id,
+                        'national_type_id' => NationalType::MAIN,
+                        'election_status_id' => [
+                            ElectionStatus::CANDIDATES,
+                            ElectionStatus::OPEN,
+                        ],
+                    ])
+                    ->limit(1)
+                    ->one();
+
+                if (!$electionNational) {
+                    $electionNational = new ElectionNational();
+                    $electionNational->election_status_id = ElectionStatus::CANDIDATES;
+                    $electionNational->federation_id = $federation->id;
+                    $electionNational->national_type_id = NationalType::MAIN;
+                    $electionNational->save();
+                }
+
+                if (ElectionStatus::CANDIDATES === $electionNational->election_status_id) {
+                    $electionNationalApplication = ElectionNationalApplication::find()
+                        ->where([
+                            'election_national_id' => $electionNational->id,
+                            'user_id' => $this->user->id,
+                        ])
+                        ->count();
+                    if ($electionNationalApplication) {
+                        $result[] = 'Вы являетесь кандидатом на должность тренера национальной сборной. ' . Html::a(
+                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                ['national-election/application']
+                            );
+                    } else {
+                        $result[] = 'В вашей стране открыт прием заявок от кандидатов тренеров национальной сборной. ' . Html::a(
+                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                ['national-election/application']
+                            );
+                    }
+                } elseif (ElectionStatus::OPEN === $electionNational->election_status_id) {
+                    $electionNationalVote = ElectionNationalVote::find()
+                        ->where([
+                            'election_national_application_id' => ElectionNationalApplication::find()
+                                ->select(['id'])
+                                ->where(['election_national_id' => $electionNational->id]),
+                            'user_id' => $this->user->id,
+                        ])
+                        ->count();
+
+                    if (!$electionNationalVote) {
+                        Yii::$app->controller->redirect(['national-election/poll']);
+                    }
+
+                    $result[] = 'В вашей стране проходят выборы тренера национальной сборной. ' . Html::a(
+                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            ['national-election/view']
+                        );
+                }
             }
 
-            if (ElectionStatus::CANDIDATES === $electionNational->election_status_id) {
-                $electionNationalApplication = ElectionNationalApplication::find()
+            if ($national && $national->user_id && !$national->vice_user_id) {
+                $electionNationalVice = ElectionNationalVice::find()
                     ->where([
-                        'election_national_id' => $electionNational->id,
-                        'user_id' => $this->user->id,
+                        'federation_id' => $federation->id,
+                        'national_type_id' => NationalType::MAIN,
+                        'election_status_id' => [
+                            ElectionStatus::CANDIDATES,
+                            ElectionStatus::OPEN,
+                        ],
                     ])
-                    ->count();
-                if ($electionNationalApplication) {
-                    $result[] = 'Вы являетесь кандидатом на должность тренера национальной сборной. ' . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                            ['national-election/application']
-                        );
-                } else {
-                    $result[] = 'В вашей стране открыт прием заявок от кандидатов тренеров национальной сборной. ' . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                            ['national-election/application']
-                        );
-                }
-            } elseif (ElectionStatus::OPEN === $electionNational->election_status_id) {
-                $electionNationalVote = ElectionNationalVote::find()
-                    ->where([
-                        'election_national_application_id' => ElectionNationalApplication::find()
-                            ->select(['id'])
-                            ->where(['election_national_id' => $electionNational->id]),
-                        'user_id' => $this->user->id,
-                    ])
-                    ->count();
+                    ->limit(1)
+                    ->one();
 
-                if (!$electionNationalVote) {
-                    Yii::$app->controller->redirect(['national-election/poll']);
+                if (!$electionNationalVice) {
+                    $electionNationalVice = new ElectionNationalVice();
+                    $electionNationalVice->election_status_id = ElectionStatus::CANDIDATES;
+                    $electionNationalVice->federation_id = $federation->id;
+                    $electionNationalVice->national_type_id = NationalType::MAIN;
+                    $electionNationalVice->save();
                 }
 
-                $result[] = 'В вашей стране проходят выборы тренера национальной сборной. ' . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                        ['national-election/view']
-                    );
-            }
-        }
+                if (ElectionStatus::CANDIDATES === $electionNationalVice->election_status_id) {
+                    $electionNationalViceApplication = ElectionNationalViceApplication::find()
+                        ->where([
+                            'election_national_vice_id' => $electionNationalVice->id,
+                            'user_id' => $this->user->id,
+                        ])
+                        ->count();
+                    if ($electionNationalViceApplication) {
+                        $result[] = 'Вы являетесь кандидатом на должность заместителя тренера национальной сборной. ' . Html::a(
+                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                ['national-election-vice/application']
+                            );
+                    } else {
+                        $result[] = 'В вашей стране открыт прием заявок от кандидатов заместителей тренера национальной сборной. ' . Html::a(
+                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                ['national-election-vice/application']
+                            );
+                    }
+                } elseif (ElectionStatus::OPEN === $electionNationalVice->election_status_id) {
+                    $electionNationalVote = ElectionNationalViceVote::find()
+                        ->where([
+                            'election_national_vice_application_id' => ElectionNationalViceApplication::find()
+                                ->select(['id'])
+                                ->where(['election_national_vice_id' => $electionNationalVice->id]),
+                            'user_id' => $this->user->id,
+                        ])
+                        ->count();
 
-        if ($national && $national->user_id && !$national->vice_user_id) {
-            $electionNationalVice = ElectionNationalVice::find()
-                ->where([
-                    'federation_id' => $federation->id,
-                    'national_type_id' => NationalType::MAIN,
-                    'election_status_id' => [
-                        ElectionStatus::CANDIDATES,
-                        ElectionStatus::OPEN,
-                    ],
-                ])
-                ->limit(1)
-                ->one();
+                    if (!$electionNationalVote) {
+                        Yii::$app->controller->redirect(['national-election-vice/poll']);
+                    }
 
-            if (!$electionNationalVice) {
-                $electionNationalVice = new ElectionNationalVice();
-                $electionNationalVice->election_status_id = ElectionStatus::CANDIDATES;
-                $electionNationalVice->federation_id = $federation->id;
-                $electionNationalVice->national_type_id = NationalType::MAIN;
-                $electionNationalVice->save();
-            }
-
-            if (ElectionStatus::CANDIDATES === $electionNationalVice->election_status_id) {
-                $electionNationalViceApplication = ElectionNationalViceApplication::find()
-                    ->where([
-                        'election_national_vice_id' => $electionNationalVice->id,
-                        'user_id' => $this->user->id,
-                    ])
-                    ->count();
-                if ($electionNationalViceApplication) {
-                    $result[] = 'Вы являетесь кандидатом на должность заместителя тренера национальной сборной. ' . Html::a(
+                    $result[] = 'В вашей стране проходят выборы заместителя тренера национальной сборной. ' . Html::a(
                             '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                            ['national-election-vice/application']
-                        );
-                } else {
-                    $result[] = 'В вашей стране открыт прием заявок от кандидатов заместителей тренера национальной сборной. ' . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                            ['national-election-vice/application']
+                            ['national-election-vice/view']
                         );
                 }
-            } elseif (ElectionStatus::OPEN === $electionNationalVice->election_status_id) {
-                $electionNationalVote = ElectionNationalViceVote::find()
-                    ->where([
-                        'election_national_vice_application_id' => ElectionNationalViceApplication::find()
-                            ->select(['id'])
-                            ->where(['election_national_vice_id' => $electionNationalVice->id]),
-                        'user_id' => $this->user->id,
-                    ])
-                    ->count();
-
-                if (!$electionNationalVote) {
-                    Yii::$app->controller->redirect(['national-election-vice/poll']);
-                }
-
-                $result[] = 'В вашей стране проходят выборы заместителя тренера национальной сборной. ' . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
-                        ['national-election-vice/view']
-                    );
             }
         }
 

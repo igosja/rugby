@@ -45,6 +45,16 @@ class TeamQuery
     public static function getFreeTeamListQuery(): ActiveQuery
     {
         return Team::find()
+            ->with([
+                'base',
+                'baseMedical',
+                'basePhysical',
+                'baseSchool',
+                'baseScout',
+                'baseTraining',
+                'stadium.city.country',
+                'teamRequests',
+            ])
             ->where(['!=', 'id', 0])
             ->andWhere(['user_id' => 0]);
     }
@@ -110,6 +120,7 @@ class TeamQuery
     {
         return Team::find()
             ->joinWith(['user', 'stadium.city'], false)
+            ->with(['user', 'stadium.city'])
             ->where(['city.country_id' => $countryId]);
     }
 }

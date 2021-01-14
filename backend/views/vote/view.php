@@ -4,6 +4,7 @@
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\Vote;
+use common\models\db\VoteStatus;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -41,8 +42,6 @@ use yii\widgets\DetailView;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $attributes = [
             'id',
@@ -79,8 +78,6 @@ use yii\widgets\DetailView;
 </div>
 <div class="row">
     <?php
-
-// TODO refactor
 
     try {
         $columns = [

@@ -6,6 +6,7 @@ use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
 use common\models\db\TeamRequest;
+use rmrevin\yii\fontawesome\FAS;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -27,8 +28,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -37,7 +36,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1'],
                 'value' => static function (TeamRequest $model) {
                     return Html::a(
-                        '<i class="fa fa-times-circle"></i>',
+                        FAS::icon(FAS::_TIMES_CIRCLE),
                         ['delete', 'id' => $model->id],
                         ['title' => 'Удалить заявку']
                     );
@@ -78,8 +77,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -88,7 +85,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1'],
                 'value' => static function (Team $model) {
                     return Html::a(
-                        '<i class="fa fa-check-circle"></i>',
+                        FAS::icon(FAS::_CHECK_CIRCLE),
                         ['confirm', 'id' => $model->id],
                         ['title' => 'Выбрать']
                     );

@@ -4,8 +4,8 @@
 
 namespace common\components\helpers;
 
+use common\components\AbstractWebController;
 use common\models\db\User;
-use console\components\AbstractController;
 use Throwable;
 use Yii;
 use yii\base\Model;
@@ -21,7 +21,10 @@ class ErrorHelper
      */
     public static function log(Throwable $e)
     {
-        if (Yii::$app->controller instanceof AbstractController || User::ADMIN_USER_ID == Yii::$app->user->id) {
+        print '<pre>';
+        print_r($e->__toString());
+        exit;
+        if (Yii::$app->controller instanceof AbstractWebController || User::ADMIN_USER_ID === Yii::$app->user->id) {
             print '<pre>';
             print_r($e->__toString());
             exit;

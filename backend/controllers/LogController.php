@@ -15,14 +15,6 @@ use yii\web\Response;
 class LogController extends AbstractController
 {
     /**
-     * @return string
-     */
-    public function actionBackend(): string
-    {
-        return $this->prepareIndexAction('backend');
-    }
-
-    /**
      * @param string $chapter
      * @return string
      */
@@ -38,6 +30,14 @@ class LogController extends AbstractController
             'chapter' => $chapter,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionBackend(): string
+    {
+        return $this->prepareIndexAction('backend');
     }
 
     /**

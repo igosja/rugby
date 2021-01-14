@@ -39,6 +39,7 @@ class NewsQuery
     public static function getNewsListQuery(int $federationId = null): ActiveQuery
     {
         return News::find()
+            ->with(['user', 'newsComments'])
             ->andFilterWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC]);
     }
@@ -49,7 +50,7 @@ class NewsQuery
     public static function updateUserNewsId(User $user): void
     {
         $lastNewsId = self::getLastNewsId();
-        if ($user->id < $lastNewsId) {
+        if ($user->news_id < $lastNewsId) {
             User::updateAll(
                 ['news_id' => $lastNewsId],
                 ['id' => $user->id]

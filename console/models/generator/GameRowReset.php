@@ -33,7 +33,7 @@ class GameRowReset
             return;
         }
 
-        Player::updateAll(['game_row' => -1], ['<=', 'player_age', Player::AGE_READY_FOR_PENSION]);
+        Player::updateAll(['game_row' => -1], ['<=', 'age', Player::AGE_READY_FOR_PENSION]);
         Player::updateAll(
             ['game_row_old' => new Expression('game_row')],
             [

@@ -915,7 +915,7 @@ class Team extends AbstractActiveRecord
                 'место',
                 [
                     'championship/index',
-                    'countryId' => $this->championship->federation->country->id,
+                    'federationId' => $this->championship->federation->id,
                     'divisionId' => $this->championship->division->id,
                 ]
             );
@@ -947,6 +947,17 @@ class Team extends AbstractActiveRecord
     {
         return Html::a(
             $this->name,
+            ['team/view', 'id' => $this->id],
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeamCityLink(): string
+    {
+        return Html::a(
+            $this->name . ' (' . $this->stadium->city->name . ')',
             ['team/view', 'id' => $this->id],
         );
     }

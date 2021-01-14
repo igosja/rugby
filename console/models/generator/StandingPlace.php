@@ -92,7 +92,7 @@ class StandingPlace
          * @var OffSeason[] $offSeasonArray
          */
         $offSeasonArray = OffSeason::find()
-            ->joinWith(['team', false])
+            ->joinWith(['team'], false)
             ->where(['season_id' => $this->seasonId])
             ->orderBy([
                 'point' => SORT_DESC,
@@ -140,7 +140,7 @@ class StandingPlace
                  * @var Championship[] $championshipArray
                  */
                 $championshipArray = Championship::find()
-                    ->joinWith(['team', false])
+                    ->joinWith(['team'], false)
                     ->where([
                         'federation_id' => $federation->federation_id,
                         'division_id' => $division->division_id,
@@ -182,7 +182,7 @@ class StandingPlace
              * @var League[] $leagueArray
              */
             $leagueArray = League::find()
-                ->joinWith(['team', false])
+                ->joinWith(['team'], false)
                 ->where([
                     'group' => $group->group,
                     'season_id' => $this->seasonId,
@@ -234,7 +234,7 @@ class StandingPlace
                  * @var WorldCup[] $worldCupArray
                  */
                 $worldCupArray = WorldCup::find()
-                    ->joinWith(['national', false])
+                    ->joinWith(['national'], false)
                     ->where([
                         'division_id' => $division->division_id,
                         'national_type_id' => $nationalType->national_type_id,

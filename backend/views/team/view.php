@@ -30,8 +30,6 @@ use yii\widgets\DetailView;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $attributes = [
             'id',

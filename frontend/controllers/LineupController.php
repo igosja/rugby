@@ -67,8 +67,14 @@ class LineupController extends AbstractController
         }
 
         $query = Game::find()
-            ->joinWith(['schedule'])
-            ->where(['played' => null])
+            ->joinWith(['schedule'], false)
+            ->with([
+                'schedule.tournamentType',
+                'schedule.stage',
+                'guestTeam',
+                'homeTeam',
+            ])
+            ->andWhere(['played' => null])
             ->andWhere([
                 'or',
                 ['guest_team_id' => $this->myTeamOrVice->id],
@@ -82,7 +88,16 @@ class LineupController extends AbstractController
         ]);
 
         $query = Player::find()
-            ->joinWith(['country', 'playerPositions'])
+            ->joinWith(['country', 'playerPositions'], false)
+            ->with([
+                'country',
+                'name',
+                'physical',
+                'playerPositions.position',
+                'playerSpecials.special',
+                'squad',
+                'surname',
+            ])
             ->andWhere([
                 'or',
                 ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],
@@ -153,6 +168,13 @@ class LineupController extends AbstractController
          * @var Player[] $playerArray
          */
         $playerArray = Player::find()
+            ->with([
+                'name',
+                'playerPositions.position',
+                'playerSpecials.special',
+                'squad',
+                'surname',
+            ])
             ->where([
                 'or',
                 ['team_id' => $this->myTeamOrVice->id, 'loan_team_id' => null],
@@ -193,23 +215,23 @@ class LineupController extends AbstractController
             $pos15Coefficient = 0;
             $coefficientArray = [
                 'forward' => [
-                    Position::POS_01 => 'pos01Coefficient',
-                    Position::POS_02 => 'pos02Coefficient',
-                    Position::POS_03 => 'pos03Coefficient',
-                    Position::POS_04 => 'pos04Coefficient',
-                    Position::POS_05 => 'pos05Coefficient',
-                    Position::POS_06 => 'pos06Coefficient',
-                    Position::POS_07 => 'pos07Coefficient',
-                    Position::POS_08 => 'pos08Coefficient',
+                    Position::POS_01 => ['array' => 'pos01Coefficient', 'position' => Position::PROP],
+                    Position::POS_02 => ['array' => 'pos02Coefficient', 'position' => Position::HOOKER],
+                    Position::POS_03 => ['array' => 'pos03Coefficient', 'position' => Position::PROP],
+                    Position::POS_04 => ['array' => 'pos04Coefficient', 'position' => Position::LOCK],
+                    Position::POS_05 => ['array' => 'pos05Coefficient', 'position' => Position::LOCK],
+                    Position::POS_06 => ['array' => 'pos06Coefficient', 'position' => Position::FLANKER],
+                    Position::POS_07 => ['array' => 'pos07Coefficient', 'position' => Position::FLANKER],
+                    Position::POS_08 => ['array' => 'pos08Coefficient', 'position' => Position::EIGHT],
                 ],
                 'back' => [
-                    Position::POS_09 => 'pos09Coefficient',
-                    Position::POS_10 => 'pos10Coefficient',
-                    Position::POS_11 => 'pos11Coefficient',
-                    Position::POS_12 => 'pos12Coefficient',
-                    Position::POS_13 => 'pos13Coefficient',
-                    Position::POS_14 => 'pos14Coefficient',
-                    Position::POS_15 => 'pos15Coefficient',
+                    Position::POS_09 => ['array' => 'pos09Coefficient', 'position' => Position::SCRUM_HALF],
+                    Position::POS_10 => ['array' => 'pos10Coefficient', 'position' => Position::FLY_HALF],
+                    Position::POS_11 => ['array' => 'pos11Coefficient', 'position' => Position::WING],
+                    Position::POS_12 => ['array' => 'pos12Coefficient', 'position' => Position::CENTRE],
+                    Position::POS_13 => ['array' => 'pos13Coefficient', 'position' => Position::CENTRE],
+                    Position::POS_14 => ['array' => 'pos14Coefficient', 'position' => Position::WING],
+                    Position::POS_15 => ['array' => 'pos15Coefficient', 'position' => Position::FULL_BACK],
                 ],
             ];
             foreach ($player->playerPositions as $playerPosition) {
@@ -221,9 +243,10 @@ class LineupController extends AbstractController
                     $isBack = true;
                 }
 
-                foreach ($coefficientArray as $chapter) {
-                    foreach ($chapter as $position => $coefficient) {
-                        if ($position === $playerPosition->position_id) {
+                foreach ($coefficientArray as $chapter => $chapterArray) {
+                    foreach ($chapterArray as $position => $coefficientData) {
+                        $coefficient = $coefficientData['array'];
+                        if ($coefficientData['position'] === $playerPosition->position_id) {
                             if (1 > $$coefficient) {
                                 $$coefficient = 1;
                             }
@@ -541,6 +564,8 @@ class LineupController extends AbstractController
             $position = round($power / $position * 100);
 
             $lineup = round($power / $this->myTeamOrVice->power_vs * 100);
+
+            $teamwork = round($teamwork, 2);
 
             $result = [
                 'power' => $power,

@@ -39,17 +39,17 @@ class InsertAchievement
                         FROM `off_season`
                         LEFT JOIN `team`
                         ON `team_id`=`team`.`id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
                 $sql = "INSERT INTO `achievement_player` (`player_id`, `place`, `season_id`, `team_id`, `tournament_type_id`)
                         SELECT `player`.`id`, `place`, `season_id`, `team`.`id`, " . TournamentType::OFF_SEASON . "
                         FROM `off_season`
                         LEFT JOIN `team`
-                        ON `team_id`=`team_id`
+                        ON `team_id`=`team`.`id`
                         LEFT JOIN `player`
                         ON `team`.`id`=`player`.`team_id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
             } elseif (TournamentType::NATIONAL === $schedule->tournament_type_id && Stage::TOUR_11 === $schedule->stage_id) {
                 $sql = "INSERT INTO `achievement` (`place`, `division_id`, `season_id`, `national_id`, `tournament_type_id`, `user_id`)
@@ -57,7 +57,7 @@ class InsertAchievement
                         FROM `world_cup`
                         LEFT JOIN `national`
                         ON `national_id`=`national`.`id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
                 $sql = "INSERT INTO `achievement_player` (`player_id`, `place`, `division_id`, `season_id`, `national_id`, `tournament_type_id`)
@@ -73,7 +73,7 @@ class InsertAchievement
                         FROM `championship`
                         LEFT JOIN `team`
                         ON `team_id`=`team`.`id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
                 $sql = "INSERT INTO `achievement_player` (`federation_id`, `division_id`, `player_id`, `place`, `season_id`, `team_id`, `tournament_type_id`)
@@ -83,7 +83,7 @@ class InsertAchievement
                         ON `team_id`=`team`.`id`
                         LEFT JOIN `player`
                         ON `team`.`id`=`player`.`team_id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
                 $sql = "INSERT INTO `achievement` (`place`, `season_id`, `team_id`, `tournament_type_id`, `user_id`)
@@ -91,7 +91,7 @@ class InsertAchievement
                         FROM `conference`
                         LEFT JOIN `team`
                         ON `team_id`=`team`.`id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
                 $sql = "INSERT INTO `achievement_player` (`player_id`, `place`, `season_id`, `team_id`, `tournament_type_id`)
@@ -101,7 +101,7 @@ class InsertAchievement
                         ON `team_id`=`team`.`id`
                         LEFT JOIN `player`
                         ON `team`.`id`=`player`.`team_id`
-                        WHERE `season_id`=$seasonId";
+                        WHERE `season_id`=" . $seasonId;
                 Yii::$app->db->createCommand($sql)->execute();
 
             } elseif (TournamentType::LEAGUE === $schedule->tournament_type_id && in_array($schedule->stage_id, [

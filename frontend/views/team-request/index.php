@@ -27,8 +27,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -78,8 +76,6 @@ use yii\web\View;
 <div class="row">
     <?php
 
-// TODO refactor
-
     try {
         $columns = [
             [
@@ -100,10 +96,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => 'Команда',
                 'value' => static function (Team $model) {
-                    return Html::a(
-                        $model->name,
-                        ['team/view', $model->id]
-                    );
+                    return $model->getTeamLink();
                 }
             ],
             [

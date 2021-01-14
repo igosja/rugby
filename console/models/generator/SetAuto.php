@@ -53,7 +53,18 @@ class SetAuto
                 $game->guest_tactic_id = Tactic::NORMAL;
             }
 
-            $game->save();
+            $game->save(true, [
+                'home_auto',
+                'home_mood_id',
+                'home_rudeness_id',
+                'home_style_id',
+                'home_tactic_id',
+                'guest_auto',
+                'guest_mood_id',
+                'guest_rudeness_id',
+                'guest_style_id',
+                'guest_tactic_id',
+            ]);
         }
     }
 }

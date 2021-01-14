@@ -43,7 +43,7 @@ class VoteController extends AbstractController
     /**
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         Vote::updateAll(
             ['vote_status_id' => VoteStatus::CLOSE],
@@ -60,6 +60,7 @@ class VoteController extends AbstractController
         }
 
         $query = Vote::find()
+            ->with(['user', 'voteAnswers.voteUsers', 'voteStatus'])
             ->andWhere(['vote_status_id' => [VoteStatus::OPEN, VoteStatus::CLOSE]])
             ->andWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC]);
@@ -84,7 +85,11 @@ class VoteController extends AbstractController
      */
     public function actionView(int $id)
     {
+        /**
+         * @var Vote $vote
+         */
         $vote = Vote::find()
+            ->with(['voteAnswers.voteUsers'])
             ->andWhere(['id' => $id])
             ->limit(1)
             ->one();
@@ -101,7 +106,7 @@ class VoteController extends AbstractController
                     ])
                     ->count();
                 if (!$voteUser) {
-                    return $this->redirect(['vote/vote', 'id' => $id]);
+                    return $this->redirect(['vote', 'id' => $id]);
                 }
             }
         }

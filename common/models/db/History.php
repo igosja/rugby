@@ -80,11 +80,8 @@ class History extends AbstractActiveRecord
             [['building_id'], 'integer', 'min' => 1, 'max' => 9],
             [['fire_reason_id', 'history_text_id', 'position_id', 'special_id'], 'integer', 'min' => 1, 'max' => 99],
             [['federation_id', 'national_id'], 'integer', 'min' => 1, 'max' => 999],
-            [
-                ['game_id', 'player_id', 'second_team_id', 'second_user_id', 'team_id', 'user_id', 'value'],
-                'integer',
-                'min' => 1
-            ],
+            [['game_id', 'player_id', 'value'], 'integer', 'min' => 1],
+            [['second_team_id', 'second_user_id', 'team_id', 'user_id'], 'integer', 'min' => 0],
             [['building_id'], 'exist', 'targetRelation' => 'building'],
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['fire_reason_id'], 'exist', 'targetRelation' => 'fireReason'],
@@ -231,7 +228,7 @@ class History extends AbstractActiveRecord
      */
     public function getBuilding(): ActiveQuery
     {
-        return $this->hasOne(Building::class, ['id' => 'building_id'])->cache();
+        return $this->hasOne(Building::class, ['id' => 'building_id']);
     }
 
     /**
@@ -239,7 +236,7 @@ class History extends AbstractActiveRecord
      */
     public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Federation::class, ['id' => 'federation_id'])->cache();
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**
@@ -247,7 +244,7 @@ class History extends AbstractActiveRecord
      */
     public function getFireReason(): ActiveQuery
     {
-        return $this->hasOne(FireReason::class, ['id' => 'fire_reason_id'])->cache();
+        return $this->hasOne(FireReason::class, ['id' => 'fire_reason_id']);
     }
 
     /**
@@ -255,7 +252,7 @@ class History extends AbstractActiveRecord
      */
     public function getGame(): ActiveQuery
     {
-        return $this->hasOne(Game::class, ['id' => 'game_id'])->cache();
+        return $this->hasOne(Game::class, ['id' => 'game_id']);
     }
 
     /**
@@ -263,7 +260,7 @@ class History extends AbstractActiveRecord
      */
     public function getHistoryText(): ActiveQuery
     {
-        return $this->hasOne(HistoryText::class, ['id' => 'history_text_id'])->cache();
+        return $this->hasOne(HistoryText::class, ['id' => 'history_text_id']);
     }
 
     /**
@@ -271,7 +268,7 @@ class History extends AbstractActiveRecord
      */
     public function getNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['id' => 'national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'national_id']);
     }
 
     /**
@@ -279,7 +276,7 @@ class History extends AbstractActiveRecord
      */
     public function getPlayer(): ActiveQuery
     {
-        return $this->hasOne(Player::class, ['id' => 'player_id'])->cache();
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
     }
 
     /**
@@ -287,7 +284,7 @@ class History extends AbstractActiveRecord
      */
     public function getPosition(): ActiveQuery
     {
-        return $this->hasOne(Position::class, ['id' => 'position_id'])->cache();
+        return $this->hasOne(Position::class, ['id' => 'position_id']);
     }
 
     /**
@@ -295,7 +292,7 @@ class History extends AbstractActiveRecord
      */
     public function getSeason(): ActiveQuery
     {
-        return $this->hasOne(Season::class, ['id' => 'season_id'])->cache();
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
     }
 
     /**
@@ -303,7 +300,7 @@ class History extends AbstractActiveRecord
      */
     public function getSecondTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['id' => 'second_team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'second_team_id']);
     }
 
     /**
@@ -311,7 +308,7 @@ class History extends AbstractActiveRecord
      */
     public function getSecondUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['id' => 'second_user_id'])->cache();
+        return $this->hasOne(User::class, ['id' => 'second_user_id']);
     }
 
     /**
@@ -319,7 +316,7 @@ class History extends AbstractActiveRecord
      */
     public function getSpecial(): ActiveQuery
     {
-        return $this->hasOne(Special::class, ['id' => 'special_id'])->cache();
+        return $this->hasOne(Special::class, ['id' => 'special_id']);
     }
 
     /**
@@ -327,7 +324,7 @@ class History extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['id' => 'team_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
     /**
@@ -335,6 +332,6 @@ class History extends AbstractActiveRecord
      */
     public function getUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['id' => 'user_id'])->cache();
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

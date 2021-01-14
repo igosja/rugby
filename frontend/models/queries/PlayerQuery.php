@@ -5,7 +5,6 @@
 namespace frontend\models\queries;
 
 use common\models\db\Player;
-use common\models\db\PlayerPosition;
 use yii\db\ActiveQuery;
 
 /**
@@ -37,7 +36,16 @@ class PlayerQuery
     public static function getPlayerTeamList(int $teamId): ActiveQuery
     {
         return Player::find()
-            ->joinWith(['playerPositions'])
+            ->joinWith(['playerPositions'], false)
+            ->with([
+                'country',
+                'loan',
+                'physical',
+                'playerPositions.position',
+                'playerSpecials.special',
+                'squad',
+                'transfer',
+            ])
             ->where([
                 'or',
                 ['team_id' => $teamId],

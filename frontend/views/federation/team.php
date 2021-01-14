@@ -31,7 +31,7 @@ print $this->render('_federation', [
                 'format' => 'raw',
                 'label' => 'Команда',
                 'value' => static function (Team $model) {
-                    return $model->iconFreeTeam() . $model->getTeamLink();
+                    return $model->iconFreeTeam() . $model->getTeamCityLink();
                 }
             ],
             [

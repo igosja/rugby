@@ -13,7 +13,6 @@ use yii\db\ActiveQuery;
  *
  * @property int $id
  * @property string $name
- * @property int $order
  * @property string $select_field
  * @property int $statistic_chapter_id
  *
