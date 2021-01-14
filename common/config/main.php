@@ -2,6 +2,7 @@
 
 // TODO refactor
 
+use common\components\TranslationEventHandler;
 use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\redis\Cache;
@@ -18,13 +19,15 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'app*' => [
+                '*' => [
                     'class' => PhpMessageSource::class,
                     'basePath' => '@common/messages',
                     'sourceLanguage' => 'en-US',
                     'fileMap' => [
                         'app' => 'app.php',
+                        'frontend' => 'frontend.php',
                     ],
+                    'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation'],
                 ],
             ],
         ],

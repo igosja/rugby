@@ -15,12 +15,15 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Виртуальный магазин</h1>
+        <h1><?= Yii::t('frontend', 'views.store.h1') ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        <p class="text-center">Ваш счёт - <?= Yii::$app->formatter->asDecimal($user->money, 2) ?></p>
+        <p class="text-center">
+            <?= Yii::t('frontend', 'views.store.p.1', [
+                'value' => Yii::$app->formatter->asDecimal($user->money, 2)
+            ]) ?></p>
     </div>
 </div>
 <div class="row margin-top-small text-center">
@@ -30,13 +33,7 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p>
-            Если вам нравится эта игра, если вы хотите пользоваться
-            более комфортным интерфейсом без рекламы и с дополнительными страничками,
-            выделиться VIP-значком, управлять большим числом команд,
-            а может у вас просто есть желание и возможность поддержать нашу дальнейшую работу -
-            рекомендуем вам оплатить небольшой взнос и стать VIP-менеджером. Спасибо!
-        </p>
+        <p><?= Yii::t('frontend', 'views.store.p.2') ?></p>
     </div>
 </div>
 <?php if ($bonusText) : ?>
@@ -50,56 +47,56 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <td>
-                    Вступить в VIP-клуб на 15 дней
-                </td>
+                <td><?= Yii::t('frontend', 'views.store.join', ['value' => 15]) ?></td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(2) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => StoreController::getStorePriceWithDiscount(2),
+                        ]),
                         ['store/vip', 'day' => 15]
                     ) ?>
                 </td>
             </tr>
             <tr>
-                <td>
-                    Вступить в VIP-клуб на 30 дней
-                </td>
+                <td><?= Yii::t('frontend', 'views.store.join', ['value' => 30]) ?></td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(3) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => StoreController::getStorePriceWithDiscount(3),
+                        ]),
                         ['store/vip', 'day' => 30]
                     ) ?>
                 </td>
             </tr>
             <tr>
-                <td>
-                    Вступить в VIP-клуб на 60 дней
-                </td>
+                <td><?= Yii::t('frontend', 'views.store.join', ['value' => 60]) ?></td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(5) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => StoreController::getStorePriceWithDiscount(5),
+                        ]),
                         ['store/vip', 'day' => 60]
                     ) ?>
                 </td>
             </tr>
             <tr>
-                <td>
-                    Вступить в VIP-клуб на 180 дней
-                </td>
+                <td><?= Yii::t('frontend', 'views.store.join', ['value' => 180]) ?></td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(10) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => StoreController::getStorePriceWithDiscount(10),
+                        ]),
                         ['store/vip', 'day' => 180]
                     ) ?>
                 </td>
             </tr>
             <tr>
-                <td>
-                    Вступить в VIP-клуб на 365 дней
-                </td>
+                <td><?= Yii::t('frontend', 'views.store.join', ['value' => 365]) ?></td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(15) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => StoreController::getStorePriceWithDiscount(15),
+                        ]),
                         ['store/vip', 'day' => 365]
                     ) ?>
                 </td>
@@ -109,21 +106,16 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p>
-            Развитие команды не требует обязательного совершения покупок в магазине,
-            но если вы не привыкли ждать, хотите "всё и сразу" и имеете возможность "ускорить процесс",
-            то добро пожаловать в магазин игровых товаров!
-            Цены для разных команд разные - чем сильнее команда, тем сложнее её усилить с помощью магазина:
-        </p>
+        <p><?= Yii::t('frontend', 'views.store.p.3') ?></p>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p>
-            Ваш коэффициент цен:
+            <?= Yii::t('frontend', 'views.store.coefficient') ?>:
             <span class="strong"><?= $user->getStoreCoefficient() ?>x</span>
             <?php if ($user->getStoreCoefficientText()): ?>
-                (Причина: <?= $user->getStoreCoefficientText() ?>)
+                (<?= Yii::t('frontend', 'views.store.reason') ?>: <?= $user->getStoreCoefficientText() ?>)
             <?php endif ?>
         </p>
     </div>
@@ -133,11 +125,15 @@ use yii\helpers\Html;
         <table class="table table-bordered table-hover">
             <tr>
                 <td>
-                    <?= FormatHelper::asCurrency(1000000) ?> на счёт команды
+                    <?= Yii::t('frontend', 'views.store.money', [
+                        'value' => FormatHelper::asCurrency(1000000),
+                    ]) ?>
                 </td>
                 <td class="text-right">
                     <?= Html::a(
-                        'Купить за ' . StoreController::getStorePriceWithDiscount(5 * $user->getStoreCoefficient()) . ' ед.',
+                        Yii::t('frontend', 'views.store.link.buy', [
+                            'value' => 5 * $user->getStoreCoefficient(),
+                        ]),
                         ['store/finance']
                     ) ?>
                 </td>
