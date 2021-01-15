@@ -22,13 +22,13 @@ use yii\widgets\DetailView;
 </div>
 <ul class="list-inline preview-links text-center">
     <li>
-        <?= Html::a('Список', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('List', ['index'], ['class' => 'btn btn-default']) ?>
     </li>
     <li>
-        <?= Html::a('Одобрить', ['accept', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Accept', ['accept', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
     </li>
     <li>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
     </li>
 </ul>
 <div class="row">
@@ -38,27 +38,27 @@ use yii\widgets\DetailView;
         $attributes = [
             [
                 'captionOptions' => ['class' => 'col-lg-6'],
-                'label' => 'ID',
+                'label' => 'Id',
                 'value' => static function (Logo $model) {
                     return $model->id;
                 },
             ],
             [
-                'label' => 'Время заявки',
+                'label' => 'Application time',
                 'value' => static function (Logo $model) {
                     return FormatHelper::asDateTime($model->date);
                 },
             ],
             [
                 'format' => 'raw',
-                'label' => 'Пользователь',
+                'label' => 'User',
                 'value' => static function (Logo $model) {
                     return $model->user->getUserLink();
                 },
             ],
             [
                 'format' => 'raw',
-                'label' => 'Старое фото',
+                'label' => 'Old photo',
                 'value' => static function (Logo $model) {
                     if (file_exists(Yii::getAlias('@frontend') . '/web/img/user/125/' . $model->user_id . '.png')) {
                         return Html::img(
@@ -74,7 +74,7 @@ use yii\widgets\DetailView;
             ],
             [
                 'format' => 'raw',
-                'label' => 'Новое фото',
+                'label' => 'New photo',
                 'value' => static function (Logo $model) {
                     if (file_exists(Yii::getAlias('@frontend') . '/web/upload/img/user/125/' . $model->user_id . '.png')) {
                         return Html::img(
@@ -89,7 +89,7 @@ use yii\widgets\DetailView;
                 },
             ],
             [
-                'label' => 'Комментарий',
+                'label' => 'Comment',
                 'value' => static function (Logo $model) {
                     return nl2br($model->text);
                 },

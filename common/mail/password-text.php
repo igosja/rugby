@@ -10,6 +10,6 @@ use yii\helpers\Url;
 
 $link = Url::toRoute(['site/password-restore', 'code' => $model->code], true);
 
-?>
-    Вы запросили восстановление пароля на сайте Виртуальной Регбийной Лиги.
-    Чтобы восстановить пароль перейдите по ссылке <?= $link ?>
+print Yii::t('common', 'mail.password-text.text', [
+    'link' => $link,
+]);

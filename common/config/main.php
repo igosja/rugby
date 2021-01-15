@@ -25,6 +25,7 @@ return [
                     'sourceLanguage' => 'en-US',
                     'fileMap' => [
                         'app' => 'app.php',
+                        'common' => 'common.php',
                         'console' => 'console.php',
                         'frontend' => 'frontend.php',
                     ],
