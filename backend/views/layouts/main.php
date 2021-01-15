@@ -202,7 +202,7 @@ $this->beginBody() ?>
                     'items' => [
                         [
                             'label' => 'Generator correction',
-                            'url' => ['analytics/game-statistic'],
+                            'url' => ['analytics/generator-correction'],
                         ],
                         [
                             'label' => 'Snapshots',
