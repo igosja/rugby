@@ -20,7 +20,7 @@ class FinanceText extends AbstractActiveRecord
     public const INCOME_BUILDING_STADIUM = 15;
     public const INCOME_COACH = 35;
     public const INCOME_DEAL_CHECK = 34;
-    public const INCOME_LOAN = 21;
+    public const INCOME_LOAN = 22;
     public const INCOME_NATIONAL = 26;
     public const INCOME_PENSION = 25;
     public const INCOME_PRIZE_CHAMPIONSHIP = 4;
@@ -40,9 +40,9 @@ class FinanceText extends AbstractActiveRecord
     public const OUTCOME_BUILDING_BASE = 16;
     public const OUTCOME_BUILDING_STADIUM = 14;
     public const OUTCOME_GAME = 8;
-    public const OUTCOME_LOAN = 22;
+    public const OUTCOME_LOAN = 21;
     public const OUTCOME_MAINTENANCE = 23;
-    public const OUTCOME_NATIONAL = 37;
+    public const OUTCOME_NATIONAL = 36;
     public const OUTCOME_SALARY = 9;
     public const OUTCOME_SCOUT_STYLE = 13;
     public const OUTCOME_TRAINING_POSITION = 10;

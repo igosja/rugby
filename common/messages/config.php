@@ -40,7 +40,6 @@ return [
         '.hgignore',
         '.hgkeep',
         '/messages',
-        '/console/migrations',
         '/environments',
         '/vagrant',
         '/vendor',

@@ -201,4 +201,41 @@ class SiteController extends AbstractController
 
         return $this->redirect(['site/index']);
     }
+
+    /**
+     * @param int|null $id
+     * @return string|Response
+     */
+    public function actionVersion(int $id = null)
+    {
+        $site = Site::find()
+            ->where(['id' => 1])
+            ->limit(1)
+            ->one();
+        if ($id) {
+            if (1 === $id) {
+                $site->version_1++;
+                $site->version_2 = 0;
+                $site->version_3 = 0;
+            } elseif (2 === $id) {
+                $site->version_2++;
+                $site->version_3 = 0;
+            } else {
+                $site->version_3++;
+            }
+
+            $site->version_date = time();
+            $site->save();
+
+            $this->setSuccessFlash();
+            return $this->redirect(['site/version']);
+        }
+
+        $this->view->title = 'Site version';
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $this->render('version', [
+            'site' => $site,
+        ]);
+    }
 }

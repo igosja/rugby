@@ -27,10 +27,29 @@ use yii\helpers\Html;
  */
 class UserTransferFinance extends Model
 {
+    /**
+     * @var string $comment
+     */
     public $comment;
+
+    /**
+     * @var int $federationId
+     */
     public $federationId;
+
+    /**
+     * @var int $sum
+     */
     public $sum;
+
+    /**
+     * @var int $teamId
+     */
     public $teamId;
+
+    /**
+     * @var User $user
+     */
     public $user;
 
     /**
@@ -64,10 +83,10 @@ class UserTransferFinance extends Model
     public function attributeLabels(): array
     {
         return [
-            'comment' => 'Комментарий',
-            'federationId' => 'Федерация',
-            'sum' => 'Сумма',
-            'teamId' => 'Команда',
+            'comment' => Yii::t('frontend', 'models.forms.user-transfer-finance.label.comment'),
+            'federationId' => Yii::t('frontend', 'models.forms.user-transfer-finance.label.federation'),
+            'sum' => Yii::t('frontend', 'models.forms.user-transfer-finance.label.sum'),
+            'teamId' => Yii::t('frontend', 'models.forms.user-transfer-finance.label.team'),
         ];
     }
 
