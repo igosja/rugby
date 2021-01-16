@@ -38,7 +38,7 @@ use yii\helpers\ArrayHelper;
  */
 class GameResult
 {
-    private const AUTO_PENALTY = 25;
+    private const AUTO_PENALTY = 10;
     private const COEFFICIENT_FORWARD_ATTACK = 4;
     private const COEFFICIENT_FORWARD_DEFENCE = 10;
     private const COEFFICIENT_HALF_ATTACK = 7;
