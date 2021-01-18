@@ -27,17 +27,25 @@ return [
 <br/>
 <a href="#2">2. Профильные позиции игроков.</a>
 <br/>
-<a href="#2.1">2.1. GK - Голкипер.</a>
+<a href="#2.1">2.1. P - Prop.</a>
 <br/>
-<a href="#2.2">2.2. LD - Левый защитник.</a>
+<a href="#2.2">2.2. H - Hooker.</a>
 <br/>
-<a href="#2.3">2.3. RD - Правый защитник.</a>
+<a href="#2.3">2.3. L - Lock.</a>
 <br/>
-<a href="#2.4">2.4. LF - Левый нападающий.</a>
+<a href="#2.4">2.4. FL - Flanker.</a>
 <br/>
-<a href="#2.5">2.5. C - Центральный нападающий.</a>
+<a href="#2.5">2.5. 8 - Number 8.</a>
 <br/>
-<a href="#2.6">2.6. RF - Правый нападающий.</a>
+<a href="#2.6">2.6. SH - Scrum-half.</a>
+<br/>
+<a href="#2.7">2.7. FH - Fly-half.</a>
+<br/>
+<a href="#2.8">2.8. W - Wing.</a>
+<br/>
+<a href="#2.9">2.9. C - Centre.</a>
+<br/>
+<a href="#2.10">2.10. FB - Fullback.</a>
 </p>
 <p class="strong text-justify" id="1">1. Общие положения.</p>
 <p class="text-justify" id="1.1"><span class="strong">1.1. Что такое позиции игроков.</span> Каждый игрок в Лиге имеет одну или две профильные (любимые) позиции:</p>
@@ -45,53 +53,91 @@ return [
 <li>на своих профильных позициях регбист играет в свою силу;</li>
 <li>на непрофильных позициях регбист играет слабее.</li>
 </ul>
-<p class="text-justify">Профильные позиции могут быть натренированы игрокам в тренировочном центре команды или бонусными тренировками.</p>
+<p class="text-justify">Профильные позиции могут быть натренированы игрокам в тренировочном центре команды.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="text-justify" id="1.2"><span class="strong">1. 2. Совмещение позиций.</span> Наличие у игрока двух профильных позиций называется совмещением позиций.</p>
 <p class="text-justify">Если у игрока есть две профильные позиции, то он может без потери силы играть на любой из этих позиций.</p>
-<p class="text-justify">Вторая позиция может быть только у полевых игроков (голкиперы играют строго на позиции голкиперов).</p>
+<p class="text-justify">Вторая позиция может быть у всех игроков.</p>
 <p class="text-justify">Максимальное количество позиций одного игрока равно двум.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="strong text-justify" id="2">2. Профильные позиции игроков.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. GK - Голкипер.</span> Не играет на другой позиции и не может иметь совмещения позиций.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.2"><span class="strong">2.2. LD - Левый защитник</p>
-<p class="text-justify">На позиции левого защитника могут играть:</p>
+<p class="text-justify" id="2.1"><span class="strong">2.1. PR - Prop.</span></p>
+<p class="text-justify">На позиции Prop могут играть:</p>
 <ul>
-<li>LD (левый защитник) с силой 100% от реальной;</li>
-<li>LF (левый нападающий), RD (правый защитник) с силой 90% от реальной;</li>
+<li>PR (Prop) с силой 100% от реальной;</li>
+<li>H (Hooker), L (Lock), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
 <li>Игроки других позиций с силой 80% от реальной.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.3">2.3. RD - Правый защитник</p>
-<p class="text-justify">На позиции правого защитника могут играть:</p>
+<p class="text-justify" id="2.2"><span class="strong">2.2. H - Hooker.</span></p>
+<p class="text-justify">На позиции Hooker могут играть:</p>
 <ul>
-<li>RD (правый защитник) с силой 100% от реальной;</li>
-<li>RF (правый нападающий), LD (левый защитник) с силой 90% от реальной;</li>
+<li>H (Hooker) с силой 100% от реальной;</li>
+<li>P (Prop), L (Lock), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
 <li>Игроки других позиций с силой 80% от реальной.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.4">2.4. LF - Левый нападающий.</p>
-<p class="text-justify">На позиции левого нападающего могут играть:</p>
+<p class="text-justify" id="2.3"><span class="strong">2.3. L - Lock.</span></p>
+<p class="text-justify">На позиции Lock могут играть:</p>
 <ul>
-<li>LF (левый нападающий) с силой 100% от реальной;</li>
-<li>С (центральный нападающий), LD (левый защитник) с силой 90% от реальной;</li>
+<li>L (Lock) с силой 100% от реальной;</li>
+<li>P (Prop), H (Hooker), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
 <li>Игроки других позиций с силой 80% от реальной.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.5">2.5. C - Центральный нападающий.</p>
-<p class="text-justify">На позиции центрального нападающего могут играть:</p>
+<p class="text-justify" id="2.4"><span class="strong">2.4. FL - Flanker.</span></p>
+<p class="text-justify">На позиции Flanker могут играть:</p>
 <ul>
-<li>С (центральный нападающий) с силой 100% от реальной;</li>
-<li>LF (левый нападающий), RF (правый нападающий) с силой 90% от реальной;</li>
+<li>FL (Flanker) с силой 100% от реальной;</li>
+<li>P (Prop), H (Hooker), L (Lock), 8 (Number 8) с силой 90% от реальной;</li>
 <li>Игроки других позиций с силой 80% от реальной.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.6">2.6. RF - Правый нападающий.</p>
-<p class="text-justify">На позиции правого нападающего могут играть:</p>
+<p class="text-justify" id="2.5"><span class="strong">2.5. 8 - Number 8.</span></p>
+<p class="text-justify">На позиции Number 8 могут играть:</p>
 <ul>
-<li>RF (правый нападающий) с силой 100% от реальной;</li>
-<li>С (центральный нападающий), RD (правый защитник) с силой 90% от реальной;</li>
+<li>8 (Number 8) с силой 100% от реальной;</li>
+<li>P (Prop), H (Hooker), L (Lock), FL (Flanker) с силой 90% от реальной;</li>
+<li>Игроки других позиций с силой 80% от реальной.</li>
+</ul>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.6"><span class="strong">2.6. SH - Scrum-half.</span></p>
+<p class="text-justify">На позиции Scrum-half могут играть:</p>
+<ul>
+<li>SH (Scrum-half) с силой 100% от реальной;</li>
+<li>FH (Fly-half), W (Wing), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
+<li>Игроки других позиций с силой 80% от реальной.</li>
+</ul>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.7"><span class="strong">2.7. FH - Fly-half.</span></p>
+<p class="text-justify">На позиции Fly-half могут играть:</p>
+<ul>
+<li>FH (Fly-half) с силой 100% от реальной;</li>
+<li>SH (Scrum-half), W (Wing), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
+<li>Игроки других позиций с силой 80% от реальной.</li>
+</ul>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.8"><span class="strong">2.8. W - Wing.</span></p>
+<p class="text-justify">На позиции Wing могут играть:</p>
+<ul>
+<li>W (Wing) с силой 100% от реальной;</li>
+<li>SH (Scrum-half), FH (Fly-half), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
+<li>Игроки других позиций с силой 80% от реальной.</li>
+</ul>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.9"><span class="strong">2.9. C - Centre.</span></p>
+<p class="text-justify">На позиции Centre могут играть:</p>
+<ul>
+<li>C (Centre) с силой 100% от реальной;</li>
+<li>SH (Scrum-half), FH (Fly-half), W (Wing), FB (Fullback) с силой 90% от реальной;</li>
+<li>Игроки других позиций с силой 80% от реальной.</li>
+</ul>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.10"><span class="strong">2.10. FB - Fullback.</span></p>
+<p class="text-justify">На позиции Fullback могут играть:</p>
+<ul>
+<li>FB (Fullback) с силой 100% от реальной;</li>
+<li>SH (Scrum-half), FH (Fly-half), W (Wing), C (Centre) с силой 90% от реальной;</li>
 <li>Игроки других позиций с силой 80% от реальной.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
