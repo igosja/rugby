@@ -79,8 +79,8 @@ class Loan extends AbstractActiveRecord
     {
         return [
             [['day_max', 'day_min', 'player_id', 'price_seller', 'team_seller_id', 'user_seller_id'], 'required'],
-            [['day', 'day_max', 'day_min'], 'integer', 'min' => 1, 'max' => 9],
-            [['age'], 'integer', 'min' => 1, 'max' => 99],
+            [['day', 'day_min'], 'integer', 'min' => 1, 'max' => 9],
+            [['age', 'day_max'], 'integer', 'min' => 1, 'max' => 99],
             [['power', 'season_id'], 'integer', 'min' => 1, 'max' => 999],
             [
                 [

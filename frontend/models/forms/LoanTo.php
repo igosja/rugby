@@ -31,7 +31,7 @@ use yii\base\Model;
 class LoanTo extends Model
 {
     public $price;
-    public $maxDay = 7;
+    public $maxDay = 99;
     public $maxPrice = 0;
     public $minDay = 1;
     public $minPrice = 0;
@@ -87,6 +87,11 @@ class LoanTo extends Model
 
         if ($this->player->loan) {
             Yii::$app->session->setFlash('error', 'Игрок уже выставлен на арендный рынок.');
+            return false;
+        }
+
+        if ($this->player->age >= Player::AGE_READY_FOR_PENSION) {
+            Yii::$app->session->setFlash('error', 'Нельзя отдавать в аренду игрока, в возрасте ' . $this->player->age . ' лет.');
             return false;
         }
 
