@@ -75,6 +75,21 @@ use yii\helpers\Html;
                     return $model->stage->name;
                 }
             ],
+            [
+                'contentOptions' => ['class' => 'hidden-xs text-center'],
+                'footer' => 'Тип',
+                'footerOptions' => ['class' => 'hidden-xs'],
+                'format' => 'raw',
+                'headerOptions' => ['class' => 'col-5 hidden-xs'],
+                'label' => 'Тип',
+                'value' => static function (Schedule $model) {
+                    return Html::tag(
+                        'span',
+                        $model->tournamentType->dayType->name,
+                        ['title' => $model->tournamentType->dayType->text]
+                    );
+                }
+            ],
         ];
         print GridView::widget([
                 'columns' => $columns,

@@ -23,57 +23,72 @@ return [
 <br/>
 <a href="#2">2. Список спецвозможностей.</a>
 <br/>
-<a href="#2.1">2.1. Скорость (Ск).</a>
+<a href="#2.1">2.1. Сила (Сл).</a>
 <br/>
-<a href="#2.2">2.2. Силовая борьба (Сб).</a>
+<a href="#2.2">2.2. Пас (Пс).</a>
 <br/>
-<a href="#2.3">2.3. Техника (Т).</a>
+<a href="#2.3">2.3. Комбинирование (Км).</a>
 <br/>
-<a href="#2.4">2.4. Лидер (Л).</a>
+<a href="#2.4">2.4. Схватка (Сх).</a>
 <br/>
-<a href="#2.5">2.5. Атлетизм (Ат).</a>
+<a href="#2.5">2.5. Лидер (Л).</a>
 <br/>
-<a href="#2.6">2.6. Реакция (Р).</a>
+<a href="#2.6">2.6. Атлетизм (Ат).</a>
 <br/>
-<a href="#2.7">2.7. Отбор (От).</a>
+<a href="#2.7">2.7. Скорость (Ск).</a>
 <br/>
-<a href="#2.8">2.8. Бросок (Бр).</a>
+<a href="#2.8">2.8. Захват (Зх).</a>
+<br/>
+<a href="#2.9">2.9. Рак (Рк).</a>
+<br/>
+<a href="#2.10">2.10. Мол (Мл).</a>
+<br/>
+<a href="#2.11">2.11. Кумир (Км).</a>
 </p>
 <p class="text-justify" id="1"><span class="strong">1. Что такое спецвозможности и как их получить.</span> Каждый регбист может иметь от нуля до четырех специальных возможностей (специальных умений, спецвозможностей, спецух), которые дают им определенные бонусы при различных условиях.</p>
 <p class="text-justify">Игрок, имеющий спецвозможности, более полезен команде и ценится выше - все спецвозможности дают дополнительные игровые преимущества их владельцам.</p>
 <p class="text-justify">Каждая из четырех возможных у одного игрока спецвозможностей может быть четырех уровней: от первого до четвертого. Чем выше уровень спецвозможности, тем больший бонус она даёт.</p>
-<p class="text-justify">Специальные возможности можно получить в тренировочном центре на базе команды или бонусными тренировками.</p>
+<p class="text-justify">Специальные возможности можно получить в тренировочном центре на базе команды.</p>
 <p class="text-justify">Одной тренировкой тренируется либо новая спецвозможность, либо увеличивается уровень уже имеющейся спецухи.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="text-justify" id="2"><span class="strong">2. Список спецвозможностей.</span> Игроки могут иметь следующие специальные возможности:</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Скорость (Ск).</span> Игроки с этой спецвозможностью на поле передвигаются быстрее остальных.</p>
+<p class="text-justify" id="2.1"><span class="strong">2.1. Сила (Сл).</span> Игроки с этой спецвозможностью лучше играют в силовых единоборствах.</p>
 <table class="table table-hover table-bordered">
-<tr><th class="col-20">Уровень</th><th class="col-20">Скоросной</th><th class="col-20">Силовой</th><th class="col-20">Технический</th><th class="col-20">Нормальный</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+10% силы</td><td class="text-center">+5% силы</td><td class="text-center">+4% силы</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+20% силы</td><td class="text-center">+10% силы</td><td class="text-center">+8% силы</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+30% силы</td><td class="text-center">+15% силы</td><td class="text-center">+12% силы</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+40% силы</td><td class="text-center">+20% силы</td><td class="text-center">+16% силы</td><td class="text-center">+20% силы</td></tr>
+<tr><th class="col-25">Уровень</th><th class="col-25">down the middle</th><th class="col-25">10 man rugby</th><th class="col-15">Другие</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. Силовая борьба (Сб).</span> Игроки с этой спецвозможностью лучше играют в силовых единоборств.</p>
+<p class="text-justify" id="2.2"><span class="strong">2.2. Пас (Пс).</span> Игроки с этой спецвозможностью лучше отдают передачи.</p>
 <table class="table table-hover table-bordered">
-<tr><th class="col-20">Уровень</th><th class="col-20">Силовой</th><th class="col-20">Технический</th><th class="col-20">Скоросной</th><th class="col-20">Нормальный</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+10% силы</td><td class="text-center">+5% силы</td><td class="text-center">+4% силы</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+20% силы</td><td class="text-center">+10% силы</td><td class="text-center">+8% силы</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+30% силы</td><td class="text-center">+15% силы</td><td class="text-center">+12% силы</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+40% силы</td><td class="text-center">+20% силы</td><td class="text-center">+16% силы</td><td class="text-center">+20% силы</td></tr>
+<tr><th class="col-25">Уровень</th><th class="col-25">15 man rugby</th><th class="col-25">champagne rugby</th><th class="col-15">Другие</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. Техника (Т).</span> Игроки с этой спецвозможностью имеют высокую технику работы с шайбой..</p>
+<p class="text-justify" id="2.3"><span class="strong">2.3. Комбинирование (Км).</span> Игроки с этой спецвозможностью лучше проводят игровые комбинации.</p>
 <table class="table table-hover table-bordered">
-<tr><th class="col-20">Уровень</th><th class="col-20">Технический</th><th class="col-20">Скоросной</th><th class="col-20">Силовой</th><th class="col-20">Нормальный</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+10% силы</td><td class="text-center">+5% силы</td><td class="text-center">+4% силы</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+20% силы</td><td class="text-center">+10% силы</td><td class="text-center">+8% силы</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+30% силы</td><td class="text-center">+15% силы</td><td class="text-center">+12% силы</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+40% силы</td><td class="text-center">+20% силы</td><td class="text-center">+16% силы</td><td class="text-center">+20% силы</td></tr>
-</table>
+<tr><th class="col-25">Уровень</th><th class="col-25">champagne rugby</th><th class="col-25">down the middle</th><th class="col-15">Другие</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
+</table></table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. Лидер (Л).</span> Когда игрок с этой спецвозможностью попадает в стартовый состав, увеличивается на несколько процентов реальная сила всех игроков своей команды, выходящих на поле.</p>
+<p class="text-justify" id="2.4"><span class="strong">2.4. Схватка (Сх).</span> Игроки с этой спецвозможностью лучше играют при схватках.</p>
+<table class="table table-hover table-bordered">
+<tr><th class="col-25">Уровень</th><th class="col-25">10 man rugby</th><th class="col-25">15 man rugby</th><th class="col-15">Другие</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
+</table></table>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.5"><span class="strong">2.5. Лидер (Л).</span> Когда игрок с этой спецвозможностью попадает в стартовый состав, увеличивается на несколько процентов реальная сила всех игроков своей команды, выходящих на поле.</p>
 <table class="table table-hover table-bordered">
 <tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
 <tr><td class="text-center">1</td><td class="text-center">+0.5% силы каждому игроку своей команды</td></tr>
@@ -82,7 +97,7 @@ return [
 <tr><td class="text-center">4</td><td class="text-center">+3% силы каждому игроку своей команды</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. Атлетизм (Ат).</span> Игроки с этой спецвозможностью меньше устают после матчей.</p>
+<p class="text-justify" id="2.6"><span class="strong">2.6. Атлетизм (Ат).</span> Игроки с этой спецвозможностью меньше устают после матчей.</p>
 <table class="table table-hover table-bordered">
 <tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
 <tr><td class="text-center">1</td><td class="text-center">на 1% меньше растет усталость после участия в матче</td></tr>
@@ -91,7 +106,7 @@ return [
 <tr><td class="text-center">4</td><td class="text-center">на 4% меньше растет усталость после участия в матче</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.6"><span class="strong">2.6. Реакция (Р).</span> Вратари с быстрой реакцией играют сильнее.</p>
+<p class="text-justify" id="2.7"><span class="strong">2.7. Скорость (Ск).</span> Игроки с этой спецвозможностью быстрее передвигаются по полю.</p>
 <table class="table table-hover table-bordered">
 <tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
 <tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
@@ -100,7 +115,7 @@ return [
 <tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.7"><span class="strong">2.7. Отбор (От).</span> Игроки с этой спецвозможностью лучше отбирают шайбу у соперников.</p>
+<p class="text-justify" id="2.8"><span class="strong">2.8. Захват (Зх).</span> Игроки с этой спецвозможностью лучше проводят захваты соперников.</p>
 <table class="table table-hover table-bordered">
 <tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
 <tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
@@ -109,13 +124,31 @@ return [
 <tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.8"><span class="strong">2.8. Бросок (Бр).</span> Игроки с этой спецвозможностью делают броски лучше других.</p>
+<p class="text-justify" id="2.9"><span class="strong">2.9. Рак (Рк).</span> Игроки с этой спецвозможностью лучше играют при раках.</p>
 <table class="table table-hover table-bordered">
 <tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы при бросках по воротам</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы при бросках по воротам</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы при бросках по воротам</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы при бросках по воротам</td></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+</table>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.10"><span class="strong">2.10. Мол (Мл).</span> Игроки с этой спецвозможностью лучше играют при молах.</p>
+<table class="table table-hover table-bordered">
+<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+</table>
+<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
+<p class="text-justify" id="2.11"><span class="strong">2.11. Кумир (К).</span> Игроки с этой спецвозможностью привлекают больше зрителей на трибуны.</p>
+<table class="table table-hover table-bordered">
+<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
+<tr><td class="text-center">1</td><td class="text-center">+5% зрителей</td></tr>
+<tr><td class="text-center">2</td><td class="text-center">+10% зрителей</td></tr>
+<tr><td class="text-center">3</td><td class="text-center">+15% зрителей</td></tr>
+<tr><td class="text-center">4</td><td class="text-center">+20% зрителей</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
     'title' => 'Cпецвозможности игроков',
