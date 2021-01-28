@@ -76,15 +76,15 @@ return [
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="text-justify" id="3.3"><span class="strong">3.3. Влияние крупного счета.</span> Крупный счет даже в матчах со слабой командой является стимулом для роста силы игроков. Корректировка базового командного изменения силы приведена в таблице:</p>
 <table class="table table-bordered table-hover">
-<tr><th>Разница шайб</th><th>Победитель</th><th>Проигравший</th></tr>
-<tr><td class="text-center">9 и более шайб</td><td class="text-center">+7.5</td><td class="text-center">-7.5</td></tr>
-<tr><td class="text-center">8 шайб</td><td class="text-center">+6.5</td><td class="text-center">-6.5</td></tr>
-<tr><td class="text-center">7 шайб</td><td class="text-center">+5.5</td><td class="text-center">-5.5</td></tr>
-<tr><td class="text-center">6 шайб</td><td class="text-center">+4.5</td><td class="text-center">-4.5</td></tr>
-<tr><td class="text-center">5 шайб</td><td class="text-center">+3.5</td><td class="text-center">-3.5</td></tr>
-<tr><td class="text-center">4 шайбы</td><td class="text-center">+2.5</td><td class="text-center">-2.5</td></tr>
-<tr><td class="text-center">3 шайбы</td><td class="text-center">+1.5</td><td class="text-center">-1.5</td></tr>
-<tr><td class="text-center">2 шайбы</td><td class="text-center">+0.5</td><td class="text-center">-0.5</td></tr>
+<tr><th>Разница очков</th><th>Победитель</th><th>Проигравший</th></tr>
+<tr><td class="text-center">64 очка и более</td><td class="text-center">+7.5</td><td class="text-center">-7.5</td></tr>
+<tr><td class="text-center">56 очков</td><td class="text-center">+6.5</td><td class="text-center">-6.5</td></tr>
+<tr><td class="text-center">48 очков</td><td class="text-center">+5.5</td><td class="text-center">-5.5</td></tr>
+<tr><td class="text-center">40 очков</td><td class="text-center">+4.5</td><td class="text-center">-4.5</td></tr>
+<tr><td class="text-center">32 очка</td><td class="text-center">+3.5</td><td class="text-center">-3.5</td></tr>
+<tr><td class="text-center">24 очка</td><td class="text-center">+2.5</td><td class="text-center">-2.5</td></tr>
+<tr><td class="text-center">16 очков</td><td class="text-center">+1.5</td><td class="text-center">-1.5</td></tr>
+<tr><td class="text-center">8 очков</td><td class="text-center">+0.5</td><td class="text-center">-0.5</td></tr>
 </table>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="text-justify" id="3.4"><span class="strong">3.4. Поправка на разные типы соревнований.</span> Во время игр сборных никто не теряет баллы. Корректировка базового командного изменения силы приведена в таблице:</p>

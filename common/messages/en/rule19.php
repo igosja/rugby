@@ -37,9 +37,9 @@ return [
 <br/>
 <a href="#9">9. Зрительский интерес к матчу.</a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие сведения о стадионах.</span> У каждой команды есть собственная арена (стадион), на котороё проводятся домашние матчи. Стадионы являются источником дохода от продажи зрительских билетов. Количество зрителей зависит от цены билета, вместимости стадиона, интересности матча.</p>
+<p class="text-justify" id="1"><span class="strong">1. Общие сведения о стадионах.</span> У каждой команды есть собственный стадион, на котором проводятся домашние матчи. Стадионы являются источником дохода от продажи зрительских билетов. Количество зрителей зависит от цены билета, вместимости стадиона, интересности матча.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Вместимость стадиона.</span> У новых команд стадион имеет вместимость 100 мест. Впоследствии его вместимость может быть расширена за счет постройки новых трибун и расширения уже имеющихся вплоть до 25 тыс., если, конечно, на это у команды есть деньги. Стоимость такого улучшения определяется по формуле:</p>
+<p class="text-justify" id="2"><span class="strong">2. Вместимость стадиона.</span> У новых команд стадион имеет вместимость 100 мест. Впоследствии его вместимость может быть расширена за счет постройки новых трибун и расширения уже имеющихся вплоть до 100 тыс., если, конечно, на это у команды есть деньги. Стоимость такого улучшения определяется по формуле:</p>
 <p class="text-justify">(НВ ^ 1.1 - ТВ ^ 1.1) * 200, где</p>
 <ul>
 <li>НВ - новая вместимоть арены;</li>
@@ -56,7 +56,7 @@ return [
 <p class="text-justify">В любой момент времени у вас есть возможность отменить запланированную постройку (или разрушение) стадиона, вернув на свой счёт всю оплаченную сумму (если вы запланировали постройку). Но если отмена строительства произошла, то весь прогресс будет потерян.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
 <p class="text-justify" id="3"><span class="strong">3. Содержание стадиона.</span> Содержание стадиона расчитывается по формуле:</p>
-<p class="text-justify">ТВ ^ 1.3, где</p>
+<p class="text-justify">(ТВ / 60) ^ 2, где</p>
 <ul>
 <li>ТВ - текущая вместимоть арены.</li>
 </ul>
@@ -68,7 +68,6 @@ return [
 <ul>
 <li>если хозяин матча явно определен (чемпионат, кубок межсезонья, конференция любительских клубов), то все деньги за билеты получает организатор (владелец стадиона), он же должен оплатить содержание стадиона;</li>
 <li>если стадион проведения матча определяется среди участников матча в момент добавления матчей и домашнего бонуса нет (товарищеские игры), то деньги, как и обязанность оплатить содержание стадиона, делятся поровну;</li>
-<li>если стадион выбирается среди наибольших (финалы различных кубков), то деньги за билеты делятся на три равные части между владельцем стадиона и финалистами, а содержание стадиона оплачивает лига;</li>
 <li>в матчах сборных деньги за билеты делятся на три равные части между игравшими сборными и командой-владельцем стадиона. Содержание стадионов в матчах сборных оплачивает Лига.</li>
 </ul>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
@@ -81,22 +80,22 @@ return [
 <p class="text-justify">В начале каждого сезона краткосрочный рейтинг посещаемости равен 1,00.</p>
 <p class="text-justify">За каждый матч из списка пяти последних сыгранных в этом сезоне матчей команда набирает определённое число баллов в зависимости от итогового счёта этого матча:</p>
 <table class="table table-bordered table-hover">
-<tr><th>Заброшено шайб</th><th>Рейтинг</th><th>Пропущено шайб</th><th>Рейтинг</th></tr>
-<tr><td class="text-center">9 и больше</td><td class="text-center">+0.95</td><td class="text-center">9 и больше</td><td class="text-center">0</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">+0.90</td><td class="text-center">8</td><td class="text-center">+0.05</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">+0.85</td><td class="text-center">7</td><td class="text-center">+0.10</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">+0.80</td><td class="text-center">6</td><td class="text-center">+0.15</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">+0.75</td><td class="text-center">5</td><td class="text-center">+0.20</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+0.70</td><td class="text-center">4</td><td class="text-center">+0.25</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+0.65</td><td class="text-center">3</td><td class="text-center">+0.30</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+0.60</td><td class="text-center">2</td><td class="text-center">+0.35</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">+0.55</td><td class="text-center">1</td><td class="text-center">+0.40</td></tr>
+<tr><th>Набрано очков</th><th>Рейтинг</th><th>Очков соперника</th><th>Рейтинг</th></tr>
+<tr><td class="text-center">72 и больше</td><td class="text-center">+0.95</td><td class="text-center">72 и больше</td><td class="text-center">0</td></tr>
+<tr><td class="text-center">64</td><td class="text-center">+0.90</td><td class="text-center">64</td><td class="text-center">+0.05</td></tr>
+<tr><td class="text-center">56</td><td class="text-center">+0.85</td><td class="text-center">56</td><td class="text-center">+0.10</td></tr>
+<tr><td class="text-center">48</td><td class="text-center">+0.80</td><td class="text-center">48</td><td class="text-center">+0.15</td></tr>
+<tr><td class="text-center">40</td><td class="text-center">+0.75</td><td class="text-center">40</td><td class="text-center">+0.20</td></tr>
+<tr><td class="text-center">32</td><td class="text-center">+0.70</td><td class="text-center">32</td><td class="text-center">+0.25</td></tr>
+<tr><td class="text-center">24</td><td class="text-center">+0.65</td><td class="text-center">24</td><td class="text-center">+0.30</td></tr>
+<tr><td class="text-center">16</td><td class="text-center">+0.60</td><td class="text-center">16</td><td class="text-center">+0.35</td></tr>
+<tr><td class="text-center">8</td><td class="text-center">+0.55</td><td class="text-center">8</td><td class="text-center">+0.40</td></tr>
 <tr><td class="text-center">0</td><td class="text-center">+0.50</td><td class="text-center">0</td><td class="text-center">+0.45</td></tr>
 </table>
 <p class="text-justify">В случае назначения команде технического поражения - она набирает за этот матч 0 баллов.</p>
 <p class="text-justify">Сумма набранных баллов делится на число матчей, участвовавших в подсчёте (на пять или в начале сезона на меньшее число), полученный результат и есть краткосрочный рейтинг посещаемости.</p>
 <p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="9"><span class="strong">9. Зрительский интерес к матчу.</span> При определении зрительского интереса к матчу учитывается краткосрочный рейтинг посещаемости обоих участников матча и поправочный коэффициент к питу турнира и страдии турнира.</p>
+<p class="text-justify" id="9"><span class="strong">9. Зрительский интерес к матчу.</span> При определении зрительского интереса к матчу учитывается краткосрочный рейтинг посещаемости обоих участников матча и поправочный коэффициент к типу турнира и страдии турнира.</p>
 <p class="text-justify">Поправочный коэффициент к типу турнира можно узнать из таблицы:</p>
 <table class="table table-bordered table-hover">
 <tr><th>Турнир</th><th>Коэффициент</th></tr>
@@ -111,14 +110,8 @@ return [
 <table class="table table-bordered table-hover">
 <tr><th>Стадия</th><th>Коэффициент</th></tr>
 <tr><td class="text-center">Нет стадии (для товарищеских матчей)</td><td class="text-center">0.9</td></tr>
-<tr><td class="text-center">1-41 тур</td><td class="text-center">1</td></tr>
+<tr><td class="text-center">1-30 тур</td><td class="text-center">1</td></tr>
 <tr><td class="text-center">Отборочный раунд</td><td class="text-center">1.05</td></tr>
-<tr><td class="text-center">1/512 финала</td><td class="text-center">1.1</td></tr>
-<tr><td class="text-center">1/256 финала</td><td class="text-center">1.2</td></tr>
-<tr><td class="text-center">1/128 финала</td><td class="text-center">1.3</td></tr>
-<tr><td class="text-center">1/64 финала</td><td class="text-center">1.4</td></tr>
-<tr><td class="text-center">1/32 финала</td><td class="text-center">1.5</td></tr>
-<tr><td class="text-center">1/16 финала</td><td class="text-center">1.6</td></tr>
 <tr><td class="text-center">1/8 финала</td><td class="text-center">1.7</td></tr>
 <tr><td class="text-center">1/4 финала</td><td class="text-center">1.8</td></tr>
 <tr><td class="text-center">1/2 финала</td><td class="text-center">1.9</td></tr>

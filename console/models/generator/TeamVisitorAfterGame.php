@@ -42,14 +42,16 @@ class TeamVisitorAfterGame
             if ($homePoints > 72) {
                 $homePoints = 72;
             }
+            $homePoints = floor($homePoints / 8);
 
             $guestPoints = $game->guest_point;
             if ($guestPoints > 72) {
                 $guestPoints = 72;
             }
+            $guestPoints = floor($guestPoints / 8);
 
-            $homeVisitor = round(95 + ($homePoints - $guestPoints) * 5 / 8);
-            $guestVisitor = round(95 + ($guestPoints - $homePoints) * 5 / 8);
+            $homeVisitor = 0.5 + $homePoints * 0.05 + 0.45 - $guestPoints * 0.05;
+            $guestVisitor = 0.5 + $guestPoints * 0.05 + 0.45 - $homePoints * 0.05;
 
             $insertData[] = [$game->home_team_id, $homeVisitor];
             $insertData[] = [$game->guest_team_id, $guestVisitor];

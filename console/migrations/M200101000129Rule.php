@@ -62,8 +62,6 @@ class M200101000129Rule extends Migration
                 [time(), 25, Yii::t('rule25', 'text'), Yii::t('rule25', 'title')],
                 [time(), 26, Yii::t('rule26', 'text'), Yii::t('rule26', 'title')],
                 [time(), 27, Yii::t('rule27', 'text'), Yii::t('rule27', 'title')],
-                [time(), 28, Yii::t('rule28', 'text'), Yii::t('rule28', 'title')],
-                [time(), 29, Yii::t('rule29', 'text'), Yii::t('rule29', 'title')],
                 [time(), 30, Yii::t('rule30', 'text'), Yii::t('rule30', 'title')],
             ]
         );

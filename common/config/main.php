@@ -55,8 +55,6 @@ return [
                         'rule25' => 'rule25.php',
                         'rule26' => 'rule26.php',
                         'rule27' => 'rule27.php',
-                        'rule28' => 'rule28.php',
-                        'rule29' => 'rule29.php',
                         'rule30' => 'rule30.php',
                     ],
                     'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation'],
