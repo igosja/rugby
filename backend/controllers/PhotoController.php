@@ -30,7 +30,7 @@ class PhotoController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->view->title = 'Фото пользователей';
+        $this->view->title = 'User photos';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('index', [
@@ -56,7 +56,7 @@ class PhotoController extends AbstractController
         $this->notFound($model);
 
         $this->view->title = Html::encode($model->user->login);
-        $this->view->params['breadcrumbs'][] = ['label' => 'Фото пользователей', 'url' => ['photo/index']];
+        $this->view->params['breadcrumbs'][] = ['label' => 'User photos', 'url' => ['photo/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('view', [

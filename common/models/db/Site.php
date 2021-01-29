@@ -35,8 +35,8 @@ class Site extends AbstractActiveRecord
     {
         return [
             [['status'], 'boolean'],
-            [['version_1', 'version_2', 'version_3'], 'string', 'min' => 0, 'max' => 99],
-            [['date_cron', 'version_date'], 'string', 'min' => 0],
+            [['version_1', 'version_2', 'version_3'], 'integer', 'min' => 0, 'max' => 99],
+            [['date_cron', 'version_date'], 'integer', 'min' => 0],
         ];
     }
 

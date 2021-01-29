@@ -38,7 +38,7 @@ use yii\helpers\ArrayHelper;
  */
 class GameResult
 {
-    private const AUTO_PENALTY = 25;
+    private const AUTO_PENALTY = 10;
     private const COEFFICIENT_FORWARD_ATTACK = 4;
     private const COEFFICIENT_FORWARD_DEFENCE = 10;
     private const COEFFICIENT_HALF_ATTACK = 7;
@@ -397,46 +397,36 @@ class GameResult
                     if (Special::POWER === $special->special_id) {
                         if (Style::DOWN_THE_MIDDLE === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
-                        } elseif (Style::MAN_15 === $this->result[$team]['team']['style']) {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
-                        } elseif (Style::CHAMPAGNE === $this->result[$team]['team']['style']) {
+                        } elseif (Style::MAN_10 === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 3 * $special->level;
                         } else {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 2 * $special->level;
+                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         }
                     } elseif (Special::PASS === $special->special_id) {
                         if (Style::MAN_15 === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
                         } elseif (Style::CHAMPAGNE === $this->result[$team]['team']['style']) {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
-                        } elseif (Style::MAN_10 === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 3 * $special->level;
                         } else {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 2 * $special->level;
+                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         }
                     } elseif (Special::COMBINE === $special->special_id) {
                         if (Style::CHAMPAGNE === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
-                        } elseif (Style::MAN_10 === $this->result[$team]['team']['style']) {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         } elseif (Style::DOWN_THE_MIDDLE === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 3 * $special->level;
                         } else {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 2 * $special->level;
+                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         }
                     } elseif (Special::SCRUM === $special->special_id) {
                         if (Style::MAN_10 === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
-                        } elseif (Style::DOWN_THE_MIDDLE === $this->result[$team]['team']['style']) {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         } elseif (Style::MAN_15 === $this->result[$team]['team']['style']) {
                             $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 3 * $special->level;
                         } else {
-                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 2 * $special->level;
+                            $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 4 * $special->level;
                         }
-                    } elseif (Special::TACKLE === $special->special_id) {
-                        $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
-                    } elseif (in_array($special->special_id, [Special::SPEED, Special::TACKLE, Special::RUCK, Special::MOUL], true)) {
+                    } elseif (in_array($special->special_id, [Special::SPEED, Special::TACKLE, Special::RUCK, Special::MOUL, Special::TACKLE], true)) {
                         $this->result[$team]['player']['field'][$position]['bonus'] = $this->result[$team]['player']['field'][$position]['bonus'] + 5 * $special->level;
                     } elseif (Special::LEADER === $special->special_id) {
                         $this->result[$team]['team']['leader'] += $special->level;

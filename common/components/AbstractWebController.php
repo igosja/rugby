@@ -23,7 +23,6 @@ use yii\web\Response;
  */
 abstract class AbstractWebController extends Controller
 {
-
     /**
      * @var User|null $user
      */
@@ -59,7 +58,7 @@ abstract class AbstractWebController extends Controller
     protected function notFound(ActiveRecord $model = null): void
     {
         if (!$model) {
-            throw new NotFoundHttpException('Страница не найдена');
+            throw new NotFoundHttpException('Page not found');
         }
     }
 

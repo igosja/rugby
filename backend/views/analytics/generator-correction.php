@@ -20,18 +20,18 @@ use yii\helpers\Html;
         <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
                 <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    Показатель
+                    Name (per game)
                 </th>
                 <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    Результат сайта
+                    Site result
                 </th>
                 <th>
-                    Реал
+                    Real
                 </th>
             </tr>
             <tr>
                 <td>
-                    Средняя результативность
+                    Points
                 </td>
                 <td>
                     <?= round($game['home_point'], 3) ?>
@@ -42,7 +42,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество попыток
+                    Tries
                 </td>
                 <td>
                     <?= round($game['home_try'], 3) ?>
@@ -53,7 +53,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество забитых штрафных
+                    Penalty kicks
                 </td>
                 <td>
                     <?= round($game['home_penalty_kick'], 3) ?>
@@ -64,7 +64,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество дроп-голов
+                    Drop goals
                 </td>
                 <td>
                     <?= round($game['home_drop_goal'], 5) ?>
@@ -75,7 +75,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество реализаций
+                    Conversions
                 </td>
                 <td>
                     <?= round($game['home_conversion'], 3) ?>
@@ -86,7 +86,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество жетлых
+                    Yellow cards
                 </td>
                 <td>
                     <?= round($game['home_yellow_card'], 3) ?>
@@ -97,7 +97,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее количество красных
+                    Red cards
                 </td>
                 <td>
                     <?= round($game['home_red_card'], 3) ?>
@@ -108,7 +108,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td>
-                    Среднее процент реализаций
+                    Conversion, %
                 </td>
                 <td>
                     <?= round($game['home_conversion'] / ($game['home_try'] ?: 1) * 100, 3) ?>%

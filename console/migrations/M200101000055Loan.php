@@ -27,7 +27,7 @@ class M200101000055Loan extends Migration
                 'cancel' => $this->integer(11),
                 'date' => $this->integer(11)->notNull(),
                 'day' => $this->integer(1),
-                'day_max' => $this->integer(1)->notNull(),
+                'day_max' => $this->integer(2)->notNull(),
                 'day_min' => $this->integer(1)->notNull(),
                 'player_id' => $this->integer(11)->notNull(),
                 'player_price' => $this->integer(11)->defaultValue(0),

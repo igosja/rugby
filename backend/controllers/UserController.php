@@ -81,12 +81,9 @@ class UserController extends AbstractController
         $this->view->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['user/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
-        return $this->render(
-            'view',
-            [
-                'model' => $model,
-            ]
-        );
+        return $this->render('view', [
+            'model' => $model,
+        ]);
     }
 
     /**

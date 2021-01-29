@@ -13,28 +13,28 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h3 class="page-header">Версия сайта</h3>
+        <h3 class="page-header">Site version</h3>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <strong>
-            Текущая версия
-            <?= $site->site_version_1 . '.' . $site->site_version_2 . '.' . $site->site_version_3 ?>
-            от
-            <?= FormatHelper::asDate($site->site_version_date) ?>
+            Current version
+            <?= $site->version_1 . '.' . $site->version_2 . '.' . $site->version_3 ?>
+            dated
+            <?= FormatHelper::asDate($site->version_date) ?>
         </strong>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        PHP <?= phpversion() ?>
+        PHP <?= PHP_VERSION ?>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <ul class="list-inline preview-links">
             <li>
-                <?= Html::a('+', ['site/version', 'id' => 1], ['class' => 'btn btn-default']) ?>
-                - Полное или очень существенное переписывание системы
+                <?= Html::a('+', ['version', 'id' => 1], ['class' => 'btn btn-default']) ?>
+                - Complete or very significant system rewrite
             </li>
         </ul>
     </div>
@@ -43,8 +43,8 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <ul class="list-inline preview-links">
             <li>
-                <?= Html::a('+', ['site/version', 'id' => 2], ['class' => 'btn btn-default']) ?>
-                - Добавление новых крупных разделов
+                <?= Html::a('+', ['version', 'id' => 2], ['class' => 'btn btn-default']) ?>
+                - Adding new large sections
             </li>
         </ul>
     </div>
@@ -53,9 +53,9 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <ul class="list-inline preview-links">
             <li>
-                <?= Html::a('+', ['site/version', 'id' => 3], ['class' => 'btn btn-default']) ?>
-                - Добавления нового функционала на страницах, исправление опечаток, багов без изменения функционала,
-                рефакторинг кода и запросов, вывод дополнительной стратистики в таблицах и графиках
+                <?= Html::a('+', ['version', 'id' => 3], ['class' => 'btn btn-default']) ?>
+                - Adding new functionality on the pages, fixing typos, bugs without changing functionality,
+                refactoring of code and queries, displaying additional statistics in tables and graphs
             </li>
         </ul>
     </div>

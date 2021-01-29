@@ -339,110 +339,110 @@ class Menu extends Widget
 
         $this->menuItemList = [
             self::ITEM_CHANGE_TEAM => [
-                'label' => 'Сменить клуб',
+                'label' => Yii::t('frontend', 'components.widgets.menu.change-team'),
                 'url' => ['/team-change/index'],
             ],
             self::ITEM_CHAT => [
-                'label' => 'Чат',
+                'label' => Yii::t('frontend', 'components.widgets.menu.chat'),
                 'target' => '_blank',
                 'url' => ['/chat/index'],
             ],
             self::ITEM_FEDERATION => [
                 'css' => $federationInfo ? 'red' : '',
-                'label' => 'Федерация' . ($federationInfo ? ' <sup class="text-size-4">' . $federationInfo . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.federation') . ($federationInfo ? ' <sup class="text-size-4">' . $federationInfo . '</sup>' : ''),
                 'url' => ['/federation/news'],
             ],
             self::ITEM_FORUM => [
-                'label' => 'Форум',
+                'label' => Yii::t('frontend', 'components.widgets.menu.forum'),
                 'target' => '_blank',
                 'url' => ['/forum/default/index'],
             ],
             self::ITEM_HOME => [
-                'label' => 'Главная',
+                'label' => Yii::t('frontend', 'components.widgets.menu.home'),
                 'url' => ['/site/index'],
             ],
             self::ITEM_LOAN => [
-                'label' => 'Аренда',
+                'label' => Yii::t('frontend', 'components.widgets.menu.loan'),
                 'url' => ['/loan/index'],
             ],
             self::ITEM_MESSENGER => [
                 'css' => $messenger ? 'red' : '',
-                'label' => 'Сообщения' . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.messenger') . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
                 'url' => ['messenger/index'],
             ],
             self::ITEM_NATIONAL_TEAM => [
                 'css' => $nationalId ? 'red' : 'hidden',
-                'label' => 'Сборная',
+                'label' => Yii::t('frontend', 'components.widgets.menu.national'),
                 'url' => ['/national/view', 'id' => $nationalId],
             ],
             self::ITEM_NEWS => [
                 'css' => $news ? 'red' : '',
-                'label' => 'Новости' . ($news ? '<sup class="text-size-4">' . $news . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.news') . ($news ? '<sup class="text-size-4">' . $news . '</sup>' : ''),
                 'url' => ['/news/index'],
             ],
             self::ITEM_PASSWORD => [
-                'label' => 'Забыли пароль?',
+                'label' => Yii::t('frontend', 'components.widgets.menu.password'),
                 'url' => ['/site/forgot-password'],
             ],
             self::ITEM_PLAYER => [
-                'label' => 'Игроки',
+                'label' => Yii::t('frontend', 'components.widgets.menu.player'),
                 'url' => ['/player/index'],
             ],
-            self::ITEM_VOTE => [
-                'css' => $vote ? 'red' : '',
-                'label' => 'Опросы' . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
-                'url' => ['/vote/index'],
-            ],
             self::ITEM_PROFILE => [
-                'label' => 'Профиль',
+                'label' => Yii::t('frontend', 'components.widgets.menu.profile'),
                 'url' => ['/user/view'],
             ],
             self::ITEM_RATING => [
-                'label' => 'Рейтинги',
+                'label' => Yii::t('frontend', 'components.widgets.menu.rating'),
                 'url' => ['/rating/index'],
             ],
             self::ITEM_ROSTER => [
                 'css' => 'red',
-                'label' => 'Ростер',
+                'label' => Yii::t('frontend', 'components.widgets.menu.roster'),
                 'url' => ['/team/view'],
             ],
             self::ITEM_RULE => [
-                'label' => 'Правила',
+                'label' => Yii::t('frontend', 'components.widgets.menu.rule'),
                 'url' => ['/rule/index'],
             ],
             self::ITEM_SCHEDULE => [
-                'label' => 'Рассписание',
+                'label' => Yii::t('frontend', 'components.widgets.menu.schedule'),
                 'url' => ['/schedule/index'],
             ],
             self::ITEM_SING_UP => [
                 'css' => 'red',
-                'label' => 'Регистрация',
+                'label' => Yii::t('frontend', 'components.widgets.menu.signup'),
                 'url' => ['/site/sign-up'],
             ],
             self::ITEM_STORE => [
-                'label' => 'Магазин',
+                'label' => Yii::t('frontend', 'components.widgets.menu.store'),
                 'url' => ['store/index'],
             ],
             self::ITEM_SUPPORT => [
                 'css' => $support ? 'red' : '',
-                'label' => 'Тех.поддержка' . ($support ? ' <sup class="text-size-4">' . $support . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.support') . ($support ? ' <sup class="text-size-4">' . $support . '</sup>' : ''),
                 'url' => ['/support/index'],
             ],
             self::ITEM_TEAM => [
-                'label' => 'Команды',
+                'label' => Yii::t('frontend', 'components.widgets.menu.team'),
                 'url' => ['/team/index'],
             ],
             self::ITEM_TOURNAMENT => [
-                'label' => 'Турниры',
+                'label' => Yii::t('frontend', 'components.widgets.menu.tournament'),
                 'url' => ['/tournament/index'],
             ],
             self::ITEM_TRANSFER => [
-                'label' => 'Трансфер',
+                'label' => Yii::t('frontend', 'components.widgets.menu.transfer'),
                 'url' => ['/transfer/index'],
             ],
             self::ITEM_VIP => [
-                'label' => 'VIP клуб',
+                'label' => Yii::t('frontend', 'components.widgets.menu.vip'),
                 'url' => ['/vip/index'],
+            ],
+            self::ITEM_VOTE => [
+                'css' => $vote ? 'red' : '',
+                'label' => Yii::t('frontend', 'components.widgets.menu.vote') . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
+                'url' => ['/vote/index'],
             ],
         ];
     }

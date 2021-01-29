@@ -197,15 +197,15 @@ $this->beginBody() ?>
                     'url' => ['schedule/index'],
                 ],
                 [
-                    'label' => 'Показатели сайта',
+                    'label' => 'Site metrics',
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Коррекция генератора',
-                            'url' => ['analytics/game-statistic'],
+                            'label' => 'Generator correction',
+                            'url' => ['analytics/generator-correction'],
                         ],
                         [
-                            'label' => 'Слепки состояния сайта',
+                            'label' => 'Snapshots',
                             'url' => ['analytics/snapshot'],
                         ],
                     ],

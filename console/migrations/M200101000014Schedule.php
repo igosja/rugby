@@ -40,7 +40,7 @@ class M200101000014Schedule extends Migration
             'id'
         );
 
-        $date = strtotime('Mon') + 9 * 60 * 60;
+        $date = strtotime('Mon') + 12 * 60 * 60;
         $this->batchInsert(
             self::TABLE,
             [
