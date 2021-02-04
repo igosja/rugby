@@ -9,7 +9,6 @@ use common\models\db\LeagueDistribution;
 use common\models\db\National;
 use common\models\db\NationalType;
 use common\models\db\ParticipantLeague;
-use frontend\models\forms\FederationTransferFinance;
 use frontend\models\preparers\TeamPrepare;
 use frontend\models\queries\FederationQuery;
 use yii\data\ActiveDataProvider;
@@ -39,9 +38,11 @@ class FederationController extends AbstractController
     }
 
     /**
+     * @param int $id
      * @return string
+     * @throws NotFoundHttpException
      */
-    public function actionNational($id)
+    public function actionNational(int $id): string
     {
         $federation = $this->getFederation($id);
 

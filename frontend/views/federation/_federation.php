@@ -53,16 +53,9 @@ $controller = Yii::$app->controller;
         ]) ?>
     </div>
 </div>
-<?php if ('country_national' === $file_name) : ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= $this->render('_country-national-links') ?>
-        </div>
-    </div>
-<?php endif ?>
-<div class="row margin-top">
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center team-logo-div">
-        <?php if (file_exists(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->country_id . '.png')) : ?>
+<?php if (file_exists(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->country_id . '.png')) : ?>
+    <div class="row margin-top">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center team-logo-div">
             <?= Html::img(
                 '/img/country/100/' . $federation->country_id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/country/100/' . $federation->country_id . '.png'),
                 [
@@ -71,6 +64,6 @@ $controller = Yii::$app->controller;
                     'title' => $federation->country->name,
                 ]
             ) ?>
-        <?php endif ?>
+        </div>
     </div>
-</div>
+<?php endif ?>

@@ -21,18 +21,6 @@ try {
                 'url' => ['federation/national', 'id' => $id],
             ],
             [
-                'text' => 'Новости',
-                'url' => ['federation/news', 'id' => $id],
-            ],
-            [
-                'text' => 'Фонд',
-                'url' => ['federation/finance', 'id' => $id],
-            ],
-            [
-                'text' => 'Опросы',
-                'url' => ['federation/vote', 'id' => $id],
-            ],
-            [
                 'text' => 'Лига Чемпионов',
                 'url' => ['federation/league', 'id' => $id],
             ],
