@@ -16,13 +16,10 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1>Вход</h1>
+        <h1><?= Yii::t('frontend', 'views.site.sign-in.h1') ?></h1>
     </div>
 </div>
-<?php
-
-// TODO refactor
-$form = ActiveForm::begin(
+<?php $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
         'fieldConfig' => [
@@ -46,23 +43,19 @@ $form = ActiveForm::begin(
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Вход', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.site.sign-in.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
-<?php
-
-// TODO refactor
-ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Или войдите с помощью соцсетей:
+        <?= Yii::t('frontend', 'views.site.sign-in.social') ?>:
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <?php
 
-// TODO refactor
         try {
             print Html::a(
                 FAS::icon(FAS::_FACEBOOK_SQUARE)->size(FAS::SIZE_2X),
@@ -75,7 +68,6 @@ ActiveForm::end() ?>
         ?>
         <?php
 
-// TODO refactor
         try {
             print Html::a(
                 FAS::icon(FAS::_GOOGLE_PLUS_SQUARE)->size(FAS::SIZE_2X),

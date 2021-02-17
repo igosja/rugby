@@ -8,6 +8,7 @@ use common\models\db\Division;
 use common\models\db\Game;
 use common\models\db\Special;
 use common\models\db\TournamentType;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
@@ -37,10 +38,10 @@ class VisitorController extends AbstractController
 
     /**
      * @param int $id
-     * @return string
-     * @throws NotFoundHttpException
+     * @return string|\yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
      */
-    public function actionView(int $id): string
+    public function actionView(int $id)
     {
         if (!$this->myTeam) {
             return $this->redirect(['team/view']);
@@ -103,7 +104,7 @@ class VisitorController extends AbstractController
         $s_data_visitor = array_values($visitor_array['visitor']);
         $s_data_income = array_values($visitor_array['income']);
 
-        $this->setSeoTitle('Прогноз посещаемости');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.visitor.view.title'));
 
         return $this->render('view', [
             'game' => $game,

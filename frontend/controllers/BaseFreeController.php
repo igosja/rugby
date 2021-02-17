@@ -73,15 +73,15 @@ class BaseFreeController extends AbstractController
 
         if ($team->buildingBase && Building::BASE === $team->buildingBase->building_id) {
             $linkBaseArray[] = Html::a(
-                'Отменить строительство',
+                Yii::t('frontend', 'controllers.base.view.link.cancel'),
                 ['cancel', 'id' => $team->buildingBase->id],
                 ['class' => 'btn margin']
             );
-            $linkTrainingArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
-            $linkMedicalArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
-            $linkPhysicalArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
-            $linkSchoolArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
-            $linkScoutArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+            $linkTrainingArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
+            $linkMedicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
+            $linkPhysicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
+            $linkSchoolArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
+            $linkScoutArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
 
             $delBase = true;
             $delMedical = true;
@@ -92,69 +92,69 @@ class BaseFreeController extends AbstractController
         } else {
             if ($team->base->level < Building::MAX_LEVEL) {
                 $linkBaseArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::BASE],
                     ['class' => 'btn margin']
                 );
             }
 
             if ($team->buildingBase && Building::TRAINING === $team->buildingBase->building_id) {
-                $linkTrainingArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+                $linkTrainingArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delTraining = true;
             } elseif ($team->baseTraining->level < Building::MAX_LEVEL) {
                 $linkTrainingArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::TRAINING],
                     ['class' => 'btn margin']
                 );
             }
 
             if ($team->buildingBase && Building::PHYSICAL === $team->buildingBase->building_id) {
-                $linkPhysicalArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+                $linkPhysicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delPhysical = true;
             } elseif ($team->basePhysical->level < Building::MAX_LEVEL) {
                 $linkPhysicalArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::PHYSICAL],
                     ['class' => 'btn margin']
                 );
             }
 
             if ($team->buildingBase && Building::SCHOOL === $team->buildingBase->building_id) {
-                $linkSchoolArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+                $linkSchoolArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delSchool = true;
             } elseif ($team->baseSchool->level < Building::MAX_LEVEL) {
                 $linkSchoolArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::SCHOOL],
                     ['class' => 'btn margin']
                 );
             }
 
             if ($team->buildingBase && Building::SCOUT === $team->buildingBase->building_id) {
-                $linkScoutArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+                $linkScoutArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delScout = true;
             } elseif ($team->baseScout->level < Building::MAX_LEVEL) {
                 $linkScoutArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::SCOUT],
                     ['class' => 'btn margin']
                 );
             }
 
             if ($team->buildingBase && Building::MEDICAL === $team->buildingBase->building_id) {
-                $linkMedicalArray[] = Html::a('Идет строительство', 'javascript:', ['class' => 'btn margin']);
+                $linkMedicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delMedical = true;
             } elseif ($team->baseMedical->level < Building::MAX_LEVEL) {
                 $linkMedicalArray[] = Html::a(
-                    'Строить',
+                    Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::MEDICAL],
                     ['class' => 'btn margin']
                 );
             }
         }
 
-        $this->setSeoTitle('База команды ' . $team->fullName());
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.base.view.title') . ' ' . $team->fullName());
 
         return $this->render('view', [
             'delBase' => $delBase,
@@ -176,8 +176,7 @@ class BaseFreeController extends AbstractController
 
     /**
      * @param int $building
-     * @return string|Response
-     * @throws \yii\db\Exception
+     * @return string|\yii\web\Response
      */
     public function actionBuild(int $building)
     {
@@ -188,7 +187,7 @@ class BaseFreeController extends AbstractController
         $team = $this->myTeam;
 
         if ($team->buildingBase) {
-            $this->setErrorFlash('На базе уже идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.base'));
             return $this->redirect(['view']);
         }
 
@@ -199,32 +198,32 @@ class BaseFreeController extends AbstractController
                 ->limit(1)
                 ->one();
             if (!$base) {
-                $this->setErrorFlash('Вы имеете здание максимального уровня.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.max'));
                 return $this->redirect(['view']);
             }
 
             if ($team->isTraining()) {
-                $this->setErrorFlash('В тренировочном центре тренируются игроки.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.training'));
                 return $this->redirect(['view']);
             }
 
             if ($team->isSchool()) {
-                $this->setErrorFlash('В спортшколе идет подготовка игрока.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.school'));
                 return $this->redirect(['view']);
             }
 
             if ($team->isScout()) {
-                $this->setErrorFlash('В скаутцентре идет изучение игроков.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.scout'));
                 return $this->redirect(['view']);
             }
 
             if ($base->slot_min > $team->baseUsed()) {
-                $this->setErrorFlash('Минимальное количество занятых слотов должно быть не меньше <span class="strong">' . $base->slot_min . '</span>.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.used', ['min' => $base->slot_min]));
                 return $this->redirect(['view']);
             }
 
             if (!$team->free_base_number) {
-                $this->setErrorFlash('У вас нет бесплатных улучшений базы.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base-free.build.error.free'));
                 return $this->redirect(['view']);
             }
 
@@ -241,36 +240,36 @@ class BaseFreeController extends AbstractController
                     $team->free_base_number--;
                     $team->save(true, ['base_id', 'free_base_number']);
 
-                    $this->setSuccessFlash('Строительство успешно началось.');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.base.build.success'));
                 } catch (Exception $e) {
                     ErrorHelper::log($e);
                 }
                 return $this->redirect(['view']);
             }
 
-            $message = 'Улучшение базы <span class="strong">' . $base->level . '</span> уровня произойдет мгновенно.';
+            $message = Yii::t('frontend', 'controllers.base-free.build.base', ['level' => $base->level]);
         } else {
             $base = Building::find()
                 ->where(['id' => $building])
                 ->one();
 
             if (!$base) {
-                $this->setErrorFlash('Тип строения выбран неправильно.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.type'));
                 return $this->redirect(['view']);
             }
 
             if (Building::TRAINING === $building && $team->isTraining()) {
-                $this->setErrorFlash('В тренировочном центре тренируются игроки.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.training'));
                 return $this->redirect(['view']);
             }
 
             if (Building::SCHOOL === $building && $team->isSchool()) {
-                $this->setErrorFlash('В спортшколе идет подготовка игрока.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.school'));
                 return $this->redirect(['view']);
             }
 
             if (Building::SCOUT === $building && $team->isScout()) {
-                $this->setErrorFlash('В скаутцентре идет изучение игроков.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.scout'));
                 return $this->redirect(['view']);
             }
 
@@ -296,22 +295,22 @@ class BaseFreeController extends AbstractController
             $base = $base->limit(1)->one();
 
             if (!$base) {
-                $this->setErrorFlash('Вы имеете здание максимального уровня.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.type'));
                 return $this->redirect(['view']);
             }
 
             if ($base->$baseLevel > $team->base->level) {
-                $this->setErrorFlash('Минимальный уровень базы должен быть не меньше <span class="strong">' . $base->$baseLevel . '</span>.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.level', ['level' => $base->$baseLevel]));
                 return $this->redirect(['view']);
             }
 
             if ($team->base->slot_max <= $team->baseUsed()) {
-                $this->setErrorFlash('На базе нет свободных слотов для строительства.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base.build.error.slot'));
                 return $this->redirect(['view']);
             }
 
             if (!$team->free_base_number) {
-                $this->setErrorFlash('У вас нет бесплатных улучшений базы.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.base-free.build.error.free'));
                 return $this->redirect(['view']);
             }
 
@@ -328,7 +327,7 @@ class BaseFreeController extends AbstractController
                     $team->free_base_number--;
                     $team->save(true, [$baseTeam, 'free_base_number']);
 
-                    $this->setSuccessFlash('Строительство успешно началось.');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.base.build.success'));
                 } catch (Exception $e) {
                     ErrorHelper::log($e);
                     $this->setErrorFlash();
@@ -336,10 +335,10 @@ class BaseFreeController extends AbstractController
                 return $this->redirect(['view']);
             }
 
-            $message = 'Строительство здания <span class="strong">' . $level . '</span> уровня произойдет мгновенно.';
+            $message = Yii::t('frontend', 'controllers.base-free.build.building', ['level' => $level]);
         }
 
-        $this->setSeoTitle('Строительство базы команды ' . $team->fullName());
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.base.build.title'));
 
         return $this->render('build', [
             'building' => $building,

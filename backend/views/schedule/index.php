@@ -22,7 +22,7 @@ use yii\web\View;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
-            Сегодня:
+            <?= Yii::t('backend', 'views.schedule.index.today') ?>:
             <?= $schedule->tournamentType->name ?? '' ?>
             ,
             <?= $schedule->stage->name ?? '' ?>
@@ -32,14 +32,14 @@ use yii\web\View;
 <ul class="list-inline preview-links text-center">
     <li>
         <?= Html::a(
-            'Назад в прошлое',
+            Yii::t('backend', 'views.schedule.index.link.past'),
             ['schedule/index', 'id' => 1],
             ['class' => 'btn btn-default']
         ) ?>
     </li>
     <li>
         <?= Html::a(
-            'Вперед в будущее',
+            Yii::t('backend', 'views.schedule.index.link.future'),
             ['schedule/index', 'id' => -1],
             ['class' => 'btn btn-default']
         ) ?>

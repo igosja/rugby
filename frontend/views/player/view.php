@@ -3,6 +3,7 @@
 // TODO refactor
 
 use common\components\helpers\ErrorHelper;
+use common\components\helpers\FormatHelper;
 use common\models\db\Lineup;
 use common\models\db\Player;
 use yii\data\ActiveDataProvider;
@@ -30,7 +31,7 @@ print $this->render('//player/_player', ['player' => $player]);
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Season', 'seasonId') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?= Html::dropDownList(
@@ -51,18 +52,18 @@ print $this->render('//player/_player', ['player' => $player]);
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.player.view.th.date'),
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.player.view.th.date'),
                 'value' => static function (Lineup $model) {
-                    return Yii::$app->formatter->asDate($model->game->schedule->date, 'short');
+                    return FormatHelper::asDate($model->game->schedule->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Матч',
+                'footer' => Yii::t('frontend', 'views.player.view.th.game'),
                 'format' => 'raw',
-                'label' => 'Матч',
+                'label' => Yii::t('frontend', 'views.player.view.th.game'),
                 'value' => static function (Lineup $model) {
                     return $model->game->teamOrNationalLink('home', false)
                         . '-'
@@ -71,11 +72,11 @@ print $this->render('//player/_player', ['player' => $player]);
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Сч',
-                'footerOptions' => ['title' => 'Счёт'],
+                'footer' => Yii::t('frontend', 'views.player.view.th.score'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.player.view.title.score')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Счёт'],
-                'label' => 'Сч',
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.player.view.title.score')],
+                'label' => Yii::t('frontend', 'views.player.view.th.score'),
                 'value' => static function (Lineup $model) {
                     return Html::a(
                         $model->game->formatScore(),
@@ -85,57 +86,57 @@ print $this->render('//player/_player', ['player' => $player]);
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Тип матча',
+                'footer' => Yii::t('frontend', 'views.player.view.th.tournament'),
                 'headerOptions' => ['class' => 'col-13'],
-                'label' => 'Тип матча',
+                'label' => Yii::t('frontend', 'views.player.view.th.tournament'),
                 'value' => static function (Lineup $model) {
                     return $model->game->schedule->tournamentType->name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Стадия',
+                'footer' => Yii::t('frontend', 'views.player.view.th.stage'),
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => 'Стадия',
+                'label' => Yii::t('frontend', 'views.player.view.th.stage'),
                 'value' => static function (Lineup $model) {
                     return $model->game->schedule->stage->name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Поз',
-                'footerOptions' => ['title' => 'Позиция'],
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Позиция'],
-                'label' => 'Поз',
+                'footer' => Yii::t('frontend', 'views.player.view.th.position'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.player.view.title.position')],
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.player.view.title.position')],
+                'label' => Yii::t('frontend', 'views.player.view.th.position'),
                 'value' => static function (Lineup $model) {
                     return $model->position_id;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Сила'],
-                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Сила'],
-                'label' => 'С',
+                'footer' => Yii::t('frontend', 'views.player.view.th.power'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.power')],
+                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.power')],
+                'label' => Yii::t('frontend', 'views.player.view.th.power'),
                 'value' => static function (Lineup $model) {
                     return $model->power_real;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Ш',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Шайбы'],
-                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Шайбы'],
-                'label' => 'Ш',
+                'footer' => Yii::t('frontend', 'views.player.view.th.point'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.point')],
+                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.point')],
+                'label' => Yii::t('frontend', 'views.player.view.th.point'),
                 'value' => static function (Lineup $model) {
                     return $model->point;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Изменение силы'],
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.power-change')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Изменение силы'],
+                'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.player.view.title.power-change')],
                 'value' => static function (Lineup $model) {
                     return $model->iconPowerChange();
                 }
@@ -159,4 +160,3 @@ print $this->render('//player/_player', ['player' => $player]);
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>
-

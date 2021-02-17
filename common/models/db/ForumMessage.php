@@ -134,7 +134,7 @@ class ForumMessage extends AbstractActiveRecord
             Html::a(
                 FAS::icon(FAS::_QUOTE_RIGHT),
                 'javascript:',
-                ['class' => 'forum-quote', 'data' => ['text' => $this->text], 'title' => 'Цитировать']
+                ['class' => 'forum-quote', 'data' => ['text' => $this->text], 'title' => Yii::t('common', 'models.db.forum-message.links.quote')]
             ),
         ];
 
@@ -142,7 +142,7 @@ class ForumMessage extends AbstractActiveRecord
             $linkArray[] = Html::a(
                 FAS::icon(FAS::_PENCIL_ALT),
                 ['message/edit', 'id' => $this->id],
-                ['title' => 'Редактировать']
+                ['title' => Yii::t('common', 'models.db.forum-message.links.edit')]
             );
         }
 
@@ -150,7 +150,7 @@ class ForumMessage extends AbstractActiveRecord
             $linkArray[] = Html::a(
                 FAS::icon(FAS::_TRASH_ALT),
                 ['message/delete', 'id' => $this->id],
-                ['title' => 'Удалить']
+                ['title' => Yii::t('common', 'models.db.forum-message.links.delete')]
             );
         }
 
@@ -158,7 +158,7 @@ class ForumMessage extends AbstractActiveRecord
             $linkArray[] = Html::a(
                 FAS::icon(FAS::_EXCLAMATION_TRIANGLE),
                 ['message/complaint', 'id' => $this->id],
-                ['title' => 'Пожаловаться']
+                ['title' => Yii::t('common', 'models.db.forum-message.links.complaint')]
             );
         }
 
@@ -166,14 +166,14 @@ class ForumMessage extends AbstractActiveRecord
             $linkArray[] = Html::a(
                 FAS::icon(FAS::_ARROW_CIRCLE_RIGHT),
                 ['message/move', 'id' => $this->id],
-                ['title' => 'Переместить']
+                ['title' => Yii::t('common', 'models.db.forum-message.links.move')]
             );
 
             if (!$this->date_blocked) {
-                $text = 'Блокировать';
+                $text = Yii::t('common', 'models.db.forum-message.links.block');
                 $icon = FAS::_LOCK_OPEN;
             } else {
-                $text = 'Разблокировать';
+                $text = Yii::t('common', 'models.db.forum-message.links.unblock');
                 $icon = FAS::_LOCK;
             }
             $linkArray[] = Html::a(

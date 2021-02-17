@@ -37,13 +37,13 @@ class ChatController extends AbstractController
     }
 
     /**
-     * @return array|string|Response
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $model = new Chat();
 
-        $this->setSeoTitle('Чат');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.chat.index.title'));
         return $this->render('index', [
             'model' => $model,
             'user' => $this->user,

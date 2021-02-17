@@ -23,7 +23,7 @@ class RuleController extends AbstractController
     {
         $ruleArray = RuleQuery::getRuleList();
 
-        $this->setSeoTitle('Правила');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.rule.index.title'));
         return $this->render('index', [
             'ruleArray' => $ruleArray,
         ]);
@@ -42,7 +42,7 @@ class RuleController extends AbstractController
         $rule = RuleQuery::getRuleById($id);
         $this->notFound($rule);
 
-        $this->setSeoTitle($rule->title . ' - Правила');
+        $this->setSeoTitle($rule->title . ' - ' . Yii::t('frontend', 'controllers.rule.view.title'));
         return $this->render('view', [
             'rule' => $rule,
         ]);
@@ -61,7 +61,7 @@ class RuleController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Результаты поиска - Правила');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.rule.search.title'));
         return $this->render('search', [
             'dataProvider' => $dataProvider,
         ]);

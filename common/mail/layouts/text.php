@@ -10,20 +10,8 @@
 use yii\web\View;
 
 ?>
-<?php
-
-// TODO refactor
-$this->beginPage() ?>
-<?php
-
-// TODO refactor
-$this->beginBody() ?>
+<?php $this->beginPage() ?>
+<?php $this->beginBody() ?>
 <?= $content ?>
-<?php
-
-// TODO refactor
-$this->endBody() ?>
-<?php
-
-// TODO refactor
-$this->endPage() ?>
+<?php $this->endBody() ?>
+<?php $this->endPage() ?>

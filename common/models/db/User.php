@@ -52,7 +52,6 @@ use yii\web\IdentityInterface;
  * @property int $user_role_id
  *
  * @property-read string $authKey
- * @property-read string $fullName
  *
  * @property-read UserHoliday $activeUserHoliday
  * @property-read Country $country
@@ -157,6 +156,10 @@ class User extends AbstractActiveRecord implements IdentityInterface
     {
         $result = [100];
         foreach ($this->teams as $team) {
+            if (!$team->ratingTeam) {
+                continue;
+            }
+
             if (1 === $team->ratingTeam->power_vs_place) {
                 $result[] = 500;
             } elseif ($team->ratingTeam->power_vs_place <= 3) {
@@ -182,18 +185,22 @@ class User extends AbstractActiveRecord implements IdentityInterface
     {
         $result = [100 => ''];
         foreach ($this->teams as $team) {
+            if (!$team->ratingTeam) {
+                continue;
+            }
+
             if (1 === $team->ratingTeam->power_vs_place) {
-                $result[500] = 'Вы управляете лучшей командой Лиги';
+                $result[500] = Yii::t('common', 'models.db.user.store-coefficient-text.1');
             } elseif ($team->ratingTeam->power_vs_place <= 3) {
-                $result[400] = 'Вы управляете командой из тройки лучших в Лиге';
+                $result[400] = Yii::t('common', 'models.db.user.store-coefficient-text.3');
             } elseif ($team->ratingTeam->power_vs_place <= 5) {
-                $result[300] = 'Вы управляете командой из пятерки лучших в Лиге';
+                $result[300] = Yii::t('common', 'models.db.user.store-coefficient-text.5');
             } elseif ($team->ratingTeam->power_vs_place <= 10) {
-                $result[200] = 'Вы управляете командой из десятки лучших в Лиге';
+                $result[200] = Yii::t('common', 'models.db.user.store-coefficient-text.10');
             } elseif ($team->ratingTeam->power_vs_place <= 20) {
-                $result[150] = 'Вы управляете командой из двадцатки лучших в Лиге';
+                $result[150] = Yii::t('common', 'models.db.user.store-coefficient-text.20');
             } elseif ($team->ratingTeam->power_vs_place <= 30) {
-                $result[125] = 'Вы управляете командой из тридцатки лучших в Лиге';
+                $result[125] = Yii::t('common', 'models.db.user.store-coefficient-text.30');
             }
         }
         krsort($result);
@@ -264,7 +271,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
         } elseif ($countryName) {
             $result = $countryName;
         } else {
-            $result = 'Не указано';
+            $result = Yii::t('common', 'models.db.user.user-from.not-set');
         }
 
         return $result;
@@ -273,12 +280,12 @@ class User extends AbstractActiveRecord implements IdentityInterface
     /**
      * @return string
      */
-    public function birthDay(): string
+    public function birthday(): string
     {
         if ($this->birth_day && $this->birth_month && $this->birth_year) {
             $result = $this->birth_day . '.' . $this->birth_month . '.' . $this->birth_year;
         } else {
-            $result = 'Не указан';
+            $result = Yii::t('common', 'models.db.user.birthday.not-set');
         }
 
         return $result;
@@ -297,10 +304,10 @@ class User extends AbstractActiveRecord implements IdentityInterface
             ->limit(1)
             ->one();
         if ($blacklist) {
-            return FAS::icon(FAS::_FILE_ALT, ['title' => 'Удалить из черного списка']);
+            return FAS::icon(FAS::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.remove')]);
         }
 
-        return FAS::icon(FAS::_FILE_ALT, ['title' => 'Добавить в черный список']);
+        return FAS::icon(FAS::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.add')]);
     }
 
     /**
@@ -308,7 +315,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
      */
     public function fullName(): string
     {
-        $result = 'Новый менеджер';
+        $result = Yii::t('common', 'models.db.user.full-name.new');
         if ($this->name || $this->surname) {
             $result = $this->name . ' ' . $this->surname;
         }
@@ -341,7 +348,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
      */
     public function logo(): string
     {
-        $result = 'Нет<br/>фото';
+        $result = Yii::t('common', 'models.db.user.logo.text');
         if (file_exists(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png')) {
             $result = Html::img(
                 '/img/user/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/user/125/' . $this->id . '.png'),
@@ -385,8 +392,8 @@ class User extends AbstractActiveRecord implements IdentityInterface
         } elseif ($min_60 >= $now) {
             $difference = $now - $date;
             $difference /= 60;
-            $difference = round($difference, 0);
-            $date = $difference . ' минут назад';
+            $difference = round($difference);
+            $date = $difference . ' ' . Yii::t('common', 'models.db.user.last-visit.minute');
         } elseif (!$date) {
             $date = '-';
         } else {
@@ -443,18 +450,6 @@ class User extends AbstractActiveRecord implements IdentityInterface
                 ) . '<br/>';
         }
 
-        return $result;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullName(): string
-    {
-        $result = 'New user';
-        if ($this->name || $this->surname) {
-            $result = $this->name . ' ' . $this->surname;
-        }
         return $result;
     }
 

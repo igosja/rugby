@@ -27,7 +27,7 @@ use yii\helpers\Html;
             <?= FormatHelper::asDatetime($schedule->date) ?>,
             <?= $schedule->stage->name ?>,
             <?= $schedule->season_id ?>
-            сезон
+            <?= Yii::t('frontend', 'views.schedule.view.season') ?>
         </p>
     </div>
 </div>

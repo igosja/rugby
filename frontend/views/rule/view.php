@@ -30,7 +30,7 @@ use yii\helpers\Html;
         </div>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::a('Назад', ['index']) ?>
+                <?= Html::a(Yii::t('frontend', 'views.rule.views.link.index'), ['index']) ?>
             </div>
         </div>
     </div>

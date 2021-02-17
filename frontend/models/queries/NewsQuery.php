@@ -16,31 +16,27 @@ class NewsQuery
 {
     /**
      * @param int $id
-     * @param int|null $federationId
      * @return News|null
      */
-    public static function getNewsById(int $id, int $federationId = null): ?News
+    public static function getNewsById(int $id): ?News
     {
         /**
          * @var News $result
          */
         $result = News::find()
             ->andWhere(['id' => $id])
-            ->andFilterWhere(['federation_id' => $federationId])
             ->limit(1)
             ->one();
         return $result;
     }
 
     /**
-     * @param int|null $federationId
      * @return ActiveQuery
      */
-    public static function getNewsListQuery(int $federationId = null): ActiveQuery
+    public static function getNewsListQuery(): ActiveQuery
     {
         return News::find()
             ->with(['user', 'newsComments'])
-            ->andFilterWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC]);
     }
 
@@ -59,14 +55,12 @@ class NewsQuery
     }
 
     /**
-     * @param int|null $federationId
      * @return int
      */
-    public static function getLastNewsId(int $federationId = null): int
+    public static function getLastNewsId(): int
     {
         return News::find()
             ->select(['id'])
-            ->andFilterWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC])
             ->scalar() ?: 0;
     }
@@ -80,7 +74,6 @@ class NewsQuery
          * @var News $news
          */
         $news = News::find()
-            ->andWhere(['federation_id' => null])
             ->orderBy(['id' => SORT_DESC])
             ->limit(1)
             ->one();

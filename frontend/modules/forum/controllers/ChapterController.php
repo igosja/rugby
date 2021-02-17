@@ -6,6 +6,7 @@ namespace frontend\modules\forum\controllers;
 
 use common\models\db\ForumChapter;
 use frontend\controllers\AbstractController;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -27,7 +28,7 @@ class ChapterController extends AbstractController
             ->one();
         $this->notFound($forumChapter);
 
-        $this->setSeoTitle($forumChapter->name . ' - Форум');
+        $this->setSeoTitle($forumChapter->name . ' - ' . Yii::t('frontend', 'modules.forum.controllers.chapter.view.title'));
         return $this->render('view', [
             'forumChapter' => $forumChapter,
         ]);

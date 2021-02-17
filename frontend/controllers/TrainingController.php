@@ -102,7 +102,7 @@ class TrainingController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle($team->fullName() . '. Тренировка хоккеистов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.training.index.title'));
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -140,7 +140,7 @@ class TrainingController extends AbstractController
         $team = $this->myTeam;
 
         if ($this->isOnBuilding()) {
-            $this->setErrorFlash('На базе сейчас идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.building'));
             return $this->redirect(['index']);
         }
 
@@ -166,7 +166,7 @@ class TrainingController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$player) {
-                    $this->setErrorFlash('Игрок выбран неправильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.player'));
                     return $this->redirect(['index']);
                 }
 
@@ -174,7 +174,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($transfer) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на трансфер.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.transfer'));
                     return $this->redirect(['index']);
                 }
 
@@ -182,7 +182,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($loan) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на арендный рынок.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.loan'));
                     return $this->redirect(['index']);
                 }
 
@@ -190,7 +190,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($training) {
-                    $this->setErrorFlash('Одному игроку нельзя назначить несколько тренировок одновременно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.training'));
                     return $this->redirect(['index']);
                 }
 
@@ -213,7 +213,7 @@ class TrainingController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$player) {
-                    $this->setErrorFlash('Игрок выбран неправильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.player'));
                     return $this->redirect(['index']);
                 }
 
@@ -221,7 +221,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId])
                     ->count();
                 if (2 === $playerPosition) {
-                    $this->setErrorFlash('Одному игроку нельзя натренировать больше одного совмещения.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.player-position'));
                     return $this->redirect(['index']);
                 }
 
@@ -229,7 +229,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($transfer) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на трансфер.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.transfer'));
                     return $this->redirect(['index']);
                 }
 
@@ -237,7 +237,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($loan) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на арендный рынок.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.loan'));
                     return $this->redirect(['index']);
                 }
 
@@ -245,7 +245,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($training) {
-                    $this->setErrorFlash('Одному игроку нельзя назначить несколько тренировок одновременно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.training'));
                     return $this->redirect(['index']);
                 }
 
@@ -265,7 +265,7 @@ class TrainingController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$position) {
-                    $this->setErrorFlash('Совмещение выбрано не правильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.position'));
                     return $this->redirect(['index']);
                 }
 
@@ -292,7 +292,7 @@ class TrainingController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$player) {
-                    $this->setErrorFlash('Игрок выбран неправильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.player'));
                     return $this->redirect(['index']);
                 }
 
@@ -300,7 +300,7 @@ class TrainingController extends AbstractController
                     ->where(['level' => Special::MAX_LEVEL, 'player_id' => $playerId])
                     ->count();
                 if (Special::MAX_SPECIALS === $playerSpecial) {
-                    $this->setErrorFlash('Игроку нельзя натренировать более 4 спецвозможностей.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.player-special'));
                     return $this->redirect(['index']);
                 }
 
@@ -308,7 +308,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($transfer) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на трансфер.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.transfer'));
                     return $this->redirect(['index']);
                 }
 
@@ -316,7 +316,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($loan) {
-                    $this->setErrorFlash('Нельзя тренировать игрока, который выставлен на арендный рынок.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.loan'));
                     return $this->redirect(['index']);
                 }
 
@@ -324,7 +324,7 @@ class TrainingController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($training) {
-                    $this->setErrorFlash('Одному игроку нельзя назначить несколько тренировок одновременно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.training'));
                     return $this->redirect(['index']);
                 }
 
@@ -360,7 +360,7 @@ class TrainingController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$special) {
-                    $this->setErrorFlash('Спецвозможность выбрано не правильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.special'));
                     return $this->redirect(['index']);
                 }
 
@@ -380,27 +380,27 @@ class TrainingController extends AbstractController
         }
 
         if (count($confirmData['power']) > $team->availableTrainingPower()) {
-            $this->setErrorFlash('У вас недостаточно баллов для тренировки.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.power.available'));
             return $this->redirect(['index']);
         }
 
         if (count($confirmData['position']) > $team->availableTrainingPosition()) {
-            $this->setErrorFlash('У вас недостаточно совмещений для тренировки.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.position.available'));
             return $this->redirect(['index']);
         }
 
         if (count($confirmData['special']) > $team->availableTrainingSpecial()) {
-            $this->setErrorFlash('У вас недостаточно спецвозможностей для тренировки.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.special.available'));
             return $this->redirect(['index']);
         }
 
         if (count($playerIdArray) !== count(array_unique($playerIdArray))) {
-            $this->setErrorFlash('Одному игроку нельзя назначить несколько тренировок одновременно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.training'));
             return $this->redirect(['index']);
         }
 
         if ($confirmData['price'] > $team->finance) {
-            $this->setErrorFlash('У вас недостаточно денег для тренировки.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.train.finance'));
             return $this->redirect(['index']);
         }
 
@@ -427,7 +427,7 @@ class TrainingController extends AbstractController
                     $team->save(true, ['finance']);
                 }
 
-                foreach ($confirmData['position'] as $playerId => $position) {
+                foreach ($confirmData['position'] as $position) {
                     $model = new Training();
                     $model->player_id = $position['id'];
                     $model->position_id = $position['position']['id'];
@@ -448,7 +448,7 @@ class TrainingController extends AbstractController
                     $team->save(true, ['finance']);
                 }
 
-                foreach ($confirmData['special'] as $playerId => $special) {
+                foreach ($confirmData['special'] as $special) {
                     $model = new Training();
                     $model->player_id = $special['id'];
                     $model->season_id = $this->season->id;
@@ -469,7 +469,7 @@ class TrainingController extends AbstractController
                     $team->save(true, ['finance']);
                 }
 
-                $this->setSuccessFlash('Тренировка успешно началась.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.training.train.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -477,7 +477,7 @@ class TrainingController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle($team->fullName() . '. Тренировка хоккеистов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.training.train.title'));
 
         return $this->render('train', [
             'confirmData' => $confirmData,
@@ -502,7 +502,7 @@ class TrainingController extends AbstractController
             ->limit(1)
             ->one();
         if (!$training) {
-            $this->setErrorFlash('Тренировка выбрана неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.training.cancel.id'));
             return $this->redirect(['index']);
         }
 
@@ -538,7 +538,7 @@ class TrainingController extends AbstractController
                 $team->finance += $price;
                 $team->save(true, ['finance']);
 
-                $this->setSuccessFlash('Тренировка успешно отменена.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.training.cancel.success'));
             } catch (Throwable $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -546,7 +546,7 @@ class TrainingController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle('Отмена тренировки. ' . $team->fullName());
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.training.cancel.title'));
 
         return $this->render('cancel', [
             'id' => $id,

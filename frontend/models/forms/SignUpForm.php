@@ -75,7 +75,7 @@ class SignUpForm extends Model
 
             $refUser = User::find()
                 ->andWhere(['id' => $referrerUserId])
-//                ->andWhere(['!=', 'user_ip', $userIp])
+                ->andWhere(['!=', 'user_ip', $userIp])
                 ->limit(1)
                 ->one();
             if (!$refUser) {
@@ -100,7 +100,7 @@ class SignUpForm extends Model
                 )
                 ->setTo($this->email)
                 ->setFrom([Yii::$app->params['noReplyEmail'] => Yii::$app->params['noReplyName']])
-                ->setSubject('Регистрация на сайте Виртуальной Регбийной Лиги')
+                ->setSubject(Yii::t('frontend', 'models.forms.sign-up.sign-up.subject'))
                 ->send();
 
             if ($transaction) {

@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Строительство стадиона
+                <?= Yii::t('frontend', 'views.stadium.decrease.title') ?>
             </div>
         </div>
     </div>
@@ -30,11 +30,12 @@ use yii\widgets\ActiveForm;
 <?php if ($team->buildingStadium) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
-            На стадионе сейчас идет строительство.
-            Дата окончания строительства - <?= $team->buildingStadium->endDate() ?>
+            <?= Yii::t('frontend', 'views.stadium.decrease.on-building', [
+                'date' => $team->buildingStadium->endDate()
+            ]) ?>
             <br/>
             <?= Html::a(
-                'Отменить строительство',
+                Yii::t('frontend', 'views.stadium.decrease.link.cancel'),
                 ['cancel', 'id' => $team->buildingStadium->id]
             ) ?>
         </div>
@@ -62,7 +63,7 @@ use yii\widgets\ActiveForm;
 ]) ?>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        Текушая вместимость
+        <?= Yii::t('frontend', 'views.stadium.capacity') ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 strong">
         <?= Yii::$app->formatter->asInteger($team->stadium->capacity) ?>
@@ -80,10 +81,10 @@ use yii\widgets\ActiveForm;
         'id' => 'stadium-decrease-input',
         'type' => 'integer',
     ])
-    ->label('Новая вместимость') ?>
+    ->label(Yii::t('frontend', 'views.stadium.label.capacity')) ?>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        Финансы команды
+        <?= Yii::t('frontend', 'views.stadium.finance') ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 strong">
         <?= FormatHelper::asCurrency($team->finance) ?>
@@ -91,7 +92,7 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        Компенсация
+        <?= Yii::t('frontend', 'views.stadium.decrease.bonus') ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 strong">
         <span id="stadium-decrease-price"><?= FormatHelper::asCurrency(0) ?></span>
@@ -99,7 +100,7 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Уменьшить стадион', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.stadium.decrease.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

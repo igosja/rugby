@@ -11,6 +11,7 @@ use common\models\db\NationalType;
 use common\models\db\ParticipantLeague;
 use frontend\models\preparers\TeamPrepare;
 use frontend\models\queries\FederationQuery;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
@@ -30,7 +31,7 @@ class FederationController extends AbstractController
         $federation = $this->getFederation($id);
         $dataProvider = TeamPrepare::getFederationTeamDataProvider($federation->country_id);
 
-        $this->setSeoTitle('Команды федерации');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.team.title'));
         return $this->render('team', [
             'dataProvider' => $dataProvider,
             'federation' => $federation,
@@ -55,7 +56,7 @@ class FederationController extends AbstractController
             'pagination' => false,
         ]);
 
-        $this->setSeoTitle('Сборные');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.national.title'));
         return $this->render('national', [
             'dataProvider' => $dataProvider,
             'federation' => $federation,
@@ -96,8 +97,7 @@ class FederationController extends AbstractController
                 ->all();
         }
 
-        $this->setSeoTitle('Лига чемпионов');
-
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.league.title'));
         return $this->render('league', [
             'federation' => $federation,
             'leagueDistribution' => $leagueDistribution,

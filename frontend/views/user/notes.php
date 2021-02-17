@@ -28,7 +28,7 @@ print $this->render('_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Блокнот менеджера</th>
+                <th><?= Yii::t('frontend', 'views.user.notes.title') ?></th>
             </tr>
         </table>
     </div>
@@ -48,14 +48,13 @@ print $this->render('_top');
 ]) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        В Вашем личном <span class="strong">блокноте</span> вы можете хранить секретные заметки
-        о тактике, командах или игроках, которых хотите купить.
+        <?= Yii::t('frontend', 'views.user.notes.p') ?>
     </div>
 </div>
 <?= $form->field($model, 'notes')->textarea(['rows' => 7])->label(false) ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.user.notes.submit'), ['class' => 'btn']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

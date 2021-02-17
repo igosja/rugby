@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -42,21 +43,21 @@ class M200101000124RatingType extends Migration
             self::TABLE,
             ['field', 'name', 'order', 'rating_chapter_id'],
             [
-                ['power_vs_place', 'Сила состава', 0, 1],
-                ['age_place', 'Средний возраст', 1, 1],
-                ['stadium_place', 'Стадионы', 2, 1],
-                ['visitor_place', 'Посещаемость', 3, 1],
-                ['base_place', 'Базы и строения', 4, 1],
-                ['price_base_place', 'Стоимость баз', 5, 1],
-                ['price_stadium_place', 'Стоимость стадионов', 6, 1],
-                ['player_place', 'Игроки', 7, 1],
-                ['price_total_place', 'Общая стоимость', 8, 1],
-                ['rating_place', 'Рейтинг', 9, 2],
-                ['stadium_place', 'Стадионы', 10, 3],
-                ['auto_place', 'Автосоставы', 11, 3],
-                ['league_place', 'Лига Чемпионов', 12, 3],
-                ['salary_place', 'Зарплата игроков', 13, 1],
-                ['finance_place', 'Денег в кассе', 14, 1],
+                ['power_vs_place', Yii::t('console', 'migrations.rating-type.vs'), 0, 1],
+                ['age_place', Yii::t('console', 'migrations.rating-type.age'), 1, 1],
+                ['stadium_place', Yii::t('console', 'migrations.rating-type.stadium'), 2, 1],
+                ['visitor_place', Yii::t('console', 'migrations.rating-type.visitor'), 3, 1],
+                ['base_place', Yii::t('console', 'migrations.rating-type.base'), 4, 1],
+                ['price_base_place', Yii::t('console', 'migrations.rating-type.price.base'), 5, 1],
+                ['price_stadium_place', Yii::t('console', 'migrations.rating-type.price.stadium'), 6, 1],
+                ['player_place', Yii::t('console', 'migrations.rating-type.player'), 7, 1],
+                ['price_total_place', Yii::t('console', 'migrations.rating-type.price.total'), 8, 1],
+                ['rating_place', Yii::t('console', 'migrations.rating-type.rating'), 9, 2],
+                ['stadium_place', Yii::t('console', 'migrations.rating-type.stadium'), 10, 3],
+                ['auto_place', Yii::t('console', 'migrations.rating-type.auto'), 11, 3],
+                ['league_place', Yii::t('console', 'migrations.rating-type.league'), 12, 3],
+                ['salary_place', Yii::t('console', 'migrations.rating-type.salary'), 13, 1],
+                ['finance_place', Yii::t('console', 'migrations.rating-type.finance'), 14, 1],
             ]
         );
 

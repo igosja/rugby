@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-2">
                 <?= Html::a(
-                    'Форум',
+                    Yii::t('frontend', 'modules.forum.views.bread.forum'),
                     ['default/index']
                 ) ?>
                 /
@@ -35,12 +35,12 @@ use yii\widgets\ActiveForm;
                     ['theme/view', 'id' => $model->forumTheme->id]
                 ) ?>
                 /
-                Редактирование сообщения
+                <?= Yii::t('frontend', 'modules.forum.views.bread.edit') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>Редактирование сообщения</h1>
+                <h1><?= Yii::t('frontend', 'modules.forum.views.message.edit.h1') ?></h1>
             </div>
         </div>
         <?php $form = ActiveForm::begin([
@@ -57,7 +57,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'text')->textarea(['rows' => 10])->label(false) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'modules.forum.views.message.edit.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

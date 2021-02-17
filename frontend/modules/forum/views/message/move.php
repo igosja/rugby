@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-2">
                 <?= Html::a(
-                    'Форум',
+                    Yii::t('frontend', 'modules.forum.views.bread.forum'),
                     ['default/index']
                 ) ?>
                 /
@@ -36,12 +36,12 @@ use yii\widgets\ActiveForm;
                     ['theme/view', 'id' => $model->forumTheme->id]
                 ) ?>
                 /
-                Перемещение сообщения
+                <?= Yii::t('frontend', 'modules.forum.views.bread.move') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>Перемещение сообщения</h1>
+                <h1><?= Yii::t('frontend', 'modules.forum.views.message.move.h1') ?></h1>
             </div>
         </div>
         <?php $form = ActiveForm::begin([
@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'forum_theme_id')->dropDownList($forumThemeArray)->label(false) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'modules.forum.views.message.move.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

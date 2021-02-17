@@ -9,19 +9,19 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Виртуальный магазин',
+                'text' => Yii::t('frontend', 'views.store.links.index'),
                 'url' => ['store/index'],
             ],
             [
-                'text' => 'Пополнить счет',
+                'text' => Yii::t('frontend', 'views.store.links.payment'),
                 'url' => ['store/payment'],
             ],
             [
-                'text' => 'Подарок другу',
+                'text' => Yii::t('frontend', 'views.store.links.send'),
                 'url' => ['store/send'],
             ],
             [
-                'text' => 'История платежей',
+                'text' => Yii::t('frontend', 'views.store.links.history'),
                 'url' => ['store/history'],
             ],
         ]

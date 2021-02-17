@@ -22,7 +22,10 @@ use yii\web\View;
             <?= Html::a(
                 Html::img(
                     '/img/roster/questionnaire.png',
-                    ['alt' => 'Зарегистрироваться', 'title' => 'Зарегистрироваться']
+                    [
+                        'alt' => Yii::t('frontend', 'views.national.national-top-right.sign-up'),
+                        'title' => Yii::t('frontend', 'views.national.national-top-right.sign-up'),
+                    ]
                 ),
                 ['site/sign-up'],
                 ['class' => 'no-underline']
@@ -32,7 +35,10 @@ use yii\web\View;
                 <?= Html::a(
                     Html::img(
                         '/img/roster/substitute.png',
-                        ['alt' => 'Изменить состав сборной', 'title' => 'Изменить состав сборной']
+                        [
+                            'alt' => Yii::t('frontend', 'views.national.national-top-right.player'),
+                            'title' => Yii::t('frontend', 'views.national.national-top-right.player'),
+                        ]
                     ),
                     ['national/player', 'id' => $national->id],
                     ['class' => 'no-underline']
@@ -42,7 +48,10 @@ use yii\web\View;
                 <?= Html::a(
                     Html::img(
                         '/img/roster/fire.png',
-                        ['alt' => 'Отказаться от должности', 'title' => 'Отказаться от должности']
+                        [
+                            'alt' => Yii::t('frontend', 'views.national.national-top-right.fire'),
+                            'title' => Yii::t('frontend', 'views.national.national-top-right.fire'),
+                        ]
                     ),
                     ['national/fire', 'id' => $national->id],
                     ['class' => 'no-underline']
@@ -51,7 +60,10 @@ use yii\web\View;
             <?= Html::a(
                 Html::img(
                     '/img/roster/questionnaire.png',
-                    ['alt' => 'Личные данные', 'title' => 'Личные данные']
+                    [
+                        'alt' => Yii::t('frontend', 'views.national.national-top-right.questionnaire'),
+                        'title' => Yii::t('frontend', 'views.national.national-top-right.questionnaire'),
+                    ]
                 ),
                 ['user/questionnaire'],
                 ['class' => 'no-underline']
@@ -64,7 +76,7 @@ use yii\web\View;
             -
             <?= $item->schedule->tournamentType->name ?>
             -
-            <?= $item->home_national_id === $national->id ? 'Д' : 'Г' ?>
+            <?= $item->home_national_id === $national->id ? Yii::t('frontend', 'views.home') : Yii::t('frontend', 'views.guest') ?>
             -
             <?= Html::a(
                 $item->home_national_id === $national->id ? $item->guestNational->federation->country->name : $item->homeNational->federation->country->name,
@@ -86,7 +98,7 @@ use yii\web\View;
             -
             <?= $item->schedule->tournamentType->name ?>
             -
-            <?= $item->home_national_id === $national->id ? 'Д' : 'Г' ?>
+            <?= $item->home_national_id === $national->id ? Yii::t('frontend', 'views.home') : Yii::t('frontend', 'views.guest') ?>
             -
             <?= Html::a(
                 $item->home_national_id === $national->id ? $item->guestNational->federation->country->name : $item->homeNational->federation->country->name,
@@ -97,8 +109,8 @@ use yii\web\View;
                 <?= Html::a(
                     (($item->home_national_id === $national->id && $item->home_tactic_id)
                         || ($item->guest_national_id === $national->id && $item->guest_tactic_id))
-                        ? 'Ред.'
-                        : 'Отпр.',
+                        ? Yii::t('frontend', 'views.team.team-top-right.update')
+                        : Yii::t('frontend', 'views.team.team-top-right.create'),
                     ['lineup-national/view', 'id' => $item->id]
                 ) ?>
             <?php else: ?>

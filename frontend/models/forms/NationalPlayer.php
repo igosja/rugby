@@ -47,12 +47,12 @@ class NationalPlayer extends Model
     }
 
     /**
-     * @param $attribute
+     * @param string $attribute
      */
     public function checkPlayer(string $attribute)
     {
         if (count($this->$attribute) !== 10) {
-            $this->addError('player', 'Игроки выбраны неправильно');
+            $this->addError('player', Yii::t('frontend', 'models.forms.national-player.error'));
         }
 
         $formPlayerArray = [];
@@ -66,7 +66,7 @@ class NationalPlayer extends Model
             }
 
             if (count($playerArray) !== $limit) {
-                $this->addError('player', 'Игроки выбраны неправильно');
+                $this->addError('player', Yii::t('frontend', 'models.forms.national-player.error'));
             }
 
             foreach ($playerArray as $playerId) {
@@ -83,7 +83,7 @@ class NationalPlayer extends Model
                     ])
                     ->exists();
                 if (!$player) {
-                    $this->addError('player', 'Игроки выбраны неправильно');
+                    $this->addError('player', Yii::t('frontend', 'models.forms.national-player.error'));
                 }
             }
         }

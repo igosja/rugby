@@ -12,7 +12,6 @@ use common\models\db\Team;
 use Throwable;
 use Yii;
 use yii\base\Model;
-use yii\db\Exception;
 
 /**
  * Class LoanFrom
@@ -56,7 +55,6 @@ class LoanFrom extends Model
 
     /**
      * @return bool
-     * @throws Exception
      */
     public function execute(): bool
     {
@@ -79,7 +77,7 @@ class LoanFrom extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Игрок успешно снят с арендного рынка.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.loan-from.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();

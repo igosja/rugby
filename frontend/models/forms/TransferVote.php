@@ -64,14 +64,13 @@ class TransferVote extends Model
     public function attributeLabels(): array
     {
         return [
-            'vote' => 'Оценка',
-            'comment' => 'Комментарий',
+            'vote' => Yii::t('frontend', 'models.forms.transfer-vote.label.vote'),
+            'comment' => Yii::t('frontend', 'models.forms.transfer-vote.label.comment'),
         ];
     }
 
     /**
      * @return bool
-     * @throws \yii\db\Exception
      */
     public function saveVote(): bool
     {

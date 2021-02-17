@@ -26,7 +26,7 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?= Html::beginForm(['analytics/snapshot'], 'get', ['class' => 'form-inline']) ?>
         <div class="form-group">
-            <label for="num"><?= Html::label('Сезон', 'seasonId') ?></label>
+            <label for="num"><?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?></label>
             <?= Html::dropDownList(
                 'seasonId',
                 $seasonId,
@@ -35,7 +35,7 @@ use yii\helpers\Html;
             ) ?>
         </div>
         <div class="form-group">
-            <label for="num"><?= Html::label('Показатель', 'id') ?></label>
+            <label for="num"><?= Html::label(Yii::t('backend', 'views.analytics.snapshot.label.id'), 'id') ?></label>
             <?= Html::dropDownList(
                 'id',
                 $id,
@@ -43,7 +43,7 @@ use yii\helpers\Html;
                 ['class' => 'form-control', 'id' => 'id']
             ) ?>
         </div>
-        <?= Html::submitButton('Показать', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('backend', 'views.analytics.snapshot.submit'), ['class' => 'btn btn-default']) ?>
         <?= Html::endForm() ?>
     </div>
 </div>
@@ -76,7 +76,7 @@ use yii\helpers\Html;
                     'xAxis' => [
                         'categories' => $dataArray,
                         'title' => [
-                            'text' => 'Дата',
+                            'text' => Yii::t('backend', 'views.analytics.snapshot.date'),
                         ],
                     ],
                     'yAxis' => [

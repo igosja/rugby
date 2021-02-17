@@ -17,12 +17,14 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Пополнение денежного счета</h1>
+        <h1><?= Yii::t('frontend', 'views.store.payment.h1') ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        <p class="text-center">Ваш счёт - <?= Yii::$app->formatter->asDecimal($user->money, 2) ?></p>
+        <p class="text-center">
+            <?= Yii::t('frontend', 'views.store.p.1', ['value' => Yii::$app->formatter->asDecimal($user->money, 2)]) ?>
+        </p>
     </div>
 </div>
 <div class="row">
@@ -33,32 +35,26 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-justify">
-            <span class="strong">Денежный счёт менеджера</span> предназначен для приобретения игровых товаров.
-            Перед тем, как пополнить свой денежный счёт, посмотрите
-            <?= Html::a('в списке игровых товаров', ['store/index']) ?>, какие из них вам нужны.
-            Таким образом, вы сможете рассчитать, сколько для этого потребуется единиц на вашем денежном счёте.
+            <?= Yii::t('frontend', 'views.store.payment.p.1', [
+                'link' => Html::a(Yii::t('frontend', 'views.store.payment.link.1'), ['index']),
+            ]) ?>
         </p>
         <p class="text-justify">
-            Мы предоставляем вам
-            <span class="strong">максимально возможное число способов для пополнения вашего денежного счёта</span>,
-            в каком бы регионе земного шара вы не находились.
-            Воспользоваться правом на зачисление
-            <span class="strong">1 единицы</span>
-            на ваш денежный счёт вы можете примерно за <span class="strong"><?= FormatHelper::asCurrency(1) ?></span>,
-            но точная стоимость зависит от способа оплаты. Выбирайте тот способ, который для вас удобнее.
+            <?= Yii::t('frontend', 'views.store.payment.p.2', [
+                'amount' => FormatHelper::asCurrency(1),
+            ]) ?>
         </p>
         <p class="text-justify">
-            Средства на денежном счёте менеджера являются игровым понятием
-            и могут быть использованы только для покупки
-            <?= Html::a('игровых товаров', ['store/index']) ?> на нашем сайте.
-            Средства на денежном счёте менеджера хранятся неограниченное время до удаления аккаунта менеджера.
+            <?= Yii::t('frontend', 'views.store.payment.p.3', [
+                'link' => Html::a(Yii::t('frontend', 'views.store.payment.link.2'), ['index']),
+            ]) ?>
         </p>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-center">
-            <span class="strong">Ваш личный бонус</span>:
+            <span class="strong"><?= Yii::t('frontend', 'views.store.payment.bonus') ?></span>:
             <?= $bonusLine ?>
         </p>
     </div>
@@ -66,11 +62,7 @@ use yii\widgets\ActiveForm;
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-center">
-            <span class="strong">Внимание!</span>
-            При пополнении денежного счета одним платежом на большую сумму полагаются бонусы:
-            <br/>
-            если сумма пополнения счёта <span class="strong">от 100</span> единиц денежного счета,
-            то вы получите <span class="strong">+10% от суммы</span> в подарок.
+            <?= Yii::t('frontend', 'views.store.payment.big') ?>
         </p>
     </div>
 </div>
@@ -88,10 +80,10 @@ use yii\widgets\ActiveForm;
 <?= $form
     ->field($model, 'sum')
     ->textInput(['class' => 'form-control form-small', 'type' => 'number'])
-    ->label('Сумма пополнения, единиц') ?>
+    ->label(Yii::t('frontend', 'views.store.payment.label.sum')) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Пополнить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.store.payment.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

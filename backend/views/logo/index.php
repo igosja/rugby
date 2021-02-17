@@ -35,14 +35,14 @@ use yii\web\View;
                 },
             ],
             [
-                'label' => 'Время заявки',
+                'label' => Yii::t('backend', 'views.logo.index.th.date'),
                 'value' => static function (Logo $model) {
                     return FormatHelper::asDateTime($model->date);
                 },
             ],
             [
                 'format' => 'raw',
-                'label' => 'Пользователь',
+                'label' => Yii::t('backend', 'views.logo.index.th.team'),
                 'value' => static function (Logo $model) {
                     return $model->team->getTeamImageLink();
                 },

@@ -22,7 +22,7 @@ $identity = Yii::$app->user->identity;
         <?= $model->user->getUserLink(['class' => 'strong']) ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= nl2br($model->text) ?>
+        <?= nl2br(Html::encode($model->text)) ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 font-grey">
         <?= FormatHelper::asDateTime($model->date) ?>
@@ -30,7 +30,7 @@ $identity = Yii::$app->user->identity;
             <?= Html::a(
                 FAS::icon(FAS::_TRASH),
                 ['delete-comment', 'id' => $model->id, 'gameId' => $model->game_id],
-                ['title' => 'Удалить']
+                ['title' => Yii::t('frontend', 'views.game.comment.link.delete')]
             ) ?>
         <?php endif ?>
     </div>

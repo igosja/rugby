@@ -22,7 +22,7 @@ use yii\web\View;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            Прогноз посещаемости
+            <?= Yii::t('frontend', 'views.visitor.view.h1') ?>
         </h1>
     </div>
 </div>
@@ -38,7 +38,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td class="col-50">
-                    Сезон
+                    <?= Yii::t('frontend', 'views.visitor.view.season') ?>
                 </td>
                 <td class="text-right">
                     <?= $game->schedule->season_id ?>
@@ -46,7 +46,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Дата
+                    <?= Yii::t('frontend', 'views.visitor.view.date') ?>
                 </td>
                 <td class="text-right">
                     <?= FormatHelper::asDate($game->schedule->date) ?>
@@ -54,7 +54,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Тип турнира
+                    <?= Yii::t('frontend', 'views.visitor.view.tournament-type') ?>
                 </td>
                 <td class="text-right">
                     <?= $game->schedule->tournamentType->name ?>
@@ -62,7 +62,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Коэффициент типа турнира
+                    <?= Yii::t('frontend', 'views.visitor.view.tournament-coefficient') ?>
                 </td>
                 <td class="text-right">
                     <?= $game->schedule->tournamentType->visitor / 100 ?>
@@ -71,7 +71,7 @@ use yii\web\View;
             <?php if (TournamentType::CHAMPIONSHIP === $game->schedule->tournament_type_id) : ?>
                 <tr>
                     <td>
-                        Дивизион
+                        <?= Yii::t('frontend', 'views.visitor.view.division') ?>
                     </td>
                     <td class="text-right">
                         <?= $game->homeTeam->championship->division->name ?>
@@ -79,7 +79,7 @@ use yii\web\View;
                 </tr>
                 <tr>
                     <td>
-                        Коэффициент дивизиона
+                        <?= Yii::t('frontend', 'views.visitor.view.division-coefficient') ?>
                     </td>
                     <td class="text-right">
                         <?= Yii::$app->formatter->asDecimal((100 - ($game->homeTeam->championship->division_id - 1)) / 100) ?>
@@ -88,7 +88,7 @@ use yii\web\View;
             <?php endif ?>
             <tr>
                 <td>
-                    Стадия
+                    <?= Yii::t('frontend', 'views.visitor.view.stage') ?>
                 </td>
                 <td class="text-right">
                     <?= $game->schedule->stage->name ?>
@@ -96,7 +96,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Коэффициент стадии турнира
+                    <?= Yii::t('frontend', 'views.visitor.view.stage-coefficient') ?>
                 </td>
                 <td class="text-right">
                     <?= $game->schedule->stage->visitor / 100 ?>
@@ -104,7 +104,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    <?= $game->stadium->name ?> (вместимость)
+                    <?= $game->stadium->name ?> (<?= Yii::t('frontend', 'views.visitor.view.capacity') ?>)
                 </td>
                 <td class="text-right">
                     <?= $game->stadium->capacity ?>
@@ -112,7 +112,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Рейтинг посещаемости хозяев
+                    <?= Yii::t('frontend', 'views.visitor.view.visitor-home') ?>
                 </td>
                 <td class="text-right">
                     <?= Yii::$app->formatter->asDecimal($game->homeTeam->visitor / 100) ?>
@@ -120,7 +120,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Рейтинг посещаемости гостей
+                    <?= Yii::t('frontend', 'views.visitor.view.visitor-guest') ?>
                 </td>
                 <td class="text-right">
                     <?= Yii::$app->formatter->asDecimal($game->guestTeam->visitor / 100) ?>
@@ -128,7 +128,7 @@ use yii\web\View;
             </tr>
             <tr>
                 <td>
-                    Количество кумиров в заявке на матч
+                    <?= Yii::t('frontend', 'views.visitor.view.idol') ?>
                 </td>
                 <td class="text-right">
                     <?= $special ?>
@@ -154,26 +154,26 @@ use yii\web\View;
                             ],
                             'series' => [
                                 [
-                                    'name' => 'Посещаемость',
+                                    'name' => Yii::t('frontend', 'views.visitor.view.series'),
                                     'data' => $sDataVisitor,
                                 ]
                             ],
                             'title' => [
-                                'text' => 'Посещаемость матча',
+                                'text' => Yii::t('frontend', 'views.visitor.view.title'),
                             ],
                             'tooltip' => [
-                                'headerFormat' => 'Цена билета <b>{point.key}</b><br/>',
+                                'headerFormat' => Yii::t('frontend', 'views.visitor.view.header') . ' <b>{point.key}</b><br/>',
                                 'pointFormat' => '{series.name} <b>{point.y}</b>',
                             ],
                             'xAxis' => [
                                 'categories' => $xData,
                                 'title' => [
-                                    'text' => 'Цена билета',
+                                    'text' => Yii::t('frontend', 'views.visitor.view.x-title'),
                                 ],
                             ],
                             'yAxis' => [
                                 'title' => [
-                                    'text' => 'Посещаемость',
+                                    'text' => Yii::t('frontend', 'views.visitor.view.y-title'),
                                 ],
                             ],
                         ]
@@ -198,26 +198,26 @@ use yii\web\View;
                             ],
                             'series' => [
                                 [
-                                    'name' => 'Выручка',
+                                    'name' => Yii::t('frontend', 'views.visitor.view.series.2'),
                                     'data' => $sDataIncome,
                                 ]
                             ],
                             'title' => [
-                                'text' => 'Выручка за билеты',
+                                'text' => Yii::t('frontend', 'views.visitor.view.title.2'),
                             ],
                             'tooltip' => [
-                                'headerFormat' => 'Цена билета <b>{point.key}</b><br/>',
+                                'headerFormat' => Yii::t('frontend', 'views.visitor.view.header') . ' <b>{point.key}</b><br/>',
                                 'pointFormat' => '{series.name} <b>{point.y}</b>',
                             ],
                             'xAxis' => [
                                 'categories' => $xData,
                                 'title' => [
-                                    'text' => 'Цена билета',
+                                    'text' => Yii::t('frontend', 'views.visitor.view.x-title'),
                                 ],
                             ],
                             'yAxis' => [
                                 'title' => [
-                                    'text' => 'Выручка',
+                                    'text' => Yii::t('frontend', 'views.visitor.view.y-title.2'),
                                 ],
                             ],
                         ]
@@ -237,10 +237,10 @@ use yii\web\View;
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 table-responsive">
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th colspan="2">Хозяева</th>
+                        <th colspan="2"><?= Yii::t('frontend', 'views.visitor.view.home') ?></th>
                     </tr>
                     <tr>
-                        <td>От продажи билетов получают</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.receive') ?></td>
                         <td class="text-center">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 50%
@@ -252,7 +252,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Содержание стадиона</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.maintenance') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency($game->stadium->maintenance / 2) ?>
@@ -264,7 +264,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Зарплата игроков за день</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.salary') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::NATIONAL === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency(0) ?>
@@ -274,7 +274,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Сумма расходов хозяев</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.outcome.home') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency($game->stadium->maintenance / 2 + $game->homeTeam->salary) ?>
@@ -290,10 +290,10 @@ use yii\web\View;
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <table class="table table-bordered table-hover table-responsive">
                     <tr>
-                        <th colspan="2">Гости</th>
+                        <th colspan="2"><?= Yii::t('frontend', 'views.visitor.view.guest') ?></th>
                     </tr>
                     <tr>
-                        <td>От продажи билетов получают</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.receive') ?></td>
                         <td class="text-center">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 50%
@@ -305,7 +305,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Содержание стадиона</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.maintenance') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency($game->stadium->maintenance / 2) ?>
@@ -315,7 +315,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Зарплата игроков за день</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.salary') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::NATIONAL === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency(0) ?>
@@ -325,7 +325,7 @@ use yii\web\View;
                         </td>
                     </tr>
                     <tr>
-                        <td>Сумма расходов гостей</td>
+                        <td><?= Yii::t('frontend', 'views.visitor.view.outcome.guest') ?></td>
                         <td class="text-right">
                             <?php if (TournamentType::FRIENDLY === $game->schedule->tournament_type_id) : ?>
                                 <?= FormatHelper::asCurrency($game->stadium->maintenance / 2 + $game->guestTeam->salary) ?>

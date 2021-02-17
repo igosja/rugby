@@ -62,7 +62,7 @@ class ActivationRepeatForm extends Model
                 )
                 ->setTo($this->email)
                 ->setFrom([Yii::$app->params['noReplyEmail'] => Yii::$app->params['noReplyName']])
-                ->setSubject('Регистрация на сайте Виртуальной Хоккейной Лиги')
+                ->setSubject(Yii::t('frontend', 'models.forms.activation-repeat.send.subject'))
                 ->send();
         } catch (Exception $e) {
             ErrorHelper::log($e);
@@ -81,7 +81,7 @@ class ActivationRepeatForm extends Model
         $user = $this->getUser();
 
         if ($user->date_confirm) {
-            $this->addError($attribute, 'Профиль уже активирован');
+            $this->addError($attribute, Yii::t('frontend', 'models.forms.activation-repeat.email.error'));
         }
 
         return true;

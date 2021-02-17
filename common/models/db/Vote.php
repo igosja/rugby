@@ -17,13 +17,11 @@ use yii\db\StaleObjectException;
  * @package common\models\db
  *
  * @property int $id
- * @property int $federation_id
  * @property int $date
  * @property string $text
  * @property int $user_id
  * @property int $vote_status_id
  *
- * @property-read Federation $federation
  * @property-read User $user
  * @property-read VoteAnswer[] $voteAnswers
  * @property-read VoteStatus $voteStatus
@@ -67,9 +65,7 @@ class Vote extends AbstractActiveRecord
             [['text'], 'trim'],
             [['text'], 'string'],
             [['vote_status_id'], 'integer', 'min' => 1, 'max' => 9],
-            [['federation_id'], 'integer', 'min' => 1, 'max' => 999],
             [['user_id'], 'integer', 'min' => 1],
-            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             [['vote_status_id'], 'exist', 'targetRelation' => 'voteStatus'],
             [['answers'], 'each', 'rule' => ['trim']],

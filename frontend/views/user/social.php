@@ -24,16 +24,14 @@ print $this->render('//user/_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Мои профили в соцальных сетях</th>
+                <th><?= Yii::t('frontend', 'views.user.social.th') ?></th>
             </tr>
         </table>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        На этой странице вы можете
-        <span class="strong">соединить ваш аккаунт менеджера с теми социальными сетями</span>,
-        которыми вы пользуетесь.
+        <?= Yii::t('frontend', 'views.user.social.p.1') ?>
     </div>
 </div>
 <div class="row margin-top-small">
@@ -43,16 +41,16 @@ print $this->render('//user/_top');
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if ($model->social_facebook_id) : ?>
             <?= Html::a(
-                'Профиль',
+                Yii::t('frontend', 'views.user.social.profile'),
                 'https://www.facebook.com/app_scoped_user_id/' . $model->social_facebook_id
             ) ?>
             [<?= Html::a(
-                'Отключить',
+                Yii::t('frontend', 'views.user.social.disconnect'),
                 ['social/disconnect', 'id' => 'fb']
             ) ?>]
         <?php else: ?>
             <?= Html::a(
-                'Подключить',
+                Yii::t('frontend', 'views.user.social.connect'),
                 OAuthFacebook::getConnectUrl('connect')
             ) ?>
         <?php endif ?>
@@ -65,16 +63,16 @@ print $this->render('//user/_top');
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if ($model->social_google_id) : ?>
             <?= Html::a(
-                'Профиль',
+                Yii::t('frontend', 'views.user.social.profile'),
                 'https://plus.google.com/' . $model->social_google_id
             ) ?>
             [<?= Html::a(
-                'Отключить',
+                Yii::t('frontend', 'views.user.social.disconnect'),
                 ['social/disconnect', 'id' => 'gl']
             ) ?>]
         <?php else: ?>
             <?= Html::a(
-                'Подключить',
+                Yii::t('frontend', 'views.user.social.connect'),
                 OAuthGoogle::getConnectUrl('connect')
             ) ?>
         <?php endif ?>
@@ -82,6 +80,6 @@ print $this->render('//user/_top');
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Это позволит входить в игру нажатием одной кнопки.
+        <?= Yii::t('frontend', 'views.user.social.p.2') ?>
     </div>
 </div>

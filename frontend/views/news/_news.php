@@ -20,7 +20,7 @@ use yii\helpers\Html;
     <?= $model->user->getUserLink(['class' => 'strong']) ?>
     -
     <?= Html::a(
-        'Комментарии: ' . count($model->newsComments),
+        Yii::t('frontend', 'views.news.news.comments', ['count' => count($model->newsComments)]),
         ['view', 'id' => $model->id],
         ['class' => 'strong text-size-3']
     ) ?>

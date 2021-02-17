@@ -8,6 +8,7 @@ use common\components\AbstractActiveRecord;
 use common\components\helpers\FormatHelper;
 use DateTime;
 use DateTimeZone;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
@@ -149,11 +150,18 @@ class Transfer extends AbstractActiveRecord
                     ->one();
                 if ($history) {
                     if (HistoryText::USER_MANAGER_TEAM_OUT === $history->history_text_id) {
-                        $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> покинул команду <span class="strong">' . $history->team->name . '</span>.';
+                        $result['error'][] = Yii::t('common', 'models.db.deal.alert.leave', [
+                            'user' => Html::encode($history->user->login),
+                            'team' => $history->team->name
+                        ]);
                     } elseif ($history->date > time() - 2592000) {
-                        $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> менее 1 месяца в команде.';
+                        $result['error'][] = Yii::t('common', 'models.db.deal.alert.team.month.1', [
+                            'user' => Html::encode($history->user->login),
+                        ]);
                     } elseif ($history->date > time() - 5184000) {
-                        $result['warning'][] = 'Менеджер <span class="strong">' . Html::encode($history->user->login) . '</span> менее 2 месяцев в команде.';
+                        $result['warning'][] = Yii::t('common', 'models.db.deal.alert.team.month.2', [
+                            'user' => Html::encode($history->user->login),
+                        ]);
                     }
                 }
 
@@ -162,13 +170,19 @@ class Transfer extends AbstractActiveRecord
                     ->limit(1)
                     ->one();
                 if ($user->date_login < time() - 604800) {
-                    $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> больше недели не заходил на сайт.';
+                    $result['error'][] = Yii::t('common', 'models.db.deal.alert.login', [
+                        'user' => Html::encode($user->login),
+                    ]);
                 }
 
                 if ($user->date_register > time() - 2592000) {
-                    $result['error'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> менее 1 месяца в Лиге.';
+                    $result['error'][] = Yii::t('common', 'models.db.deal.alert.register.month.1', [
+                        'user' => Html::encode($user->login),
+                    ]);
                 } elseif ($user->date_register > time() - 5184000) {
-                    $result['warning'][] = 'Менеджер <span class="strong">' . Html::encode($user->login) . '</span> менее 2 месяцев в Лиге.';
+                    $result['warning'][] = Yii::t('common', 'models.db.deal.alert.register.month.2', [
+                        'user' => Html::encode($user->login),
+                    ]);
                 }
 
                 $team = Team::find()
@@ -177,7 +191,10 @@ class Transfer extends AbstractActiveRecord
                     ->one();
 
                 if ($team->auto_number) {
-                    $result['warning'][] = 'Команда <span class="strong">' . $team->name . '</span> сыграла ' . $team->auto_number . ' последних матчей автосоставом.';
+                    $result['warning'][] = Yii::t('common', 'models.db.deal.alert.auto', [
+                        'team' => $team->name,
+                        'auto' => $team->auto_number,
+                    ]);
                 }
 
                 $transfer = self::find()
@@ -201,7 +218,10 @@ class Transfer extends AbstractActiveRecord
                     ->count();
 
                 if ($transfer + $loan) {
-                    $result['warning'][] = 'У менеджера <span class="strong">' . Html::encode($user->login) . '</span> в этом сезоне уже отменяли <span class="strong">' . ($transfer + $loan) . ' сделок</span>.';
+                    $result['warning'][] = Yii::t('common', 'models.db.deal.alert.cancel', [
+                        'user' => Html::encode($user->login),
+                        'deal' => ($transfer + $loan),
+                    ]);
                 }
             }
         }
@@ -243,7 +263,9 @@ class Transfer extends AbstractActiveRecord
 
 
             if ($transfer + $loan) {
-                $result['warning'][] = 'Менеджеры уже заключали <span class="strong">' . ($transfer + $loan) . ' сделок</span> между собой.';
+                $result['warning'][] = Yii::t('common', 'models.db.deal.alert.deal', [
+                    'deal' => ($transfer + $loan),
+                ]);
             }
 
             $user = User::find()
@@ -252,7 +274,7 @@ class Transfer extends AbstractActiveRecord
                 ->count();
 
             if (2 === $user) {
-                $result['success'][] = 'Оба менеджера достаточно давно играют в Лиге.';
+                $result['success'][] = Yii::t('common', 'models.db.deal.alert.success');
             }
         }
 

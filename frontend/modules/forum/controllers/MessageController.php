@@ -43,9 +43,9 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @param $id
-     * @return Response
-     * @throws NotFoundHttpException
+     * @param int $id
+     * @return \yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionComplaint(int $id): Response
     {
@@ -61,7 +61,7 @@ class MessageController extends AbstractController
         $model->user_id = $this->user->id;
         $model->save();
 
-        $this->setSuccessFlash('Жалоба успешно сохранена');
+        $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.message.complaint.success'));
         return $this->redirect(
             Yii::$app->request->referrer ?: ['theme/view', 'id' => $forumMessage->forum_theme_id]
         );
@@ -122,7 +122,7 @@ class MessageController extends AbstractController
         $themeId = $model->forum_theme_id;
         $model->delete();
 
-        $this->setSuccessFlash('Сообшение успешно удалено');
+        $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.message.delete.success'));
         return $this->redirect(Yii::$app->request->referrer ?: ['forum/theme', 'id' => $themeId]);
     }
 
@@ -147,7 +147,7 @@ class MessageController extends AbstractController
         $this->notFound($model);
 
         if ($model->date_blocked && UserRole::USER === $this->user->user_role_id) {
-            $this->setErrorFlash('Сообщение заблокировано и не может быть отредактировано');
+            $this->setErrorFlash(Yii::t('frontend', 'modules.forum.controllers.message.edit.error'));
             return $this->redirect(
                 Yii::$app->request->referrer ?: ['theme/view', 'id' => $model->forum_theme_id]
             );
@@ -155,11 +155,11 @@ class MessageController extends AbstractController
 
         $model->date_update = time();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->setSuccessFlash('Сообщение успешно отредактировано');
+            $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.message.edit.success'));
             return $this->redirect(['theme/view', 'id' => $model->forum_theme_id]);
         }
 
-        $this->setSeoTitle('Редактирование сообщения');
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.message.edit.title'));
 
         return $this->render('edit', [
             'model' => $model,
@@ -185,7 +185,7 @@ class MessageController extends AbstractController
         $this->notFound($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->setSuccessFlash('Сообщение успешно отредактировано');
+            $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.message.move.success'));
             return $this->redirect(['theme/view', 'id' => $model->forum_theme_id]);
         }
 
@@ -205,7 +205,7 @@ class MessageController extends AbstractController
                 . $forumTheme->name;
         }
 
-        $this->setSeoTitle('Перемещение сообщения');
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.message.move.title'));
         return $this->render('move', [
             'forumThemeArray' => $forumThemeOptions,
             'model' => $model,

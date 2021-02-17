@@ -22,7 +22,7 @@ print $this->render('//user/_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Изменить пароль менеджера</th>
+                <th><?= Yii::t('frontend', 'views.user.password.th') ?></th>
             </tr>
         </table>
     </div>
@@ -43,11 +43,7 @@ print $this->render('//user/_top');
 ]) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Здесь вы можете <span class="strong">изменить свой пароль менеджера</span>. Следите внимательно за регистром и
-        кодировкой букв.
-        <br/>
-        Если вы забудете или потеряете пароль, то для его восстановления вам нужно будет иметь доступ к своему почтовому
-        ящику.
+        <?= Yii::t('frontend', 'views.user.password.p.1') ?>
     </div>
 </div>
 <?= $form->field($model, 'old', ['enableAjaxValidation' => true])->passwordInput(['class' => 'form-control']) ?>
@@ -55,18 +51,12 @@ print $this->render('//user/_top');
 <?= $form->field($model, 'repeat')->passwordInput(['class' => 'form-control']) ?>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-justify">
-        Помните, что пароль <span class="strong">должен быть достаточно сложным</span>, чтобы никто не смог его угадать
-        и использовать для управления вашими командами.
-        С другой стороны, вы сами должны его хорошо помнить.
-        Не рекомендуется использовать в Лиге пароли, которые подходят к вашим почтовым ящикам, форумам, используются для
-        входа в ваш компьютер или для получения доступа к ценной информации.
-        <br/>
-        Пожалуйста, не указывайте в качестве пароля свой день рождения, телефон, email и другие общедоступные данные.
+        <?= Yii::t('frontend', 'views.user.password.p.2') ?>
     </div>
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Изменить пароль', ['class' => 'btn']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.user.password.submit'), ['class' => 'btn']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

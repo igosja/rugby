@@ -15,13 +15,13 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
-            Здесь вы можете <span class="strong">поставить своего игрока на арендный рынок</span>.
+            <?= Yii::t('frontend', 'views.player.loan-to.p.1') ?>
         </p>
         <p>
-            Начальная цена аренды игрока должна быть не меньше
-            <span class="strong"><?= FormatHelper::asCurrency($model->minPrice) ?></span>
-            и не больше
-            <span class="strong"><?= FormatHelper::asCurrency($model->maxPrice) ?></span>.
+            <?= Yii::t('frontend', 'views.player.loan-to.p.2', [
+                'max' => FormatHelper::asCurrency($model->maxPrice),
+                'min' => FormatHelper::asCurrency($model->minPrice),
+            ]) ?>
         </p>
         <?php $form = ActiveForm::begin([
             'enableAjaxValidation' => true,
@@ -57,7 +57,7 @@ use yii\widgets\ActiveForm;
                 <div class="row">{error}</div>'
         ])->textInput() ?>
         <p class="text-center">
-            <?= Html::submitButton('Выставить на рынок аренды', ['class' => 'btn']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.player.loan-to.submit'), ['class' => 'btn']) ?>
         </p>
         <?php $form::end() ?>
     </div>

@@ -47,7 +47,7 @@ class GroupController extends AbstractController
             ]
         ]);
 
-        $this->setSeoTitle($forumGroup->name . ' - Форум');
+        $this->setSeoTitle($forumGroup->name . ' - ' . Yii::t('frontend', 'modules.forum.controllers.group.view.title'));
         return $this->render('view', [
             'dataProvider' => $dataProvider,
             'forumGroup' => $forumGroup,

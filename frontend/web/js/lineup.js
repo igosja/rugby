@@ -184,7 +184,7 @@ jQuery(document).ready(function () {
     $(document).on('click', '.template-delete', function () {
         $.ajax({
             beforeSend: function () {
-                return confirm("Вы собираетесь удалить шаблон. Вы уверены?");
+                return confirm("You are about to delete the template. Are you sure?");
             },
             'url': $(this).data('url'),
             'complete': function () {

@@ -10,21 +10,21 @@ try {
         [
             'items' => [
                 [
-                    'text' => 'Регистрация',
+                    'text' => Yii::t('frontend', 'views.site.sign-up-links.link.sign-up'),
                     'url' => ['site/sign-up'],
                 ],
                 [
                     'alias' => [
                         ['site/password-restore'],
                     ],
-                    'text' => 'Забыли пароль?',
+                    'text' => Yii::t('frontend', 'views.site.sign-up-links.link.forgot'),
                     'url' => ['site/forgot-password'],
                 ],
                 [
                     'alias' => [
                         ['site/activation-repeat'],
                     ],
-                    'text' => 'Активация аккаунта',
+                    'text' => Yii::t('frontend', 'views.site.sign-up-links.link.activation'),
                     'url' => ['site/activation'],
                 ],
             ]

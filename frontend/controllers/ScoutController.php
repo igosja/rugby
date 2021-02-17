@@ -96,7 +96,7 @@ class ScoutController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle($team->fullName() . '. Изучение хоккеистов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.scout.index.title'));
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -124,7 +124,6 @@ class ScoutController extends AbstractController
 
     /**
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionStudy()
     {
@@ -135,7 +134,7 @@ class ScoutController extends AbstractController
         $team = $this->myTeam;
 
         if ($this->isOnBuilding()) {
-            $this->setErrorFlash('На базе сейчас идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.on-building'));
             return $this->redirect(['index']);
         }
 
@@ -157,7 +156,7 @@ class ScoutController extends AbstractController
                     ->limit(1)
                     ->one();
                 if (!$player) {
-                    $this->setErrorFlash('Игрок выбран неправильно.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.player'));
                     return $this->redirect(['index']);
                 }
 
@@ -165,12 +164,12 @@ class ScoutController extends AbstractController
                     ->where(['player_id' => $playerId, 'ready' => null])
                     ->count();
                 if ($scout) {
-                    $this->setErrorFlash('Одного игрока нельзя одновременно изучать несколько раз.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.scout'));
                     return $this->redirect(['index']);
                 }
 
                 if (2 === $player->countScout()) {
-                    $this->setErrorFlash('Игрок уже полностью изучен.');
+                    $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.done'));
                     return $this->redirect(['index']);
                 }
 
@@ -184,12 +183,12 @@ class ScoutController extends AbstractController
         }
 
         if (count($confirmData['style']) > $team->availableScout()) {
-            $this->setErrorFlash('У вас недостаточно стилей для изучения.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.style'));
             return $this->redirect(['index']);
         }
 
         if ($confirmData['price'] > $team->finance) {
-            $this->setErrorFlash('У вас недостаточно денег для изучения.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.study.error.finance'));
             return $this->redirect(['index']);
         }
 
@@ -216,7 +215,7 @@ class ScoutController extends AbstractController
                     $team->save(true, ['finance']);
                 }
 
-                $this->setSuccessFlash('Изучение успешно началось.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.scout.study.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -224,7 +223,7 @@ class ScoutController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle($team->fullName() . '. Изучение хоккеистов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.scout.study.title'));
 
         return $this->render('study', [
             'confirmData' => $confirmData,
@@ -235,7 +234,6 @@ class ScoutController extends AbstractController
     /**
      * @param int $id
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionCancel(int $id)
     {
@@ -250,7 +248,7 @@ class ScoutController extends AbstractController
             ->limit(1)
             ->one();
         if (!$scout) {
-            $this->setErrorFlash('Изучение выбрано неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.scout.cancel.error.scout'));
             return $this->redirect(['index']);
         }
 
@@ -270,7 +268,7 @@ class ScoutController extends AbstractController
                 $team->finance += $team->baseScout->my_style_price;
                 $team->save(true, ['finance']);
 
-                $this->setSuccessFlash('Изучение успешно отменено.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.scout.cancel.success'));
             } catch (Throwable $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -278,7 +276,7 @@ class ScoutController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle('Отмена изучения. ' . $team->fullName());
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.scout.cancel.title'));
 
         return $this->render('cancel', [
             'id' => $id,

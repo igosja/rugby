@@ -15,30 +15,25 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <p class="text-center">
-            Игрок находится на рынке аренды.
-            <br/>
-            Начальная стоимость игрока составляет
-            <span class="strong"><?= FormatHelper::asCurrency($model->player->loan->price_seller) ?></span>.
-            <br/>
-            Срок аренды составляет
-            <span class="strong">
-                <?= $model->player->loan->day_min ?>-<?= $model->player->loan->day_max ?>
-            </span>
-            дней.
+            <?= Yii::t('frontend', 'views.player.loan-form.p', [
+                'max' => $model->player->loan->day_max,
+                'min' => $model->player->loan->day_min,
+                'price' => FormatHelper::asCurrency($model->player->loan->price_seller),
+            ]) ?>
         </p>
         <?php $form = ActiveForm::begin() ?>
         <?= $form->field($model, 'off')->hiddenInput(['value' => true])->label(false) ?>
         <p class="text-center">
-            <?= Html::submitButton('Снять с рынка аренды', ['class' => 'btn']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.player.loan-form.submit'), ['class' => 'btn']) ?>
         </p>
         <?php $form::end() ?>
         <?php if ($model->loanApplicationArray) : ?>
-            <p class="text-center">Заявки на вашего игрока:</p>
+            <p class="text-center"><?= Yii::t('frontend', 'views.player.loan-form.applications') ?></p>
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>Команда потенциального арендатора</th>
-                    <th class="col-20">Время заявки</th>
-                    <th class="col-15">Срок аренды</th>
+                    <th><?= Yii::t('frontend', 'views.player.loan-form.th.team') ?></th>
+                    <th class="col-20"><?= Yii::t('frontend', 'views.player.loan-form.th.time') ?></th>
+                    <th class="col-15"><?= Yii::t('frontend', 'views.player.loan-form.th.days') ?></th>
                 </tr>
                 <?php foreach ($model->loanApplicationArray as $item): ?>
                     <tr>

@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Ваш статус в товарищеских матчах:
+        <?= Yii::t('frontend', 'views.friendly.status.status') ?>:
     </div>
 </div>
 <?php $form = ActiveForm::begin() ?>
@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
     ->label(false) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.friendly.status.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

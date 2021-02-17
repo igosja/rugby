@@ -28,62 +28,60 @@ use yii\web\View;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Тренировочный центр
+                <?= Yii::t('frontend', 'views.training.title') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Уровень:
+                <?= Yii::t('frontend', 'views.training.level') ?>:
                 <span class="strong"><?= $team->baseTraining->level ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Скорость тренировки:
-                <span class="strong"><?= $team->baseTraining->training_speed_min ?>%</span>
-                -
-                <span class="strong"><?= $team->baseTraining->training_speed_max ?>%</span>
-                за тур
+                <?= Yii::t('frontend', 'views.training.speed', [
+                    'max' => $team->baseTraining->training_speed_max,
+                    'min' => $team->baseTraining->training_speed_min,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Осталось тренировок силы:
-                <span class="strong"><?= $team->availableTrainingPower() ?></span>
-                из
-                <span class="strong"><?= $team->baseTraining->power_count ?></span>
+                <?= Yii::t('frontend', 'views.training.available.power', [
+                    'available' => $team->availableTrainingPower(),
+                    'count' => $team->baseTraining->power_count,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Осталось спецвозможностей:
-                <span class="strong"><?= $team->availableTrainingSpecial() ?></span>
-                из
-                <span class="strong"><?= $team->baseTraining->special_count ?></span>
+                <?= Yii::t('frontend', 'views.training.available.special', [
+                    'available' => $team->availableTrainingSpecial(),
+                    'count' => $team->baseTraining->special_count,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Осталось совмещений:
-                <span class="strong"><?= $team->availableTrainingPosition() ?></span>
-                из
-                <span class="strong"><?= $team->baseTraining->position_count ?></span>
+                <?= Yii::t('frontend', 'views.training.available.position', [
+                    'available' => $team->availableTrainingPosition(),
+                    'count' => $team->baseTraining->position_count,
+                ]) ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center <?php if ($onBuilding) : ?>del<?php endif ?>">
-        <span class="strong">Стоимость тренировок:</span>
-        Балл силы
+        <?= Yii::t('frontend', 'views.training.price.power') ?>
         <span class="strong">
             <?= FormatHelper::asCurrency($team->baseTraining->power_price) ?>
         </span>
-        Спецвозможность
+        <?= Yii::t('frontend', 'views.training.price.special') ?>
         <span class="strong">
             <?= FormatHelper::asCurrency($team->baseTraining->special_price) ?>
         </span>
-        Совмещение
+        <?= Yii::t('frontend', 'views.training.price.position') ?>
         <span class="strong">
             <?= FormatHelper::asCurrency($team->baseTraining->position_price) ?>
         </span>
@@ -91,27 +89,31 @@ use yii\web\View;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Здесь - <span class="strong">в тренировочном центре</span> -
-        вы можете назначить тренировки силы, спецвозможностей или совмещений своим игрокам:
+        <?= Yii::t('frontend', 'views.training.p') ?>
     </div>
 </div>
 <?php if ($trainingArray) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            Игроки вашей команды, находящиеся на тренировке:
+            <?= Yii::t('frontend', 'views.training.index.p') ?>:
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>Игрок</th>
-                    <th class="col-1 hidden-xs" title="Национальность">Нац</th>
-                    <th class="col-5" title="Возраст">В</th>
-                    <th class="col-10" title="Номинальная сила">С</th>
-                    <th class="col-10" title="Позиция">Поз</th>
-                    <th class="col-10" title="Спецвозможности">Спец</th>
-                    <th class="col-10" title="Прогресс тренировки">%</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="col-1 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-15 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-10" title="<?= Yii::t('frontend', 'views.training.index.title.progress') ?>">%</th>
                     <th class="col-1"></th>
                 </tr>
                 <?php foreach ($trainingArray as $item) : ?>
@@ -148,19 +150,21 @@ use yii\web\View;
                             <?= Html::a(
                                 '<i class="fa fa-times-circle"></i>',
                                 ['cancel', 'id' => $item->id],
-                                ['title' => 'Отменить тренировку']
+                                ['title' => Yii::t('frontend', 'views.training.index.link.cancel')]
                             ) ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
                 <tr>
-                    <th>Игрок</th>
-                    <th class="hidden-xs" title="Национальность">Нац</th>
-                    <th title="Возраст">В</th>
-                    <th title="Позиция">Поз</th>
-                    <th title="Номинальная сила">С</th>
-                    <th title="Спецвозможности">Спец</th>
-                    <th title="Прогресс тренировки">%</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.training.index.title.progress') ?>">%</th>
                     <th></th>
                 </tr>
             </table>
@@ -175,9 +179,9 @@ use yii\web\View;
         $columns = [
             [
                 'attribute' => 'squad',
-                'footer' => 'Игрок',
+                'footer' => Yii::t('frontend', 'views.th.player'),
                 'format' => 'raw',
-                'label' => 'Игрок',
+                'label' => Yii::t('frontend', 'views.th.player'),
                 'value' => static function (Player $model) {
                     return $model->getPlayerLink();
                 }
@@ -185,11 +189,11 @@ use yii\web\View;
             [
                 'attribute' => 'country',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Нац',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Национальность'],
+                'footer' => Yii::t('frontend', 'views.th.national'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
-                'label' => 'Нац',
+                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
+                'label' => Yii::t('frontend', 'views.th.national'),
                 'value' => static function (Player $model) {
                     return $model->country->getImageLink();
                 }
@@ -197,10 +201,10 @@ use yii\web\View;
             [
                 'attribute' => 'age',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'В',
-                'footerOptions' => ['title' => 'Возраст'],
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
-                'label' => 'В',
+                'footer' => Yii::t('frontend', 'views.th.age'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.age')],
+                'label' => Yii::t('frontend', 'views.th.age'),
                 'value' => static function (Player $model) {
                     return $model->age;
                 }
@@ -208,11 +212,11 @@ use yii\web\View;
             [
                 'attribute' => 'power_nominal',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Номинальная сила'],
+                'footer' => Yii::t('frontend', 'views.th.nominal-power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Номинальная сила'],
-                'label' => 'С',
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.title.nominal-power')],
+                'label' => Yii::t('frontend', 'views.th.nominal-power'),
                 'value' => static function (Player $model) {
                     $result = $model->power_nominal;
                     if ($model->date_no_action < time()) {
@@ -224,11 +228,11 @@ use yii\web\View;
             [
                 'attribute' => 'position',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Поз',
-                'footerOptions' => ['title' => 'Позиция'],
+                'footer' => Yii::t('frontend', 'views.th.position'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-15', 'title' => 'Позиция'],
-                'label' => 'Поз',
+                'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.title.position')],
+                'label' => Yii::t('frontend', 'views.th.position'),
                 'value' => static function (Player $model) {
                     $result = '<div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">'
                         . $model->position()
@@ -242,11 +246,11 @@ use yii\web\View;
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Спец',
-                'footerOptions' => ['title' => 'Спецвозможности'],
+                'footer' => Yii::t('frontend', 'views.th.special'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.special')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-15', 'title' => 'Спецвозможности'],
-                'label' => 'Спец',
+                'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.title.special')],
+                'label' => Yii::t('frontend', 'views.th.special'),
                 'value' => static function (Player $model) {
                     $result = '<div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">'
                         . $model->special()
@@ -279,7 +283,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Продолжить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.training.index.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?= Html::endForm() ?>

@@ -63,14 +63,14 @@ class TeamChangeController extends AbstractController
     }
 
     /**
-     * @return string|Response
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
         $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
-        $this->setSeoTitle('Смена команды');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.team-change.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'myDataProvider' => $myDataProvider,
@@ -79,8 +79,7 @@ class TeamChangeController extends AbstractController
 
     /**
      * @param null $id
-     * @return string|Response
-     * @throws \yii\db\Exception
+     * @return string|\yii\web\Response
      */
     public function actionConfirm($id = null)
     {
@@ -89,7 +88,7 @@ class TeamChangeController extends AbstractController
          */
         $team = Team::find()->where(['id' => $id, 'user_id' => 0])->limit(1)->one();
         if (!$team) {
-            $this->setErrorFlash('Команда выбрана неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-change.confirm.error.team'));
             return $this->redirect(['index']);
         }
 
@@ -97,7 +96,7 @@ class TeamChangeController extends AbstractController
             'team_id' => $id,
             'user_id' => $this->user->id
         ])->count()) {
-            $this->setErrorFlash('Вы уже подали заявку на эту команду.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-change.confirm.error.request'));
             return $this->redirect(['team/change']);
         }
 
@@ -131,7 +130,7 @@ class TeamChangeController extends AbstractController
         } else {
             if (1 === count($this->myOwnTeamArray)) {
                 if ($team->stadium->city->country->id !== $this->myTeam->stadium->city->country->id) {
-                    $leaveArray[0] = 'Беру дополнительную команду';
+                    $leaveArray[0] = Yii::t('frontend', 'controllers.team-change.confirm.additional');
                 }
                 $leaveArray[$this->myTeam->id] = $this->myTeam->name;
             } else {
@@ -165,7 +164,7 @@ class TeamChangeController extends AbstractController
                 $teamAsk->user_id = $this->user->id;
                 $teamAsk->save();
 
-                $this->setSuccessFlash('Заявка успешно подана.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-change.confirm.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
@@ -191,7 +190,7 @@ class TeamChangeController extends AbstractController
         }
 
         TeamRequestQuery::deleteTeamRequest($id, $this->user->id);
-        $this->setSuccessFlash('Заявка успешно удалена');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-change.delete.success'));
 
         return $this->redirect(['team-request/index']);
     }

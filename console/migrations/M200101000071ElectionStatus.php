@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,9 +32,9 @@ class M200101000071ElectionStatus extends Migration
             self::TABLE,
             ['name'],
             [
-                ['Сбор кандидатур'],
-                ['Идет голосование'],
-                ['Закрыто'],
+                [Yii::t('console', 'migrations.election-status.candidates')],
+                [Yii::t('console', 'migrations.election-status.open')],
+                [Yii::t('console', 'migrations.election-status.close')],
             ]
         );
 

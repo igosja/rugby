@@ -63,7 +63,7 @@ class MessengerController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Личная переписка');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.messenger.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -85,7 +85,7 @@ class MessengerController extends AbstractController
 
         $model = new Message();
         if ($model->addMessage($id)) {
-            $this->setSuccessFlash('Сообщение успешно сохранено');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.messenger.view.success'));
             return $this->refresh();
         }
 
@@ -125,7 +125,7 @@ class MessengerController extends AbstractController
             ->where(['owner_user_id' => $id, 'blocked_user_id' => $this->user->id])
             ->count();
 
-        $this->setSeoTitle('Личная переписка');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.messenger.view.title'));
         return $this->render('view', [
             'inBlacklistInterlocutor' => $inBlacklistInterlocutor,
             'inBlacklistOwner' => $inBlacklistOwner,

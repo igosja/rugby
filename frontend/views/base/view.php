@@ -33,21 +33,20 @@ use yii\helpers\Html;
 <?php if ($team->buildingBase) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
-            На базе сейчас идет строительство.
-            Дата окончания строительства - <?= $team->buildingBase->endDate() ?>
+            <?= Yii::t('frontend', 'views.base.view.building-base', ['date' => $team->buildingBase->endDate()]) ?>
         </div>
     </div>
 <?php endif ?>
 <div class="row margin-top">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">База команды</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.base') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/base.png',
                         [
-                            'alt' => 'База команды',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.base'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -55,13 +54,13 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delBase) : ?> del<?php endif ?>">
-                            Уровень:
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
                             <span class="strong"><?= $team->base->level ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delBase) : ?> del<?php endif ?>">
-                            Стоимость:
+                            <?= Yii::t('frontend', 'views.base.view.price') ?>:
                             <span class="strong">
                                 <?= FormatHelper::asCurrency($team->base->price_buy) ?>
                             </span>
@@ -69,7 +68,7 @@ use yii\helpers\Html;
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delBase) : ?> del<?php endif ?>">
-                            Слотов:
+                            <?= Yii::t('frontend', 'views.base.view.slot') ?>:
                             <span class="strong">
                                 <?= $team->base->slot_min ?>-<?= $team->base->slot_max ?>
                             </span>
@@ -77,13 +76,13 @@ use yii\helpers\Html;
                     </div>
                     <div class="row margin-top">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delBase) : ?> del<?php endif ?>">
-                            Занято слотов:
+                            <?= Yii::t('frontend', 'views.base.view.slot-used') ?>:
                             <span class="strong"><?= $team->baseUsed() ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delBase) : ?> del<?php endif ?>">
-                            Содержание:
+                            <?= Yii::t('frontend', 'views.base.view.maintenance') ?>:
                             <span class="strong">
                                 <?= FormatHelper::asCurrency($team->baseMaintenance()) ?>
                             </span>
@@ -102,13 +101,13 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">Тренировочный центр</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.training') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/training.png',
                         [
-                            'alt' => 'Тренировочный центр',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.training'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -116,23 +115,23 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delTraining) : ?> del<?php endif ?>">
-                            Уровень:
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
                             <span class="strong"><?= $team->baseTraining->level ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delTraining) : ?> del<?php endif ?>">
-                            Доступно:
-                            <span class="strong"><?= $team->baseTraining->power_count ?></span> бал.
+                            <?= Yii::t('frontend', 'views.base.view.available-training') ?>:
+                            <span class="strong"><?= $team->baseTraining->power_count ?></span> <?= Yii::t('frontend', 'views.base.view.point') ?>
                             |
-                            <span class="strong"><?= $team->baseTraining->special_count ?></span> спец.
+                            <span class="strong"><?= $team->baseTraining->special_count ?></span> <?= Yii::t('frontend', 'views.base.view.special') ?>
                             |
-                            <span class="strong"><?= $team->baseTraining->position_count ?></span> поз.
+                            <span class="strong"><?= $team->baseTraining->position_count ?></span> <?= Yii::t('frontend', 'views.base.view.position') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delTraining) : ?> del<?php endif ?>">
-                            Скорость:
+                            <?= Yii::t('frontend', 'views.base.view.speed') ?>:
                             <span class="strong">
                                 <?=
                                 $team->baseTraining->training_speed_min
@@ -144,15 +143,15 @@ use yii\helpers\Html;
                     </div>
                     <div class="row margin-top">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            Осталось:
+                            <?= Yii::t('frontend', 'views.base.view.left-training') ?>:
                             <span class="strong"><?= $team->availableTrainingPower() ?></span>
-                            бал.
+                            <?= Yii::t('frontend', 'views.base.view.point') ?>
                             |
                             <span class="strong"><?= $team->availableTrainingSpecial() ?></span>
-                            спец.
+                            <?= Yii::t('frontend', 'views.base.view.special') ?>
                             |
                             <span class="strong"><?= $team->availableTrainingPosition() ?></span>
-                            поз.
+                            <?= Yii::t('frontend', 'views.base.view.position') ?>
                         </div>
                     </div>
                 </div>
@@ -168,13 +167,13 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">Медцентр</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.medical') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/medical.png',
                         [
-                            'alt' => 'Медицинский центр',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.medical'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -182,13 +181,13 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delMedical) : ?> del<?php endif ?>">
-                            Уровень:
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
                             <span class="strong"><?= $team->baseMedical->level ?></span>
                         </div>
                     </div>
                     <div class="row margin-top">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delMedical) : ?> del<?php endif ?>">
-                            Базовая усталость:
+                            <?= Yii::t('frontend', 'views.base.view.tire') ?>:
                             <span class="strong"><?= $team->baseMedical->tire ?>%</span>
                         </div>
                     </div>
@@ -205,13 +204,13 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">Центр физподготовки</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.physical') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/physical.png',
                         [
-                            'alt' => 'Центр физподготовки',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.physical'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -219,32 +218,33 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delPhysical) : ?> del<?php endif ?>">
-                            Уровень:
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
                             <span class="strong"><?= $team->basePhysical->level ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delPhysical) : ?> del<?php endif ?>">
-                            Изменений формы:
+                            <?= Yii::t('frontend', 'views.base.view.change-count') ?>:
                             <span class="strong"><?= $team->basePhysical->change_count ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delPhysical) : ?> del<?php endif ?>">
-                            Увеличение усталости:
+                            <?= Yii::t('frontend', 'views.base.view.tire-bonus') ?>:
                             <span class="strong"><?= $team->basePhysical->tire_bonus ?>%</span>
                         </div>
                     </div>
                     <?php if ($myTeam && $myTeam->id === $team->id) : ?>
                         <div class="row margin-top">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delPhysical) : ?> del<?php endif ?>">
-                                Осталось изменений:
+                                <?= Yii::t('frontend', 'views.base.view.available-physical') ?>:
                                 <span class="strong"><?= $team->availablePhysical() ?></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delPhysical) : ?> del<?php endif ?>">
-                                Запланировано: <span class="strong"><?= $team->planPhysical() ?></span>
+                                <?= Yii::t('frontend', 'views.base.view.plan-physical') ?>:
+                                <span class="strong"><?= $team->planPhysical() ?></span>
                             </div>
                         </div>
                     <?php endif ?>
@@ -261,13 +261,13 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">Спортшкола</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.school') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/school.png',
                         [
-                            'alt' => 'Спортивная школа',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.school'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -275,18 +275,20 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delSchool) : ?> del<?php endif ?>">
-                            Уровень:
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
                             <span class="strong"><?= $team->baseSchool->level ?></span>
                         </div>
                     </div>
                     <div class="row margin-top">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delSchool) : ?> del<?php endif ?>">
-                            Молодежь: <span class="strong"><?= $team->baseSchool->player_count ?></span>
+                            <?= Yii::t('frontend', 'views.base.view.school-player') ?>:
+                            <span class="strong"><?= $team->baseSchool->player_count ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delSchool) : ?> del<?php endif ?>">
-                            Осталось игроков: <span class="strong"><?= $team->availableSchool() ?></span>
+                            <?= Yii::t('frontend', 'views.base.view.school-available') ?>:
+                            <span class="strong"><?= $team->availableSchool() ?></span>
                         </div>
                     </div>
                 </div>
@@ -302,13 +304,13 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <fieldset>
-            <legend class="strong text-center">Скаут-центр</legend>
+            <legend class="strong text-center"><?= Yii::t('frontend', 'views.base.view.scout') ?></legend>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 text-center">
                     <?= Html::img(
                         '/img/base/scout.png',
                         [
-                            'alt' => 'Скаут-центр',
+                            'alt' => Yii::t('frontend', 'views.base.view.alt.scout'),
                             'class' => 'img-border img-base',
                         ]
                     ) ?>
@@ -316,18 +318,19 @@ use yii\helpers\Html;
                 <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delScout) : ?> del<?php endif ?>">
-                            Уровень: <span class="strong"><?= $team->baseScout->level ?></span>
+                            <?= Yii::t('frontend', 'views.base.view.level') ?>:
+                            <span class="strong"><?= $team->baseScout->level ?></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delScout) : ?> del<?php endif ?>">
-                            Изучений стилей:
+                            <?= Yii::t('frontend', 'views.base.view.my-style') ?>:
                             <span class="strong"><?= $team->baseScout->my_style_count ?></span>
                         </div>
                     </div>
                     <div class="row margin-top">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12<?php if ($delScout) : ?> del<?php endif ?>">
-                            Осталось изучений стилей:
+                            <?= Yii::t('frontend', 'views.base.view.available-scout') ?>:
                             <span class="strong"><?= $team->availableScout() ?></span>
                         </div>
                     </div>
@@ -345,6 +348,10 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::a('В ростер', ['team/view', 'id' => $team->id], ['class' => 'btn margin']) ?>
+        <?= Html::a(
+            Yii::t('frontend', 'views.base.view.link.cancel'),
+            ['team/view', 'id' => $team->id],
+            ['class' => 'btn margin']
+        ) ?>
     </div>
 </div>

@@ -7,6 +7,7 @@ namespace common\models\db;
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use rmrevin\yii\fontawesome\FAS;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
@@ -103,7 +104,7 @@ class Lineup extends AbstractActiveRecord
     {
         $result = '';
         if ($this->is_captain) {
-            $result = FAS::icon(FAS::_COPYRIGHT, ['title' => 'Капитан']);
+            $result = FAS::icon(FAS::_COPYRIGHT, ['title' => Yii::t('common', 'models.db.lineup.captain.title')]);
         }
         return $result;
     }
@@ -116,9 +117,9 @@ class Lineup extends AbstractActiveRecord
     {
         $result = '';
         if ($this->power_change > 0) {
-            $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => '+1 балл по результатам матча'])->addCssClass('font-green');
+            $result = FAS::icon(FAS::_PLUS_SQUARE, ['title' => Yii::t('common', 'models.db.lineup.power-change.plus')])->addCssClass('font-green');
         } elseif ($this->power_change < 0) {
-            $result = FAS::icon(FAS::_MINUS_SQUARE, ['title' => '-1 балл по результатам матча'])->addCssClass('font-red');
+            $result = FAS::icon(FAS::_MINUS_SQUARE, ['title' => Yii::t('common', 'models.db.lineup.power-change.minus')])->addCssClass('font-red');
         }
         return $result;
     }

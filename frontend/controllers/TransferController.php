@@ -78,7 +78,7 @@ class TransferController extends AbstractController
                 ->all();
         }
 
-        $this->setSeoTitle('Трансфер игроков');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.transfer.index.title'));
 
         return $this->render('index', [
             'countryArray' => $countryArray,
@@ -93,7 +93,7 @@ class TransferController extends AbstractController
     /**
      * @return string
      */
-    public function actionHistory()
+    public function actionHistory(): string
     {
         $searchModel = new TransferHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
@@ -118,7 +118,7 @@ class TransferController extends AbstractController
             'text'
         );
 
-        $this->setSeoTitle('Трансфер игроков');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.transfer.history.title'));
 
         return $this->render('history', [
             'countryArray' => $countryArray,
@@ -145,7 +145,7 @@ class TransferController extends AbstractController
 
         $model = new TransferVote(['transferId' => $id]);
         if ($model->saveVote()) {
-            $this->setSuccessFlash('Ваш голос успешно сохранён');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.transfer.view.success'));
 
             /**
              * @var Federation[] $presidentFederationArray
@@ -291,7 +291,7 @@ class TransferController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle('Трансферная сделка');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.transfer.view.title'));
 
         return $this->render('view', [
             'applicationDataProvider' => $applicationDataProvider,
@@ -328,7 +328,7 @@ class TransferController extends AbstractController
 
         try {
             $model->delete();
-            $this->setSuccessFlash('Комментарий успешно удалён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.transfer.delete-comment.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
         }

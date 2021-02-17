@@ -47,11 +47,11 @@ class UserTransferMoney extends Model
     /**
      * @return array
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'sum' => 'Сумма',
-            'userId' => 'Менеджер',
+            'sum' => Yii::t('frontend', 'models.forms.user-transfer-money.label.sum'),
+            'userId' => Yii::t('frontend', 'models.forms.user-transfer-money.label.user'),
         ];
     }
 

@@ -31,7 +31,7 @@ class ChangePassword extends Model
         return [
             [['new', 'old', 'repeat'], 'required'],
             [['old'], 'checkOldPassword'],
-            [['repeat'], 'compare', 'compareAttribute' => 'new', 'message' => 'Введенные пароли не совпадают.'],
+            [['repeat'], 'compare', 'compareAttribute' => 'new', 'message' => Yii::t('frontend', 'models.forms.change-password.rules.repeat.message')],
             [['new'], 'string', 'min' => 6],
         ];
     }
@@ -70,7 +70,7 @@ class ChangePassword extends Model
          */
         $user = Yii::$app->user->identity;
         if (!$user->validatePassword($this->old)) {
-            $this->addError($attribute, 'Текущий пароль указан не верно');
+            $this->addError($attribute, Yii::t('frontend', 'models.forms.change-password.old-password.error'));
         }
     }
 
@@ -80,9 +80,9 @@ class ChangePassword extends Model
     public function attributeLabels(): array
     {
         return [
-            'new' => 'Новый пароль',
-            'old' => 'Текущий пароль',
-            'repeat' => 'Повторите пароль',
+            'new' => Yii::t('frontend', 'models.forms.change-password.label.new'),
+            'old' => Yii::t('frontend', 'models.forms.change-password.label.old'),
+            'repeat' => Yii::t('frontend', 'models.forms.change-password.label.repeat'),
         ];
     }
 }

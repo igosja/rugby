@@ -80,7 +80,7 @@ class LoanController extends AbstractController
                 ->all();
         }
 
-        $this->setSeoTitle('Аренда игроков');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.loan.index.title'));
 
         return $this->render('index', [
             'countryArray' => $countryArray,
@@ -120,7 +120,7 @@ class LoanController extends AbstractController
             'text'
         );
 
-        $this->setSeoTitle('Аренда игроков');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.loan.history.title'));
 
         return $this->render('history', [
             'countryArray' => $countryArray,
@@ -147,7 +147,7 @@ class LoanController extends AbstractController
 
         $model = new LoanVote(['loanId' => $id]);
         if ($model->saveVote()) {
-            $this->setSuccessFlash('Ваш голос успешно сохранён');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.loan.view.success'));
 
             /**
              * @var Federation[] $presidentFederationArray
@@ -296,7 +296,7 @@ class LoanController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle('Арендная сделка');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.loan.view.title'));
 
         return $this->render('view', [
             'applicationDataProvider' => $applicationDataProvider,
@@ -333,7 +333,7 @@ class LoanController extends AbstractController
 
         try {
             $model->delete();
-            $this->setSuccessFlash('Комментарий успешно удалён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.loan.delete-comment.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
         }

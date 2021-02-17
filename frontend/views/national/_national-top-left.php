@@ -21,12 +21,12 @@ use yii\helpers\Html;
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                Дивизион: <?= $national->division() ?>
+                <?= Yii::t('frontend', 'views.national.national-top-right.division') ?>: <?= $national->division() ?>
             </div>
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Менеджер:
+                <?= Yii::t('frontend', 'views.national.national-top-right.manager') ?>:
                 <?php if ($national->user->canDialog()) : ?>
                     <?= Html::a(
                         FAS::icon(FAS::_ENVELOPE),
@@ -42,14 +42,14 @@ use yii\helpers\Html;
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Ник:
+                <?= Yii::t('frontend', 'views.national.national-top-right.login') ?>:
                 <?= $national->user->iconVip() ?>
                 <?= $national->user->getUserLink(['class' => 'strong']) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Рейтинг тренера:
+                <?= Yii::t('frontend', 'views.national.national-top-right.rating') ?>:
                 <span class="font-green strong"><?= $national->attitudeNationalPositive() ?>%</span>
                 |
                 <span class="font-yellow strong"><?= $national->attitudeNationalNeutral() ?>%</span>
@@ -60,7 +60,7 @@ use yii\helpers\Html;
         <?php if ($national->vice_user_id) : ?>
             <div class="row margin-top-small">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    Заместитель:
+                    <?= Yii::t('frontend', 'views.national.national-top-right.vice') ?>:
                     <?php if ($national->viceUser->canDialog()) : ?>
                         <?= Html::a(
                             FAS::icon(FAS::_ENVELOPE),
@@ -76,7 +76,7 @@ use yii\helpers\Html;
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    Ник:
+                    <?= Yii::t('frontend', 'views.national.national-top-right.login') ?>:
                     <?= $national->viceUser->iconVip() ?>
                     <?= $national->viceUser->getUserLink(['class' => 'strong']) ?>
                 </div>
@@ -84,14 +84,14 @@ use yii\helpers\Html;
         <?php endif ?>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Стадион:
+                <?= Yii::t('frontend', 'views.national.national-top-right.stadium') ?>:
                 <?= $national->stadium->name ?>,
                 <strong><?= Yii::$app->formatter->asInteger($national->stadium->capacity) ?></strong>
             </div>
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Финансы:
+                <?= Yii::t('frontend', 'views.national.national-top-right.finance') ?>:
                 <span class="strong">
                     <?= FormatHelper::asCurrency($national->finance) ?>
                 </span>

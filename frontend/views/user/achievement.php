@@ -26,34 +26,34 @@ print $this->render('//user/_top');
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Сезон'],
-                'header' => 'С',
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
+                'footer' => Yii::t('frontend', 'views.th.season'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                'header' => Yii::t('frontend', 'views.th.season'),
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
                 'value' => static function (Achievement $model) {
                     return $model->season_id;
                 }
             ],
             [
-                'footer' => 'Команда',
+                'footer' => Yii::t('frontend', 'views.th.team'),
                 'format' => 'raw',
-                'header' => 'Команда',
+                'header' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (Achievement $model) {
                     return $model->team_id ? $model->team->getTeamImageLink() : $model->national->nationalLink(true);
                 }
             ],
             [
-                'footer' => 'Турнир',
-                'header' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.th.tournament'),
+                'header' => Yii::t('frontend', 'views.th.tournament'),
                 'value' => static function (Achievement $model) {
                     return $model->getTournament();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Позиция',
+                'footer' => Yii::t('frontend', 'views.th.achievement.position'),
                 'format' => 'raw',
-                'header' => 'Позиция',
+                'header' => Yii::t('frontend', 'views.th.achievement.position'),
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Achievement $model) {
                     return $model->getPosition();

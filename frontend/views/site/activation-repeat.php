@@ -14,20 +14,17 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 
 ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <h1>Активация аккаунта</h1>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h1><?= Yii::t('frontend', 'views.site.activation.h1') ?></h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= $this->render('_sign-up-links') ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <?= $this->render('_sign-up-links') ?>
     </div>
-<?php
-
-// TODO refactor
-$form = ActiveForm::begin(
+</div>
+<?php $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
         'fieldConfig' => [
@@ -41,31 +38,27 @@ $form = ActiveForm::begin(
         ],
     ]
 ) ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <p>
-                Эта страничка предназначена для новых менеджеров,
-                которые <strong>не смогли получить письмо с кодом активации</strong>.
-            </p>
-            <p>
-                Для повторной отправки кода активации введите свой <strong>email</strong>:
-            </p>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <p>
+            <?= Yii::t('frontend', 'views.site.activation-repeat.p.1') ?>
+        </p>
+        <p>
+            <?= Yii::t('frontend', 'views.site.activation-repeat.p.2') ?>
+        </p>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= $form->field($activationRepeatForm, 'email')->textInput(['autoFocus' => true]) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $form->field($activationRepeatForm, 'email')->textInput(['autoFocus' => true]) ?>
     </div>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
-            <?= Html::submitButton('Получить код', ['class' => 'btn margin']) ?>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left xs-text-center">
-            <?= Html::a('У меня уже есть код активации', ['site/activation'], ['class' => 'btn margin']) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
+        <?= Html::submitButton(Yii::t('frontend', 'views.site.activation-repeat.submit'), ['class' => 'btn margin']) ?>
     </div>
-<?php
-
-// TODO refactor
-ActiveForm::end() ?>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left xs-text-center">
+        <?= Html::a(Yii::t('frontend', 'views.site.activation-repeat.link.activation'), ['site/activation'], ['class' => 'btn margin']) ?>
+    </div>
+</div>
+<?php ActiveForm::end() ?>

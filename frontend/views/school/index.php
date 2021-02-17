@@ -27,75 +27,77 @@ use yii\web\View;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Спортшкола
+                <?= Yii::t('frontend', 'views.school.title') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Уровень:
+                <?= Yii::t('frontend', 'views.school.level') ?>:
                 <span class="strong"><?= $team->baseSchool->level ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Время подготовки игрока:
-                <span class="strong"><?= $team->baseSchool->school_speed ?></span> дней
+                <?= Yii::t('frontend', 'views.school.speed', ['speed' => $team->baseSchool->school_speed]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Осталось юниоров:
-                <span class="strong"><?= $team->availableSchool() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->player_count ?></span>
+                <?= Yii::t('frontend', 'views.school.available', [
+                    'available' => $team->availableSchool(),
+                    'count' => $team->baseSchool->player_count,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Из них со спецвозможностью:
-                <span class="strong"><?= $team->availableSchoolWithSpecial() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->with_special ?></span>
+                <?= Yii::t('frontend', 'views.school.with-special', [
+                    'available' => $team->availableSchoolWithSpecial(),
+                    'count' => $team->baseSchool->with_special,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Из них со стилем:
-                <span class="strong"><?= $team->availableSchoolWithStyle() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->with_style ?></span>
+                <?= Yii::t('frontend', 'views.school.with-style', [
+                    'available' => $team->availableSchoolWithStyle(),
+                    'count' => $team->baseSchool->with_style,
+                ]) ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Здесь - <span class="strong">в спортшколе</span> -
-        вы можете подготовить молодых игроков для основной команды:
+        <?= Yii::t('frontend', 'views.school.p') ?>
     </div>
 </div>
 <?php if ($schoolArray) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            Сейчас происходит подготовка юниора:
+            <?= Yii::t('frontend', 'views.school.index.now') ?>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>Игрок</th>
-                    <th class="col-1 hidden-xs" title="Национальность">Нац</th>
-                    <th class="col-10" title="Позиция">Поз</th>
-                    <th class="col-5" title="Возраст">В</th>
-                    <th class="col-15" title="Спецвозможности">Спец</th>
-                    <th class="col-15">Стиль</th>
-                    <th class="col-15">Осталось дней</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="col-1 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.th.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-15"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-15"><?= Yii::t('frontend', 'views.th.style') ?></th>
+                    <th class="col-15"><?= Yii::t('frontend', 'views.school.th.day') ?></th>
                     <th class="col-1"></th>
                 </tr>
                 <?php foreach ($schoolArray as $item) : ?>
                     <tr>
-                        <td>Молодой игрок</td>
+                        <td><?= Yii::t('frontend', 'views.school.td.player') ?></td>
                         <td class="hidden-xs text-center">
                             <?= $team->stadium->city->country->getImageLink() ?>
                         </td>
@@ -110,19 +112,20 @@ use yii\web\View;
                             <?= Html::a(
                                 '<i class="fa fa-times-circle"></i>',
                                 ['cancel', 'id' => $item->id],
-                                ['title' => 'Отменить подготовку игрока']
+                                ['title' => Yii::t('frontend', 'views.school.link.cancel')]
                             ) ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
                 <tr>
-                    <th>Игрок</th>
-                    <th class="hidden-xs" title="Национальность">Нац</th>
-                    <th title="Позиция">Поз</th>
-                    <th title="Возраст">В</th>
-                    <th title="Спецвозможности">Спец</th>
-                    <th>Стиль</th>
-                    <th>Осталось дней</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.th.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th><?= Yii::t('frontend', 'views.th.style') ?></th>
+                    <th><?= Yii::t('frontend', 'views.school.th.day') ?></th>
                     <th></th>
                 </tr>
             </table>
@@ -134,16 +137,20 @@ use yii\web\View;
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>Игрок</th>
-                    <th class="col-1" title="Национальность">Нац</th>
-                    <th class="col-5" title="Возраст">В</th>
-                    <th class="col-15" title="Позиция">Поз</th>
-                    <th class="col-15" title="Спецвозможности">Спец</th>
-                    <th class="col-15">Стиль</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="col-1"
+                        title="<?= Yii::t('frontend', 'views.th.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-15"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-15"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-15"><?= Yii::t('frontend', 'views.th.style') ?></th>
                 </tr>
                 <tr>
                     <td>
-                        Молодой игрок
+                        <?= Yii::t('frontend', 'views.school.td.player') ?>
                     </td>
                     <td class="text-center">
                         <?= $team->stadium->city->country->getImageLink() ?>
@@ -179,7 +186,8 @@ use yii\web\View;
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <input class="btn margin" type="submit" value="Продолжить"/>
+            <?= Html::submitButton(Yii::t('frontend', 'views.school.submit'), ['class' => 'btn margin']) ?>
         </div>
     </div>
+    <?= Html::endForm() ?>
 <?php endif ?>

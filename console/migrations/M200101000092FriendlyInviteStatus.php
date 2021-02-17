@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,9 +32,9 @@ class M200101000092FriendlyInviteStatus extends Migration
             self::TABLE,
             ['name'],
             [
-                ['Новое приглашение'],
-                ['Приглашение принято'],
-                ['Приглашение отклонено'],
+                [Yii::t('console', 'migrations.friendly-invite-status.new')],
+                [Yii::t('console', 'migrations.friendly-invite-status.accepted')],
+                [Yii::t('console', 'migrations.friendly-invite-status.canceled')],
             ]
         );
 

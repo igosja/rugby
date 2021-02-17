@@ -13,35 +13,35 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Игроки',
+                'text' => Yii::t('frontend', 'views.team.team-links.player'),
                 'url' => ['team/view', 'id' => $id],
             ],
             [
-                'text' => 'Матчи',
+                'text' => Yii::t('frontend', 'views.team.team-links.game'),
                 'url' => ['team/game', 'id' => $id],
             ],
             [
-                'text' => 'Статистика',
+                'text' => Yii::t('frontend', 'views.team.team-links.statistics'),
                 'url' => ['team/statistics', 'id' => $id],
             ],
             [
-                'text' => 'Сделки',
+                'text' => Yii::t('frontend', 'views.team.team-links.deal'),
                 'url' => ['team/deal', 'id' => $id],
             ],
             [
-                'text' => 'События',
+                'text' => Yii::t('frontend', 'views.team.team-links.history'),
                 'url' => ['team/history', 'id' => $id],
             ],
             [
-                'text' => 'Финансы',
+                'text' => Yii::t('frontend', 'views.team.team-links.finance'),
                 'url' => ['team/finance', 'id' => $id],
             ],
             [
-                'text' => 'Достижения',
+                'text' => Yii::t('frontend', 'views.team.team-links.achievement'),
                 'url' => ['team/achievement', 'id' => $id],
             ],
             [
-                'text' => 'Трофеи',
+                'text' => Yii::t('frontend', 'views.team.team-links.trophy'),
                 'url' => ['team/trophy', 'id' => $id],
             ],
         ]

@@ -30,7 +30,7 @@ print $this->render('//user/_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Отпуск менеджера</th>
+                <th><?= Yii::t('frontend', 'views.user.holiday.th') ?></th>
             </tr>
         </table>
     </div>
@@ -48,15 +48,15 @@ print $this->render('//user/_top');
 ]) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        На этой странице вы можете <span class="strong">изменить свои анкетные данные</span>:
+        <?= Yii::t('frontend', 'views.user.holiday.p') ?>:
     </div>
 </div>
 <?= $form->field($model, 'isHoliday')->checkbox(['label' => false])->label(
-    'Поставьте здесь галочку, если собираетесь уехать в отпуск и временно не сможете управлять своими командами'
+    Yii::t('frontend', 'views.user.holiday.label')
 ) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center margin-top strong">
-        Заместители:
+        <?= Yii::t('frontend', 'views.user.holiday.vice') ?>:
     </div>
 </div>
 <?php foreach ($teamArray as $item) : ?>
@@ -78,20 +78,20 @@ print $this->render('//user/_top');
                 'vice[' . $team->id . ']',
                 $team->vice_user_id,
                 $item['userArray'],
-                ['prompt' => 'Нет', 'id' => 'vice-' . $team->id, 'class' => 'form-control']
+                ['prompt' => Yii::t('frontend', 'views.user.holiday.prompt.no'), 'id' => 'vice-' . $team->id, 'class' => 'form-control']
             ) ?>
         </div>
     </div>
 <?php endforeach ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.user.holiday.submit'), ['class' => 'btn']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center margin-top strong">
-        История:
+        <?= Yii::t('frontend', 'views.user.holiday.history') ?>:
     </div>
 </div>
 <div class="row">
@@ -101,16 +101,16 @@ print $this->render('//user/_top');
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Начало отпуска',
-                'header' => 'Начало отпуска',
+                'footer' => Yii::t('frontend', 'views.user.holiday.th.start'),
+                'header' => Yii::t('frontend', 'views.user.holiday.th.start'),
                 'value' => static function (UserHoliday $model) {
                     return FormatHelper::asDate($model->date_start);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Конец отпуска',
-                'header' => 'Конец отпуска',
+                'footer' => Yii::t('frontend', 'views.user.holiday.th.end'),
+                'header' => Yii::t('frontend', 'views.user.holiday.th.end'),
                 'value' => static function (UserHoliday $model) {
                     if (!$model->date_end) {
                         return '-';
@@ -120,16 +120,16 @@ print $this->render('//user/_top');
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Длительность',
-                'header' => 'Длительность',
+                'footer' => Yii::t('frontend', 'views.user.holiday.th.duration'),
+                'header' => Yii::t('frontend', 'views.user.holiday.th.duration'),
                 'value' => static function (UserHoliday $model) {
                     if (!$model->date_end) {
                         return '-';
                     }
-                    $date1 = new DateTime('@' . $model->date_start);
-                    $date2 = new DateTime('@' . $model->date_end);
+                    $date1 = new DateTime($model->date_start);
+                    $date2 = new DateTime($model->date_end);
                     $interval = $date1->diff($date2);
-                    return $interval->days . ' d';
+                    return $interval->days . ' ' . Yii::t('frontend', 'views.user.holiday.days');
                 }
             ],
         ];

@@ -24,7 +24,7 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            Кубок межсезонья
+            <?= Yii::t('frontend', 'views.off-season.index.h1') ?>
         </h1>
     </div>
 </div>
@@ -32,7 +32,7 @@ use yii\helpers\Html;
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-        <?= Html::label('Статистика', 'statisticType') ?>
+        <?= Html::label(Yii::t('frontend', 'views.off-season.statistics.label.statistic-type'), 'statisticType') ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-8">
         <?= Html::dropDownList(
@@ -51,14 +51,14 @@ if (1 === $statisticType->statistic_chapter_id) {
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticTeam $model) {
                 return $model->team->getTeamLink();
             }
@@ -77,22 +77,22 @@ if (1 === $statisticType->statistic_chapter_id) {
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Игрок',
+            'footer' => Yii::t('frontend', 'views.th.player'),
             'format' => 'raw',
-            'label' => 'Игрок',
+            'label' => Yii::t('frontend', 'views.th.player'),
             'value' => static function (StatisticPlayer $model) {
                 return $model->player->getPlayerLink();
             }
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticPlayer $model) {
                 return $model->team->getTeamLink();
             }
@@ -120,9 +120,7 @@ if (1 === $statisticType->statistic_chapter_id) {
                     return [];
                 }
                 $class = '';
-                if (1 === $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
-                    $class = 'info';
-                } elseif (1 !== $statisticType->statistic_chapter_id && $model->team_id === $myTeam->id) {
+                if ($model->team_id === $myTeam->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];

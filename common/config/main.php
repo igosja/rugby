@@ -77,7 +77,7 @@ return [
                     'message' => [
                         'from' => ['log@virtual-rugby.com'],
                         'to' => ['igosja@ukr.net'],
-                        'subject' => 'Ошибки базы данных на сайте virtual-rugby.com',
+                        'subject' => 'Database errors on the virtual-rugby.com website',
                     ],
                 ],
             ],

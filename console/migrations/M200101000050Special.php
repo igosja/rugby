@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -32,17 +33,17 @@ class M200101000050Special extends Migration
             self::TABLE,
             ['name', 'text'],
             [
-                ['Сл', 'Сила'],
-                ['Пс', 'Пас'],
-                ['Км', 'Комбинирование'],
-                ['Сх', 'Сватка'],
-                ['Ск', 'Скорость'],
-                ['Зх', 'Захват'],
-                ['Рк', 'Рак'],
-                ['Мл', 'Мол'],
-                ['Лд', 'Лидер'],
-                ['Ат', 'Атлетизм'],
-                ['К', 'Кумир'],
+                [Yii::t('console', 'migrations.special.name.power'), Yii::t('console', 'migrations.special.text.power')],
+                [Yii::t('console', 'migrations.special.name.pass'), Yii::t('console', 'migrations.special.text.pass')],
+                [Yii::t('console', 'migrations.special.name.combine'), Yii::t('console', 'migrations.special.text.combine')],
+                [Yii::t('console', 'migrations.special.name.scrum'), Yii::t('console', 'migrations.special.text.scrum')],
+                [Yii::t('console', 'migrations.special.name.speed'), Yii::t('console', 'migrations.special.text.speed')],
+                [Yii::t('console', 'migrations.special.name.tackle'), Yii::t('console', 'migrations.special.text.tackle')],
+                [Yii::t('console', 'migrations.special.name.ruck'), Yii::t('console', 'migrations.special.text.ruck')],
+                [Yii::t('console', 'migrations.special.name.moul'), Yii::t('console', 'migrations.special.text.moul')],
+                [Yii::t('console', 'migrations.special.name.leader'), Yii::t('console', 'migrations.special.text.leader')],
+                [Yii::t('console', 'migrations.special.name.athletic'), Yii::t('console', 'migrations.special.text.athletic')],
+                [Yii::t('console', 'migrations.special.name.idol'), Yii::t('console', 'migrations.special.text.idol')],
             ]
         );
 

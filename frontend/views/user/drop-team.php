@@ -23,22 +23,22 @@ print $this->render('//user/_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Отказ от управления командой</th>
+                <th><?= Yii::t('frontend', 'views.user.drop-team.title') ?></th>
             </tr>
         </table>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Вы собираетесь отказаться от управления своей командой
+        <?= Yii::t('frontend', 'views.user.drop-team.p') ?>
         <?= $team->getTeamImageLink() ?>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-center">
-            <?= Html::a('Отказаться от команды', ['drop-team', 'ok' => true], ['class' => 'btn margin']) ?>
-            <?= Html::a('Вернуться', ['view'], ['class' => 'btn margin']) ?>
+            <?= Html::a(Yii::t('frontend', 'views.user.drop-team.link.ok'), ['drop-team', 'ok' => true], ['class' => 'btn margin']) ?>
+            <?= Html::a(Yii::t('frontend', 'views.user.drop-team.link.view'), ['view'], ['class' => 'btn margin']) ?>
         </p>
     </div>
 </div>

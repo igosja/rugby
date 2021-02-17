@@ -19,19 +19,19 @@ use yii\helpers\Html;
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Дата регистрации:
+            <?= Yii::t('frontend', 'modules.forum.views.date-register') ?>:
             <?= FormatHelper::asDate($model->user->date_register) ?>
         </div>
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Рейтинг:
+            <?= Yii::t('frontend', 'modules.forum.views.rating') ?>:
             <?= $model->user->rating ?>
         </div>
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Команды:
+            <?= Yii::t('frontend', 'modules.forum.views.teams') ?>:
             <?php foreach ($model->user->teams as $team) : ?>
                 <?= $team->getTeamLink() ?>
             <?php endforeach; ?>
@@ -55,7 +55,7 @@ use yii\helpers\Html;
     </div>
     <div class="row text-size-2 font-grey">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <?= Html::a('Перейти в тему', ['forum/theme', 'id' => $model->forum_theme_id]) ?>
+            <?= Html::a(Yii::t('frontend', 'modules.forum.views.default.to-theme'), ['theme/view', 'id' => $model->forum_theme_id]) ?>
         </div>
     </div>
 </div>

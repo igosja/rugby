@@ -28,7 +28,7 @@ $context = $this->context;
         <?= Html::a(
             FAS::icon(FAS::_TRASH),
             ['news/delete-comment', 'id' => $model->id, 'newsId' => $model->news_id],
-            ['title' => 'Удалить']
+            ['title' => Yii::t('frontend', 'views.news.comment.link.delete')]
         ) ?>
     <?php endif ?>
 </div>

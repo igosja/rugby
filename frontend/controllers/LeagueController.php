@@ -160,7 +160,7 @@ class LeagueController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Лига чемпионов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.league.qualification.title'));
         return $this->render('qualification', [
             'qualificationArray' => $qualificationArray,
             'roundArray' => $this->getRoundLinksArray($seasonId),
@@ -177,21 +177,21 @@ class LeagueController extends AbstractController
     {
         return [
             [
-                'text' => 'Квалификация',
+                'text' => Yii::t('frontend', 'controllers.league.round.qualification'),
                 'url' => [
                     'league/qualification',
                     'seasonId' => $seasonId,
                 ]
             ],
             [
-                'text' => 'Групповой этап',
+                'text' => Yii::t('frontend', 'controllers.league.round.table'),
                 'url' => [
                     'league/table',
                     'seasonId' => $seasonId,
                 ]
             ],
             [
-                'text' => 'Плей-офф',
+                'text' => Yii::t('frontend', 'controllers.league.round.playoff'),
                 'url' => [
                     'league/playoff',
                     'seasonId' => $seasonId,
@@ -325,7 +325,7 @@ class LeagueController extends AbstractController
             ->all();
         $stageArray = ArrayHelper::map($stageArray, 'stage.id', 'stage.name');
 
-        $this->setSeoTitle('Лига чемпионов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.league.table.title'));
 
         return $this->render('table', [
             'groupArray' => $groupArray,
@@ -424,7 +424,7 @@ class LeagueController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Лига чемпионов');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.league.playoff.title'));
         return $this->render('qualification', [
             'qualificationArray' => $playoffArray,
             'roundArray' => $this->getRoundLinksArray($seasonId),
@@ -472,7 +472,8 @@ class LeagueController extends AbstractController
             'query' => $query,
             'sort' => false,
         ]);
-        $this->setSeoTitle('Статистика Лиги Чемпионов');
+
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.league.statistics.title'));
 
         return $this->render('statistics', [
             'dataProvider' => $dataProvider,

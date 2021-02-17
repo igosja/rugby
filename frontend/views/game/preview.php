@@ -25,9 +25,9 @@ use yii\helpers\Html;
 <?php if ($game->played) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-            <?= Html::a('Результат', ['view', 'id' => Yii::$app->request->get('id')]) ?>
+            <?= Html::a(Yii::t('frontend', 'views.game.link.result'), ['view', 'id' => Yii::$app->request->get('id')]) ?>
             |
-            <span class="strong">Перед матчем</span>
+            <span class="strong"><?= Yii::t('frontend', 'views.game.link.before-game') ?>></span>
         </div>
     </div>
 <?php endif ?>
@@ -96,7 +96,7 @@ use yii\helpers\Html;
                 <td class="col-35 text-center">
                     <?= $homeForecast ?>
                 </td>
-                <td class="text-center">Прогноз на матч</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.forecast') ?></td>
                 <td class="col-35 text-center">
                     <?= $guestForecast ?>
                 </td>
@@ -112,7 +112,7 @@ use yii\helpers\Html;
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'footerOptions' => ['class' => 'hidden'],
-                'header' => 'Дата',
+                'header' => Yii::t('frontend', 'views.game.preview.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
                 'value' => static function (Game $model) {
                     return FormatHelper::asDate($model->schedule->date);
@@ -121,7 +121,7 @@ use yii\helpers\Html;
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footerOptions' => ['class' => 'hidden'],
-                'header' => 'Турнир',
+                'header' => Yii::t('frontend', 'views.game.preview.th.tournament'),
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'value' => static function (Game $model) {
                     return $model->schedule->tournamentType->name;
@@ -130,7 +130,7 @@ use yii\helpers\Html;
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footerOptions' => ['class' => 'hidden'],
-                'header' => 'Стадия',
+                'header' => Yii::t('frontend', 'views.game.preview.th.stage'),
                 'headerOptions' => ['class' => 'col-15 hidden-xs'],
                 'value' => static function (Game $model) {
                     return $model->schedule->stage->name;
@@ -140,7 +140,7 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'footerOptions' => ['class' => 'hidden'],
                 'format' => 'raw',
-                'header' => 'Игра',
+                'header' => Yii::t('frontend', 'views.game.preview.th.game'),
                 'value' => static function (Game $model) {
                     return $model->teamOrNationalLink('home', false)
                         . ' - '
@@ -152,11 +152,11 @@ use yii\helpers\Html;
                 'footer' => '+' . $win . ' =' . $draw . ' -' . $loose . ' (' . $pointFor . ':' . $pointAgainst . ')',
                 'footerOptions' => ['colspan' => '5'],
                 'format' => 'raw',
-                'header' => 'Счёт',
+                'header' => Yii::t('frontend', 'views.game.preview.th.score'),
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Game $model) {
                     return Html::a(
-                        $model->formatScore('home'),
+                        $model->formatScore(),
                         ['view', 'id' => $model->id]
                     );
                 }

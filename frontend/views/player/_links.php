@@ -13,31 +13,31 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Games',
+                'text' => Yii::t('frontend', 'views.player.links.view'),
                 'url' => ['player/view', 'id' => $id],
             ],
             [
-                'text' => 'History',
+                'text' => Yii::t('frontend', 'views.player.links.history'),
                 'url' => ['player/history', 'id' => $id],
             ],
             [
-                'text' => 'Deals',
+                'text' => Yii::t('frontend', 'views.player.links.deal'),
                 'url' => ['player/deal', 'id' => $id],
             ],
             [
-                'text' => 'Transfer',
+                'text' => Yii::t('frontend', 'views.player.links.transfer'),
                 'url' => ['player/transfer', 'id' => $id],
             ],
             [
-                'text' => 'Loan',
+                'text' => Yii::t('frontend', 'views.player.links.loan'),
                 'url' => ['player/loan', 'id' => $id],
             ],
             [
-                'text' => 'Achievements',
+                'text' => Yii::t('frontend', 'views.player.links.achievement'),
                 'url' => ['player/achievement', 'id' => $id],
             ],
             [
-                'text' => 'Trophies',
+                'text' => Yii::t('frontend', 'views.player.links.trophy'),
                 'url' => ['player/trophy', 'id' => $id],
             ],
         ]

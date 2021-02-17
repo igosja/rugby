@@ -64,7 +64,7 @@ class ThemeController extends AbstractController
         $model->user_id = $this->user->id;
         $model->forum_theme_id = $id;
         if ($model->addMessage()) {
-            $this->setSuccessFlash('Сообщение успешно сохранено');
+            $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.theme.view.success'));
             return $this->refresh();
         }
 
@@ -87,7 +87,7 @@ class ThemeController extends AbstractController
         $forumTheme->count_view++;
         $forumTheme->save();
 
-        $this->setSeoTitle($forumTheme->name . ' - Форум');
+        $this->setSeoTitle($forumTheme->name . ' - ' . Yii::t('frontend', 'modules.forum.controllers.theme.view.title'));
 
         return $this->render('view', [
             'dataProvider' => $dataProvider,
@@ -130,11 +130,11 @@ class ThemeController extends AbstractController
 
         $model = new ForumThemeForm();
         if ($model->create($groupId)) {
-            $this->setSuccessFlash('Тема успешно создана');
+            $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.theme.create.success'));
             return $this->redirect(['view', 'id' => $model->getThemeId()]);
         }
 
-        $this->setSeoTitle('Создание темы - ' . $forumGroup->name . ' - Форум');
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.theme.create.title') . ' - ' . $forumGroup->name);
 
         return $this->render('create', [
             'forumGroup' => $forumGroup,
@@ -161,7 +161,7 @@ class ThemeController extends AbstractController
 
         $model->delete();
 
-        $this->setSuccessFlash('Тема успешно удалена');
+        $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.theme.delete.success'));
         return $this->redirect(Yii::$app->request->referrer ?: ['group/view', 'id' => $groupId]);
     }
 }

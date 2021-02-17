@@ -12,14 +12,14 @@ try {
                 'alias' => [
                     ['stadium/build'],
                 ],
-                'text' => 'Расширить стадион',
+                'text' => Yii::t('frontend', 'views.stadium.links.increase'),
                 'url' => ['stadium/increase'],
             ],
             [
                 'alias' => [
                     ['stadium/destroy'],
                 ],
-                'text' => 'Уменьшить стадион',
+                'text' => Yii::t('frontend', 'views.stadium.links.decrease'),
                 'url' => ['stadium/decrease'],
             ],
         ]

@@ -16,11 +16,11 @@ use common\components\AbstractActiveRecord;
 class MoneyText extends AbstractActiveRecord
 {
     public const INCOME_ADD_FUNDS = 1;
-    public const INCOME_FRIEND = 8;
+    public const INCOME_FRIEND = 5;
     public const INCOME_REFERRAL = 2;
-    public const OUTCOME_FRIEND = 9;
-    public const OUTCOME_TEAM_FINANCE = 4;
-    public const OUTCOME_VIP = 7;
+    public const OUTCOME_FRIEND = 6;
+    public const OUTCOME_TEAM_FINANCE = 3;
+    public const OUTCOME_VIP = 4;
 
     /**
      * @return string

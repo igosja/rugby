@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
@@ -74,7 +75,7 @@ class ElectionNationalVice extends AbstractActiveRecord
             $count = count($electionNationalViceApplication->electionNationalViceVotes);
             $result[] = [
                 'count' => $count,
-                'user' => $electionNationalViceApplication->user_id ? $electionNationalViceApplication->user->getUserLink() : 'Против всех',
+                'user' => $electionNationalViceApplication->user_id ? $electionNationalViceApplication->user->getUserLink() : Yii::t('common', 'models.db.election.application.against'),
                 'logo' => $electionNationalViceApplication->user_id ? $electionNationalViceApplication->user->smallLogo() : '',
             ];
             $total += $count;

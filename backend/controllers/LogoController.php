@@ -30,7 +30,7 @@ class LogoController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->view->title = 'Логотипы команд';
+        $this->view->title = Yii::t('backend', 'controllers.logo.index.title');
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('index', [
@@ -56,7 +56,7 @@ class LogoController extends AbstractController
         $this->notFound($model);
 
         $this->view->title = Html::encode($model->team->name);
-        $this->view->params['breadcrumbs'][] = ['label' => 'Логотипы команд', 'url' => ['logo/index']];
+        $this->view->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'controllers.logo.view.bread.index'), 'url' => ['logo/index']];
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('view', [

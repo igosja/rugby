@@ -75,22 +75,17 @@ class SiteController extends AbstractController
         $forumMessage = ForumMessageQuery::getLastForumGroupsByMessageDate();
         $news = NewsQuery::getLastNews();
 
-        $this->view->title = 'Регбийный онлайн менеджер';
-        $this->view->registerMetaTag(
-            [
-                'name' => 'description',
-                'content' => 'Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер',
-            ]
-        );
+        $this->view->title = Yii::t('frontend', 'controllers.site.index.title');
+        $this->view->registerMetaTag([
+            'name' => 'description',
+            'content' => Yii::t('frontend', 'controllers.site.index.description'),
+        ]);
 
-        return $this->render(
-            'index',
-            [
-                'birthdayBoys' => $birthdayBoys,
-                'forumMessage' => $forumMessage,
-                'news' => $news,
-            ]
-        );
+        return $this->render('index', [
+            'birthdayBoys' => $birthdayBoys,
+            'forumMessage' => $forumMessage,
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -109,23 +104,20 @@ class SiteController extends AbstractController
                 $activationForm->load(Yii::$app->request->get(), '')) && $activationForm->code) {
             try {
                 if ($activationForm->activate()) {
-                    $this->setSuccessFlash('Активация прошла успешно');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.activation.success'));
                     return $this->redirect(['site/activation']);
                 }
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
-            $this->setErrorFlash('Не удалось провести активацию');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.site.activation.error'));
         }
 
-        $this->setSeoTitle('Активация аккаунта');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.activation.title'));
 
-        return $this->render(
-            'activation',
-            [
-                'activationForm' => $activationForm,
-            ]
-        );
+        return $this->render('activation', [
+            'activationForm' => $activationForm,
+        ]);
     }
 
     /**
@@ -143,22 +135,19 @@ class SiteController extends AbstractController
         if ($activationRepeatForm->load(Yii::$app->request->post())) {
             try {
                 if ($activationRepeatForm->send()) {
-                    $this->setSuccessFlash('Код активации успешно отправлен');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.activation-repeat.success'));
                     return $this->redirect(['site/activation']);
                 }
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
-            $this->setErrorFlash('Не удалось отправить код активации');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.site.activation-repeat.error'));
         }
 
-        $this->setSeoTitle('Активация аккаунта');
-        return $this->render(
-            'activation-repeat',
-            [
-                'activationRepeatForm' => $activationRepeatForm,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.activation-repeat.title'));
+        return $this->render('activation-repeat', [
+            'activationRepeatForm' => $activationRepeatForm,
+        ]);
     }
 
     /**
@@ -206,26 +195,21 @@ class SiteController extends AbstractController
         if ($forgotPasswordForm->load(Yii::$app->request->post())) {
             try {
                 if ($forgotPasswordForm->send()) {
-                    $this->setSuccessFlash(
-                        'Письмо с инструкциями по восстановлению пароля успешно отправлено на email'
-                    );
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.forgot-password.success'));
                     return $this->refresh();
                 }
 
-                $this->setErrorFlash('Не удалось восстановить пароль');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.forgot-password.error'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
-                $this->setErrorFlash('Не удалось восстановить пароль');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.forgot-password.error'));
             }
         }
 
-        $this->setSeoTitle('Восстановление пароля');
-        return $this->render(
-            'forgot-password',
-            [
-                'forgotPasswordForm' => $forgotPasswordForm,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.forgot-password.title'));
+        return $this->render('forgot-password', [
+            'forgotPasswordForm' => $forgotPasswordForm,
+        ]);
     }
 
     /**
@@ -244,24 +228,21 @@ class SiteController extends AbstractController
         if ($passwordRestoreForm->load(Yii::$app->request->post())) {
             try {
                 if ($passwordRestoreForm->restore()) {
-                    $this->setSuccessFlash('Пароль успешно изменён');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.password-restore.success'));
                     return $this->redirect(['sign-in']);
                 }
 
-                $this->setErrorFlash('Не удалось изменить пароль');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.password-restore.error'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
-                $this->setErrorFlash('Не удалось изменить пароль');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.password-restore.error'));
             }
         }
 
-        $this->setSeoTitle('Восстановление пароля');
-        return $this->render(
-            'password-restore',
-            [
-                'passwordRestoreForm' => $passwordRestoreForm,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.password-restore.title'));
+        return $this->render('password-restore', [
+            'passwordRestoreForm' => $passwordRestoreForm,
+        ]);
     }
 
     /**
@@ -280,13 +261,10 @@ class SiteController extends AbstractController
             return $this->redirect(['team/view']);
         }
 
-        $this->setSeoTitle('Вход');
-        return $this->render(
-            'sign-in',
-            [
-                'signInForm' => $signInForm,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.sign-in.title'));
+        return $this->render('sign-in', [
+            'signInForm' => $signInForm,
+        ]);
     }
 
     /**
@@ -314,22 +292,19 @@ class SiteController extends AbstractController
         if ($model->load(Yii::$app->request->post())) {
             try {
                 if ($model->signUp()) {
-                    $this->setSuccessFlash('Регистрация прошла успешно. Осталось подтвердить ваш email.');
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.sign-up.success'));
                     return $this->redirect(['site/activation']);
                 }
-                $this->setErrorFlash('Не удалось провести регистрацию');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.sign-up.error'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
-                $this->setErrorFlash('Не удалось провести регистрацию');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.sign-up.error'));
             }
         }
 
-        $this->setSeoTitle('Регистрация');
-        return $this->render(
-            'sign-up',
-            [
-                'model' => $model,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.sign-up.title'));
+        return $this->render('sign-up', [
+            'model' => $model,
+        ]);
     }
 }

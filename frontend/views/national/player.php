@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
 ]) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <p>В сборной должно быть 30 игрока - 2 игрока на непарные позиции и 4 на парные позиции.</p>
+        <p><?= Yii::t('frontend', 'views.national.player.p') ?></p>
     </div>
 </div>
 <?= $form->field($model, 'player[]')->error() ?>
@@ -77,14 +77,20 @@ use yii\widgets\ActiveForm;
             <table class="table table-bordered">
                 <tr>
                     <th class="col-5"></th>
-                    <th>Игрок</th>
-                    <th class="col-5" title="Позиция">Поз</th>
-                    <th class="col-5 hidden-xs" title="Возраст">В</th>
-                    <th class="col-5" title="Номинальная сила">С</th>
-                    <th class="col-5" title="Усталость">У</th>
-                    <th class="col-5" title="Форма">Ф</th>
-                    <th class="col-10 hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="col-40 hidden-xs">Команда</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-5 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.tire') ?>"><?= Yii::t('frontend', 'views.th.tire') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.physical') ?>"><?= Yii::t('frontend', 'views.th.physical') ?></th>
+                    <th class="col-10 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-40 hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
                 </tr>
                 <?php foreach ($playerArray as $item) : ?>
                     <tr>
@@ -111,14 +117,16 @@ use yii\widgets\ActiveForm;
                 <?php endforeach ?>
                 <tr>
                     <th></th>
-                    <th>Игрок</th>
-                    <th title="Позиция">Поз</th>
-                    <th class="hidden-xs" title="Возраст">В</th>
-                    <th title="Номинальная сила">С</th>
-                    <th title="Усталость">У</th>
-                    <th title="Форма">Ф</th>
-                    <th class="hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="hidden-xs">Команда</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.tire') ?>"><?= Yii::t('frontend', 'views.th.tire') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.physical') ?>"><?= Yii::t('frontend', 'views.th.physical') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
                 </tr>
             </table>
         </div>
@@ -127,7 +135,7 @@ use yii\widgets\ActiveForm;
 <?= $this->render('//site/_show-full-table') ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.national.player.submit'), ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

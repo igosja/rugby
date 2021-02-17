@@ -26,7 +26,7 @@ print $this->render('//user/_top');
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Сезон', 'season_id') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'season_id') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?= Html::dropDownList(
@@ -47,8 +47,8 @@ print $this->render('//user/_top');
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
-                'header' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.th.date'),
+                'header' => Yii::t('frontend', 'views.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
                 'value' => static function (Finance $model) {
                     return FormatHelper::asDate($model->date);
@@ -56,9 +56,9 @@ print $this->render('//user/_top');
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Было',
+                'footer' => Yii::t('frontend', 'views.finance.th.before'),
                 'footerOptions' => ['class' => 'hidden-xs'],
-                'header' => 'Было',
+                'header' => Yii::t('frontend', 'views.finance.th.before'),
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value_before);
@@ -66,8 +66,8 @@ print $this->render('//user/_top');
             ],
             [
                 'contentOptions' => ['class' => 'text-right'],
-                'footer' => '+/-',
-                'header' => '+/-',
+                'footer' => Yii::t('frontend', 'views.finance.th.value'),
+                'header' => Yii::t('frontend', 'views.finance.th.value'),
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value);
@@ -75,18 +75,18 @@ print $this->render('//user/_top');
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Стало',
+                'footer' => Yii::t('frontend', 'views.finance.th.after'),
                 'footerOptions' => ['class' => 'hidden-xs'],
-                'header' => 'Стало',
+                'header' => Yii::t('frontend', 'views.finance.th.after'),
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value_after);
                 }
             ],
             [
-                'footer' => 'Комментарий',
+                'footer' => Yii::t('frontend', 'views.finance.th.comment'),
                 'format' => 'raw',
-                'header' => 'Комментарий',
+                'header' => Yii::t('frontend', 'views.finance.th.comment'),
                 'value' => static function (Finance $model) {
                     return $model->getText();
                 }

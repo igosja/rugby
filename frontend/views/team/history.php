@@ -36,7 +36,7 @@ use yii\web\View;
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Сезон', 'seasonId') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?= Html::dropDownList(
@@ -57,17 +57,17 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.th.date'),
                 'value' => static function (History $model) {
                     return FormatHelper::asDate($model->date);
                 }
             ],
             [
-                'footer' => 'Событие',
+                'footer' => Yii::t('frontend', 'views.th.event'),
                 'format' => 'raw',
-                'label' => 'Событие',
+                'label' => Yii::t('frontend', 'views.th.event'),
                 'value' => static function (History $model) {
                     return $model->text();
                 }

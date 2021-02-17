@@ -25,7 +25,7 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::a('Строить', ['build', 'building' => $building, 'ok' => true], ['class' => 'btn margin']) ?>
-        <?= Html::a('Отказаться', ['view', 'id' => $team->id], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.base-free.build.link.ok'), ['build', 'building' => $building, 'ok' => true], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.base-free.build.link.cancel'), ['view', 'id' => $team->id], ['class' => 'btn margin']) ?>
     </div>
 </div>

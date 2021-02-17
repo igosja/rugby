@@ -140,8 +140,7 @@ class GameController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Матч');
-
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.game.preview.title'));
         return $this->render('preview', [
             'dataProvider' => $dataProvider,
             'draw' => $draw,
@@ -178,7 +177,7 @@ class GameController extends AbstractController
             $model->game_id = $id;
             $model->user_id = $this->user->id;
             if ($model->save()) {
-                $this->setSuccessFlash('Комментарий успешно сохранён');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.game.view.success'));
                 return $this->refresh();
             }
         }
@@ -221,8 +220,7 @@ class GameController extends AbstractController
             'sort' => false,
         ]);
 
-        $this->setSeoTitle('Матч');
-
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.game.view.title'));
         return $this->render('view', [
             'commentDataProvider' => $commentDataProvider,
             'eventDataProvider' => $eventDataProvider,
@@ -256,7 +254,7 @@ class GameController extends AbstractController
 
         try {
             $model->delete();
-            $this->setSuccessFlash('Комментарий успешно удалён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.game.delete-comment.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
         }

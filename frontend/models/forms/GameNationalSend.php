@@ -206,7 +206,7 @@ class GameNationalSend extends Model
     public function attributeLabels(): array
     {
         return [
-            'name' => 'Название',
+            'name' => Yii::t('frontend', 'models.forms.game-national-send.label.name'),
         ];
     }
 }

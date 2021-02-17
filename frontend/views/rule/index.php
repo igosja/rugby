@@ -14,12 +14,12 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1>Правила</h1>
+                <h1><?= Yii::t('frontend', 'views.rule.index.h1') ?></h1>
             </div>
         </div>
         <?= Html::beginForm(['search'], 'get', ['class' => 'form-inline text-center']) ?>
         <?= Html::textInput('q', Yii::$app->request->get('q'), ['class' => 'form-control form-small']) ?>
-        <?= Html::submitButton('Поиск', ['class' => 'btn']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.rule.index.submit'), ['class' => 'btn']) ?>
         <?= Html::endForm() ?>
         <ul>
             <?php foreach ($ruleArray as $rule) : ?>

@@ -13,9 +13,9 @@ use yii\helpers\Url;
 $link = Url::toRoute(['site/activation', 'code' => $model->code], true);
 $page = Url::toRoute(['site/activation'], true);
 
-?>
-    Вы успешно зарегистрированы на сайте Виртуальной Регбийной Лиги под логином
-    <strong><?= Html::encode($model->login) ?></strong>.
-    <br/>
-    Чтобы завершить регистрацию подтвердите свой email по ссылке <?= Html::a($link, $link) ?>
-    или введите код <strong><?= $model->code ?></strong> на странице <?= Html::a($page, $page) ?>
+print Yii::t('common', 'mail.signUp-html.text', [
+    'login' => Html::encode($model->login),
+    'link' => Html::a($link, $link),
+    'code' => $model->code,
+    'page' => Html::a($page, $page),
+]);

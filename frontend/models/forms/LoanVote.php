@@ -64,14 +64,13 @@ class LoanVote extends Model
     public function attributeLabels(): array
     {
         return [
-            'vote' => 'Оценка',
-            'comment' => 'Комментарий',
+            'vote' => Yii::t('frontend', 'models.forms.loan-vote.label.vote'),
+            'comment' => Yii::t('frontend', 'models.forms.loan-vote.label.comment'),
         ];
     }
 
     /**
      * @return bool
-     * @throws \yii\db\Exception
      */
     public function saveVote(): bool
     {

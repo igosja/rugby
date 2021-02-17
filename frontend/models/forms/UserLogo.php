@@ -47,7 +47,7 @@ class UserLogo extends Model
     public function attributeLabels(): array
     {
         return [
-            'file' => 'Фото',
+            'file' => Yii::t('frontend', 'models.forms.user-logo.label.file'),
         ];
     }
 

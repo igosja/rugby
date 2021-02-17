@@ -18,18 +18,18 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1>Смена команды</h1>
+        <h1><?= Yii::t('frontend', 'views.team-change.confirm.h1') ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <p>Здесь вы можете подать заявку на смену текущего клуба либо получения дополнительного.</p>
+        <p><?= Yii::t('frontend', 'views.team-change.confirm.p.1') ?></p>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-center">
-            Вы подаете заяку на управление командой
+            <?= Yii::t('frontend', 'views.team-change.confirm.p.2') ?>
             <span class="strong"><?= $team->name ?></span>.
         </p>
     </div>
@@ -49,13 +49,13 @@ use yii\widgets\ActiveForm;
 <?= $form
     ->field($model, 'leaveId')
     ->dropDownList($leaveArray, ['class' => 'form-control'])
-    ->label('Какую команду вы отдаете взамен') ?>
+    ->label(Yii::t('frontend', 'views.team-change.confirm.label.leave')) ?>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
-        <?= Html::submitButton('Подать заяку', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.team-change.confirm.submit'), ['class' => 'btn margin']) ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left xs-text-center">
-        <?= Html::a('Вернуться', ['index'], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.team-change.confirm.link.index'), ['index'], ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

@@ -29,7 +29,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h4>Подача заявки на пост тренера сборной</h4>
+        <h4><?= Yii::t('frontend', 'views.national-election.application.h4') ?></h4>
     </div>
 </div>
 <?php $form = ActiveForm::begin([
@@ -46,10 +46,10 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
 <?= $form
     ->field($model, 'text')
     ->textarea(['rows' => 5])
-    ->label('Ваша программа') ?>
+    ->label(Yii::t('frontend', 'views.national-election.application.label.text')) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <p>В заявке обязательно должно быть 30 игрока - 2 игрока на непарные позиции и 4 на парные позиции.</p>
+        <p><?= Yii::t('frontend', 'views.national-election.application.p') ?></p>
     </div>
 </div>
 <?= $form->field(
@@ -92,14 +92,20 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
             <table class="table table-bordered">
                 <tr>
                     <th class="col-5"></th>
-                    <th>Игрок</th>
-                    <th class="col-5" title="Позиция">Поз</th>
-                    <th class="col-5 hidden-xs" title="Возраст">В</th>
-                    <th class="col-5" title="Номинальная сила">С</th>
-                    <th class="col-5" title="Усталость">У</th>
-                    <th class="col-5" title="Форма">Ф</th>
-                    <th class="col-10 hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="col-40 hidden-xs">Команда</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-5 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.tire') ?>"><?= Yii::t('frontend', 'views.th.tire') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.physical') ?>"><?= Yii::t('frontend', 'views.th.physical') ?></th>
+                    <th class="col-10 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-40 hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
                 </tr>
                 <?php foreach ($playerArray as $item) : ?>
                     <tr>
@@ -126,14 +132,16 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
                 <?php endforeach ?>
                 <tr>
                     <th></th>
-                    <th>Игрок</th>
-                    <th title="Позиция">Поз</th>
-                    <th class="hidden-xs" title="Возраст">В</th>
-                    <th title="Номинальная сила">С</th>
-                    <th title="Усталость">У</th>
-                    <th title="Форма">Ф</th>
-                    <th class="hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="hidden-xs">Команда</th>
+                    <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.tire') ?>"><?= Yii::t('frontend', 'views.th.tire') ?></th>
+                    <th title="<?= Yii::t('frontend', 'views.title.physical') ?>"><?= Yii::t('frontend', 'views.th.physical') ?></th>
+                    <th class="hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
                 </tr>
             </table>
         </div>
@@ -142,9 +150,9 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
 <?= $this->render('//site/_show-full-table') ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.national-election.application.submit'), ['class' => 'btn margin']) ?>
         <?php if (!$model->isNewRecord) : ?>
-            <?= Html::a('Удалить', ['delete-application'], ['class' => 'btn margin']) ?>
+            <?= Html::a(Yii::t('frontend', 'views.national-election.application.delete'), ['delete-application'], ['class' => 'btn margin']) ?>
         <?php endif ?>
     </div>
 </div>

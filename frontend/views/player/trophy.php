@@ -30,35 +30,35 @@ print $this->render('//player/_player', ['player' => $player]);
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Сезон'],
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
-                'label' => 'С',
+                'footer' => Yii::t('frontend', 'views.th.season'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
+                'label' => Yii::t('frontend', 'views.th.season'),
                 'value' => static function (AchievementPlayer $model) {
                     return $model->season_id;
                 }
             ],
             [
-                'footer' => 'Команда',
+                'footer' => Yii::t('frontend', 'views.th.team'),
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (AchievementPlayer $model) {
                     return $model->team_id ? $model->team->getTeamLink() : $model->national->nationalLink();
                 }
             ],
             [
-                'footer' => 'Турнир',
-                'label' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.th.tournament'),
+                'label' => Yii::t('frontend', 'views.th.tournament'),
                 'value' => static function (AchievementPlayer $model) {
                     return $model->getTournament();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Позиция',
+                'footer' => Yii::t('frontend', 'views.th.achievement.position'),
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => 'Позиция',
+                'label' => Yii::t('frontend', 'views.th.achievement.position'),
                 'value' => static function (AchievementPlayer $model) {
                     return $model->getPosition();
                 }

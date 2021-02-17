@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -32,10 +33,10 @@ class M200101000044ForumChapter extends Migration
             self::TABLE,
             ['name', 'order'],
             [
-                ['Общие', 1],
-                ['Сделки и договоры', 2],
-                ['За пределами Лиги', 3],
-                ['Национальные форумы', 4],
+                [Yii::t('console', 'migrations.forum-chapter.main'), 1],
+                [Yii::t('console', 'migrations.forum-chapter.deal'), 2],
+                [Yii::t('console', 'migrations.forum-chapter.real'), 3],
+                [Yii::t('console', 'migrations.forum-chapter.national'), 4],
             ]
         );
 

@@ -180,7 +180,7 @@ class PhysicalController extends AbstractController
             }
         }
 
-        $this->setSeoTitle($team->fullName() . '. Центр физической подготовки');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.physical.index.title'));
 
         return $this->render('index', [
             'countSchedule' => $countSchedule,
@@ -210,9 +210,9 @@ class PhysicalController extends AbstractController
     }
 
     /**
-     * @param string $tournament
-     * @param string $stage
-     * @param string $team
+     * @param string|null $tournament
+     * @param string|null $stage
+     * @param string|null $team
      */
     public function actionImage(string $tournament = null, string $stage = null, string $team = null): void
     {

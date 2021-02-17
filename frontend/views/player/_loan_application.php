@@ -26,7 +26,7 @@ try {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                Ваша команда:
+                <?= Yii::t('frontend', 'views.player.loan-application.team') ?>:
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <span class="strong">
@@ -36,7 +36,7 @@ try {
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                Финансы команды:
+                <?= Yii::t('frontend', 'views.player.loan-application.finance') ?>:
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <span class="strong">
@@ -46,7 +46,7 @@ try {
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                Начальная цена за 1 день аренды:
+                <?= Yii::t('frontend', 'views.player.loan-application.price') ?>:
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <span class="strong">
@@ -56,10 +56,11 @@ try {
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                Срок аренды:
+                <?= Yii::t('frontend', 'views.player.loan-application.period') ?>:
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <span class="strong"><?= $model->minDay ?>-<?= $model->maxDay ?></span> дней
+                <span class="strong"><?= $model->minDay ?>-<?= $model->maxDay ?></span>
+                <?= Yii::t('frontend', 'views.player.loan-application.day') ?>
             </div>
         </div>
         <?php $form = ActiveForm::begin([
@@ -98,14 +99,14 @@ try {
         </div>
         <p class="text-center">
             <?php if ($model->loanApplication) : ?>
-                <?= Html::submitButton('Редактировать заявку', ['class' => 'btn']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.player.loan-application.edit'), ['class' => 'btn']) ?>
                 <?= Html::a(
-                    'Удалить заявку',
+                    Yii::t('frontend', 'views.player.loan-application.link.delete'),
                     'javascript:',
                     ['class' => 'btn', 'id' => 'btn' . $modelFromClassName]
                 ) ?>
             <?php else: ?>
-                <?= Html::submitButton('Подать заявку', ['class' => 'btn']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.player.loan-application.submit'), ['class' => 'btn']) ?>
             <?php endif ?>
         </p>
         <?php $form::end() ?>

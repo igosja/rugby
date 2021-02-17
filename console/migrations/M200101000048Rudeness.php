@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,8 +32,8 @@ class M200101000048Rudeness extends Migration
             self::TABLE,
             ['name'],
             [
-                ['нормальная'],
-                ['грубая'],
+                [Yii::t('console', 'migrations.rudeness.normal')],
+                [Yii::t('console', 'migrations.rudeness.rude')],
             ]
         );
 

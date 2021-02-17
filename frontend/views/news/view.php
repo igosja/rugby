@@ -28,7 +28,7 @@ $user = $this->context->user;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Комментарии к новостям Лиги</h1>
+        <h1><?= Yii::t('frontend', 'views.news.view.h1') ?></h1>
     </div>
 </div>
 <div class="row">
@@ -47,7 +47,7 @@ $user = $this->context->user;
 <?php if ($dataProvider->models) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <span class="strong">Последние комментарии:</span>
+            <span class="strong"><?= Yii::t('frontend', 'views.news.view.comments') ?>:</span>
         </div>
     </div>
     <div class="row">
@@ -55,11 +55,10 @@ $user = $this->context->user;
 
         try {
             print ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemOptions' => ['class' => 'row border-top'],
-                    'itemView' => '_comment',
-                ]
-            );
+                'dataProvider' => $dataProvider,
+                'itemOptions' => ['class' => 'row border-top'],
+                'itemView' => '_comment',
+            ]);
         } catch (Exception $e) {
             ErrorHelper::log($e);
         }
@@ -71,27 +70,25 @@ $user = $this->context->user;
     <?php if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию новостей
-                <br/>
-                Причина - ваш почтовый адрес не подтверждён
+                <?= Yii::t('frontend', 'views.news.view.blocked-confirm') ?>
             </div>
         </div>
     <?php elseif ($newsCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT_NEWS)->one()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию новостей до
-                <?= FormatHelper::asDateTime($newsCommentBlock->date) ?>
-                <br/>
-                Причина - <?= $newsCommentBlock->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'views.news.view.blocked-reason', [
+                    'date' => FormatHelper::asDateTime($newsCommentBlock->date),
+                    'text' => $newsCommentBlock->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php elseif ($allCommentBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию новостей до
-                <?= FormatHelper::asDateTime($allCommentBlock->date) ?>
-                <br/>
-                Причина - <?= $allCommentBlock->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'views.news.view.blocked-reason', [
+                    'date' => FormatHelper::asDateTime($allCommentBlock->date),
+                    'text' => $allCommentBlock->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php else : ?>
@@ -104,20 +101,20 @@ $user = $this->context->user;
                     'options' => ['class' => 'row'],
                     'template' =>
                         '<div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center strong">{label}</div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
-                    </div>
-                    <div class="row">{error}</div>',
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center strong">{label}</div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
+                        </div>
+                        <div class="row">{error}</div>',
                 ],
             ]
         ) ?>
-        <?= $form->field($model, 'text')->textarea()->label('Ваш комментарий:') ?>
+        <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.news.view.label.text')) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton(
-                    'Комментировать',
+                    Yii::t('frontend', 'views.news.view.submit'),
                     ['class' => 'btn margin']
                 ) ?>
             </div>

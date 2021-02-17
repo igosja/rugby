@@ -124,7 +124,8 @@ class WorldCupController extends AbstractController
             ->orderBy(['id' => SORT_ASC])
             ->all();
 
-        $this->setSeoTitle('Чемпионат мира среди сборных');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.world-cup.index.title'));
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'divisionArray' => $this->getDivisionLinksArray($seasonId, $nationalTypeId),
@@ -290,7 +291,8 @@ class WorldCupController extends AbstractController
             'sort' => false,
         ]);
 
-        $this->setSeoTitle('Статистика чемпионата мира');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.world-cup.statistics.title'));
+
         return $this->render('statistics', [
             'dataProvider' => $dataProvider,
             'divisionArray' => $this->getDivisionStatisticsLinksArray($seasonId),

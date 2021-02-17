@@ -58,7 +58,7 @@ class TransferApplicationFrom extends Model
             ->limit(1)
             ->one();
         if (!$transferApplication) {
-            Yii::$app->session->setFlash('error', 'Заявка выбрана неправильно.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.transfer-application-from.error'));
             return false;
         }
 
@@ -70,7 +70,7 @@ class TransferApplicationFrom extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Заявка успешно удалена.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.transfer-application-from.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();

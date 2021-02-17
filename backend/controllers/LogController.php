@@ -6,8 +6,11 @@ namespace backend\controllers;
 
 use backend\models\search\LogSearch;
 use common\models\db\Log;
+use Throwable;
 use Yii;
 use yii\db\Exception;
+use yii\db\StaleObjectException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -30,6 +33,28 @@ class LogController extends AbstractController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function actionDelete(int $id): Response
+    {
+        $log = Log::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
+        if (!$log) {
+            throw new NotFoundHttpException();
+        }
+
+        $log->delete();
+
+        return $this->redirect(['index']);
     }
 
     /**

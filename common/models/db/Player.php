@@ -411,7 +411,7 @@ class Player extends AbstractActiveRecord
         } elseif ($this->power_nominal < $this->power_old) {
             $class = 'font-red';
         }
-        return '<span class="' . $class . '">' . $this->power_nominal . '</span>';
+        return Html::tag('span', $this->power_nominal, ['class' => $class]);
     }
 
     /**
@@ -421,7 +421,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if ($this->is_injury) {
-            $result = ' ' . FAS::icon(FAS::_AMBULANCE, ['title' => 'Травмирован на ' . $this->injury_day . ' дн.']);
+            $result = ' ' . FAS::icon(FAS::_AMBULANCE, ['title' => Yii::t('common', 'models.db.player.injury', ['day' => $this->injury_day])]);
         }
         return $result;
     }
@@ -433,7 +433,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if ($this->loan || $this->transfer) {
-            $result = ' ' . FAS::icon(FAS::_BALANCE_SCALE, ['title' => 'Выставлен на трансфер/аренду']);
+            $result = ' ' . FAS::icon(FAS::_BALANCE_SCALE, ['title' => Yii::t('common', 'models.db.player.deal')]);
         }
         return $result;
     }
@@ -446,11 +446,11 @@ class Player extends AbstractActiveRecord
         $result = '';
         if ($this->national_id) {
             if (NationalType::MAIN === $this->national->national_type_id) {
-                $text = 'национальной сборной';
+                $text = Yii::t('common', 'models.db.player.national');
             } else {
-                $text = 'сборной ' . $this->national->nationalType->name;
+                $text = Yii::t('common', 'models.db.player.national-type', ['type' => $this->national->nationalType->name]);
             }
-            $result = ' ' . FAS::icon(FAS::_FLAG, ['title' => 'Игрок ' . $text]);
+            $result = ' ' . FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.player.national-player') . ' ' . $text]);
         }
         return $result;
     }
@@ -462,7 +462,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if (self::AGE_READY_FOR_PENSION === $this->age) {
-            $result = ' ' . FAS::icon(FAS::_HOME, ['title' => 'Заканчивает карьеру в конце текущего сезона']);
+            $result = ' ' . FAS::icon(FAS::_HOME, ['title' => Yii::t('common', 'models.db.player.pension')]);
         }
         return $result;
     }
@@ -564,7 +564,7 @@ class Player extends AbstractActiveRecord
 
         $result = '';
         if ($countTraining) {
-            $result = ' ' . FAS::icon(FAS::_LEVEL_UP_ALT, ['title' => 'На тренировке']);
+            $result = ' ' . FAS::icon(FAS::_LEVEL_UP_ALT, ['title' => Yii::t('common', 'models.db.player.training')]);
         }
         return $result;
     }
@@ -590,7 +590,7 @@ class Player extends AbstractActiveRecord
 
         $result = '';
         if ($countScout) {
-            $result = ' ' . FAS::icon(FAS::_SEARCH, ['title' => 'Изучается в скаутцентре вашей команды']);
+            $result = ' ' . FAS::icon(FAS::_SEARCH, ['title' => Yii::t('common', 'models.db.player.scout')]);
         }
         return $result;
     }
@@ -602,7 +602,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if ($this->loan_day) {
-            $result = ' <span title="В аренде">(' . $this->loan_day . ')</i>';
+            $result = ' <span title="' . Yii::t('common', 'models.db.player.loan') . '">(' . $this->loan_day . ')</i>';
         }
         return $result;
     }

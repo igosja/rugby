@@ -14,10 +14,10 @@ $model = $controller->myTeamOrVice;
 
 ?>
 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-size-2">
-    <span class="italic">Показатели вашей команды:</span>
+    <span class="italic"><?= Yii::t('frontend', 'views.team.team-bottom-my-title.title') ?>:</span>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Рейтинг силы команды (Vs)
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.vs') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->power_vs ?>
@@ -25,7 +25,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Сила 15 лучших (s15)
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.s15') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->power_s_15 ?>
@@ -33,7 +33,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Сила 19 лучших (s19)
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.s19') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->power_s_19 ?>
@@ -41,7 +41,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Сила 24 лучших (s24)
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.s24') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= $model->power_s_24 ?>
@@ -49,7 +49,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Стоимость строений
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.price.base') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= FormatHelper::asCurrency($model->price_base) ?>
@@ -57,7 +57,7 @@ $model = $controller->myTeamOrVice;
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            - Общая стоимость
+            - <?= Yii::t('frontend', 'views.team.team-bottom-my-title.price') ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
             <?= FormatHelper::asCurrency($model->price_total) ?>

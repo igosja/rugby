@@ -9,7 +9,6 @@ use common\components\helpers\TimeZoneHelper;
 use common\models\db\Achievement;
 use common\models\db\Blacklist;
 use common\models\db\Country;
-use common\models\db\Federation;
 use common\models\db\Finance;
 use common\models\db\History;
 use common\models\db\Loan;
@@ -101,15 +100,6 @@ class UserController extends AbstractController
             return $this->redirect(['user/view', 'id' => $id]);
         }
 
-        $query = Federation::find()
-            ->joinWith(['country'])
-            ->where(['president_user_id' => $id])
-            ->orWhere(['vice_user_id' => $id])
-            ->orderBy(['name' => SORT_ASC]);
-        $countryDataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
         $query = Team::find()
             ->where(['or', ['user_id' => $id], ['vice_user_id' => $id]]);
         $teamDataProvider = new ActiveDataProvider([
@@ -146,10 +136,9 @@ class UserController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Профиль менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.index.title'));
 
         return $this->render('view', [
-            'countryDataProvider' => $countryDataProvider,
             'historyDataProvider' => $historyDataProvider,
             'nationalDataProvider' => $nationalDataProvider,
             'ratingDataProvider' => $ratingDataProvider,
@@ -159,7 +148,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
      */
     public function actionAchievement(int $id): string
@@ -171,7 +160,7 @@ class UserController extends AbstractController
                 ->orderBy(['id' => SORT_DESC]),
         ]);
 
-        $this->setSeoTitle('Достижения менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.achievement.title'));
 
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
@@ -179,7 +168,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
      */
     public function actionTrophy(int $id): string
@@ -192,7 +181,7 @@ class UserController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Трофеи менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.trophy.title'));
 
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
@@ -200,7 +189,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
      */
     public function actionFinance(int $id): string
@@ -215,7 +204,7 @@ class UserController extends AbstractController
                 ->orderBy(['id' => SORT_DESC]),
         ]);
 
-        $this->setSeoTitle('Финансы менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.finance.title'));
 
         return $this->render('finance', [
             'dataProvider' => $dataProvider,
@@ -225,10 +214,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string
      */
-    public function actionDeal($id)
+    public function actionDeal(int $id): string
     {
         $dataProviderTransferFrom = new ActiveDataProvider([
             'pagination' => false,
@@ -259,7 +248,7 @@ class UserController extends AbstractController
                 ->orderBy(['ready' => SORT_DESC]),
         ]);
 
-        $this->setSeoTitle('Сделки менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.deal.title'));
 
         return $this->render('deal', [
             'dataProviderTransferFrom' => $dataProviderTransferFrom,
@@ -280,7 +269,7 @@ class UserController extends AbstractController
          */
         $model = Yii::$app->user->identity;
         if ($model->updateQuestionnaire()) {
-            $this->setSuccessFlash('Данные успешно сохранены.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.user.questionnaire.success'));
             return $this->refresh();
         }
 
@@ -301,7 +290,7 @@ class UserController extends AbstractController
             $yearArray[$i] = $i;
         }
 
-        $this->setSeoTitle('Анкета менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.questionnaire.title'));
 
         return $this->render('questionnaire', [
             'countryArray' => Country::selectOptions(),
@@ -324,7 +313,7 @@ class UserController extends AbstractController
         $model = new Holiday();
         $model->setUser($this->user);
         if ($model->change()) {
-            $this->setSuccessFlash('Данные успешно сохранены.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.user.holiday.success'));
             return $this->refresh();
         }
 
@@ -368,7 +357,7 @@ class UserController extends AbstractController
                 ->orderBy(['id' => SORT_DESC]),
         ]);
 
-        $this->setSeoTitle('Отпуск менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.holiday.title'));
         return $this->render('holiday', [
             'dataProvider' => $dataProvider,
             'model' => $model,
@@ -390,11 +379,11 @@ class UserController extends AbstractController
         }
 
         if ($model->change()) {
-            $this->setSuccessFlash('Пароль успешно изменён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.user.password.success'));
             return $this->refresh();
         }
 
-        $this->setSeoTitle('Смена пароля');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.password.title'));
         return $this->render('password', [
             'model' => $model,
         ]);
@@ -402,21 +391,15 @@ class UserController extends AbstractController
 
     /**
      * @return string|Response
-     * @throws Exception
+     * @throws \Exception
      */
     public function actionMoneyTransfer()
     {
         $model = new UserTransferFinance(['user' => $this->user]);
         if ($model->execute()) {
-            $this->setSuccessFlash('Деньги успешно переведены');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.user.money-transfer.success'));
             return $this->refresh();
         }
-
-        $federationArray = Federation::find()
-            ->joinWith(['country'])
-            ->where(['!=', 'federation.id', 0])
-            ->orderBy(['country.name' => SORT_ASC])
-            ->all();
 
         /**
          * @var Team[] $teamArray
@@ -431,10 +414,9 @@ class UserController extends AbstractController
             $teamItems[$team->id] = $team->fullName();
         }
 
-        $this->setSeoTitle('Перевод денег с личного счета');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.money-transfer.title'));
 
         return $this->render('money-transfer', [
-            'federationArray' => ArrayHelper::map($federationArray, 'id', 'country.name'),
             'model' => $model,
             'teamArray' => $teamItems,
         ]);
@@ -452,7 +434,7 @@ class UserController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Партнёрская программа');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.referral.title'));
 
         return $this->render('referral', [
             'dataProvider' => $dataProvider,
@@ -481,7 +463,7 @@ class UserController extends AbstractController
             return $this->redirect(['drop-team']);
         }
 
-        $this->setSeoTitle('Отказ от команды');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.drop-team.title'));
 
         return $this->render('drop-team', [
             'team' => $this->myTeam,
@@ -489,7 +471,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @return string
+     * @return string|Response
      */
     public function actionReRegister()
     {
@@ -513,7 +495,7 @@ class UserController extends AbstractController
             return $this->redirect(['user/re-register']);
         }
 
-        $this->setSeoTitle('Преререгистрация команды');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.re-register.title'));
         return $this->render('re-register', [
             'team' => $this->myTeam,
         ]);
@@ -543,7 +525,7 @@ class UserController extends AbstractController
             return $this->redirect(['delete']);
         }
 
-        $this->setSeoTitle('Удаление аккаунта');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.delete.title'));
         return $this->render('delete');
     }
 
@@ -566,7 +548,7 @@ class UserController extends AbstractController
             return $this->redirect(['view', 'id' => $this->user->id]);
         }
 
-        $this->setSeoTitle('Восстановление аккаунта');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.restore.title'));
         return $this->render('restore');
     }
 
@@ -579,11 +561,11 @@ class UserController extends AbstractController
         $model = $this->user;
 
         if ($model->updateNotes()) {
-            $this->setSuccessFlash('Данные успешно сохранены.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.user.notes.success'));
             return $this->refresh();
         }
 
-        $this->setSeoTitle('Блокнот менеджера');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.user.notes.title'));
 
         return $this->render('notes', [
             'model' => $model,
@@ -636,7 +618,7 @@ class UserController extends AbstractController
             ->where(['team_id' => null])
             ->all();
 
-        $this->setSeoTitle(Html::encode($user->login) . '. Загрузка фото');
+        $this->setSeoTitle(Html::encode($user->login) . Yii::t('frontend', 'controllers.user.logo.title'));
 
         return $this->render('logo', [
             'logoArray' => $logoArray,
@@ -647,13 +629,12 @@ class UserController extends AbstractController
 
     /**
      * @return string|Response
-     * @throws Exception
      */
     public function actionSocial()
     {
         $model = $this->user;
 
-        $this->setSeoTitle(Html::encode($model->login) . '. Профили в социальных сетях.');
+        $this->setSeoTitle(Html::encode($model->login) . Yii::t('frontend', 'controllers.user.social.title'));
 
         return $this->render('social', [
             'model' => $model,

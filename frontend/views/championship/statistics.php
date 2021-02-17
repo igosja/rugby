@@ -47,7 +47,7 @@ use yii\helpers\Html;
 <?= Html::hiddenInput('federationId', $federation->country_id) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-        <?= Html::label('Статистика', 'statisticType') ?>
+        <?= Html::label(Yii::t('frontend', 'views.championship.statistics.label.statistic-type'), 'statisticType') ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-8">
         <?= Html::dropDownList(
@@ -66,14 +66,14 @@ if (1 === $statisticType->statistic_chapter_id) {
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticTeam $model) {
                 return $model->team->getTeamLink();
             }
@@ -92,22 +92,22 @@ if (1 === $statisticType->statistic_chapter_id) {
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Игрок',
+            'footer' => Yii::t('frontend', 'views.th.player'),
             'format' => 'raw',
-            'label' => 'Игрок',
+            'label' => Yii::t('frontend', 'views.th.player'),
             'value' => static function (StatisticPlayer $model) {
                 return $model->player->getPlayerLink();
             }
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticPlayer $model) {
                 return $model->team->getTeamLink();
             }
@@ -153,7 +153,7 @@ if (1 === $statisticType->statistic_chapter_id) {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
             <?= Html::a(
-                'Турнирная таблица',
+                Yii::t('frontend', 'views.championship.statistics.link.index'),
                 [
                     'index',
                     'federationId' => $federation->id,

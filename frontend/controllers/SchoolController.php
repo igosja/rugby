@@ -62,7 +62,7 @@ class SchoolController extends AbstractController
             ->where(['ready' => null, 'team_id' => $team->id])
             ->all();
 
-        $this->setSeoTitle($team->fullName() . '. Спортивная школа');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.school.index.title'));
 
         return $this->render('index', [
             'onBuilding' => $this->isOnBuilding(),
@@ -102,12 +102,12 @@ class SchoolController extends AbstractController
         $team = $this->myTeam;
 
         if ($this->isOnBuilding()) {
-            $this->setErrorFlash('На базе сейчас идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.on-building'));
             return $this->redirect(['index']);
         }
 
         if (!$team->availableSchool()) {
-            $this->setErrorFlash('У вас нет юниоров для подготовки в спортшколе.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.available'));
             return $this->redirect(['index']);
         }
 
@@ -115,7 +115,7 @@ class SchoolController extends AbstractController
             ->where(['ready' => null, 'team_id' => $team->id])
             ->count();
         if ($school) {
-            $this->setErrorFlash('Нельзя готовить в спортшколе более одного игрока одновременно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.school'));
             return $this->redirect(['index']);
         }
 
@@ -128,7 +128,7 @@ class SchoolController extends AbstractController
         ];
 
         if (!$data['position_id']) {
-            $this->setErrorFlash('Необходимо указать позицию игрока.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.position.empty'));
             return $this->redirect(['index']);
         }
 
@@ -140,7 +140,7 @@ class SchoolController extends AbstractController
             ->limit(1)
             ->one();
         if (!$position) {
-            $this->setErrorFlash('Позиция игрока выбрана неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.position'));
             return $this->redirect(['index']);
         }
 
@@ -164,7 +164,7 @@ class SchoolController extends AbstractController
             ->limit(1)
             ->one();
         if (!$special) {
-            $this->setErrorFlash('Спецвозможность игрока выбрана неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.special'));
             return $this->redirect(['index']);
         }
 
@@ -190,7 +190,7 @@ class SchoolController extends AbstractController
             ->limit(1)
             ->one();
         if (!$style) {
-            $this->setErrorFlash('Стиль игрока выбран неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.start.error.style'));
             return $this->redirect(['index']);
         }
 
@@ -209,13 +209,13 @@ class SchoolController extends AbstractController
                 $model->special_id = $specialId;
                 $model->style_id = $style->id;
                 $model->team_id = $team->id;
-                $model->is_with_special = $specialId ? true : false;
-                $model->is_with_special_request = $data['special_id'] ? true : false;
-                $model->is_with_style = $styleId ? true : false;
-                $model->is_with_style_request = $data['style_id'] ? true : false;
+                $model->is_with_special = (bool)$specialId;
+                $model->is_with_special_request = (bool)$data['special_id'];
+                $model->is_with_style = (bool)$styleId;
+                $model->is_with_style_request = (bool)$data['style_id'];
                 $model->save();
 
-                $this->setSuccessFlash('Подготовка юниора успешно началась.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.school.start.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -223,7 +223,7 @@ class SchoolController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle($team->fullName() . '. Подготовка юниоров');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.school.start.title'));
 
         return $this->render('start', [
             'confirmData' => $confirmData,
@@ -234,7 +234,6 @@ class SchoolController extends AbstractController
     /**
      * @param int $id
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionCancel(int $id)
     {
@@ -249,7 +248,7 @@ class SchoolController extends AbstractController
             ->limit(1)
             ->one();
         if (!$school) {
-            $this->setErrorFlash('Игрок выбран неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.school.cancel.error'));
             return $this->redirect(['index']);
         }
 
@@ -257,7 +256,7 @@ class SchoolController extends AbstractController
             try {
                 $school->delete();
 
-                $this->setSuccessFlash('Подготовка юниора успешно отменена.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.school.cancel.success'));
             } catch (Throwable $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -265,7 +264,7 @@ class SchoolController extends AbstractController
             return $this->redirect(['index']);
         }
 
-        $this->setSeoTitle('Отмена поготовки юниора. ' . $team->fullName());
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.school.cancel.title') . ' ' . $team->fullName());
 
         return $this->render('cancel', [
             'id' => $id,

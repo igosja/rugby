@@ -14,12 +14,14 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Виртуальный магазин</h1>
+        <h1><?= Yii::t('frontend', 'views.store.h1') ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        <p class="text-center">Ваш счёт - <?= Yii::$app->formatter->asDecimal($user->money, 2) ?></p>
+        <p class="text-center">
+            <?= Yii::t('frontend', 'views.store.p.1', ['value' => Yii::$app->formatter->asDecimal($user->money, 2)]) ?>
+        </p>
     </div>
 </div>
 <div class="row margin-top-small text-center">
@@ -34,7 +36,7 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::a('Купить', ['finance', 'ok' => true], ['class' => 'btn margin']) ?>
-        <?= Html::a('Отказаться', ['index'], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.store.finance.link.buy'), ['finance', 'ok' => true], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.store.finance.link.cancel'), ['index'], ['class' => 'btn margin']) ?>
     </div>
 </div>

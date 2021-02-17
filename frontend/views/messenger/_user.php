@@ -24,17 +24,18 @@ $user = $model->from_user_id === Yii::$app->user->id ? $model->toUser : $model->
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Последний визит: <?= $user->lastVisit() ?>
+                <?= Yii::t('frontend', 'views.messenger.user.visit') ?> <?= $user->lastVisit() ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Рейтинг: <span class="strong"><?= $user->rating ?></span>
+                <?= Yii::t('frontend', 'views.messenger.user.rating') ?> <span
+                        class="strong"><?= $user->rating ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Команды:
+                <?= Yii::t('frontend', 'views.messenger.user.team') ?>
                 <?php foreach ($user->teams as $team) : ?>
                     <br/>
                     <?= $team->getTeamImageLink() ?>
@@ -44,9 +45,9 @@ $user = $model->from_user_id === Yii::$app->user->id ? $model->toUser : $model->
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?php if (!$model->read) : ?>
-                    <?= Html::a('Читать новые', ['view', 'id' => $user->id], ['class' => 'strong']) ?> |
+                    <?= Html::a(Yii::t('frontend', 'views.messenger.user.link.read'), ['view', 'id' => $user->id], ['class' => 'strong']) ?> |
                 <?php endif ?>
-                <?= Html::a('Написать', ['view', 'id' => $user->id]) ?>
+                <?= Html::a(Yii::t('frontend', 'views.messenger.user.link.write'), ['view', 'id' => $user->id]) ?>
             </div>
         </div>
     </div>

@@ -161,7 +161,7 @@ class RatingController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle('Рейтинги');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.rating.index.title'));
 
         return $this->render('index', [
             'countryId' => $countryId,

@@ -19,14 +19,14 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Расписание</h1>
+        <h1><?= Yii::t('frontend', 'views.schedule.index.h1') ?></h1>
     </div>
 </div>
 <?= Html::beginForm(null, 'get') ?>
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
-        <?= Html::label('Сезон', 'seasonId') ?>
+        <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
         <?= Html::dropDownList(
@@ -46,18 +46,18 @@ use yii\helpers\Html;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.th.date'),
                 'headerOptions' => ['class' => 'col-20'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.th.date'),
                 'value' => static function (Schedule $model) {
                     return FormatHelper::asDateTime($model->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.th.tournament'),
                 'format' => 'raw',
-                'label' => 'Турнир',
+                'label' => Yii::t('frontend', 'views.th.tournament'),
                 'value' => static function (Schedule $model) {
                     return Html::a(
                         $model->tournamentType->name,
@@ -67,21 +67,21 @@ use yii\helpers\Html;
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Стадия',
+                'footer' => Yii::t('frontend', 'views.schedule.index.th.stage'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-20 hidden-xs'],
-                'label' => 'Стадия',
+                'label' => Yii::t('frontend', 'views.schedule.index.th.stage'),
                 'value' => static function (Schedule $model) {
                     return $model->stage->name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Тип',
+                'footer' => Yii::t('frontend', 'views.schedule.index.th.type'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5 hidden-xs'],
-                'label' => 'Тип',
+                'label' => Yii::t('frontend', 'views.schedule.index.th.type'),
                 'value' => static function (Schedule $model) {
                     return Html::tag(
                         'span',
@@ -92,18 +92,17 @@ use yii\helpers\Html;
             ],
         ];
         print GridView::widget([
-                'columns' => $columns,
-                'dataProvider' => $dataProvider,
-                'rowOptions' => static function (Schedule $model) use ($scheduleId) {
-                    if (in_array($model->id, $scheduleId, true)) {
-                        return ['class' => 'info'];
-                    }
-                    return [];
-                },
-                'showFooter' => true,
-                'summary' => false,
-            ]
-        );
+            'columns' => $columns,
+            'dataProvider' => $dataProvider,
+            'rowOptions' => static function (Schedule $model) use ($scheduleId) {
+                if (in_array($model->id, $scheduleId, true)) {
+                    return ['class' => 'info'];
+                }
+                return [];
+            },
+            'showFooter' => true,
+            'summary' => false,
+        ]);
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }

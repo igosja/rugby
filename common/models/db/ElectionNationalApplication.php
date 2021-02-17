@@ -9,7 +9,6 @@ use Throwable;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\Exception;
 use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 
@@ -92,12 +91,12 @@ class ElectionNationalApplication extends AbstractActiveRecord
     }
 
     /**
-     * @param $attribute
+     * @param string $attribute
      */
     public function checkPlayer(string $attribute)
     {
         if (count($this->$attribute) !== 10) {
-            $this->addError('player', 'Игроки выбраны неправильно');
+            $this->addError('player', Yii::t('common', 'models.db.election-national-application.player.error'));
         }
 
         $formPlayerArray = [];
@@ -111,7 +110,7 @@ class ElectionNationalApplication extends AbstractActiveRecord
             }
 
             if (count($playerArray) !== $limit) {
-                $this->addError('player', 'Игроки выбраны неправильно');
+                $this->addError('player', Yii::t('common', 'models.db.election-national-application.player.error'));
             }
 
             foreach ($playerArray as $playerId) {
@@ -128,7 +127,7 @@ class ElectionNationalApplication extends AbstractActiveRecord
                     ])
                     ->exists();
                 if (!$player) {
-                    $this->addError('player', 'Игроки выбраны неправильно');
+                    $this->addError('player', Yii::t('common', 'models.db.election-national-application.player.error'));
                 }
             }
         }
@@ -138,7 +137,6 @@ class ElectionNationalApplication extends AbstractActiveRecord
 
     /**
      * @return bool
-     * @throws Exception
      */
     public function saveApplication(): bool
     {

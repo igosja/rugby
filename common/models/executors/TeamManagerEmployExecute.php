@@ -14,9 +14,6 @@ use Yii;
 /**
  * Class TeamManagerFireExecute
  * @package console\models\executors
- *
- * @property-read Team $team
- * @property-read User $user
  */
 class TeamManagerEmployExecute implements ExecuteInterface
 {
@@ -80,11 +77,11 @@ class TeamManagerEmployExecute implements ExecuteInterface
 
         Yii::$app->mailer->compose(
             ['html' => 'default-html', 'text' => 'default-text'],
-            ['text' => 'Ваша заявка на получение команды одобрена']
+            ['text' => Yii::t('common', 'models.executors.team-manager-employ.text')]
         )
             ->setTo($this->user->email)
             ->setFrom([Yii::$app->params['noReplyEmail'] => Yii::$app->params['noReplyName']])
-            ->setSubject('Получение команды на сайте Виртуальной Регбийной Лиги')
+            ->setSubject(Yii::t('common', 'models.executors.team-manager-employ.subject'))
             ->send();
 
         return true;

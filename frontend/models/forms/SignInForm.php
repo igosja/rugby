@@ -53,7 +53,7 @@ class SignInForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неправильная комбинация логин/пароль');
+                $this->addError($attribute, Yii::t('frontend', 'models.forms.sign-in.password.error'));
             }
         }
     }

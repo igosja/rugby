@@ -25,7 +25,7 @@ use yii\helpers\Html;
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-            Автор:
+            <?= Yii::t('frontend', 'views.vote.vote.author') ?>
             <?= $model->user->getUserLink(['color' => true]) ?>,
             <?= FormatHelper::asDateTime($model->date) ?>
         </div>

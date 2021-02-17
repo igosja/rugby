@@ -55,7 +55,7 @@ class NewsController extends AbstractController
             NewsQuery::updateUserNewsId($this->user);
         }
 
-        $this->setSeoTitle('Новости');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.news.index.title'));
         return $this->render(
             'index',
             [
@@ -78,13 +78,13 @@ class NewsController extends AbstractController
         $model->news_id = $id;
         $model->user_id = $this->user->id;
         if ($this->user && (new NewsCommentSaveExecutor($this->user, $model, Yii::$app->request->post()))->execute()) {
-            $this->setSuccessFlash('Комментарий успешно сохранён');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.news.view.success'));
             return $this->refresh();
         }
 
         $dataProvider = NewsCommentPrepare::getNewsCommentDataProvider($id);
 
-        $this->setSeoTitle('Комментарии к новости');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.news.view.title'));
         return $this->render(
             'view',
             [
@@ -116,7 +116,7 @@ class NewsController extends AbstractController
 
         try {
             $model->delete();
-            $this->setSuccessFlash('Комментарий успешно удалён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.news.delete-comment.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
         }

@@ -14,20 +14,17 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 
 ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <h1>Забыли пароль?</h1>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h1><?= Yii::t('frontend', 'views.site.password-restore.h1') ?></h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= $this->render('_sign-up-links') ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <?= $this->render('_sign-up-links') ?>
     </div>
-<?php
-
-// TODO refactor
-$form = ActiveForm::begin(
+</div>
+<?php $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
         'fieldConfig' => [
@@ -41,24 +38,21 @@ $form = ActiveForm::begin(
         ],
     ]
 ) ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <p>
-                Здесь вы можете ввести <strong>новый пароль</strong> для своего аккаунта.
-            </p>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <p>
+            <?= Yii::t('frontend', 'views.site.password-restore.p') ?>
+        </p>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= $form->field($passwordRestoreForm, 'password')->passwordInput(['autoFocus' => true]) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $form->field($passwordRestoreForm, 'password')->passwordInput(['autoFocus' => true]) ?>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= Html::submitButton('Сменить пароль', ['class' => 'btn margin']) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <?= Html::submitButton(Yii::t('frontend', 'views.site.password-restore.submit'), ['class' => 'btn margin']) ?>
     </div>
-<?php
-
-// TODO refactor
-ActiveForm::end() ?>
+</div>
+<?php ActiveForm::end() ?>

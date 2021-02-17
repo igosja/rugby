@@ -80,7 +80,7 @@ $context = $this->context;
                     Html::img(
                         '/img/logo.png',
                         [
-                            'alt' => 'Виртуальная Регбийная Лига',
+                            'alt' => Yii::t('frontend', 'views.layouts.main.alt'),
                             'class' => 'img-responsive'
                         ]
                     ),
@@ -91,7 +91,7 @@ $context = $this->context;
                 <br/>
                 <?php if (Yii::$app->user->isGuest): ?>
                     <?= Html::a(
-                        'Войти',
+                        Yii::t('frontend', 'views.layouts.main.link.sign-in'),
                         ['/site/sign-in'],
                         ['class' => 'btn margin']
                     ) ?>
@@ -113,7 +113,7 @@ $context = $this->context;
                         ) ?>
                     <?php endif ?>
                     <?= Html::a(
-                        'Выйти',
+                        Yii::t('frontend', 'views.layouts.main.link.sign-out'),
                         ['site/sign-out'],
                         ['class' => ['btn', 'margin']]
                     ) ?>
@@ -127,8 +127,6 @@ $context = $this->context;
             <div class="col-lg-12 col-md-12 col-sm-12 text-center menu">
                 <?php
 
-// TODO refactor
-
                 try {
                     print Menu::widget();
                 } catch (Exception $e) {
@@ -140,17 +138,12 @@ $context = $this->context;
         </div>
         <noscript>
             <div class="row margin-top">
-                <div
-                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                    JavaScript is disabled in your browser. For the site to work
-                    correctly, it is recommended to enable
-                    JavaScript.
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
+                    <?= Yii::t('frontend', 'views.layouts.main.javascript') ?>
                 </div>
             </div>
         </noscript>
         <?php
-
-// TODO refactor
 
         try {
             print Alert::widget();
@@ -162,8 +155,7 @@ $context = $this->context;
         <?= $content ?>
         <?php if (YII_ENV_PROD && (!$context->user || !$context->user->isVip())) : ?>
             <div class="row">
-                <div
-                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
                     <?= Html::tag(
                         'ins',
                         '',
@@ -187,16 +179,18 @@ $context = $this->context;
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer text-center">
-            Страница сгенерирована за <?= round(Yii::getLogger()->getElapsedTime(), 5) ?> сек,
+            <?= Yii::t('frontend', 'views.layouts.main.generated', [
+                'time' => round(Yii::getLogger()->getElapsedTime(), 5),
+            ]) ?>
             <br/>
             <?php
 
-// TODO refactor
             try {
                 print SitePrepare::getSiteVersion();
             } catch (InvalidConfigException $e) {
                 ErrorHelper::log($e);
             }
+
             ?>
         </div>
     </div>

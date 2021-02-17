@@ -61,7 +61,7 @@ class LineupNationalController extends AbstractController
 
         $model = new GameNationalSend(['game' => $game, 'national' => $this->myNationalOrVice]);
         if ($model->saveLineup()) {
-            $this->setSuccessFlash('Состав успешно отправлен.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.lineup.success'));
             return $this->refresh();
         }
 
@@ -328,7 +328,7 @@ class LineupNationalController extends AbstractController
         $styleArray = ArrayHelper::map(Style::find()->all(), 'id', 'name');
         $tacticArray = ArrayHelper::map(Tactic::find()->all(), 'id', 'name');
 
-        $this->setSeoTitle('Отправка состава');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.lineup.view.title'));
         return $this->render('view', [
             'player_1_id' => $player_1_id,
             'player_2_id' => $player_2_id,

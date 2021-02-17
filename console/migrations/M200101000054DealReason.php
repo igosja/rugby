@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,11 +32,11 @@ class M200101000054DealReason extends Migration
             self::TABLE,
             ['text'],
             [
-                ['Лимит на одну сделку между менеджерами за сезон'],
-                ['Лимит на одну сделку между командами за сезон'],
-                ['У команды не хватило денег'],
-                ['Не лучшая заявка'],
-                ['Запрет на сделки между подопечными'],
+                [Yii::t('console', 'migrations.deal-reason.manager-limit')],
+                [Yii::t('console', 'migrations.deal-reason.team-limit')],
+                [Yii::t('console', 'migrations.deal-reason.no-money')],
+                [Yii::t('console', 'migrations.deal-reason.not-best')],
+                [Yii::t('console', 'migrations.deal-reason.referrer')],
             ]
         );
 

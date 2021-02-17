@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Yii;
 use yii\db\ActiveQuery;
 
 /**
@@ -102,7 +103,7 @@ class AchievementPlayer extends AbstractActiveRecord
                 $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
             }
         } else {
-            $result = 'Чемпион <i class="fa fa-trophy" style="color: gold;"></i>';
+            $result = Yii::t('common', 'models.db.achievement-player.position.champion') . ' <i class="fa fa-trophy" style="color: gold;"></i>';
         }
 
         return $result;

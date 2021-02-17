@@ -303,7 +303,7 @@ class GameSend extends Model
     public function attributeLabels(): array
     {
         return [
-            'name' => 'Название',
+            'name' => Yii::t('frontend', 'models.forms.game-send.label.name'),
         ];
     }
 }
