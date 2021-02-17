@@ -5,6 +5,8 @@
 use common\components\TranslationEventHandler;
 use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
+use yii\log\DbTarget;
+use yii\log\EmailTarget;
 use yii\redis\Cache;
 use yii\redis\Connection;
 
@@ -13,6 +15,7 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
+    'bootstrap' => ['log'],
     'components' => [
         'cache' => [
             'class' => Cache::class,
@@ -60,6 +63,25 @@ return [
                     'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation'],
                 ],
             ],
+        ],
+        'log' => [
+            'targets' => [
+                [
+                    'class' => DbTarget::class,
+                    'levels' => ['error', 'warning'],
+                ],
+                [
+                    'class' => EmailTarget::class,
+                    'levels' => ['error'],
+                    'categories' => ['yii\db\*'],
+                    'message' => [
+                        'from' => ['log@virtual-rugby.com'],
+                        'to' => ['igosja@ukr.net'],
+                        'subject' => 'Ошибки базы данных на сайте virtual-rugby.com',
+                    ],
+                ],
+            ],
+            'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
         'redis' => [
             'class' => Connection::class,

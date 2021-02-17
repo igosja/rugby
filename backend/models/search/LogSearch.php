@@ -4,15 +4,15 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\db\Log;
 use yii\base\Model;
-use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 
 /**
  * Class LogSearch
  * @package backend\models\search
  */
-class LogSearch extends Model
+class LogSearch extends Log
 {
     /**
      * @return array
@@ -23,40 +23,26 @@ class LogSearch extends Model
     }
 
     /**
-     * @param string $chapter
-     * @return ArrayDataProvider
+     * @param $params
+     * @return ActiveDataProvider
      */
-    public function search(string $chapter): ArrayDataProvider
+    public function search($params): ActiveDataProvider
     {
-        return new ArrayDataProvider([
-            'allModels' => $this->models($chapter),
-            'pagination' => [
-                'pageSize' => 50,
-            ],
-        ]);
-    }
+        $query = self::find();
 
-    /**
-     * @param string $chapter
-     * @return array
-     */
-    private function models(string $chapter): array
-    {
-        $path = Yii::getAlias('@' . $chapter);
-        if (!file_exists($path . '/runtime/logs/app.log')) {
-            return [];
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query' => $query,
+                'sort' => [
+                    'defaultOrder' => ['id' => SORT_DESC],
+                ],
+            ]
+        );
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
         }
 
-        $file = file_get_contents($path . '/runtime/logs/app.log');
-        $fileData = explode(']' . PHP_EOL . '2', $file);
-        $models = [];
-        foreach ($fileData as $fileDatum) {
-            $text = $fileDatum;
-            if ('2' !== $text[0]) {
-                $text = '2' . $text;
-            }
-            $models[] = ['text' => $text];
-        }
-        return array_reverse($models);
+        return $dataProvider;
     }
 }

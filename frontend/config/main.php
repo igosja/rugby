@@ -4,7 +4,6 @@
 
 use frontend\components\widgets\LinkPager;
 use yii\grid\GridView;
-use yii\log\FileTarget;
 use yii\redis\Session;
 use yii\widgets\ListView;
 
@@ -17,7 +16,6 @@ $params = array_merge(
 
 return [
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'container' => [
         'definitions' => [
             GridView::class => [
@@ -57,15 +55,6 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-            'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
         'request' => [
             'baseUrl' => '',

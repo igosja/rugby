@@ -5,7 +5,9 @@
 namespace backend\controllers;
 
 use backend\models\search\LogSearch;
+use common\models\db\Log;
 use Yii;
+use yii\db\Exception;
 use yii\web\Response;
 
 /**
@@ -15,56 +17,28 @@ use yii\web\Response;
 class LogController extends AbstractController
 {
     /**
-     * @param string $chapter
      * @return string
      */
-    private function prepareIndexAction(string $chapter): string
+    public function actionIndex(): string
     {
         $searchModel = new LogSearch();
-        $dataProvider = $searchModel->search($chapter);
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $this->view->title = 'Logs (' . $chapter . ')';
+        $this->view->title = 'Logs';
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('index', [
-            'chapter' => $chapter,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * @return string
-     */
-    public function actionBackend(): string
-    {
-        return $this->prepareIndexAction('backend');
-    }
-
-    /**
-     * @return string
-     */
-    public function actionConsole(): string
-    {
-        return $this->prepareIndexAction('console');
-    }
-
-    /**
-     * @return string
-     */
-    public function actionFrontend(): string
-    {
-        return $this->prepareIndexAction('frontend');
-    }
-
-    /**
-     * @param string $chapter
      * @return Response
+     * @throws Exception
      */
-    public function actionClear(string $chapter): Response
+    public function actionClear(): Response
     {
-        if (file_exists(Yii::getAlias('@' . $chapter) . '/runtime/logs/app.log')) {
-            unlink(Yii::getAlias('@' . $chapter) . '/runtime/logs/app.log');
-        }
-        return $this->redirect([$chapter]);
+        Yii::$app->db->createCommand()->truncateTable(Log::tableName())->execute();
+        return $this->redirect(['index']);
     }
 }
