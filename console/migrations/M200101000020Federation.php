@@ -27,17 +27,12 @@ class M200101000020Federation extends Migration
                 'id' => $this->primaryKey(3),
                 'auto' => $this->integer(5)->defaultValue(0),
                 'country_id' => $this->integer(3)->unique(),
-                'finance' => $this->integer(11)->defaultValue(0),
                 'game' => $this->integer(5)->defaultValue(0),
-                'president_user_id' => $this->integer(11)->defaultValue(0),
                 'stadium_capacity' => $this->integer(5)->defaultValue(0),
-                'vice_user_id' => $this->integer(11)->defaultValue(0),
             ]
         );
 
         $this->addForeignKey('federation_country_id', self::TABLE, 'country_id', '{{%country}}', 'id');
-        $this->addForeignKey('federation_president_user_id', self::TABLE, 'president_user_id', '{{%user}}', 'id');
-        $this->addForeignKey('federation_vice_user_id', self::TABLE, 'vice_user_id', '{{%user}}', 'id');
 
         $this->insert(self::TABLE, ['country_id' => 0]);
 

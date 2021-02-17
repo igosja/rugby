@@ -49,11 +49,6 @@ use console\models\generator\PlayerRealPower;
 use console\models\generator\PlayerSpecialToLineup;
 use console\models\generator\PlayerTire;
 use console\models\generator\PlusMinus;
-use console\models\generator\PresidentFire;
-use console\models\generator\PresidentViceFire;
-use console\models\generator\PresidentViceVoteStatus;
-use console\models\generator\PresidentVip;
-use console\models\generator\PresidentVoteStatus;
 use console\models\generator\Prize;
 use console\models\generator\ReferrerBonus;
 use console\models\generator\SetAuto;
@@ -172,10 +167,6 @@ class GeneratorController extends AbstractController
             new NationalViceVoteStatus,
             new NationalFire,
             new NationalViceFire,
-            new PresidentVoteStatus,
-            new PresidentViceVoteStatus,
-            new PresidentFire,
-            new PresidentViceFire,
             new ReferrerBonus,
             new NewSeason,
             new PlayerLeaguePower,
@@ -191,7 +182,6 @@ class GeneratorController extends AbstractController
             new UpdateUserTotalRating,
             new UpdateRating,
             new InsertNews,
-            new PresidentVip,
             new FriendlyInviteDelete,
             new UserFireExtraTeam,
             new NationalStadium,

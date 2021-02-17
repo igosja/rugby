@@ -58,10 +58,6 @@ print $this->render('_top');
             ->field($model, 'teamId')
             ->dropDownList($teamArray, ['class' => 'form-control', 'prompt' => 'Выберите команду'])
             ->label('Команда') ?>
-        <?= $form
-            ->field($model, 'federationId')
-            ->dropDownList($federationArray, ['class' => 'form-control', 'prompt' => 'Выберите федерацию'])
-            ->label('Федерация') ?>
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
                 Доступно
