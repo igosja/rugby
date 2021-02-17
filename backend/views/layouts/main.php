@@ -94,16 +94,8 @@ $this->beginBody() ?>
             'label' => FAS::icon(FAS::_FILE_ALT),
             'items' => [
                 [
-                    'label' => 'Logs backend',
-                    'url' => ['log/backend'],
-                ],
-                [
-                    'label' => 'Logs console',
-                    'url' => ['log/console'],
-                ],
-                [
-                    'label' => 'Logs frontend',
-                    'url' => ['log/frontend'],
+                    'label' => 'Logs',
+                    'url' => ['log/index'],
                 ],
             ],
             'url' => 'javascript:',

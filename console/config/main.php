@@ -3,7 +3,6 @@
 // TODO refactor
 
 use yii\console\controllers\FixtureController;
-use yii\log\FileTarget;
 use yii\web\UrlManager;
 
 $params = array_merge(
@@ -19,7 +18,6 @@ return [
         '@npm' => '@vendor/npm-asset',
     ],
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'fixture' => [
@@ -28,14 +26,6 @@ return [
         ],
     ],
     'components' => [
-        'log' => [
-            'targets' => [
-                [
-                    'class' => FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
         'urlManager' => [
             'baseUrl' => '/',
             'class' => UrlManager::class,
