@@ -15,7 +15,7 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            Кубок межсезонья
+            <?= Yii::t('frontend', 'views.off-season.index.h1') ?>
         </h1>
     </div>
 </div>
@@ -23,7 +23,7 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
-        <?= Html::label('Сезон', 'seasonId') ?>
+        <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
         <?= Html::dropDownList(
@@ -39,35 +39,28 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p class="text-justify">
-            <span class="strong">Кубок межсезонья</span> - это турнир, который проводится в самом начале сезона.
-            <br/>
-            Всего команд в Кубке межсезонья в этом сезоне - <span class="strong"><?= $count ?></span>.
+            <?= Yii::t('frontend', 'views.off-season.index.p.1', ['count' => $count]) ?>
         </p>
         <p class="text-center">
-            <?= Html::a('Турнирная таблица', ['table', 'seasonId' => $seasonId]) ?>
+            <?= Html::a(Yii::t('frontend', 'views.off-season.link.table'), ['table', 'seasonId' => $seasonId]) ?>
             |
-            <?= Html::a('Статистика', ['statistics', 'seasonId' => $seasonId]) ?>
+            <?= Html::a(Yii::t('frontend', 'views.off-season.link.statistics'), ['statistics', 'seasonId' => $seasonId]) ?>
         </p>
         <p class="text-justify">
-            Турнир играется по швейцарской системе, когда для каждого тура сводятся в пары команды одного ранга
-            (расположенные достаточно близко друг от друга в турнирной таблице,
-            но так, чтобы не нарушались принципы турнира).
+            <?= Yii::t('frontend', 'views.off-season.index.p.2') ?>
         </p>
         <p class="text-justify">
-            В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.
+            <?= Yii::t('frontend', 'views.off-season.index.p.3') ?>
         </p>
         <p class="text-justify">
-            Каждая команда имеет право сыграть 2 матча на супере и 2 матча на отдыхе
-            во время розыгрыша кубка межсезонья.
+            <?= Yii::t('frontend', 'views.off-season.index.p.4') ?>
         </p>
         <p class="text-justify">
-            В кубке межсезонья участники не могут встречаться между собой дважды и сводятся в пары,
-            имеющие ближайшие места в турнирной таблице, но такие,
-            которые могут играть между собой в соответствии с принципами жеребьёвки:
+            <?= Yii::t('frontend', 'views.off-season.index.p.5') ?>
         </p>
         <ul class="text-left">
-            <li>две команды не могут играть между собой более одного матчей;</li>
-            <li>ни одна из команд не может сыграть более половины матчей турнира дома или в гостях.</li>
+            <li><?= Yii::t('frontend', 'views.off-season.index.li.1') ?></li>
+            <li><?= Yii::t('frontend', 'views.off-season.index.li.2') ?></li>
         </ul>
     </div>
 </div>

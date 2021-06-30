@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -33,11 +34,11 @@ class M200101000030Squad extends Migration
             ['color', 'name'],
             [
                 [null, '------'],
-                ['DFF2BF', '1 состав'],
-                ['C9FFCC', '2 состав'],
-                ['FEEFB3', '3 состав'],
-                ['FFBABA', '4 состав'],
-                ['E0E0E0', '5 состав'],
+                ['DFF2BF', Yii::t('console', 'migrations.squad.squad', ['squad' => 1])],
+                ['C9FFCC', Yii::t('console', 'migrations.squad.squad', ['squad' => 2])],
+                ['FEEFB3', Yii::t('console', 'migrations.squad.squad', ['squad' => 3])],
+                ['FFBABA', Yii::t('console', 'migrations.squad.squad', ['squad' => 4])],
+                ['E0E0E0', Yii::t('console', 'migrations.squad.squad', ['squad' => 5])],
             ]
         );
 

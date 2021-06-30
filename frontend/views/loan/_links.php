@@ -9,14 +9,14 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Игроки на рынке',
+                'text' => Yii::t('frontend', 'views.loan.links.index'),
                 'url' => ['loan/index'],
             ],
             [
                 'alias' => [
                     ['loan/view'],
                 ],
-                'text' => 'Результаты сделок',
+                'text' => Yii::t('frontend', 'views.loan.links.history'),
                 'url' => ['loan/history'],
             ],
         ]

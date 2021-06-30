@@ -10,6 +10,7 @@ use frontend\models\executors\TeamRequestSaveExecutor;
 use frontend\models\preparers\TeamRequestPrepare;
 use frontend\models\queries\TeamQuery;
 use frontend\models\queries\TeamRequestQuery;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Response;
 
@@ -49,14 +50,11 @@ class TeamRequestController extends AbstractController
         $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
         $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
-        $this->setSeoTitle('Получение команды');
-        return $this->render(
-            'index',
-            [
-                'dataProvider' => $dataProvider,
-                'myDataProvider' => $myDataProvider,
-            ]
-        );
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.team-request.index.title'));
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'myDataProvider' => $myDataProvider,
+        ]);
     }
 
     /**
@@ -70,20 +68,20 @@ class TeamRequestController extends AbstractController
         }
 
         if (!TeamQuery::getFreeTeamById($id)) {
-            $this->setErrorFlash('Команда выбрана неправильно');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.team'));
             return $this->redirect(['team-request/index']);
         }
 
         if (TeamRequestQuery::getTeamRequestByIdAndUser($id, $this->user->id)) {
-            $this->setErrorFlash('Вы уже подали заявку на эту команду');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.request'));
             return $this->redirect(['team-request/index']);
         }
 
         try {
             (new TeamRequestSaveExecutor($id, $this->user->id))->execute();
-            $this->setSuccessFlash('Заявка успешно подана');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-request.request.success'));
         } catch (Exception $e) {
-            $this->setErrorFlash('Не удалось подать заявку');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.catch'));
             ErrorHelper::log($e);
         }
 
@@ -101,7 +99,7 @@ class TeamRequestController extends AbstractController
         }
 
         TeamRequestQuery::deleteTeamRequest($id, $this->user->id);
-        $this->setSuccessFlash('Заявка успешно удалена');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-request.delete.success'));
 
         return $this->redirect(['team-request/index']);
     }

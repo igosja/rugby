@@ -30,7 +30,7 @@ class ScheduleController extends AbstractController
         $scheduleId = ScheduleQuery::getCurrentScheduleIds();
         $seasonArray = Season::getSeasonArray();
 
-        $this->setSeoTitle('Расписание');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.schedule.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'seasonArray' => $seasonArray,
@@ -55,7 +55,7 @@ class ScheduleController extends AbstractController
         $dataProvider = GamePrepare::getGameDataProvider($id);
 
         $this->setSeoTitle(
-            'Список матчей игрового дня '
+            Yii::t('frontend', 'controllers.schedule.view.title')
             . FormatHelper::asDate($schedule->date)
         );
         return $this->render('view', [

@@ -79,8 +79,8 @@ class TransferApplicationTo extends Model
     public function attributeLabels(): array
     {
         return [
-            'price' => 'Ваше предложение',
-            'onlyOne' => 'В случае победы удалить все остальные мои заявки',
+            'onlyOne' => Yii::t('frontend', 'models.forms.loan-application-to.label.only'),
+            'price' => Yii::t('frontend', 'models.forms.loan-application-to.label.price'),
         ];
     }
 
@@ -103,12 +103,12 @@ class TransferApplicationTo extends Model
         }
 
         if ($transfer->team_seller_id === $this->team->id) {
-            Yii::$app->session->setFlash('error', 'Нельзя покупать игрока у своей команды.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.team'));
             return false;
         }
 
         if ($transfer->user_seller_id === Yii::$app->user->id) {
-            Yii::$app->session->setFlash('error', 'Нельзя покупать игрока у своей команды.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.team'));
             return false;
         }
 
@@ -117,7 +117,7 @@ class TransferApplicationTo extends Model
             ->andFilterWhere(['!=', 'id', ($this->transferApplication->id ?? null)])
             ->count();
         if ($check) {
-            Yii::$app->session->setFlash('error', 'Вы уже подали заявку на этого игрока от имени другой своей команды.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.application'));
             return false;
         }
 
@@ -129,7 +129,7 @@ class TransferApplicationTo extends Model
             ->andWhere(['id' => $this->player->team->user_id])
             ->count();
         if ($check) {
-            Yii::$app->session->setFlash('error', 'Нельзя заключать сделки между подопечными.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.referral'));
             return false;
         }
 
@@ -138,7 +138,7 @@ class TransferApplicationTo extends Model
             ->andWhere(['referrer_user_id' => $controller->user->id])
             ->count();
         if ($check) {
-            Yii::$app->session->setFlash('error', 'Нельзя заключать сделки между подопечными.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.referral'));
             return false;
         }
 
@@ -195,7 +195,7 @@ class TransferApplicationTo extends Model
         }
 
         if (in_array($this->team->id, $teamArray, true)) {
-            Yii::$app->session->setFlash('error', 'Ваши команды уже заключали сделку в текущем сезоне.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-to.execute.error.season.team'));
             return false;
         }
 
@@ -248,7 +248,7 @@ class TransferApplicationTo extends Model
         if (in_array(Yii::$app->user->id, $userArray, true)) {
             Yii::$app->session->setFlash(
                 'error',
-                'Вы уже заключали сделку с этим менеджером в текущем сезоне.'
+                Yii::t('frontend', 'models.forms.loan-application-to.execute.error.season.user')
             );
             return false;
         }
@@ -271,7 +271,7 @@ class TransferApplicationTo extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Заявка успешно сохранена.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.loan-application-to.execute.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();

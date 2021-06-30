@@ -36,7 +36,7 @@ use yii\web\View;
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Сезон', 'seasonId') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <?= Html::dropDownList(
@@ -57,46 +57,46 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.th.date'),
                 'value' => static function (Finance $model) {
                     return FormatHelper::asDate($model->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Было',
+                'footer' => Yii::t('frontend', 'views.finance.th.before'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Было',
+                'label' => Yii::t('frontend', 'views.finance.th.before'),
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value_before);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-right'],
-                'footer' => '+/-',
+                'footer' => Yii::t('frontend', 'views.finance.th.value'),
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => '+/-',
+                'label' => Yii::t('frontend', 'views.finance.th.value'),
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Стало',
+                'footer' => Yii::t('frontend', 'views.finance.th.after'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Стало',
+                'label' => Yii::t('frontend', 'views.finance.th.after'),
                 'value' => static function (Finance $model) {
                     return FormatHelper::asCurrency($model->value_after);
                 }
             ],
             [
-                'footer' => 'Комментарий',
+                'footer' => Yii::t('frontend', 'views.finance.th.comment'),
                 'format' => 'raw',
-                'label' => 'Комментарий',
+                'label' => Yii::t('frontend', 'views.finance.th.comment'),
                 'value' => static function (Finance $model) {
                     return $model->getText();
                 }

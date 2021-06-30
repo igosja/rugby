@@ -143,7 +143,7 @@ class ChampionshipController extends AbstractController
             ->orderBy(['game.id' => SORT_ASC])
             ->all();
 
-        $this->setSeoTitle($federation->country->name . '. Национальный чемпионат');
+        $this->setSeoTitle($federation->country->name . '. ' . Yii::t('frontend', 'controllers.championship.table.title'));
 
         return $this->render('table', [
             'federation' => $federation,
@@ -200,7 +200,7 @@ class ChampionshipController extends AbstractController
             ->count();
         if ($conference) {
             $result[] = [
-                'text' => 'КЛК',
+                'text' => Yii::t('frontend', 'controllers.championship.division.link.conference'),
                 'url' => [
                     'conference/table',
                     'federationId' => $federationId,
@@ -284,7 +284,7 @@ class ChampionshipController extends AbstractController
                 'sort' => false,
             ]
         );
-        $this->setSeoTitle($federation->country->name . '. Статистика национального чемпионата');
+        $this->setSeoTitle($federation->country->name . '. ' . Yii::t('frontend', 'controllers.championship.statistics.title'));
 
         return $this->render('statistics', [
             'federation' => $federation,

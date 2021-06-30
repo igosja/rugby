@@ -248,7 +248,6 @@ class Menu extends Widget
          * @var AbstractController $controller
          */
         $controller = Yii::$app->controller;
-        $federationInfo = 0;
         $messenger = 0;
         $news = 0;
         $support = 0;
@@ -258,8 +257,7 @@ class Menu extends Widget
                 ->andWhere([
                     'user_id' => $controller->user->id,
                     'is_question' => false,
-                    'read' => null,
-                    'is_inside' => false
+                    'read' => null
                 ])
                 ->count();
 
@@ -268,12 +266,11 @@ class Menu extends Widget
                 ->count();
 
             $news = News::find()
-                ->andWhere(['federation_id' => null])
                 ->andFilterWhere(['>', 'id', $controller->user->news_id])
                 ->count();
 
             $vote = Vote::find()
-                ->andWhere(['vote_status_id' => VoteStatus::OPEN, 'federation_id' => null])
+                ->andWhere(['vote_status_id' => VoteStatus::OPEN])
                 ->andWhere([
                     'not',
                     [
@@ -287,52 +284,6 @@ class Menu extends Widget
                     ]
                 ])
                 ->count();
-            if ($controller->myTeam) {
-                $federationNews = News::find()
-                    ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id])
-                    ->andWhere(['>', 'id', $controller->myTeam->federation_news_id])
-                    ->count();
-
-                $supportManager = Support::find()
-                    ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->id, 'is_inside' => true, 'is_question' => false, 'read' => 0, 'user_id' => $controller->user->id])
-                    ->count();
-
-                $supportAdmin = 0;
-                $supportPresident = 0;
-
-                if (in_array($controller->user->id, [$controller->myTeam->stadium->city->country->federation->president_user_id, $controller->myTeam->stadium->city->country->federation->vice_user_id], true)) {
-                    $supportAdmin = Support::find()
-                        ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id, 'is_inside' => false, 'is_question' => false, 'read' => 0])
-                        ->count();
-
-                    $supportPresident = Support::find()
-                        ->andWhere(['federation_id' => $controller->myTeam->stadium->city->country->federation->id, 'is_inside' => true, 'is_question' => true, 'read' => 0])
-                        ->count();
-                }
-
-                $federationInfo = $federationNews + $supportManager + $supportAdmin + $supportPresident;
-
-                if (!$vote) {
-                    $vote = Vote::find()
-                        ->andWhere([
-                            'vote_status_id' => VoteStatus::OPEN,
-                            'federation_id' => $controller->myTeam->stadium->city->country->federation->id,
-                        ])
-                        ->andWhere([
-                            'not',
-                            [
-                                'id' => VoteAnswer::find()
-                                    ->select(['vote_id'])
-                                    ->andWhere([
-                                        'id' => VoteUser::find()
-                                            ->select(['vote_answer_id'])
-                                            ->andWhere(['user_id' => Yii::$app->user->id])
-                                    ])
-                            ]
-                        ])
-                        ->count();
-                }
-            }
         }
 
         $nationalId = $controller->myNationalVice->id ?? $controller->myNational->id ?? 0;
@@ -348,8 +299,7 @@ class Menu extends Widget
                 'url' => ['/chat/index'],
             ],
             self::ITEM_FEDERATION => [
-                'css' => $federationInfo ? 'red' : '',
-                'label' => Yii::t('frontend', 'components.widgets.menu.federation') . ($federationInfo ? ' <sup class="text-size-4">' . $federationInfo . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.federation'),
                 'url' => ['/federation/news'],
             ],
             self::ITEM_FORUM => [

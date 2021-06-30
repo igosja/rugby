@@ -11,6 +11,7 @@ use common\models\db\GameComment;
 use common\models\db\Lineup;
 use common\models\db\User;
 use common\models\db\UserBlock;
+use rmrevin\yii\fontawesome\FAS;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -37,25 +38,25 @@ $user = Yii::$app->user->identity;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if (!Yii::$app->user->isGuest) : ?>
             <?= Html::a(
-                '<i class="fa fa-thumbs-up" aria-hidden="true"></i>',
+                FAS::i(FAS::_THUMBS_UP),
                 ['vote', 'id' => $game->id, 'vote' => 1],
-                ['title' => 'Интересный и правильный матч, заслуживает внимания']
+                ['title' => Yii::t('frontend', 'views.game.view.vote-up')]
             ) ?>
         <?php endif ?>
-        <span title="Оценка матча"><?= $game->rating() ?></span>
+        <span title="<?= Yii::t('frontend', 'views.game.view.title.rating') ?>"><?= $game->rating() ?></span>
         <?php if (!Yii::$app->user->isGuest) : ?>
             <?= Html::a(
-                '<i class="fa fa-thumbs-down" aria-hidden="true"></i>',
+                FAS::i(FAS::_THUMBS_DOWN),
                 ['vote', 'id' => $game->id, 'vote' => -1],
-                ['title' => 'Неинтересный и нелогичный матч, генератор не прав']
+                ['title' => Yii::t('frontend', 'views.game.view.vote-down')]
             ) ?>
         <?php endif ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        <span class="strong">Результат</span>
+        <span class="strong"><?= Yii::t('frontend', 'views.game.link.result') ?></span>
         |
         <?= Html::a(
-            'Перед матчем',
+            Yii::t('frontend', 'views.game.link.before-game'),
             ['preview', 'id' => $game->id]
         ) ?>
     </div>
@@ -106,9 +107,11 @@ $user = Yii::$app->user->identity;
         <?php endif ?>
         <div>
             <?php if ($game->home_plus_minus >= 0): ?>
-                <i class="fa fa-plus-square font-green" title="Набрано балов по результатам матча"></i>
+                <i class="fa fa-plus-square font-green"
+                   title="<?= Yii::t('frontend', 'views.game.view.point.up') ?>"></i>
             <?php else: ?>
-                <i class="fa fa-minus-square font-red" title="Потеряно балов по результатам матча"></i>
+                <i class="fa fa-minus-square font-red"
+                   title="<?= Yii::t('frontend', 'views.game.view.point.down') ?>"></i>
             <?php endif ?>
             <?= abs($game->home_plus_minus) ?>
         </div>
@@ -124,8 +127,9 @@ $user = Yii::$app->user->identity;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::a($game->stadium->name, ['team/view', 'id' => $game->stadium->team->id]) ?>
                 (<?= $game->stadium_capacity ?>),
-                Зрителей: <?= $game->visitor ?>.
-                Билет: <?= FormatHelper::asCurrency($game->ticket_price) ?>
+                <?= Yii::t('frontend', 'views.game.view.visitor') ?>: <?= $game->visitor ?>.
+                <?= Yii::t('frontend', 'views.game.view.ticket') ?>
+                : <?= FormatHelper::asCurrency($game->ticket_price) ?>
             </div>
         </div>
     </div>
@@ -151,9 +155,11 @@ $user = Yii::$app->user->identity;
         <?php endif ?>
         <div>
             <?php if ($game->guest_plus_minus >= 0): ?>
-                <i class="fa fa-plus-square font-green" title="Набрано балов по результатам матча"></i>
+                <i class="fa fa-plus-square font-green"
+                   title="<?= Yii::t('frontend', 'views.game.view.point.up') ?>"></i>
             <?php else: ?>
-                <i class="fa fa-minus-square font-red" title="Потеряно балов по результатам матча"></i>
+                <i class="fa fa-minus-square font-red"
+                   title="<?= Yii::t('frontend', 'views.game.view.point.down') ?>"></i>
             <?php endif ?>
             <?= abs($game->guest_plus_minus) ?>
         </div>
@@ -166,7 +172,7 @@ $user = Yii::$app->user->identity;
                 <td class="col-35 text-center">
                     <?= $game->homeTactic->name ?>
                 </td>
-                <td class="text-center">Тактика</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.tactic') ?></td>
                 <td class="col-35 text-center">
                     <?= $game->guestTactic->name ?>
                 </td>
@@ -177,7 +183,7 @@ $user = Yii::$app->user->identity;
                         <?= $game->homeStyle->name ?>
                     </span>
                 </td>
-                <td class="text-center">Стиль</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.style') ?></td>
                 <td class="text-center">
                     <span class="<?= $game->cssStyle('guest') ?>">
                         <?= $game->guestStyle->name ?>
@@ -188,7 +194,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->homeRudeness->name ?>
                 </td>
-                <td class="text-center">Грубость</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.rudeness') ?></td>
                 <td class="text-center">
                     <?= $game->guestRudeness->name ?>
                 </td>
@@ -199,7 +205,7 @@ $user = Yii::$app->user->identity;
                         <?= $game->homeMood->name ?>
                     </span>
                 </td>
-                <td class="text-center">Настрой</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.mood') ?></td>
                 <td class="text-center">
                     <span class="<?= $game->cssMood('guest') ?>">
                         <?= $game->guestMood->name ?>
@@ -210,27 +216,29 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_power_percent ?>%
                 </td>
-                <td class="text-center">Соотношение сил</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.power-percent') ?></td>
                 <td class="text-center">
                     <?= $game->guest_power_percent ?>%
                 </td>
             </tr>
             <tr>
                 <td class="text-center">
-                    <span title="Расстановка сил по позициям"><?= $game->home_optimality_1 ?>%</span> |
-                    <span title="Соотношение силы состава к ретингу команды"><?= $game->home_optimality_2 ?>%</span>
+                    <span title="<?= Yii::t('frontend', 'views.game.view.optimality.1') ?>"><?= $game->home_optimality_1 ?>%</span>
+                    |
+                    <span title="<?= Yii::t('frontend', 'views.game.view.optimality.2') ?>"><?= $game->home_optimality_2 ?>%</span>
                 </td>
-                <td class="text-center">Оптимальность</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.optimality') ?></td>
                 <td class="text-center">
-                    <span title="Расстановка сил по позициям"><?= $game->guest_optimality_1 ?>%</span> |
-                    <span title="Соотношение силы состава к ретингу команды"><?= $game->guest_optimality_2 ?>%</span>
+                    <span title="<?= Yii::t('frontend', 'views.game.view.optimality.1') ?>"><?= $game->guest_optimality_1 ?>%</span>
+                    |
+                    <span title="<?= Yii::t('frontend', 'views.game.view.optimality.2') ?>"><?= $game->guest_optimality_2 ?>%</span>
                 </td>
             </tr>
             <tr>
                 <td class="text-center">
                     <?= $game->home_teamwork ?>%
                 </td>
-                <td class="text-center">Сыгранность</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.teamwork') ?></td>
                 <td class="text-center">
                     <?= $game->guest_teamwork ?>%
                 </td>
@@ -239,7 +247,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_carry ?>
                 </td>
-                <td class="text-center">Carries</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.carry') ?></td>
                 <td class="text-center">
                     <?= $game->guest_carry ?>
                 </td>
@@ -248,7 +256,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_clean_break ?>
                 </td>
-                <td class="text-center">Clean breaks</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.clean-break') ?></td>
                 <td class="text-center">
                     <?= $game->guest_clean_break ?>
                 </td>
@@ -257,7 +265,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_defender_beaten ?>
                 </td>
-                <td class="text-center">Defenders beaten</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.defender-beaten') ?></td>
                 <td class="text-center">
                     <?= $game->guest_defender_beaten ?>
                 </td>
@@ -266,7 +274,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_metre_gained ?>
                 </td>
-                <td class="text-center">Metres gained</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.metre-gained') ?></td>
                 <td class="text-center">
                     <?= $game->guest_metre_gained ?>
                 </td>
@@ -275,7 +283,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_pass ?>
                 </td>
-                <td class="text-center">Passes</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.pass') ?></td>
                 <td class="text-center">
                     <?= $game->guest_pass ?>
                 </td>
@@ -284,7 +292,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_penalty_conceded ?>
                 </td>
-                <td class="text-center">Penalty conceded</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.penalty-conceded') ?></td>
                 <td class="text-center">
                     <?= $game->guest_penalty_conceded ?>
                 </td>
@@ -293,7 +301,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_turnover_won ?>
                 </td>
-                <td class="text-center">Turnover won</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.turnover-won') ?></td>
                 <td class="text-center">
                     <?= $game->guest_turnover_won ?>
                 </td>
@@ -302,7 +310,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_try ?>
                 </td>
-                <td class="text-center">Tries</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.try') ?></td>
                 <td class="text-center">
                     <?= $game->guest_try ?>
                 </td>
@@ -311,7 +319,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_conversion ?>
                 </td>
-                <td class="text-center">Conversions</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.conversion') ?></td>
                 <td class="text-center">
                     <?= $game->guest_conversion ?>
                 </td>
@@ -320,7 +328,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_penalty_kick ?>
                 </td>
-                <td class="text-center">Penalty kicks</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.penalty-kick') ?></td>
                 <td class="text-center">
                     <?= $game->guest_penalty_kick ?>
                 </td>
@@ -329,7 +337,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_drop_goal ?>
                 </td>
-                <td class="text-center">Drop goals</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.drop-goal') ?></td>
                 <td class="text-center">
                     <?= $game->guest_drop_goal ?>
                 </td>
@@ -338,7 +346,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_red_card ?>
                 </td>
-                <td class="text-center">Red cards</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.red-card') ?></td>
                 <td class="text-center">
                     <?= $game->guest_red_card ?>
                 </td>
@@ -347,25 +355,16 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_yellow_card ?>
                 </td>
-                <td class="text-center">Yellow cards</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.yellow-card') ?></td>
                 <td class="text-center">
                     <?= $game->guest_yellow_card ?>
                 </td>
             </tr>
             <tr>
                 <td class="text-center">
-                    <?= $game->home_red_card ?>
-                </td>
-                <td class="text-center">Red cards</td>
-                <td class="text-center">
-                    <?= $game->guest_red_card ?>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">
                     <?= $game->home_forecast ?>
                 </td>
-                <td class="text-center">Прогноз на матч</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.forecast') ?></td>
                 <td class="text-center">
                     <?= $game->guest_forecast ?>
                 </td>
@@ -374,7 +373,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_power ?>
                 </td>
-                <td class="text-center">Сила состава</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.power') ?></td>
                 <td class="text-center">
                     <?= $game->guest_power ?>
                 </td>
@@ -383,7 +382,7 @@ $user = Yii::$app->user->identity;
                 <td class="text-center">
                     <?= $game->home_possession ?>%
                 </td>
-                <td class="text-center">Possession</td>
+                <td class="text-center"><?= Yii::t('frontend', 'views.game.view.possession') ?></td>
                 <td class="text-center">
                     <?= $game->guest_possession ?>%
                 </td>
@@ -405,18 +404,25 @@ $user = Yii::$app->user->identity;
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 table-responsive">
             <table class="table table-bordered">
                 <tr>
-                    <th class="col-6" title="Позиция">П</th>
-                    <th>
-                        <?= $game->teamOrNationalLink($side, false) ?>
-                    </th>
-                    <th class="col-6 hidden-xs" title="Возраст">В</th>
-                    <th class="col-6 hidden-xs" title="Номинальная сила">НС</th>
-                    <th class="col-6" title="Реальная сила">РС</th>
-                    <th class="hidden-xs hidden-sm" title="Спецвозможности">Сп</th>
-                    <th class="col-6" title="Tries">T</th>
-                    <th class="col-6" title="Conversions">C</th>
-                    <th class="col-6" title="Penalty kicks">P</th>
-                    <th class="col-6 hidden-xs" title="Drop goals">D</th>
+                    <th class="col-6"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th><?= $game->teamOrNationalLink($side, false) ?></th>
+                    <th class="col-6 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-6 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.nominal-power') ?></th>
+                    <th class="col-6"
+                        title="<?= Yii::t('frontend', 'views.title.real-power') ?>"><?= Yii::t('frontend', 'views.th.real-power') ?></th>
+                    <th class="hidden-xs hidden-sm"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="col-6"
+                        title="<?= Yii::t('frontend', 'views.title.try') ?>"><?= Yii::t('frontend', 'views.th.try') ?></th>
+                    <th class="col-6"
+                        title="<?= Yii::t('frontend', 'views.title.conversion') ?>"><?= Yii::t('frontend', 'views.th.conversion') ?></th>
+                    <th class="col-6"
+                        title="<?= Yii::t('frontend', 'views.title.penalty-kick') ?>"><?= Yii::t('frontend', 'views.th.penalty-kick') ?></th>
+                    <th class="col-6 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.drop-goal') ?>"><?= Yii::t('frontend', 'views.th.drop-goal') ?></th>
                 </tr>
                 <?php for ($j = 0, $countLineup = count($lineupArray); $j < $countLineup; $j++) : ?>
                     <tr>
@@ -470,7 +476,7 @@ $user = Yii::$app->user->identity;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'header' => 'Время',
+                'header' => Yii::t('frontend', 'views.game.view.th.time'),
                 'value' => static function (Event $model) {
                     return $model->minute . "'";
                 }
@@ -478,7 +484,7 @@ $user = Yii::$app->user->identity;
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
-                'header' => 'Команда',
+                'header' => Yii::t('frontend', 'views.game.view.th.team'),
                 'value' => static function (Event $model) {
                     $side = 'guest';
                     if (($model->team_id && $model->team_id === $model->game->home_team_id)
@@ -491,7 +497,7 @@ $user = Yii::$app->user->identity;
             [
                 'contentOptions' => ['class' => 'text-center hidden-xs'],
                 'format' => 'raw',
-                'header' => 'Тип',
+                'header' => Yii::t('frontend', 'views.game.view.th.type'),
                 'headerOptions' => ['class' => 'text-center hidden-xs'],
                 'value' => static function (Event $model) {
                     return $model->icon();
@@ -500,7 +506,7 @@ $user = Yii::$app->user->identity;
             [
                 'contentOptions' => ['class' => 'text-center hidden-xs'],
                 'format' => 'raw',
-                'header' => 'Событие',
+                'header' => Yii::t('frontend', 'views.game.view.th.event'),
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'value' => static function (Event $model) {
                     return $model->eventText->text . ' - ' . $model->player->getPlayerLink();
@@ -508,7 +514,7 @@ $user = Yii::$app->user->identity;
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'header' => 'Счёт',
+                'header' => Yii::t('frontend', 'views.game.view.th.score'),
                 'value' => static function (Event $model) {
                     if ($model->eventText->event_type_id === EventType::TYPE_GOAL) {
                         return $model->home_point . ':' . $model->guest_point;
@@ -532,7 +538,7 @@ $user = Yii::$app->user->identity;
 <?php if ($commentDataProvider->models) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <span class="strong">Последние комментарии:</span>
+            <span class="strong"><?= Yii::t('frontend', 'views.game.view.comments') ?>:</span>
         </div>
     </div>
     <div class="row">
@@ -554,27 +560,25 @@ $user = Yii::$app->user->identity;
     <?php if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию матчей
-                <br/>
-                Причина - ваш почтовый адрес не подтверждён
+                <?= Yii::t('frontend', 'views.game.view.blocked-confirm') ?>
             </div>
         </div>
     <?php elseif ($userBlockGame && $userBlockGame->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию матчей до
-                <?= FormatHelper::asDatetime($userBlockGame->date) ?>
-                <br/>
-                Причина - <?= $userBlockGame->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'views.game.view.blocked-reason', [
+                    'date' => FormatHelper::asDatetime($userBlockGame->date),
+                    'reason' => $userBlockGame->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к комментированию матчей до
-                <?= FormatHelper::asDateTime($userBlockComment->date) ?>
-                <br/>
-                Причина - <?= $userBlockComment->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'views.game.view.blocked-reason', [
+                    'date' => FormatHelper::asDatetime($userBlockComment->date),
+                    'reason' => $userBlockComment->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php else: ?>
@@ -598,7 +602,7 @@ $user = Yii::$app->user->identity;
         <?= $form->field($model, 'text')->textarea() ?>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Комментировать', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.game.view.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

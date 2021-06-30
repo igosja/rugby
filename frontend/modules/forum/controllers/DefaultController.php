@@ -30,7 +30,7 @@ class DefaultController extends AbstractController
             $myFederationArray[] = $team->stadium->city->country->federation->id;
         }
 
-        $this->setSeoTitle('Форум');
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.default.index.title'));
         return $this->render('index', [
             'forumChapterArray' => $forumChapterArray,
             'myFederationArray' => $myFederationArray,
@@ -51,7 +51,7 @@ class DefaultController extends AbstractController
             ]
         ]);
 
-        $this->setSeoTitle('Результаты поиска - Форум');
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.default.search.title'));
         return $this->render('search', [
             'dataProvider' => $dataProvider,
         ]);

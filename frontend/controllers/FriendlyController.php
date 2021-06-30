@@ -84,9 +84,9 @@ class FriendlyController extends AbstractController
                 ->one();
             if ($game) {
                 if ($game->home_team_id === $this->myTeam->id) {
-                    $scheduleStatusArray[$schedule->id] = 'Играем с ' . $game->guestTeam->getTeamImageLink();
+                    $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.play') . $game->guestTeam->getTeamImageLink();
                 } else {
-                    $scheduleStatusArray[$schedule->id] = 'Играем с ' . $game->guestTeam->getTeamImageLink();
+                    $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.play') . $game->guestTeam->getTeamImageLink();
                 }
                 continue;
             }
@@ -99,14 +99,14 @@ class FriendlyController extends AbstractController
                 ])
                 ->count();
             if ($invite) {
-                $scheduleStatusArray[$schedule->id] = 'У вас есть неотвеченные приглашения.';
+                $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.index.invite');
                 continue;
             }
 
-            $scheduleStatusArray[$schedule->id] = 'Нет приглашений';
+            $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.index.no');
         }
 
-        $this->setSeoTitle('Организация товарищеских матчей');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.friendly.index.title'));
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -166,9 +166,9 @@ class FriendlyController extends AbstractController
                 ->one();
             if ($game) {
                 if ($game->home_team_id === $this->myTeam->id) {
-                    $scheduleStatusArray[$schedule->id] = 'Играем с ' . $game->guestTeam->getTeamImageLink();
+                    $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.play') . $game->guestTeam->getTeamImageLink();
                 } else {
-                    $scheduleStatusArray[$schedule->id] = 'Играем с ' . $game->homeTeam->getTeamImageLink();
+                    $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.play') . $game->homeTeam->getTeamImageLink();
                 }
                 continue;
             }
@@ -181,11 +181,11 @@ class FriendlyController extends AbstractController
                 ])
                 ->count();
             if ($invite) {
-                $scheduleStatusArray[$schedule->id] = 'У вас есть неотвеченные приглашения.';
+                $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.invite');
                 continue;
             }
 
-            $scheduleStatusArray[$schedule->id] = 'Нет приглашений';
+            $scheduleStatusArray[$schedule->id] = Yii::t('frontend', 'controllers.friendly.view.no');
         }
 
         $query = FriendlyInvite::find()
@@ -283,7 +283,7 @@ class FriendlyController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('Организация товарищеских матчей');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.friendly.view.title'));
 
         return $this->render('view', [
             'receivedDataProvider' => $receivedDataProvider,
@@ -313,7 +313,7 @@ class FriendlyController extends AbstractController
             ->andWhere(['<', 'date', time() + 1209600])
             ->count();
         if (!$schedule) {
-            $this->setErrorFlash('Игровой день выбран неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.schedule'));
             return $this->redirect(['index']);
         }
 
@@ -326,7 +326,7 @@ class FriendlyController extends AbstractController
             ])
             ->count();
         if ($game) {
-            $this->setErrorFlash('Ваща команда уже играет матч в этот игровой день.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.game'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -342,7 +342,7 @@ class FriendlyController extends AbstractController
             ->limit(1)
             ->one();
         if (!$team) {
-            $this->setErrorFlash('Команда выбрана неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.team'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -354,7 +354,7 @@ class FriendlyController extends AbstractController
             ])
             ->count();
         if ($invite) {
-            $this->setErrorFlash('Вы уже отправили этой команде приглашение на этот игровой день.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.invite'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -363,7 +363,7 @@ class FriendlyController extends AbstractController
             ->andWhere(['or', ['guest_team_id' => $teamId], ['home_team_id' => $teamId]])
             ->count();
         if ($game) {
-            $this->setErrorFlash('Эта команда уже организовала товарищеский матч.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.game.opponent'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -382,7 +382,7 @@ class FriendlyController extends AbstractController
             ])
             ->count();
         if ($game) {
-            $this->setErrorFlash('Ваши команды уже играли в этом сезоне.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.game.duplicate'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -433,11 +433,11 @@ class FriendlyController extends AbstractController
             } catch (Exception $e) {
                 ErrorHelper::log($e);
 
-                $this->setErrorFlash('Не удалось организовать матч.');
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.game.catch'));
                 return $this->redirect(['view', 'id' => $id]);
             }
 
-            $this->setSuccessFlash('Игра успешно организована.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.friendly.send.success.game'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -449,7 +449,7 @@ class FriendlyController extends AbstractController
             ])
             ->count();
         if ($invite >= 5) {
-            $this->setErrorFlash('На один игровой день можно отправить не более 5 приглашений.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.5'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -465,18 +465,17 @@ class FriendlyController extends AbstractController
         } catch (Exception $e) {
             ErrorHelper::log($e);
 
-            $this->setErrorFlash('Не удалось отправить приглашение.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.send.error.invite.catch'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
-        $this->setSuccessFlash('Приглашение успешно отправлено.');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.friendly.send.success.invite'));
         return $this->redirect(['view', 'id' => $id]);
     }
 
     /**
      * @param int $id
      * @return Response
-     * @throws Exception
      */
     public function actionAccept(int $id): Response
     {
@@ -492,17 +491,17 @@ class FriendlyController extends AbstractController
             ->limit(1)
             ->one();
         if (!$invite) {
-            $this->setErrorFlash('Приглашение выбрано неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.invite'));
             return $this->redirect(['index']);
         }
 
         if (FriendlyInviteStatus::ACCEPTED === $invite->friendly_invite_status_id) {
-            $this->setErrorFlash('Приглашение уже одобрено.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.accepted'));
             return $this->redirect(['view', 'id' => $invite->schedule_id]);
         }
 
         if (FriendlyInviteStatus::CANCELED === $invite->friendly_invite_status_id) {
-            $this->setErrorFlash('Приглашение уже отклонено.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.canceled'));
             return $this->redirect(['view', 'id' => $invite->schedule_id]);
         }
 
@@ -515,7 +514,7 @@ class FriendlyController extends AbstractController
             ])
             ->count();
         if ($game) {
-            $this->setErrorFlash('Ваща команда уже играет матч в этот игровой день.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.game'));
             return $this->redirect(['view', 'id' => $invite->schedule_id]);
         }
 
@@ -531,7 +530,7 @@ class FriendlyController extends AbstractController
             $invite->friendly_invite_status_id = FriendlyInviteStatus::CANCELED;
             $invite->save();
 
-            $this->setErrorFlash('Эта команда уже организовала товарищеский матч.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.game.opponent'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -575,11 +574,11 @@ class FriendlyController extends AbstractController
         } catch (Exception $e) {
             ErrorHelper::log($e);
 
-            $this->setErrorFlash('Не удалось организовать матч.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.accept.error.catch'));
             return $this->redirect(['view', 'id' => $invite->schedule_id]);
         }
 
-        $this->setSuccessFlash('Игра успешно организована.');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.friendly.accept.error.success'));
         return $this->redirect(['view', 'id' => $invite->schedule_id]);
     }
 
@@ -603,30 +602,29 @@ class FriendlyController extends AbstractController
             ->limit(1)
             ->one();
         if (!$model) {
-            $this->setErrorFlash('Приглашение выбрано неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.cancel.error.invite'));
             return $this->redirect(['index']);
         }
 
         if (FriendlyInviteStatus::ACCEPTED === $model->friendly_invite_status_id) {
-            $this->setErrorFlash('Приглашение уже одобрено.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.cancel.error.accepted'));
             return $this->redirect(['view', 'id' => $model->schedule_id]);
         }
 
         if (FriendlyInviteStatus::CANCELED === $model->friendly_invite_status_id) {
-            $this->setErrorFlash('Приглашение уже отклонено.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.friendly.cancel.error.canceled'));
             return $this->redirect(['view', 'id' => $model->schedule_id]);
         }
 
         $model->friendly_invite_status_id = FriendlyInviteStatus::CANCELED;
         $model->save();
 
-        $this->setSuccessFlash('Приглашение успешно отклонено.');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.friendly.cancel.success'));
         return $this->redirect(['view', 'id' => $model->schedule_id]);
     }
 
     /**
      * @return string|Response
-     * @throws Exception
      */
     public function actionStatus()
     {
@@ -648,7 +646,7 @@ class FriendlyController extends AbstractController
             'name'
         );
 
-        $this->setSeoTitle('Изменения статуса в товарищеских матчах');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.friendly.status.title'));
         return $this->render('status', [
             'friendlyStatusArray' => $friendlyStatusArray,
             'team' => $this->myTeam,

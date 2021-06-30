@@ -11,7 +11,6 @@ use common\models\db\Team;
 use Throwable;
 use Yii;
 use yii\base\Model;
-use yii\db\Exception;
 
 /**
  * Class LoanApplicationFrom
@@ -40,9 +39,8 @@ class LoanApplicationFrom extends Model
 
     /**
      * @return bool
-     * @throws Exception
      */
-    public function execute()
+    public function execute(): bool
     {
         if (!$this->validate()) {
             return false;
@@ -60,7 +58,7 @@ class LoanApplicationFrom extends Model
             ->limit(1)
             ->one();
         if (!$loanApplication) {
-            Yii::$app->session->setFlash('error', 'Заявка выбрана неправильно.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-application-from.error'));
             return false;
         }
 
@@ -68,7 +66,7 @@ class LoanApplicationFrom extends Model
 
         try {
             $loanApplication->delete();
-            Yii::$app->session->setFlash('success', 'Заявка успешно удалена.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.loan-application-from.success'));
             if ($transaction) {
                 $transaction->commit();
             }

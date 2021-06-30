@@ -14,7 +14,7 @@ use common\models\db\Vote;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1>Опрос</h1>
+                <h1><?= Yii::t('frontend', 'views.vote.view.h1') ?></h1>
             </div>
         </div>
         <div class="row margin-top">
@@ -27,7 +27,7 @@ use common\models\db\Vote;
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                Автор:
+                <?= Yii::t('frontend', 'views.vote.view.author') ?>
                 <?= $vote->user->getUserLink() ?>,
                 <?= FormatHelper::asDateTime($vote->date) ?>
             </div>

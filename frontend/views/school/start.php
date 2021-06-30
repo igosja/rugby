@@ -20,64 +20,63 @@ use yii\web\View;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Спортшкола
+                <?= Yii::t('frontend', 'views.school.title') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Уровень:
+                <?= Yii::t('frontend', 'views.school.level') ?>:
                 <span class="strong"><?= $team->baseSchool->level ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Время подготовки игрока:
-                <span class="strong"><?= $team->baseSchool->school_speed ?></span> дней
+                <?= Yii::t('frontend', 'views.school.speed', ['speed' => $team->baseSchool->school_speed]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Осталось юниоров:
-                <span class="strong"><?= $team->availableSchool() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->player_count ?></span>
+                <?= Yii::t('frontend', 'views.school.available', [
+                    'available' => $team->availableSchool(),
+                    'count' => $team->baseSchool->player_count,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Из них со спецвозможностью:
-                <span class="strong"><?= $team->availableSchoolWithSpecial() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->with_special ?></span>
+                <?= Yii::t('frontend', 'views.school.with-special', [
+                    'available' => $team->availableSchoolWithSpecial(),
+                    'count' => $team->baseSchool->with_special,
+                ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Из них со стилем:
-                <span class="strong"><?= $team->availableSchoolWithStyle() ?></span>
-                из
-                <span class="strong"><?= $team->baseSchool->with_style ?></span>
+                <?= Yii::t('frontend', 'views.school.with-style', [
+                    'available' => $team->availableSchoolWithStyle(),
+                    'count' => $team->baseSchool->with_style,
+                ]) ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Здесь - <span class="strong">в спортшколе</span> -
-        вы можете подготовить молодых игроков для основной команды:
+        <?= Yii::t('frontend', 'views.school.p') ?>
     </div>
 </div>
 <?= Html::beginForm(['school/start', 'ok' => 1], 'get') ?>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        Начнется подготовка юниора:
+        <?= Yii::t('frontend', 'views.school.start.text') ?>:
         <ul>
-            <li>позиция - <?= $confirmData['position']['name'] ?></li>
+            <li><?= Yii::t('frontend', 'views.school.position') ?> - <?= $confirmData['position']['name'] ?></li>
             <li>
-                спецвозможность -
-                <?= $confirmData['special']['with'] ? $confirmData['special']['name'] : 'нет' ?>
+                <?= Yii::t('frontend', 'views.school.special') ?> -
+                <?= $confirmData['special']['with'] ? $confirmData['special']['name'] : Yii::t('frontend', 'views.school.no') ?>
             </li>
-            <li>стиль - <?= $confirmData['style']['with'] ? $confirmData['style']['name'] : 'неизвестно' ?></li>
+            <li><?= Yii::t('frontend', 'views.school.style') ?>
+                - <?= $confirmData['style']['with'] ? $confirmData['style']['name'] : Yii::t('frontend', 'views.school.unknown') ?></li>
         </ul>
     </div>
 </div>
@@ -86,8 +85,8 @@ use yii\web\View;
         <?= Html::hiddenInput('position_id', $confirmData['position']['id']) ?>
         <?= Html::hiddenInput('special_id', $confirmData['special']['with']) ?>
         <?= Html::hiddenInput('style_id', $confirmData['style']['with']) ?>
-        <?= Html::submitButton('Начать подготовку', ['class' => 'btn margin']) ?>
-        <?= Html::a('Отказаться', ['school/index'], ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.school.start.submit'), ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.school.start.link.index'), ['school/index'], ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?= Html::endForm() ?>

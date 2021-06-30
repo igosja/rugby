@@ -72,7 +72,7 @@ class TransferFrom extends Model
         if ($this->team->finance < 0) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя снимать игроков с трансферного рынка, если в команде отрицательный баланс.'
+                Yii::t('frontend', 'models.forms.transfer.execute.error')
             );
             return false;
         }
@@ -85,7 +85,7 @@ class TransferFrom extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Игрок успешно снят с трансфера.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.transfer.execute.success'));
         } catch (Throwable $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();

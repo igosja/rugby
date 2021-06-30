@@ -18,7 +18,7 @@ class SupportQuery
     public static function countNewQuestions(): int
     {
         return Support::find()
-            ->andWhere(['is_question' => true, 'read' => null, 'is_inside' => false])
+            ->andWhere(['is_question' => true, 'read' => null])
             ->count();
     }
 }

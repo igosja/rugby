@@ -29,7 +29,7 @@ print $this->render('//player/_player', ['player' => $player]);
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p class="text-center">Трансферы:</p>
+            <p class="text-center"><?= Yii::t('frontend', 'views.player.deal.transfers') ?>:</p>
         </div>
     </div>
     <div class="row">
@@ -39,68 +39,68 @@ print $this->render('//player/_player', ['player' => $player]);
             $columns = [
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['title' => 'Сезон'],
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.season'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
+                    'label' => Yii::t('frontend', 'views.th.season'),
                     'value' => static function (Transfer $model) {
                         return $model->season_id;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Поз',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Позиция'],
+                    'footer' => Yii::t('frontend', 'views.th.position'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Позиция'],
-                    'label' => 'Поз',
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Transfer $model) {
                         return $model->position();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Возраст'],
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.th.age'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'label' => Yii::t('frontend', 'views.th.age'),
                     'value' => static function (Transfer $model) {
                         return $model->age;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Сила'],
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Сила'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.power'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'label' => Yii::t('frontend', 'views.th.power'),
                     'value' => static function (Transfer $model) {
                         return $model->power;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                    'footer' => Yii::t('frontend', 'views.th.special'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => 'Спецвозможности'],
-                    'label' => 'Спец',
+                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                    'label' => Yii::t('frontend', 'views.th.special'),
                     'value' => static function (Transfer $model) {
                         return $model->special();
                     }
                 ],
                 [
-                    'footer' => 'Продавец',
+                    'footer' => Yii::t('frontend', 'views.player.deal.th.seller'),
                     'format' => 'raw',
-                    'label' => 'Продавец',
+                    'label' => Yii::t('frontend', 'views.player.deal.th.seller'),
                     'value' => static function (Transfer $model) {
                         return $model->teamSeller->getTeamLink();
                     }
                 ],
                 [
-                    'footer' => 'Покупатель',
+                    'footer' => Yii::t('frontend', 'views.player.deal.th.buyer'),
                     'format' => 'raw',
-                    'label' => 'Покупатель',
+                    'label' => Yii::t('frontend', 'views.player.deal.th.buyer'),
                     'headerOptions' => ['class' => 'col-25'],
                     'value' => static function (Transfer $model) {
                         return $model->teamBuyer->getTeamLink();
@@ -108,10 +108,10 @@ print $this->render('//player/_player', ['player' => $player]);
                 ],
                 [
                     'contentOptions' => ['class' => 'text-right'],
-                    'footer' => 'Цена',
+                    'footer' => Yii::t('frontend', 'views.th.price'),
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Цена',
+                    'label' => Yii::t('frontend', 'views.th.price'),
                     'value' => static function (Transfer $model) {
                         return Html::a(
                             FormatHelper::asCurrency($model->price_buyer),
@@ -134,7 +134,7 @@ print $this->render('//player/_player', ['player' => $player]);
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p class="text-center">Аренды:</p>
+            <p class="text-center"><?= Yii::t('frontend', 'views.player.deal.loans') ?>:</p>
         </div>
     </div>
     <div class="row">
@@ -144,88 +144,88 @@ print $this->render('//player/_player', ['player' => $player]);
             $columns = [
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['title' => 'Сезон'],
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.season'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
+                    'label' => Yii::t('frontend', 'views.th.season'),
                     'value' => static function (Loan $model) {
                         return $model->season_id;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Поз',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Позиция'],
+                    'footer' => Yii::t('frontend', 'views.th.position'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Позиция'],
-                    'label' => 'Поз',
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Loan $model) {
                         return $model->position();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Возраст'],
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.th.age'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'label' => Yii::t('frontend', 'views.th.age'),
                     'value' => static function (Loan $model) {
                         return $model->age;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Сила'],
-                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => 'Сила'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.power'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'headerOptions' => ['class' => 'col-5 hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'label' => Yii::t('frontend', 'views.th.power'),
                     'value' => static function (Loan $model) {
                         return $model->power;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                    'footer' => Yii::t('frontend', 'views.th.special'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => 'Спецвозможности'],
-                    'label' => 'Спец',
+                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                    'label' => Yii::t('frontend', 'views.th.special'),
                     'value' => static function (Loan $model) {
                         return $model->special();
                     }
                 ],
                 [
-                    'footer' => 'Владелец',
+                    'footer' => Yii::t('frontend', 'views.player.deal.th.owner'),
                     'format' => 'raw',
-                    'label' => 'Владелец',
+                    'label' => Yii::t('frontend', 'views.player.deal.th.owner'),
                     'value' => static function (Loan $model) {
                         return $model->teamSeller->getTeamLink();
                     }
                 ],
                 [
-                    'footer' => 'Арендатор',
+                    'footer' => Yii::t('frontend', 'views.player.deal.th.renter'),
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'col-25'],
-                    'label' => 'Арендатор',
+                    'label' => Yii::t('frontend', 'views.player.deal.th.renter'),
                     'value' => static function (Loan $model) {
                         return $model->teamBuyer->getTeamLink();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Срок',
+                    'footer' => Yii::t('frontend', 'views.player.deal.th.day'),
                     'headerOptions' => ['class' => 'col-5'],
-                    'label' => 'Срок',
+                    'label' => Yii::t('frontend', 'views.player.deal.th.day'),
                     'value' => static function (Loan $model) {
                         return $model->day;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-right'],
-                    'footer' => 'Цена',
+                    'footer' => Yii::t('frontend', 'views.th.price'),
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Цена',
+                    'label' => Yii::t('frontend', 'views.th.price'),
                     'value' => static function (Loan $model) {
                         return Html::a(
                             FormatHelper::asCurrency($model->price_buyer),

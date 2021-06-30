@@ -5,6 +5,7 @@
 namespace frontend\models\forms;
 
 use common\models\db\User;
+use Yii;
 use yii\base\Model;
 
 /**
@@ -65,7 +66,7 @@ class ActivationForm extends Model
         $user = $this->getUser();
 
         if ($user->date_confirm) {
-            $this->addError($attribute, 'Профиль уже активирован');
+            $this->addError($attribute, Yii::t('frontend', 'models.forms.activation.code.error'));
         }
 
         return true;

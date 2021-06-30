@@ -24,16 +24,16 @@ use yii\widgets\ActiveForm;
  */
 
 ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1>Список хоккеистов, выставленных на аренду</h1>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h1><?= Yii::t('frontend', 'views.loan.index.h1') ?></h1>
     </div>
-    <div class="row margin-top-small text-center">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= $this->render('//loan/_links') ?>
-        </div>
+</div>
+<div class="row margin-top-small text-center">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $this->render('//loan/_links') ?>
     </div>
+</div>
 <?php $form = ActiveForm::begin([
     'action' => ['index'],
     'fieldConfig' => [
@@ -41,97 +41,105 @@ use yii\widgets\ActiveForm;
     ],
     'method' => 'get',
 ]) ?>
-    <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-            Условия поиска:
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-            <?= $form->field($model, 'country')->dropDownList(
-                $countryArray,
-                ['class' => 'form-control', 'prompt' => 'Национальность']
-            ) ?>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
-            <?= $form->field($model, 'name')->textInput([
-                'class' => 'form-control',
-                'placeholder' => 'Имя',
-            ]) ?>
+<div class="row">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+        <?= Yii::t('frontend', 'views.loan.search') ?>:
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <?= $form->field($model, 'country')->dropDownList(
+            $countryArray,
+            ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.loan.prompt.national')]
+        ) ?>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
+        <?= $form->field($model, 'name')->textInput([
+            'class' => 'form-control',
+            'placeholder' => Yii::t('frontend', 'views.loan.placeholder.name'),
+        ]) ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
             <?= $form->field($model, 'surname')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Фамилия',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.surname'),
             ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'position')->dropDownList(
                 $positionArray,
-                ['class' => 'form-control', 'prompt' => 'Позиция']
+                ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.loan.prompt.position')]
             ) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Возраст, от',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.age.min'),
                 'type' => 'number',
             ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMax')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Возраст, до',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.age.max'),
                 'type' => 'number',
             ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Сила, от',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.power.min'),
                 'type' => 'number',
             ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMax')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Сила, до',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.power.max'),
                 'type' => 'number',
             ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'priceMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Цена, от',
+                'placeholder' => Yii::t('frontend', 'views.loan.placeholder.price.min'),
                 'type' => 'number',
             ]) ?>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-            <?= $form->field($model, 'priceMax')->textInput([
-                'class' => 'form-control',
-                'placeholder' => 'Цена, до',
-                'type' => 'number',
-            ]) ?>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-            <?= Html::submitButton('Поиск', ['class' => 'form-control submit-blue']) ?>
-        </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+        <?= $form->field($model, 'priceMax')->textInput([
+            'class' => 'form-control',
+            'placeholder' => Yii::t('frontend', 'views.loan.placeholder.price.max'),
+            'type' => 'number',
+        ]) ?>
     </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+        <?= Html::submitButton(Yii::t('frontend', 'views.loan.submit'), ['class' => 'form-control submit-blue']) ?>
+    </div>
+</div>
 <?php ActiveForm::end() ?>
 <?php if ($myPlayerArray) : ?>
     <div class="row margin-top-small">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th class="col-3">№</th>
-                    <th class="col-20">Ваши игроки</th>
-                    <th class="col-1 hidden-xs" title="Национальность">Нац</th>
-                    <th class="col-5" title="Позиция">Поз</th>
-                    <th class="col-5" title="Возраст">В</th>
-                    <th class="col-5" title="Сила">С</th>
-                    <th class="col-10 hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="hidden-xs">Команда</th>
-                    <th class="col-5" title="Срок аренды (календарных дней)">Дней</th>
-                    <th class="col-10" title="Минимальная запрашиваемая цена">Цена</th>
-                    <th class="col-10" title="Дата проведения торгов">Торги</th>
+                    <th class="col-3">#</th>
+                    <th class="col-20"><?= Yii::t('frontend', 'views.loan.index.th.player') ?></th>
+                    <th class="col-1 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.power') ?>"><?= Yii::t('frontend', 'views.th.power') ?></th>
+                    <th class="col-10 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.day') ?>"><?= Yii::t('frontend', 'views.loan.index.th.day') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.price') ?>"><?= Yii::t('frontend', 'views.loan.index.th.price') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.deal') ?>"><?= Yii::t('frontend', 'views.loan.index.th.deal') ?></th>
                 </tr>
                 <?php for ($i = 0, $iMax = count($myPlayerArray); $i < $iMax; $i++) : ?>
                     <tr>
@@ -159,17 +167,25 @@ use yii\widgets\ActiveForm;
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th class="col-3">№</th>
-                    <th class="col-20">Ваши заявки</th>
-                    <th class="col-1 hidden-xs" title="Национальность">Нац</th>
-                    <th class="col-5" title="Позиция">Поз</th>
-                    <th class="col-5" title="Возраст">В</th>
-                    <th class="col-5" title="Сила">С</th>
-                    <th class="col-10 hidden-xs" title="Спецвозможности">Спец</th>
-                    <th class="hidden-xs">Команда</th>
-                    <th class="col-5" title="Срок аренды (календарных дней)">Дней</th>
-                    <th class="col-10" title="Минимальная запрашиваемая цена">Цена</th>
-                    <th class="col-10" title="Дата проведения торгов">Торги</th>
+                    <th class="col-3">#</th>
+                    <th class="col-20"><?= Yii::t('frontend', 'views.loan.index.th.application') ?></th>
+                    <th class="col-1 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.national') ?>"><?= Yii::t('frontend', 'views.th.national') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.title.power') ?>"><?= Yii::t('frontend', 'views.th.power') ?></th>
+                    <th class="col-10 hidden-xs"
+                        title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                    <th class="hidden-xs"><?= Yii::t('frontend', 'views.th.team') ?></th>
+                    <th class="col-5"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.day') ?>"><?= Yii::t('frontend', 'views.loan.index.th.day') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.price') ?>"><?= Yii::t('frontend', 'views.th.price') ?></th>
+                    <th class="col-10"
+                        title="<?= Yii::t('frontend', 'views.loan.index.title.deal') ?>"><?= Yii::t('frontend', 'views.loan.index.th.deal') ?></th>
                 </tr>
                 <?php for ($i = 0, $iMax = count($myApplicationArray); $i < $iMax; $i++) : ?>
                     <tr>
@@ -199,15 +215,15 @@ use yii\widgets\ActiveForm;
                 [
                     'class' => SerialColumn::class,
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '№',
-                    'header' => '№',
+                    'footer' => '#',
+                    'header' => '#',
                     'headerOptions' => ['class' => 'col-3'],
                 ],
                 [
-                    'footer' => 'Игрок',
+                    'footer' => Yii::t('frontend', 'views.th.player'),
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'col-20'],
-                    'label' => 'Игрок',
+                    'label' => Yii::t('frontend', 'views.th.player'),
                     'value' => static function (Loan $model) {
                         return Html::a(
                             $model->player->playerName(),
@@ -218,11 +234,11 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'country',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Нац',
-                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
+                    'footer' => Yii::t('frontend', 'views.th.national'),
+                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
-                    'label' => 'Нац',
+                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
+                    'label' => Yii::t('frontend', 'views.th.national'),
                     'value' => static function (Loan $model) {
                         return $model->player->country->getImageLink();
                     }
@@ -230,11 +246,11 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'position',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Поз',
-                    'footerOptions' => ['title' => 'Позиция'],
+                    'footer' => Yii::t('frontend', 'views.th.position'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Позиция'],
-                    'label' => 'Поз',
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Loan $model) {
                         return $model->player->position();
                     }
@@ -242,10 +258,10 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'age',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['title' => 'Возраст'],
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.th.age'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'label' => Yii::t('frontend', 'views.th.age'),
                     'value' => static function (Loan $model) {
                         return $model->player->age;
                     }
@@ -253,32 +269,32 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'power',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['title' => 'Сила'],
+                    'footer' => Yii::t('frontend', 'views.th.power'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.power')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Сила'],
-                    'label' => 'С',
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'label' => Yii::t('frontend', 'views.th.power'),
                     'value' => static function (Loan $model) {
                         return $model->player->power_nominal;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center hidden-xs'],
-                    'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
-                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => 'Спецвозможности'],
-                    'label' => 'Спец',
+                    'footer' => Yii::t('frontend', 'views.th.special'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                    'headerOptions' => ['class' => 'col-10 hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                    'label' => Yii::t('frontend', 'views.th.special'),
                     'value' => static function (Loan $model) {
                         return $model->player->special();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs'],
-                    'footer' => 'Команда',
+                    'footer' => Yii::t('frontend', 'views.th.team'),
                     'footerOptions' => ['class' => 'hidden-xs'],
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'hidden-xs'],
-                    'label' => 'Команда',
+                    'label' => Yii::t('frontend', 'views.th.team'),
                     'value' => static function (Loan $model) {
                         return $model->teamSeller->getTeamImageLink();
                     }
@@ -286,10 +302,10 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'days',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Дней',
-                    'footerOptions' => ['title' => 'Срок аренды (календарных дней)'],
-                    'headerOptions' => ['class' => 'col-5', 'title' => 'Срок аренды (календарных дней)'],
-                    'label' => 'Дней',
+                    'footer' => Yii::t('frontend', 'views.loan.index.th.day'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.loan.index.title.day')],
+                    'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.loan.index.title.day')],
+                    'label' => Yii::t('frontend', 'views.loan.index.th.day'),
                     'value' => static function (Loan $model) {
                         return $model->day_min . '-' . $model->day_max;
                     }
@@ -297,10 +313,10 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'price',
                     'contentOptions' => ['class' => 'text-right'],
-                    'footer' => 'Цена',
-                    'footerOptions' => ['title' => 'Минимальная запрашиваемая цена за 1 день аренды'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Минимальная запрашиваемая цена за 1 день аренды'],
-                    'label' => 'Цена',
+                    'footer' => Yii::t('frontend', 'views.loan.index.th.price'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.loan.index.title.price')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.loan.index.title.price')],
+                    'label' => Yii::t('frontend', 'views.loan.index.th.price'),
                     'value' => static function (Loan $model) {
                         return FormatHelper::asCurrency($model->price_seller);
                     }
@@ -308,10 +324,10 @@ use yii\widgets\ActiveForm;
                 [
                     'attribute' => 'loan_id',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Торги',
-                    'footerOptions' => ['title' => 'Дата проведения торгов'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Дата проведения торгов'],
-                    'label' => 'Торги',
+                    'footer' => Yii::t('frontend', 'views.loan.index.th.deal'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.loan.index.title.deal')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.loan.index.title.deal')],
+                    'label' => Yii::t('frontend', 'views.loan.index.th.deal'),
                     'value' => static function (Loan $model) {
                         return $model->dealDate();
                     }

@@ -52,21 +52,19 @@ $user = Yii::$app->user->identity;
             <?php if (!$user->date_confirm) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вам заблокирован доступ к личным сообщениям
-                        <br/>
-                        Причина - ваш почтовый адрес не подтверждён
+                        <?= Yii::t('frontend', 'views.messenger.view.blocked-confirm') ?>
                     </div>
                 </div>
             <?php elseif ($inBlacklistOwner) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вы не можете написать сообщение этому менеджеру так как вы добавили его в чёрный список
+                        <?= Yii::t('frontend', 'views.messenger.view.blocked-blacklist-owner') ?>
                     </div>
                 </div>
             <?php elseif ($inBlacklistInterlocutor) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вы не можете написать сообщение этому менеджеру так как он добавил вас в чёрный список
+                        <?= Yii::t('frontend', 'views.messenger.view.blocked-blacklist-interlocutor') ?>
                     </div>
                 </div>
             <?php else: ?>
@@ -79,18 +77,18 @@ $user = Yii::$app->user->identity;
                         'options' => ['class' => 'row'],
                         'template' =>
                             '<div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label}</div>
-                </div>
-                <div class="row margin-top">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
-                </div>
-                <div class="row">{error}</div>',
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label}</div>
+                            </div>
+                            <div class="row margin-top">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
+                            </div>
+                            <div class="row">{error}</div>',
                     ],
                 ]) ?>
-                <?= $form->field($model, 'text')->textarea(['row' => 5])->label('Ваше сообщение:') ?>
+                <?= $form->field($model, 'text')->textarea(['row' => 5])->label(Yii::t('frontend', 'views.messenger.view.label.text')) ?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                        <?= Html::submitButton('Отправить', ['class' => 'btn margin']) ?>
+                        <?= Html::submitButton(Yii::t('frontend', 'views.messenger.view.submit'), ['class' => 'btn margin']) ?>
                     </div>
                 </div>
                 <?php ActiveForm::end() ?>

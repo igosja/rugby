@@ -30,12 +30,12 @@ $user = User::find()
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                        Последний визит: <?= $user->lastVisit() ?>
+                        <?= Yii::t('frontend', 'views.user.top.last') ?>: <?= $user->lastVisit() ?>
                     </div>
                 </div>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        Ник:
+                        <?= Yii::t('frontend', 'views.user.top.login') ?>:
                         <?= $user->iconVip() ?>
                         <span class="strong"><?= Html::encode($user->login) ?></span>
                         <?php if ($user->canDialog()) : ?>
@@ -49,37 +49,39 @@ $user = User::find()
                             ) ?>
                         <?php endif ?>
                         <?php if ($user->activeUserHoliday) : ?>
-                            <span class="italic">(в отпуске)</span>
+                            <span class="italic">(<?= Yii::t('frontend', 'views.user.top.holiday') ?>)</span>
                         <?php endif ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        Личный счет:
+                        <?= Yii::t('frontend', 'views.user.top.finance') ?>:
                         <span class="strong"><?= FormatHelper::asCurrency($user->finance) ?></span>
                     </div>
                 </div>
                 <?php if (!Yii::$app->user->isGuest && Yii::$app->request->get('id') === Yii::$app->user->id) : ?>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            Денежный счет: <span class="strong"><?= $user->money ?> ед.</span>
+                            <?= Yii::t('frontend', 'views.user.top.money') ?>:
+                            <span class="strong"><?= $user->money ?> <?= Yii::t('frontend', 'views.user.top.point') ?>.</span>
                         </div>
                     </div>
                 <?php endif ?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        Рейтинг: <span class="strong"><?= $user->rating ?></span>
+                        <?= Yii::t('frontend', 'views.user.top.rating') ?>: <span
+                                class="strong"><?= $user->rating ?></span>
                     </div>
                 </div>
                 <?php if (!Yii::$app->user->isGuest && Yii::$app->request->get('id') === Yii::$app->user->id) : ?>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            VIP-клуб:
+                            <?= Yii::t('frontend', 'views.user.top.vip') ?>:
                             <span class="strong">
                                 <?php if ($user->isVip()) {
-                                    $vipText = 'до ' . FormatHelper::asDatetime($user->date_vip);
+                                    $vipText = Yii::t('frontend', 'views.user.top.till') . ' ' . FormatHelper::asDatetime($user->date_vip);
                                 } else {
-                                    $vipText = 'не активирован';
+                                    $vipText = Yii::t('frontend', 'views.user.top.inactive');
                                 } ?>
                                 <?= Html::a($vipText, ['vip/index']) ?>
                             </span>
@@ -92,37 +94,38 @@ $user = User::find()
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-1 strong">
-                Профиль менеджера
+                <?= Yii::t('frontend', 'views.user.top.profile') ?>
             </div>
         </div>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                День рождения:
+                <?= Yii::t('frontend', 'views.user.top.birthday') ?>:
                 <span class="strong">
-                    <?= $user->birthDay() ?>
+                    <?= $user->birthday() ?>
                 </span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Пол: <span class="strong"><?= $user->sex->name ?? '' ?></span>
+                <?= Yii::t('frontend', 'views.user.top.sex') ?>: <span
+                        class="strong"><?= $user->sex->name ?? '' ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Откуда: <span class="strong"><?= $user->userFrom() ?></span>
+                <?= Yii::t('frontend', 'views.user.top.from') ?>: <span class="strong"><?= $user->userFrom() ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Дата регистрации:
+                <?= Yii::t('frontend', 'views.user.top.register') ?>:
                 <span class="strong"><?= FormatHelper::asDate($user->date_register) ?></span>
             </div>
         </div>
         <?php if (!Yii::$app->user->isGuest && (int)Yii::$app->request->get('id') === Yii::$app->user->id) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    Я в социальных сетях:
+                    <?= Yii::t('frontend', 'views.user.top.social') ?>:
                     <span class="strong">
                         <?= $user->socialLinks() ?>
                     </span>

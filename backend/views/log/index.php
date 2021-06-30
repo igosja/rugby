@@ -9,6 +9,7 @@
 use common\components\helpers\ErrorHelper;
 use common\models\db\Log;
 use yii\data\ArrayDataProvider;
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -38,17 +39,32 @@ use yii\helpers\Html;
                     [
                         'attribute' => 'log_time',
                         'format' => 'datetime',
-                        'headerOptions' => ['class' => 'col-lg-3'],
+                        'headerOptions' => ['class' => 'col-lg-1'],
                     ],
-                    'level',
-                    'category',
-                    'prefix',
+                    [
+                        'attribute' => 'level',
+                        'headerOptions' => ['class' => 'col-lg-1'],
+                    ],
+                    [
+                        'attribute' => 'category',
+                        'headerOptions' => ['class' => 'col-lg-1'],
+                    ],
+                    [
+                        'attribute' => 'prefix',
+                        'headerOptions' => ['class' => 'col-lg-1'],
+                    ],
                     [
                         'attribute' => 'message',
                         'format' => 'raw',
                         'value' => static function (Log $model) {
                             return nl2br($model->message);
                         },
+                    ],
+                    [
+                        'class' => ActionColumn::class,
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'col-lg-1'],
+                        'template' => '{delete}',
                     ],
                 ];
                 print GridView::widget([

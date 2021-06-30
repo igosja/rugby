@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -35,12 +36,12 @@ class M200101000012TournamentType extends Migration
             self::TABLE,
             ['day_type_id', 'name', 'visitor'],
             [
-                [3, 'Чемпионат мира', 200],
-                [3, 'Лига Чемпионов', 150],
-                [2, 'Чемпионат', 100],
-                [2, 'Конференция', 90],
-                [2, 'Кубок межсезонья', 90],
-                [1, 'Товарищеский матч', 80],
+                [3, Yii::t('console', 'migrations.tournament-type.world-cup'), 200],
+                [3, Yii::t('console', 'migrations.tournament-type.league'), 150],
+                [2, Yii::t('console', 'migrations.tournament-type.championship'), 100],
+                [2, Yii::t('console', 'migrations.tournament-type.conference'), 90],
+                [2, Yii::t('console', 'migrations.tournament-type.off-season'), 90],
+                [1, Yii::t('console', 'migrations.tournament-type.friendly'), 80],
             ]
         );
 

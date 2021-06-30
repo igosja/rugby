@@ -95,7 +95,7 @@ class National extends AbstractActiveRecord
             $result = Html::a(
                 $this->worldCup->division->name . ', ' .
                 $this->worldCup->place . ' ' .
-                'место',
+                Yii::t('common', 'models.db.national.division.place'),
                 [
                     'world-championship/index',
                     'divisionId' => $this->worldCup->division->id,

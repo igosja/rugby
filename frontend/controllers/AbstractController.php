@@ -140,7 +140,7 @@ abstract class AbstractController extends AbstractWebController
             $result[$myTeam->id] = $myTeam->name
                 . ' ('
                 . $myTeam->stadium->city->country->name
-                . ($myTeam->vice_user_id === $this->user->id ? ', зам' : '')
+                . ($myTeam->vice_user_id === $this->user->id ? ', ' . Yii::t('frontend', 'controllers.abstract.drop-down.vice') : '')
                 . ')';
         }
         return $result;
@@ -169,7 +169,7 @@ abstract class AbstractController extends AbstractWebController
     protected function forbiddenRole(): void
     {
         throw new ForbiddenHttpException(
-            'Не хватает прав для выполнения этой операции'
+            Yii::t('frontend', 'controllers.abstract.forbidden')
         );
     }
 
@@ -178,7 +178,7 @@ abstract class AbstractController extends AbstractWebController
         if (!$this->user->date_confirm) {
             Yii::$app->session->setFlash(
                 'warning',
-                'Пожалуйста, подтвердите свой почтовый адрес'
+                Yii::t('frontend', 'controllers.abstract.email.flash')
             );
         }
     }
@@ -209,7 +209,7 @@ abstract class AbstractController extends AbstractWebController
                     ->one();
                 if ($userBlock && $userBlock->date > time()) {
                     throw new ForbiddenHttpException(
-                        'Вам заблокирован доступ к сайту. Причина блокировки - '
+                        Yii::t('frontend', 'controllers.abstract.block.text')
                         . $userBlock->userBlockReason->text
                     );
                 }
@@ -303,7 +303,7 @@ abstract class AbstractController extends AbstractWebController
             [
                 'name' => 'description',
                 'content' => $this->view->title
-                    . ' на сайте Виртуальной Регбийной Лиги'
+                    . Yii::t('frontend', 'controllers.abstract.description')
             ]
         );
     }

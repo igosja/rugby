@@ -14,7 +14,7 @@ use yii\grid\GridView;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Команды</h1>
+        <h1><?= Yii::t('frontend', 'views.team.index.h1') ?></h1>
     </div>
 </div>
 <div class="row">
@@ -23,18 +23,18 @@ use yii\grid\GridView;
     try {
         $columns = [
             [
-                'footer' => 'Страна',
+                'footer' => Yii::t('frontend', 'views.team.index.th.country'),
                 'format' => 'raw',
-                'label' => 'Страна',
+                'label' => Yii::t('frontend', 'views.team.index.th.country'),
                 'value' => static function (Team $model) {
                     return $model->stadium->city->country->getImageTextLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Команды',
+                'footer' => Yii::t('frontend', 'views.team.index.th.team'),
                 'headerOptions' => ['class' => 'col-25'],
-                'label' => 'Команды',
+                'label' => Yii::t('frontend', 'views.team.index.th.team'),
                 'value' => static function (Team $model) {
                     return $model->player_number;
                 }

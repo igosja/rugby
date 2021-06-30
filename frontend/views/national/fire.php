@@ -32,15 +32,15 @@ use yii\web\View;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <table class="table table-bordered">
             <tr>
-                <th>Отказ от должности</th>
+                <th><?= Yii::t('frontend', 'views.national.fire.title') ?></th>
             </tr>
         </table>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <p>Вы собираетесь отказаться от своей должности в сборной</p>
-        <?= Html::a('Отказаться от должности', ['fire', 'id' => $id, 'ok' => true], ['class' => 'btn margin']) ?>
+        <p><?= Yii::t('frontend', 'views.national.fire.p') ?></p>
+        <?= Html::a(Yii::t('frontend', 'views.national.fire.link.ok'), ['fire', 'id' => $id, 'ok' => true], ['class' => 'btn margin']) ?>
     </div>
 </div>
 <div class="row">

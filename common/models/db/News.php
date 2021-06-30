@@ -21,7 +21,6 @@ use yii\db\StaleObjectException;
  * @property string $title
  * @property int $user_id
  *
- * @property-read Federation $federation
  * @property-read NewsComment[] $newsComments
  * @property-read User $user
  */
@@ -56,7 +55,7 @@ class News extends AbstractActiveRecord
     {
         return [
             [['text', 'title', 'user_id'], 'required'],
-            [['check', 'federation_id', 'user_id'], 'integer'],
+            [['check', 'user_id'], 'integer'],
             [['text', 'title'], 'trim'],
             [['title'], 'string', 'max' => 255],
             [['text'], 'string'],
@@ -74,7 +73,6 @@ class News extends AbstractActiveRecord
         foreach ($this->newsComments as $newsComment) {
             $newsComment->delete();
         }
-        Team::updateAll(['federation_news_id' => null], ['federation_news_id' => $this->id]);
         User::updateAll(['news_id' => null], ['news_id' => $this->id]);
         return parent::beforeDelete();
     }

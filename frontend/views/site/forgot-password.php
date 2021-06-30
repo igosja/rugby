@@ -14,20 +14,17 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 
 ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <h1>Забыли пароль?</h1>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h1><?= Yii::t('frontend', 'views.site.forgot-password.h1') ?></h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= $this->render('_sign-up-links') ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <?= $this->render('_sign-up-links') ?>
     </div>
-<?php
-
-// TODO refactor
-$form = ActiveForm::begin(
+</div>
+<?php $form = ActiveForm::begin(
     [
         'enableAjaxValidation' => true,
         'fieldConfig' => [
@@ -41,44 +38,36 @@ $form = ActiveForm::begin(
         ],
     ]
 ) ?>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <p>
-                Здесь вы можете запросить отправку <strong>забытого пароля на свой почтовый ящик</strong>,
-                который был указан вами при регистрации.
-            </p>
-            <p>
-                Укажите ваш <strong>логин</strong> или <strong>email</strong>:
-            </p>
-        </div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <p>
+            <?= Yii::t('frontend', 'views.site.forgot-password.p.1') ?>
+        </p>
+        <p>
+            <?= Yii::t('frontend', 'views.site.forgot-password.p.2') ?>:
+        </p>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= $form->field($forgotPasswordForm, 'login')->textInput(['autoFocus' => true]) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $form->field($forgotPasswordForm, 'login')->textInput(['autoFocus' => true]) ?>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= $form->field($forgotPasswordForm, 'email')->textInput() ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $form->field($forgotPasswordForm, 'email')->textInput() ?>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <?= Html::submitButton('Восстановить пароль', ['class' => 'btn margin']) ?>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <?= Html::submitButton(Yii::t('frontend', 'views.site.forgot-password.submit'), ['class' => 'btn margin']) ?>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <p>
-                Если при регистрации вы ввели свой email неправильно или он уже не работает,
-                <br/>
-                то напишите нам письмо на <span class="strong"><?= Yii::$app->params['infoEmail'] ?></span>
-                <br/>
-                и мы попробуем найти ваш аккаунт вручную.
-            </p>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <p>
+            <?= Yii::t('frontend', 'views.site.forgot-password.p.3', ['email' => Yii::$app->params['infoEmail']]) ?>
+        </p>
     </div>
-<?php
-
-// TODO refactor
-ActiveForm::end() ?>
+</div>
+<?php ActiveForm::end() ?>

@@ -12,27 +12,27 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Игроки',
+                'text' => Yii::t('frontend', 'views.national.national-links.player'),
                 'url' => ['national/view', 'id' => $id],
             ],
             [
-                'text' => 'Матчи',
+                'text' => Yii::t('frontend', 'views.national.national-links.game'),
                 'url' => ['national/game', 'id' => $id],
             ],
             [
-                'text' => 'События',
+                'text' => Yii::t('frontend', 'views.national.national-links.event'),
                 'url' => ['national/event', 'id' => $id],
             ],
             [
-                'text' => 'Финансы',
+                'text' => Yii::t('frontend', 'views.national.national-links.finance'),
                 'url' => ['national/finance', 'id' => $id],
             ],
             [
-                'text' => 'Достижения',
+                'text' => Yii::t('frontend', 'views.national.national-links.achievement'),
                 'url' => ['national/achievement', 'id' => $id],
             ],
             [
-                'text' => 'Трофеи',
+                'text' => Yii::t('frontend', 'views.national.national-links.trophy'),
                 'url' => ['national/trophy', 'id' => $id],
             ],
         ]

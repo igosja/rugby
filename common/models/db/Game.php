@@ -6,6 +6,7 @@ namespace common\models\db;
 
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
@@ -291,9 +292,9 @@ class Game extends AbstractActiveRecord
     public function gameHomeGuest($teamOrNational): string
     {
         if (in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
-            $result = 'Д';
+            $result = Yii::t('common', 'models.db.game.home');
         } else {
-            $result = 'Г';
+            $result = Yii::t('common', 'models.db.game.guest');
         }
         return $result;
     }
@@ -376,11 +377,11 @@ class Game extends AbstractActiveRecord
     public function gameAuto($teamOrNational): string
     {
         if ($this->home_auto && in_array($teamOrNational->id, [$this->home_team_id, $this->home_national_id], true)) {
-            return 'А';
+            return Yii::t('common', 'models.db.game.auto');
         }
 
         if ($this->guest_auto && in_array($teamOrNational->id, [$this->guest_team_id, $this->guest_national_id], true)) {
-            return 'А';
+            return Yii::t('common', 'models.db.game.auto');
         }
         return '';
     }

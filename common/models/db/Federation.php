@@ -79,20 +79,4 @@ class Federation extends AbstractActiveRecord
     {
         return $this->hasMany(LeagueCoefficient::class, ['federation_id' => 'id']);
     }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getPresidentUser(): ActiveQuery
-    {
-        return $this->hasOne(User::class, ['id' => 'president_user_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getViceUser(): ActiveQuery
-    {
-        return $this->hasOne(User::class, ['id' => 'vice_user_id']);
-    }
 }

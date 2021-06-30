@@ -60,8 +60,8 @@ class TeamLogo extends Model
     public function attributeLabels(): array
     {
         return [
-            'file' => 'Эмблема',
-            'text' => 'Чем новая эмблема лучше старой',
+            'file' => Yii::t('frontend', 'models.forms.team-logo.label.file'),
+            'text' => Yii::t('frontend', 'models.forms.team-logo.label.text'),
         ];
     }
 

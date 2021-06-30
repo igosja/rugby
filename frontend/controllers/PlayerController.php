@@ -66,7 +66,7 @@ class PlayerController extends AbstractController
             'name'
         );
 
-        $this->setSeoTitle('Список игроков');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.player.index.title'));
         return $this->render('index', [
             'countryArray' => $countryArray,
             'dataProvider' => $dataProvider,
@@ -87,7 +87,7 @@ class PlayerController extends AbstractController
         $seasonId = Yii::$app->request->get('season_id', $this->season->id);
         $dataProvider = LineupPrepare::getPlayerDataProvider($id, $seasonId);
 
-        $this->setSeoTitle($player->playerName() . ' - profile');
+        $this->setSeoTitle($player->playerName() . '. ' . Yii::t('frontend', 'controllers.player.view.title'));
         return $this->render('view', [
             'dataProvider' => $dataProvider,
             'player' => $player,
@@ -113,7 +113,7 @@ class PlayerController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($player->playerName() . '. История игрока');
+        $this->setSeoTitle($player->playerName() . '. ' . Yii::t('frontend', 'controllers.player.history.title'));
 
         return $this->render('history', [
             'dataProvider' => $dataProvider,
@@ -148,7 +148,7 @@ class PlayerController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($player->playerName() . '. Сделки игрока');
+        $this->setSeoTitle($player->playerName() . '. ' . Yii::t('frontend', 'controllers.player.deal.title'));
 
         return $this->render('deal', [
             'dataProviderLoan' => $dataProviderLoan,
@@ -165,7 +165,7 @@ class PlayerController extends AbstractController
     public function actionTransfer(int $id)
     {
         $player = $this->getPlayer($id);
-        $onTransfer = $player->transfer ? true : false;
+        $onTransfer = (bool)$player->transfer;
 
         $formConfig = ['player' => $player, 'team' => $this->myTeam];
 
@@ -231,7 +231,7 @@ class PlayerController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Трансфер игрока');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.player.transfer.title'));
 
         return $this->render('transfer', [
             'modelTransferApplicationFrom' => $modelTransferApplicationFrom,
@@ -317,7 +317,7 @@ class PlayerController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Аренда игрока');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.player.loan.title'));
 
         return $this->render('loan', [
             'modelLoanApplicationFrom' => $modelLoanApplicationFrom,
@@ -346,7 +346,7 @@ class PlayerController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($player->playerName() . '. Достижения игрока');
+        $this->setSeoTitle($player->playerName() . '. ' . Yii::t('frontend', 'controllers.player.achievement.title'));
 
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
@@ -371,7 +371,7 @@ class PlayerController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($player->playerName() . '. Трофеи игрока');
+        $this->setSeoTitle($player->playerName() . '. ' . Yii::t('frontend', 'controllers.player.trophy.title'));
 
         return $this->render('trophy', [
             'dataProvider' => $dataProvider,

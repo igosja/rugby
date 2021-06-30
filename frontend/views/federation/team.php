@@ -27,9 +27,9 @@ print $this->render('_federation', [
         $columns = [
             [
                 'attribute' => 'team',
-                'footer' => 'Команда',
+                'footer' => Yii::t('frontend', 'views.th.team'),
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (Team $model) {
                     return $model->iconFreeTeam() . $model->getTeamCityLink();
                 }
@@ -37,10 +37,10 @@ print $this->render('_federation', [
             [
                 'attribute' => 'user',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Менеджер',
+                'footer' => Yii::t('frontend', 'views.th.manager'),
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-40'],
-                'label' => 'Менеджер',
+                'label' => Yii::t('frontend', 'views.th.manager'),
                 'value' => static function (Team $model) {
                     return $model->user->iconVip() . ' ' . $model->user->getUserLink();
                 }
@@ -48,22 +48,21 @@ print $this->render('_federation', [
             [
                 'attribute' => 'last_visit',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Последний визит',
+                'footer' => Yii::t('frontend', 'views.federation.team.th.visit'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-20 hidden-xs'],
-                'label' => 'Последний визит',
+                'label' => Yii::t('frontend', 'views.federation.team.th.visit'),
                 'value' => static function (Team $model) {
                     return $model->user->lastVisit();
                 }
             ],
         ];
         print GridView::widget([
-                'columns' => $columns,
-                'dataProvider' => $dataProvider,
-                'showFooter' => true,
-            ]
-        );
+            'columns' => $columns,
+            'dataProvider' => $dataProvider,
+            'showFooter' => true,
+        ]);
     } catch (Exception $e) {
         ErrorHelper::log($e);
     }

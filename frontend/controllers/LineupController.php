@@ -6,6 +6,7 @@ namespace frontend\controllers;
 
 use common\models\db\Game;
 use common\models\db\Lineup;
+use common\models\db\LineupTemplate;
 use common\models\db\Mood;
 use common\models\db\Player;
 use common\models\db\Position;
@@ -62,7 +63,7 @@ class LineupController extends AbstractController
 
         $model = new GameSend(['game' => $game, 'team' => $this->myTeamOrVice]);
         if ($model->saveLineup()) {
-            $this->setSuccessFlash('Состав успешно отправлен.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.lineup.success'));
             return $this->refresh();
         }
 
@@ -379,7 +380,7 @@ class LineupController extends AbstractController
         $styleArray = ArrayHelper::map(Style::find()->all(), 'id', 'name');
         $tacticArray = ArrayHelper::map(Tactic::find()->all(), 'id', 'name');
 
-        $this->setSeoTitle('Отправка состава');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.lineup.view.title'));
         return $this->render('view', [
             'player_1_id' => $player_1_id,
             'player_2_id' => $player_2_id,

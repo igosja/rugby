@@ -350,6 +350,22 @@
                 position: new google.maps.LatLng(40.633143, 22.945795), //Салоніки
                 map: map
             }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(50.511391, 30.790281), //Бровари
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(50.589704, 30.905293), //Тарасівка
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(48.639241, 25.737360), //Заліщики
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(27.978610, 34.393610), //Шарм-еш-шейх
+                map: map
+            }),
         ];
         marker.setMap(map);
     }

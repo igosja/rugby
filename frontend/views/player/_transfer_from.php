@@ -15,28 +15,28 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <p class="text-center">
-            Игрок находится на трансфере.
+            <?= Yii::t('frontend', 'views.player.transfer-from.on-transfer') ?>
             <br/>
-            Начальная стоимость игрока составляет
+            <?= Yii::t('frontend', 'views.player.transfer-from.price') ?>
             <span class="strong"><?= FormatHelper::asCurrency($model->player->transfer->price_seller) ?></span>.
         </p>
         <?php if ($model->player->transfer->is_to_league): ?>
             <p class="text-center">
-                В случае отсутствия спроса игрок будет продан Лиге.
+                <?= Yii::t('frontend', 'views.player.transfer-from.is-to-league') ?>
             </p>
         <?php endif ?>
         <?php $form = ActiveForm::begin() ?>
         <?= $form->field($model, 'off')->hiddenInput(['value' => true])->label(false) ?>
         <p class="text-center">
-            <?= Html::submitButton('Снять с трансфера', ['class' => 'btn']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.player.transfer-from.submit'), ['class' => 'btn']) ?>
         </p>
         <?php $form::end() ?>
         <?php if ($model->transferApplicationArray) : ?>
-            <p class="text-center">Заявки на вашего игрока:</p>
+            <p class="text-center"><?= Yii::t('frontend', 'views.player.transfer-from.applications') ?>:</p>
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>Команда потенциального покупателя</th>
-                    <th class="col-20">Время заявки</th>
+                    <th><?= Yii::t('frontend', 'views.player.transfer-from.th.team') ?></th>
+                    <th class="col-20"><?= Yii::t('frontend', 'views.player.transfer-from.th.date') ?></th>
                 </tr>
                 <?php foreach ($model->transferApplicationArray as $item): ?>
                     <tr>

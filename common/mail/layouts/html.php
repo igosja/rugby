@@ -293,7 +293,7 @@ use yii\web\View;
                                                                     Html::img(
                                                                         Url::base(true) . '/img/logo-letter.png',
                                                                         [
-                                                                            'alt' => 'Virtual Hockey League',
+                                                                            'alt' => 'Virtual Rugby League',
                                                                             'class' => 'flexibleImage',
                                                                             'style' => [
                                                                                 'max-width' => '560px',
@@ -339,7 +339,7 @@ use yii\web\View;
                                                                 <br/>
                                                                 <br/>
                                                                 <?= Html::a(
-                                                                    'Virtual Hockey League',
+                                                                    'Virtual Rugby League',
                                                                     Url::base(true),
                                                                     ['target' => '_blank']
                                                                 ) ?>

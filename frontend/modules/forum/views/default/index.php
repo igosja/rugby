@@ -19,7 +19,7 @@ use yii\web\View;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>Форум</h1>
+                <h1><?= Yii::t('frontend', 'modules.views.default.index.h1') ?></h1>
             </div>
         </div>
         <div class="row">
@@ -36,15 +36,19 @@ use yii\web\View;
                     ) ?>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-                    <span class="hidden-lg hidden-md hidden-sm" title="Темы">Т</span>
-                    <span class="hidden-xs">Темы</span>
+                    <span class="hidden-lg hidden-md hidden-sm"
+                          title="<?= Yii::t('frontend', 'modules.views.default.index.theme') ?>">
+                        <?= Yii::t('frontend', 'modules.views.default.index.theme-short') ?>
+                    </span>
+                    <span class="hidden-xs"><?= Yii::t('frontend', 'modules.views.default.index.theme') ?></span>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
-                    <span class="hidden-lg hidden-md" title="Сообщения">C</span>
-                    <span class="hidden-sm hidden-xs">Сообщения</span>
+                    <span class="hidden-lg hidden-md"
+                          title="<?= Yii::t('frontend', 'modules.views.default.index.message') ?>"><?= Yii::t('frontend', 'modules.views.default.index.message-short') ?></span>
+                    <span class="hidden-sm hidden-xs"><?= Yii::t('frontend', 'modules.views.default.index.message') ?></span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    Последнее сообщение
+                    <?= Yii::t('frontend', 'modules.views.default.index.last') ?>
                 </div>
             </div>
             <?php if (ForumChapter::NATIONAL !== $forumChapter->id): ?>

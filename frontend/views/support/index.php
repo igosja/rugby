@@ -60,10 +60,10 @@ print $this->render('//user/_top');
                 <div class="row">{error}</div>',
                 ],
             ]) ?>
-            <?= $form->field($model, 'text')->textarea(['rows' => 5])->label('Ваше сообщение:') ?>
+            <?= $form->field($model, 'text')->textarea(['rows' => 5])->label(Yii::t('frontend', 'views.support.index.label.text')) ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <?= Html::submitButton('Отправить', ['class' => 'btn margin']) ?>
+                    <?= Html::submitButton(Yii::t('frontend', 'views.support.index.submit'), ['class' => 'btn margin']) ?>
                 </div>
             </div>
             <?php ActiveForm::end() ?>

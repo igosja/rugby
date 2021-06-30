@@ -50,7 +50,7 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
     ]) ?>
     <div class="row text-center">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 relation-head">
-            Ваше отношение к тренеру сборной:
+            <?= Yii::t('frontend', 'views.national.view.attitude') ?>
             <a href="javascript:" id="relation-link">
                 <?= $controller->myTeam->nationalAttitude->name ?>
             </a>
@@ -72,7 +72,7 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
                 ->label(false) ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?= Html::submitButton('Изменить отношение', ['class' => 'btn margin']) ?>
+                    <?= Html::submitButton(Yii::t('frontend', 'views.national.view.submit'), ['class' => 'btn margin']) ?>
                 </div>
             </div>
         </div>
@@ -103,14 +103,14 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'class' => SerialColumn::class,
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => '№',
-                'header' => '№',
+                'footer' => '#',
+                'header' => '#',
             ],
             [
                 'attribute' => 'squad',
-                'footer' => 'Игрок',
+                'footer' => Yii::t('frontend', 'views.th.player'),
                 'format' => 'raw',
-                'label' => 'Игрок',
+                'label' => Yii::t('frontend', 'views.th.player'),
                 'value' => static function (Player $model) {
                     return $model->getPlayerLink()
                         . $model->iconPension()
@@ -123,11 +123,11 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'position',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Поз',
-                'footerOptions' => ['title' => 'Позиция'],
+                'footer' => Yii::t('frontend', 'views.th.position'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Позиция'],
-                'label' => 'Поз',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                'label' => Yii::t('frontend', 'views.th.position'),
                 'value' => static function (Player $model) {
                     return $model->position();
                 }
@@ -135,10 +135,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'age',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'В',
-                'footerOptions' => ['title' => 'Возраст'],
-                'headerOptions' => ['title' => 'Возраст'],
-                'label' => 'В',
+                'footer' => Yii::t('frontend', 'views.th.age'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'label' => Yii::t('frontend', 'views.th.age'),
                 'value' => static function (Player $model) {
                     return $model->age;
                 }
@@ -146,11 +146,11 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'power_nominal',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Номинальная сила'],
+                'footer' => Yii::t('frontend', 'views.th.power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Номинальная сила'],
-                'label' => 'С',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
+                'label' => Yii::t('frontend', 'views.th.power'),
                 'value' => static function (Player $model) {
                     return $model->powerNominal();
                 }
@@ -158,10 +158,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'tire',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'У',
-                'footerOptions' => ['title' => 'Усталость'],
-                'headerOptions' => ['title' => 'Усталость'],
-                'label' => 'У',
+                'footer' => Yii::t('frontend', 'views.th.tire'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                'label' => Yii::t('frontend', 'views.th.tire'),
                 'value' => static function (Player $model) {
                     return $model->playerTire();
                 }
@@ -169,11 +169,11 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'physical',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Ф',
-                'footerOptions' => ['title' => 'Форма'],
+                'footer' => Yii::t('frontend', 'views.th.physical'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.physical')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Форма'],
-                'label' => 'Ф',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.physical')],
+                'label' => Yii::t('frontend', 'views.th.physical'),
                 'value' => static function (Player $model) {
                     return $model->playerPhysical();
                 }
@@ -181,10 +181,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'power_real',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'РС',
-                'footerOptions' => ['title' => 'Реальная сила'],
-                'headerOptions' => ['title' => 'Реальная сила'],
-                'label' => 'РС',
+                'footer' => Yii::t('frontend', 'views.th.real-power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                'label' => Yii::t('frontend', 'views.th.real-power'),
                 'value' => static function (Player $model) use ($national) {
                     return $national->myTeamOrVice() ? $model->power_real : '~' . $model->power_nominal;
                 }
@@ -192,22 +192,22 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'special',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Спец',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                'footer' => Yii::t('frontend', 'views.th.special'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
-                'label' => 'Спец',
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                'label' => Yii::t('frontend', 'views.th.special'),
                 'value' => static function (Player $model) {
                     return $model->special();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Ст',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
+                'footer' => Yii::t('frontend', 'views.th.style'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.style')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
-                'label' => 'Ст',
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.style')],
+                'label' => Yii::t('frontend', 'views.th.style'),
                 'value' => static function (Player $model) {
                     return $model->iconStyle(true);
                 }
@@ -215,10 +215,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             [
                 'attribute' => 'game_row',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'ИО',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Играл/отдыхал подряд'],
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Играл/отдыхал подряд'],
-                'label' => 'ИО',
+                'footer' => Yii::t('frontend', 'views.th.row'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.row')],
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.row')],
+                'label' => Yii::t('frontend', 'views.th.row'),
                 'value' => static function (Player $model) {
                     return $model->playerGameRow();
                 }

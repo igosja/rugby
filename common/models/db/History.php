@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\Exception;
@@ -197,17 +198,17 @@ class History extends AbstractActiveRecord
         if (false !== strpos($text, '{building}')) {
             $building = '';
             if (Building::BASE === $this->building_id) {
-                $building = 'база';
+                $building = Yii::t('common', 'models.db.history.text.base');
             } elseif (Building::MEDICAL === $this->building_id) {
-                $building = 'медцентр';
+                $building = Yii::t('common', 'models.db.history.text.medical');
             } elseif (Building::PHYSICAL === $this->building_id) {
-                $building = 'центр физподготовки';
+                $building = Yii::t('common', 'models.db.history.text.physical');
             } elseif (Building::SCHOOL === $this->building_id) {
-                $building = 'спортшкола';
+                $building = Yii::t('common', 'models.db.history.text.school');
             } elseif (Building::SCOUT === $this->building_id) {
-                $building = 'скаут-центр';
+                $building = Yii::t('common', 'models.db.history.text.scout');
             } elseif (Building::TRAINING === $this->building_id) {
-                $building = 'тренировочный центр';
+                $building = Yii::t('common', 'models.db.history.text.training');
             }
             $text = str_replace(
                 '{building}',
@@ -215,12 +216,11 @@ class History extends AbstractActiveRecord
                 $text
             );
         }
-        $text = str_replace(
+        return str_replace(
             ['{capacity}', '{level}', '{day}'],
-            [$this->value, $this->value, $this->value . ' дн.'],
+            [$this->value, $this->value, Yii::t('common', 'models.db.history.text.day', ['day' => $this->value])],
             $text
         );
-        return $text;
     }
 
     /**

@@ -69,9 +69,11 @@ LineupAsset::register($this);
 <?php if ($isVip) : ?>
     <div class="row margin-top">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-            <a href="javascript:" class="link-template-save">Сохранить как...</a>
+            <a href="javascript:"
+               class="link-template-save"><?= Yii::t('frontend', 'views.lineup.view.link.save') ?></a>
             |
-            <a href="javascript:" class="link-template-load">Загрузить шаблон</a>
+            <a href="javascript:"
+               class="link-template-load"><?= Yii::t('frontend', 'views.lineup.view.link.load') ?></a>
         </div>
     </div>
     <div class="row margin-top-small div-template-save" style="display: none;">
@@ -94,18 +96,14 @@ LineupAsset::register($this);
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <?= Html::submitButton('Сохранить', ['class' => 'btn margin', 'id' => 'template-save-submit']) ?>
+                    <?= Html::submitButton(Yii::t('frontend', 'views.lineup.view.submit.template'), ['class' => 'btn margin', 'id' => 'template-save-submit']) ?>
                 </div>
             </div>
             <?php ActiveForm::end() ?>
         </div>
     </div>
-    <div
-            class="row margin-top div-template-load"
-            data-url="<?= Url::to(['lineup/template']) ?>"
-            style="display: none;"
-    >
-    </div>
+    <div class="row margin-top div-template-load" data-url="<?= Url::to(['lineup/template']) ?>"
+         style="display: none;"></div>
 <?php endif; ?>
 <div class="row margin-top">
     <?php
@@ -114,7 +112,7 @@ LineupAsset::register($this);
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.th.date'),
                 'value' => static function (Game $model) {
                     return FormatHelper::asDatetime($model->schedule->date);
                 }
@@ -123,7 +121,7 @@ LineupAsset::register($this);
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'format' => 'raw',
-                'label' => 'Турнир',
+                'label' => Yii::t('frontend', 'views.lineup.view.th.tournament'),
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'value' => static function (Game $model) {
                     return Html::a(
@@ -135,7 +133,7 @@ LineupAsset::register($this);
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footerOptions' => ['class' => 'hidden-xs'],
-                'label' => 'Стадия',
+                'label' => Yii::t('frontend', 'views.lineup.view.th.stage'),
                 'headerOptions' => ['class' => 'hidden-xs'],
                 'value' => static function (Game $model) {
                     return $model->schedule->stage->name;
@@ -144,7 +142,7 @@ LineupAsset::register($this);
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'value' => static function (Game $model) use ($national) {
-                    return $model->home_national_id === $national->id ? 'Д' : 'Г';
+                    return $model->home_national_id === $national->id ? Yii::t('frontend', 'views.home') : Yii::t('frontend', 'views.guest');
                 }
             ],
             [
@@ -163,10 +161,10 @@ LineupAsset::register($this);
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
                 'footerOptions' => ['class' => 'hidden-xs'],
-                'label' => 'C/C',
+                'label' => Yii::t('frontend', 'views.lineup.view.th.ratio'),
                 'headerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => 'Соотношение сил (чем больше это число, тем сильнее ваш соперник)',
+                    'title' => Yii::t('frontend', 'views.lineup.view.title.ratio'),
                 ],
                 'value' => static function (Game $model) use ($national): string {
                     if ($model->home_national_id === $national->id) {
@@ -236,7 +234,8 @@ LineupAsset::register($this);
         ])
         ->textInput(['class' => 'form-control', 'disabled' => !$model->home]) ?>
     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4" style="height: 20px">
-        [<?= Html::a('Зрители', ['visitor/view', 'id' => $game->id], ['target' => '_blank']) ?>]
+        [<?= Html::a(Yii::t('frontend', 'views.lineup.view.link.visitor'), ['visitor/view', 'id' => $game->id], ['target' => '_blank']) ?>
+        ]
     </div>
     <?= $form
         ->field($model, 'mood', [
@@ -253,17 +252,15 @@ LineupAsset::register($this);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <td></td>
-                <td class="col-30 text-center strong">Тактика</td>
-                <td class="col-30 text-center strong">Грубость</td>
+                <td class="col-30 text-center strong"><?= Yii::t('frontend', 'views.lineup.view.tactic') ?></td>
+                <td class="col-30 text-center strong"><?= Yii::t('frontend', 'views.lineup.view.rudeness') ?></td>
                 <td class="col-30 text-center strong">
-                    Стиль
+                    <?= Yii::t('frontend', 'views.lineup.view.style') ?>
                     <i class="fa fa-question-circle-o"
-                       title="силовым лучше всего играть против скоростного;<br/>скоростным лучше всего играть против технического;<br/>техническим лучше всего играть против силового."></i>
+                       title="<?= Yii::t('frontend', 'views.lineup.view.tooltip.style') ?>"></i>
                 </td>
             </tr>
             <tr>
-                <td class="text-right strong">1 звено:</td>
                 <td>
                     <?= $form->field($model, 'tactic')
                         ->dropDownList($tacticArray, ['class' => 'form-control'])
@@ -287,19 +284,20 @@ LineupAsset::register($this);
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
-                Сила состава: <span class="strong span-power">0</span>
+                <?= Yii::t('frontend', 'views.lineup.view.power') ?>: <span class="strong span-power">0</span>
                 <br/>
-                Оптимальность позиций: <span class="strong span-position-percent">0</span>%
+                <?= Yii::t('frontend', 'views.lineup.view.optimality.1') ?>: <span class="strong span-position-percent">0</span>%
                 <br/>
-                Оптимальность состава: <span class="strong span-lineup-percent">0</span>%
+                <?= Yii::t('frontend', 'views.lineup.view.optimality.2') ?>: <span
+                        class="strong span-lineup-percent">0</span>%
                 <br/>
-                Сыгранность:
+                <?= Yii::t('frontend', 'views.lineup.view.teamwork') ?>:
                 <span class="strong span-teamwork">0</span>%
             </div>
         </div>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center strong">
-                Игроки:
+                <?= Yii::t('frontend', 'views.lineup.view.player') ?>:
             </div>
         </div>
         <?php for ($i = 1; $i <= 15; $i++): ?>
@@ -320,7 +318,7 @@ LineupAsset::register($this);
         <?php endfor ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center strong">
-                Капитан:
+                <?= Yii::t('frontend', 'views.lineup.view.captain') ?>:
             </div>
         </div>
         <div class="row">
@@ -339,8 +337,8 @@ LineupAsset::register($this);
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
-                <?= Html::a('Очистить', 'javascript:', ['class' => 'btn margin', 'id' => 'reset-lineup']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.lineup.view.submit'), ['class' => 'btn margin']) ?>
+                <?= Html::a(Yii::t('frontend', 'views.lineup.view.reset'), 'javascript:', ['class' => 'btn margin', 'id' => 'reset-lineup']) ?>
             </div>
         </div>
     </div>
@@ -357,9 +355,9 @@ LineupAsset::register($this);
                         }
                         return [];
                     },
-                    'footer' => 'Игрок',
+                    'footer' => Yii::t('frontend', 'views.th.player'),
                     'format' => 'raw',
-                    'label' => 'Игрок',
+                    'label' => Yii::t('frontend', 'views.th.player'),
                     'value' => static function (Player $model) {
                         return $model->getPlayerLink(['target' => '_blank'])
                             . $model->iconInjury()
@@ -369,11 +367,11 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'country',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Нац',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Национальность'],
+                    'footer' => Yii::t('frontend', 'views.th.national'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
-                    'label' => 'Нац',
+                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
+                    'label' => Yii::t('frontend', 'views.th.national'),
                     'value' => static function (Player $model) {
                         return $model->country->getImageLink();
                     }
@@ -381,11 +379,11 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'position',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Поз',
-                    'footerOptions' => ['title' => 'Позиция'],
+                    'footer' => Yii::t('frontend', 'views.th.position'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['title' => 'Позиция'],
-                    'label' => 'Поз',
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Player $model) {
                         return $model->position();
                     }
@@ -393,10 +391,10 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'age',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Возраст'],
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.th.age'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.age')],
+                    'label' => Yii::t('frontend', 'views.th.age'),
                     'value' => static function (Player $model) {
                         return $model->age;
                     }
@@ -404,10 +402,10 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'power_nominal',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Сила'],
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Сила'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.power'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.power')],
+                    'label' => Yii::t('frontend', 'views.th.power'),
                     'value' => static function (Player $model) {
                         return $model->power_nominal;
                     }
@@ -415,10 +413,10 @@ LineupAsset::register($this);
                 [
                     'attribute' => TournamentType::FRIENDLY === $game->schedule->tournament_type_id ? '' : 'tire',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'У',
-                    'footerOptions' => ['title' => 'Усталость'],
-                    'headerOptions' => ['title' => 'Усталость'],
-                    'label' => 'У',
+                    'footer' => Yii::t('frontend', 'views.th.tire'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                    'label' => Yii::t('frontend', 'views.th.tire'),
                     'value' => static function (Player $model) use ($game) {
                         return TournamentType::FRIENDLY === $game->schedule->tournament_type_id
                             ? '25'
@@ -428,11 +426,11 @@ LineupAsset::register($this);
                 [
                     'attribute' => TournamentType::FRIENDLY === $game->schedule->tournament_type_id ? '' : 'physical',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Ф',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Форма'],
+                    'footer' => Yii::t('frontend', 'views.th.physical'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.physical')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Форма'],
-                    'label' => 'Ф',
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.physical')],
+                    'label' => Yii::t('frontend', 'views.th.physical'),
                     'value' => static function (Player $model) use ($game) {
                         return TournamentType::FRIENDLY === $game->schedule->tournament_type_id
                             ? (Physical::findOne(Physical::DEFAULT_ID))->image()
@@ -442,10 +440,10 @@ LineupAsset::register($this);
                 [
                     'attribute' => TournamentType::FRIENDLY === $game->schedule->tournament_type_id ? 'power_nominal' : 'power_real',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'РС',
-                    'footerOptions' => ['title' => 'Реальная сила'],
-                    'headerOptions' => ['title' => 'Реальная сила'],
-                    'label' => 'РС',
+                    'footer' => Yii::t('frontend', 'views.th.real-power'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                    'label' => Yii::t('frontend', 'views.th.real-power'),
                     'value' => static function (Player $model) use ($game) {
                         return TournamentType::FRIENDLY === $game->schedule->tournament_type_id
                             ? round($model->power_nominal * 0.75)
@@ -454,10 +452,10 @@ LineupAsset::register($this);
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Спец',
-                    'footerOptions' => ['title' => 'Спецвозможности'],
-                    'headerOptions' => ['title' => 'Спецвозможности'],
-                    'label' => 'Спец',
+                    'footer' => Yii::t('frontend', 'views.th.special'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.special')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.special')],
+                    'label' => Yii::t('frontend', 'views.th.special'),
                     'value' => static function (Player $model) {
                         return $model->special();
                     }
@@ -465,11 +463,11 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'style',
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Ст',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
+                    'footer' => Yii::t('frontend', 'views.th.style'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.style')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
-                    'label' => 'Ст',
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.style')],
+                    'label' => Yii::t('frontend', 'views.th.style'),
                     'value' => static function (Player $model) {
                         return $model->iconStyle(true);
                     }
@@ -477,10 +475,10 @@ LineupAsset::register($this);
                 [
                     'attribute' => 'game_row',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'ИО',
-                    'footerOptions' => ['title' => 'Играл/отдыхал подряд'],
-                    'headerOptions' => ['title' => 'Играл/отдыхал подряд'],
-                    'label' => 'ИО',
+                    'footer' => Yii::t('frontend', 'views.th.row'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.row')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.row')],
+                    'label' => Yii::t('frontend', 'views.th.row'),
                     'value' => static function (Player $model) {
                         return $model->game_row;
                     }

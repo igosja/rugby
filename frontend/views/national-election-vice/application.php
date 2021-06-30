@@ -17,7 +17,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h4>Подача заявки на пост заместителя тренера национальной сборной</h4>
+        <h4><?= Yii::t('frontend', 'views.national-election-vice.application.h4') ?></h4>
     </div>
 </div>
 <?php $form = ActiveForm::begin([
@@ -34,12 +34,12 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
 <?= $form
     ->field($model, 'text')
     ->textarea(['rows' => 5])
-    ->label('Ваша программа') ?>
+    ->label(Yii::t('frontend', 'views.national-election-vice.application.label.text')) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.national-election-vice.application.submit'), ['class' => 'btn margin']) ?>
         <?php if (!$model->isNewRecord) : ?>
-            <?= Html::a('Удалить', ['delete-application'], ['class' => 'btn margin']) ?>
+            <?= Html::a(Yii::t('frontend', 'views.national-election-vice.application.link.delete'), ['delete-application'], ['class' => 'btn margin']) ?>
         <?php endif ?>
     </div>
 </div>

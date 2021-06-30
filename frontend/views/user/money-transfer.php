@@ -25,7 +25,7 @@ print $this->render('_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Перевод денег с личного счёта</th>
+                <th><?= Yii::t('frontend', 'views.user.money-transfer.th') ?></th>
             </tr>
         </table>
     </div>
@@ -33,14 +33,12 @@ print $this->render('_top');
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-center">
-            Деньги на личном счете менеджера появляются как премиальные за написание обзоров,
-            участие в пресс-конференциях, тренерскую работу в сборных либо за воспитание подопечных.
+            <?= Yii::t('frontend', 'views.user.money-transfer.p.1') ?>
         </p>
         <p class="text-center">
-            На этой странице вы можете перевести деньги с вашего личного счета
-            на счет выбранной команды или в фонд федерации.
+            <?= Yii::t('frontend', 'views.user.money-transfer.p.2') ?>
         </p>
-        <p class="text-center">Заполните форму для перевода денег:</p>
+        <p class="text-center"><?= Yii::t('frontend', 'views.user.money-transfer.p.3') ?>:</p>
         <?php $form = ActiveForm::begin([
             'fieldConfig' => [
                 'errorOptions' => [
@@ -56,11 +54,11 @@ print $this->render('_top');
         ]) ?>
         <?= $form
             ->field($model, 'teamId')
-            ->dropDownList($teamArray, ['class' => 'form-control', 'prompt' => 'Выберите команду'])
-            ->label('Команда') ?>
+            ->dropDownList($teamArray, ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.user.money-transfer.prompt.team')])
+            ->label(Yii::t('frontend', 'views.user.money-transfer.label.team')) ?>
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
-                Доступно
+                <?= Yii::t('frontend', 'views.user.money-transfer.available') ?>
             </div>
             <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
                 <span class="strong"><?= FormatHelper::asCurrency($model->user->finance) ?></span>
@@ -69,13 +67,13 @@ print $this->render('_top');
         <?= $form
             ->field($model, 'sum')
             ->textInput(['class' => 'form-control', 'type' => 'number'])
-            ->label('Сумма, $') ?>
+            ->label(Yii::t('frontend', 'views.user.money-transfer.label.sum')) ?>
         <?= $form
             ->field($model, 'comment')
             ->textarea(['class' => 'form-control'])
-            ->label('Комментарий') ?>
+            ->label(Yii::t('frontend', 'views.user.money-transfer.label.comment')) ?>
         <p class="text-center">
-            <?= Html::submitButton('Перевести', ['class' => 'btn margin']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.user.money-transfer.submit'), ['class' => 'btn margin']) ?>
         </p>
         <?php ActiveForm::end() ?>
     </div>

@@ -31,27 +31,27 @@ print $this->render('//player/_player', ['player' => $player]);
             $columns = [
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['title' => 'Сезон'],
-                    'headerOptions' => ['class' => 'col-3', 'title' => 'Сезон'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.season'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                    'headerOptions' => ['class' => 'col-3', 'title' => Yii::t('frontend', 'views.title.season')],
+                    'label' => Yii::t('frontend', 'views.th.season'),
                     'value' => static function (History $model) {
                         return $model->season_id;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Дата',
+                    'footer' => Yii::t('frontend', 'views.th.date'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Дата',
+                    'label' => Yii::t('frontend', 'views.th.date'),
                     'value' => static function (History $model) {
                         return FormatHelper::asDate($model->date);
                     }
                 ],
                 [
-                    'footer' => 'Событие',
+                    'footer' => Yii::t('frontend', 'views.th.event'),
                     'format' => 'raw',
-                    'label' => 'Событие',
+                    'label' => Yii::t('frontend', 'views.th.event'),
                     'value' => static function (History $model) {
                         return $model->text();
                     }

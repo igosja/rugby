@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,15 +32,12 @@ class M200101000105MoneyText extends Migration
             self::TABLE,
             ['text'],
             [
-                ['Пополнение счёта'],
-                ['Бонус партнёрской программе'],
-                ['Покупка балла силы'],
-                ['Пополнение счёта своей команды'],
-                ['Покупка совмещения'],
-                ['Покупка спецвозможности'],
-                ['Продление VIP-клуба'],
-                ['Перевод средств от другого менеджера'],
-                ['Перевод средств другому менеджеру'],
+                [Yii::t('console', 'migrations.money-text.income.add-funds')],
+                [Yii::t('console', 'migrations.money-text.income.referral')],
+                [Yii::t('console', 'migrations.money-text.outcome.team-finance')],
+                [Yii::t('console', 'migrations.money-text.outcome.vip')],
+                [Yii::t('console', 'migrations.money-text.income.friend')],
+                [Yii::t('console', 'migrations.money-text.outcome.friend')],
             ]
         );
 

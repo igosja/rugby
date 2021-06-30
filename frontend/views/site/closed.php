@@ -12,7 +12,7 @@ $this->title = 'Forbidden (#403)';
         <h1><?= Html::encode($this->title) ?></h1>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert error">
-                На сайте проводятся технические работы. Зайдите, пожалуйста, позже.
+                <?= Yii::t('frontend', 'views.site.closed.p') ?>
             </div>
         </div>
     </div>

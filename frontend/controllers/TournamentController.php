@@ -25,7 +25,7 @@ class TournamentController extends AbstractController
         $tournaments = TournamentPrepare::getTournaments($seasonId);
         $seasonArray = Season::getSeasonArray();
 
-        $this->setSeoTitle('Турниры');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.tournament.index.title'));
         return $this->render('index', [
             'countryArray' => $countryArray,
             'seasonArray' => $seasonArray,

@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1>Опрос</h1>
+                <h1><?= Yii::t('frontend', 'views.vote.vote.h1') ?></h1>
             </div>
         </div>
         <div class="row margin-top">
@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                Автор:
+                <?= Yii::t('frontend', 'views.vote.vote.author') ?>
                 <?= $vote->user->getUserLink(['color' => true]) ?>
             </div>
         </div>
@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
             ->label(false) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Голосовать', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.vote.vote.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

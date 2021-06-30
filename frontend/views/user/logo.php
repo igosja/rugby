@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1>Загрузить фото</h1>
+        <h1><?= Yii::t('frontend', 'views.user.logo.h1') ?></h1>
     </div>
 </div>
 <div class="row">
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-3 hidden-xs"></div>
             <div class="col-lg-6 col-md-7 col-sm-8 col-xs-11">
-                <span class="strong">Старое фото</span>
+                <span class="strong"><?= Yii::t('frontend', 'views.user.logo.old') ?></span>
             </div>
         </div>
         <div class="row">
@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
                             ]
                         ) ?>
                     <?php else : ?>
-                        Нет фото
+                        <?= Yii::t('frontend', 'views.user.logo.no-photo') ?>
                     <?php endif ?>
                 </span>
             </div>
@@ -52,7 +52,7 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
             <div class="col-lg-6 col-md-7 col-sm-8 col-xs-11">
-                <span class="strong">Новое фото</span>
+                <span class="strong"><?= Yii::t('frontend', 'views.user.logo.new') ?></span>
             </div>
         </div>
         <div class="row">
@@ -69,7 +69,7 @@ use yii\widgets\ActiveForm;
                             ]
                         ) ?>
                     <?php else : ?>
-                        Нет фото
+                        <?= Yii::t('frontend', 'views.user.logo.no-photo') ?>
                     <?php endif ?>
                 </span>
             </div>
@@ -92,7 +92,7 @@ use yii\widgets\ActiveForm;
 ]) ?>
 <div class="row margin-top">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right strong">
-        Пользователь
+        <?= Yii::t('frontend', 'views.user.logo.user') ?>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
         <?= $user->getUserLink() ?>
@@ -103,17 +103,17 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs"></div>
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <ul>
-            <li>Размер картинки: 100x125 пикселей.</li>
-            <li>Формат картинки: png.</li>
-            <li>Объем файла: не более 50 килобайт.</li>
+            <li><?= Yii::t('frontend', 'views.user.logo.li.1') ?></li>
+            <li><?= Yii::t('frontend', 'views.user.logo.li.2') ?></li>
+            <li><?= Yii::t('frontend', 'views.user.logo.li.3') ?></li>
         </ul>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Отправить файл', ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.user.logo.link.ok'), ['class' => 'btn margin']) ?>
         <?= Html::a(
-            'Вернуться в профиль',
+            Yii::t('frontend', 'views.user.logo.link.cancel'),
             ['user/view'],
             ['class' => 'btn margin']
         ) ?>
@@ -123,7 +123,7 @@ use yii\widgets\ActiveForm;
 <?php if ($logoArray) : ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            Список пользователей, чьи фото находятся в процессе проверки (<?= count($logoArray) ?>):
+            <?= Yii::t('frontend', 'views.user.logo.checking', ['count' => count($logoArray)]) ?>:
         </div>
     </div>
     <div class="row">

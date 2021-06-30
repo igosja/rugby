@@ -37,7 +37,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                     <?php if ($player->myPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                                <label for="select-line">Состав:</label>
+                                <label for="select-line"><?= Yii::t('frontend', 'views.player.player.squad') ?>:</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
@@ -57,7 +57,8 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                     <?php if ($player->myNationalPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                                <label for="select-line">Состав в сборной:</label>
+                                <label for="select-line"><?= Yii::t('frontend', 'views.player.player.squad.national') ?>
+                                    :</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
@@ -83,7 +84,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Национальность:
+                        <?= Yii::t('frontend', 'views.player.player.national') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->country->getTextLink() ?>
@@ -92,7 +93,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Возраст:
+                        <?= Yii::t('frontend', 'views.player.player.age') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->age ?>
@@ -101,7 +102,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Сила:
+                        <?= Yii::t('frontend', 'views.player.player.power') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->power_nominal ?>
@@ -111,7 +112,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Усталость:
+                        <?= Yii::t('frontend', 'views.player.player.tire') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->playerTire() ?>
@@ -120,7 +121,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Форма:
+                        <?= Yii::t('frontend', 'views.player.player.physical') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->playerPhysical() ?>
@@ -128,7 +129,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Реальная сила:
+                        <?= Yii::t('frontend', 'views.player.player.real-power') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?php if ($player->myPlayer()) : ?>
@@ -140,7 +141,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Стиль:
+                        <?= Yii::t('frontend', 'views.player.player.style') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->iconStyle() ?>
@@ -151,7 +152,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Команда:
+                        <?= Yii::t('frontend', 'views.player.player.team') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->team->getTeamLink() ?>
@@ -160,7 +161,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 <?php if ($player->loan_team_id) : ?>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            В аренде:
+                            <?= Yii::t('frontend', 'views.player.player.loan') ?>:
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <?= $player->loanTeam->getTeamLink() ?>
@@ -170,7 +171,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 <?php endif ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Позиция:
+                        <?= Yii::t('frontend', 'views.player.player.position') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->position() ?>
@@ -178,7 +179,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Спецвозможности:
+                        <?= Yii::t('frontend', 'views.player.player.special') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= $player->special() ?>
@@ -186,7 +187,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Зарплата в день:
+                        <?= Yii::t('frontend', 'views.player.player.salary') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= FormatHelper::asCurrency($player->salary) ?>
@@ -194,7 +195,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Стоимость:
+                        <?= Yii::t('frontend', 'views.player.player.price') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?= FormatHelper::asCurrency($player->price) ?>

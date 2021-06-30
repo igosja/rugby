@@ -25,7 +25,6 @@ use yii\helpers\Html;
  * @property int $base_school_id
  * @property int $base_scout_id
  * @property int $base_training_id
- * @property int $federation_news_id
  * @property int $finance
  * @property int $friendly_status_id
  * @property int $free_base_number
@@ -43,7 +42,6 @@ use yii\helpers\Html;
  * @property int $power_s_24
  * @property int $power_v
  * @property int $power_vs
- * @property int $president_attitude_id
  * @property int $price_base
  * @property int $price_player
  * @property int $price_stadium
@@ -64,15 +62,12 @@ use yii\helpers\Html;
  * @property-read BaseTraining $baseTraining
  * @property-read BuildingBase $buildingBase
  * @property-read BuildingStadium $buildingStadium
- * @property-read News $federationNews
  * @property-read Championship $championship
  * @property-read Conference $conference
  * @property-read FriendlyStatus $friendlyStatus
  * @property-read OffSeason $offSeason
  * @property-read Attitude $nationalAttitude
- * @property-read Attitude $presidentAttitude
  * @property-read RatingTeam $ratingTeam
- * @property-read Recommendation $recommendation
  * @property-read Stadium $stadium
  * @property-read TeamRequest[] $teamRequests
  * @property-read Attitude $u19Attitude
@@ -108,7 +103,6 @@ class Team extends AbstractActiveRecord
                     'mood_rest',
                     'mood_super',
                     'national_attitude_id',
-                    'president_attitude_id',
                     'u19_attitude_id',
                     'u21_attitude_id',
                 ],
@@ -148,7 +142,6 @@ class Team extends AbstractActiveRecord
             ],
             [
                 [
-                    'federation_news_id',
                     'finance',
                     'price_base',
                     'price_player',
@@ -170,10 +163,8 @@ class Team extends AbstractActiveRecord
             [['base_school_id'], 'exist', 'targetRelation' => 'baseSchool'],
             [['base_scout_id'], 'exist', 'targetRelation' => 'baseScout'],
             [['base_training_id'], 'exist', 'targetRelation' => 'baseTraining'],
-            [['federation_news_id'], 'exist', 'targetRelation' => 'federationNews'],
             [['friendly_status_id'], 'exist', 'targetRelation' => 'friendlyStatus'],
             [['national_attitude_id'], 'exist', 'targetRelation' => 'nationalAttitude'],
-            [['president_attitude_id'], 'exist', 'targetRelation' => 'presidentAttitude'],
             [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
             [['u19_attitude_id'], 'exist', 'targetRelation' => 'u19Attitude'],
             [['u21_attitude_id'], 'exist', 'targetRelation' => 'u21Attitude'],
@@ -402,21 +393,21 @@ class Team extends AbstractActiveRecord
         if ($this->base->level >= 5) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: база команды достигла 5-го уровня.'
+                'message' => Yii::t('common', 'models.db.team.re-register.level')
             ];
         }
 
         if ($this->buildingBase) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: на базе идет строительство.'
+                'message' => Yii::t('common', 'models.db.team.re-register.building-base')
             ];
         }
 
         if ($this->buildingStadium) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: на стадионе идет строительство.'
+                'message' => Yii::t('common', 'models.db.team.re-register.building-stadium')
             ];
         }
 
@@ -426,7 +417,7 @@ class Team extends AbstractActiveRecord
         if ($player) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: в команде находятся арендованные игроки.'
+                'message' => Yii::t('common', 'models.db.team.re-register.has-loan')
             ];
         }
 
@@ -437,7 +428,7 @@ class Team extends AbstractActiveRecord
         if ($player) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: игроки команды находятся в аренде.'
+                'message' => Yii::t('common', 'models.db.team.re-register.in-loan')
             ];
         }
 
@@ -448,7 +439,7 @@ class Team extends AbstractActiveRecord
         if ($player) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: в команде есть игроки сборной.'
+                'message' => Yii::t('common', 'models.db.team.re-register.national')
             ];
         }
 
@@ -458,7 +449,7 @@ class Team extends AbstractActiveRecord
         if ($transfer) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: игроки команды выставлены на продажу.'
+                'message' => Yii::t('common', 'models.db.team.re-register.on-transfer')
             ];
         }
 
@@ -468,7 +459,7 @@ class Team extends AbstractActiveRecord
         if ($loan) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: игроки команды выставлены на аренду.'
+                'message' => Yii::t('common', 'models.db.team.re-register.on-loan')
             ];
         }
 
@@ -483,7 +474,7 @@ class Team extends AbstractActiveRecord
         if ($transfer) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: по совершенным трансферам команды еще идет голосование.'
+                'message' => Yii::t('common', 'models.db.team.re-register.transfer-vote')
             ];
         }
 
@@ -498,7 +489,7 @@ class Team extends AbstractActiveRecord
         if ($loan) {
             return [
                 'status' => false,
-                'message' => 'Перерегистрировать нельзя: по совершенным арендам команды еще идет голосование.'
+                'message' => Yii::t('common', 'models.db.team.re-register.loan-vote')
             ];
         }
 
@@ -581,13 +572,13 @@ class Team extends AbstractActiveRecord
             ErrorHelper::log($e);
             return [
                 'status' => false,
-                'message' => 'Не удалось провести перерегистрацию команды',
+                'message' => Yii::t('common', 'models.db.team.re-register.error'),
             ];
         }
 
         return [
             'status' => true,
-            'message' => 'Команда успешно перерегистрирована.',
+            'message' => Yii::t('common', 'models.db.team.re-register.success'),
         ];
     }
 
@@ -849,7 +840,7 @@ class Team extends AbstractActiveRecord
      */
     public function getLogo(): string
     {
-        $result = 'Добавить<br/>эмблему';
+        $result = Yii::t('common', 'models.db.team.get-logo.add');
         if (file_exists(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png')) {
             $result = Html::img(
                 '/img/team/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png'),
@@ -870,7 +861,7 @@ class Team extends AbstractActiveRecord
     {
         $result = '';
         if (!$this->user_id) {
-            $result = FAS::icon(FAS::_FLAG, ['title' => 'Free team']) . ' ';
+            $result = FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.team.icon-free-team.title')]) . ' ';
         }
         return $result;
     }
@@ -894,7 +885,7 @@ class Team extends AbstractActiveRecord
         $result = '-';
         if ($this->offSeason) {
             $result = Html::a(
-                $this->offSeason->place . ' место',
+                $this->offSeason->place . ' ' . Yii::t('common', 'models.db.team.off-season.place'),
                 ['off-season/table']
             );
         }
@@ -912,7 +903,7 @@ class Team extends AbstractActiveRecord
                 $this->championship->federation->country->name . ', ' .
                 $this->championship->division->name . ', ' .
                 $this->championship->place . ' ' .
-                'место',
+                Yii::t('common', 'models.db.team.division.place'),
                 [
                     'championship/index',
                     'federationId' => $this->championship->federation->id,
@@ -921,7 +912,11 @@ class Team extends AbstractActiveRecord
             );
         } elseif ($this->conference) {
             $result = Html::a(
-                'Конференция' . ', ' . $this->conference->place . ' место',
+                Yii::t('common', 'models.db.team.division.conference')
+                . ', '
+                . $this->conference->place
+                . ' '
+                . Yii::t('common', 'models.db.team.division.place'),
                 ['conference/table']
             );
         }
@@ -984,11 +979,11 @@ class Team extends AbstractActiveRecord
     public function rosterPhrase(): string
     {
         $data = [
-            'Уезжая надолго и без интернета не забудьте поставить статус ' . Html::a('в отпуске', ['user/holiday']),
-            Html::a('Пригласите друзей', ['user/referral']) . ' в Лигу и получите вознаграждение',
-            'Если у вас есть вопросы, задайте их специалистам ' . Html::a('тех.поддержки', ['support/index']) . ' Лиги',
-            'Можно достичь высоких результатов, не нарушая правил',
-            'Играйте честно - так интереснее выигрывать',
+            Yii::t('common', 'models.db.team.roster-phrase.1', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.holiday'), ['user/holiday'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.2', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.referral'), ['user/referral'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.3', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.support'), ['support/index'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.4'),
+            Yii::t('common', 'models.db.team.roster-phrase.5'),
         ];
         return $data[array_rand($data)];
     }
@@ -1084,14 +1079,6 @@ class Team extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getFederationNews(): ActiveQuery
-    {
-        return $this->hasOne(News::class, ['id' => 'federation_news_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
     public function getFriendlyStatus(): ActiveQuery
     {
         return $this->hasOne(FriendlyStatus::class, ['id' => 'friendly_status_id']);
@@ -1118,25 +1105,9 @@ class Team extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getPresidentAttitude(): ActiveQuery
-    {
-        return $this->hasOne(Attitude::class, ['id' => 'president_attitude_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
     public function getRatingTeam(): ActiveQuery
     {
         return $this->hasOne(RatingTeam::class, ['team_id' => 'id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getRecommendation(): ActiveQuery
-    {
-        return $this->hasOne(Recommendation::class, ['team_id' => 'id']);
     }
 
     /**

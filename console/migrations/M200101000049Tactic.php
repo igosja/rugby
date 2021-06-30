@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -31,11 +32,11 @@ class M200101000049Tactic extends Migration
             self::TABLE,
             ['name'],
             [
-                ['суперзащитная'],
-                ['защитная'],
-                ['номальная'],
-                ['атакующая'],
-                ['суператакующая'],
+                [Yii::t('console', 'migrations.tactic.super-defence')],
+                [Yii::t('console', 'migrations.tactic.defence')],
+                [Yii::t('console', 'migrations.tactic.normal')],
+                [Yii::t('console', 'migrations.tactic.attack')],
+                [Yii::t('console', 'migrations.tactic.super-attack')],
             ]
         );
 

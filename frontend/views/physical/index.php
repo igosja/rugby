@@ -31,28 +31,28 @@ use yii\web\View;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Центр физподготовки
+                <?= Yii::t('frontend', 'views.physical.index.physical') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Уровень:
+                <?= Yii::t('frontend', 'views.physical.index.level') ?>:
                 <span class="strong"><?= $team->basePhysical->level ?></span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Бонус к изменению усталости:
+                <?= Yii::t('frontend', 'views.physical.index.bonus') ?>:
                 <span class="strong"><?= $team->basePhysical->tire_bonus ?>%</span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php if ($onBuilding) : ?>del<?php endif ?>">
-                Осталось изменений формы:
+                <?= Yii::t('frontend', 'views.physical.index.available') ?>:
                 <span class="strong" id="physical-available" data-url="<?= Url::to(['physical/change']) ?>">
                     <?= $team->availablePhysical() ?>
                 </span>
-                из
+                <?= Yii::t('frontend', 'views.physical.index.from') ?>
                 <span class="strong"><?= $team->basePhysical->change_count ?></span>
             </div>
         </div>
@@ -60,8 +60,7 @@ use yii\web\View;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Здесь - <span class="strong">в физцентре</span> -
-        вы можете поменять физическую форму для игроков своей команды:
+        <?= Yii::t('frontend', 'views.physical.index.p') ?>:
     </div>
 </div>
 <div class="row">
@@ -77,9 +76,9 @@ use yii\web\View;
                     }
                     return [];
                 },
-                'footer' => 'Игрок',
+                'footer' => Yii::t('frontend', 'views.th.player'),
                 'format' => 'raw',
-                'label' => 'Игрок',
+                'label' => Yii::t('frontend', 'views.th.player'),
                 'value' => static function (Player $model) {
                     return $model->getPlayerLink();
                 }
@@ -87,11 +86,11 @@ use yii\web\View;
             [
                 'attribute' => 'position',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Поз',
-                'footerOptions' => ['title' => 'Позиция'],
+                'footer' => Yii::t('frontend', 'views.th.position'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Позиция'],
-                'label' => 'Поз',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                'label' => Yii::t('frontend', 'views.th.position'),
                 'value' => static function (Player $model) {
                     return $model->position();
                 }
@@ -99,10 +98,10 @@ use yii\web\View;
             [
                 'attribute' => 'age',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'В',
-                'footerOptions' => ['title' => 'Возраст'],
-                'headerOptions' => ['title' => 'Возраст'],
-                'label' => 'В',
+                'footer' => Yii::t('frontend', 'views.th.age'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'label' => Yii::t('frontend', 'views.th.age'),
                 'value' => static function (Player $model) {
                     return $model->age;
                 }
@@ -110,10 +109,10 @@ use yii\web\View;
             [
                 'attribute' => 'power',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Номинальная сила'],
-                'headerOptions' => ['title' => 'Номинальная сила'],
-                'label' => 'С',
+                'footer' => Yii::t('frontend', 'views.th.nominal-power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
+                'label' => Yii::t('frontend', 'views.th.nominal-power'),
                 'value' => static function (Player $model) {
                     return $model->power_nominal;
                 }
@@ -181,7 +180,7 @@ use yii\web\View;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <?= Html::a(
-            'Удалить все изменения',
+            Yii::t('frontend', 'views.physical.index.delete'),
             ['clear'],
             ['class' => 'btn margin']
         ) ?>

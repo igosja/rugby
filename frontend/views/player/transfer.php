@@ -35,7 +35,7 @@ print $this->render('//player/_player', ['player' => $player]);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <th>Трансфер игрока</th>
+                <th><?= Yii::t('frontend', 'views.player.transfer.title') ?></th>
             </tr>
         </table>
     </div>
@@ -66,7 +66,7 @@ print $this->render('//player/_player', ['player' => $player]);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <th>Трансфер игрока</th>
+                <th><?= Yii::t('frontend', 'views.player.transfer.title') ?></th>
             </tr>
         </table>
     </div>

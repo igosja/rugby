@@ -1,8 +1,8 @@
 RewriteEngine on
 
-# если это папка или файл, открываем его
+# if it's a folder or file, open it
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# в противном случае перенаправляем на index.php
+# otherwise redirect to index.php
 RewriteRule . index.php

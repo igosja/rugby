@@ -23,7 +23,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h4>Выборы тренера сборной</h4>
+                <h4><?= Yii::t('frontend', 'views.national-election.poll.h4') ?></h4>
             </div>
         </div>
         <div class="row margin-top">
@@ -51,7 +51,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
                     $result = '<div class="row border-top"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
                         . Html::radio($name, $checked, [
                             'index' => $index,
-                            'label' => $model->user_id ? $model->user->getUserLink() : 'Против всех',
+                            'label' => $model->user_id ? $model->user->getUserLink() : Yii::t('frontend', 'views.national-election.poll.against'),
                             'value' => $model->id,
                         ])
                         . '</div></div>';
@@ -62,22 +62,25 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
                             . '</div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
                                 <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            Дата регистрации: '
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
+                            . Yii::t('frontend', 'views.national-election.poll.register')
+                            . ' '
                             . FormatHelper::asDate($model->user->date_register)
                             . '</div></div>
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            Рейтинг менеджера: '
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
+                            . Yii::t('frontend', 'views.national-election.poll.rating')
+                            . ' '
                             . $model->user->rating
                             . '</div></div>
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            Сила состава: '
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
+                            . Yii::t('frontend', 'views.national-election.poll.power')
+                            . ' '
                             . $model->playerPower()
                             . ' ['
                             . Html::a(
-                                'Смотреть состав',
+                                Yii::t('frontend', 'views.national-election.poll.link.player'),
                                 ['player', 'id' => $model->id],
                                 ['target' => '_blank']
                             )
@@ -97,7 +100,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
             ->label(false) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Голосовать', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.national-election.poll.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

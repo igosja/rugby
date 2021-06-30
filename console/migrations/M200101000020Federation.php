@@ -5,6 +5,7 @@
 namespace console\migrations;
 
 use Yii;
+use yii\db\Exception;
 use yii\db\Migration;
 
 /**
@@ -18,6 +19,7 @@ class M200101000020Federation extends Migration
 
     /**
      * @return bool
+     * @throws Exception
      */
     public function safeUp(): bool
     {

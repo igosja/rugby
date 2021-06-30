@@ -34,27 +34,25 @@ use yii\widgets\ActiveForm;
             <?php if (!$user->date_confirm) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вам заблокирован доступ к чату
-                        <br/>
-                        Причина - ваш почтовый адрес не подтверждён
+                        <?= Yii::t('frontend', 'views.chat.index.blocked-confirm') ?>
                     </div>
                 </div>
             <?php elseif ($userBlockChat && $userBlockChat->date >= time()) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вам заблокирован доступ к чату до
-                        <?= FormatHelper::asDateTime($userBlockChat->date) ?>
-                        <br/>
-                        Причина - <?= $userBlockChat->userBlockReason->text ?>
+                        <?= Yii::t('frontend', 'views.chat.index.blocked-reason', [
+                            'date' => FormatHelper::asDateTime($userBlockChat->date),
+                            'reason' => $userBlockChat->userBlockReason->text,
+                        ]) ?>
                     </div>
                 </div>
             <?php elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
                 <div class="row margin-top">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                        Вам заблокирован доступ к чату до
-                        <?= FormatHelper::asDateTime($userBlockComment->date) ?>
-                        <br/>
-                        Причина - <?= $userBlockComment->userBlockReason->text ?>
+                        <?= Yii::t('frontend', 'views.chat.index.blocked-reason', [
+                            'date' => FormatHelper::asDateTime($userBlockComment->date),
+                            'reason' => $userBlockComment->userBlockReason->text,
+                        ]) ?>
                     </div>
                 </div>
             <?php else: ?>
@@ -69,18 +67,18 @@ use yii\widgets\ActiveForm;
                         'options' => ['class' => 'row'],
                         'template' =>
                             '<div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label}</div>
-                </div>
-                <div class="row margin-top">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
-                </div>
-                <div class="row">{error}</div>',
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">{label}</div>
+                            </div>
+                            <div class="row margin-top">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>
+                            </div>
+                            <div class="row">{error}</div>',
                     ],
                 ]) ?>
                 <?= $form->field($model, 'message')->textarea()->label(false) ?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                        <?= Html::submitButton('Отправить', ['class' => 'btn margin']) ?>
+                        <?= Html::submitButton(Yii::t('frontend', 'views.chat.index.submit'), ['class' => 'btn margin']) ?>
                     </div>
                 </div>
                 <?php ActiveForm::end() ?>

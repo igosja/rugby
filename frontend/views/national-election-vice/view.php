@@ -17,7 +17,7 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1>Выборы заместителя тренера национальной сборной</h1>
+                <h1><?= Yii::t('frontend', 'views.national-election-vice.view.h1') ?></h1>
             </div>
         </div>
         <div class="row border-top">

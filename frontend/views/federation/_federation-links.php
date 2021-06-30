@@ -13,15 +13,15 @@ try {
     print LinkBar::widget([
         'items' => [
             [
-                'text' => 'Команды',
+                'text' => Yii::t('frontend', 'views.federation.links.team'),
                 'url' => ['federation/team', 'id' => $id],
             ],
             [
-                'text' => 'Сборные',
+                'text' => Yii::t('frontend', 'views.federation.links.national'),
                 'url' => ['federation/national', 'id' => $id],
             ],
             [
-                'text' => 'Лига Чемпионов',
+                'text' => Yii::t('frontend', 'views.federation.links.league'),
                 'url' => ['federation/league', 'id' => $id],
             ],
         ]

@@ -34,14 +34,14 @@ use yii\helpers\Html;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-right text-size-1">
-                Организация товарищеских матчей
+                <?= Yii::t('frontend', 'views.friendly.index.friendly') ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Ближайшие дни товарищеских матчей:
+        <?= Yii::t('frontend', 'views.friendly.index.days') ?>:
     </div>
 </div>
 <div class="row">
@@ -53,7 +53,7 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-25'],
-                'label' => 'День',
+                'label' => Yii::t('frontend', 'views.friendly.index.th.day'),
                 'value' => static function (Schedule $model) {
                     return Html::a(
                         FormatHelper::asDate($model->date),
@@ -63,7 +63,7 @@ use yii\helpers\Html;
             ],
             [
                 'format' => 'raw',
-                'label' => 'Статус',
+                'label' => Yii::t('frontend', 'views.friendly.index.th.status'),
                 'value' => static function (Schedule $model) use ($scheduleStatusArray) {
                     return $scheduleStatusArray[$model->id];
                 }
@@ -72,7 +72,7 @@ use yii\helpers\Html;
         print GridView::widget([
             'columns' => $columns,
             'dataProvider' => $dataProvider,
-            'emptyText' => 'В ближаещие дни не запланировано товарищеских матчей.',
+            'emptyText' => Yii::t('frontend', 'views.friendly.index.empty'),
             'summary' => false,
         ]);
     } catch (Exception $e) {

@@ -26,7 +26,7 @@ use yii\helpers\Html;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>Рейтинги</h1>
+        <h1><?= Yii::t('frontend', 'views.rating.index.h1') ?></h1>
     </div>
 </div>
 <?= Html::beginForm(['rating/index'], 'get') ?>
@@ -47,7 +47,7 @@ use yii\helpers\Html;
                 'countryId',
                 $countryId,
                 $countryArray,
-                ['class' => 'form-control submit-on-change', 'id' => 'countryId', 'prompt' => 'Все']
+                ['class' => 'form-control submit-on-change', 'id' => 'countryId', 'prompt' => Yii::t('frontend', 'views.rating.index.prompt.country')]
             ) ?>
         </div>
     </div>
@@ -61,8 +61,8 @@ use yii\helpers\Html;
             [
                 'class' => SerialColumn::class,
                 'contentOptions' => ['class' => 'col-5 text-center'],
-                'footer' => '№',
-                'header' => '№',
+                'footer' => '#',
+                'header' => '#',
                 'headerOptions' => ['class' => 'col-5'],
             ],
         ];
@@ -70,9 +70,9 @@ use yii\helpers\Html;
         if (RatingChapter::TEAM === $ratingType->rating_chapter_id) {
             $columns[] = [
                 'attribute' => 'team_name',
-                'footer' => 'Команда',
+                'footer' => Yii::t('frontend', 'views.th.team'),
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (RatingTeam $model) {
                     return $model->team->getTeamImageLink();
                 }
@@ -82,10 +82,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 's_15',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 's15',
-                    'footerOptions' => ['title' => 'Сумма сил 15 лучшых игроков'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Сумма сил 15 лучшых игроков'],
-                    'label' => 's15',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.s15'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.s15')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.s15')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.s15'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->power_s_15;
                     }
@@ -93,10 +93,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 's_19',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 's19',
-                    'footerOptions' => ['title' => 'Сумма сил 19 лучших игроков'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Сумма сил 19 лучших игроков'],
-                    'label' => 's19',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.s19'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.s19')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.s19')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.s19'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->power_s_19;
                     }
@@ -104,10 +104,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 's_24',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 's24',
-                    'footerOptions' => ['title' => 'Сумма сил 24 лучших игроков'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Сумма сил 24 лучших игроков'],
-                    'label' => 's24',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.s24'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.s24')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.s24')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.s24'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->power_s_24;
                     }
@@ -115,10 +115,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Vs',
-                    'footerOptions' => ['title' => 'Рейтинг силы команды в длительных соревнованиях'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Рейтинг силы команды в длительных соревнованиях'],
-                    'label' => 'Vs',
+                    'footer' => Yii::t('frontend', 'views.th.vs'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.vs')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.title.vs')],
+                    'label' => Yii::t('frontend', 'views.th.vs'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->power_vs;
                     }
@@ -127,10 +127,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['title' => 'Средний возраст'],
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Средний возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.age'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.age')],
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.age')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.age'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->player_average_age;
                     }
@@ -139,10 +139,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Вм',
-                    'footerOptions' => ['title' => 'Вместимость'],
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Вместимость'],
-                    'label' => 'Вм',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.stadium'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.stadium')],
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.stadium')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.stadium'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->stadium->capacity;
                     }
@@ -151,10 +151,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Пос',
-                    'footerOptions' => ['title' => 'Посещаемость'],
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Посещаемость'],
-                    'label' => 'Пос',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.visitor'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.visitor')],
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.visitor')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.visitor'),
                     'value' => static function (RatingTeam $model) {
                         return Yii::$app->formatter->asDecimal($model->team->visitor / 100, 2);
                     }
@@ -163,10 +163,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'base',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Б',
-                    'footerOptions' => ['title' => 'База'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'База'],
-                    'label' => 'Б',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.base'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.base')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.base')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.base'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->base->level;
                     }
@@ -174,10 +174,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'П',
-                    'footerOptions' => ['title' => 'Количество построек'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Количество построек'],
-                    'label' => 'П',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.base.used'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.base.used')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.base.used')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.base.used'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->baseUsed();
                     }
@@ -185,10 +185,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'training',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Т',
-                    'footerOptions' => ['title' => 'Тренировочная база'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Тренировочная база'],
-                    'label' => 'Т',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.training'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.training')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.training')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.training'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->baseTraining->level;
                     }
@@ -196,10 +196,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'medical',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'М',
-                    'footerOptions' => ['title' => 'Медицинский центр'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Медицинский центр'],
-                    'label' => 'М',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.medical'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.medical')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.medical')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.medical'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->baseMedical->level;
                     }
@@ -207,10 +207,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'physical',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Ф',
-                    'footerOptions' => ['title' => 'Физцентр'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Физцентр'],
-                    'label' => 'Ф',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.physical'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.physical')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.physical')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.physical'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->basePhysical->level;
                     }
@@ -218,10 +218,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'school',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Сп',
-                    'footerOptions' => ['title' => 'Спротшкола'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Спротшкола'],
-                    'label' => 'Сп',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.school'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.school')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.title.school')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.school'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->baseSchool->level;
                     }
@@ -229,10 +229,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'scout',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Ск',
-                    'footerOptions' => ['title' => 'Скаутцентр'],
-                    'headerOptions' => ['class' => 'col-6', 'title' => 'Скаутцентр'],
-                    'label' => 'Ск',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.scout'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.scout')],
+                    'headerOptions' => ['class' => 'col-6', 'title' => Yii::t('frontend', 'views.rating.index.th.scout')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.scout'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->baseScout->level;
                     }
@@ -241,9 +241,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'ЗП',
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Зарплата игроков'],
-                    'label' => 'ЗП',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.salary'),
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.salary')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.salary'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->salary);
                     }
@@ -252,9 +252,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '$',
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Денег в кассе'],
-                    'label' => '$',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.finance'),
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.finance')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.finance'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->finance);
                     }
@@ -263,9 +263,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'База',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.base'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'База',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.base'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_base);
                     }
@@ -274,9 +274,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Стадион',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.stadium'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Стадион',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.stadium'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_stadium);
                     }
@@ -285,9 +285,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'player_number',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Кол',
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Количество'],
-                    'label' => 'Кол',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.player'),
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.player')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.player'),
                     'value' => static function (RatingTeam $model) {
                         return $model->team->player_number;
                     }
@@ -295,9 +295,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '$',
-                    'headerOptions' => ['class' => 'col-15', 'title' => 'Стоимость'],
-                    'label' => '$',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.player'),
+                    'headerOptions' => ['class' => 'col-15', 'title' => Yii::t('frontend', 'views.rating.index.title.price.player')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.player'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_player);
                     }
@@ -306,9 +306,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'base_price',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'База',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.base'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'База',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.base'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_base);
                     }
@@ -316,9 +316,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'stadium_price',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Стадион',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.stadium'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Стадион',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.stadium'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_stadium);
                     }
@@ -326,9 +326,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'player_price',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Игроки',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.total.player'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Игроки',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.total.player'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_player);
                     }
@@ -336,9 +336,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Стоимость',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.price.total'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => 'Стоимость',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.price.total'),
                     'value' => static function (RatingTeam $model) {
                         return FormatHelper::asCurrency($model->team->price_total);
                     }
@@ -346,20 +346,20 @@ use yii\helpers\Html;
             }
         } elseif (RatingType::USER_RATING === $ratingType->id) {
             $columns[] = [
-                'footer' => 'Менеджер',
+                'footer' => Yii::t('frontend', 'views.rating.index.th.user'),
                 'format' => 'raw',
-                'label' => 'Менеджер',
+                'label' => Yii::t('frontend', 'views.rating.index.th.user'),
                 'value' => static function (RatingUser $model) {
                     return $model->user->getUserLink();
                 }
             ];
             $columns[] = [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Страна'],
+                'footer' => Yii::t('frontend', 'views.rating.index.th.user.country'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.user.country')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'col-1', 'title' => 'Страна'],
-                'label' => 'С',
+                'headerOptions' => ['class' => 'col-1', 'title' => Yii::t('frontend', 'views.rating.index.title.user.country')],
+                'label' => Yii::t('frontend', 'views.rating.index.th.user.country'),
                 'value' => static function (RatingUser $model) {
                     return $model->user->country ? $model->user->country->getImage() : '';
                 }
@@ -367,18 +367,18 @@ use yii\helpers\Html;
             $columns[] = [
                 'attribute' => 'val',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Рейтинг',
+                'footer' => Yii::t('frontend', 'views.rating.index.th.rating'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Рейтинг',
+                'label' => Yii::t('frontend', 'views.rating.index.th.rating'),
                 'value' => static function (RatingUser $model) {
                     return $model->user->rating;
                 }
             ];
         } else {
             $columns[] = [
-                'footer' => 'Страна',
+                'footer' => Yii::t('frontend', 'views.rating.index.th.country'),
                 'format' => 'raw',
-                'label' => 'Страна',
+                'label' => Yii::t('frontend', 'views.rating.index.th.country'),
                 'value' => static function (RatingFederation $model) {
                     return $model->federation->country->getImageTextLink();
                 }
@@ -388,9 +388,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '10 лучших',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.federation.stadium'),
                     'headerOptions' => ['class' => 'col-15'],
-                    'label' => '10 лучших',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.federation.stadium'),
                     'value' => static function (RatingFederation $model) {
                         return $model->federation->stadium_capacity;
                     }
@@ -399,10 +399,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'game',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'И',
-                    'footerOptions' => ['title' => 'Игры'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Игры'],
-                    'label' => 'И',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.game'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.game')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.game')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.game'),
                     'value' => static function (RatingFederation $model) {
                         return $model->federation->game;
                     }
@@ -410,10 +410,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'auto',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'А',
-                    'footerOptions' => ['title' => 'Автосоставы'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Автосоставы'],
-                    'label' => 'А',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.auto'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.auto')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.auto')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.auto'),
                     'value' => static function (RatingFederation $model) {
                         return $model->federation->auto;
                     }
@@ -421,9 +421,9 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '%',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.percent'),
                     'headerOptions' => ['class' => 'col-10'],
-                    'label' => '%',
+                    'label' => Yii::t('frontend', 'views.rating.index.th.percent'),
                     'value' => static function (RatingFederation $model) {
                         return Yii::$app->formatter->asDecimal(
                             round($model->federation->auto / ($model->federation->game ?: 1) * 100, 1)
@@ -442,8 +442,8 @@ use yii\helpers\Html;
                     $columns[] = [
                         'contentOptions' => ['class' => 'text-center'],
                         'footer' => $columnSeason,
-                        'footerOptions' => ['title' => 'Сезон ' . $columnSeason],
-                        'headerOptions' => ['class' => 'col-10', 'title' => 'Сезон ' . $columnSeason],
+                        'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.th.season') . ' ' . $columnSeason],
+                        'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.th.season') . ' ' . $columnSeason],
                         'label' => $columnSeason,
                         'value' => static function (RatingFederation $model) use ($columnSeason) {
                             $count = 0;
@@ -464,10 +464,10 @@ use yii\helpers\Html;
                 $columns[] = [
                     'attribute' => 'val',
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'K',
-                    'footerOptions' => ['title' => 'Коэффициент'],
-                    'headerOptions' => ['class' => 'col-10', 'title' => 'Коэффициент'],
-                    'label' => 'K',
+                    'footer' => Yii::t('frontend', 'views.rating.index.th.coefficient'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.rating.index.title.coefficient')],
+                    'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.rating.index.title.coefficient')],
+                    'label' => Yii::t('frontend', 'views.rating.index.th.coefficient') . 'K',
                     'value' => static function (RatingFederation $model) use ($season) {
                         $rating = 0;
                         for ($i = 0; $i < 5; $i++) {

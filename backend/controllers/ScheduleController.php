@@ -5,6 +5,7 @@
 namespace backend\controllers;
 
 use common\models\db\Schedule;
+use Yii;
 use yii\web\Response;
 
 /**
@@ -29,7 +30,7 @@ class ScheduleController extends AbstractController
             ->limit(1)
             ->one();
 
-        $this->view->title = 'Перевести время';
+        $this->view->title = Yii::t('backend', 'controllers.schedule.index.title');
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $this->render('index', [

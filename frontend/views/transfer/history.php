@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1>Список хоккеистов, проданных на трансфере</h1>
+            <h1><?= Yii::t('frontend', 'views.transfer.history.h1') ?></h1>
         </div>
     </div>
     <div class="row margin-top-small text-center">
@@ -38,82 +38,82 @@ use yii\widgets\ActiveForm;
         'template' => '{input}',
     ],
     'method' => 'get',
-]); ?>
+]) ?>
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-            Условия поиска:
+            <?= Yii::t('frontend', 'views.transfer.history.search') ?>:
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
             <?= $form->field($model, 'country')->dropDownList(
                 $countryArray,
-                ['class' => 'form-control', 'prompt' => 'Национальность']
-            ); ?>
+                ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.transfer.history.prompt.country')]
+            ) ?>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
             <?= $form->field($model, 'name')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Имя',
-            ]); ?>
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.name'),
+            ]) ?>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
             <?= $form->field($model, 'surname')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Фамилия',
-            ]); ?>
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.surname'),
+            ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'position')->dropDownList(
                 $positionArray,
-                ['class' => 'form-control', 'prompt' => 'Позиция']
-            ); ?>
+                ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.transfer.history.prompt.position')]
+            ) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Возраст, от',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.age.min'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMax')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Возраст, до',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.age.max'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Сила, от',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.power.min'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'powerMax')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Сила, до',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.power.max'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'priceMin')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Цена, от',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.price.min'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
             <?= $form->field($model, 'priceMax')->textInput([
                 'class' => 'form-control',
-                'placeholder' => 'Цена, до',
+                'placeholder' => Yii::t('frontend', 'views.transfer.history.placeholder.price.max'),
                 'type' => 'number',
-            ]); ?>
+            ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-            <?= Html::submitButton('Поиск', ['class' => 'form-control submit-blue']); ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.transfer.history.submit'), ['class' => 'form-control submit-blue']) ?>
         </div>
     </div>
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end() ?>
     <div class="row">
         <?php
 
@@ -122,13 +122,13 @@ use yii\widgets\ActiveForm;
                 [
                     'class' => SerialColumn::class,
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => '№',
-                    'header' => '№',
+                    'footer' => '#',
+                    'header' => '#',
                 ],
                 [
-                    'footer' => 'Игрок',
+                    'footer' => Yii::t('frontend', 'views.th.player'),
                     'format' => 'raw',
-                    'label' => 'Игрок',
+                    'label' => Yii::t('frontend', 'views.th.player'),
                     'value' => static function (Transfer $model) {
                         return Html::a(
                             $model->player->playerName(),
@@ -138,84 +138,84 @@ use yii\widgets\ActiveForm;
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs text-center'],
-                    'footer' => 'Нац',
-                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
+                    'footer' => Yii::t('frontend', 'views.th.national'),
+                    'footerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Национальность'],
-                    'label' => 'Нац',
+                    'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
+                    'label' => Yii::t('frontend', 'views.th.national'),
                     'value' => static function (Transfer $model) {
                         return $model->player->country->getImageLink();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'Поз',
-                    'footerOptions' => ['title' => 'Позиция'],
+                    'footer' => Yii::t('frontend', 'views.th.position'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['title' => 'Позиция'],
-                    'label' => 'Поз',
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Transfer $model) {
                         return $model->position();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'В',
-                    'footerOptions' => ['title' => 'Возраст'],
-                    'headerOptions' => ['title' => 'Возраст'],
-                    'label' => 'В',
+                    'footer' => Yii::t('frontend', 'views.th.age'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                    'label' => Yii::t('frontend', 'views.th.age'),
                     'value' => static function (Transfer $model) {
                         return $model->age;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center'],
-                    'footer' => 'С',
-                    'footerOptions' => ['title' => 'Сила'],
-                    'headerOptions' => ['title' => 'Сила'],
-                    'label' => 'С',
+                    'footer' => Yii::t('frontend', 'views.th.power'),
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.power')],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.power')],
+                    'label' => Yii::t('frontend', 'views.th.power'),
                     'value' => static function (Transfer $model) {
                         return $model->power;
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-center hidden-xs'],
-                    'footer' => 'Спец',
-                    'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
+                    'footer' => Yii::t('frontend', 'views.th.special'),
+                    'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
                     'format' => 'raw',
-                    'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
-                    'label' => 'Спец',
+                    'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                    'label' => Yii::t('frontend', 'views.th.special'),
                     'value' => static function (Transfer $model) {
                         return $model->special();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs'],
-                    'footer' => 'Продавец',
+                    'footer' => Yii::t('frontend', 'views.transfer.history.th.seller'),
                     'footerOptions' => ['class' => 'hidden-xs'],
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'hidden-xs'],
-                    'label' => 'Продавец',
+                    'label' => Yii::t('frontend', 'views.transfer.history.th.seller'),
                     'value' => static function (Transfer $model) {
                         return $model->teamSeller->getTeamLink();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'hidden-xs'],
-                    'footer' => 'Покупатель',
+                    'footer' => Yii::t('frontend', 'views.transfer.history.th.buyer'),
                     'footerOptions' => ['class' => 'hidden-xs'],
                     'format' => 'raw',
                     'headerOptions' => ['class' => 'hidden-xs'],
-                    'label' => 'Покупатель',
+                    'label' => Yii::t('frontend', 'views.transfer.history.th.buyer'),
                     'value' => static function (Transfer $model) {
                         return $model->teamBuyer->getTeamLink();
                     }
                 ],
                 [
                     'contentOptions' => ['class' => 'text-right'],
-                    'footer' => 'Цена',
+                    'footer' => Yii::t('frontend', 'views.th.price'),
                     'format' => 'raw',
-                    'label' => 'Цена',
+                    'label' => Yii::t('frontend', 'views.th.price'),
                     'value' => static function (Transfer $model) {
                         $class = '';
                         if ($model->cancel) {
@@ -227,9 +227,9 @@ use yii\widgets\ActiveForm;
                 [
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => '+/-',
-                    'footerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.transfer.history.title.rating')],
                     'format' => 'raw',
-                    'headerOptions' => ['title' => 'Оценка сделки менеджерами'],
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.transfer.history.title.rating')],
                     'label' => '+/-',
                     'value' => static function (Transfer $model) {
                         return $model->rating();

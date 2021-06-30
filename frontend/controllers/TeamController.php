@@ -10,12 +10,6 @@ use common\models\db\ElectionNationalVice;
 use common\models\db\ElectionNationalViceApplication;
 use common\models\db\ElectionNationalViceVote;
 use common\models\db\ElectionNationalVote;
-use common\models\db\ElectionPresident;
-use common\models\db\ElectionPresidentApplication;
-use common\models\db\ElectionPresidentVice;
-use common\models\db\ElectionPresidentViceApplication;
-use common\models\db\ElectionPresidentViceVote;
-use common\models\db\ElectionPresidentVote;
 use common\models\db\ElectionStatus;
 use common\models\db\Federation;
 use common\models\db\FriendlyInvite;
@@ -61,7 +55,7 @@ class TeamController extends AbstractController
     {
         $dataProvider = TeamPrepare::getTeamGroupDataProvider();
 
-        $this->setSeoTitle('Команды');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.team.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -104,7 +98,7 @@ class TeamController extends AbstractController
 
         $dataProvider = PlayerPrepare::getPlayerTeamDataProvider($team);
 
-        $this->setSeoTitle($team->name . ' Профиль команды');
+        $this->setSeoTitle($team->name . '. ' . Yii::t('frontend', 'controllers.team.view.title'));
         return $this->render('view', [
             'dataProvider' => $dataProvider,
             'notificationArray' => $notificationArray,
@@ -123,7 +117,7 @@ class TeamController extends AbstractController
 
         $dataProvider = AchievementPrepare::getTeamAchievementDataProvider($team->id);
 
-        $this->setSeoTitle($team->fullName() . ' - achievements');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.achievement.title'));
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
             'team' => $team,
@@ -144,7 +138,7 @@ class TeamController extends AbstractController
         $dataProviderLoanFrom = LoanPrepare::getTeamSellerDataProvider($team->id);
         $dataProviderLoanTo = LoanPrepare::getTeamBuyerDataProvider($team->id);
 
-        $this->setSeoTitle($team->fullName() . ' - deals');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.deal.title'));
         return $this->render('deal', [
             'dataProviderTransferFrom' => $dataProviderTransferFrom,
             'dataProviderTransferTo' => $dataProviderTransferTo,
@@ -166,7 +160,7 @@ class TeamController extends AbstractController
         $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $dataProvider = FinancePrepare::getTeamDataProvider($team->id, $seasonId);
 
-        $this->setSeoTitle($team->fullName() . ' - finance');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.finance.title'));
         return $this->render('finance', [
             'dataProvider' => $dataProvider,
             'seasonId' => $seasonId,
@@ -222,7 +216,7 @@ class TeamController extends AbstractController
             }
         }
 
-        $this->setSeoTitle($team->fullName() . ' - games');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.game.title'));
         return $this->render('game', [
             'dataProvider' => $dataProvider,
             'seasonId' => $seasonId,
@@ -245,7 +239,7 @@ class TeamController extends AbstractController
         $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
         $dataProvider = HistoryPrepare::getTeamDataProvider($team->id, $seasonId);
 
-        $this->setSeoTitle($team->fullName() . ' - history');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.history.title'));
         return $this->render('history', [
             'dataProvider' => $dataProvider,
             'seasonId' => $seasonId,
@@ -265,7 +259,7 @@ class TeamController extends AbstractController
 
         $dataProvider = AchievementPrepare::getTeamTrophyDataProvider($team->id);
 
-        $this->setSeoTitle($team->fullName() . ' - trophies');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.trophy.title'));
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
             'team' => $team,
@@ -286,7 +280,7 @@ class TeamController extends AbstractController
             ->limit(1)
             ->one();
 
-        $this->setSeoTitle($team->fullName() . ' - statistics');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.statistics.title'));
         return $this->render('statistics', [
             'team' => $team,
         ]);
@@ -310,7 +304,7 @@ class TeamController extends AbstractController
 
         $logoArray = Logo::find()->all();
 
-        $this->setSeoTitle($team->fullName() . '. Загрузка эмблемы');
+        $this->setSeoTitle($team->fullName() . '. ' . Yii::t('frontend', 'controllers.team.logo.title'));
 
         return $this->render('logo', [
             'logoArray' => $logoArray,
@@ -320,10 +314,10 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @return array|Response
+     * @return array
      * @throws Exception
      */
-    public function notificationArray()
+    public function notificationArray(): array
     {
         if (!$this->myTeam) {
             return [];
@@ -350,7 +344,7 @@ class TeamController extends AbstractController
         if ($closestGame) {
             if (($closestGame->home_team_id === $this->myTeam->id && !$closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && !$closestGame->guest_mood_id)) {
-                $result[] = '<span class="font-red">Вы не отправили состав на ближайший матч своей команды.</span> ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.team.notification.lineup') . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup/view', 'id' => $closestGame->id]
                     );
@@ -358,7 +352,7 @@ class TeamController extends AbstractController
 
             if (($closestGame->home_team_id === $this->myTeam->id && Mood::SUPER === $closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && Mood::SUPER === $closestGame->guest_mood_id)) {
-                $result[] = 'В ближайшем матче ваша команда будет использовать <span class="strong font-green">супер</span>. ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.team.notification.super') . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup/view', 'id' => $closestGame->id]
                     );
@@ -366,7 +360,7 @@ class TeamController extends AbstractController
 
             if (($closestGame->home_team_id === $this->myTeam->id && Mood::REST === $closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && Mood::REST === $closestGame->guest_mood_id)) {
-                $result[] = 'В ближайшем матче ваша команда будет использовать <span class="strong font-red">отдых</span>. ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.team.notification.rest') . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup/view', 'id' => $closestGame->id]
                     );
@@ -374,14 +368,14 @@ class TeamController extends AbstractController
         }
 
         if ($user->isVip() && $user->date_vip < time() + 604800) {
-            $result[] = 'Ваш VIP-клуб заканчивается менее, чем через неделю - не забудьте продлить. ' . Html::a(
+            $result[] = Yii::t('frontend', 'controllers.team.notification.vip') . Html::a(
                     '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                     ['store/index']
                 );
         }
 
         if ($this->myTeam->free_base_number) {
-            $result[] = 'У вас есть бесплатные улучшения базы. ' . Html::a(
+            $result[] = Yii::t('frontend', 'controllers.team.notification.base') . Html::a(
                     '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                     ['base-free/view']
                 );
@@ -396,7 +390,7 @@ class TeamController extends AbstractController
             ->limit(1)
             ->one();
         if ($friendlyInvite) {
-            $result[] = 'У вас есть новые приглашения сыграть товарищеский матч. ' . Html::a(
+            $result[] = Yii::t('frontend', 'controllers.team.notification.friendly') . Html::a(
                     '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                     ['friendly/view', 'id' => $friendlyInvite->schedule_id]
                 );
@@ -439,12 +433,12 @@ class TeamController extends AbstractController
                         ])
                         ->count();
                     if ($electionNationalApplication) {
-                        $result[] = 'Вы являетесь кандидатом на должность тренера национальной сборной. ' . Html::a(
+                        $result[] = Yii::t('frontend', 'controllers.team.notification.coach.candidate') . Html::a(
                                 '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                 ['national-election/application']
                             );
                     } else {
-                        $result[] = 'В вашей стране открыт прием заявок от кандидатов тренеров национальной сборной. ' . Html::a(
+                        $result[] = Yii::t('frontend', 'controllers.team.notification.coach.application') . Html::a(
                                 '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                 ['national-election/application']
                             );
@@ -463,7 +457,7 @@ class TeamController extends AbstractController
                         Yii::$app->controller->redirect(['national-election/poll']);
                     }
 
-                    $result[] = 'В вашей стране проходят выборы тренера национальной сборной. ' . Html::a(
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.coach.election') . Html::a(
                             '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                             ['national-election/view']
                         );
@@ -499,12 +493,12 @@ class TeamController extends AbstractController
                         ])
                         ->count();
                     if ($electionNationalViceApplication) {
-                        $result[] = 'Вы являетесь кандидатом на должность заместителя тренера национальной сборной. ' . Html::a(
+                        $result[] = Yii::t('frontend', 'controllers.team.notification.vice.candidate') . Html::a(
                                 '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                 ['national-election-vice/application']
                             );
                     } else {
-                        $result[] = 'В вашей стране открыт прием заявок от кандидатов заместителей тренера национальной сборной. ' . Html::a(
+                        $result[] = Yii::t('frontend', 'controllers.team.notification.vice.application') . Html::a(
                                 '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                 ['national-election-vice/application']
                             );
@@ -523,7 +517,7 @@ class TeamController extends AbstractController
                         Yii::$app->controller->redirect(['national-election-vice/poll']);
                     }
 
-                    $result[] = 'В вашей стране проходят выборы заместителя тренера национальной сборной. ' . Html::a(
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.vice.election') . Html::a(
                             '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                             ['national-election-vice/view']
                         );
@@ -535,11 +529,6 @@ class TeamController extends AbstractController
          * @var Federation[] $presidentFederationArray
          */
         $presidentFederationArray = Federation::find()
-            ->where([
-                'or',
-                ['president_user_id' => $this->user->id],
-                ['vice_user_id' => $this->user->id],
-            ])
             ->all();
 
         if ($presidentFederationArray) {
@@ -578,7 +567,7 @@ class TeamController extends AbstractController
                 ->limit(1)
                 ->one();
             if ($transfer) {
-                $result[] = 'У вас есть непроверенные сделки в вашей федерации. ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.team.notification.deal') . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['transfer/view', 'id' => $transfer->id]
                     );
@@ -607,7 +596,7 @@ class TeamController extends AbstractController
                     ->limit(1)
                     ->one();
                 if ($loan) {
-                    $result[] = 'У вас есть непроверенные сделки в вашей федерации. ' . Html::a(
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.deal') . Html::a(
                             '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                             ['loan/view', 'id' => $loan->id]
                         );
@@ -631,7 +620,7 @@ class TeamController extends AbstractController
                         ->limit(1)
                         ->one();
                     if ($transfer) {
-                        $result[] = 'У вас есть непроверенные сделки с отрицательными оценками. ' . Html::a(
+                        $result[] = Yii::t('frontend', 'controllers.team.notification.deal.minus') . Html::a(
                                 '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                 ['transfer/view', 'id' => $transfer->id]
                             );
@@ -655,7 +644,7 @@ class TeamController extends AbstractController
                             ->limit(1)
                             ->one();
                         if ($loan) {
-                            $result[] = 'У вас есть непроверенные сделки с отрицательными оценками. ' . Html::a(
+                            $result[] = Yii::t('frontend', 'controllers.team.notification.deal.minus') . Html::a(
                                     '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                                     ['loan/view', 'id' => $loan->id]
                                 );
@@ -680,7 +669,7 @@ class TeamController extends AbstractController
             if ($closestGame) {
                 if (($closestGame->home_national_id === $this->myNationalOrVice->id && !$closestGame->home_mood_id) ||
                     ($closestGame->guest_national_id === $this->myNationalOrVice->id && !$closestGame->guest_mood_id)) {
-                    $result[] = '<span class="font-yellow">Вы не отправили состав на ближайший матч сборной.</span> ' . Html::a(
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.lineup.national') . Html::a(
                             '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                             ['lineup-national/view', 'id' => $closestGame->id]
                         );

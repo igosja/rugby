@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-2">
                 <?= Html::a(
-                    'Форум',
+                    Yii::t('frontend', 'modules.forum.views.bread.forum'),
                     ['default/index']
                 ) ?>
                 /
@@ -32,12 +32,12 @@ use yii\widgets\ActiveForm;
                     ['group/view', 'id' => $forumGroup->id]
                 ) ?>
                 /
-                Создание темы
+                <?= Yii::t('frontend', 'modules.forum.views.theme.create.bread.create') ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>Создание темы</h1>
+                <h1><?= Yii::t('frontend', 'modules.forum.views.theme.create.h1') ?></h1>
             </div>
         </div>
         <?php $form = ActiveForm::begin([
@@ -60,7 +60,7 @@ use yii\widgets\ActiveForm;
         ])->textarea(['raw' => 5])->label(false) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Создать', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'modules.forum.views.theme.create.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

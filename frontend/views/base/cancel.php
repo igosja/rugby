@@ -21,19 +21,19 @@ use yii\helpers\Html;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        Вы собираетесь отменить строительство здания.
+        <?= Yii::t('frontend', 'views.base.cancel.p') ?>
         <?php if ($price > 0) : ?>
-            Компенсансация за отмену строительства составит
+            <?= Yii::t('frontend', 'views.base.cancel.return') ?>
             <span class="strong"><?= FormatHelper::asCurrency($price) ?></span>.
         <?php else : ?>
-            Оплата за отмену строительства составит
+            <?= Yii::t('frontend', 'views.base.cancel.price') ?>
             <span class="strong"><?= FormatHelper::asCurrency(-$price) ?></span>.
         <?php endif ?>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::a('Отменить строительство', ['cancel', 'id' => $id, 'ok' => true], ['class' => 'btn margin']) ?>
-        <?= Html::a('Вернуться', ['view', 'id' => $team->id], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.base.cancel.link.cancel'), ['cancel', 'id' => $id, 'ok' => true], ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.base.cancel.link.view'), ['view', 'id' => $team->id], ['class' => 'btn margin']) ?>
     </div>
 </div>

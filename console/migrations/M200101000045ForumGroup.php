@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -54,57 +55,57 @@ class M200101000045ForumGroup extends Migration
             [
                 [
                     null,
-                    'О Лиге',
-                    'вопросы и комментарии о лиге глобального характера, творчество, что нравится/не нравится',
+                    Yii::t('console', 'migrations.forum-group.name.league'),
+                    Yii::t('console', 'migrations.forum-group.description.league'),
                     1,
                     1
                 ],
                 [
                     null,
-                    'Скорая помощь',
-                    'сверxсрочные проблемы, не терпящие отлагательств, а то будет поздно - остальное в баги или вопросы новичков',
+                    Yii::t('console', 'migrations.forum-group.name.help'),
+                    Yii::t('console', 'migrations.forum-group.description.help'),
                     1,
                     2
                 ],
                 [
                     null,
-                    'Вопросы новичков',
-                    'для обсуждения с опытными менеджерами возникающих у новичков самых простых вопросов',
+                    Yii::t('console', 'migrations.forum-group.name.new'),
+                    Yii::t('console', 'migrations.forum-group.description.new'),
                     1,
                     3
                 ],
                 [
                     null,
-                    'Регистрация и команды',
-                    '[пере]регистрация, выставление/раздача свободных команд, переходы из клуба в клуб, верните команду и т.д.',
+                    Yii::t('console', 'migrations.forum-group.name.team'),
+                    Yii::t('console', 'migrations.forum-group.description.team'),
                     1,
                     4
                 ],
                 [
                     null,
-                    'Идеи и предложения',
-                    'высказывание интересных мыслей и конкретных идей по поводу развития лиги',
+                    Yii::t('console', 'migrations.forum-group.name.idea'),
+                    Yii::t('console', 'migrations.forum-group.description.idea'),
                     1,
                     5
                 ],
-                [null, 'Правила', 'обсуждение, трактовка, серьезные вопросы по поводу действующих правил', 1, 6],
-                [null, 'Баги', 'неспрочные ошибки, неправильная работа страниц', 1, 7],
-                [null, 'Трансферы', 'если хотите договориться о купле/продаже игроков', 2, 1],
-                [null, 'Товарищеские Матчи', 'поиск соперников на товы', 2, 2],
-                [null, 'Аренда', 'если хотите договориться об аренде игроков', 2, 3],
-                [null, 'Встречи', 'встречи менеджеров в реале - на стадион сходить, пивка попить', 3, 1],
-                [null, 'Реальное регби', 'обсуждение реальных событий, регбийный оффтопик', 3, 2],
-                [null, 'Оффтопик', 'обсуждение всего чего угодно за пределами Лиги', 3, 3],
-                [7, 'Argentina', 'национальный форум', 4, 1],
-                [9, 'Australia', 'национальный форум', 4, 2],
-                [54, 'England', 'национальный форум', 4, 3],
-                [61, 'France', 'национальный форум', 4, 4],
-                [81, 'Ireland', 'национальный форум', 4, 5],
-                [83, 'Italy', 'национальный форум', 4, 6],
-                [124, 'New Zealand', 'национальный форум', 4, 7],
-                [154, 'Scotland', 'национальный форум', 4, 8],
-                [164, 'South Africa', 'национальный форум', 4, 9],
-                [194, 'Wales', 'национальный форум', 4, 10],
+                [null, Yii::t('console', 'migrations.forum-group.name.rule'), Yii::t('console', 'migrations.forum-group.description.rule'), 1, 6],
+                [null, Yii::t('console', 'migrations.forum-group.name.bug'), Yii::t('console', 'migrations.forum-group.description.bug'), 1, 7],
+                [null, Yii::t('console', 'migrations.forum-group.name.transfer'), Yii::t('console', 'migrations.forum-group.description.transfer'), 2, 1],
+                [null, Yii::t('console', 'migrations.forum-group.name.friendly'), Yii::t('console', 'migrations.forum-group.description.friendly'), 2, 2],
+                [null, Yii::t('console', 'migrations.forum-group.name.loan'), Yii::t('console', 'migrations.forum-group.description.loan'), 2, 3],
+                [null, Yii::t('console', 'migrations.forum-group.name.visit'), Yii::t('console', 'migrations.forum-group.description.visit'), 3, 1],
+                [null, Yii::t('console', 'migrations.forum-group.name.real'), Yii::t('console', 'migrations.forum-group.description.real'), 3, 2],
+                [null, Yii::t('console', 'migrations.forum-group.name.off'), Yii::t('console', 'migrations.forum-group.description.off'), 3, 3],
+                [7, 'Argentina', Yii::t('console', 'migrations.forum-group.description.national'), 4, 1],
+                [9, 'Australia', Yii::t('console', 'migrations.forum-group.description.national'), 4, 2],
+                [54, 'England', Yii::t('console', 'migrations.forum-group.description.national'), 4, 3],
+                [61, 'France', Yii::t('console', 'migrations.forum-group.description.national'), 4, 4],
+                [81, 'Ireland', Yii::t('console', 'migrations.forum-group.description.national'), 4, 5],
+                [83, 'Italy', Yii::t('console', 'migrations.forum-group.description.national'), 4, 6],
+                [124, 'New Zealand', Yii::t('console', 'migrations.forum-group.description.national'), 4, 7],
+                [154, 'Scotland', Yii::t('console', 'migrations.forum-group.description.national'), 4, 8],
+                [164, 'South Africa', Yii::t('console', 'migrations.forum-group.description.national'), 4, 9],
+                [194, 'Wales', Yii::t('console', 'migrations.forum-group.description.national'), 4, 10],
             ]
         );
 

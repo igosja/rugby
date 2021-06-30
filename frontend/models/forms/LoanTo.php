@@ -69,44 +69,45 @@ class LoanTo extends Model
     public function attributeLabels(): array
     {
         return [
-            'maxDay' => 'Дней аренды (max)',
-            'minDay' => 'Дней аренды (min)',
-            'price' => 'Начальная цена',
+            'maxDay' => Yii::t('frontend', 'models.forms.loan-to.label.day.max'),
+            'minDay' => Yii::t('frontend', 'models.forms.loan-to.label.day.min'),
+            'price' => Yii::t('frontend', 'models.forms.loan-to.label.price'),
         ];
     }
 
     /**
      * @return bool
-     * @throws \yii\db\Exception
      */
-    public function execute()
+    public function execute(): bool
     {
         if (!$this->validate()) {
             return false;
         }
 
         if ($this->player->loan) {
-            Yii::$app->session->setFlash('error', 'Игрок уже выставлен на арендный рынок.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-to.execute.error.loan'));
             return false;
         }
 
         if ($this->player->age >= Player::AGE_READY_FOR_PENSION) {
-            Yii::$app->session->setFlash('error', 'Нельзя отдавать в аренду игрока, в возрасте ' . $this->player->age . ' лет.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-to.execute.error.age', [
+                'age' => $this->player->age,
+            ]));
             return false;
         }
 
         if ($this->player->date_no_action > time()) {
             Yii::$app->session->setFlash(
                 'error',
-                'С игроком нельзя совершать никаких действий до '
-                . FormatHelper::asDate($this->player->date_no_action)
-                . '.'
+                Yii::t('frontend', 'models.forms.loan-to.execute.error.no-action', [
+                    'date' => FormatHelper::asDate($this->player->date_no_action),
+                ])
             );
             return false;
         }
 
         if ($this->player->loan_team_id) {
-            Yii::$app->session->setFlash('error', 'Нельзя отдавать в аренду игроков, которые уже находятся в аренде.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-to.execute.error.loan_team_id'));
             return false;
         }
 
@@ -117,7 +118,7 @@ class LoanTo extends Model
         if ($count > 5) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя отдавать в аренду более пяти игроков из одной команды одновременно.'
+                Yii::t('frontend', 'models.forms.loan-to.execute.error.count')
             );
             return false;
         }
@@ -139,7 +140,7 @@ class LoanTo extends Model
         if ($count < 25) {
             Yii::$app->session->setFlash(
                 'error',
-                'Нельзя отдать в аренду полевого игрока, если у вас в команде останется менее двадцати полевых игроков.'
+                Yii::t('frontend', 'models.forms.loan-to.execute.error.player')
             );
             return false;
         }
@@ -149,7 +150,7 @@ class LoanTo extends Model
             ->count();
 
         if ($count) {
-            Yii::$app->session->setFlash('error', 'Нельзя отдать в аренду игрока, который находится на тренировке.');
+            Yii::$app->session->setFlash('error', Yii::t('frontend', 'models.forms.loan-to.execute.error.training'));
             return false;
         }
 
@@ -170,7 +171,7 @@ class LoanTo extends Model
                 $transaction->commit();
             }
 
-            Yii::$app->session->setFlash('success', 'Игрок успешно выставлен на арендный рынок.');
+            Yii::$app->session->setFlash('success', Yii::t('frontend', 'models.forms.loan-to.execute.success'));
         } catch (Exception $e) {
             ErrorHelper::log($e);
             $transaction->rollBack();

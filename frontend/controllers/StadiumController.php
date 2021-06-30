@@ -55,7 +55,7 @@ class StadiumController extends AbstractController
 
         $model = new StadiumIncrease($team->stadium);
 
-        $this->setSeoTitle($team->stadium->name . '. Увеличение стадиона');
+        $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.increase.title'));
 
         return $this->render('increase', [
             'model' => $model,
@@ -76,7 +76,7 @@ class StadiumController extends AbstractController
 
         $model = new StadiumDecrease($team->stadium);
 
-        $this->setSeoTitle($team->stadium->name . '. Уменьшение стадиона');
+        $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.decrease.title'));
 
         return $this->render('decrease', [
             'model' => $model,
@@ -96,7 +96,7 @@ class StadiumController extends AbstractController
         $team = $this->myTeam;
 
         if ($team->buildingStadium) {
-            $this->setErrorFlash('На стадионе уже идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.stadium.build.error.building'));
             return $this->redirect(['increase']);
         }
 
@@ -117,7 +117,9 @@ class StadiumController extends AbstractController
         $buildingStadiumDay = ceil(($stadiumForm->capacity - $team->stadium->capacity) / 1000);
 
         if ($buildingStadiumPrice > $team->finance) {
-            $this->setErrorFlash('Для строительства нужно <span class="strong">' . FormatHelper::asCurrency($buildingStadiumPrice) . '</span>.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.stadium.build.error.finance', [
+                'price' => FormatHelper::asCurrency($buildingStadiumPrice)
+            ]));
             return $this->redirect(['increase']);
         }
 
@@ -142,20 +144,21 @@ class StadiumController extends AbstractController
                 $team->finance -= $buildingStadiumPrice;
                 $team->save(true, ['finance']);
 
-                $this->setSuccessFlash('Строительство успешно началось.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.stadium.build.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
             return $this->redirect(['increase']);
         }
 
-        $message = 'Увеличение стадиона до <span class="strong">' . $stadiumForm->capacity
-            . '</span> мест будет стоить <span class="strong">' . FormatHelper::asCurrency($buildingStadiumPrice)
-            . '</span> и займет <span class="strong">' . $buildingStadiumDay
-            . '</span> дн.';
+        $message = Yii::t('frontend', 'controllers.stadium.build.message', [
+            'capacity' => $stadiumForm->capacity,
+            'day' => $buildingStadiumDay,
+            'price' => FormatHelper::asCurrency($buildingStadiumPrice),
+        ]);
 
 
-        $this->setSeoTitle($team->stadium->name . '. Увеличение стадиона');
+        $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.build.title'));
 
         return $this->render('build', [
             'message' => $message,
@@ -176,7 +179,7 @@ class StadiumController extends AbstractController
         $team = $this->myTeam;
 
         if ($team->buildingStadium) {
-            $this->setErrorFlash('На стадионе уже идет строительство.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.stadium.destroy.error.building'));
             return $this->redirect(['decrease']);
         }
 
@@ -216,20 +219,20 @@ class StadiumController extends AbstractController
                 $team->finance += $buildingStadiumPrice;
                 $team->save(true, ['finance']);
 
-                $this->setSuccessFlash('Строительство успешно началось.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.stadium.destroy.success'));
             } catch (Exception $e) {
                 ErrorHelper::log($e);
             }
             return $this->redirect(['stadium/increase']);
         }
 
-        $message = 'При уменьшении стадиона до <span class="strong">' . $stadium->capacity
-            . '</span> мест вы получите компенсацию <span class="strong">' . FormatHelper::asCurrency($buildingStadiumPrice)
-            . '</span> и займет <span class="strong">' . $buildingStadiumDay
-            . '</span> дн.';
+        $message = Yii::t('frontend', 'controllers.stadium.destroy.message', [
+            'capacity' => $stadium->capacity,
+            'day' => $buildingStadiumDay,
+            'price' => FormatHelper::asCurrency($buildingStadiumPrice),
+        ]);
 
-
-        $this->setSeoTitle($team->stadium->name . '. Уменьшения стадиона');
+        $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.destroy.title'));
 
         return $this->render('destroy', [
             'message' => $message,
@@ -259,7 +262,7 @@ class StadiumController extends AbstractController
             ->limit(1)
             ->one();
         if (!$buildingStadium) {
-            $this->setErrorFlash('Строительство выбрано неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.stadium.cancel.error'));
             return $this->redirect(['increase']);
         }
 
@@ -275,7 +278,7 @@ class StadiumController extends AbstractController
             ->limit(1)
             ->one();
         if (!$finance) {
-            $this->setErrorFlash('Строительство выбрано неправильно.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.stadium.cancel.error'));
             return $this->redirect(['increase']);
         }
 
@@ -301,7 +304,7 @@ class StadiumController extends AbstractController
                 $team->finance -= $finance->value;
                 $team->save(true, ['finance']);
 
-                $this->setSuccessFlash('Строительство успешно отменено.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.stadium.cancel.success'));
             } catch (Throwable $e) {
                 ErrorHelper::log($e);
                 $this->setErrorFlash();
@@ -309,7 +312,7 @@ class StadiumController extends AbstractController
             return $this->redirect(['increase']);
         }
 
-        $this->setSeoTitle('Отмена строительства стадиона ' . $team->stadium->name);
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.stadium.cancel.title') . ' ' . $team->stadium->name);
 
         return $this->render('cancel', [
             'id' => $id,

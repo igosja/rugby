@@ -23,7 +23,6 @@ class M200101000119Vote extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(11),
-                'federation_id' => $this->integer(3),
                 'date' => $this->integer(11)->notNull(),
                 'text' => $this->text()->notNull(),
                 'user_id' => $this->integer(11)->notNull(),
@@ -31,7 +30,6 @@ class M200101000119Vote extends Migration
             ]
         );
 
-        $this->addForeignKey('vote_federation_id', self::TABLE, 'federation_id', '{{%federation}}', 'id');
         $this->addForeignKey('vote_vote_status_id', self::TABLE, 'vote_status_id', '{{%vote_status}}', 'id');
         $this->addForeignKey('vote_user_id', self::TABLE, 'user_id', '{{%user}}', 'id');
 

@@ -60,9 +60,6 @@ class ForgotPasswordForm extends Model
         }
 
         try {
-            /**
-             * @var User $user
-             */
             $user = $this->getUser();
 
             Yii::$app
@@ -73,7 +70,7 @@ class ForgotPasswordForm extends Model
                 )
                 ->setTo($user->email)
                 ->setFrom([Yii::$app->params['noReplyEmail'] => Yii::$app->params['noReplyName']])
-                ->setSubject('Восстановление пароля на сайте Виртуальной Регбийной Лиги')
+                ->setSubject(Yii::t('frontend', 'models.forms.forgot-password.subject'))
                 ->send();
         } catch (Exception $e) {
             ErrorHelper::log($e);

@@ -141,7 +141,7 @@ class NationalController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle($national->fullName() . '. Профиль сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.view.title'));
 
         return $this->render('view', [
             'dataProvider' => $dataProvider,
@@ -170,10 +170,9 @@ class NationalController extends AbstractController
     }
 
     /**
-     * @return array|Response
-     * @throws Exception
+     * @return array
      */
-    public function getNotificationArray()
+    public function getNotificationArray(): array
     {
         if (!$this->myNationalOrVice) {
             return [];
@@ -198,7 +197,7 @@ class NationalController extends AbstractController
         if ($closestGame) {
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && !$closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && !$closestGame->guest_mood_id)) {
-                $result[] = '<span class="font-red">Вы не отправили состав на ближайший матч своей команды.</span> ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.national.notification.lineup') . ' ' . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
@@ -206,7 +205,7 @@ class NationalController extends AbstractController
 
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && Mood::SUPER === $closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && Mood::SUPER === $closestGame->guest_mood_id)) {
-                $result[] = 'В ближайшем матче ваша команда будет использовать <span class="strong font-green">супер</span>. ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.national.notification.super') . ' ' . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
@@ -214,7 +213,7 @@ class NationalController extends AbstractController
 
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && Mood::REST === $closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && Mood::REST === $closestGame->guest_mood_id)) {
-                $result[] = 'В ближайшем матче ваша команда будет использовать <span class="strong font-red">отдых</span>. ' . Html::a(
+                $result[] = Yii::t('frontend', 'controllers.national.notification.rest') . ' ' . Html::a(
                         '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
@@ -256,7 +255,7 @@ class NationalController extends AbstractController
             $totalPoint += (int)$game->gamePlusMinus($national);
         }
 
-        $this->setSeoTitle($national->fullName() . '. Матчи сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.game.title'));
 
         return $this->render('game', [
             'dataProvider' => $dataProvider,
@@ -288,7 +287,7 @@ class NationalController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($national->fullName() . '. События сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.event.title'));
 
         return $this->render('event', [
             'dataProvider' => $dataProvider,
@@ -318,7 +317,7 @@ class NationalController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($national->fullName() . '. Финансы сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.finance.title'));
         return $this->render('finance', [
             'dataProvider' => $dataProvider,
             'seasonId' => $seasonId,
@@ -344,7 +343,7 @@ class NationalController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($national->fullName() . '. Достижения сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.achievement.title'));
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
             'national' => $national,
@@ -368,7 +367,7 @@ class NationalController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle($national->fullName() . '. Трофеи сборной');
+        $this->setSeoTitle($national->fullName() . '. ' . Yii::t('frontend', 'controllers.national.trophy.title'));
         return $this->render('achievement', [
             'dataProvider' => $dataProvider,
             'national' => $national,
@@ -376,7 +375,7 @@ class NationalController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return string|Response
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
@@ -499,7 +498,7 @@ class NationalController extends AbstractController
             }
         }
 
-        $this->setSeoTitle('Изменение состава сборной');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.national.player.title'));
 
         return $this->render('player', [
             'propArray' => $propArray,
@@ -527,12 +526,12 @@ class NationalController extends AbstractController
     {
         $national = $this->getNational($id);
         if (!in_array($this->user->id, [$national->user_id, $national->vice_user_id], true)) {
-            $this->setErrorFlash('Вы не занимаете руководящей должности в этой сборной');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.national.fire.no'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
         if (!$national->vice_user_id) {
-            $this->setErrorFlash('Нельзя отказаться от должности если в сборной нет заместителя');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.national.fire.vice'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -543,11 +542,11 @@ class NationalController extends AbstractController
                 $national->fireVice();
             }
 
-            $this->setSuccessFlash('Вы успешно отказались от должности');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.national.fire.success'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
-        $this->setSeoTitle('Отказ от должности');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.national.fire.title'));
         return $this->render('fire', [
             'id' => $id,
             'national' => $national,

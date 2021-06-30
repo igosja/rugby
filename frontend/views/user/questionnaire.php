@@ -28,7 +28,7 @@ print $this->render('//user/_top');
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table">
             <tr>
-                <th>Изменение анкетных данных менеджера</th>
+                <th><?= Yii::t('frontend', 'views.user.questionnaire.th') ?></th>
             </tr>
         </table>
     </div>
@@ -49,7 +49,7 @@ print $this->render('//user/_top');
 ]) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        На этой странице вы можете <span class="strong">изменить свои анкетные данные</span>:
+        <?= Yii::t('frontend', 'views.user.questionnaire.p.1') ?>:
     </div>
 </div>
 <?= $form->field($model, 'name')->textInput(['class' => 'form-control form-small']) ?>
@@ -58,7 +58,7 @@ print $this->render('//user/_top');
 <?= $form->field($model, 'city')->textInput(['class' => 'form-control form-small']) ?>
 <?= $form->field($model, 'country_id')->dropDownList(
     $countryArray,
-    ['class' => 'form-control form-small', 'prompt' => 'Не указано']
+    ['class' => 'form-control form-small', 'prompt' => Yii::t('frontend', 'views.user.questionnaire.prompt.country')]
 ) ?>
 <?= $form->field($model, 'sex_id')->dropDownList(
     $sexArray,
@@ -66,7 +66,7 @@ print $this->render('//user/_top');
 ) ?>
 <div class="row">
     <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
-        <?= Html::label('Дата рождения', null, ['class' => 'strong']) ?>
+        <?= Html::label(Yii::t('frontend', 'views.user.questionnaire.label.birthday'), null, ['class' => 'strong']) ?>
     </div>
     <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
         <div class="row">
@@ -101,13 +101,12 @@ print $this->render('//user/_top');
 <?= $form->field($model, 'is_no_vice')->checkbox([], false) ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center text-size-3">
-        Если вы поменяете свой e-mail, система автоматически отправит письмо на новый адрес с указанием,
-        как подтвердить, что ящик принадлежит вам и работает
+        <?= Yii::t('frontend', 'views.user.questionnaire.p.2') ?>
     </div>
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.user.questionnaire.submit'), ['class' => 'btn']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

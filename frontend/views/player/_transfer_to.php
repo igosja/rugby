@@ -15,13 +15,13 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
-            Здесь вы можете <span class="strong">поставить своего игрока на трансферный рынок</span>.
+            <?= Yii::t('frontend', 'views.player.transfer-to.p.1') ?>
         </p>
         <p>
-            Начальная трансферная цена игрока должна быть не меньше
-            <span class="strong"><?= FormatHelper::asCurrency($model->minPrice) ?></span>
-            и не больше
-            <span class="strong"><?= FormatHelper::asCurrency($model->maxPrice) ?></span>.
+            <?= Yii::t('frontend', 'views.player.transfer-to.p.2', [
+                'min' => FormatHelper::asCurrency($model->minPrice),
+                'max' => FormatHelper::asCurrency($model->maxPrice)
+            ]) ?>
         </p>
         <?php $form = ActiveForm::begin([
             'enableAjaxValidation' => true,
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
             ])->checkbox() ?>
         </div>
         <p class="text-center">
-            <?= Html::submitButton('Выставить на трансфер', ['class' => 'btn']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'views.player.transfer-to.submit'), ['class' => 'btn']) ?>
         </p>
         <?php $form::end() ?>
     </div>

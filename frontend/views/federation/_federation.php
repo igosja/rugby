@@ -3,37 +3,11 @@
 // TODO refactor
 
 use common\models\db\Federation;
-use common\models\db\Support;
 use frontend\controllers\AbstractController;
-use frontend\models\queries\AttitudeQuery;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
  * @var Federation $federation
- */
-
-$file_name = 'file_name';
-
-$attitudeArray = AttitudeQuery::getAttitudeList();
-$attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
-
-$supportAdmin = Support::find()
-    ->andWhere(['federation_id' => $federation->id, 'is_inside' => false, 'is_question' => false, 'read' => null])
-    ->count();
-
-$supportPresident = Support::find()
-    ->andWhere(['federation_id' => $federation->id, 'is_inside' => true, 'is_question' => true, 'read' => null])
-    ->count();
-
-$supportManager = 0;
-if (!Yii::$app->user->isGuest) {
-    $supportManager = Support::find()
-        ->andWhere(['federation_id' => $federation->id, 'is_inside' => true, 'is_question' => false, 'read' => null, 'user_id' => Yii::$app->user->id])
-        ->count();
-}
-
-/**
  * @var AbstractController $controller
  */
 $controller = Yii::$app->controller;

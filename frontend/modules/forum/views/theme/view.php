@@ -30,7 +30,7 @@ use yii\widgets\ListView;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-2">
                 <?= Html::a(
-                    'Форум',
+                    Yii::t('frontend', 'modules.forum.views.bread.forum'),
                     ['default/index']
                 ) ?>
                 /
@@ -77,27 +77,25 @@ use yii\widgets\ListView;
     <?php if (!$user->date_confirm) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к форуму
-                <br/>
-                Причина - ваш почтовый адрес не подтверждён
+                <?= Yii::t('frontend', 'modules.forum.views.theme.blocked-confirm') ?>
             </div>
         </div>
     <?php elseif ($userBlockForum && $userBlockForum->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к форуму до
-                <?= FormatHelper::asDatetime($userBlockForum->date) ?>
-                <br/>
-                Причина - <?= $userBlockForum->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'modules.forum.views.theme.blocked-reason', [
+                    'date' => FormatHelper::asDatetime($userBlockForum->date),
+                    'reason' => $userBlockForum->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php elseif ($userBlockComment && $userBlockComment->date >= time()) : ?>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert warning">
-                Вам заблокирован доступ к форуму до
-                <?= FormatHelper::asDateTime($userBlockComment->date) ?>
-                <br/>
-                Причина - <?= $userBlockComment->userBlockReason->text ?>
+                <?= Yii::t('frontend', 'modules.forum.views.theme.blocked-reason', [
+                    'date' => FormatHelper::asDatetime($userBlockComment->date),
+                    'reason' => $userBlockComment->userBlockReason->text,
+                ]) ?>
             </div>
         </div>
     <?php else: ?>
@@ -118,10 +116,10 @@ use yii\widgets\ListView;
                     <div class="row">{error}</div>',
             ],
         ]) ?>
-        <?= $form->field($model, 'text')->textarea(['raw' => 10])->label('Ваш ответ:') ?>
+        <?= $form->field($model, 'text')->textarea(['raw' => 10])->label(Yii::t('frontend', 'modules.forum.views.theme.label.text')) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton('Ответить', ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'modules.forum.views.theme.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

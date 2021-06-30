@@ -54,15 +54,9 @@ class VoteController extends AbstractController
             ]
         );
 
-        $federationId = [null];
-        if ($this->myTeam) {
-            $federationId[] = $this->myTeam->stadium->city->country->federation->id;
-        }
-
         $query = Vote::find()
             ->with(['user', 'voteAnswers.voteUsers', 'voteStatus'])
             ->andWhere(['vote_status_id' => [VoteStatus::OPEN, VoteStatus::CLOSE]])
-            ->andWhere(['federation_id' => $federationId])
             ->orderBy(['id' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
@@ -72,7 +66,7 @@ class VoteController extends AbstractController
             ],
         ]);
 
-        $this->setSeoTitle('Опросы');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.vote.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -95,23 +89,21 @@ class VoteController extends AbstractController
             ->one();
         $this->notFound($vote);
 
-        if ($this->user) {
-            if (VoteStatus::OPEN === $vote->vote_status_id && (!$vote->federation_id || ($this->myTeam && $this->myTeam->stadium->city->country->federation->id === $vote->federation_id))) {
-                $voteUser = VoteUser::find()
-                    ->andWhere([
-                        'vote_answer_id' => VoteAnswer::find()
-                            ->select(['id'])
-                            ->andWhere(['vote_id' => $id]),
-                        'user_id' => $this->user->id,
-                    ])
-                    ->count();
-                if (!$voteUser) {
-                    return $this->redirect(['vote', 'id' => $id]);
-                }
+        if ($this->user && VoteStatus::OPEN === $vote->vote_status_id) {
+            $voteUser = VoteUser::find()
+                ->andWhere([
+                    'vote_answer_id' => VoteAnswer::find()
+                        ->select(['id'])
+                        ->andWhere(['vote_id' => $id]),
+                    'user_id' => $this->user->id,
+                ])
+                ->count();
+            if (!$voteUser) {
+                return $this->redirect(['vote', 'id' => $id]);
             }
         }
 
-        $this->setSeoTitle('Опрос');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.vote.view.title'));
         return $this->render('view', [
             'vote' => $vote,
         ]);
@@ -124,14 +116,10 @@ class VoteController extends AbstractController
      */
     public function actionVote(int $id)
     {
-        $vote = Vote::find()->andWhere(['id' => $id])->one();
+        $vote = Vote::find()->andWhere(['id' => $id])->limit(1)->one();
         $this->notFound($vote);
 
         if (VoteStatus::OPEN !== $vote->vote_status_id) {
-            return $this->redirect(['view', 'id' => $id]);
-        }
-
-        if ($vote->federation_id && (!$this->myTeam || $this->myTeam->stadium->city->country->federation->id !== $vote->federation_id)) {
             return $this->redirect(['view', 'id' => $id]);
         }
 
@@ -150,11 +138,11 @@ class VoteController extends AbstractController
         $model = new VoteUser();
         $model->user_id = $this->user->id;
         if ($model->addAnswer()) {
-            $this->setSuccessFlash('Ваш голос успешно сохранён');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.vote.vote.success'));
             return $this->redirect(['view', 'id' => $id]);
         }
 
-        $this->setSeoTitle('Опрос');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.vote.vote.title'));
         return $this->render('vote', [
             'model' => $model,
             'vote' => $vote,

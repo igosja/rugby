@@ -22,19 +22,19 @@ use common\models\db\ForumMessage;
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Дата регистрации:
+            <?= Yii::t('frontend', 'modules.forum.views.date-register') ?>:
             <?= FormatHelper::asDate($model->user->date_register) ?>
         </div>
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Рейтинг:
+            <?= Yii::t('frontend', 'modules.forum.views.rating') ?>:
             <?= $model->user->rating ?>
         </div>
     </div>
     <div class="row text-size-2 hidden-xs">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            Команды:
+            <?= Yii::t('frontend', 'modules.forum.views.teams') ?>:
             <?php foreach ($model->user->teams as $team): ?>
                 <br/>
                 <?= $team->getTeamImageLink() ?>
@@ -59,7 +59,7 @@ use common\models\db\ForumMessage;
     <?php if ($model->date_update) : ?>
         <div class="row text-size-2 font-grey">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                Отредактировано в
+                <?= Yii::t('frontend', 'modules.forum.views.theme.message.edit') ?>
                 <?= FormatHelper::asDatetime($model->date_update) ?>
             </div>
         </div>

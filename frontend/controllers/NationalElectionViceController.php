@@ -82,7 +82,7 @@ class NationalElectionViceController extends AbstractController
             ->count();
 
         if ($position) {
-            $this->setErrorFlash('Можно быть тренером или заместителем тренера только в одной сборной.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.national-election-vice.application.error'));
             return $this->redirect(['team/view']);
         }
 
@@ -115,11 +115,11 @@ class NationalElectionViceController extends AbstractController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->setSuccessFlash('Изменения успшено сохранены.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.national-election-vice.application.success'));
             return $this->refresh();
         }
 
-        $this->setSeoTitle('Подача заявки на должность заместителя тренера сборной');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.national-election-vice.application.title'));
         return $this->render('application', [
             'federation' => $federation,
             'model' => $model,
@@ -206,7 +206,7 @@ class NationalElectionViceController extends AbstractController
 
         $model->delete();
 
-        $this->setSuccessFlash('Заявка успешно удалена.');
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.national-election-vice.delete-application.success'));
         return $this->redirect(['application']);
     }
 
@@ -265,7 +265,7 @@ class NationalElectionViceController extends AbstractController
             return $this->redirect(['poll']);
         }
 
-        $this->setSeoTitle('Голосование за заместителя тренера сборной');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.national-election-vice.view.title'));
 
         return $this->render('view', [
             'electionNationalVice' => $electionNationalVice,
@@ -332,11 +332,11 @@ class NationalElectionViceController extends AbstractController
         $model = new ElectionNationalViceVote();
         $model->user_id = $this->user->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->setSuccessFlash('Ваш голос успешно сохранён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.national-election-vice.poll.success'));
             return $this->refresh();
         }
 
-        $this->setSeoTitle('Голосование за заместителя тренера сборной');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.national-election-vice.poll.title'));
         return $this->render('poll', [
             'electionNationalVice' => $electionNationalVice,
             'federation' => $federation,

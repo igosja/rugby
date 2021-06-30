@@ -69,7 +69,7 @@ class StoreController extends AbstractController
     {
         $bonusText = self::getStoreDiscountText();
 
-        $this->setSeoTitle('Виртуальный магазин');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.index.title'));
         return $this->render('index', [
             'bonusText' => $bonusText,
             'user' => Yii::$app->user->identity,
@@ -89,15 +89,9 @@ class StoreController extends AbstractController
                 if ($now >= $discountDate[0] && $now <= $discountDate[1]) {
                     $result = '';
                     if (in_array($key, ['newYear1', 'newYear2'])) {
-                        $result = 'C 25 декабря по 07 января';
-                    } elseif ('womenDay' === $key) {
-                        $result = 'C 05 по 10 марта';
-                    } elseif ('victoryDay' === $key) {
-                        $result = 'C 01 по 10 мая';
-                    } elseif ('schoolDay' === $key) {
-                        $result = 'C 01 по 10 сентября';
+                        $result = Yii::t('frontend', 'controllers.store.discount.new-year');
                     }
-                    return $result . ' в магазине действует скидка 20%';
+                    return $result . Yii::t('frontend', 'controllers.store.discount');
                 }
             }
         } catch (Exception $e) {
@@ -116,18 +110,6 @@ class StoreController extends AbstractController
             'newYear1' => [
                 (new DateTime(date('Y') . '-01-01 00:00:00'))->getTimestamp(),
                 (new DateTime(date('Y') . '-01-07 23:59:59'))->getTimestamp()
-            ],
-            'womenDay' => [
-                (new DateTime(date('Y') . '-03-05 00:00:00'))->getTimestamp(),
-                (new DateTime(date('Y') . '-03-10 23:59:59'))->getTimestamp()
-            ],
-            'victoryDay' => [
-                (new DateTime(date('Y') . '-05-01 00:00:00'))->getTimestamp(),
-                (new DateTime(date('Y') . '-05-10 23:59:59'))->getTimestamp()
-            ],
-            'schoolDay' => [
-                (new DateTime(date('Y') . '-09-01 00:00:00'))->getTimestamp(),
-                (new DateTime(date('Y') . '-09-10 23:59:59'))->getTimestamp()
             ],
             'newYear2' => [
                 (new DateTime(date('Y') . '-12-25 00:00:00'))->getTimestamp(),
@@ -194,7 +176,7 @@ class StoreController extends AbstractController
 
         $bonusLine = implode(' | ', $bonusLine);
 
-        $this->setSeoTitle('Пополнение денежного счёта');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.payment.title'));
 
         return $this->render('payment', [
             'bonusLine' => $bonusLine,
@@ -244,7 +226,7 @@ class StoreController extends AbstractController
         $user = $this->user;
         $model = new UserTransferMoney(['user' => $user]);
         if ($model->execute()) {
-            $this->setSuccessFlash('Деньги успешно переведены');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.store.send.success'));
             return $this->refresh();
         }
 
@@ -255,7 +237,7 @@ class StoreController extends AbstractController
             ->orderBy(['login' => SORT_ASC])
             ->all();
 
-        $this->setSeoTitle('Подарок другу');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.send.title'));
         return $this->render('send', [
             'model' => $model,
             'user' => $user,
@@ -276,7 +258,7 @@ class StoreController extends AbstractController
             'query' => $query,
         ]);
 
-        $this->setSeoTitle('История платежей');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.history.title'));
         return $this->render('history', [
             'dataProvider' => $dataProvider,
             'user' => $user,
@@ -286,7 +268,6 @@ class StoreController extends AbstractController
     /**
      * @param int $day
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionVip(int $day)
     {
@@ -304,7 +285,7 @@ class StoreController extends AbstractController
         $price = self::getStorePriceWithDiscount($priceArray[$day]);
 
         if ($user->money < $price) {
-            $this->setErrorFlash('Недостаточно средств на счету.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.store.vip.error-money'));
             return $this->redirect(['store/index']);
         }
 
@@ -330,17 +311,20 @@ class StoreController extends AbstractController
             } catch (Exception $e) {
                 ErrorHelper::log($e);
 
-                $this->setSuccessFlash('Не удалось продлить VIP.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.store.vip.error-exception'));
                 return $this->redirect(['index']);
             }
 
-            $this->setSuccessFlash('Ваш VIP успешно продлён.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.store.vip.success'));
             return $this->redirect(['index']);
         }
 
-        $message = 'Вы собираетесь продлить свой VIP на ' . $day . ' дн. за ' . $price . ' ед.';
+        $message = Yii::t('frontend', 'controllers.store.vip.message', [
+            'day' => $day,
+            'price' => $price,
+        ]);
 
-        $this->setSeoTitle('Виртуальный магазин');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.vip.title'));
         return $this->render('vip', [
             'day' => $day,
             'message' => $message,
@@ -380,7 +364,6 @@ class StoreController extends AbstractController
 
     /**
      * @return string|Response
-     * @throws \yii\db\Exception
      */
     public function actionFinance()
     {
@@ -393,7 +376,7 @@ class StoreController extends AbstractController
         $price = self::getStorePriceWithDiscount(5 * $user->getStoreCoefficient());
 
         if ($user->money < $price) {
-            $this->setErrorFlash('Недостаточно средств на счету.');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.store.finance.error-money'));
             return $this->redirect(['index']);
         }
 
@@ -425,17 +408,20 @@ class StoreController extends AbstractController
             } catch (Exception $e) {
                 ErrorHelper::log($e);
 
-                $this->setSuccessFlash('Не удалось совершить покупку.');
+                $this->setSuccessFlash(Yii::t('frontend', 'controllers.store.finance.error-exception'));
                 return $this->redirect(['index']);
             }
 
-            $this->setSuccessFlash('Покупка совершена успешно.');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.store.finance.success'));
             return $this->redirect(['index']);
         }
 
-        $message = 'Вы собираетесь приобрести <span class="strong">' . FormatHelper::asCurrency(1000000) . '</span> на счёт своей команды за <span class="strong">' . $price . '</span> ед.';
+        $message = Yii::t('frontend', 'controllers.store.finance.message', [
+            'value' => FormatHelper::asCurrency(1000000),
+            'price' => $price,
+        ]);
 
-        $this->setSeoTitle('Виртуальный магазин');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.store.finance.title'));
         return $this->render('finance', [
             'message' => $message,
             'user' => $user,

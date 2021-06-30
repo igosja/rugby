@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -32,9 +33,9 @@ class M200101000123RatingChapter extends Migration
             self::TABLE,
             ['name', 'order'],
             [
-                ['Команды', 1],
-                ['Менеджеры', 2],
-                ['Страны', 3],
+                [Yii::t('console', 'migrations.rating-chapter.team'), 1],
+                [Yii::t('console', 'migrations.rating-chapter.manager'), 2],
+                [Yii::t('console', 'migrations.rating-chapter.country'), 3],
             ]
         );
 

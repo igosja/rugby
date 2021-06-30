@@ -36,26 +36,26 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Сезон'],
-                'label' => 'С',
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
+                'footer' => Yii::t('frontend', 'views.th.season'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                'label' => Yii::t('frontend', 'views.th.season'),
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
                 'value' => static function (Achievement $model) {
                     return $model->season_id;
                 }
             ],
             [
-                'footer' => 'Турнир',
-                'label' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.th.tournament'),
+                'label' => Yii::t('frontend', 'views.th.tournament'),
                 'value' => static function (Achievement $model) {
                     return $model->getTournament();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Позиция',
+                'footer' => Yii::t('frontend', 'views.th.achievement.position'),
                 'format' => 'raw',
-                'label' => 'Позиция',
+                'label' => Yii::t('frontend', 'views.th.achievement.position'),
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Achievement $model) {
                     return $model->getPosition();

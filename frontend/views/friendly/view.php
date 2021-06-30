@@ -40,14 +40,14 @@ use yii\helpers\Html;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-right text-size-1">
-                Организация товарищеских матчей
+                <?= Yii::t('frontend', 'views.friendly.view.friendly') ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Ближайшие дни товарищеских матчей:
+        <?= Yii::t('frontend', 'views.friendly.view.days') ?>:
     </div>
 </div>
 <div class="row">
@@ -59,7 +59,7 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-25'],
-                'label' => 'День',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.day'),
                 'value' => static function (Schedule $model) {
                     return Html::a(
                         FormatHelper::asDate($model->date),
@@ -69,7 +69,7 @@ use yii\helpers\Html;
             ],
             [
                 'format' => 'raw',
-                'label' => 'Статус',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.status'),
                 'value' => static function (Schedule $model) use ($scheduleStatusArray) {
                     return $scheduleStatusArray[$model->id];
                 }
@@ -78,7 +78,7 @@ use yii\helpers\Html;
         print GridView::widget([
             'columns' => $columns,
             'dataProvider' => $scheduleDataProvider,
-            'emptyText' => 'В ближаещие дни не запланировано товарищеских матчей.',
+            'emptyText' => Yii::t('frontend', 'views.friendly.view.empty'),
             'rowOptions' => static function (Schedule $model) {
                 $result = [];
                 if ($model->id === (int)Yii::$app->request->get('id')) {
@@ -96,7 +96,7 @@ use yii\helpers\Html;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Полученные приглашения на выбранный день:
+        <?= Yii::t('frontend', 'views.friendly.view.invite.receive') ?>:
     </div>
 </div>
 <div class="row">
@@ -113,11 +113,11 @@ use yii\helpers\Html;
                         return Html::a(
                                 '<i class="fa fa-check-circle"></i>',
                                 ['accept', 'id' => $model->id],
-                                ['title' => 'Принять']
+                                ['title' => Yii::t('frontend', 'views.friendly.view.link.accept')]
                             ) . ' ' . Html::a(
                                 '<i class="fa fa-times-circle"></i>',
                                 ['cancel', 'id' => $model->id],
-                                ['title' => 'Отклонить']
+                                ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
                             );
                     }
                     return '';
@@ -125,15 +125,15 @@ use yii\helpers\Html;
             ],
             [
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (FriendlyInvite $model) {
                     return $model->homeTeam->getTeamImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Рейтинг силы команды в длительных соревнованиях'],
-                'label' => 'Vs',
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.title.vs')],
+                'label' => Yii::t('frontend', 'views.th.vs'),
                 'value' => static function (FriendlyInvite $model) {
                     return $model->homeTeam->power_vs;
                 }
@@ -142,9 +142,9 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'headerOptions' => [
                     'class' => 'col-10',
-                    'title' => 'Соотношение сил (чем больше это число, тем сильнее соперник)',
+                    'title' => Yii::t('frontend', 'views.friendly.view.title.ratio'),
                 ],
-                'label' => 'С/С',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.ratio'),
                 'value' => static function (FriendlyInvite $model) use ($team) {
                     return round($model->homeTeam->power_vs / $team->power_vs * 100) . '%';
                 }
@@ -152,15 +152,15 @@ use yii\helpers\Html;
             [
                 'contentOptions' => ['class' => 'text-center'],
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => 'Стадион',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.stadium'),
                 'value' => static function (FriendlyInvite $model) {
                     return Yii::$app->formatter->asInteger($model->homeTeam->stadium->capacity);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Рейтинг посещаемости'],
-                'label' => 'РП',
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.friendly.view.title.rating')],
+                'label' => Yii::t('frontend', 'views.friendly.view.th.rating'),
                 'value' => static function (FriendlyInvite $model) {
                     return Yii::$app->formatter->asDecimal($model->homeTeam->visitor / 100);
                 }
@@ -179,7 +179,7 @@ use yii\helpers\Html;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Отправленные приглашения на выбранный день:
+        <?= Yii::t('frontend', 'views.friendly.view.invite.send') ?>:
     </div>
 </div>
 <div class="row">
@@ -196,7 +196,7 @@ use yii\helpers\Html;
                         return Html::a(
                             '<i class="fa fa-times-circle"></i>',
                             ['cancel', 'id' => $model->id],
-                            ['title' => 'Отклонить']
+                            ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
                         );
                     }
                     return '';
@@ -204,14 +204,14 @@ use yii\helpers\Html;
             ],
             [
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (FriendlyInvite $model) {
                     return $model->guestTeam->getTeamImageLink();
                 }
             ],
             [
                 'headerOptions' => ['class' => 'col-40'],
-                'label' => 'Статус',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.status'),
                 'value' => static function (FriendlyInvite $model) {
                     return $model->friendlyInviteStatus->name;
                 }
@@ -230,7 +230,7 @@ use yii\helpers\Html;
 </div>
 <div class="row margin-top">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        Доступные соперники:
+        <?= Yii::t('frontend', 'views.friendly.view.opponent') ?>:
     </div>
 </div>
 <div class="row">
@@ -246,21 +246,21 @@ use yii\helpers\Html;
                     return Html::a(
                         '<i class="fa fa-check-circle"></i>',
                         ['send', 'id' => Yii::$app->request->get('id'), 'teamId' => $model->id],
-                        ['title' => 'Отправить приглашение']
+                        ['title' => Yii::t('frontend', 'views.friendly.view.link.send')]
                     );
                 }
             ],
             [
                 'format' => 'raw',
-                'label' => 'Команда',
+                'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (Team $model) {
                     return $model->getTeamImageLink();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Рейтинг силы команды в длительных соревнованиях'],
-                'label' => 'Vs',
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.title.vs')],
+                'label' => Yii::t('frontend', 'views.th.vs'),
                 'value' => static function (Team $model) {
                     return $model->power_vs;
                 }
@@ -269,17 +269,17 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'headerOptions' => [
                     'class' => 'col-10',
-                    'title' => 'Соотношение сил (чем больше это число, тем сильнее соперник)',
+                    'title' => Yii::t('frontend', 'views.friendly.view.title.ratio'),
                 ],
-                'label' => 'С/С',
+                'label' => Yii::t('frontend', 'views.friendly.view.th.ratio'),
                 'value' => static function (Team $model) use ($team) {
                     return round($model->power_vs / $team->power_vs * 100) . '%';
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'headerOptions' => ['class' => 'col-10', 'title' => 'Рейтинг посещаемости'],
-                'label' => 'РП',
+                'headerOptions' => ['class' => 'col-10', 'title' => Yii::t('frontend', 'views.friendly.view.title.rating')],
+                'label' => Yii::t('frontend', 'views.friendly.view.th.rating'),
                 'value' => static function (Team $model) {
                     return Yii::$app->formatter->asDecimal($model->visitor / 100);
                 }
@@ -290,7 +290,7 @@ use yii\helpers\Html;
             'dataProvider' => $teamDataProvider,
             'rowOptions' => static function (Team $model) {
                 if ($model->friendly_status_id === FriendlyStatus::ALL) {
-                    return ['class' => 'success', 'title' => 'Игра будет организована мгновенно'];
+                    return ['class' => 'success', 'title' => Yii::t('frontend', 'views.friendly.view.title.now')];
                 }
                 return [];
             },

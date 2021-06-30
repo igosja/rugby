@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-                Строительство стадиона
+                <?= Yii::t('frontend', 'views.stadium.destroy.title') ?>
             </div>
         </div>
     </div>
@@ -40,8 +40,8 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'capacity')->hiddenInput()->label(false) ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <?= Html::submitButton('Строить', ['class' => 'btn margin']) ?>
-        <?= Html::a('Отказаться', ['decrease'], ['class' => 'btn margin']) ?>
+        <?= Html::submitButton(Yii::t('frontend', 'views.stadium.destroy.submit'), ['class' => 'btn margin']) ?>
+        <?= Html::a(Yii::t('frontend', 'views.stadium.destroy.link.cancel'), ['decrease'], ['class' => 'btn margin']) ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

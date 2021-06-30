@@ -17,7 +17,7 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            Лига Чемпионов
+            <?= Yii::t('frontend', 'views.league.h1') ?>
         </h1>
     </div>
 </div>
@@ -25,7 +25,7 @@ use yii\helpers\Html;
 <div class="row margin-top-small">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
-        <?= Html::label('Сезон', 'seasonId') ?>
+        <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
         <?= Html::dropDownList(
@@ -43,9 +43,9 @@ use yii\helpers\Html;
         <?= Html::img(
             '/img/tournament_type/' . TournamentType::LEAGUE . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/tournament_type/' . TournamentType::LEAGUE . '.png'),
             [
-                'alt' => 'Лига Чемпионов',
+                'alt' => Yii::t('frontend', 'views.league.img.alt'),
                 'class' => 'country-logo',
-                'title' => 'Лига Чемпионов',
+                'title' => Yii::t('frontend', 'views.league.img.title'),
             ]
         ) ?>
     </div>
@@ -53,11 +53,7 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p class="text-justify">
-                    Лига чемпионов - самый престижный клубный турнир Лиги, куда попадают лучшие команды предыдущего
-                    сезона.
-                    Число мест в розыгрыше от каждой федерации и стартовый этап для каждой команды определяется согласно
-                    клубному рейтингу стран.
-                    В турнире есть отборочные раунды, групповой двухкруговой турнир, раунды плей-офф и финал.
+                    <?= Yii::t('frontend', 'views.league.p') ?>
                 </p>
             </div>
         </div>
@@ -98,7 +94,7 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
             <?= Html::a(
-                'Статистика',
+                Yii::t('frontend', 'views.league.link.statistics'),
                 ['statistics', 'seasonId' => $seasonId],
                 ['class' => 'btn margin']
             ) ?>

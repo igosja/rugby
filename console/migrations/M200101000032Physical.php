@@ -4,6 +4,7 @@
 
 namespace console\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 /**
@@ -33,26 +34,26 @@ class M200101000032Physical extends Migration
             self::TABLE,
             ['name', 'opposite_physical_id', 'value'],
             [
-                ['125%, падает', 1, 125],
-                ['120%, падает', 20, 120],
-                ['115%, падает', 19, 115],
-                ['110%, падает', 18, 110],
-                ['105%, падает', 17, 105],
-                ['100%, падает', 16, 100],
-                ['95%, падает', 15, 95],
-                ['90%, падает', 14, 90],
-                ['85%, падает', 13, 85],
-                ['80%, падает', 12, 80],
-                ['75%, растет', 11, 75],
-                ['80%, растет', 10, 80],
-                ['85%, растет', 9, 85],
-                ['90%, растет', 8, 90],
-                ['95%, растет', 7, 95],
-                ['100%, растет', 6, 100],
-                ['105%, растет', 5, 105],
-                ['110%, растет', 4, 110],
-                ['115%, растет', 3, 115],
-                ['120%, растет', 2, 120],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 125]), 1, 125],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 120]), 20, 120],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 115]), 19, 115],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 110]), 18, 110],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 105]), 17, 105],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 100]), 16, 100],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 95]), 15, 95],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 90]), 14, 90],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 85]), 13, 85],
+                [Yii::t('console', 'migrations.physical.down', ['percent' => 80]), 12, 80],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 75]), 11, 75],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 80]), 10, 80],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 85]), 9, 85],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 90]), 8, 90],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 95]), 7, 95],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 100]), 6, 100],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 105]), 5, 105],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 110]), 4, 110],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 115]), 3, 115],
+                [Yii::t('console', 'migrations.physical.up', ['percent' => 120]), 2, 120],
                 ['-', 21, 0],
             ]
         );

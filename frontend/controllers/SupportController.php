@@ -20,7 +20,7 @@ class SupportController extends AbstractController
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -43,18 +43,18 @@ class SupportController extends AbstractController
     {
         $model = new Support();
         if ($model->addQuestion()) {
-            $this->setSuccessFlash('Сообщение успешно сохранено');
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.support.index.success'));
             return $this->refresh();
         }
 
         $supportArray = Support::find()
-            ->where(['user_id' => $this->user->id, 'is_inside' => false])
+            ->where(['user_id' => $this->user->id])
             ->limit(Yii::$app->params['pageSizeMessage'])
             ->orderBy(['id' => SORT_DESC])
             ->all();
 
         $countSupport = Support::find()
-            ->where(['user_id' => $this->user->id, 'is_inside' => false])
+            ->where(['user_id' => $this->user->id])
             ->count();
 
         $lazy = 0;
@@ -64,10 +64,10 @@ class SupportController extends AbstractController
 
         Support::updateAll(
             ['read' => time()],
-            ['read' => null, 'user_id' => $this->user->id, 'is_question' => false, 'is_inside' => false]
+            ['read' => null, 'user_id' => $this->user->id, 'is_question' => false]
         );
 
-        $this->setSeoTitle('Техническая поддержка');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.support.index.title'));
         return $this->render('index', [
             'lazy' => $lazy,
             'model' => $model,
@@ -78,10 +78,10 @@ class SupportController extends AbstractController
     /**
      * @return array
      */
-    public function actionLoad()
+    public function actionLoad(): array
     {
         $supportArray = Support::find()
-            ->where(['user_id' => $this->user->id, 'is_inside' => false])
+            ->where(['user_id' => $this->user->id])
             ->offset(Yii::$app->request->get('offset'))
             ->limit(Yii::$app->request->get('limit'))
             ->orderBy(['id' => SORT_DESC])
@@ -89,7 +89,7 @@ class SupportController extends AbstractController
         $supportArray = array_reverse($supportArray);
 
         $countSupport = Support::find()
-            ->where(['user_id' => $this->user->id, 'is_inside' => false])
+            ->where(['user_id' => $this->user->id])
             ->count();
 
         if ($countSupport > count($supportArray) + Yii::$app->request->get('offset')) {

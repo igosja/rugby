@@ -17,24 +17,28 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h4>Состав тренера сборной</h4>
+                <h4><?= Yii::t('frontend', 'views.national-election.player.h4') ?></h4>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <p>Кандидат <?= $electionNationalApplication->user->getUserLink() ?></p>
+                <p><?= Yii::t('frontend', 'views.national-election.player.candidate') ?> <?= $electionNationalApplication->user->getUserLink() ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
                 <table class="table table-bordered">
                     <tr>
-                        <th>Игрок</th>
-                        <th class="col-5" title="Позиция">Поз</th>
-                        <th class="col-5" title="Возраст">В</th>
-                        <th class="col-5" title="Номинальная сила">С</th>
-                        <th class="col-10 hidden-xs" title="Спецвозможности">Спец</th>
-                        <th class="col-40">Команда</th>
+                        <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                        <th class="col-5"
+                            title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                        <th class="col-5"
+                            title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                        <th class="col-5"
+                            title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.th.power') ?></th>
+                        <th class="col-10 hidden-xs"
+                            title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                        <th class="col-40"><?= Yii::t('frontend', 'views.th.team') ?></th>
                     </tr>
                     <?php foreach ($electionNationalApplication->electionNationalPlayers as $electionNationalPlayer) : ?>
                         <tr>
@@ -47,12 +51,13 @@ print $this->render('//federation/_federation', ['federation' => $federation]);
                         </tr>
                     <?php endforeach ?>
                     <tr>
-                        <th>Игрок</th>
-                        <th title="Позиция">Поз</th>
-                        <th title="Возраст">В</th>
-                        <th title="Номинальная сила">С</th>
-                        <th class="hidden-xs" title="Спецвозможности">Спец</th>
-                        <th>Команда</th>
+                        <th><?= Yii::t('frontend', 'views.th.player') ?></th>
+                        <th title="<?= Yii::t('frontend', 'views.title.position') ?>"><?= Yii::t('frontend', 'views.th.position') ?></th>
+                        <th title="<?= Yii::t('frontend', 'views.title.age') ?>"><?= Yii::t('frontend', 'views.th.age') ?></th>
+                        <th title="<?= Yii::t('frontend', 'views.title.nominal-power') ?>"><?= Yii::t('frontend', 'views.title.power') ?></th>
+                        <th class="hidden-xs"
+                            title="<?= Yii::t('frontend', 'views.title.special') ?>"><?= Yii::t('frontend', 'views.th.special') ?></th>
+                        <th><?= Yii::t('frontend', 'views.th.team') ?></th>
                     </tr>
                 </table>
             </div>

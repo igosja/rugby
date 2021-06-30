@@ -17,12 +17,14 @@ use yii\grid\GridView;
 ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1>История платежей</h1>
+        <h1><?= Yii::t('frontend', 'views.store.history.h1') ?></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong">
-        <p class="text-center">Ваш счёт - <?= Yii::$app->formatter->asDecimal($user->money, 2) ?></p>
+        <p class="text-center">
+            <?= Yii::t('frontend', 'views.store.p.1', ['value' => Yii::$app->formatter->asDecimal($user->money, 2)]) ?>
+        </p>
     </div>
 </div>
 <div class="row margin-top-small text-center">
@@ -37,19 +39,19 @@ use yii\grid\GridView;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.store.history.table.date'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.store.history.table.date'),
                 'value' => static function (Money $model) {
                     return FormatHelper::asDateTime($model->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Было',
+                'footer' => Yii::t('frontend', 'views.store.history.table.before'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Было',
+                'label' => Yii::t('frontend', 'views.store.history.table.before'),
                 'value' => static function (Money $model) {
                     return $model->value_before;
                 }
@@ -65,17 +67,17 @@ use yii\grid\GridView;
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Стало',
+                'footer' => Yii::t('frontend', 'views.store.history.table.after'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Стало',
+                'label' => Yii::t('frontend', 'views.store.history.table.after'),
                 'value' => static function (Money $model) {
                     return $model->value_after;
                 }
             ],
             [
-                'footer' => 'Комментарий',
-                'label' => 'Комментарий',
+                'footer' => Yii::t('frontend', 'views.store.history.table.text'),
+                'label' => Yii::t('frontend', 'views.store.history.table.text'),
                 'value' => static function (Money $model) {
                     return $model->moneyText->text;
                 }
