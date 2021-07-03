@@ -17,63 +17,63 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Участники турнира.</a>
+<a href="#2"> 2. Tournament participants. </a>
 <br/>
-<a href="#3">3. Регламент турнира.</a>
+<a href="#3"> 3. Tournament regulations. </a>
 <br/>
-<a href="#4">4. Усталость игроков.</a>
+<a href="#4"> 4. Player fatigue. </a>
 <br/>
-<a href="#5">5. Призовые.</a>
+<a href="#5"> 5. Prize money. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие положения.</span> Лига чемпионов - самый престижный клубный турнир Лиги, куда попадают лучшие команды предыдущего сезона. Первый розыгрыш лиги чемпионов будет проводиться во втором сезоне.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Участники турнира.</span> Участники лиги чемпионов и начальная стадия для каждого из них определяются согласно рейтингу стран в лиге чемпионов.</p>
-<p class="text-justify">Чем выше федерация в рейтинге, тем больше мест в лиге чемпионов она получает, и тем с более поздних этапов стартуют её представители.</p>
-<p class="text-justify">Точное количество участников и начальная стадия для каждого из них можно узнать на страницах национальных федераций.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Регламент турнира.</span> Жеребьевка турнира проводится вначале сезона и после каждого сыгранного раунда. Жеребьевка раундов проводится на основе деления участников каждого раунда на две или несколько корзин согласно показателю Vs.</p> 
-<p class="text-justify">Турнир состоит из следующих этапов:</p>
-<p class="text-justify">1) Первый отборочный раунд - двухраундовое противостояние (команды играют по два матча: дома и в гостях). Победители выходят во второй отборочный раунд.</p>
-<p class="text-justify">2) Второй отборочный раунд - двухраундовое противостояние, в котором принимают участие победители первого отборочного раунда и команды, стартующие со второго отборочного раунда. Победители выходят в третий отборочный раунд.</p>
-<p class="text-justify">3) Третий отборочный раунд - двухраундовое противостояние, в котором принимают участие победители второго отборочного раунда и команды, стартующие с третьего отборочного раунда. Победители выходят в раунд стыковых матчей.</p>
-<p class="text-justify">4) Групповой турнир - 8 групп по 4 команды, каждая команда играет с каждой в группе два матча: дома и в гостях. Участвуют победители третьего отборочного раунда и команды, стартующие с группового турнира. Из каждой группы в 1/8 финала выходит по две лучших команды.</p>
-<p class="text-justify">5) 1/8 финала - двухраундовое противостояние, в котором принимают участие команды, занявшие первые и вторые места в своих группах на групповом турнире. Жеребьевка проходит по схеме:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. General. </span> The Champions League is the most prestigious club competition in the League, which includes the best teams from the previous season. The first Champions League draw will take place in Season 2. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Tournament participants. </span> Champions League participants and the starting stage for each of them are determined according to the ranking of countries in the Champions League. </p>
+<p class = "text-justify"> The higher a federation is in the ranking, the more places in the Champions League it gets, and the more its representatives start from later stages. </p>
+<p class = "text-justify"> The exact number of participants and the starting stage for each of them can be found on the pages of the national federations. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Tournament regulations. </span> The draw for the tournament is held at the beginning of the season and after each round played. Rounds are drawn by dividing the participants of each round into two or more baskets according to the Vs. indicator. </p>
+<p class = "text-justify"> The tournament consists of the following stages: </p>
+<p class = "text-justify"> 1) First qualifying round - two-round confrontation (teams play two matches: home and away). The winners advance to the second qualifying round. </p>
+<p class = "text-justify"> 2) Second Qualifying Round is a two-round confrontation between the winners of the first qualifying round and the teams starting from the second qualifying round. The winners advance to the third qualifying round. </p>
+<p class = "text-justify"> 3) Third Qualifying Round is a two-round confrontation between the winners of the second qualifying round and the teams starting from the third qualifying round. Winners advance to the play-off round. </p>
+<p class = "text-justify"> 4) Group tournament - 8 groups of 4 teams, each team plays each in the group two matches: home and away. The winners of the third qualifying round and the teams starting from the group stage will participate. Each group will qualify for the 1/8 finals by the two best teams. </p>
+<p class = "text-justify"> 5) 1/8 finals - a two-round confrontation in which the teams that took the first and second places in their groups in the group stage take part. The draw takes place according to the following scheme: </p>
 <ul>
-<li>A1 - B2</li>
-<li>C1 - D2</li>
-<li>E1 - F2</li>
-<li>G1 - H2</li>
-<li>B1 - C2</li>
-<li>D1 - E2</li>
-<li>F1 - G2</li>
-<li>H1 - A2</li>
+<li> A1 - B2 </li>
+<li> C1 - D2 </li>
+<li> E1 - F2 </li>
+<li> G1 - H2 </li>
+<li> B1 - C2 </li>
+<li> D1 - E2 </li>
+<li> F1 - G2 </li>
+<li> H1 - A2 </li>
 </ul>
-<p class="text-justify">Победители выходят в 1/4 финала и сводятся попарно в той же очерёдности.</p>
-<p class="text-justify">6) 1/4 финала - двухраундовое противостояние, в котором принимают участие победители 1/8 финала. Победители выходят в 1/2 финала и сводятся попарно в той же очерёдности.</p>
-<p class="text-justify">7) 1/2 финала - двухраундовое противостояние, в котором принимают участие победители 1/4 финала. Победители выходят в финал турнира.</p>
-<p class="text-justify">8) Финал - двухраундовое противостояние, в котором принимают участие победители 1/2 финала.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Усталость игроков.</span> Матчи этого турнира являются дополнительными (тип C), поэтому играющие регбисты слегка устают, а усталость не участвовавших в матче не восстанавливается</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Призовые.</span> Призовые лиги чемпионов можно узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Занятое место</th><th>Призовые</th></tr>
-<tr><td>Победитель</td><td class="text-right">25 000 000$</td></tr>
-<tr><td>Финалист</td><td class="text-right">23 000 000$</td></tr>
-<tr><td>Проигравшие в 1/2 финала</td><td class="text-right">21 000 000$</td></tr>
-<tr><td>Проигравшие в 1/4 финала</td><td class="text-right">19 000 000$</td></tr>
-<tr><td>Проигравшие в 1/8 финала</td><td class="text-right">17 000 000$</td></tr>
-<tr><td>3 место в группе</td><td class="text-right">15 000 000$</td></tr>
-<tr><td>4 место в группе</td><td class="text-right">13 000 000$</td></tr>
-<tr><td>Проигравшие в третьем отборочном раунде</td><td class="text-right">9 000 000$</td></tr>
-<tr><td>Проигравшие во втором отборочном раунде</td><td class="text-right">7 000 000$</td></tr>
-<tr><td>Проигравшие в первом отборочном раунде</td><td class="text-right">5 000 000$</td></tr>
+<p class = "text-justify"> Winners advance to the quarter finals and are matched in pairs in the same order. </p>
+<p class = "text-justify"> 6) 1/4 finals - a two-round confrontation in which the winners of the 1/8 finals take part. The winners advance to the 1/2 finals and are matched in pairs in the same order. </p>
+<p class = "text-justify"> 7) 1/2 finals - a two-round confrontation in which the winners of the 1/4 finals take part. The winners advance to the final of the tournament. </p>
+<p class = "text-justify"> 8) Finals - a two-round confrontation in which the winners of the 1/2 finals take part. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Player fatigue. </span> Matches in this tournament are optional (type C), so the players who play rugby get a little tired, and the fatigue of those who did not participate in the match does not recover </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. Prize money. </span> Champions League prize money can be found in the table: </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> Place taken </th> <th> Prize money </th> </tr>
+<tr> <td> Winner </td> <td class = "text-right"> $ 25,000,000 </td> </tr>
+<tr> <td> Finalist </td> <td class = "text-right"> $ 23,000,000 </td> </tr>
+<tr> <td> Semi-finals losers </td> <td class = "text-right"> $ 21,000,000 </td> </tr>
+<tr> <td> Losers in quarter-finals </td> <td class = "text-right"> $ 19,000,000 </td> </tr>
+<tr> <td> Losers in 1/8 finals </td> <td class = "text-right"> $ 17,000,000 </td> </tr>
+<tr> <td> 3rd place in the group </td> <td class = "text-right"> 15,000,000 $ </td> </tr>
+<tr> <td> 4th place in the group </td> <td class = "text-right"> $ 13,000,000 </td> </tr>
+<tr> <td> Third qualifying round losers </td> <td class = "text-right"> $ 9,000,000 </td> </tr>
+<tr> <td> Second qualifying round losers </td> <td class = "text-right"> $ 7,000,000 </td> </tr>
+<tr> <td> First qualifying round losers </td> <td class = "text-right"> $ 5,000,000 </td> </tr>
 </table>
-<p class="text-justify">Призовые выплачиваются в том числе и тем клубам, которые начнут играть с определенной стадии и на этом же этапе и закончат выступление.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Лига чемпионов',
+<p class = "text-justify"> Prizes are also paid to those clubs that start playing from a certain stage and at the same stage and finish their performance. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Champions League',
 ];

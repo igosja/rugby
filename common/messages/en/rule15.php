@@ -17,139 +17,139 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое спецвозможности и как их получить.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What are special abilities and how to get them. </a>
 <br/>
-<a href="#2">2. Список спецвозможностей.</a>
+<a href="#2"> 2. List of special features. </a>
 <br/>
-<a href="#2.1">2.1. Сила (Сл).</a>
+<a href="#2.1"> 2.1. Strength (Sl). </a>
 <br/>
-<a href="#2.2">2.2. Пас (Пс).</a>
+<a href="#2.2"> 2.2. Pass (Ps). </a>
 <br/>
-<a href="#2.3">2.3. Комбинирование (Км).</a>
+<a href="#2.3"> 2.3. Combination (Km). </a>
 <br/>
-<a href="#2.4">2.4. Схватка (Сх).</a>
+<a href="#2.4"> 2.4. Scrum (Cx). </a>
 <br/>
-<a href="#2.5">2.5. Лидер (Л).</a>
+<a href="#2.5"> 2.5. Leader (L). </a>
 <br/>
-<a href="#2.6">2.6. Атлетизм (Ат).</a>
+<a href="#2.6"> 2.6. Athleticism (At). </a>
 <br/>
-<a href="#2.7">2.7. Скорость (Ск).</a>
+<a href="#2.7"> 2.7. Speed ​​(Sk). </a>
 <br/>
-<a href="#2.8">2.8. Захват (Зх).</a>
+<a href="#2.8"> 2.8. Capture (Zx). </a>
 <br/>
-<a href="#2.9">2.9. Рак (Рк).</a>
+<a href="#2.9"> 2.9. Cancer (Rk). </a>
 <br/>
-<a href="#2.10">2.10. Мол (Мл).</a>
+<a href="#2.10"> 2.10. Mol (Ml). </a>
 <br/>
-<a href="#2.11">2.11. Кумир (Км).</a>
+<a href="#2.11"> 2.11. Idol (Km). </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое спецвозможности и как их получить.</span> Каждый регбист может иметь от нуля до четырех специальных возможностей (специальных умений, спецвозможностей, спецух), которые дают им определенные бонусы при различных условиях.</p>
-<p class="text-justify">Игрок, имеющий спецвозможности, более полезен команде и ценится выше - все спецвозможности дают дополнительные игровые преимущества их владельцам.</p>
-<p class="text-justify">Каждая из четырех возможных у одного игрока спецвозможностей может быть четырех уровней: от первого до четвертого. Чем выше уровень спецвозможности, тем больший бонус она даёт.</p>
-<p class="text-justify">Специальные возможности можно получить в тренировочном центре на базе команды.</p>
-<p class="text-justify">Одной тренировкой тренируется либо новая спецвозможность, либо увеличивается уровень уже имеющейся спецухи.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Список спецвозможностей.</span> Игроки могут иметь следующие специальные возможности:</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Сила (Сл).</span> Игроки с этой спецвозможностью лучше играют в силовых единоборствах.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-25">Уровень</th><th class="col-25">down the middle</th><th class="col-25">10 man rugby</th><th class="col-15">Другие</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What are special abilities and how to get them. </span> Each rugby player can have from zero to four special abilities (special skills, special abilities, specials), which give them certain bonuses under different conditions. </p>
+<p class = "text-justify"> A player with special abilities is more useful to the team and appreciated higher - all special abilities give additional game benefits to their owners. </p>
+<p class = "text-justify"> Each of the four possible special abilities for one player can be of four levels: from the first to the fourth. The higher the level of special ability, the greater the bonus it gives. </p>
+<p class = "text-justify"> Accessibility is available at the team-based training center. </p>
+<p class = "text-justify"> One training session either trains a new special ability, or increases the level of an existing special. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. A list of special abilities. </span> Players may have the following special abilities: </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. Strength (DC). </span> Players with this special ability play better in strength martial arts. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-25"> Level </th> <th class = "col-25"> down the middle </th> <th class = "col-25"> 10 man rugby </ th> <th class = "col-15"> Others </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> <td class = "text-center"> + 3% strength </td> <td class = "text-center"> + 4% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> <td class = "text-center"> + 6% strength </td> <td class = "text-center"> + 8% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> <td class = "text-center"> + 9% strength </td> <td class = "text-center"> + 12% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> <td class = "text-center"> + 12% strength </td> <td class = "text-center"> + 16% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. Пас (Пс).</span> Игроки с этой спецвозможностью лучше отдают передачи.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-25">Уровень</th><th class="col-25">15 man rugby</th><th class="col-25">champagne rugby</th><th class="col-15">Другие</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. Pass (Ps). </span> Players with this special ability are better at passing passes. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-25"> Level </th> <th class = "col-25"> 15 man rugby </th> <th class = "col-25"> champagne rugby </ th > <th class = "col-15"> Others </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> <td class = "text-center"> + 3% strength </td> <td class = "text-center"> + 4% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> <td class = "text-center"> + 6% strength </td> <td class = "text-center"> + 8% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> <td class = "text-center"> + 9% strength </td> <td class = "text-center"> + 12% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> <td class = "text-center"> + 12% strength </td> <td class = "text-center"> + 16% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. Комбинирование (Км).</span> Игроки с этой спецвозможностью лучше проводят игровые комбинации.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-25">Уровень</th><th class="col-25">champagne rugby</th><th class="col-25">down the middle</th><th class="col-15">Другие</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
-</table></table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. Схватка (Сх).</span> Игроки с этой спецвозможностью лучше играют при схватках.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-25">Уровень</th><th class="col-25">10 man rugby</th><th class="col-25">15 man rugby</th><th class="col-15">Другие</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td><td class="text-center">+3% силы</td><td class="text-center">+4% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td><td class="text-center">+6% силы</td><td class="text-center">+8% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td><td class="text-center">+9% силы</td><td class="text-center">+12% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td><td class="text-center">+12% силы</td><td class="text-center">+16% силы</td></tr>
-</table></table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. Лидер (Л).</span> Когда игрок с этой спецвозможностью попадает в стартовый состав, увеличивается на несколько процентов реальная сила всех игроков своей команды, выходящих на поле.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+0.5% силы каждому игроку своей команды</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+1% силы каждому игроку своей команды</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+2% силы каждому игроку своей команды</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+3% силы каждому игроку своей команды</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.3"> <span class = "strong"> 2.3. Combination (Km). </span> Players with this special ability perform better game combinations. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-25"> Level </th> <th class = "col-25"> champagne rugby </th> <th class = "col-25"> down the middle </ th > <th class = "col-15"> Others </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> <td class = "text-center"> + 3% strength </td> <td class = "text-center"> + 4% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> <td class = "text-center"> + 6% strength </td> <td class = "text-center"> + 8% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> <td class = "text-center"> + 9% strength </td> <td class = "text-center"> + 12% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> <td class = "text-center"> + 12% strength </td> <td class = "text-center"> + 16% strength </td> </tr>
+</table> </table>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.4"> <span class = "strong"> 2.4. Skirmish (Cx). </span> Players with this special ability play better in skirmishes. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-25"> Level </th> <th class = "col-25"> 10 man rugby </th> <th class = "col-25"> 15 man rugby </ th> <th class = "col-15"> Others </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> <td class = "text-center"> + 3% strength </td> <td class = "text-center"> + 4% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> <td class = "text-center"> + 6% strength </td> <td class = "text-center"> + 8% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> <td class = "text-center"> + 9% strength </td> <td class = "text-center"> + 12% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> <td class = "text-center"> + 12% strength </td> <td class = "text-center"> + 16% strength </td> </tr>
+</table> </table>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.5"> <span class = "strong"> 2.5. Leader (L). </span> When a player with this special ability enters the starting lineup, the real strength of all players on his team entering the field increases by several percent. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 0.5% strength for each player on their team </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 1% strength for each player on their team </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 2% strength for each player on their team </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 3% strength for each player on their team </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.6"><span class="strong">2.6. Атлетизм (Ат).</span> Игроки с этой спецвозможностью меньше устают после матчей.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">на 1% меньше растет усталость после участия в матче</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">на 2% меньше растет усталость после участия в матче</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">на 3% меньше растет усталость после участия в матче</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">на 4% меньше растет усталость после участия в матче</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.6"> <span class = "strong"> 2.6. Athleticism (At). </span> Players with this special ability get less tired after matches. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1% less fatigue after playing a match </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 2% less fatigue after playing a match </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 3% less fatigue after playing a match </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 4% less fatigue after playing a match </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.7"><span class="strong">2.7. Скорость (Ск).</span> Игроки с этой спецвозможностью быстрее передвигаются по полю.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.7"> <span class = "strong"> 2.7. Speed ​​(Sk). </span> Players with this special ability move faster across the field. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.8"><span class="strong">2.8. Захват (Зх).</span> Игроки с этой спецвозможностью лучше проводят захваты соперников.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.8"> <span class = "strong"> 2.8. Capture (Zx). </span> Players with this special ability are better at capturing opponents. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.9"><span class="strong">2.9. Рак (Рк).</span> Игроки с этой спецвозможностью лучше играют при раках.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.9"> <span class = "strong"> 2.9. Cancer (Rk). </span> Players with this special ability are better at playing cancer. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.10"><span class="strong">2.10. Мол (Мл).</span> Игроки с этой спецвозможностью лучше играют при молах.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% силы</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% силы</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% силы</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% силы</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.10"> <span class = "strong"> 2.10. Mole (Jr). </span> Players with this special ability play better at maul. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% strength </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% strength </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% strength </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% strength </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.11"><span class="strong">2.11. Кумир (К).</span> Игроки с этой спецвозможностью привлекают больше зрителей на трибуны.</p>
-<table class="table table-hover table-bordered">
-<tr><th class="col-50">Уровень</th><th>Бонус</th></tr>
-<tr><td class="text-center">1</td><td class="text-center">+5% зрителей</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">+10% зрителей</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">+15% зрителей</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">+20% зрителей</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.11"> <span class = "strong"> 2.11. Idol (C). </span> Players with this special ability attract more spectators to the stands. </p>
+<table class = "table table-hover table-bordered">
+<tr> <th class = "col-50"> Level </th> <th> Bonus </th> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> + 5% viewers </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> + 10% viewers </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> + 15% viewers </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> + 20% viewers </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Cпецвозможности игроков',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Player special abilities',
 ];

@@ -17,25 +17,25 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify">События в генерации игрового дня проводятся в следующей очерёдности:</p>
+    'text' => '<p class = "strong text-justify"> Events in the game day generation are carried out in the following order: </p>
 <ol>
-<li>Закрытие сайта.</li>
-<li>Предстартовая подготовка.</li>
-<li>Генерация автосоставов.</li>
-<li>Матчи.</li>
-<li>Изменение усталости.</li>
-<li>Уменьшение срока аренды и возврат арендованных.</li>
-<li>Пересчёт турнирных таблиц турниров.</li>
-<li>Пересчёт статистических показателей игроков в турнирах.</li>
-<li>Тренировки игроков.</li>
-<li>Подготовка молодёжи в спортшколах.</li>
-<li>Изучение игроков в скаут-центрах.</li>
-<li>Изменение формы в центрах физ.подготовки.</li>
-<li>Снятие травм.</li>
-<li>Рынки: трансферный, арендный, обмены.</li>
-<li>Окончание построек. Т.е. в этот день еще нельзя менять форму игрокам, если идёт стройка.</li>
-<li>Пересчет рейтингов менеджеров и команд.</li>
-<li>Открытие сайта.</li>
-</ol>',
-    'title' => 'Очерёдность событий при генерации игрового дня',
+<li> Closing the site. </li>
+<li> Prelaunch preparation. </li>
+<li> Generation of auto compositions. </li>
+<li> Matches. </li>
+<li> Change in fatigue. </li>
+<li> Reduction of the lease term and return of the leased ones. </li>
+<li> Recalculation of tournament tables. </li>
+<li> Recalculation of statistical indicators of players in tournaments. </li>
+<li> Player training. </li>
+<li> Youth training in sports schools. </li>
+<li> Studying players in scout centers. </li>
+<li> Reshaping at fitness centers. </li>
+<li> Removal of injuries. </li>
+<li> Markets: transfer, rental, exchanges. </li>
+<li> End of buildings. Those. on this day, players are not yet allowed to change their uniforms while construction is in progress. </li>
+<li> Recalculation of ratings of managers and teams. </li>
+<li> Opening the site. </li>
+</ol> ',
+    'title' => 'The order of events when generating a game day',
 ];

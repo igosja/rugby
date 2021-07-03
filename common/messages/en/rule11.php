@@ -17,129 +17,129 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#1.1">1.1. Что такое позиции игроков.</a>
+<a href="#1.1"> 1.1. What are player positions. </a>
 <br/>
-<a href="#1.2">1.2. Совмещение позиций.</a>
+<a href="#1.2"> 1.2. Align positions. </a>
 <br/>
-<a href="#2">2. Профильные позиции игроков.</a>
+<a href="#2"> 2. Profile positions of players. </a>
 <br/>
-<a href="#2.1">2.1. P - Prop.</a>
+<a href="#2.1"> 2.1. P - Prop. </a>
 <br/>
-<a href="#2.2">2.2. H - Hooker.</a>
+<a href="#2.2"> 2.2. H - Hooker. </a>
 <br/>
-<a href="#2.3">2.3. L - Lock.</a>
+<a href="#2.3"> 2.3. L - Lock. </a>
 <br/>
-<a href="#2.4">2.4. FL - Flanker.</a>
+<a href="#2.4"> 2.4. FL - Flanker. </a>
 <br/>
-<a href="#2.5">2.5. 8 - Number 8.</a>
+<a href="#2.5"> 2.5. 8 - Number 8. </a>
 <br/>
-<a href="#2.6">2.6. SH - Scrum-half.</a>
+<a href="#2.6"> 2.6. SH - Scrum-half. </a>
 <br/>
-<a href="#2.7">2.7. FH - Fly-half.</a>
+<a href="#2.7"> 2.7. FH - Fly-half. </a>
 <br/>
-<a href="#2.8">2.8. W - Wing.</a>
+<a href="#2.8"> 2.8. W - Wing. </a>
 <br/>
-<a href="#2.9">2.9. C - Centre.</a>
+<a href="#2.9"> 2.9. C - Center. </a>
 <br/>
-<a href="#2.10">2.10. FB - Fullback.</a>
+<a href="#2.10"> 2.10. FB - Fullback. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify" id="1.1"><span class="strong">1.1. Что такое позиции игроков.</span> Каждый игрок в Лиге имеет одну или две профильные (любимые) позиции:</p>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify" id = "1.1"> <span class = "strong"> 1.1. What are the positions of the players. </span> Each player in the League has one or two profile (favorite) positions: </p>
 <ul>
-<li>на своих профильных позициях регбист играет в свою силу;</li>
-<li>на непрофильных позициях регбист играет слабее.</li>
+<li> the rugby player plays in his own strength in his profile positions; </li>
+<li> the rugby player plays weaker in non-core positions. </li>
 </ul>
-<p class="text-justify">Профильные позиции могут быть натренированы игрокам в тренировочном центре команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.2"><span class="strong">1. 2. Совмещение позиций.</span> Наличие у игрока двух профильных позиций называется совмещением позиций.</p>
-<p class="text-justify">Если у игрока есть две профильные позиции, то он может без потери силы играть на любой из этих позиций.</p>
-<p class="text-justify">Вторая позиция может быть у всех игроков.</p>
-<p class="text-justify">Максимальное количество позиций одного игрока равно двум.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Профильные позиции игроков.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. PR - Prop.</span></p>
-<p class="text-justify">На позиции Prop могут играть:</p>
+<p class = "text-justify"> Profile positions can be trained to players at the team\'s training center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.2"> <span class = "strong"> 1. 2. Alignment of positions. </span> The presence of two profile positions in a player is called alignment of positions. </p>
+<p class = "text-justify"> If a player has two profile positions, he can play any of these positions without losing his strength. </p>
+<p class = "text-justify"> All players can have the second position. </p>
+<p class = "text-justify"> The maximum number of positions per player is two. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Profile positions of players. </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. PR - Prop. </span> </p>
+<p class = "text-justify"> Prop position can be played by: </p>
 <ul>
-<li>PR (Prop) с силой 100% от реальной;</li>
-<li>H (Hooker), L (Lock), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> PR (Prop) with 100% real power; </li>
+<li> H (Hooker), L (Lock), FL (Flanker), 8 (Number 8) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. H - Hooker.</span></p>
-<p class="text-justify">На позиции Hooker могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. H - Hooker. </span> </p>
+<p class = "text-justify"> Hooker positions can be played by: </p>
 <ul>
-<li>H (Hooker) с силой 100% от реальной;</li>
-<li>P (Prop), L (Lock), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> H (Hooker) with 100% real strength; </li>
+<li> P (Prop), L (Lock), FL (Flanker), 8 (Number 8) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. L - Lock.</span></p>
-<p class="text-justify">На позиции Lock могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.3"> <span class = "strong"> 2.3. L - Lock. </span> </p>
+<p class = "text-justify"> Lock positions can be played by: </p>
 <ul>
-<li>L (Lock) с силой 100% от реальной;</li>
-<li>P (Prop), H (Hooker), FL (Flanker), 8 (Number 8) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> L (Lock) with 100% real strength; </li>
+<li> P (Prop), H (Hooker), FL (Flanker), 8 (Number 8) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. FL - Flanker.</span></p>
-<p class="text-justify">На позиции Flanker могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.4"> <span class = "strong"> 2.4. FL - Flanker. </span> </p>
+<p class = "text-justify"> Flanker positions can be played by: </p>
 <ul>
-<li>FL (Flanker) с силой 100% от реальной;</li>
-<li>P (Prop), H (Hooker), L (Lock), 8 (Number 8) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> FL (Flanker) with 100% real strength; </li>
+<li> P (Prop), H (Hooker), L (Lock), 8 (Number 8) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. 8 - Number 8.</span></p>
-<p class="text-justify">На позиции Number 8 могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.5"> <span class = "strong"> 2.5. 8 - Number 8. </span> </p>
+<p class = "text-justify"> Position Number 8 can be played by: </p>
 <ul>
-<li>8 (Number 8) с силой 100% от реальной;</li>
-<li>P (Prop), H (Hooker), L (Lock), FL (Flanker) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> 8 (Number 8) with 100% real strength; </li>
+<li> P (Prop), H (Hooker), L (Lock), FL (Flanker) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.6"><span class="strong">2.6. SH - Scrum-half.</span></p>
-<p class="text-justify">На позиции Scrum-half могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.6"> <span class = "strong"> 2.6. SH - Scrum-half. </span> </p>
+<p class = "text-justify"> The Scrum-half positions can be played by: </p>
 <ul>
-<li>SH (Scrum-half) с силой 100% от реальной;</li>
-<li>FH (Fly-half), W (Wing), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> SH (Scrum-half) with 100% real strength; </li>
+<li> FH (Fly-half), W (Wing), C (Center), FB (Fullback) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.7"><span class="strong">2.7. FH - Fly-half.</span></p>
-<p class="text-justify">На позиции Fly-half могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.7"> <span class = "strong"> 2.7. FH - Fly-half. </span> </p>
+<p class = "text-justify"> Fly-half positions can be played by: </p>
 <ul>
-<li>FH (Fly-half) с силой 100% от реальной;</li>
-<li>SH (Scrum-half), W (Wing), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> FH (Fly-half) with 100% real strength; </li>
+<li> SH (Scrum-half), W (Wing), C (Center), FB (Fullback) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.8"><span class="strong">2.8. W - Wing.</span></p>
-<p class="text-justify">На позиции Wing могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.8"> <span class = "strong"> 2.8. W - Wing. </span> </p>
+<p class = "text-justify"> Wing positions can be played by: </p>
 <ul>
-<li>W (Wing) с силой 100% от реальной;</li>
-<li>SH (Scrum-half), FH (Fly-half), C (Centre), FB (Fullback) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> W (Wing) with 100% real strength; </li>
+<li> SH (Scrum-half), FH (Fly-half), C (Center), FB (Fullback) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.9"><span class="strong">2.9. C - Centre.</span></p>
-<p class="text-justify">На позиции Centre могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.9"> <span class = "strong"> 2.9. C - Center. </span> </p>
+<p class = "text-justify"> The Center position can be played by: </p>
 <ul>
-<li>C (Centre) с силой 100% от реальной;</li>
-<li>SH (Scrum-half), FH (Fly-half), W (Wing), FB (Fullback) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> C (Center) with 100% real strength; </li>
+<li> SH (Scrum-half), FH (Fly-half), W (Wing), FB (Fullback) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.10"><span class="strong">2.10. FB - Fullback.</span></p>
-<p class="text-justify">На позиции Fullback могут играть:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.10"> <span class = "strong"> 2.10. FB - Fullback. </span> </p>
+<p class = "text-justify"> Fullback can be played by: </p>
 <ul>
-<li>FB (Fullback) с силой 100% от реальной;</li>
-<li>SH (Scrum-half), FH (Fly-half), W (Wing), C (Centre) с силой 90% от реальной;</li>
-<li>Игроки других позиций с силой 80% от реальной.</li>
+<li> FB (Fullback) with 100% real strength; </li>
+<li> SH (Scrum-half), FH (Fly-half), W (Wing), C (Center) with 90% real strength; </li>
+<li> Players in other positions with 80% real strength. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Позиции игроков',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Player positions',
 ];

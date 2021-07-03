@@ -17,116 +17,117 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие сведения о стадионах.</a>
+
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General information about stadiums. </a>
 <br/>
-<a href="#2">2. Вместимость стадиона.</a>
+<a href="#2"> 2. Stadium capacity. </a>
 <br/>
-<a href="#3">3. Содержание стадиона.</a>
+<a href="#3"> 3. Stadium maintenance. </a>
 <br/>
-<a href="#4">4. Деньги за билеты.</a>
+<a href="#4"> 4. Money for tickets. </a>
 <br/>
-<a href="#5">5. Кто получает деньги за билеты и оплачивает содержание стадиона?</a>
+<a href="#5"> 5. Who gets the money for the tickets and pays for the maintenance of the stadium? </a>
 <br/>
-<a href="#6">6. Рейтинг стадионов.</a>
+<a href="#6"> 6. Rating of stadiums. </a>
 <br/>
-<a href="#7">7. Выбор наибольших стадионов.</a>
+<a href="#7"> 7. Selection of the largest stadiums. </a>
 <br/>
-<a href="#8">8. Краткосрочный рейтинг посещаемости.</a>
+<a href="#8"> 8. Short-term attendance rating. </a>
 <br/>
-<a href="#9">9. Зрительский интерес к матчу.</a>
+<a href="#9"> 9. Audience interest in the match. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие сведения о стадионах.</span> У каждой команды есть собственный стадион, на котором проводятся домашние матчи. Стадионы являются источником дохода от продажи зрительских билетов. Количество зрителей зависит от цены билета, вместимости стадиона, интересности матча.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Вместимость стадиона.</span> У новых команд стадион имеет вместимость 100 мест. Впоследствии его вместимость может быть расширена за счет постройки новых трибун и расширения уже имеющихся вплоть до 100 тыс., если, конечно, на это у команды есть деньги. Стоимость такого улучшения определяется по формуле:</p>
-<p class="text-justify">(НВ ^ 1.1 - ТВ ^ 1.1) * 200, где</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. General information about the stadiums. </span> Each team has its own stadium where home matches are played. Stadiums are a source of revenue from the sale of spectator tickets. The number of spectators depends on the ticket price, the capacity of the stadium, the interestingness of the match. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Stadium capacity. </span> For new teams, the stadium has a capacity of 100 seats. Subsequently, its capacity can be expanded by building new stands and expanding the existing ones up to 100 thousand, if, of course, the team has money for this. The cost of such an improvement is determined by the formula: </p>
+<p class = "text-justify"> (HB ^ 1.1 - TV ^ 1.1) * 200, where </p>
 <ul>
-<li>НВ - новая вместимоть арены;</li>
-<li>ТВ - текущая вместимоть арены;</li>
+<li> HB - new arena capacity; </li>
+<li> TV - current arena capacity; </li>
 </ul>
-<p class="text-justify">Прежде чем расширять стадион, оцените возможности своей команды - как скоро вложенные в строительство и содержание деньги вернутся обратно в виде зрительского интереса к матчам вашей команды.</p>
-<p class="text-justify">Время строительства стадиона - 1 день за каждые полные (или не полные) тысячу построенных мест.</p>
-<p class="text-justify">Время разрушения стадиона - 1 день.</p>
-<p class="text-justify">Нельзя изменять вместимость стадиона в первые 7 дней после получения команды.</p>
-<p class="text-justify">Нельзя уменьшать вместимость стадиона, если за последние 7 дней команда более 25% матчей играла автосоставами.</p>
-<p class="text-justify">Любое строительство стадиона (увеличение или уменьшение вместимости) обязательно заканчивается в конце сезона.</p>
-<p class="text-justify">В течение времени строительства вы не можете повлиять на размер стадиона.</p>
-<p class="text-justify">Стоимость постройки новых трибун вы должны оплатить сразу же во время начала строительства. Компенсацию за уменьшение размера стадиона вы также получите сразу.</p>
-<p class="text-justify">В любой момент времени у вас есть возможность отменить запланированную постройку (или разрушение) стадиона, вернув на свой счёт всю оплаченную сумму (если вы запланировали постройку). Но если отмена строительства произошла, то весь прогресс будет потерян.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Содержание стадиона.</span> Содержание стадиона расчитывается по формуле:</p>
-<p class="text-justify">(ТВ / 60) ^ 2, где</p>
+<p class="text-justify"> Before expanding the stadium, assess the capabilities of your team - how soon the money invested in construction and maintenance will return back in the form of audience interest in your team\'s matches. </p>
+<p class = "text-justify"> Stadium construction time - 1 day for every full (or incomplete) thousand seats built. </p>
+<p class = "text-justify"> Stadium demolition time - 1 day. </p>
+<p class = "text-justify"> The stadium capacity cannot be changed for the first 7 days after receiving the command. </p>
+<p class = "text-justify"> The capacity of the stadium cannot be reduced if, in the last 7 days, the team has played more than 25% of the matches with autos. </p>
+<p class = "text-justify"> Any stadium construction (increase or decrease in capacity) must end at the end of the season. </p>
+<p class = "text-justify"> During construction, you have no control over the size of the stadium. </p>
+<p class = "text-justify"> You must pay the cost of building the new stands as soon as construction starts. You will also receive compensation for the reduction in the size of the stadium immediately. </p>
+<p class = "text-justify"> At any time you have the opportunity to cancel the planned construction (or destruction) of the stadium by refunding the entire paid amount (if you planned the construction). But if the cancellation of construction occurred, then all progress will be lost. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. The content of the stadium. </span> The content of the stadium is calculated using the formula: </p>
+<p class = "text-justify"> (TV / 60) ^ 2, where </p>
 <ul>
-<li>ТВ - текущая вместимоть арены.</li>
+<li> TV - current arena capacity. </li>
 </ul>
-<p class="text-justify">Стоимость содержания оплачивается после каждого проведенного на стадионе матча.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Деньги за билеты.</span> Стадион - источник дохода команды. На каждый матч продаются билеты и приходят зрители. Кол-во пришедших зрителей зависит от установленной цены на билеты, интересности матча и рейтинга посещаемости команд.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Кто получает деньги за билеты и оплачивает содержание стадиона?</span> Получение денег за билеты (и оплата содержания стадиона) зависит от типа соревнования:</p>
+<p class = "text-justify"> Maintenance fees are payable after each match played in the stadium. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Money for tickets. </span> The stadium is a source of income for the team. Tickets are sold for each match and spectators come. The number of spectators who came depends on the set ticket price, the interestingness of the match and the teams\' attendance rating. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. Who gets money for tickets and pays for stadium maintenance? </span> Getting money for tickets (and payment for stadium maintenance) depends on the type of competition: </p>
 <ul>
-<li>если хозяин матча явно определен (чемпионат, кубок межсезонья, конференция любительских клубов), то все деньги за билеты получает организатор (владелец стадиона), он же должен оплатить содержание стадиона;</li>
-<li>если стадион проведения матча определяется среди участников матча в момент добавления матчей и домашнего бонуса нет (товарищеские игры), то деньги, как и обязанность оплатить содержание стадиона, делятся поровну;</li>
-<li>в матчах сборных деньги за билеты делятся на три равные части между игравшими сборными и командой-владельцем стадиона. Содержание стадионов в матчах сборных оплачивает Лига.</li>
+<li> if the host of the match is clearly defined (championship, off-season cup, conference of amateur clubs), then the organizer (the owner of the stadium) receives all the money for tickets, he must also pay for the maintenance of the stadium; </li>
+<li> if the stadium of the match is determined among the participants of the match at the time of adding matches and there is no home bonus (friendly games), then the money, as well as the obligation to pay for the maintenance of the stadium, is divided equally; </li>
+<li> In national team matches, ticket money is divided into three equal parts between the national teams and the stadium owner team. The league pays for the maintenance of stadiums in national team matches. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Рейтинг стадионов.</span> Наибольшим стадионом в рейтингах является более новый (по времени строительства) из самых больших по вместимости стадионов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Выбор наибольших стадионов.</span> При выборе наибольших стадионов страны действует следующее правило - стадионы определяются непосредственно в день игры согласно актуальному в этот момент рейтингу стадионов страны.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="8"><span class="strong">8. Краткосрочный рейтинг посещаемости.</span> Некоторой части зрителей нравится ходить на матчи только тогда, когда команда выигрывает, и не нравится ходить на матчи, когда команда проигрывает.</p>
-<p class="text-justify">Краткосрочный рейтинг посещаемости зависит от результатов последних пяти любых матчей команды в текущем сезоне: чем лучше и интереснее выступает команда в сезоне, тем выше этот рейтинг, а вместе с ним и посещаемость матчей.</p>
-<p class="text-justify">В начале каждого сезона краткосрочный рейтинг посещаемости равен 1,00.</p>
-<p class="text-justify">За каждый матч из списка пяти последних сыгранных в этом сезоне матчей команда набирает определённое число баллов в зависимости от итогового счёта этого матча:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Набрано очков</th><th>Рейтинг</th><th>Очков соперника</th><th>Рейтинг</th></tr>
-<tr><td class="text-center">72 и больше</td><td class="text-center">+0.95</td><td class="text-center">72 и больше</td><td class="text-center">0</td></tr>
-<tr><td class="text-center">64</td><td class="text-center">+0.90</td><td class="text-center">64</td><td class="text-center">+0.05</td></tr>
-<tr><td class="text-center">56</td><td class="text-center">+0.85</td><td class="text-center">56</td><td class="text-center">+0.10</td></tr>
-<tr><td class="text-center">48</td><td class="text-center">+0.80</td><td class="text-center">48</td><td class="text-center">+0.15</td></tr>
-<tr><td class="text-center">40</td><td class="text-center">+0.75</td><td class="text-center">40</td><td class="text-center">+0.20</td></tr>
-<tr><td class="text-center">32</td><td class="text-center">+0.70</td><td class="text-center">32</td><td class="text-center">+0.25</td></tr>
-<tr><td class="text-center">24</td><td class="text-center">+0.65</td><td class="text-center">24</td><td class="text-center">+0.30</td></tr>
-<tr><td class="text-center">16</td><td class="text-center">+0.60</td><td class="text-center">16</td><td class="text-center">+0.35</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">+0.55</td><td class="text-center">8</td><td class="text-center">+0.40</td></tr>
-<tr><td class="text-center">0</td><td class="text-center">+0.50</td><td class="text-center">0</td><td class="text-center">+0.45</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6"> <span class = "strong"> 6. Rating of stadiums. </span> The largest stadium in the ratings is the newer (in terms of construction time) of the largest stadiums in terms of capacity. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7"> <span class = "strong"> 7. Selection of the largest stadiums. </span> When choosing the largest stadiums in the country, the following rule applies - the stadiums are determined directly on the day of the game according to the current rating of the country\'s stadiums. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "8"> <span class = "strong"> 8. Short-term attendance rating. </span> Some viewers like to go to matches only when the team wins, and don\'t like going to matches when the team is losing. </p>
+<p class = "text-justify"> The short-term attendance rating depends on the results of the last five matches of any team in the current season: the better and more interesting a team performs in the season, the higher this rating, and with it the attendance. </ p >
+<p class = "text-justify"> At the beginning of each season, the short-term attendance rating is 1.00. </p>
+<p class = "text-justify"> For each match from the list of the last five matches played this season, the team gains a certain number of points, depending on the final score of that match: </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> Points scored </th> <th> Rating </th> <th> Opponent\'s Points </th> <th> Rating </th> </tr>
+<tr> <td class = "text-center"> 72 and more </td> <td class = "text-center"> + 0.95 </td> <td class = "text-center"> 72 and more < / td> <td class = "text-center"> 0 </td> </tr>
+<tr> <td class = "text-center"> 64 </td> <td class = "text-center"> + 0.90 </td> <td class = "text-center"> 64 </td> < td class = "text-center"> + 0.05 </td> </tr>
+<tr> <td class = "text-center"> 56 </td> <td class = "text-center"> + 0.85 </td> <td class = "text-center"> 56 </td> < td class = "text-center"> + 0.10 </td> </tr>
+<tr> <td class = "text-center"> 48 </td> <td class = "text-center"> + 0.80 </td> <td class = "text-center"> 48 </td> < td class = "text-center"> + 0.15 </td> </tr>
+<tr> <td class = "text-center"> 40 </td> <td class = "text-center"> + 0.75 </td> <td class = "text-center"> 40 </td> < td class = "text-center"> + 0.20 </td> </tr>
+<tr> <td class = "text-center"> 32 </td> <td class = "text-center"> + 0.70 </td> <td class = "text-center"> 32 </td> < td class = "text-center"> + 0.25 </td> </tr>
+<tr> <td class = "text-center"> 24 </td> <td class = "text-center"> + 0.65 </td> <td class = "text-center"> 24 </td> < td class = "text-center"> + 0.30 </td> </tr>
+<tr> <td class = "text-center"> 16 </td> <td class = "text-center"> + 0.60 </td> <td class = "text-center"> 16 </td> < td class = "text-center"> + 0.35 </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> + 0.55 </td> <td class = "text-center"> 8 </td> < td class = "text-center"> + 0.40 </td> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> + 0.50 </td> <td class = "text-center"> 0 </td> < td class = "text-center"> + 0.45 </td> </tr>
 </table>
-<p class="text-justify">В случае назначения команде технического поражения - она набирает за этот матч 0 баллов.</p>
-<p class="text-justify">Сумма набранных баллов делится на число матчей, участвовавших в подсчёте (на пять или в начале сезона на меньшее число), полученный результат и есть краткосрочный рейтинг посещаемости.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="9"><span class="strong">9. Зрительский интерес к матчу.</span> При определении зрительского интереса к матчу учитывается краткосрочный рейтинг посещаемости обоих участников матча и поправочный коэффициент к типу турнира и страдии турнира.</p>
-<p class="text-justify">Поправочный коэффициент к типу турнира можно узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Турнир</th><th>Коэффициент</th></tr>
-<tr><td class="text-center">Матчи сборных</td><td class="text-center">2</td></tr>
-<tr><td class="text-center">Лига чемпионов</td><td class="text-center">1.5</td></tr>
-<tr><td class="text-center">Чемпионаты стран</td><td class="text-center">1</td></tr>
-<tr><td class="text-center">Конференция любительских клубов</td><td class="text-center">0.9</td></tr>
-<tr><td class="text-center">Кубок межсезонья</td><td class="text-center">0.9</td></tr>
-<tr><td class="text-center">Товарищеский матч</td><td class="text-center">0.8</td></tr>
+<p class = "text-justify"> If a team is assigned a technical defeat, it scores 0 points for this match. </p>
+<p class = "text-justify"> The total of the points scored is divided by the number of matches included in the scoring (by five or at the beginning of the season to a lower number), the result obtained is the short-term attendance rating. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "9"> <span class = "strong"> 9. Spectator interest in a match. </span> The short-term attendance rate of both participants in the match and a correction factor for the type of tournament and the suffering of the tournament are taken into account when determining the audience interest in a match. </p>
+<p class = "text-justify"> The correction factor for the type of tournament can be found in the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th>Tournament</th><th> Odds</th> </tr>
+<tr> <td class = "text-center"> National team matches </td> <td class = "text-center"> 2 </td> </tr>
+<tr> <td class = "text-center"> Champions League </td> <td class = "text-center"> 1.5 </td> </tr>
+<tr> <td class = "text-center"> Country Championships </td> <td class = "text-center"> 1 </td> </tr>
+<tr> <td class = "text-center"> Amateur Clubs Conference </td> <td class = "text-center"> 0.9 </td> </tr>
+<tr> <td class = "text-center"> Offseason Cup </td> <td class = "text-center"> 0.9 </td> </tr>
+<tr> <td class = "text-center"> Friendly Match </td> <td class = "text-center"> 0.8 </td> </tr>
 </table>
-<p class="text-justify">Поправочный коэффициент к страдии турнира можно узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Стадия</th><th>Коэффициент</th></tr>
-<tr><td class="text-center">Нет стадии (для товарищеских матчей)</td><td class="text-center">0.9</td></tr>
-<tr><td class="text-center">1-30 тур</td><td class="text-center">1</td></tr>
-<tr><td class="text-center">Отборочный раунд</td><td class="text-center">1.05</td></tr>
-<tr><td class="text-center">1/8 финала</td><td class="text-center">1.7</td></tr>
-<tr><td class="text-center">1/4 финала</td><td class="text-center">1.8</td></tr>
-<tr><td class="text-center">1/2 финала</td><td class="text-center">1.9</td></tr>
-<tr><td class="text-center">Финал</td><td class="text-center">2</td></tr>
+<p class = "text-justify"> The correction factor for tournament misery can be found in the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Stage</th><th> Ratio</th> </tr>
+<tr> <td class = "text-center"> No stage (for friendlies) </td> <td class = "text-center"> 0.9 </td> </tr>
+<tr> <td class = "text-center"> 1-30 tour </td> <td class = "text-center"> 1 </td> </tr>
+<tr> <td class = "text-center"> Qualifying round </td> <td class = "text-center"> 1.05 </td> </tr>
+<tr> <td class = "text-center"> 1/8 finals </td> <td class = "text-center"> 1.7 </td> </tr>
+<tr> <td class = "text-center"> 1/4 finals </td> <td class = "text-center"> 1.8 </td> </tr>
+<tr> <td class = "text-center"> 1/2 finals </td> <td class = "text-center"> 1.9 </td> </tr>
+<tr> <td class = "text-center"> Final </td> <td class = "text-center"> 2 </td> </tr>
 </table>
-<p class="text-justify">Зрительский интерес к матчу рассчитывается по одной из двух формул:</p>
-<p class="text-justify">( РД + РГ ) * K1 * K2 / 2 - для всех матчей без домашнего бонуса.</p>
-<p class="text-justify">( 2 * РД + РГ ) * K1 * K2 / 3 - для всех матчей с домашним бонусом.</p>
-<p class="text-justify">Где</p>
+<p class = "text-justify"> Audience interest in a match is calculated using one of two formulas: </p>
+<p class = "text-justify"> (RD + WG) * K1 * K2 / 2 - for all matches without home bonus. </p>
+<p class = "text-justify"> (2 * RD + WG) * K1 * K2 / 3 - for all home bonus matches. </p>
+<p class = "text-justify"> Where </p>
 <ul>
-<li>РД - ретинг домашней команды;</li>
-<li>РГ - ретинг гостевой команды;</li>
-<li>K1 - поправочный коэффициент к типу турнира;</li>
-<li>K2 - поправочный коэффициент к страдии турнира.</li>
+<li> RD - home team rating; </li>
+<li> WG - guest team rating; </li>
+<li> K1 - correction factor for the type of tournament; </li>
+<li> K2 is the correction factor for the suffering of the tournament. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Стадионы команд и посещаемость матчей',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Team stadiums and match attendance',
 ];

@@ -17,152 +17,152 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#1.1">1.1. Что значит управлять командой?</a>
+<a href="#1.1"> 1.1. What does it mean to manage a team? </a>
 <br/>
-<a href="#2">2. Заполнение заявки на матч.</a>
+<a href="#2"> 2. Filling out the application for a match. </a>
 <br/>
-<a href="#2.1">2.1. Что такое заявка на матч?</a>
+<a href="#2.1"> 2.1. What is a match request? </a>
 <br/>
-<a href="#2.2">2.2. Когда принимаются заявки.</a>
+<a href="#2.2"> 2.2. When applications are accepted. </a>
 <br/>
-<a href="#2.3">2.3. Усталость игроков.</a>
+<a href="#2.3"> 2.3. Player fatigue. </a>
 <br/>
-<a href="#2.4">2.4. Физическая форма игроков.</a>
+<a href="#2.4"> 2.4. The physical form of the players. </a>
 <br/>
-<a href="#2.5">2.5. Кого назначать капитаном?</a>
+<a href="#2.5"> 2.5. Who should be appointed captain? </a>
 <br/>
-<a href="#2.6">2.6. Тактика команд.</a>
+<a href="#2.6"> 2.6. Command tactics. </a>
 <br/>
-<a href="#2.7">2.7. Стиль игры.</a>
+<a href="#2.7"> 2.7. Play style. </a>
 <br/>
-<a href="#2.8">2.8. Коллизии стилей.</a>
+<a href="#2.8"> 2.8. Style collisions. </a>
 <br/>
-<a href="#2.9">2.9. Что такое настрой на игру?</a>
+<a href="#2.9"> 2.9. What is game mindset? </a>
 <br/>
-<a href="#2.10">2.10. Какую цену билета поставить?</a>
+<a href="#2.10"> 2.10. What is the ticket price? </a>
 <br/>
-<a href="#2.11">2.11. Хроническая не отправка составов на матч.</a>
+<a href="#2.11"> 2.11. Chronic non-sending of squads for the match. </a>
 <br/>
-<a href="#2.12">2.12. Отпуск менеджера.</a>
+<a href="#2.12"> 2.12. Manager\'s vacation. </a>
 <br/>
-<a href="#2.13">2.13. Заместители менеджеров.</a>
+<a href="#2.13"> 2.13. Deputy managers. </a>
 <br/>
-<a href="#3">3. Другие действия менеджера.</a>
+<a href="#3"> 3. Other actions of the manager. </a>
 <br/>
-<a href="#3.1">3.1. Организация товарищеских матчей.</a>
+<a href="#3.1"> 3.1. Organization of friendly matches. </a>
 <br/>
-<a href="#3.2">3.2. Постройка и функционирование баз.</a>
+<a href="#3.2"> 3.2. Construction and operation of bases. </a>
 <br/>
-<a href="#3.3">3.3. Расширение стадиона.</a>
+<a href="#3.3"> 3.3. Expansion of the stadium. </a>
 <br/>
-<a href="#3.4">3.4. Действия на рынке игроков.</a>
+<a href="#3.4"> 3.4. Players\' market actions. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify" id="1.1"><span class="strong">1.1. Что значит управлять командой?</span> Основными действиями по управлению командой в лиге являются:</p>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify" id = "1.1"> <span class = "strong"> 1.1. What does it mean to manage a team? </span> The main actions for managing a team in a league are: </p>
 <ul>
-<li>отправка состава на матч команды;</li>
-<li>тренировка игроков, развитие инфраструктуры баз и расширение стадионов;</li>
-<li>покупка/продажа игроков на трансфере;</li>
-<li>организация и проведение товарищеских матчей;</li>
+<li> sending a squad for a team match; </li>
+<li> training of players, development of base infrastructure and expansion of stadiums; </li>
+<li> buying / selling players on transfer; </li>
+<li> organizing and holding friendly matches; </li>
 </ul>
-<p class="text-justify">Для управления командой Менеджер использует раздел сайта, называемый "Ростер". Управление командой происходит прямо на страничках сайта, в режиме онлайн.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Заполнение заявки на матч.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Что такое заявка на матч?</span> Одна из основных функций Менеджера - отправлять состав своей команды на все матчи, которые есть в расписании. Заявка на матч - это 15 игроков, тренерские указания, как именно им играть.</p>
-<p class="text-justify">Для заполнения заявки на каждый конкретный матч необходимо выбрать соответствующий пункт меню: "отправить состав на игру" и последовательно заполнить все поля формы.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. Когда принимаются заявки?</span> Составы команд принимаются до начала проведения матчей (точное время начала матчей конкретного игрового дня всегда есть в Расписании).</p>
-<p class="text-justify">Если на матч, указанный в расписании игр вашей команды, не был вовремя отправлен состав, то на поле выйдут те игроки Вашей команды, которых отберет наша программа. Такой состав команды называется автосоставом, сила которого на 10% меньше обычного и помечается в отчете о матче звездочкой.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. Усталость игроков.</span> Сила игрока в матче зависит от его усталости. Реальная сила игрока в матче меньше на процент его усталости на момент проведения матча.</p>
-<p class="text-justify">По результатам матча у игроков, выходивших на поле, усталость может увеличиться в соответствии с разделом правил Усталость игроков. У игроков, не попавших в заявку на матч, усталость может уменьшиться в соответствии с тем же разделом правил.</p>
-<p class="text-justify">Нельзя заставлять играть одного и того же игрока каждый игровой день без отдыха, иначе его усталость будет неуклонно повышаться. Следует помнить, что у игрока с большей усталостью увеличивается вероятность травм.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. Физическая форма игроков.</span> Сила игрока в матче так же зависит от его физической формы, которая автоматически меняется с течением времени (от тура к туру). Визуально график изменения формы напоминает синусоиду. Зеленая часть - игрок играет на пике формы, красная часть- игрок играет на спаде формы. Менеджер может влиять на изменение формы, меняя ей направление.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. Кого назначать капитаном?</span> Капитан - лидер команды, пример для других, представительная личность. В матче капитан добавляет некоторое количество силы к суммарной силе команды. Чем старше капитан, тем больше процентов его силы передается игрокам. Чем сильнее капитан по отношению к средней силе состава, тем сильнее играют регбисты. Когда речь идет о силе капитана, имеется в виду его реальная сила (РС) на данный момент, т.е. с учетом усталости и формы.</p>
-<table class="table table-bordered table-hover">
-<tr><th>Возраст капитана</th><th>Бонусы и штрафы</th></tr>
-<tr><td class="text-center">34-35</td><td>каждый игрок получает +6% силы капитана</td></tr>
-<tr><td class="text-center">32-33</td><td>каждый игрок получает +4% силы капитана</td></tr>
-<tr><td class="text-center">30-31</td><td>каждый игрок получает +2% силы капитана</td></tr>
-<tr><td class="text-center">28-29</td><td>каждый игрок получает +1% силы капитана</td></tr>
-<tr><td class="text-center">25-27</td><td>бонус капитана отсутствует</td></tr>
-<tr><td class="text-center">23-24</td><td>каждый игрок получает -1% своей силы</td></tr>
-<tr><td class="text-center">21-22</td><td>каждый игрок получает -2% своей силы</td></tr>
-<tr><td class="text-center">19-20</td><td>каждый игрок получает -4% своей силы</td></tr>
-<tr><td class="text-center">17-18</td><td>каждый игрок получает -6% своей силы</td></tr>
-</table>
-<p class="text-justify">Если сила капитана больше, чем средняя сила основного состава с коэффициентом 1.2, то каждый игрок команды к своей силе получает дополнительно 2% бонуса от силы капитана. Если сила капитана меньше, чем средняя сила основного состава с коэффициентом 0.8, то каждый игрок команды к своей силе получает дополнительно 2% штрафа от своей силы.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.6"><span class="strong">2.6. Тактика команд.</span> В зависимости от своей цели и соотношения сил, вы можете выбрать одну из следующих тактик:</p>
+<p class = "text-justify"> The Manager uses a section of the site called "Roster" to manage the team. The team is managed directly on the website pages, online. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Filling out a match application. </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. What is a match request? </span> One of the main functions of the Manager is to send the composition of your team for all the matches that are on the schedule. The application for the match is 15 players, coaching instructions on how to play them. </p>
+<p class = "text-justify"> To fill out an application for each specific match, you must select the appropriate menu item: "send the squad to the game" and consistently fill in all the fields of the form. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. When are applications accepted? </span> Team lineups are accepted before the start of the matches (the exact start time of the matches of a particular game day is always in the Schedule). </p>
+<p class = "text-justify"> If the squad was not sent on time for the match indicated in your team\'s schedule, then those players of your team who will be selected by our program will enter the field. This squad is called an auto-squad, which is 10% less powerful than usual and is marked with an asterisk in the match report. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.3"> <span class = "strong"> 2.3. Player fatigue. </span> A player\'s strength in a match depends on his fatigue. The real strength of a player in a match is less by the percentage of his fatigue at the time of the match. </p>
+<p class = "text-justify"> As a result of the match, players entering the field may become more fatigued according to the Fatigue of Players section of the rules. Players who are not on the match list may have less fatigue according to the same section of the rules. </p>
+<p class = "text-justify"> You cannot force the same player to play every game day without rest, otherwise his fatigue will increase steadily. It should be remembered that the player with more fatigue increases the likelihood of injury. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.4"> <span class = "strong"> 2.4. The physical shape of the players. </span> The strength of a player in a match also depends on his physical shape, which automatically changes over time (from round to round). Visually, the shape change graph resembles a sinusoid. The green part - the player is playing at the peak of the form, the red part - the player is playing at the fall of the form. The manager can influence the change of the form by changing its direction. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.5"> <span class = "strong"> 2.5. Who should be appointed captain? </span> The captain is the leader of the team, an example for others, a representative person. In a match, the captain adds a certain amount of strength to the total strength of the team. The older the captain, the more percent of his power is transferred to the players. The stronger the captain is in relation to the average strength of the squad, the stronger the rugby players play. When it comes to the strength of the captain, we mean his real strength (PC) at the moment, i.e. taking into account fatigue and shape. </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> Captain\'s age </th> <th> Bonuses and penalties </th> </tr>
+<tr> <td class = "text-center"> 34-35 </td> <td> each player gains + 6% captain strength </td> </tr>
+<tr> <td class = "text-center"> 32-33 </td> <td> each player gains + 4% of the captain\'s strength </td > </tr >
+<tr > <td class = "text-center" > 30 - 31 </td > <td > each player gains + 2 % of the captain\'s strength </td> </tr>
+<tr> <td class = "text-center"> 28-29 </td> <td> each player gains + 1% of the captain\'s strength </td > </tr >
+<tr > <td class = "text-center" > 25 - 27 </td > <td > no captain bonus </td > </tr >
+<tr > <td class = "text-center" > 23 - 24 </td > <td > each player gains - 1 % of their strength </td > </tr >
+<tr > <td class = "text-center" > 21 - 22 </td > <td > each player gains - 2 % of their strength </td > </tr >
+<tr > <td class = "text-center" > 19 - 20 </td > <td > each player gains - 4 % of their strength </td > </tr >
+<tr > <td class = "text-center" > 17 - 18 </td > <td > each player gains - 6 % of their strength </td > </tr >
+</table >
+<p class = "text-justify" > if the strength of the captain is greater than the average strength of the main squad by a factor of 1.2, then each team member receives an additional 2 % bonus from the strength of the captain to his strength . if the strength of the captain is less than the average strength of the main team with a coefficient of 0.8, then each player of the team receives an additional 2 % penalty from his strength in addition to his strength . </p >
+<p class = "text-right text-size-3" > [<a href = "#0" > to content </a >] </p >
+<p class = "text-justify" id = "2.6" > <span class = "strong" > 2.6 . Team tactics . </span > Depending on your goal and the balance of power, you can choose one of the following tactics: </p >
+<ul >
+<li > super defensive - only defend; </li >
+<li > defensive - focus more on defense than attack; </li >
+<li > normal - balanced tactics; </li >
+<li > attacker - focus more on attack than defense; </li >
+<li > everyone on the attack - only engage in the attack; </li >
+</ul >
+<p class = "text-justify" > By choosing an attacking tactic, the team is stronger in attack, creates more chances, but risks in defense . </p >
+<p class = "text-justify" > Defensive tactics allow you to defend better, but weaker offensively and create fewer chances . </p >
+<p class = "text-right text-size-3" > [<a href = "#0" > to content </a >] </p >
+<p class = "text-justify" id = "2.7" > <span class = "strong" > 2.7 . Play style . </span > The game has five play styles - normal, down the middle, champagne rugby, 15 man rugby and 10 man rugby . </p >
+<p class = "text-justify" > Every rugby player has a favorite style that he plays stronger - this is a hidden parameter and can be found in the scout center . </p >
+<p class = "text-justify" > Certain special abilities provide special strength gains when playing a certain style . </p >
+<p class = "text-justify" > When submitting a squad for each match, you need to choose which style you will play today . The choice should be made depending on the special abilities and favorite styles available in the team of players . But once you\'ve figured out which style is most comfortable for you, your opponent can catch you on style collisions. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.8"> <span class = "strong"> 2.8. Collisions of styles. </span> If teams playing different styles meet on the field, then a collision of styles may arise between them in the game - one of the teams will receive a special bonus to strength due to the fact that its opponent will play against it in the most convenient way for it style: </p>
 <ul>
-<li>суперзащитная - заниматься только защитой;</li>
-<li>защитная - больше уделять внимания защите, чем атаке;</li>
-<li>нормальная - сбалансированная тактика;</li>
-<li>атакующая - больше уделять внимания атаке, чем защите;</li>
-<li>все в атаку - заниматься только атакой;</li>
+<li> 10 man rugby is best played against 15 man rugby; </li>
+<li> down the middle is best played against 10 man rugby; </li>
+<li> champagne rugby is best played against down the middle; </li>
+<li> 15 man rugby is best played against champagne rugby. </li>
 </ul>
-<p class="text-justify">Выбирая атакующий вариант тактики команда сильнее действует в атаке, создаёт больше моментов, но рискует в защите.</p>
-<p class="text-justify">Защитная тактика позволяют лучше защищаться, но слабее действовать в атаке и создавать меньше моментов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.7"><span class="strong">2.7. Стиль игры.</span> В игре предусмотрено пять стилей игры - нормальный, down the middle, champagne rugby, 15 man rugby и 10 man rugby.</p>
-<p class="text-justify">У каждого регбиста есть любимый стиль, которым он играет сильнее - это скрытый параметр и его можно узнать в скаут-центре.</p>
-<p class="text-justify">Некоторые спецвозможности дают особые прибавки к силе при игре определённым стилем.</p>
-<p class="text-justify">При отправке состава на каждый матч вам нужно выбрать, каким из стилей вы будете играть сегодня. Выбор стоит делать в зависимости от спецвозможностей и любимых стилей имеющихся в составе команды игроков. Но догадавшись, каким стилем вам удобнее всего играть, ваш соперник может поймать вас на коллизии стилей.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.8"><span class="strong">2.8. Коллизии стилей.</span> Если на поле встречаются команды, играющие разными стилями, то между ними в игре может возникнуть коллизия стилей - одна из команд получит особый бонус к силе за счёт того, что её противник будет играть против неё самым удобным для неё стилем:</p>
+<p class = "text-justify"> Normal is a special style that does not conflict with any of the other styles. But there are also no players who like the normal playstyle, and all style specials when played with the normal playstyle work in the same average way. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.9"> <span class = "strong"> 2.9. What is mood for the game? </span> In any match, except for friendlies, in the form of sending the squad to the game there is a field for choosing the mood for the game - normal (by default) and special (super and rest). The number in parentheses means how many times you can use this type of special tuning in the current season. The Offseason Cup (KM) has 2 super and 2 rests. For the main season, there are 3 super and 3 rests (and there is no difference what exactly you want to "spend" your special equipment - on the matches of the national championship or the Champions League). </p>
+<p class = "text-justify"> The "super" mood makes your players play noticeably stronger by doubling fatigue. </p>
+<p class = "text-justify"> The "rest" mood of your players is noticeably weaker. but their fatigue does not change. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.10"> <span class = "strong"> 2.10. What is the ticket price to bet? </span> The ticket price is determined by the price indicated in the application by the Manager whose team plays at home. </p>
+<p class = "text-justify"> The price of a ticket must be no less than 10 rolls and no more than 50. The interest of the audience is determined by the interestingness of the tournament, the results of the team\'s recent games, the places of the playing teams in the tournament, their ratings, the stage or round of the tournament, the price of tickets. </p>
+<p class = "text-justify"> In principle, a full house is possible at the stadium, i.e. fullness 100%. In such a case, if the tournament provides a spectator bonus, the home team will receive a special increase in the strength of the rugby players. With a fullness of 90-100%, the team receives an increase in strength, but not so significant. With a fullness of 80-90%, there is also an increase, but even less. With less occupancy, the viewer bonus is almost imperceptible. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.11"> <span class = "strong"> 2.11. Chronic non-sending of squads for the match. </span> If the Manager does not regularly send squads to the matches of his team, then it is declared free and transferred to another Manager. If the rights to a command are transferred, the previous Manager loses all rights to it. </p>
+<p class = "text-justify"> VIP managers\' teams are not automatically set free, even in the case of a long absence of the coach for no reason (up to 90 days). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.12"> <span class = "strong"> 2.12. Manager\'s vacation. </span> The site has a system of temporary transfer of the "guest" control of your teams to the "deputy" for the duration of your vacation, i.e. to another manager. </p>
+<p class = "text-justify"> The manager may be absent for six months (if he temporarily does not have access to managing his teams): </p>
 <ul>
-<li>10 man rugby лучше всего играть против 15 man rugby;</li>
-<li>down the middle лучше всего играть против 10 man rugby;</li>
-<li>champagne rugby лучше всего играть против down the middle;</li>
-<li>15 man rugby лучше всего играть против champagne rugby.</li>
+<li> up to 30 days - any manager; </li>
+<li> up to 60 days - VIP manager. </li>
 </ul>
-<p class="text-justify">Нормальный - это особый стиль, у которого нет коллизии ни с одним из других стилей. Но и нет игроков, которые любят нормальный стиль игры, а все стилевые спецвозможности при игре нормальным стилем работают одинаковым средним образом.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.9"><span class="strong">2.9. Что такое настрой на игру?</span> В любом матче, кроме товарищеских, в форме отправки состава на игру есть поле выбора настроя на игру - нормальный (по умолчанию) и специальные (супер и отдых). Цифра в скобочках означает, сколько еще раз вы можете использовать этот вид спецнастроя в текущем сезоне. На Кубок Межсезонья (КМ) дается по 2 супера и 2 отдыха. На основной сезон по 3 супера и 3 отдыха (при этом нет никакой разницы на что именно вы захотите "потратить" свои спецнастрои - на матчи чемпионата страны или Лигу Чемпионов).</p>
-<p class="text-justify">Настрой "супер" заставляет ваших игроков играть заметно сильнее за счет двойного увеличения усталости.</p>
-<p class="text-justify">Настрой "отдых" ваши игроки играют заметно слабей. но при этом их усталость не изменяется.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.10"><span class="strong">2.10. Какую цену билета поставить?</span> Цена на билеты определяется той ценой, которую указывает в заявке Менеджер, чья команда играет дома.</p>
-<p class="text-justify">Цена на билет должна быть не меньше 10 вроликов и не больше 50. Интерес зрителей определяется интересностью турнира, результатами последних игр команды, занимаемыми в турнире местами играющих команд, их рейтингами, стадией или туром турнира, ценой билетов.</p>
-<p class="text-justify">В принципе, на стадионе возможен аншлаг, т.е. заполненность 100%. В таком случае, если в турнире предусмотрен зрительский бонус, домашняя команда получает особую прибавку к силе регбистов. При заполненности в 90-100% - команда получает прибавку к силе, но не столь значительную. При заполненности в 80-90% - прибавка тоже есть, но еще меньше. При меньшей заполненности зрительский бонус практически неощутим.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.11"><span class="strong">2.11. Хроническая не отправка составов на матч.</span> Если Менеджер регулярно не отправляет составы на матчи своей команды, то она объявляется свободной и передается другому Менеджеру. В случае передачи прав на команду предыдущий Менеджер теряет все права на нее.</p>
-<p class="text-justify">Команды VIP-менеджеров не выставляются в свободные автоматически, даже в случае длительного отсутствия тренера без причин (до 90 дней).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.12"><span class="strong">2.12. Отпуск менеджера.</span> На сайте реализована система временной передачи "гостевого" управления вашими командами "заместителю" на время вашего отпуска, т.е. другому менеджеру.</p>
-<p class="text-justify">В течение полугода менеджер может отсутствовать (в случае, если временно не имеет доступа к управлению своими командами):</p>
+<p class = "text-justify"> The total duration of all vacations in the last six months is calculated. </p>
+<p class = "text-justify"> In order to go on vacation, the manager must enter his personal data and check the box "I went on vacation". From this moment, the countdown of the time of his stay on vacation will begin and the teams will not be put into free ones even if there are a large number of auto trains. </p>
+<p class = "text-justify"> After the manager has returned to managing his teams and can send squads regularly, we recommend that you uncheck the "I went on vacation" checkbox in your profile data so as not to waste your vacation time. </ p >
+<p class = "text-justify"> If the time spent on vacation exceeds the maximum allowed, then the tick "I\'m on vacation" is removed automatically, and the teams may be free. </p>
+<p class = "text-justify"> You can use your vacation as many times as you like, by turning the "on vacation" checkbox on and off. If a manager needs to leave his teams without control for more than 30 days within six months, then he should join the VIP club in order to increase the maximum period of absence from the post of head coach of his teams. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+    <p class = "text-justify" id = "2.13"> <span class = "strong"> 2.13. Deputy managers. </span> It is allowed to have a deputy in their team for managers who are on vacation, as well as members of the VIP-club (they do not have to take vacation). </p>
 <ul>
-<li>до 30 дней - любой менеджер;</li>
-<li>до 60 дней - VIP-менеджер.</li>
+<li> A deputy can be assigned to each team separately. </li>
+<li> Cannot be assigned as deputy manager from the same federation this team belongs to. </li>
+<li> You cannot appoint a deputy manager who is already a deputy in 3 teams. </li>
+<li> You can unsubscribe from the services of a substitute at any time by removing the corresponding checkbox. </li>
 </ul>
-<p class="text-justify">Считается суммарная продолжительность всех отпусков за последние полгода.</p>
-<p class="text-justify">Для того, чтобы отправиться в отпуск, менеджер должен зайти в свои анкетные данные и поставить галочку "я уехал в отпуск". С этого момента начнется отсчет времени его нахождения в отпуске и команды не будут выставляться в свободные даже в случае наличия большого числа автосоставов.</p>
-<p class="text-justify">После того, как менеджер вернулся к управлению своими командами и может отправлять составы регулярно, рекомендуем снять галочку "я уехал в отпуск" в своих анкетных данных, чтобы не тратить своё отпускное время.</p>
-<p class="text-justify">Если время, проведенное в отпуске, превышает максимально допустимое, то галочка "я в отпуске" снимается автоматически, и команды могут оказаться в свободных.</p>
-<p class="text-justify">Отпуском можно воспользоваться сколько угодно раз, включая и выключая галочку "в отпуске". Если менеджеру необходимо в течение полугода оставлять свои команды без управления более, чем на 30 дней, то ему следует вступить в VIP-клуб, чтобы увеличить максимально допустимый срок отсутствия на посту главного тренера своих команд.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.13"><span class="strong">2.13. Заместители менеджеров.</span> Иметь в своей команде заместителя разрешено менеджерам, находящимся в отпуске, а также членам VIP-клуба (им отпуск ставить необязательно).</p>
-<ul>
-<li>Заместителя можно назначать на каждую команду отдельно.</li>
-<li>Нельзя назначать заместителем менеджера из той же федерации, к которой относится данная команда.</li>
-<li>Нельзя назначать заместителем менеджера, который уже является заместителем в 3-х командах.</li>
-<li>Отказаться от услуг заместителя можно в любой момент, убрав соответствующую галку.</li>
-</ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3">3. Другие действия менеджера.</p>
-<p class="text-justify" id="3.1"><span class="strong">3.1. Организация товарищеских матчей.</span> В специально отведенные дни Менеджер команды может организовать для своей команды неофициальные (товарищеские) тренировочные матчи. Требуется предварительно договориться с другой командой и получить согласие друг друга на организацию матча посредством специальной формы.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.2"><span class="strong">3.2. Постройка и функционирование баз.</span> У каждой команды есть база команды и строения на ней, позволяющие получать разные бонусы, проводить тренировки, воспитывать молодых регбистов, изменять физическую форму игрокам. Базу можно расширять, добавлять новые строения и т.д.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.3"><span class="strong">3.3. Расширение стадиона.</span> У каждой команды есть собственный стадион, на котором проводятся домашние матчи. Стадионы являются источником дохода от продажи зрительских билетов. Количество зрителей зависит от цены билета, вместимости стадиона (которую можно увеличить или уменьшить), интересности матча.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.4"><span class="strong">3.4. Действия на рынке игроков.</span> С игроками Менеджер может совершать следующие действия: продажа/покупка игрока (трансферный рынок) и аренда игрока на время (арендный рынок).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Как управлять командой?',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3"> 3. Other actions of the manager. </p>
+<p class = "text-justify" id = "3.1"> <span class = "strong"> 3.1. Organization of friendly matches. </span> On specially designated days, the Team Manager may organize unofficial (friendly) practice matches for his team. It is required to preliminarily agree with the other team and obtain each other\'s consent to organize the match through a special form. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.2"> <span class = "strong"> 3.2. Construction and operation of bases. </span> Each team has a team base and structures on it, allowing you to receive different bonuses, conduct training, educate young rugby players, and change the players\' physical shape. The base can be expanded, new buildings added, etc. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.3"> <span class = "strong"> 3.3. Expansion of the stadium. </span> Each team has its own home stadium. Stadiums are a source of revenue from the sale of spectator tickets. The number of spectators depends on the ticket price, the stadium capacity (which can be increased or decreased), the interestingness of the match. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.4"> <span class = "strong"> 3.4. Actions on the players\' market. </span> The Manager can perform the following actions with players: selling / buying a player (transfer market) and renting a player for a while (rental market). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'How to manage a team?',
 ];

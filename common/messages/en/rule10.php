@@ -17,201 +17,201 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Трансферы игроков.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. Player transfers. </a>
 <br/>
-<a href="#1.1">1.1. Что такое трансферы?</a>
+<a href="#1.1"> 1.1. What are transfers? </a>
 <br/>
-<a href="#1.2">1.2. Как проводятся торги?</a>
+<a href="#1.2"> 1.2. How are the auctions carried out? </a>
 <br/>
-<a href="#1.3">1.3. Как купить игрока?</a>
+<a href="#1.3"> 1.3. How do I buy a player? </a>
 <br/>
-<a href="#1.4">1.4. Как продать игрока?</a>
+<a href="#1.4"> 1.4. How to sell a player? </a>
 <br/>
-<a href="#1.5">1.5. Ограничения на цены.</a>
+<a href="#1.5"> 1.5. Price restrictions. </a>
 <br/>
-<a href="#1.6">1.6. Запреты в трансферных сделках.</a>
+<a href="#1.6"> 1.6. Prohibitions in transfer deals. </a>
 <br/>
-<a href="#1.7">1.7. Принудительное выставление игроков на трансфер.</a>
+<a href="#1.7"> 1.7. Forcing players to be transferred. </a>
 <br/>
-<a href="#1.8">1.8. Бонусы первой команде игрока.</a>
+<a href="#1.8"> 1.8. Bonuses to the player\'s first team. </a>
 <br/>
-<a href="#2">2. Аренда игроков.</a>
+<a href="#2"> 2. Rent of players. </a>
 <br/>
-<a href="#2.1">2.1. Что такое аренда?</a>
+<a href="#2.1"> 2.1. What is rent? </a>
 <br/>
-<a href="#2.2">2.2. Как проводятся торги?</a>
+<a href="#2.2"> 2.2. How are the auctions carried out? </a>
 <br/>
-<a href="#2.3">2.3. Срок аренды.</a>
+<a href="#2.3"> 2.3. Lease term. </a>
 <br/>
-<a href="#2.4">2.4. Стоимость аренды.</a>
+<a href="#2.4"> 2.4. Rental price. </a>
 <br/>
-<a href="#2.5">2.5. Зарплата.</a>
+<a href="#2.5"> 2.5. Salary. </a>
 <br/>
-<a href="#2.6">2.6. Окончание сезона.</a>
+<a href="#2.6"> 2.6. The end of the season. </a>
 <br/>
-<a href="#2.7">2.7. Ограничения по использованию арендованных игроков.</a>
+<a href="#2.7"> 2.7. Restrictions on the use of rented players. </a>
 <br/>
-<a href="#2.8">2.8. Запреты в арендных сделках.</a>
+<a href="#2.8"> 2.8. Prohibitions in rental deals. </a>
 <br/>
-<a href="#3">3. Ограничение количества сделок за один сезон.</a>
+<a href="#3"> 3. Limit the number of deals in one season. </a>
 <br/>
-<a href="#3.1">3.1. Одна сделка между менеджерами за сезон.</a>
+<a href="#3.1"> 3.1. One deal between managers per season. </a>
 <br/>
-<a href="#3.2">3.2. Одна сделка между командами за сезон.</a>
+<a href="#3.2"> 3.2. One deal between teams per season. </a>
 <br/>
-<a href="#3.3">3.3. Одна смена клуба игроком за сезон (новички команд).</a>
+<a href="#3.3"> 3.3. One player changeover per season (newcomers). </a>
 <br/>
-<a href="#4">4. Проверка сделок.</a>
+<a href="#4"> 4. Checking deals. </a>
 <br/>
-<a href="#4.1">4.1. О проверке сделок.</a>
+<a href="#4.1"> 4.1. About checking transactions. </a>
 <br/>
-<a href="#4.2">4.2. Отмена сделок.</a>
+<a href="#4.2"> 4.2. Cancellation of deals. </a>
 <br/>
-<a href="#4.3">4.3. О запрете попрошайничества на тему проверки сделок.</a>
+<a href="#4.3"> 4.3. On the prohibition of begging on the topic of checking transactions. </a>
 <br/>
-<a href="#4.4">4.4. О некорректном голосовании при проверке сделок.</a>
+<a href="#4.4"> 4.4. Incorrect voting when checking deals. </a>
 </p>
-<p class="strong text-justify" id="1">1. Трансферы игроков.</p>
-<p class="strong text-justify" id="1.1">1.1. Что такое трансферы?</p>
-<p class="text-justify">Трансфер - это продажа игрока в другой клуб. В другом клубе он появится со всеми характеристиками, которые у него были (включая установленную ему предыдущим менеджером форму, усталость, травмы, статистику игр).</p>
-<p class="text-justify">Список игроков, которых можно купить, находится на странице трансферного рынка.</p>
-<p class="text-justify">На трансферный рынок могут выставляться и игроки от Лиги. В этом случае их стартовая цена выставляется минимальной, сила и спецвозможности выбираются Лигой.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.2">1.2. Как проводятся торги?</p>
-<p class="text-justify">Трансферные сделки заключаются в форме аукциона после матчей игрового дня.</p>
-<p class="text-justify">Аукцион закрытый, т.е. покупатели не знают, какие еще заявки были поданы на этого игрока.</p>
-<p class="text-justify">Все желающие купить игрока называют свои цены, а игрок уходит в команду, предложившую наибольшую цену (и способную ее оплатить). При равных заявках игрок уходит в ту команду, которая подала свою заявку раньше.</p>
-<p class="text-justify">Очередность проведения аукциона: сначала продаются на трансфере самые дорогие игроки по их базовой (номинальной) цене, потом более дешевые.</p>
-<p class="text-justify">Если желающих купить игрока нет, он остаётся на рынке до следующего дня торгов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.3">1.3. Как купить игрока?</p>
-<p class="text-justify">Для того, чтобы купить игрока на трансфере, необходимо подать на него заявку с указанием суммы, которую вы готовы за него заплатить (не меньше той, которую установил продавец). В день трансферных сделок игрок будет продан в ту команду, которая предложила за него наибольшую сумму.</p>
-<p class="text-justify">Команда может купить игрока только в том случае, если в кассе команды есть достаточная сумма денег на его покупку. Иначе заявка на покупку будет проигнорирована.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.4">1.4. Как продать игрока?</p>
-<p class="text-justify">Чтобы продать игрока, нужно выставить его на трансферный рынок, указать минимальную цену и дождаться завершения аукциона. Если заявок на покупку не будет - игрок останется на трансфере.</p>
-<p class="text-justify">Снять игрока с торгов можно в любой момент до проведения торгов. Нельзя снимать игроков с трансферного рынка, если в команде отрицательный баланс.</p>
-<p class="text-justify">За 50% стоимости слабого и ненужного игрока можно продать Лиге. Нельзя продать Лиге игрока сборной.</p>
-<p class="text-justify">Разрешается публично сообщать о том, какое максимальное предложение поступало на вашего игрока на данный момент (однако при этом никто не может проверить, говорите ли вы правду).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.5">1.5. Ограничения на цены.</p>
-<p class="text-justify">Менеджер сам определяет минимальную цену, за которую он готов продать игрока. Минимальная цена продажи должна быть не менее 50% от номинальной стоимости игрока.</p>
-<p class="text-justify">Покупатель на трансферном рынке может предложить за игрока сумму, не меньшую минимальной цены продажи, установленной менеджером команды, владеющей игроком.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.6">1.6. Запреты в трансферных сделках.</p>
-<p class="text-justify">После совершения сделки на протяжении 7 суток нельзя проводить любые тренировки игрокам, участвовавшим в сделке.</p>
-<p class="text-justify">Запрещается одновременно выставлять на трансферный рынок более пяти игроков.</p>
-<p class="text-justify">Нельзя выставить игрока на трансфер-лист, если у вас в команде останется менее 25 игроков.</p>
-<p class="text-justify">Нельзя выставить на трансфер игроков, отданных в данный момент в аренду (или взятых в аренду).</p>
-<p class="text-justify">Не проводятся сделки между командами, управляемыми одним человеком.</p>
-<p class="text-justify">Инспекторы сделок (скаут-коллегия и президенты федераций) могут коллективным решением отменить сделку, которую считают нечестной или невыгодной для одной из сторон.</p>
-<p class="text-justify">Сделка всегда должна быть самодостаточной и ни в коем случае не может являться частью другой сделки или сопровождаться доплатами в виде любых денег, клубов или услуг.</p>
-<p class="text-justify">Отменяются сделки, нарушающие правила игры.</p>
-<p class="text-justify">Отмена сделки может сопровождаться штрафами и даже выставлением команд в свободные, если нарушения правил признаются достаточно серьезными.</p>
-<p class="text-justify">Игрока, выставленного на трансферный рынок, нельзя тренировать и изучать в скаут-центре.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.7">1.7. Принудительное выставление игроков на трансфер.</p>
-<p class="text-justify">В случае если в течение 5 подряд игровых дней типа В текущего сезона в команде держится отрицательный баланс, при этом на трансферном рынке нет хотя бы одного игрока, Лига в принудительном порядке выставит игрока на трансфер с минимальной стоимостью, чья продажа за 50% выведет команду в плюс.</p>
-<p class="text-justify">Лига может выставить на трансфер только тех игроков, которых можно выставить на рынок согласно правилам игры. Если Лига выберет игрока, который стоит на аренде, то он будет удален оттуда и выставлен на трансфер.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.8">1.8. Бонусы первой команде игрока.</p>
-<p class="text-justify">Игроки имеют в профиле строчку: школа - первая команда, в которой был выращен игрок. Эта команда будет получать % от суммы каждого трансфера этого регбиста на протяжении всей его карьеры в размере 1% от суммы сделки.</p>
-<p class="text-justify">Это вознаграждение платит Лига.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Аренда игроков.</p>
-<p class="strong text-justify" id="2.1">2. 1. Что такое аренда?</p>
-<p class="text-justify">Аренда - это временный переход игрока в другую команду. Команда, владеющая этим игроком, получает деньги за аренду, а арендовавший получает игрока на определенный в сделке срок.</p>
-<p class="text-justify">Игрок появляется в его команде с теми же характеристиками, которые у него были в другой команде, и возвращается обратно уже с измененными в зависимости от времени и числа сыгранных матчей.</p>
-<p class="text-justify">Игрок в аренде как и любой виртуальный регбист может получить травму, может вырасти в силе или потерять её.</p>
-<p class="text-justify">Арендованные игроки на время аренды не влияют на статистические показатели рейтинга силы команд, т.е. для рейтингов считается, что этот игрок находится в той команде, которой принадлежит, а не той команде, которая взяла этого игрока в аренду.</p>
-<p class="text-justify">Список игроков, которых можно арендовать, находится на странице арендного рынка.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.2">2.2. Как проводятся торги?</p>
-<p class="text-justify">Арендные сделки заключаются в форме аукциона после матчей игрового дня.</p>
-<p class="text-justify">Аукцион закрытый, т.е. менеджеры не знают, какие еще заявки были поданы на игрока.</p>
-<p class="text-justify">Разрешается публично сообщать о том, какое максимальное предложение на вашего игрока в данный момент (однако при этом никто не может проверить, говорите ли вы правду).</p>
-<p class="text-justify">Очередность проведения аукциона: сначала отдаются в аренду самые дорогие игроки по их базовой (номинальной) цене, потом более дешевые.</p>
-<p class="text-justify">Если желающих арендовать игрока нет, он остаётся на рынке до следующего дня торгов.</p>
-<p class="text-justify">Менеджер, предлагающий игрока в аренду, устанавливает минимальные и максимальные сроки, на которые он готов отдать игрока.</p>
-<p class="text-justify">Покупатель предлагает ту цену, которую он готов отдать за аренду игрока (не меньше минимальной) и желаемый срок, на который он готов получить игрока (в разрешенных пределах). Игрок достаётся тому, кто предложил большую суммарную стоимость за игрока (срок, умноженный на цену за день).</p>
-<p class="text-justify">Команда может арендовать игрока только в том случае, если в кассе команды есть достаточная сумма денег на его аренду. Иначе заявка будет проигнорирована.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.3">2.3. Срок аренды.</p>
-<p class="text-justify">Минимальный - 1 календарный день, максимальный - 99 дней. Учитываются все календарные дни, не зависимо от того, играет ли команда в этот день матчи или нет.</p>
-<p class="text-justify">Не важно, выходил ли арендованный игрок на поле - оплачивается весь срок его пребывания в команде.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.4">2.4. Стоимость аренды.</p>
-<p class="text-justify">Стоимость одного календарного дня аренды должна быть не менее 0.1% от номинальной стоимости игрока. Итоговая сумма сделки формируется из стоимости игрока за календарный день умноженной на срок аренды.</p>
-<p class="text-justify">При равных арендных заявках игрок уходит в ту команду, которая подала заявку раньше.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.5">2.5. Зарплата.</p>
-<p class="text-justify">Зарплата арендованного игрока выплачивается клубом, взявшим его в аренду, а не клубом-владельцем.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.6">2.6. Окончание сезона.</p>
-<p class="text-justify">В период окончания сезона арендованные игроки остаются в командах, которые их арендовали. Арендованный игрок получает усталость той команды, которая его арендует на момент начала сезона. Срок аренды из-за окончания сезона не меняется, т.е. остается таким же, каким был на момент окончания сезона.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.7">2.7. Ограничения по использованию арендованных игроков.</p>
-<p class="text-justify">Арендованный игрок не продается,не переотдается в аренду, не тренируется на базах, не меняет форму. Досрочный разрыв аренды запрещен.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.8">2.8. Запреты в арендных сделках.</p>
-<p class="text-justify">Запрещается отдавать в аренду более 5 игроков из одной команды одновременно.</p>
-<p class="text-justify">Нельзя отдавать в аренду игрока, если у вас в команде останется менее 25 игроков.</p>
-<p class="text-justify">Нельзя отдавать в аренду игроков, отданных в данный момент в аренду (или взятых в аренду).</p>
-<p class="text-justify">Игроки в возрасте 35 лет (ветераны) не могут быть отданы в аренду.</p>
-<p class="text-justify">Не проводятся сделки между командами, управляемыми одним человеком.</p>
-<p class="text-justify">Инспекторы сделок (скаут-коллегия и президенты федераций) могут коллективным решением отменить сделку, которую считают нечестной или невыгодной для одной из сторон.</p>
-<p class="text-justify">Сделка всегда должна быть самодостаточной и ни в коем случае не может являться частью другой сделки или сопровождаться доплатами в виде любых денег, клубов или услуг.</p>
-<p class="text-justify">Отменяются сделки, нарушающие правила игры.</p>
-<p class="text-justify">Отмена сделки может сопровождаться штрафами и даже выставлением команд в свободные, если нарушения правил признаются достаточно серьезными.</p>
-<p class="text-justify">Игрока, выставленного на арендный рынок, нельзя тренировать и изучать в скаут-центре.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3">3. Ограничение количества сделок за один сезон.</p>
-<p class="strong text-justify" id="3.1">3.1. Одна сделка между менеджерами за сезон.</p>
-<p class="text-justify">Два менеджера имеют право только на одну сделку (трансфер, аренда) в течение сезона. Отмененная сделка так же запрещает повторную сделку между этими менеджерами в течение сезона.</p>
-<p class="text-justify">Здесь и далее под сезоном подразумевается сезон, который завершается в последний день сезона. В первый день следующего сезона начинается новый сезон. Т.е. менеджеры могут провести 2 сделки подряд - одну в конце одного сезона и вторую в начале следующего.</p>
-<p class="text-justify">Все попытки провести сделку ранее блокируются автоматически. Причина - противодействие разного рода махинациям и облегчение проверки на нечестные сделки, запрет серии сделок.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3.2">3.2. Одна сделка между командами за сезон.</p>
-<p class="text-justify">Две команды имеют право только на одну сделку (трансфер, аренда) в течение сезона с момента совершения первой сделки. Отмененная сделка так же запрещает повторную сделку между этими командами в течение сезона.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4">4. Проверка сделок.</p>
-<p class="strong text-justify" id="4.1">4.1. О проверке сделок.</p>
-<p class="text-justify">Каждая сделка после её проведения проверяется общественным мнением по поводу её честности. Сделка, признанная по итогам голосования нечестной, считается махинацией на рынке и подлежит отмене.</p>
-<p class="text-justify">Для этого по каждой сделке после её совершения проводится всеобщее голосование с единственным вопросом на нём: "Считаете ли вы, что эта сделка была честной?" с двумя вариантами ответов:</p>
+<p class = "strong text-justify" id = "1"> 1. Player transfers. </p>
+<p class = "strong text-justify" id = "1.1"> 1.1. What are transfers? </p>
+<p class = "text-justify"> Transfer is the sale of a player to another club. In another club, he will appear with all the characteristics that he had (including the form set by the previous manager, fatigue, injuries, game statistics). </p>
+<p class = "text-justify"> See the transfer market page for a list of players you can buy. </p>
+<p class = "text-justify"> Players from the League can also enter the transfer market. In this case, their starting price is set to the minimum, strength and special abilities are chosen by the League. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.2"> 1.2. How are auctions held? </p>
+<p class = "text-justify"> Transfer deals are concluded in the form of an auction after matches of a game day. </p>
+<p class = "text-justify"> The auction is closed, i.e. buyers don\'t know what other bids have been made for this player. </p>
+<p class = "text-justify"> Everyone who wants to buy a player names their prices, and the player goes to the team that offered the highest price (and is able to pay for it). In case of equal applications, the player goes to the team that submitted their application earlier. </p>
+<p class = "text-justify"> The order of the auction: first, the most expensive players are sold on transfer at their base (nominal) price, then the cheaper ones. </p>
+<p class = "text-justify"> If no one wants to buy a player, he stays on the market until the next trading day. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.3"> 1.3. How do I buy a player? </p>
+<p class = "text-justify"> In order to buy a player on transfer, you must submit an application for him indicating the amount that you are willing to pay for him (not less than the one set by the seller). On the day of the transfer deals, the player will be sold to the team that offered the highest amount for him. </p>
+<p class = "text-justify"> A team can only buy a player if the team has enough money to buy it. Otherwise, the purchase requisition will be ignored. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.4"> 1.4. How to sell a player? </p>
+<p class = "text-justify"> To sell a player, you need to put him on the transfer market, specify the minimum price and wait for the end of the auction. If there are no purchase orders, the player will remain on the transfer. </p>
+<p class = "text-justify"> You can withdraw a player from the auction at any time before the auction. Players cannot be removed from the transfer market if the team has a negative balance. </p>
+<p class = "text-justify"> For 50% of the cost of a weak and unnecessary player can be sold to the League. Cannot be sold to the League of a national team player. </p>
+<p class = "text-justify"> It is allowed to publicly announce what the maximum offer has been received by your player so far (however, no one can check if you are telling the truth). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.5"> 1.5. Price restrictions. </p>
+<p class = "text-justify"> The manager himself determines the minimum price for which he is ready to sell the player. The minimum selling price must be at least 50% of the player\'s face value. </p>
+<p class = "text-justify"> A buyer in the transfer market may offer for a player an amount no less than the minimum selling price set by the manager of the team that owns the player. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.6"> 1.6. Prohibitions in transfer deals. </p>
+<p class = "text-justify"> After the deal has been made, no training is allowed for the players who participated in the deal for 7 days. </p>
+<p class = "text-justify"> You may not list more than five players on the transfer market at the same time. </p>
+<p class = "text-justify"> You cannot put a player on the transfer list if you have less than 25 players left in your team. </p>
+<p class = "text-justify"> You cannot transfer currently loaned (or loaned) players. </p>
+<p class = "text-justify"> No deals are made between teams controlled by the same person. </p>
+<p class = "text-justify"> Transaction inspectors (Scout College and Federation Presidents) can collectively cancel a transaction that they consider unfair or unfavorable to one of the parties. </p>
+<p class = "text-justify"> The transaction must always be self-sufficient and in no case can be part of another transaction or be accompanied by additional payments in the form of any money, clubs or services. </p>
+<p class = "text-justify"> Deals that violate the rules of the game are canceled. </p>
+<p class = "text-justify"> Cancellation of a deal can be accompanied by fines and even placing teams in vacant if the violations of the rules are deemed serious enough. </p>
+<p class = "text-justify"> A player placed on the Transfer Market cannot be trained or studied at the Scout Center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.7"> 1.7. Forcing players to be transferred. </p>
+<p class = "text-justify"> If, for 5 consecutive days of type B of the current season, the team has a negative balance, while there is no at least one player on the transfer market, the League will forcibly put the player on a transfer with a minimum cost, whose sale for 50% will bring the team into a plus. </p>
+<p class = "text-justify"> The League may only place players on the transfer who can be placed on the market according to the rules of the game. If the League chooses a player who is on loan, he will be removed from there and put up for transfer. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.8"> 1.8. Bonuses to the player\'s first team. </p>
+<p class = "text-justify"> Players have a line in their profile: school is the first team in which the player was raised. This team will receive 1% of the amount of each transfer of this rugby player throughout his career in the amount of 1% of the transaction amount. </p>
+<p class = "text-justify"> The League pays this reward. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Rent of players. </p>
+<p class = "strong text-justify" id = "2.1"> 2. 1. What is rent? </p>
+<p class = "text-justify"> A lease is a temporary transfer of a player to another team. The team that owns this player receives money for the rent, and the renter gets the player for the period specified in the deal. </p>
+<p class = "text-justify"> A player appears in his team with the same characteristics that he had in the other team, and comes back with changed depending on the time and the number of matches played. </p>
+<p class = "text-justify"> A player on loan, like any virtual rugby player, can be injured, gain in strength or lose it. </p>
+<p class = "text-justify"> Loaned players for the duration of the lease do not affect the statistics of the team\'s strength rating, ie. for ratings, this player is considered to be on the team that he belongs to, and not on the team that rented this player. </p>
+<p class = "text-justify"> For a list of players that can be rented, see the rental market page. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.2"> 2.2. How are auctions held? </p>
+<p class = "text-justify"> Lease deals are concluded in the form of an auction after matches of a game day. </p>
+<p class = "text-justify"> The auction is closed, i.e. managers do not know what other applications have been submitted for the player. </p>
+<p class = "text-justify"> It is allowed to publicly announce what is the maximum offer for your player at the moment (however, no one can check if you are telling the truth). </p>
+<p class = "text-justify"> The order of the auction: the most expensive players are leased first at their base (nominal) price, then the cheaper ones. </p>
+<p class = "text-justify"> If there are no players willing to rent, they remain on the market until the next trading day. </p>
+<p class = "text-justify"> The manager that offers a player on loan sets the minimum and maximum periods for which he is ready to give the player. </p>
+<p class = "text-justify"> The buyer offers the price that he is ready to pay for the player\'s rental (not less than the minimum) and the desired period for which he is ready to receive the player (within the permitted limits). The player goes to the one who offered the highest total cost per player (time multiplied by the price per day). </p>
+<p class = "text-justify"> A team can only rent a player if the team has enough money to rent a player. Otherwise, the application will be ignored. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.3"> 2.3. Lease term. </p>
+<p class = "text-justify"> The minimum is 1 calendar day, the maximum is 99 days. All calendar days are taken into account, regardless of whether the team plays matches on that day or not. </p>
+<p class = "text-justify"> It does not matter if the rented player has entered the field - the entire period of his stay in the team is paid. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.4"> 2.4. Rental price. </p>
+<p class = "text-justify"> The cost of one calendar day of rent must be at least 0.1% of the player\'s nominal value. The total amount of the transaction is formed from the player\'s value for a calendar day multiplied by the rental period. </p>
+<p class = "text-justify"> In case of equal rental requests, the player goes to the team that applied earlier. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.5"> 2.5. Salary. </p>
+<p class = "text-justify"> The rented player\'s salary is paid by the club that rented the player, not by the owner club. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.6"> 2.6. The end of the season. </p>
+<p class = "text-justify"> During the end of the season, rented players remain with the teams that rented them. The rented player gets tired of the team that rented him at the start of the season. The rental period does not change due to the end of the season, i.e. remains the same as it was at the end of the season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.7"> 2.7. Restrictions on the use of rented players. </p>
+<p class = "text-justify"> A rented player is not for sale, does not re-lease, does not train on bases, does not change form. Early termination of the lease is prohibited. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.8"> 2.8. Prohibitions in rental deals. </p>
+<p class = "text-justify"> You may not rent more than 5 players from one team at a time. </p>
+<p class = "text-justify"> You cannot loan a player if you have less than 25 players left on your team. </p>
+<p class = "text-justify"> You cannot loan players currently on loan (or on loan). </p>
+<p class = "text-justify"> Players aged 35 (veterans) cannot be loaned. </p>
+<p class = "text-justify"> No deals are made between teams controlled by the same person. </p>
+<p class = "text-justify"> Transaction inspectors (Scout College and Federation Presidents) can collectively cancel a transaction that they consider unfair or unfavorable to one of the parties. </p>
+<p class = "text-justify"> The transaction must always be self-sufficient and in no case can be part of another transaction or be accompanied by additional payments in the form of any money, clubs or services. </p>
+<p class = "text-justify"> Deals that violate the rules of the game are canceled. </p>
+<p class = "text-justify"> Cancellation of a deal can be accompanied by fines and even placing teams in vacant if the violations of the rules are deemed serious enough. </p>
+<p class = "text-justify"> A player placed on the rental market cannot be trained or studied in the scout center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3"> 3. Limit the number of deals per season. </p>
+<p class = "strong text-justify" id = "3.1"> 3.1. One deal between managers per season. </p>
+<p class = "text-justify"> Two managers are only entitled to one deal (transfer, rental) per season. A canceled deal also prohibits a second deal between these managers during the season. </p>
+<p class = "text-justify"> Hereinafter, a season refers to the season that ends on the last day of the season. On the first day of the next season, a new season begins. Those. managers can conduct 2 deals in a row - one at the end of one season and one at the beginning of the next. </p>
+<p class = "text-justify"> All attempts to make a deal earlier are automatically blocked. The reason is resistance to all kinds of fraud and facilitation of verification for dishonest transactions, the prohibition of a series of transactions. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3.2"> 3.2. One deal between teams per season. </p>
+<p class = "text-justify"> Two teams are entitled to only one deal (transfer, rental) during the season from the moment of the first deal. A canceled deal also prohibits a second deal between these teams during the season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4"> 4. Checking deals. </p>
+<p class = "strong text-justify" id = "4.1"> 4.1. About checking transactions. </p>
+<p class = "text-justify"> Every deal, after it has been completed, is reviewed by public opinion for its fairness. A transaction that is deemed unfair by the voting is considered a fraud in the market and must be canceled. </p>
+<p class = "text-justify"> To do this, for each transaction, after its completion, a general vote is taken with a single question on it: "Do you think this transaction was fair?" with two possible answers: </p>
 <ul>
-<li>"Честная сделка"</li>
-<li>"Нечестная сделка"</li>
+<li> "Fair Deal" </li>
+<li> "Bad Deal" </li>
 </ul>
-<p class="text-justify">"Вес" каждого голоса составляет одно очко.</p>
-<p class="text-justify">Голосование заканчивается, если прошло 7 дней с момента совершения сделки. По итогам голосования любая сделка может быть отменена.</p>
-<p class="strong text-justify" id="4.2">4.2. Отмена сделок.</p>
-<p class="text-justify">Для того, чтобы сделка была отменена по итогам голосования, необходимо чтобы большинство голосов (по очкам) было отдано за то, что сделка невыгодна одной из команд;</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4.3">4.3. О запрете попрошайничества на тему проверки сделок.</p>
-<p class="text-justify">Запрещены следующие действия менеджеров:</p>
+<p class = "text-justify"> Each vote weighs one point. </p>
+<p class = "text-justify"> Voting ends if 7 days have passed since the deal was made. According to the voting results, any deal can be canceled. </p>
+<p class = "strong text-justify" id = "4.2"> 4.2. Cancellation of deals. </p>
+<p class = "text-justify"> In order for the deal to be canceled following the voting results, the majority of votes (in points) must be cast for the fact that the deal is not profitable for one of the teams; </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4.3"> 4.3. On the prohibition of begging on the topic of checking transactions. </p>
+<p class = "text-justify"> The following manager actions are prohibited: </p>
 <ul>
-<li>отправка (особенно массовая - спам) любых "просьб" проголосовать в конкретных голосованиях любыми способами (личное общение, в чате, на форуме);</li>
-<li>угрозы и оскорбления в адрес участников голосования;</li>
-<li>комментарии к сделке с просьбами проголосовать за или против этой сделки;</li>
-<li>оказание влияния любого рода на участников голосования (взятки, уговоры) с целью получения нужного голоса;</li>
+<li> sending (especially massive - spam) any "requests" to vote in specific polls by any means (personal communication, chat, on the forum); </li>
+<li> threats and insults addressed to voting participants; </li>
+<li> comments on a deal asking to vote for or against this deal; </li>
+<li> influence of any kind on voting participants (bribes, persuasion) in order to obtain the desired vote; </li>
 </ul>
-<p class="text-justify">Если вы получили "просьбу" ("предложение") проголосовать в конкретной сделке - сообщите об этом в тех.поддержку.</p>
-<p class="text-justify"><span class="strong">Внимание!</span> Подобные просьбы проголосовать как правило сопровождаются "слёзными" описаниями: сообщениями об "ошибках", словами "помогите", "очень надо", "очень прошу", "не уследил", "не хотел", "перепутал", "срочно" и т.д. - это обман с целью ввести вас в заблуждение и получить ваш голос в нужном махинатору направлении.</p>
-<p class="text-justify">Оценивая сделку, вы должны оценить только её честность, не принимая во внимание никакие другие факторы как то "ошибки" менеджеров или их пожелания.</p>
-<p class="text-justify">Помните, что ваш голос, отданный по "просьбе", помогает только махинатору - автору просьбы, и наносит вред остальным участникам сделки, Лиге в целом и вашей репутации в частности.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4.4">4.4. О некорректном голосовании при проверке сделок.</p>
-<p class="text-justify">Участники проверки сделок могут оставить свой голос только на основе ответа на вопрос "Считаете ли вы, что эта сделка была честной?"</p>
-<p class="text-justify">Запрещается оставлять голос по любым другим причинам, например:</p>
+<p class = "text-justify"> If you have received a "request" ("offer") to vote in a particular deal, please contact technical support. </p>
+<p class = "text-justify"> <span class = "strong"> Attention! </span> Such requests to vote are usually accompanied by "tearful" descriptions: messages about "errors", the words "help", "very necessary" , "I beg you very much", "did not keep track", "did not want to", "confused", "urgently", etc. is a deception in order to mislead you and get your vote in the direction the fraudster wants. </p>
+<p class = "text-justify"> When evaluating a deal, you should evaluate only its fairness, not taking into account any other factors such as "mistakes" of managers or their wishes. </p>
+<p class = "text-justify"> Remember that your vote at the "request" only helps the fraudster - the author of the request, and harms the rest of the parties to the deal, the League in general and your reputation in particular. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4.4"> 4.4. Incorrect voting when checking deals. </p>
+<p class = "text-justify"> Transaction reviewers can only vote based on the answer to the question "Do you think this transaction was fair?" </p>
+<p class = "text-justify"> It is forbidden to leave a vote for any other reason, for example: </p>
 <ul>
-<li>отвечая на чью-либо "просьбу" проголосовать;</li>
-<li>исправляя чью-либо "ошибку";</li>
-<li>личная симпатия или неприязнь;</li>
-<li>личная заинтересованность в исходе голосования.</li>
+<li> answering someone\'s "request" to vote; </li>
+<li> correcting someone\'s "mistake"; </li>
+<li> personal liking or dislike; </li>
+<li> personal interest in the outcome of the vote. </li>
 </ul>
-<p class="text-justify">При обнаружении непонимания голосующим вопроса, на который его просят ответить, т.е. в случае, если ответы, данные участником голосования, некорректны, Администрация Лиги вправе выносить штрафы, запреты на участие в проверке сделок.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Как купить (продать, арендовать) игроков?',
+<p class = "text-justify"> If a voter does not understand the question to which he is asked to answer, i.e. if the answers given by the voting participant are incorrect, the League Administration has the right to impose fines, bans on participation in the verification of transactions. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'How to buy (sell, rent) players?',
 ];

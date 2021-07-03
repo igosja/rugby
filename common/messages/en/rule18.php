@@ -17,132 +17,132 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Товарищеские матчи.</a>
+<a href="#2"> 2. Friendly matches. </a>
 <br/>
-<a href="#3">3. Соревновательные матчи.</a>
+<a href="#3"> 3. Competitive matches. </a>
 <br/>
-<a href="#3.1">3.1. Соотношение сил игравших составов.</a>
+<a href="#3.1"> 3.1. The balance of forces of the playing teams. </a>
 <br/>
-<a href="#3.2">3.2. Влияние морали.</a>
+<a href="#3.2"> 3.2. The influence of morality. </a>
 <br/>
-<a href="#3.3">3.3. Влияние крупного счета.</a>
+<a href="#3.3"> 3.3. The impact of a large account. </a>
 <br/>
-<a href="#3.4">3.4. Поправка на разные типы соревнований.</a>
+<a href="#3.4"> 3.4. Correction for different types of competitions. </a>
 <br/>
-<a href="#3.5">3.5. Критерии тренерского мастерства.</a>
+<a href="#3.5"> 3.5. Coaching criteria. </a>
 <br/>
-<a href="#3.6">3.6. Ограничения.</a>
+<a href="#3.6"> 3.6. Restrictions. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify">Сила ваших игроков может измениться по результатам матча, в котором они выходили на поле. Вероятность изменения силы зависит от типа соревнования, от того, как хорошо игрок сыграл в матче, от силы игроков соперника (против сильного соперника ваши игроки лучше набирают опыт, в матчах со слабыми - теряют), от мастерства тренера команды (чем оптимальнее вы выставите состав, тем лучше они будут набирать силу), от результата матча. В отчете о прошедшем матче иконками-стрелками вверх или вниз возле фамилии игрока показано, как изменилась сила игрока - выросла или упала. За один матч сила одного игрока может измениться не более, чем на один балл.</p>
-<p class="text-justify">В международных соревнованиях все игроки лучше набирают силу, поэтому попасть в лигу чемпионов - очень престижно. В матчах сборных сила игроков набирается еще быстрее.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Товарищеские матчи.</span> Товарищеские матчи являются проверочными, позволяя тренеру проверить новые тактические схемы и комбинации, поэтому изменение силы игроков по их результатам не происходят.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Соревновательные матчи.</span> Это все остальные матчи, которые не относятся к товарищеским.</p>
-<p class="text-justify" id="3.1"><span class="strong">3.1. Соотношение сил игравших составов.</span> Основным критерием изменения силы игроков являются результат и соотношение сил составов игравших соперников в %. В таблице приведено базовое командное изменение силы (т.е. число получаемых баллов на команду), затем оно корректируется в зависимости от нижеследующих пунктов данных правил:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Отношение силы игравшего состава к сумме сил игравших составов</th><th>Победа</th><th>Ничья</th><th>Поражение</th></tr>
-<tr><td class="text-center">75%-100%</td><td class="text-center">-4.0</td><td class="text-center">-4.5</td><td class="text-center">-5.0</td></tr>
-<tr><td class="text-center">71%-74%</td><td class="text-center">-3.5</td><td class="text-center">-4.0</td><td class="text-center">-4.5</td></tr>
-<tr><td class="text-center">68%-70%</td><td class="text-center">-3.0</td><td class="text-center">-3.5</td><td class="text-center">-4.0</td></tr>
-<tr><td class="text-center">65%-67%</td><td class="text-center">-2.5</td><td class="text-center">-3.0</td><td class="text-center">-3.5</td></tr>
-<tr><td class="text-center">62%-64%</td><td class="text-center">-2.0</td><td class="text-center">-2.5</td><td class="text-center">-3.0</td></tr>
-<tr><td class="text-center">59%-61%</td><td class="text-center">-1.5</td><td class="text-center">-2.0</td><td class="text-center">-2.5</td></tr>
-<tr><td class="text-center">57%-58%</td><td class="text-center">-1.0</td><td class="text-center">-1.5</td><td class="text-center">-2.0</td></tr>
-<tr><td class="text-center">55%-56%</td><td class="text-center">-0.5</td><td class="text-center">-1.0</td><td class="text-center">-1.5</td></tr>
-<tr><td class="text-center">53%-54%</td><td class="text-center">0.0</td><td class="text-center">-0.5</td><td class="text-center">-1.0</td></tr>
-<tr><td class="text-center">51%-52%</td><td class="text-center">+0.5</td><td class="text-center">0.0</td><td class="text-center">-0.5</td></tr>
-<tr><td class="text-center">49%-50%</td><td class="text-center">+1.0</td><td class="text-center">+0.5</td><td class="text-center">0.0</td></tr>
-<tr><td class="text-center">47%-48%</td><td class="text-center">+1.5</td><td class="text-center">+1.0</td><td class="text-center">+0.5</td></tr>
-<tr><td class="text-center">45%-46%</td><td class="text-center">+2.0</td><td class="text-center">+1.5</td><td class="text-center">+1.0</td></tr>
-<tr><td class="text-center">43%-44%</td><td class="text-center">+2.5</td><td class="text-center">+2.0</td><td class="text-center">+1.5</td></tr>
-<tr><td class="text-center">41%-42%</td><td class="text-center">+3.0</td><td class="text-center">+2.5</td><td class="text-center">+2.0</td></tr>
-<tr><td class="text-center">38%-40%</td><td class="text-center">+3.5</td><td class="text-center">+3.0</td><td class="text-center">+2.5</td></tr>
-<tr><td class="text-center">35%-37%</td><td class="text-center">+4.0</td><td class="text-center">+3.5</td><td class="text-center">+3.0</td></tr>
-<tr><td class="text-center">32%-34%</td><td class="text-center">+4.5</td><td class="text-center">+4.0</td><td class="text-center">+3.5</td></tr>
-<tr><td class="text-center">29%-31%</td><td class="text-center">+5.0</td><td class="text-center">+4.5</td><td class="text-center">+4.0</td></tr>
-<tr><td class="text-center">25%-28%</td><td class="text-center">+5.5</td><td class="text-center">+5.0</td><td class="text-center">+4.5</td></tr>
-<tr><td class="text-center">0%-24%</td><td class="text-center">+6.0</td><td class="text-center">+5.5</td><td class="text-center">+5.0</td></tr>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify"> The strength of your players can change as a result of the match in which they entered the field. The likelihood of a change in strength depends on the type of competition, on how well the player played in the match, on the strength of the opposing players (against a strong opponent, your players gain experience better, in matches with weak ones they lose), on the skill of the team coach (the more optimal you will set the squad , the better they will gain strength), from the result of the match. In the report on the past match, the up or down arrow icons next to the player\'s name show how the player\'s strength has changed - increased or decreased. In one match, the strength of one player can change by no more than one point.</p>
+<p class = "text-justify"> In international competitions, all players gain strength better, so getting into the Champions League is very prestigious. In international matches, the players\' strength grows even faster. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Friendly Matches. </span> Friendly Matches are test matches, allowing the coach to test new tactics and combinations, so there is no change in the strength of the players based on their results. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Competitive matches. </span> These are all other matches that are not friendly. </p>
+<p class = "text-justify" id = "3.1"> <span class = "strong"> 3.1. The ratio of the strengths of the teams playing. </span> The main criterion for changing the strength of the players is the result and the ratio of the strengths of the teams of the opponents in%. The table shows the basic team change in strength (i.e. the number of points received per team), then it is adjusted depending on the following points of these rules: </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> The ratio of the strength of the playing squad to the sum of the forces of the playing squads </th> <th> Victory </th> <th> Draw </th> <th> Loss </th> </tr>
+<tr> <td class = "text-center"> 75% -100% </td> <td class = "text-center"> - 4.0 </td> <td class = "text-center"> - 4.5 </td> <td class = "text-center"> - 5.0 </td> </tr>
+<tr> <td class = "text-center"> 71% -74% </td> <td class = "text-center"> - 3.5 </td> <td class = "text-center"> - 4.0 </td> <td class = "text-center"> - 4.5 </td> </tr>
+<tr> <td class = "text-center"> 68% -70% </td> <td class = "text-center"> - 3.0 </td> <td class = "text-center"> - 3.5 </td> <td class = "text-center"> - 4.0 </td> </tr>
+<tr> <td class = "text-center"> 65% -67% </td> <td class = "text-center"> - 2.5 </td> <td class = "text-center"> - 3.0 </td> <td class = "text-center"> - 3.5 </td> </tr>
+<tr> <td class = "text-center"> 62% -64% </td> <td class = "text-center"> - 2.0 </td> <td class = "text-center"> - 2.5 </td> <td class = "text-center"> - 3.0 </td> </tr>
+<tr> <td class = "text-center"> 59% -61% </td> <td class = "text-center"> - 1.5 </td> <td class = "text-center"> - 2.0 </td> <td class = "text-center"> - 2.5 </td> </tr>
+<tr> <td class = "text-center"> 57% -58% </td> <td class = "text-center"> - 1.0 </td> <td class = "text-center"> - 1.5 </td> <td class = "text-center"> - 2.0 </td> </tr>
+<tr> <td class = "text-center"> 55% -56% </td> <td class = "text-center"> - 0.5 </td> <td class = "text-center"> - 1.0 </td> <td class = "text-center"> - 1.5 </td> </tr>
+<tr> <td class = "text-center"> 53% -54% </td> <td class = "text-center"> 0.0 </td> <td class = "text-center"> - 0.5 < / td> <td class = "text-center"> - 1.0 </td> </tr>
+<tr> <td class = "text-center"> 51% -52% </td> <td class = "text-center"> + 0.5 </td> <td class = "text-center"> 0.0 < / td> <td class = "text-center"> - 0.5 </td> </tr>
+<tr> <td class = "text-center"> 49% -50% </td> <td class = "text-center"> + 1.0 </td> <td class = "text-center"> + 0.5 </td> <td class = "text-center"> 0.0 </td> </tr>
+<tr> <td class = "text-center"> 47% -48% </td> <td class = "text-center"> + 1.5 </td> <td class = "text-center"> + 1.0 </td> <td class = "text-center"> + 0.5 </td> </tr>
+<tr> <td class = "text-center"> 45% -46% </td> <td class = "text-center"> + 2.0 </td> <td class = "text-center"> + 1.5 </td> <td class = "text-center"> + 1.0 </td> </tr>
+<tr> <td class = "text-center"> 43% -44% </td> <td class = "text-center"> + 2.5 </td> <td class = "text-center"> + 2.0 </td> <td class = "text-center"> + 1.5 </td> </tr>
+<tr> <td class = "text-center"> 41% -42% </td> <td class = "text-center"> + 3.0 </td> <td class = "text-center"> + 2.5 </td> <td class = "text-center"> + 2.0 </td> </tr>
+<tr> <td class = "text-center"> 38% -40% </td> <td class = "text-center"> + 3.5 </td> <td class = "text-center"> + 3.0 </td> <td class = "text-center"> + 2.5 </td> </tr>
+<tr> <td class = "text-center"> 35% -37% </td> <td class = "text-center"> + 4.0 </td> <td class = "text-center"> + 3.5 </td> <td class = "text-center"> + 3.0 </td> </tr>
+<tr> <td class = "text-center"> 32% -34% </td> <td class = "text-center"> + 4.5 </td> <td class = "text-center"> + 4.0 </td> <td class = "text-center"> + 3.5 </td> </tr>
+<tr> <td class = "text-center"> 29% -31% </td> <td class = "text-center"> + 5.0 </td> <td class = "text-center"> + 4.5 </td> <td class = "text-center"> + 4.0 </td> </tr>
+<tr> <td class = "text-center"> 25% -28% </td> <td class = "text-center"> + 5.5 </td> <td class = "text-center"> + 5.0 </td> <td class = "text-center"> + 4.5 </td> </tr>
+<tr> <td class = "text-center"> 0% -24% </td> <td class = "text-center"> + 6.0 </td> <td class = "text-center"> + 5.5 </td> <td class = "text-center"> + 5.0 </td> </tr>
 </table>
-<p class="text-justify">0.5 балла означают, что у команды есть 50%-ная вероятность получить этот балл по результатам матча. Целое число баллов команда получит по результатам матча в любом случае.</p>
-<p class="text-justify">В понятие результата матча входит результат матча по истечении основного и дополнительного времени игры. Послематчевые буллиты на изменении силы игроков не отражаются.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.2"><span class="strong">3.2. Влияние морали.</span> Если вы играете супернастроем, то получаете поправку -1.0 балл, а ваш соперник +0.5 балла. Если вы играете на отдыхе, то получаете поправку +0.5 балла, а ваш соперник -1.0 балл.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.3"><span class="strong">3.3. Влияние крупного счета.</span> Крупный счет даже в матчах со слабой командой является стимулом для роста силы игроков. Корректировка базового командного изменения силы приведена в таблице:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Разница очков</th><th>Победитель</th><th>Проигравший</th></tr>
-<tr><td class="text-center">64 очка и более</td><td class="text-center">+7.5</td><td class="text-center">-7.5</td></tr>
-<tr><td class="text-center">56 очков</td><td class="text-center">+6.5</td><td class="text-center">-6.5</td></tr>
-<tr><td class="text-center">48 очков</td><td class="text-center">+5.5</td><td class="text-center">-5.5</td></tr>
-<tr><td class="text-center">40 очков</td><td class="text-center">+4.5</td><td class="text-center">-4.5</td></tr>
-<tr><td class="text-center">32 очка</td><td class="text-center">+3.5</td><td class="text-center">-3.5</td></tr>
-<tr><td class="text-center">24 очка</td><td class="text-center">+2.5</td><td class="text-center">-2.5</td></tr>
-<tr><td class="text-center">16 очков</td><td class="text-center">+1.5</td><td class="text-center">-1.5</td></tr>
-<tr><td class="text-center">8 очков</td><td class="text-center">+0.5</td><td class="text-center">-0.5</td></tr>
+<p class = "text-justify"> 0.5 points means that the team has a 50% chance of getting that point in the match. The team will receive a whole number of points based on the match results in any case. </p>
+<p class = "text-justify"> The result of a match includes the result of the match after the expiration of the main and additional playing time. Post-match shootouts do not affect the strength of the players. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.2"> <span class = "strong"> 3.2. Influence of morality. </span> If you play with super mood, you get a correction of -1.0 point, and your opponent +0.5 points. If you play on vacation, you get a correction of +0.5 points, and your opponent - -1.0 points. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.3"> <span class = "strong"> 3.3. Impact of a large score. </span> A large score, even in matches with a weak team, is an incentive for players to grow in strength. The adjustments to the basic team strength change are shown in the table: </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> Point Difference </th> <th> Winner </th> <th> Loser </th> </tr>
+<tr> <td class = "text-center"> 64 points or more </td> <td class = "text-center"> + 7.5 </td> <td class = "text-center"> - 7.5 < / td> </tr>
+<tr> <td class = "text-center"> 56 points </td> <td class = "text-center"> + 6.5 </td> <td class = "text-center"> - 6.5 </ td > </tr>
+<tr> <td class = "text-center"> 48 points </td> <td class = "text-center"> + 5.5 </td> <td class = "text-center"> - 5.5 </ td > </tr>
+<tr> <td class = "text-center"> 40 points </td> <td class = "text-center"> + 4.5 </td> <td class = "text-center"> - 4.5 </ td > </tr>
+<tr> <td class = "text-center"> 32 points </td> <td class = "text-center"> + 3.5 </td> <td class = "text-center"> - 3.5 </ td > </tr>
+<tr> <td class = "text-center"> 24 points </td> <td class = "text-center"> + 2.5 </td> <td class = "text-center"> - 2.5 </ td > </tr>
+<tr> <td class = "text-center"> 16 points </td> <td class = "text-center"> + 1.5 </td> <td class = "text-center"> - 1.5 </ td > </tr>
+<tr> <td class = "text-center"> 8 points </td> <td class = "text-center"> + 0.5 </td> <td class = "text-center"> - 0.5 </ td > </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.4"><span class="strong">3.4. Поправка на разные типы соревнований.</span> Во время игр сборных никто не теряет баллы. Корректировка базового командного изменения силы приведена в таблице:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Тип соревнований</th><th>Баллы</th></tr>
-<tr><td class="text-center">Игры сборных</td><td class="text-center">+2.5</td></tr>
-<tr><td class="text-center">Лиги чемпионов</td><td class="text-center">+2.0</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.4"> <span class = "strong"> 3.4. Correction for different types of competitions. </span> No points are lost during national team games. The adjustments to the basic team strength change are shown in the table: </p>
+<table class = "table table-bordered table-hover">
+<tr> <th> Competition type </th> <th> Points </th> </tr>
+<tr> <td class = "text-center"> National Team Games </td> <td class = "text-center"> + 2.5 </td> </tr>
+<tr> <td class = "text-center"> Champions League </td> <td class = "text-center"> + 2.0 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.5"><span class="strong">3.5. Критерии тренерского мастерства.</span> Эти поправки позволяют команде получить больше баллов, если состав для игры был подобран оптимально, или наоборот - получить меньше баллов, если состав для игры был взят дублирующим или специально ослабленным.</p>
-<p class="text-justify">Оптимальность состава: соотношение силы игравшего состава к рейтингу команды</p>
-<table class="table table-bordered table-hover">
-<tr><th>Оптимальность</th><th>Баллы</th></tr>
-<tr><td class="text-center">135% и больше</td><td class="text-center">+2.5</td></tr>
-<tr><td class="text-center">125%-134%</td><td class="text-center">+2.0</td></tr>
-<tr><td class="text-center">115%-124%</td><td class="text-center">+1.5</td></tr>
-<tr><td class="text-center">110%-114%</td><td class="text-center">+1.0</td></tr>
-<tr><td class="text-center">105%-109%</td><td class="text-center">+0.5</td></tr>
-<tr><td class="text-center">80%-104%</td><td class="text-center">0.0</td></tr>
-<tr><td class="text-center">76%-79%</td><td class="text-center">-0.5</td></tr>
-<tr><td class="text-center">73%-75%</td><td class="text-center">-1.0</td></tr>
-<tr><td class="text-center">70%-72%</td><td class="text-center">-1.5</td></tr>
-<tr><td class="text-center">67%-69%</td><td class="text-center">-2.0</td></tr>
-<tr><td class="text-center">65%-66%</td><td class="text-center">-2.5</td></tr>
-<tr><td class="text-center">63%-64%</td><td class="text-center">-3.0</td></tr>
-<tr><td class="text-center">61%-62%</td><td class="text-center">-3.5</td></tr>
-<tr><td class="text-center">59%-60%</td><td class="text-center">-4.0</td></tr>
-<tr><td class="text-center">57%-58%</td><td class="text-center">-4.5</td></tr>
-<tr><td class="text-center">55%-56%</td><td class="text-center">-5.0</td></tr>
-<tr><td class="text-center">53%-54%</td><td class="text-center">-5.5</td></tr>
-<tr><td class="text-center">51%-52%</td><td class="text-center">-6.0</td></tr>
-<tr><td class="text-center">49%-50%</td><td class="text-center">-6.5</td></tr>
-<tr><td class="text-center">47%-48%</td><td class="text-center">-7.0</td></tr>
-<tr><td class="text-center">45%-46%</td><td class="text-center">-7.5</td></tr>
-<tr><td class="text-center">43%-44%</td><td class="text-center">-8.0</td></tr>
-<tr><td class="text-center">41%-42%</td><td class="text-center">-8.5</td></tr>
-<tr><td class="text-center">39%-40%</td><td class="text-center">-9.0</td></tr>
-<tr><td class="text-center">37%-38%</td><td class="text-center">-9.5</td></tr>
-<tr><td class="text-center">35%-36%</td><td class="text-center">-10.0</td></tr>
-<tr><td class="text-center">34% и меньше</td><td class="text-center">-10.5</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.5"> <span class = "strong"> 3.5. Criteria for coaching. </span> These amendments allow the team to get more points if the composition for the game was selected optimally, or vice versa - to get less points if the composition for the game was taken as a duplicate or specially weakened. </p>
+<p class = "text-justify"> Optimality of the squad: the ratio of the strength of the playing squad to the rating of the team </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Optimality</th><th> Points</th> </tr>
+<tr> <td class = "text-center"> 135% or more </td> <td class = "text-center"> + 2.5 </td> </tr>
+<tr> <td class = "text-center"> 125% -134% </td> <td class = "text-center"> + 2.0 </td> </tr>
+<tr> <td class = "text-center"> 115% -124% </td> <td class = "text-center"> + 1.5 </td> </tr>
+<tr> <td class = "text-center"> 110% -114% </td> <td class = "text-center"> + 1.0 </td> </tr>
+<tr> <td class = "text-center"> 105% -109% </td> <td class = "text-center"> + 0.5 </td> </tr>
+<tr> <td class = "text-center"> 80% -104% </td> <td class = "text-center"> 0.0 </td> </tr>
+<tr> <td class = "text-center"> 76% -79% </td> <td class = "text-center"> - 0.5 </td> </tr>
+<tr> <td class = "text-center"> 73% -75% </td> <td class = "text-center"> - 1.0 </td> </tr>
+<tr> <td class = "text-center"> 70% -72% </td> <td class = "text-center"> - 1.5 </td> </tr>
+<tr> <td class = "text-center"> 67% -69% </td> <td class = "text-center"> - 2.0 </td> </tr>
+<tr> <td class = "text-center"> 65% -66% </td> <td class = "text-center"> - 2.5 </td> </tr>
+<tr> <td class = "text-center"> 63% -64% </td> <td class = "text-center"> - 3.0 </td> </tr>
+<tr> <td class = "text-center"> 61% -62% </td> <td class = "text-center"> - 3.5 </td> </tr>
+<tr> <td class = "text-center"> 59% -60% </td> <td class = "text-center"> - 4.0 </td> </tr>
+<tr> <td class = "text-center"> 57% -58% </td> <td class = "text-center"> - 4.5 </td> </tr>
+<tr> <td class = "text-center"> 55% -56% </td> <td class = "text-center"> - 5.0 </td> </tr>
+<tr> <td class = "text-center"> 53% -54% </td> <td class = "text-center"> - 5.5 </td> </tr>
+<tr> <td class = "text-center"> 51% -52% </td> <td class = "text-center"> - 6.0 </td> </tr>
+<tr> <td class = "text-center"> 49% -50% </td> <td class = "text-center"> - 6.5 </td> </tr>
+<tr> <td class = "text-center"> 47% -48% </td> <td class = "text-center"> - 7.0 </td> </tr>
+<tr> <td class = "text-center"> 45% -46% </td> <td class = "text-center"> - 7.5 </td> </tr>
+<tr> <td class = "text-center"> 43% -44% </td> <td class = "text-center"> - 8.0 </td> </tr>
+<tr> <td class = "text-center"> 41% -42% </td> <td class = "text-center"> - 8.5 </td> </tr>
+<tr> <td class = "text-center"> 39% -40% </td> <td class = "text-center"> - 9.0 </td> </tr>
+<tr> <td class = "text-center"> 37% -38% </td> <td class = "text-center"> - 9.5 </td> </tr>
+<tr> <td class = "text-center"> 35% -36% </td> <td class = "text-center"> - 10.0 </td> </tr>
+<tr> <td class = "text-center"> 34% or less </td> <td class = "text-center"> - 10.5 </td> </tr>
 </table>
-<p class="text-justify">Оптимальность позиций: расстановка игроков по позициям</p>
-<table class="table table-bordered table-hover">
-<tr><th>Оптимальность</th><th>Баллы</th></tr>
-<tr><td class="text-center">100%</td><td class="text-center">0.0</td></tr>
-<tr><td class="text-center">97%-99%</td><td class="text-center">-0.5</td></tr>
-<tr><td class="text-center">94%-96%</td><td class="text-center">-1.0</td></tr>
-<tr><td class="text-center">91%-93%</td><td class="text-center">-1.5</td></tr>
-<tr><td class="text-center">88%-90%</td><td class="text-center">-2.0</td></tr>
-<tr><td class="text-center">85%-87%</td><td class="text-center">-2.5</td></tr>
-<tr><td class="text-center">82%-84%</td><td class="text-center">-3.0</td></tr>
-<tr><td class="text-center">79%-81%</td><td class="text-center">-3.5</td></tr>
-<tr><td class="text-center">76%-78%</td><td class="text-center">-4.0</td></tr>
-<tr><td class="text-center">73%-75%</td><td class="text-center">-4.5</td></tr>
-<tr><td class="text-center">72% и меньше</td><td class="text-center">-5.0</td></tr>
+<p class = "text-justify"> Optimal positioning: placing players by position </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Optimality</th><th> Points</th> </tr>
+<tr> <td class = "text-center"> 100% </td> <td class = "text-center"> 0.0 </td> </tr>
+<tr> <td class = "text-center"> 97% -99% </td> <td class = "text-center"> - 0.5 </td> </tr>
+<tr> <td class = "text-center"> 94% -96% </td> <td class = "text-center"> - 1.0 </td> </tr>
+<tr> <td class = "text-center"> 91% -93% </td> <td class = "text-center"> - 1.5 </td> </tr>
+<tr> <td class = "text-center"> 88% -90% </td> <td class = "text-center"> - 2.0 </td> </tr>
+<tr> <td class = "text-center"> 85% -87% </td> <td class = "text-center"> - 2.5 </td> </tr>
+<tr> <td class = "text-center"> 82% -84% </td> <td class = "text-center"> - 3.0 </td> </tr>
+<tr> <td class = "text-center"> 79% -81% </td> <td class = "text-center"> - 3.5 </td> </tr>
+<tr> <td class = "text-center"> 76% -78% </td> <td class = "text-center"> - 4.0 </td> </tr>
+<tr> <td class = "text-center"> 73% -75% </td> <td class = "text-center"> - 4.5 </td> </tr>
+<tr> <td class = "text-center"> 72% or less </td> <td class = "text-center"> - 5.0 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.6"><span class="strong">3.6. Ограничения.</span> В любых случаях командное изменение силы не может превышать 5 набранных или потерянных баллов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Изменение силы игроков по результатам матча',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.6"> <span class = "strong"> 3.6. Limitations. </span> In any case, a team change in strength cannot exceed 5 points scored or lost. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Changing the strength of players based on match results',
 ];

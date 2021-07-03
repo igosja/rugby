@@ -17,90 +17,90 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
+    'text' => '<p class="strong text-justify" id = "0"> Content </p>
 <p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Игроки и составы команд.</a>
+<a href="#2"> 2. Players and lineups. </a>
 <br/>
-<a href="#3">3. Замены игроков в составе сборной.</a>
+<a href="#3"> 3. Substitution of players in the national team. </a>
 <br/>
-<a href="#4">4. Тренеры сборных и их выборы.</a>
+<a href="#4"> 4. National team coaches and their selections. </a>
 <br/>
-<a href="#5">5. Заместители тренеров сборных и их выборы.</a>
+<a href="#5"> 5. Deputy coaches of the national teams and their election. </a>
 <br/>
-<a href="#6">6. Замена тренеров и выборы заместителей тренера сборных.</a>
+<a href="#6"> 6. Replacement of coaches and election of deputy coaches of the national teams. </a>
 <br/>
-<a href="#7">7. Призовые тренеров сборных.</a>
+<a href="#7"> 7. National team coaches prize money. </a>
 <br/>
-<a href="#8">8. Регламент.</a>
+<a href="#8"> 8. Regulations. </a>
 <br/>
-<a href="#9">9. Стадионы сборных.</a>
+<a href="#9"> 9. National team stadiums. </a>
 <br/>
-<a href="#10">10. Распределение мест.</a>
+<a href="#10"> 10. Allocation of seats. </a>
 <br/>
-<a href="#11">11. Призовые.</a>
+<a href="#11"> 11. Prize money. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие положения.</span> Наряду с различными клубными турнирами в Лиге проводятся и турниры среди сборных всех федераций. Один раз в сезон сезон проводится чемпионат мира среди национальных сборных.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Игроки и составы команд.</span> Игроком сборной может стать игрок, имеющий национальность, соответствующую этой федерации (в Лиге предусмотрена только одна национальность у игрока).</p>
-<p class="text-justify">Еще одно дополнительное условие для того, чтобы игрок мог быть выбран в сборную - он должен попасть в список лучших игроков своей федерации своего амплуа по мнению Лиги, т.е. присутствовать на страничке подачи заявки состава сборной, которая составляется автоматически. В этот список заносится ограниченное число лучших игроков на каждой позиции по нашему мнению.</p>
-<p class="text-justify">Игроки в матчах сборных не могут терять баллы силы, однако они устают и могут получать травмы. За участие игрока в официальном матче сборной (выход на поле) клубу, которому он принадлежит на момент выдачи призовых, начисляются призовые, размер которых зависит от числа игр этого регбиста за сборную.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Замены игроков в составе сборной.</span> Тренер сборной может в менять состав сборной (из списка лучших игроков федерации своего амплуа по мнению Лиги).</p>
-<p class="text-justify">Выбранный состав команды не меняется при смене тренера сборной.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Тренеры сборных и их выборы.</span> Тренером сборной может стать любой менеджер Лиги, желающий им стать, получивший достаточное число голосов поддержки при выборе тренеров сборных и при этом управляющий на момент выборов хотя бы одной командой. Тренер каждой сборной выбирается один раз на весь турнир. Он отвечает за выбор игроков сборной, за отправку составов на матчи, за выполнение поставленных задач, за достижение обещаных целей.</p>
-<p class="text-justify">Процесс первоначального избрания тренера сборной проводится в два этапа:</p>
-<p class="text-justify">Этап первый - сбор кандидатур. Все кандидаты в тренера сборных предлагают свои списки игроков, которых они берут в свою сборную, и составляют предвыборную программу - почему они выбрали этих игроков и каких целей планируют добиться.</p>
-<p class="text-justify">Разрешено руководить только одной сборной. При приеме заявок разрешено быть кандидатом только на одну сборную, т.е. подавать только одну заявку. После этого если даже он не стал тренером ни одной из сборных, он может стать заместителем тренера одной из команд в той федерации, где в голосовании он занял второе место.</p>
-<p class="text-justify">Этап второй - голосование - глядя на программы и списки выбранных игроков, менеджеры определяют тайным голосованием - кому из кандидатов стать у руля сборной на предстоящий сезон. Голос каждого владельца команды из этой федерации оценивается в 1 балл.</p>
-<p class="text-justify">Победитель голосования определяется простым большинством суммарного рейтинга. В случае равенства суммарного рейтинга в итоговом распределении мест в голосовании в порядке приоритетности учитываются следующие параметры:</p>
+<p class="text-justify" id = "1"> <span class="strong"> 1. General provisions. </span> Along with various club tournaments in the League, there are also tournaments for the national teams of all federations. The World Championship among national teams is held once a season. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "2"> <span class="strong"> 2. Players and squads of teams. </span> A player with a nationality corresponding to this federation can become a player of a national team (in the League there is only one nationality for a player). </p>
+<p class="text-justify"> Another additional condition for a player to be selected for the national team is that he must be included in the list of the best players of his federation according to his role in the League\'s opinion. be present on the page for applying for the squad, which is compiled automatically. This list includes a limited number of the best players in each position in our opinion. </p>
+<p class="text-justify"> National team players cannot lose strength points, but they get tired and may get injured. For the participation of a player in the official match of the national team (entering the field) to the club to which he belongs at the time of the prize money, the prize money is awarded, the amount of which depends on the number of games of this rugby player for the national team. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "3"> <span class="strong"> 3. Substitution of players in the national team. </span> The coach of the national team can change the composition of the national team (from the list of the best players of the federation of his role according to the League). </p>
+<p class="text-justify"> The selected team composition does not change when the national team coach is changed. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "4"> <span class="strong"> 4. Coaches of national teams and their election. </span> Any manager of the League can become a coach of the national team, who wants to become one, who has received a sufficient number of support votes when choosing the coaches of the national teams and at the same time is the manager of at least one team at the time of the election. The coach of each national team is selected once for the entire tournament. He is responsible for choosing the players for the national team, for sending the squads to the matches, for completing the assigned tasks, for achieving the promised goals. </p>
+<p class="text-justify"> The initial selection of a national team coach is a two-step process: </p>
+<p class="text-justify"> Stage one - collecting nominations. All candidates for national team coaches offer their lists of players whom they take to their national team, and draw up an electoral program - why they chose these players and what goals they plan to achieve. </p>
+<p class="text-justify"> Only one team is allowed to lead. When accepting applications, it is allowed to be a candidate for only one national team, i.e. submit only one application. After that, even if he did not become a coach of any of the national teams, he can become a deputy coach of one of the teams in the federation where he took second place in the voting. </p>
+<p class="text-justify"> Stage two - voting - looking at the programs and lists of selected players, managers determine by secret ballot - which of the candidates will be at the helm of the national team for the upcoming season. Each team owner from this federation has a 1 point vote. </p>
+<p class="text-justify"> The winner of the vote is determined by a simple majority of the total rating. In case of equality of the total rating, the following parameters are taken into account in the final distribution of seats in voting in order of priority: </p>
 <ul>
-<li>рейтинг выбранного состава сборной;</li>
-<li>рейтинг кандидата;</li>
-<li>дата регистрации кандидата в Лиге;</li>
+<li> rating of the selected squad; </li>
+<li> candidate rating; </li>
+<li> date of registration of the candidate in the League; </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Заместители тренеров сборных и их выборы.</span> Заместитель тренера сборной определяется на этапе первоначального выбора главного тренера - это кандидат, занявший второе место во время голосования.</p>
-<p class="text-justify">Ни один менеджер не может занимать два разных поста в руководстве сборными одного сезона.</p>
-<p class="text-justify">Заместитель тренера имеет ограниченный доступ к управлению сборной, т.е. может только отправлять состав на матч, который выйдет на поле в том случае, если главный тренер состав на матч не отправит или разрешит заместителю его редактировать.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Замена тренеров и выборы заместителей тренера сборных.</span> В ростере сборной любой менеджер, который управляет командой из этой федерации, может выразить своё отношение к тренеру сборной. Оценивать сам себя тренер сборной не может.</p>
-<p class="text-justify">Отставка тренера сборной происходит, если будут выполнены следующие условия:</p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "5"> <span class="strong"> 5. National team deputy coaches and their election. </span> The national team deputy coach is determined during the initial head coach selection phase - this is the second-placed candidate during the voting. </p>
+<p class="text-justify"> No manager can hold two different leadership positions for the national teams of the same season. </p>
+<p class="text-justify"> The deputy coach has limited access to the management of the national team, i.e. can only send the squad to the match, which will take to the field in the event that the head coach does not send the squad to the match or allows the deputy to edit it. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "6"> <span class="strong"> 6. Replacement of coaches and election of deputy coaches of the national teams. </span> In the national team roster, any manager who manages a team from that federation can express his attitude towards the coach of the national team. The coach of the national team cannot evaluate himself. </p>
+<p class="text-justify"> The resignation of a national team coach occurs if the following conditions are met: </p>
 <ul>
-<li>более 25% активных менеджеров федерации выразят негативное отношение к тренеру (активных менеджеров - это значит, что мнение менеджеров свободных команд вообще никак не учитывается, свободные команды не принимают участие в оценке работы тренеров сборных вообще);</li>
-<li>у сборной есть заместитель.</li>
+<li> more than 25% of active federation managers will express a negative attitude towards the coach (active managers - this means that the opinion of managers of free teams is not taken into account at all, free teams do not take part in assessing the work of national team coaches in general); </li>
+<li> the national team has a deputy. </li>
 </ul>
-<p class="text-justify">Вместо тренера сборной в случае его снятия с должности, тренером обязательно становится его заместитель. Таким образом, образуется вакантная должность, на которую открывается приём заявок.</p>
-<p class="text-justify">Разрешено руководить только одной сборной. При приеме заявок разрешено быть кандидатом только на одну сборную, т.е. подавать только одну заявку. Если вы уже являетесь тренером или заместителем какой-либо сборной, то подать заявку вы не сможете.</p>
-<p class="text-justify">Не ранее чем через 24 часа после открытия приёма заявок при наличии хотя бы одного кандидата, открывается голосование на пост заместителя сборной. Голосование проходит среди менеджеров той федерации, где проходят выборы заместителя сборной. Голос каждого менеджера команды из этой федерации оценивается в 1 балл.</p>
-<p class="text-justify">Голосование завершается не ранее чем через 48 часов после его начала.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Призовые тренеров сборных.</span> Зарплата тренерского штаба сборной составляет 20% заработанных сборной денег.</span> Эта сумма делится между всеми тренерами и заместителями, которые управляли сборной на протяжении всего турнира, пропорционально числу дней, которые менеджер занимал свой пост.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="8"><span class="strong">8. Регламент.</span> Чемпионат мира проводится для всех сборных. Матчи сборных проводятся параллельно чемпионатам и являются играми типа С, т.е. игравшые игроки устают, усталость отдыхавших не восстанавливается.</p>
-<p class="text-justify">Чемпионат мира проходит по круговой системе, при этом каждая команда играет со всеми остальными по одному матчу.</p>
-<p class="text-justify">Всем командам на отборочный цикл выдается по 2 супернастроя и 2 отдыха.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="9"><span class="strong">9. Стадионы сборных.</span> Матчи национальной сборной проводятся на самом большом стадионе федерации. Выбор стадиона происходит в момент генерации матча.</p>
-<p class="text-justify">В матчах сборных бонуса своего поля нет.</p>
-<p class="text-justify">Цена билетов определяется тренером хозяев.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="10"><span class="strong">10. Распределение мест.</span> В итоговом распределении мест в порядке приоритетности учитываются следующие параметры:</p>
+<p class="text-justify"> Instead of the coach of the national team, if he is removed from office, his deputy will necessarily become the coach. Thus, a vacant position is formed for which applications are open. </p>
+<p class="text-justify"> Only one team is allowed to lead. When accepting applications, it is allowed to be a candidate for only one national team, i.e. submit only one application. If you are already a coach or deputy of a national team, then you will not be able to apply. </p>
+<p class="text-justify"> Not earlier than 24 hours after the opening of the application acceptance, if there is at least one candidate, voting for the post of the deputy of the national team opens. Voting takes place among the managers of the federation where the deputy of the national team is being elected. The vote of each team manager from this federation is worth 1 point. </p>
+<p class="text-justify"> Voting will end no earlier than 48 hours after the start. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "7"> <span class="strong"> 7. National team coaches\' prize money. </span> The salary of the national team coaching staff is 20% of the money earned by the national team. </span> This amount is divided among all the coaches and deputies who managed the team throughout the tournament, in proportion to the number of days that the manager was in office. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "8"> <span class="strong"> 8. Regulations. </span> The World Championship is held for all national teams. National team matches are played in parallel with the championships and are type C games, i.e. playing players get tired, resting fatigue is not restored. </p>
+<p class="text-justify"> The World Championship is played in a round robin system, with each team playing one match against everyone else. </p>
+<p class="text-justify"> All teams for the qualifying round are given 2 super attitudes and 2 rests. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "9"> <span class="strong"> 9. National team stadiums. </span> National team matches are played at the largest stadium in the federation. The selection of the stadium occurs when the match is generated. </p>
+<p class="text-justify"> National team matches do not have their own field. </p>
+<p class="text-justify"> Ticket prices are determined by the host coach. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "10"> <span class="strong"> 10. Allocation of seats. </span> The following parameters are taken into account in the final distribution of seats in order of priority: </p>
 <ul>
-<li>набранные турнирные очки (чем больше, тем выше);</li>
-<li>победы (чем больше, тем выше);</li>
-<li>ничьи (чем больше, тем выше);</li>
-<li>разница игровых очков (чем больше, тем выше);</li>
-<li>набраных игровых очков (чем больше, тем выше);</li>
-<li>по рейтингу Vs (чем меньше, тем выше);</li>
+<li> accumulated tournament points (the more, the higher); </li>
+<li> wins (the more, the higher); </li>
+<li> draws (the more, the higher); </li>
+<li> the difference in game points (the more, the higher); </li>
+<li> of the accumulated game points (the more, the higher); </li>
+<li> by Vs rating (the lower the higher); </li>
 </ul>
-<p class="text-justify">При равенстве всех вышеназванных показателей проводится жребий.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="11"><span class="strong">11. Призовые.</span> По результатам чемпионата команды получают призовые.</p>
-<p class="text-justify">Призовые национальных сбоных рассчитываются по формуле:</p>
-<p class="text-justify">25000000 * 0.98 ^ ( место в турнирной таблице - 1 )</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Чемпионаты мира',
+<p class="text-justify"> If all of the above indicators are equal, a lot is drawn. </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class="text-justify" id = "11"> <span class="strong"> 11. Prize money. </span> According to the results of the championship, the teams receive prize money. </p>
+<p class="text-justify"> National bonus prizes are calculated as follows: </p>
+<p class="text-justify"> 25000000 * 0.98 ^ (place in the standings - 1) </p>
+<p class="text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'World Championships',
 ];

@@ -36,10 +36,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php
-
-// TODO refactor
-$this->beginBody() ?>
+<?php $this->beginBody() ?>
 <div id="wrapper">
     <?php
 
@@ -62,29 +59,27 @@ $this->beginBody() ?>
                 . '"></span>',
             'items' => [
                 [
-                    'label' => FAS::icon(FAS::_FOOTBALL_BALL) . ' Team requests <span class="badge"></span>',
+                    'label' => FAS::icon(FAS::_FOOTBALL_BALL) . ' ' . Yii::t('backend', 'views.layout.main.label.team-request') . ' <span class="badge"></span>',
                     'url' => ['team-request/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SHIELD_ALT) . ' Logos <span class="badge admin-logo"></span>',
+                    'label' => FAS::icon(FAS::_SHIELD_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logo') . ' <span class="badge admin-logo"></span>',
                     'url' => ['logo/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_USER) . ' Photos <span class="badge admin-photo"></span>',
+                    'label' => FAS::icon(FAS::_USER) . ' ' . Yii::t('backend', 'views.layout.main.label.photo') . ' <span class="badge admin-photo"></span>',
                     'url' => ['photo/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_COMMENTS) . ' Support <span class="badge admin-support"></span>',
+                    'label' => FAS::icon(FAS::_COMMENTS) . ' ' . Yii::t('backend', 'views.layout.main.label.support') . ' <span class="badge admin-support"></span>',
                     'url' => ['support/index'],
                 ],
                 [
-                    'label' => FAS::icon(
-                            FAS::_EXCLAMATION_CIRCLE
-                        ) . ' Complaints <span class="badge admin-complaint"></span>',
+                    'label' => FAS::icon(FAS::_EXCLAMATION_CIRCLE) . ' ' . Yii::t('backend', 'views.layout.main.label.complaint') . ' <span class="badge admin-complaint"></span>',
                     'url' => ['complaint/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_CHART_BAR) . ' Votes <span class="badge admin-vote"></span>',
+                    'label' => FAS::icon(FAS::_CHART_BAR) . ' ' . Yii::t('backend', 'views.layout.main.label.vote') . ' <span class="badge admin-vote"></span>',
                     'url' => ['vote/index'],
                 ],
             ],
@@ -94,7 +89,7 @@ $this->beginBody() ?>
             'label' => FAS::icon(FAS::_FILE_ALT),
             'items' => [
                 [
-                    'label' => 'Logs',
+                    'label' => Yii::t('backend', 'views.layout.main.label.log'),
                     'url' => ['log/index'],
                 ],
             ],
@@ -104,15 +99,15 @@ $this->beginBody() ?>
             'label' => FAS::icon(FAS::_COG),
             'items' => [
                 [
-                    'label' => FAS::icon(FAS::_POWER_OFF) . ' Turn ' . (SiteQuery::getStatus() ? 'off' : 'on'),
+                    'label' => FAS::icon(FAS::_POWER_OFF) . ' ' . (SiteQuery::getStatus() ? Yii::t('backend', 'views.layout.main.label.turn-off') : Yii::t('backend', 'views.layout.main.label.turn-on')),
                     'url' => ['site/status'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SIGNAL) . ' Site version',
+                    'label' => FAS::icon(FAS::_SIGNAL) . ' ' . Yii::t('backend', 'views.layout.main.label.version'),
                     'url' => ['site/version'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SIGN_OUT_ALT) . ' Logout',
+                    'label' => FAS::icon(FAS::_SIGN_OUT_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logout'),
                     'url' => ['site/logout'],
                 ],
             ],
@@ -140,64 +135,64 @@ $this->beginBody() ?>
 
             $menuItems = [
                 [
-                    'label' => 'Users',
+                    'label' => Yii::t('backend', 'views.layout.main.label.user'),
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Users',
+                            'label' => Yii::t('backend', 'views.layout.main.label.user'),
                             'url' => ['user/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Teams',
+                    'label' => Yii::t('backend', 'views.layout.main.label.team'),
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Teams',
+                            'label' => Yii::t('backend', 'views.layout.main.label.team'),
                             'url' => ['team/index'],
                         ],
                         [
-                            'label' => 'Team requests',
+                            'label' => Yii::t('backend', 'views.layout.main.label.team-request'),
                             'url' => ['team-request/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'News',
+                    'label' => Yii::t('backend', 'views.layout.main.label.news'),
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'News',
+                            'label' => Yii::t('backend', 'views.layout.main.label.news'),
                             'url' => ['news/index'],
                         ],
                     ],
                     'url' => 'javascript:',
                 ],
                 [
-                    'label' => 'Rules',
+                    'label' => Yii::t('backend', 'views.layout.main.label.rule'),
                     'url' => ['rule/index'],
                 ],
                 [
-                    'label' => 'Votes',
+                    'label' => Yii::t('backend', 'views.layout.main.label.vote'),
                     'url' => ['vote/index'],
                 ],
                 [
-                    'label' => 'Schedule',
+                    'label' => Yii::t('backend', 'views.layout.main.label.schedule'),
                     'url' => ['schedule/index'],
                 ],
                 [
-                    'label' => 'Site metrics',
+                    'label' => Yii::t('backend', 'views.layout.main.label.metrics'),
                     'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
                     'items' => [
                         [
-                            'label' => 'Generator correction',
+                            'label' => Yii::t('backend', 'views.layout.main.label.generator'),
                             'url' => ['analytics/generator-correction'],
                         ],
                         [
-                            'label' => 'Snapshots',
+                            'label' => Yii::t('backend', 'views.layout.main.label.snapshot'),
                             'url' => ['analytics/snapshot'],
                         ],
                     ],
@@ -225,10 +220,9 @@ $this->beginBody() ?>
         <?php
 
         try {
-            print Breadcrumbs::widget(
-                [
-                    'links' => $this->params['breadcrumbs'] ?? [],
-                ]);
+            print Breadcrumbs::widget([
+                'links' => $this->params['breadcrumbs'] ?? [],
+            ]);
         } catch (Exception $e) {
             ErrorHelper::log($e);
         }

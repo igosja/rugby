@@ -17,65 +17,65 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Как получить команду?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. How do I get a command? </a>
 <br/>
-<a href="#1.1">1.1. Свободные команды.</a>
+<a href="#1.1"> 1.1. Free teams. </a>
 <br/>
-<a href="#1.2">1.2. Управление несколькими командами.</a>
+<a href="#1.2"> 1.2. Manage multiple teams. </a>
 <br/>
-<a href="#2">2. Часто задаваемые вопросы.</a>
+<a href="#2"> 2. Frequently asked questions. </a>
 <br/>
-<a href="#2.1">2.1. Что такое новая команда?</a>
+<a href="#2.1"> 2.1. What is a new team? </a>
 <br/>
-<a href="#2.2">2.2. По какому принципу раздаются команды?</a>
+<a href="#2.2"> 2.2. How are commands issued? </a>
 <br/>
-<a href="#2.3">2.3. Я был рекомендован президентом федерации, но команду мне не дали.</a>
+<a href="#2.3"> 2.3. I was recommended by the president of the federation, but I was not given a command. </a>
 <br/>
-<a href="#2.4">2.4. Как получить еще одну команду?</a>
+<a href="#2.4"> 2.4. How do I get another command? </a>
 <br/>
-<a href="#2.5">2.5. Хочу передать/обменяться  командами с другим  менеджером, как это сделать?</a>
+<a href="#2.5"> 2.5. I want to transfer / exchange commands with another manager, how to do it? </a>
 </p>
-<p class="strong text-justify" id="1">1. Как получить команду?</p>
-<p class="text-justify">Получить команду в Лиге можно следующим способом: </p>
-<p class="text-justify" id="1.1"><span class="strong">1.1. Свободные команды.</span> Вы можете взять одну из уже созданных команд, которая по тем или иным причинам осталась без менеджера – такие команды называются свободными.</p>
-<p class="text-justify">Выбираете команду, нажимаете на значок перехода на страничку подачи заявок на управление ею, нажимаете на кнопку "Отправить заявку на управление этой командой модератору".</p>
-<p class="text-justify">На каждую из свободных команд могут претендовать сразу несколько менеджеров. Модератор выбирает из заявок на каждую команду того менеджера, которому на наш взгляд наиболее нужна в данный момент эта команда.</p>
-<p class="text-justify">Заявка может быть рассмотрена в срок от нескольких секунд до нескольких дней. Причем если ваши заявки постоянно долго и безрезультатно висят без рассмотрения - значит скорее всего мы вообще против того, чтобы выдавать вам команду (кто-то уже играет в Лиге с вашего компьютера, у вас слишком много команд, вы ранее были замечены в махинациях, у вас отрицательная репутация и т.д.)</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.2"><span class="strong">1.2. Управление несколькими командами.</span> На сайте допускается управление сразу двумя командами при выполнении ряда условий:</p>
+<p class = "strong text-justify" id = "1"> 1. How do I get a command? </p>
+<p class = "text-justify"> You can get a team in the League in the following way: </p>
+<p class = "text-justify" id = "1.1"> <span class = "strong"> 1.1. Free teams. </span> You can take one of the already created teams, which for one reason or another was left without a manager - such teams are called free. </p>
+<p class = "text-justify"> Select a command, click on the icon to go to the page for managing it, click on the button "Submit a request to manage this command to the moderator." </p>
+<p class = "text-justify"> Several managers can apply for each of the free teams at once. The moderator selects from the applications for each team the manager who, in our opinion, needs this team the most at the moment. </p>
+<p class = "text-justify"> An application can be reviewed in a period from a few seconds to several days. Moreover, if your applications constantly hang for a long time and to no avail without consideration, then most likely we are generally against giving you a command (someone is already playing in the League from your computer, you have too many commands, you have previously been seen in fraud, negative reputation, etc.) </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.2"> <span class = "strong"> 1.2. Managing multiple teams. </span> The site allows you to manage two teams at once if a number of conditions are met: </p>
 <ul>
-<li>все ваши команды должны управляться с одного логина, регистрация двух логинов на одного человека запрещена;</li>
-<li>запрещено играть несколькими командами в одной стране;</li>
-<li>запрещено проводить сделки и организовывать матчи между своими командами;</li>
-<li>если жребий сводит команды одного менеджера в матче между собой в Лиге Чемпионов, менеджер не должен играть договорняк (ловить сам себя на коллизии, ставить только у одной из команд отдых, играть основа-против-дубля и проводить другие действия, которые скауты могут определить как нацеленные на достижение определенного результата в пользу конкретной команды). Играть обеими командами супер или обеими отдых в матче между собой разрешается.</li>
+<li> all your teams must be managed from one login, registration of two logins per person is prohibited; </li>
+<li> it is forbidden to play by several teams in the same country; </li>
+<li> it is forbidden to carry out transactions and organize matches between their teams; </li>
+<li> if the draw brings the teams of one manager in a match against each other in the Champions League, the manager should not play an agreement (catch himself in a collision, set only one of the teams to rest, play base-versus-double and carry out other actions that the scouts can be defined as aimed at achieving a certain result in favor of a specific team). It is allowed to play with both super teams or both.
 </ul>
-<p class="text-justify">У каждого менеджера в профиле указано максимальное число команд, которыми он в данный момент может управлять одновременно. Обычные менеджеры могут управлять только одной командой, VIP-менеджеры могут взять под свое управление вторую команду.</p>
-<p class="text-justify">Покупка членства в VIP-клубе не гарантирует менеджеру получение свободной команды вне очереди. Получение команд производится на общих основаниях.</p>
-<p class="text-justify">Если число команд у менеджера превышает разрешенное ему максимальное число команд, «лишние» клубы автоматически выставляются в свободные.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Часто задаваемые вопросы.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Что такое новая команда.</span> Новая команда – это команда, которая только начинает свой путь в Виртуальной Регбийной Лиге. Она не сыграла еще ни одного матча, вы – её первый тренер.</p>
-<p class="text-justify">В новой команде:</p>
+<p class = "text-justify"> Each manager has a profile with the maximum number of commands that he can manage at the same time. Regular managers can only manage one team, VIP managers can take control of a second team. </p>
+<p class = "text-justify"> Purchasing a VIP Club membership does not guarantee a manager a free team out of turn. Commands are received on a general basis. </p>
+<p class = "text-justify"> If a manager has more than the maximum number of teams allowed, the "extra" clubs are automatically put into vacant clubs. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Frequently asked questions. </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. What is a new team. </span> A new team is a team that is just starting its way in the Virtual Rugby League. She hasn\'t played a game yet, you are her first coach. </p>
+<p class = "text-justify"> In the new command: </p>
 <ul>
-<li>30 регбистов разного возраста;</li>
-<li>стадион вместимостью 100 мест;</li>
-<li>1 миллион вроликов (наших виртуальных денег) на счету;</li>
-<li>база 1-го уровня без строений;</li>
-<li>5 бесплатных улучшений базы;</li>
+<li> 30 rugby players of different ages; </li>
+<li> stadium with a capacity of 100 seats; </li>
+<li> 1 million rolls (our virtual money) in the account; </li>
+<li> base level 1 without buildings; </li>
+<li> 5 free base improvements; </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. По какому принципу раздаются команды?</span> В Лиге отдается приоритет менеджерам, не имеющим команд, такие заявки рассматриваются в первую очередь. Также обращают на себя внимание заявки с рекомендаций президентов федерации. Остальные заявки рассматриваются в случае большого количества свободных команд. В таком случае приоритет получают VIP-менеджеры.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. Я был рекомендован президентом федерации, но команду мне не дали?</span> Рекомендация президента федерации не является гарантией получения команды. Но на такую заявку обязательно обращают внимание и в большинстве случаев отказа главной причиной служит тот факт, что менеджер либо не может получить команду именно в этой федерации, либо в принципе на данный момент администрация против получения им команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. Как получить еще одну команду?</span> Единственный способ получить еще одну команду - оформить членство в VIP-клубе и подать заявку на получение второй команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. Хочу передать/обменяться  командами с другим  менеджером, как это сделать?</span> Необходимо зайти на страницу и  выбрать менеджера, которому вы хотите передать команду, указать, обмен это или просто передача. Менеджер получит сообщение о вашем предложении и сможет отказаться или подтвердить его.</p>
-<p class="text-justify">Автоматическая система проверит возможность передачи/обмена вашей команды и, в случае необходимости, укажет причины, по которым передача/обмен не может состояться. Вы можете отказаться от передачи/обмена клуба только до подтверждения заявки другим менеджером, после передачи/обмена команды претензии и возражения не принимаются.</p>
-<p class="text-justify">Если второй менеджер не ответил на предложение, через неделю оно будет автоматически отменено. Также автоматически отменяться будут те предложения, которые уже точно не могут состояться, например, по причине смены менеджера в одной из команд из заявки.</p>
-<p class="text-justify">Техническая поддержка не будет заниматься другими вариантами передач и обменов, которые не предусмотрены автоматикой.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Как получить команду?',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. What is the principle of the distribution of teams? </span> In the League, the priority is given to managers who do not have teams, such applications are considered first. Also noteworthy are applications from the recommendations of the presidents of the federation. The rest of the applications are considered in case of a large number of free teams. In this case, VIP managers get priority. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.3"> <span class = "strong"> 2.3. I was recommended by the president of the federation, but I was not given a command? </span> The recommendation of the president of the federation is not a guarantee of getting a command. But such an application must be paid attention to, and in most cases of refusal, the main reason is the fact that the manager either cannot get a team in this particular federation, or, in principle, at the moment the administration is against receiving a team for him. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.4"> <span class = "strong"> 2.4. How to get another team? </span> The only way to get another team is to get a VIP Club membership and apply for a second team. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.5"> <span class = "strong"> 2.5. I want to transfer / exchange commands with another manager, how to do this? </span> You need to go to the page and select the manager to whom you want to transfer the command, indicate whether it is an exchange or just a transfer. The manager will receive a message about your offer and will be able to refuse or confirm it. </p>
+<p class = "text-justify"> The automatic system will check the ability to transfer / exchange your command and, if necessary, indicate the reasons why the transfer / exchange cannot take place. You can refuse to transfer / exchange the club only before confirmation of the application by another manager, after the transfer / exchange of the team, claims and objections will not be accepted. </p>
+<p class = "text-justify"> If the second manager does not respond to the offer, after a week it will be automatically canceled. Also, those offers will be automatically canceled that can no longer take place, for example, due to a change of manager in one of the teams from the application. </p>
+<p class = "text-justify"> Technical support will not deal with other transfer and exchange options that are not provided by the automation. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'How do I get the command?',
 ];
