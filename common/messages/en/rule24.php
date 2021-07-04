@@ -17,37 +17,37 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Распределение мест в конференции.</a>
+<a href="#2"> 2. Allocation of seats in the conference. </a>
 <br/>
-<a href="#3">3. Призовые.</a>
+<a href="#3"> 3. Prize money. </a>
 <br/>
-<a href="#4">4. Ротация.</a>
+<a href="#4"> 4. Rotation. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие положения.</span> В розыгрыше конференции любительских клубов участвуют абсолютно все новые команды, которые были созданы после определения состава участников очередного чемпионата своей страны и соответственно в нем не участвуют. Также в число участников турнира попадают те из ранее зарегистрированных команд, которые вылетели или еще не попали в сетку дивизионов чемпионата своей страны.</p>
-<p class="text-justify">Отказаться от участия в турнире невозможно. Регистрация в кубке происходит автоматически сразу после создания команды в Лиге, она принимает участие в ближайшей жеребьевке очередного тура.</p>
-<p class="text-justify">Турнир играется нестабильному календарю, когда для каждой команды выбирается случайный соперник, причем с одной и той же командой можно сыграть только два раза за турнир, а число игр дома и в гостях в конце турнира должно стать равным или отличаться на еденицу (если ваша команда провела нечетное число матчей)</p>
-<p class="text-justify">В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.</p>
-<p class="text-justify">Игры конференции любительских клубов - это игры типа B ("обязательные"), т. е. в них изменяется усталость игроков, неигравшие - отдыхают. Это касается только команд, которые участвуют в конференции любительских клубов, игроки, участвующие в чемпионатах - устают и отдыхают там.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Распределение мест в конференции.</span> В итоговом распределении мест в порядке приоритетности учитываются следующие параметры:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. General provisions. </span> Absolutely all new teams that were created after determining the composition of the participants in the next championship of their country and, accordingly, do not participate in it, participate in the drawing of the conference of amateur clubs. Also among the participants of the tournament are those from the previously registered teams that have been eliminated or have not yet entered the grid of the divisions of the championship of their country. </p>
+<p class = "text-justify"> You cannot refuse to participate in the tournament. Registration for the cup takes place automatically immediately after the creation of a team in the League, it takes part in the next draw of the next round. </p>
+<p class = "text-justify"> The tournament is played on an unstable calendar, when a random opponent is selected for each team, moreover, the same team can only be played twice per tournament, and the number of home and away games at the end of the tournament should be equal or differ by one (if your team played an odd number of matches) </p>
+<p class = "text-justify"> There is a home bonus in tournament matches - teams play stronger at home. </p>
+<p class = "text-justify"> Games of the amateur club conference are type B ("must") games, that is, they change the fatigue of the players, non-players rest. This only applies to teams that participate in the conference of amateur clubs, the players participating in the championships get tired and rest there. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. The distribution of seats in the conference. </span> The following parameters are taken into account in the final distribution of seats in order of priority: </p>
 <ul>
-<li>набранные турнирные очки (чем больше, тем выше);</li>
-<li>победы (чем больше, тем выше);</li>
-<li>ничьи (чем больше, тем выше);</li>
-<li>разница игровых очков (чем больше, тем выше);</li>
-<li>набраных игровых очков (чем больше, тем выше);</li>
-<li>по рейтингу Vs (чем меньше, тем выше);</li>
+<li> accumulated tournament points (the more, the higher); </li>
+<li> wins (the more, the higher); </li>
+<li> draws (the more, the higher); </li>
+<li> the difference in game points (the more, the higher); </li>
+<li> of the accumulated game points (the more, the higher); </li>
+<li> by Vs rating (the lower the higher); </li>
 </ul>
-<p class="text-justify">При равенстве всех вышеназванных показателей проводится жребий.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Призовые.</span> Сумма призовых, заработанных командой за участие в Конференции любительских клубов, рассчитывается по формуле:</p>
-<p class="text-justify">5000000 * 0.98 ^ (место в турнирной таблице - 1)</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Ротация.</span> Команды, занявшие высокие места в национальном зачете по итогам конференции, в следующем сезоне получают право выступать в чемпионате своей страны вместо последнего и предпоследнего мест низшего дивизиона (или дивизионов).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Конференция любительских клубов',
+<p class = "text-justify"> If all of the above indicators are equal, a lot is drawn. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Prize money. </span> The amount of prize money earned by a team for participating in the Amateur Clubs Conference is calculated as follows: </p>
+<p class = "text-justify"> 5000000 * 0.98 ^ (place in the standings - 1) </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Rotation. </span> The teams that took the highest places in the national standings according to the results of the conference, in the next season, will be entitled to play in the championship of their country instead of the last and penultimate places in the lower division (or divisions). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Conference of Amateur Clubs',
 ];

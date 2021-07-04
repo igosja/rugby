@@ -17,20 +17,20 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Игроки от Лиги.</a>
+<a href="#2"> 2. Players from the League. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify">Одна из основных функций менеджера - отправлять состав своей команды на все матчи, которые есть в расписании.</p>
-<p class="text-justify">Заявка на матч - это 15 игроков, тренерские указания, как именно им играть.</p>
-<p class="text-justify">Если на матч, указанный в расписании игр вашей команды, не был вовремя отправлен состав, то на поле выйдут те игроки вашей команды, которых отберет наша программа. Точно так же определяются составы свободных команд.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Игроки от Лиги.</p>
-<p class="text-justify">Если у вас недостаточно игроков в команде, вы можете оставить места некоторых игроков пустыми. В этом случае в вашу команду, на время матча можно пригласить некоторое число дополнительных игроков от Лиги, которые и займут пустые места в заявке. Сила таких игроков 15, усталость 0%, спецвозможностей нет, не влияют на сыгранность, форма 100%.</p>
-<p class="text-justify">Количество игроков от Лиги неограничено.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Состав команды на матч',
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify"> One of the main functions of a manager is to send his team line-up to all matches on the schedule. </p>
+<p class = "text-justify"> A match application is 15 players, coaching instructions on how to play. </p>
+<p class = "text-justify"> If the squad was not sent on time for the match specified in your team\'s schedule, then those players of your team who will be selected by our program will enter the field. The lineups of free teams are determined in the same way. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Players from the League. </p>
+<p class = "text-justify"> If you don\'t have enough players on your team, you can leave some players empty. In this case, you can invite a certain number of additional players from the League to your team during the match, which will take empty spaces in the application. The strength of such players is 15, fatigue 0%, no special abilities, do not affect chemistry, form 100%. </p>
+<p class = "text-justify"> The number of players from the League is unlimited. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Team line-up for the match',
 ];

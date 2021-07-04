@@ -17,45 +17,45 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. С кем можно играть?</a>
+<a href="#2"> 2. Who can you play with? </a>
 <br/>
-<a href="#3">3. Когда можно играть?</a>
+<a href="#3"> 3. When can I play? </a>
 <br/>
-<a href="#4">4. Ограничения и запреты.</a>
+<a href="#4"> 4. Restrictions and prohibitions. </a>
 <br/>
-<a href="#5">5. Стадион, деньги и зрители.</a>
+<a href="#5"> 5. Stadium, money and spectators. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify">Товарищеский матч - это тренировочный матч двух команд, который организовывается самими менеджерами двух участвующих команд и  проводится с целью тренировки, проверки тактики или просто чтобы выяснить, чья команда сильнее.</p>
-<p class="text-justify">Товарищеский матч можно играть, а можно и не играть. Вы сами выбираете себе соперника, отправляете ему приглашение на конкретный игровой день и ждете ответа. Если ответ положительный - организуется товарищеский матч.</p>
-<p class="text-justify">Если матч организован - он вносится в расписание игр команд и состоится в любом случае, отменить его нельзя. В случае отсутствия составов одной или обеих команд на этот матч, генератор создаст автосоставы.</p>
-<p class="text-justify">В товарищеских матчах все игроки играют с одинаковой усталостью 25% и физической формой 100%.</p>
-<p class="text-justify">Усталость игроков в товарищеских матчах не изменяется (не увеличивается у играющих и не уменьшается у отдыхающих). На столбцы ИП (играл подряд) и ОП (отдыхал подряд) проведение товарищеского матча никак не влияет (они не изменяются).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. С кем можно играть?</span> Товарищеские матчи могут играть любые команды, зарегистрированные в Лиге, предварительно договорившиеся и получившие согласие друг друга на организацию игры.</p>
-<p class="text-justify">Договориться на товарищескую игру можно только с командой, которая более-менее равна по силе с вашей (иначе просто нужной команды не окажется в списке на странице организации товарищеских матчей).</p>
-<p class="text-justify">Для удобства вы можете поставить в каждой своей команде один из трех статусов:</p>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify"> A friendly match is a practice match between the two teams, organized by the managers of the two participating teams, to practice, test tactics, or simply to find out which team is stronger. </p>
+<p class = "text-justify"> A Friendly Match may or may not be played. You choose your opponent yourself, send him an invitation to a specific game day and wait for a response. If the answer is yes, a friendly match will be organized. </p>
+<p class = "text-justify"> If a match is organized - it is included in the teams\' schedule and will take place in any case, it cannot be canceled . if there are no lineups for one or both teams for this match, the generator will create auto - lineups . </p >
+<p class = "text-justify"> In friendlies, all players play with the same 25 % fatigue and 100 % fitness . </p >
+<p class = "text-justify"> Fatigue of players in friendly matches does not change(does not increase for players and does not decrease for vacationers). The columns IP(played in a row) and OP(rested in a row) are not affected by the holding of a friendly match(they do not change). </p >
+<p class = "text-right text-size-3" > [<a href = "#0" > to content </a >] </p >
+<p class = "text-justify" id = "2" > <span class = "strong" > 2. Who can I play with ? </span > Friendly matches can be played by any teams registered in the League, having previously agreed and received each other\'s consent to organize the game. </p>
+<p class = "text-justify"> You can only negotiate a friendly game with a team that is more or less equal in strength to yours (otherwise, the team you just need will not be listed on the friendly matches organization page). </p>
+<p class = "text-justify"> For convenience, you can set one of three statuses in each of your commands: </p>
 <ul>
-<li>обычный статус - ничем не выделяющий вашу команду из общей массы. Вы сами будете выбирать - отправлять или принимать приглашения от других команд, отклонять каждое пришедшее предложение или соглашаться;</li>
-<li>cтатус для любителей играть товарищеские матчи - при котором первое же предложение, отправленное вашей команде, будет автоматически принято;</li>
-<li>не играю товарищеские матчи - статус, при котором вам нельзя будет надоедать приглашениями сыграть товарищеский матч.</li>
+<li> regular status - does not distinguish your team from the crowd. You yourself will choose whether to send or accept invitations from other teams, reject every proposal that comes up or agree; </li>
+<li> status for those who like to play friendlies - in which the first offer sent to your team will be automatically accepted; </li>
+<li> I don’t play friendlies - a status whereby you will not be annoyed by invitations to play a friendly match. </li>
 </ul>
-<p class="text-justify">На один день нельзя одновременно держать более пяти открытых предложений. Нужно дождаться реакции на предложение сыграть (положительную или отрицательную), прежде чем предложить сыграть еще одной (шестой и т.д.) команде.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Когда можно играть?</span> Организовывать товарищеские матчи можно только в специально отведенные для этого игровые дни, помеченные в расписании как "Товарищеский матч".</p>
-<p class="text-justify">Договориться на товарищеский матч можно только на ближайшие игровые дни. Нельзя в один игровой день сыграть более одного матча.</p>
-<p class="text-justify">Договориться на товарищеский матч можно не позже, чем за 24 часа до игры, чтобы оба соперника имели шанс отправить составы.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Ограничения и запреты.</span> Запрещается организация товарищеских игр, в которых менеджер знает точный состав соперника. Запрещается проведения товарищеских игр между командами одного менеджера.</p>
-<p class="text-justify">Между двумя командами в течении сезона может быть сыграно не более 1 матча.</p>
-<p class="text-justify">Нарушение правил организации товарищеских матчей влечет за собой штрафы командам вплоть до выставления их в свободные.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Стадион, деньги и зрители.</span> Товарищеские матчи проводятся на стадионе того из соперников, который отправил приглашение. Тем не менее домашнего бонуса у команды-организатора в товарищеских матчах нет.</p>
-<p class="text-justify">Стоимость билета на товарищеский матч выставляет хозяин матча.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Товарищеские матчи',
+<p class = "text-justify"> You cannot keep more than five open sentences at the same time for one day. It is necessary to wait for the reaction to the offer to play (positive or negative) before offering to play another (sixth, etc.) team. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. When can I play? </span> Friendly matches can only be organized on specially designated match days marked in the schedule as "Friendly Match". </p>
+<p class = "text-justify"> Agree on a friendly match only for the next game days. You cannot play more than one match on one match day. </p>
+<p class = "text-justify"> You can agree on a friendly match no later than 24 hours before the game, so that both opponents have a chance to send their squads. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Restrictions and prohibitions. </span> It is forbidden to organize friendly games in which the manager knows the exact composition of the opponent. It is forbidden to hold friendly games between teams of the same manager. </p>
+<p class = "text-justify"> A maximum of 1 match can be played between two teams during a season. </p>
+<p class = "text-justify"> Violation of the rules for organizing friendly matches entails penalties for teams, up to putting them on free. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. Stadium, money and spectators. </span> Friendly matches are played at the stadium of the opponent who sent the invitation. However, there is no home bonus for the organizing team in friendlies. </p>
+<p class = "text-justify"> The host of the match sets the cost of a friendly match ticket. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Friendlies',
 ];

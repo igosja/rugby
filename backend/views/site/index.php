@@ -29,10 +29,7 @@ use yii\web\View;
     </div>
 </div>
 <div class="row">
-    <?php
-
-// TODO refactor
-    foreach ($panels as $panel): ?>
+    <?php foreach ($panels as $panel): ?>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 panel-<?= $panel['class'] ?>">
             <div class="panel panel-<?= $panel['color'] ?>">
                 <div class="panel-heading">
@@ -40,7 +37,6 @@ use yii\web\View;
                         <div class="col-xs-3">
                             <?php
 
-// TODO refactor
                             try {
                                 print FAS::icon($panel['icon'])->size(FAS::SIZE_5X);
                             } catch (InvalidConfigException $e) {
@@ -56,7 +52,7 @@ use yii\web\View;
                 </div>
                 <?= Html::a(
                     '<div class="panel-footer">
-                        <span class="pull-left">Details</span>
+                        <span class="pull-left">' . Yii::t('backend', 'views.site.index.link.details') . '</span>
                         <span class="pull-right">' . FAS::icon(FAS::_ARROW_CIRCLE_RIGHT) . '</span>
                         <div class="clearfix"></div>
                     </div>',
@@ -70,12 +66,11 @@ use yii\web\View;
     <div class="col-lg-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?= FAS::icon(FAS::_MONEY_BILL_ALT) ?> Payments
+                <?= FAS::icon(FAS::_MONEY_BILL_ALT) ?> <?= Yii::t('backend', 'views.site.index.payment') ?>
             </div>
             <div class="panel-body">
                 <?php
 
-// TODO refactor
                 try {
                     print Highcharts::widget(
                         [
@@ -83,15 +78,15 @@ use yii\web\View;
                                 'credits' => ['enabled' => false],
                                 'legend' => ['enabled' => false],
                                 'series' => [
-                                    ['name' => 'Payments', 'data' => $paymentData],
+                                    ['name' => Yii::t('backend', 'views.site.index.payment'), 'data' => $paymentData],
                                 ],
-                                'title' => ['text' => 'Payments'],
+                                'title' => ['text' => Yii::t('backend', 'views.site.index.payment')],
                                 'xAxis' => [
                                     'categories' => $paymentCategories,
-                                    'title' => ['text' => 'Month'],
+                                    'title' => ['text' => Yii::t('backend', 'views.site.index.month')],
                                 ],
                                 'yAxis' => [
-                                    'title' => ['text' => 'Amount'],
+                                    'title' => ['text' => Yii::t('backend', 'views.site.index.amount')],
                                 ],
                             ]
                         ]
@@ -103,7 +98,6 @@ use yii\web\View;
                 <div id="chart-payment"></div>
                 <?php
 
-// TODO refactor
                 try {
                     $columns = [
                         [
@@ -144,14 +138,12 @@ use yii\web\View;
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?= FAS::icon(FAS::_CHECK_CIRCLE) ?> For checking (<?= $countModeration ?>)
+                <?= FAS::icon(FAS::_CHECK_CIRCLE) ?> <?= Yii::t('backend', 'views.site.index.check') ?>
+                (<?= $countModeration ?>)
             </div>
             <div class="panel-body">
                 <div class="list-group">
-                    <?php
-
-// TODO refactor
-                    foreach ($moderation as $item): ?>
+                    <?php foreach ($moderation as $item): ?>
                         <?= Html::a(
                             $item['text'] . ' <span class="pull-right text-muted small"><em>'
                             . $item['value']

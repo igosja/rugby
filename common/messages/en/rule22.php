@@ -17,34 +17,34 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Распределение мест в кубке межсезонья.</a>
+<a href="#2"> 2. The distribution of places in the off-season cup. </a>
 <br/>
-<a href="#3">3. Призовые.</a>
+<a href="#3"> 3. Prize money. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие положения.</span> Кубок межсезонья - это турнир, который проводится в самом начале каждого сезона. В кубке межсезонья принимают участие все команды Лиги.</p>
-<p class="text-justify">Турнир играется в 12 туров по нестабильному календарю, когда для каждой команды выбирается случайный соперник, причем с одной и той же командой можно сыграть только один раз за турнир, а число игр дома и в гостях в конце турнира должно стать равным или отличаться на еденицу (если ваша команда провела нечетное число матчей)..</p>
-<p class="text-justify">В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.</p>
-<p class="text-justify">Каждая команда имеет право сыграть 2 матча на супере и 2 матча на отдыхе во время розыгрыша кубка межсезонья.</p>
-<p class="text-justify">Игры кубка межсезонья - это игры типа B ("обязательные"), т. е. в них изменяется усталость игроков. Подробнее о разных видах игр можно почитать в разделе про Усталость игроков (У).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Распределение мест в кубке межсезонья.</span> В итоговом распределении мест в порядке приоритетности учитываются следующие параметры:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. General. </span> The Offseason Cup is a tournament that takes place at the very beginning of each season. All League teams take part in the off-season cup. </p>
+<p class = "text-justify"> The tournament is played in 12 rounds on an unstable calendar, when a random opponent is selected for each team, moreover, the same team can be played only once per tournament, and the number of home and away games is at the end of the tournament should become equal to or differ by one (if your team played an odd number of matches) .. </p>
+<p class = "text-justify"> There is a home bonus in tournament matches - teams play stronger at home. </p>
+<p class = "text-justify"> Each team is eligible to play 2 Super and 2 Holiday matches during the offseason cup. </p>
+<p class = "text-justify"> Offseason Cup games are Type B ("Must") games, which means they change player fatigue. You can read more about the different types of games in the section on Player Fatigue (D). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. The distribution of places in the off-season cup. </span> The following parameters are taken into account in the final distribution of places in order of priority: </p>
 <ul>
-<li>набранные турнирные очки (чем больше, тем выше);</li>
-<li>победы (чем больше, тем выше);</li>
-<li>ничьи (чем больше, тем выше);</li>
-<li>разница игровых очков (чем больше, тем выше);</li>
-<li>набраных игровых очков (чем больше, тем выше);</li>
-<li>по рейтингу Vs (чем меньше, тем выше);</li>
+<li> accumulated tournament points (the more, the higher); </li>
+<li> wins (the more, the higher); </li>
+<li> draws (the more, the higher); </li>
+<li> the difference in game points (the more, the higher); </li>
+<li> of the accumulated game points (the more, the higher); </li>
+<li> by Vs rating (the lower the higher); </li>
 </ul>
-<p class="text-justify">При равенстве всех вышеназванных показателей проводится жребий.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Призовые.</span> За участие в Кубке межсезонья команды получают призовые, которые рассчитывается по формуле:</p>
-<p class="text-justify">2000000 * 0.98 ^ (место в турнирной таблице - 1)</p>
-<p class="text-justify">Итоговые места команд по результатам кубка межсезонья учитываются только при распределении призового фонда турнира. Создание новых дивизионов и стран проводится по результатам участия команд в конференции любительских клубов (а не кубка межсезонья).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Кубок межсезонья',
+<p class = "text-justify"> If all of the above indicators are equal, a lot is drawn. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Prize money. </span> For participation in the Cup of the offseason, teams receive prize money, which is calculated by the formula: </p>
+<p class = "text-justify"> 2000000 * 0.98 ^ (place in the standings - 1) </p>
+<p class = "text-justify"> The final places of the teams according to the results of the Cup of the off-season are taken into account only when distributing the prize fund of the tournament. The creation of new divisions and countries is based on the results of the teams\' participation in the amateur club conference (not the off-season cup). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Offseason Cup',
 ];

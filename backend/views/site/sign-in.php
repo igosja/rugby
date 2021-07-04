@@ -18,10 +18,7 @@ use yii\helpers\Html;
                 <h3 class="panel-title text-center">Sign In</h3>
             </div>
             <div class="panel-body">
-                <?php
-
-// TODO refactor
-                $form = ActiveForm::begin(
+                <?php $form = ActiveForm::begin(
                     [
                         'fieldConfig' => [
                             'template' => '{input}{error}'
@@ -45,10 +42,7 @@ use yii\helpers\Html;
                         ['class' => 'btn btn-lg btn-primary btn-block']
                     ) ?>
                 </fieldset>
-                <?php
-
-// TODO refactor
-                ActiveForm::end() ?>
+                <?php ActiveForm::end() ?>
             </div>
         </div>
     </div>

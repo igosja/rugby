@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое травмы игроков?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What are player injuries? </a>
 <br/>
-<a href="#2">2. Виды травм.</a>
+<a href="#2"> 2. Types of injuries. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое травмы игроков?</span> Любой регбист может получить травму по результатам игры. Травмированный игрок не может участвовать в матчах, выделен красным цветом в ростере. Травмы игроков в конце сезона полностью излечиваются.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Виды травм.</span> Травмы условно подразделяются на микро (1-2 дня), легкие (3-4 дня), тяжелые (5-6 дней) и очень тяжелые (7-9 дней).</p>
-<p class="text-justify">Все травмы обнаруживаются уже после игры. Виртуальный регбист доигрывает матч до конца без потери силы, однако по возвращении на базу оказывается травмирован и подлежит лечению. Вероятность получения травм целиком и полностью зависит от усталости игрока. Чем она больше, тем вероятнее получение послематчевой травмы.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Травмы игроков',
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What are player injuries? </span> Any rugby player can be injured as a result of the game. An injured player cannot participate in matches, highlighted in red in the roster. Player injuries are completely healed at the end of the season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Types of injuries. </span> Injuries are conventionally divided into micro (1-2 days), light (3-4 days), severe (5-6 days) and very severe (7-9 days). </p>
+<p class = "text-justify"> All injuries are discovered after the game. The virtual rugby player plays out the match to the end without losing strength, however, upon returning to the base, he is injured and is subject to treatment. The likelihood of injury depends entirely on the player\'s fatigue. The larger it is, the more likely it is to get a post-match injury. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Player Injury',
 ];

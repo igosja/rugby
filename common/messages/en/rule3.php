@@ -17,48 +17,48 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое Виртуальная Регбийная Лига?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What is the Virtual Rugby League? </a>
 <br/>
-<a href="#2">2. Как играть и кто играет?</a>
+<a href="#2"> 2. How to play and who is playing? </a>
 <br/>
-<a href="#3">3. Как действует Лига?</a>
+<a href="#3"> 3. How does the League work? </a>
 <br/>
-<a href="#4">4. Как управляется Лига?</a>
+<a href="#4"> 4. How is the League governed? </a>
 <br/>
-<a href="#5">5. Если вы хотите стать участником игры.</a>
+<a href="#5"> 5. If you want to become a member of the game. </a>
 <br/>
-<a href="#6">6. Если чего-то нет в правилах.</a>
+<a href="#6"> 6. If something is not in the rules. </a>
 <br/>
-<a href="#7">7. Давайте жить дружно!</a>
+<a href="#7"> 7. Let\'s live together! </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое Виртуальная Регбийная Лига?</span> Виртуальная Регбийная Лига - виртуальный регбийный онлайн-менеджер - игра, в которой Вам предстоит управлять своей собственной регбийной командой. Здесь Вас ожидает соревнование с сотнями других участников Лиги, которых объединяет одно слово - регби!</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Как играть и кто играет?</span> В наш регбийный менеджер играют через интернет (должен быть доступ на сайт virtual-rugby.com) и электронную почту (у каждого участника игры должен быть работающий почтовый ящик). К участию в Лиге допускаются все желающие, ознакомившиеся с правилами.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Как действует Лига?</span> Каждый участвующий в Лиге игрок управляет своей собственной регбийной командой, которая участвует в виртуальных соревнованиях наряду с  другими командами, также управляемыми реальными людьми. Лига играет по сезонам. Каждый сезон состоит из большого числа соревнований, основными являются чемпионаты стран. В ходе каждого сезона проводятся Лига Чемпионов и чемпионаты мира. Информацию о всех турнирах текущего сезона можно узнать на страничке "Турниры". Расписание игровых дней сезона (т.е. в какое время проводятся какие матчи) находится на страничке "Расписание".</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Как управляется Лига?</span> Лигой и играми в ней управляет Администрация Лиги. Все документы, находящиеся на страничке "Правила" есть игровая конституция Лиги, правила игры. Игровой денежной единицей в Лиге является вролик.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Если вы хотите стать участником игры.</span> Ваша карьера менеджера начинается с регистрации на сайте. В этот момент вы - "менеджер без команды".</p>
-<p class="text-justify">Затем вы берете под свое управление уже созданный клуб, у которого нет тренера. И вот тогда вы становитесь уже полноправным участником игры.</p>
-<p class="text-justify">Чтобы узнать подробнее о процессе регистрации, для начала просмотрите раздел "Как зарегистрироваться и взять команду?".</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Если чего-то нет в правилах.</span> Если у вас возникли вопросы, вы всегда можете задать их тех.поддержке или оставить сообщение в форуме в наиболее подходящем разделе. Кое-какие вопросы может быть смогут вам прояснить даже опытные менеджеры, на остальные ответит Администрация Лиги. Пробелы в Правилах будут регулярно устраняться.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Давайте жить дружно!</span> За нечестную игру, за умышленные нарушения правил, за некорректное поведение, за разрушительные действия на сайте Администрация Лиги вправе назначать штрафы, в крайних случаях нарушитель может лишиться команды. Администрация Лиги вправе ограничить особо рьяным нарушителям посещение сайта и регистрацию на нем. Договорные матчи могут быть отменены с назначением технического поражения одной или обеим командам. Договорные сделки могут быть отменены.</p>
-<p class="text-justify">В случае незначительности нарушения, тем более если причиной нарушения может быть неопытность нарушителя, Администрация Лиги вправе заменять штрафы вынесением предупреждений. Каждый штраф или предупреждение сопровождается указанием нарушения.</p>
-<p class="text-justify">Самыми серьезными нарушениями в Лиге являются:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What is Virtual Rugby League? </span> Virtual Rugby League - online virtual rugby manager is a game in which you have to manage your own rugby team. Here you will compete with hundreds of other members of the League, who are united by one word - rugby! </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. How to play and who is playing? </span> Our rugby manager is played via the Internet (must have access to the site virtual-rugby.com) and e-mail (each participant in the game must have a working mailbox). Anyone who has read the rules is allowed to participate in the League. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. How does the League work? </span> Each player participating in the League controls his own rugby team, which participates in virtual competitions along with other teams, also run by real people. The league plays by seasons. Each season consists of a large number of competitions, the main ones being national championships. The Champions League and World Championships are held during each season. Information about all tournaments of the current season can be found on the "Tournaments" page. The schedule of game days of the season (ie at what time of which matches are played) can be found on the "Schedule" page. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. How is the League governed? </span> The League and its games are governed by the League Administration. All documents on the "Rules" page are the League\'s game constitution, the rules of the game. The game currency in the League is a roll. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. If you want to become a member of the game. </span> Your manager\'s career begins with registration on the site. At this point, you are a "manager without a team". </p>
+<p class = "text-justify"> Then you take control of an already created club that does not have a coach. And then you become a full participant in the game. </p>
+<p class = "text-justify"> To learn more about the registration process, first see the section "How to register and take a command?". </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6"> <span class = "strong"> 6. If something is not in the rules. </span> If you have any questions, you can always ask technical support or leave a message in the forum in the most appropriate section. Even experienced managers may be able to clarify some questions for you, the League Administration will answer the rest. Gaps in the Rules will be regularly addressed. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7"> <span class = "strong"> 7. Let\'s live together! </span> For dishonest play, for deliberate violations of the rules, for incorrect behavior, for destructive actions on the website, the League Administration has the right to impose fines, in extreme cases the violator may lose his team. The Administration of the League has the right to restrict especially zealous violators from visiting the site and registering on it. Fixed matches can be canceled with the appointment of a technical defeat to one or both teams. Contractual transactions can be canceled. </p>
+<p class = "text-justify"> If the violation is insignificant, especially if the violation may be caused by the violator\'s inexperience, the League Administration has the right to replace fines by issuing warnings. Each penalty or warning is accompanied by an indication of the violation. </p>
+<p class = "text-justify"> The most serious violations in the League are: </p>
 <ul>
-<li>договорные игры и сделки;</li>
-<li>игра под несколькими никами (логинами);</li>
-<li>игра за несколько команд в одной стране;</li>
-<li>умышленная дезинформация новичков, распространение лживой информации о правилах или новостях в Лиге;</li>
-<li>оскорбления менеджеров, посетителей и Администрации Лиги.</li>
+<li> negotiated games and deals; </li>
+<li> game under several nicknames (logins); </li>
+<li> playing for several teams in one country; </li>
+<li> deliberate misinformation of newcomers, spreading false information about the rules or news in the League; </li>
+<li> insults to managers, visitors and the Administration of the League. </li>
 </ul>
-<p class="text-justify">За умышленное разрушение команды Администрация Лиги вправе изъять команду и наказать нерадивого менеджера.</p>
-<p class="text-justify">Апелляции к штрафам, отмена сделок, изъятие команд и другие наказания рассматриваются в тех.поддержке.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Что такое Виртуальная Регбийная Лига?',
+<p class = "text-justify"> For deliberate destruction of a team, the League Administration has the right to withdraw the team and punish the negligent manager. </p>
+<p class = "text-justify"> Appeals to fines, cancellation of deals, withdrawal of teams and other penalties are considered in technical support. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'What is Virtual Rugby League?',
 ];

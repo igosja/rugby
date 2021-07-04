@@ -17,51 +17,51 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Дивизионы.</a>
+<a href="#2"> 2. Divisions. </a>
 <br/>
-<a href="#3">3. Расписание игр.</a>
+<a href="#3"> 3. Game schedule. </a>
 <br/>
-<a href="#4">4. Ротация между дивизионами.</a>
+<a href="#4"> 4. Rotation between divisions. </a>
 <br/>
-<a href="#5">5. Изменение усталости игроков.</a>
+<a href="#5"> 5. Change player fatigue. </a>
 <br/>
-<a href="#6">6. Распределение мест в турнирной таблице.</a>
+<a href="#6"> 6. Distribution of places in the standings. </a>
 <br/>
-<a href="#7">7. Призовые.</a>
+<a href="#7"> 7. Prize money. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Регламент.</span> Чемпионаты стран являются основным турниром для каждой команды в Лиге. Команды участвуют в чемпионатах своих стран, чемпионат проводится один раз в сезон. Чемпионаты проводятся по странам.</p>
-<p class="text-justify">Победители высшего дивизиона чемпионата (D1) помимо звания чемпиона страны получают право представлять страну в лиге чемпионов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Дивизионы.</span> Одной стране может соответствовать два или более дивизионов, в каждом из которых 16 команд. Каждый дивизион, по сути, представляет собой отдельный турнир с той лишь разницей, что между дивизионами одной страны существует ротация команд.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Расписание игр.</span> Все чемпионаты играются по двухкруговой системе, при этом каждая команда играет со всеми остальными по два матча - дома и на выезде (всего 30 матчей).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Ротация между дивизионами.</span> По завершению чемпионата 2 лучшие команды меняются местами с двумя худшими командами более высокого дивизиона.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Изменение усталости игроков.</span> В зависимости от усталости игрока меняется и то, как он будет проявлять себя в очередном матче вашей команды. Чем больше матчей подряд сыграет ваш игрок, тем более уставшим он будет выходить на поле. Усталость в начале чемпионата у всех игроков выводится на уровень медцентра тех команд, в которых они находились перед стартом этого соревнования (готовились). Будьте внимательны: если в момент выведение усталости на уровень медцентра строится медцентр или база - все ваши игроки начнут участие в соревновании с усталостью медцентра нулевого уровня. Подробнее Усталость игроков (У).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Распределение мест в турнирной таблице.</span> В итоговом распределении мест в порядке приоритетности учитываются следующие параметры:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. Regulations. </span> The National Championships are the main tournament for each team in the League. Teams participate in the championships of their countries, the championship is held once a season. Championships are held by country. </p>
+<p class = "text-justify"> Winners of the top division of the championship (D1), in addition to the title of champion of the country, are entitled to represent the country in the Champions League. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Divisions. </span> One country can have two or more divisions, each with 16 teams. Each division is, in fact, a separate tournament, with the only difference that there is a rotation of teams between the divisions of the same country. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Schedule of games. </span> All championships are played in a two-round system, with each team playing two matches against everyone else - home and away (30 matches in total). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Rotation between divisions. </span> At the end of the championship, the top 2 teams are swapped with the two worst teams in the higher division. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. Changes in player fatigue. </span> Depending on the player\'s fatigue, the way he will manifest himself in the next match of your team also changes. The more matches your player plays in a row, the more tired he will be on the field. Fatigue at the beginning of the championship for all players is brought to the level of the medical center of those teams in which they were before the start of this competition (prepared). Be careful: if at the moment fatigue is brought to the level of the medical center, a medical center or base is being built, all your players will start participating in the competition with the fatigue of a medical center of zero level. Read more Player fatigue. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6"> <span class = "strong"> 6. The distribution of places in the standings. </span> The following parameters are taken into account in the final distribution of places in order of priority: </p>
 <ul>
-<li>набранные турнирные очки (чем больше, тем выше);</li>
-<li>победы (чем больше, тем выше);</li>
-<li>ничьи (чем больше, тем выше);</li>
-<li>разница игровых очков (чем больше, тем выше);</li>
-<li>набраных игровых очков (чем больше, тем выше);</li>
-<li>по рейтингу Vs (чем меньше, тем выше);</li>
+<li> accumulated tournament points (the more, the higher); </li>
+<li> wins (the more, the higher); </li>
+<li> draws (the more, the higher); </li>
+<li> the difference in game points (the more, the higher); </li>
+<li> of the accumulated game points (the more, the higher); </li>
+<li> by Vs rating (the lower the higher); </li>
 </ul>
-<p class="text-justify">При равенстве всех вышеназванных показателей проводится жребий.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Призовые.</span> По результатам чемпионата команды получают призовые в зависимости от дивизиона.</p>
-<p class="text-justify">Призовые для чемпионата рассчитываются по формуле:</p>
-<p class="text-justify">20000000 * 0.98 ^ (( М - 1 ) + ( Д - 1 ) * 16), где</p>
+<p class = "text-justify"> If all of the above indicators are equal, a lot is drawn. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7"> <span class = "strong"> 7. Prize money. </span> According to the results of the championship, the teams receive prize money depending on the division. </p>
+<p class = "text-justify"> The prize money for the championship is calculated using the following formula: </p>
+<p class = "text-justify"> 20000000 * 0.98 ^ ((M - 1) + (D - 1) * 16), where </p>
 <ul>
-<li>М - место в турнирной таблице;</li>
-<li>Д - уровень дивизиона;</li>
+<li> М - place in the standings; </li>
+<li> D - division level; </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Чемпионаты стран',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'National Championships',
 ];

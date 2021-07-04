@@ -17,20 +17,20 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое физическая форма?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What is fitness? </a>
 <br/>
-<a href="#2">2. Начало сезона.</a>
+<a href="#2"> 2. The beginning of the season. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое физическая форма?</span> Физическая форма - это параметр виртуального регбиста, влияющий на его силу в каждом матче, самопроизвольно изменяющийся с течением времени (от матча к матчу). В реальной жизни у каждого спортсмена бывают пики и спады физической формы и тренеры стремятся вывести форму регбиста на пиковый уровень к важным соревнованиям и матчам. Как правило, они выводят на пик формы всю команду. Однако игроки могут готовиться к матчам и по индивидуальной программе.</p>
-<p class="text-justify">В нашей игре физическая форма каждого регбиста отражена в ростере в графе Ф. Этот параметр по умолчанию известен только для своих регбистов. Узнать физическую форму соперника можно с помощью скаут-центра. Физическая форма может быть от 75% до 125%. Например, если физическая форма игрока в туре равна 75%, это означает, что он будет играть на четверть слабее, чем если бы его форма была 100%.</p>
-<p class="text-justify">Физическая форма самопроизвольно меняется с течением времени (от матча к матчу). За пиком следует спад, потом снова пик, снова спад и т.д.</p>
-<p class="text-justify">Полный период изменения физической формы - 20 календарных дней, за которые один раз форма регбиста находится в абсолютном пике (125%), один раз в абсолютном спаде (75%), два раза форма нормальная (100%).</p>
-<p class="text-justify">Вообще говоря, у каждого регбиста физическая форма - своя. Т.е. у одних ее пик, например, может приходиться на 10-ый день сезона, у других на 3-ий день.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Начало сезона.</span> В начале каждого сезона физическая форма всех игроков одной команды становится разной, один из 20 вариантов ее изменения выбирается случайным образом (это происходит один раз в сезон, в отличие от выведения усталости на уровень баз, которая проводится перед началом каждого крупного соревнования). После этого, если выпавшие случайно пики формы тренера не устраивают, он может поменять вариант изменения формы игроков команды на другой с помощью физиоцентра. При этом в зависимости от уровня физцентра он может проводить такие изменения несколько раз в сезон.</p>
-<p class="text-justify">Игроки, приходящие в команду по результатам сделок по ходу сезона по умолчанию имеют тот вариант изменения формы, который у него был натренирован в физцентре предыдущей команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Физическая форма игроков (Ф)',
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What is fitness? </span> Fitness is a parameter of a virtual rugby player that affects his strength in each match, spontaneously changing over time (from match to match). In real life, every athlete has peaks and troughs in fitness and coaches strive to bring the rugby player\'s form to its peak for important competitions and matches. As a rule, they bring the whole team to the peak of their form. However, players can prepare for matches according to an individual program. </p>
+<p class = "text-justify"> In our game, the physical form of each rugby player is reflected in the roster in column F. This parameter is known by default only to their own rugby players. You can find out the physical form of an opponent using the scout center. Physical fitness can be between 75% and 125%. For example, if a player\'s fitness on a round is 75%, this means that he will play a quarter weaker than if his shape was 100%. </p>
+<p class = "text-justify"> Fitness changes spontaneously over time (from match to match). A peak is followed by a decline, then a peak again, another decline, etc. </p>
+<p class = "text-justify"> The full period of change in physical form is 20 calendar days, during which once the rugby player\'s uniform is in an absolute peak (125%), once in an absolute decline (75%), twice in a normal form ( 100%). </p>
+<p class = "text-justify"> Generally speaking, every rugby player has his own physical form. Those. for some, its peak, for example, may fall on the 10th day of the season, for others, on the 3rd day. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. The beginning of the season. </span> At the beginning of each season, the physical form of all players of one team becomes different, one of 20 options for changing it is chosen randomly (this happens once a season, as opposed to bringing fatigue to the base level, which is carried out before the start each major competition). After that, if the coach\'s uniform peaks do not suit him by accident, he can change the option of changing the team players\' uniform to another using the Physiocenter. Moreover, depending on the level of the physical center, he can carry out such changes several times a season. </p>
+<p class = "text-justify"> Players who come to the team based on the results of deals during the season, by default, have the option of changing the form that they trained in the physical center of the previous team. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Physical form of players (F)',
 ];

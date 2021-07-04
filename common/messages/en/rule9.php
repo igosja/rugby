@@ -17,65 +17,65 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#2">2. Рост силы молодых игроков.</a>
+<a href="#2"> 2. Growing strength of young players. </a>
 <br/>
-<a href="#3">3. Потеря силы ветеранов.</a>
+<a href="#3"> 3. Veterans lose their strength. </a>
 <br/>
-<a href="#4">4. Завершение карьеры.</a>
+<a href="#4"> 4. Retirement. </a>
 <br/>
-<a href="#5">5. Денежная компенсация за ветерана.</a>
+<a href="#5"> 5. Monetary compensation for a veteran. </a>
 <br/>
-<a href="#6">6. Базы команд.</a>
+<a href="#6"> 6. Command bases. </a>
 <br/>
-<a href="#7">7. Игроки сборных.</a>
+<a href="#7"> 7. National team players. </a>
 <br/>
-<a href="#8">8. Травмы.</a>
+<a href="#8"> 8. Injuries. </a>
 <br/>
-<a href="#9">9. Арендованные игроки.</a>
+<a href="#9"> 9. Rented players. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Общие положения.</span> В конце сезона молодые игроки (от 17 до 23 лет включительно) прогрессируют в силе, а ветераны (от 31 до 35 лет включительно) силу теряют.</p>
-<p class="text-justify">Здесь и дальше имеется в виду тот возраст игрока, с которым он проводит заканчивающийся сезон. Следующий сезон все игроки (от 17 до 34 лет включительно) проведут, "постарев" на год (например, игрок 24 лет в следующем сезоне будет иметь возраст 25 лет). Все игроки в возрасте 35 лет в конце сезона уходят из регби (отправляются "на пенсию").</p>
-<p class="text-justify">В Лиге самыми молодыми игроками являются игроки 17 лет, самыми старыми игроками являются игроки 35 лет.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Рост силы молодых игроков.</span> По окончании сезона молодые игроки, взрослея на один год прибавляют к силе следующее количество баллов:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. General. </span> At the end of the season, young players (from 17 to 23 years old inclusive) progress in strength, while veterans (from 31 to 35 years old inclusive) lose strength. </p>
+<p class = "text-justify"> Hereinafter, we mean the age of the player with which he spends the ending season. All players (from 17 to 34 years old inclusive) will spend the next season "aging" by a year (for example, a 24-year-old player in the next season will be 25 years old). All players aged 35 will retire (retire) at the end of the season. </p>
+<p class = "text-justify"> In the League, the youngest players are 17 years old, the oldest players are 35 years old. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. Growth of strength of young players. </span> At the end of the season, young players add the following number of points to strength by maturing one year: </p>
 <ul>
-<li>17 лет получают +10 баллов силы;</li>
-<li>18 лет получают +9 баллов силы;</li>
-<li>19 лет получают +8 баллов силы;</li>
-<li>20 лет получают +7 баллов силы;</li>
-<li>21 лет получают +6 баллов силы;</li>
-<li>22 лет получают +5 баллов силы;</li>
-<li>23 лет получают +4 баллов силы.</li>
+<li> 17 years old receive +10 strength points; </li>
+<li> 18 years old receive +9 strength points; </li>
+<li> 19 years old receive +8 strength points; </li>
+<li> 20 years old gain +7 strength points; </li>
+<li> 21 years old gain +6 strength points; </li>
+<li> 22 years old gain +5 strength points; </li>
+<li> 23 years old receive +4 strength points. </li>
 </ul>
-<p class="text-justify">Остальные по окончании сезона не растут.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Потеря силы ветеранов.</span> По окончании сезона ветераны теряют в силе следующее количество баллов:</p>
+<p class = "text-justify"> The rest do not grow at the end of the season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Veterans lose their strength. </span> At the end of the season, veterans lose the following points: </p>
 <ul>
-<li>31 лет - 5%;</li>
-<li>32 лет - 10%;</li>
-<li>33 лет - 15%;</li>
-<li>34 лет - 20%;</li>
-<li>35 лет - завершают карьеру.</li>
+<li> 31 years old - 5%; </li>
+<li> 32 years old - 10%; </li>
+<li> 33 years old - 15%; </li>
+<li> 34 years old - 20%; </li>
+<li> 35 years old - retirement. </li>
 </ul>
-<p class="text-justify">Обратите внимание, что если сила молодых игроков растет на строго определенное кол-во баллов (т.е. например +2 балла), то старые игроки теряют в силе проценты имеющихся у них баллов (т.е. например 10%).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Завершение карьеры.</span> Все игроки 35 лет в начале сезона объявляют о своём желании завершить карьеру. Такие игроки помечаются специальным значком и играют последний сезон.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Денежная компенсация за ветерана.</span> За абсолютно всех ветеранов, заканчивающих карьеру в текущем сезоне в любой команде, полагается компенсация в размере 50% их номинальной стоимости.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Базы команд.</span> В конце сезона строительства и тренировки завершаются по правилам постройки и тренировки. Считается, что между окончанием сезона и началом следующего проходит достаточно большое виртуальное время. В начале сезона все строения и база команды находятся в работающем состоянии, на тренировках никого нет.</p>
-<p class="text-justify">Число проведенных тренировок в начале сезона обнуляется. Неиспользованные тренировки на новый сезон не переносятся.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Игроки сборных.</span> Все игроки сборных перед началом старения и других действий возвращаются в свои команды и ничем не отличаются от других игроков.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="8"><span class="strong">8. Травмы.</span> Считается, что между окончанием сезона и началом следующего проходит достаточно большое виртуальное время, чтобы вылечить травмы. В начале сезона травмы всех игроков обнуляется.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="9"><span class="strong">9. Арендованные игроки.</span> Если на момент окончания сезона игрок находится в аренде, то в начале нового сезона он продолжает играть за команду, его арендовавшую. Срок аренды остаётся тем же, что и был на момент окончания сезона.</p>
-<p class="text-justify">Арендованный игрок получает усталость той команды, которая его арендует на момент начала сезона.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Что происходит в конце сезона?',
+<p class = "text-justify"> Please note that if the strength of young players grows by a strictly defined number of points (i.e., for example +2 points), then the old players lose the percentage of their points (i.e. .e. for example 10%). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. Retirement. </span> All players 35 years old at the beginning of the season announce their desire to retire. These players are marked with a special badge and play the last season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. Monetary compensation for a veteran. </span> For absolutely all veterans who end their careers in the current season in any team, compensation in the amount of 50% of their nominal value is entitled. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6"> <span class = "strong"> 6. Team bases. </span> At the end of the season, construction and training ends according to the construction and training rules. It is believed that a fairly large virtual time passes between the end of the season and the beginning of the next one. At the beginning of the season, all the buildings and base of the team are in working order, there is no one in training. </p>
+<p class = "text-justify"> The number of workouts done at the start of the season is reset to zero. Unused workouts will not be carried over to the new season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7"> <span class = "strong"> 7. National team players. </span> All national team players return to their teams before aging and other activities and are no different from other players. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "8"> <span class = "strong"> 8. Injuries. </span> It is believed that there is enough virtual time between the end of the season and the beginning of the next to heal injuries. At the beginning of the season, all players\' injuries are reset to zero. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "9"> <span class = "strong"> 9. Loaned players. </span> If at the end of the season a player is on loan, then at the beginning of the new season he will continue to play for the team that rented him. The lease term remains the same as it was at the end of the season. </p>
+<p class = "text-justify"> The rented player gets tired from the team that rented him at the start of the season. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'What happens at the end of the season?',
 ];

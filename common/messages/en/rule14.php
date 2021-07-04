@@ -17,73 +17,73 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#1.1">1.1. Стоимость игрока.</a>
+<a href="#1.1"> 1.1. Player cost. </a>
 <br/>
-<a href="#1.2">1.2. Зарплата игрока.</a>
+<a href="#1.2"> 1.2. Player\'s salary. </a>
 <br/>
-<a href="#2">2. Как расчитывается зарплата игроков?</a>
+<a href="#2"> 2. How are players\' salaries calculated? </a>
 <br/>
-<a href="#2.1">2.1. Общие сведения - формула расчета.</a>
+<a href="#2.1"> 2.1. General information - calculation formula. </a>
 <br/>
-<a href="#2.2">2.2. Зависимость зарплаты от уровня базы.</a>
+<a href="#2.2"> 2.2. Dependence of the salary on the base level. </a>
 <br/>
-<a href="#2.3">2.3. Зависимость от дивизиона в котором выступает команда.</a>
+<a href="#2.3"> 2.3. Depends on the division in which the team plays. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="strong text-justify" id="1.1">1.1. Стоимость игрока.</p>
-<p class="text-justify">Стоимость игрока - номинальная цена игрока, зависящая от его возраста, силы, наличия спецвозможностей и дополнительной профильной позиции на поле.</p>
-<p class="text-justify">Стоимость игрока определяется по формуле: Стоимость игрока = (150 - (28 - В)) ^ 2 * (П - 1 + С + Сп )* 1000, где</p>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "strong text-justify" id = "1.1"> 1.1. Player cost. </p>
+<p class = "text-justify"> Player cost - the player\'s nominal price, depending on his age, strength, availability of special abilities and additional profile position on the field. </p>
+<p class = "text-justify"> Player cost is determined by the formula: Player cost = (150 - (28 - B)) ^ 2 * (P - 1 + S + Cn) * 1000, where </p>
 <ul>
-<li>В - возраст игрока;</li>
-<li>П - количество профильных позиций игрока;</li>
-<li>C - номинальная сила игрока;</li>
-<li>Сп - количество cпецвозможностей игрока (считается путем сложения всех уровней различных спецвозможностей, например игрок Ск3Км2 в сумме имеет 5 спецвозможностей).</li>
+<li> B - player\'s age; </li>
+<li> P - the number of profile positions of the player; </li>
+<li> C - player\'s nominal strength; </li>
+<li> Cn - the number of the player\'s special abilities (it is calculated by adding up all the levels of various special abilities, for example, the player Sk3Km2 has 5 special abilities in total). </li>
 </ul>
-<p class="text-justify">От стоимости игрока зависит его зарплата и его стартовая цена на трансферном и арендном рынках. Она же учитывается при построении различных рейтингов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.2">1.2. Зарплата игрока.</p>
-<p class="text-justify">Зарплата является одной из составляющей расходов команды. Зарплата выплачивается каждому игрока, находящемуся в команде (включая травмированных и взятых в аренду).</p>
-<p class="text-justify">Зарплата выплачивается каждый каледарный день.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Как расчитывается зарплата игроков?</p>
-<p class="strong text-justify" id="2.1">2.1. Общие сведения - формула расчета.</p>
-<p class="text-justify">Формула расчета зарплаты игроков каждой команды имеет следующий вид: Зарплата игрока за тур = Стоимость игрока * k1 * k2, где</p>
+<p class = "text-justify"> The player\'s value determines his salary and his starting price in the transfer and rental markets. It is also taken into account when building various ratings. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.2"> 1.2. Player\'s salary. </p>
+<p class = "text-justify"> Salary is one of the costs of the team. A salary is paid to every player on the team (including those injured and on loan). </p>
+<p class = "text-justify"> Salary is paid every calendar day. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. How is player salary calculated? </p>
+<p class = "strong text-justify" id = "2.1"> 2.1. General information - calculation formula. </p>
+<p class = "text-justify"> The formula for calculating the salaries of the players of each team is as follows: Player\'s salary per round = Player cost * k1 * k2, where </p>
 <ul>
-<li>k1 - коэффициент зависимости от уровня базы команды;</li>
-<li>k2 - коэффициент зависимости от дивизиона, в котором выступает команда.</li>
+<li> k1 - coefficient of dependence on the level of the team base; </li>
+<li> k2 is the coefficient of dependence on the division in which the team is playing. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.2">2.2. Зависимость зарплаты от уровня базы.</p>
-<p class="text-justify">На уровень зарплаты влияет уровень Базы команды. Чем выше этот уровень, тем выше зарплата.
-<table class="table table-hover table-bordered">
-<tr><th>Уровень базы</th><th>Коэффициент</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0.0003</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">0.0004</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">0.0005</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">0.0006</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">0.0007</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">0.0008</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">0.0009</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">0.0010</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">0.0011</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">0.0012</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">0.0013</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.2"> 2.2. Dependence of the salary on the base level. </p>
+<p class = "text-justify"> The salary level is influenced by the level of the Team Base. The higher this level, the higher the salary.
+<table class = "table table-hover table-bordered">
+<tr> <th> Base Level </th> <th> Ratio </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0.0003 </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 0.0004 </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 0.0005 </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 0.0006 </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 0.0007 </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 0.0008 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 0.0009 </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 0.0010 </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 0.0011 </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 0.0012 </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 0.0013 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2.3">2.3. Зависимость от дивизиона, в котором выступает команда.</p>
-<p class="text-justify">В более высоких дивизионах зарплата у игроков выше.</p>
-<table class="table table-hover table-bordered">
-<tr><th>Дивизион</th><th>Коэффициент</th></tr>
-<tr><td class="text-center">D1</td><td class="text-center">1,00</td></tr>
-<tr><td class="text-center">D2</td><td class="text-center">0,95</td></tr>
-<tr><td class="text-center">D3</td><td class="text-center">0,90</td></tr>
-<tr><td class="text-center">D4</td><td class="text-center">0,80</td></tr>
-<tr><td class="text-center">Конференция</td><td class="text-center">0,70</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2.3"> 2.3. Depends on the division in which the team competes. </p>
+<p class = "text-justify"> Players have higher salaries in higher divisions. </p>
+<table class = "table table-hover table-bordered">
+<tr><th>Division</th><th> Odds</th> </tr>
+<tr> <td class = "text-center"> D1 </td> <td class = "text-center"> 1.00 </td> </tr>
+<tr> <td class = "text-center"> D2 </td> <td class = "text-center"> 0.95 </td> </tr>
+<tr> <td class = "text-center"> D3 </td> <td class = "text-center"> 0.90 </td> </tr>
+<tr> <td class = "text-center"> D4 </td> <td class = "text-center"> 0.80 </td> </tr>
+<tr> <td class = "text-center"> Conference </td> <td class = "text-center"> 0.70 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Стоимость и зарплата игроков',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Player cost and salary',
 ];

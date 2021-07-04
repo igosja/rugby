@@ -17,98 +17,98 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Турниры Лиги.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. League tournaments. </a>
 <br/>
-<a href="#1.1">1.1. Какие официальные турниры проводятся.</a>
+<a href="#1.1"> 1.1. What are the official tournaments. </a>
 <br/>
-<a href="#1.2">1.2. Структура сезона Лиги.</a>
+<a href="#1.2"> 1.2. League season structure. </a>
 <br/>
-<a href="#2">2. Параметры игрового дня.</a>
+<a href="#2"> 2. Game day parameters. </a>
 <br/>
-<a href="#2.1">2.1. Виды матчей.</a>
+<a href="#2.1"> 2.1. Types of matches. </a>
 <br/>
-<a href="#2.2">2.2. Изменение усталости игроков.</a>
+<a href="#2.2"> 2.2. Change player fatigue. </a>
 <br/>
-<a href="#2.3">2.3. Распределение мест в турнирах с групповым форматом.</a>
+<a href="#2.3"> 2.3. Seating allocation in group format tournaments. </a>
 <br/>
-<a href="#2.4">2.4. Распределение мест в турнирах с кубковым форматом.</a>
+<a href="#2.4"> 2.4. Seating allocation in cup-format tournaments. </a>
 <br/>
-<a href="#2.5">2.5. Форс-мажор.</a>
+<a href="#2.5"> 2.5. Force majeure. </a>
 <br/>
-<a href="#3">3. Товарищеские матчи (тип A).</a>
+<a href="#3"> 3. Friendly matches (type A). </a>
 <br/>
-<a href="#4">4. Чемпионаты стран (тип B).</a>
+<a href="#4"> 4. National Championships (type B). </a>
 <br/>
-<a href="#5">5. Лига чемпионов (тип C).</a>
+<a href="#5"> 5. Champions League (type C). </a>
 <br/>
-<a href="#6">6. Кубок межсезонья (тип B).</a>
+<a href="#6"> 6. Offseason Cup (type B). </a>
 <br/>
-<a href="#7">7. Конференция любительских клубов (тип B).</a>
+<a href="#7"> 7. Amateur club conference (type B). </a>
 <br/>
-<a href="#8">8. Чемпионат мира (тип C).</a>
+<a href="#8"> 8. World Championship (type C). </a>
 </p>
-<p class="strong text-justify" id="1">1. Турниры Лиги.</p>
-<p class="text-justify" id="1.1"><span class="strong">1.1. Какие официальные турниры проводятся.</span> В Лиге проводятся чемпионаты стран, товарищеские игры, Лига Чемпионов и чемпионат мира. В период межсезонья проводится кубок межсезонья.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.2"><span class="strong">1.2. Структура сезона Лиги.</span> Сезон Лиги состоит из множества игровых дней. В любой игровой день команда может провести не более одного матча. Это касается, в том числе и дней товарищеских матчей. Структуру текущего игрового сезона можно посмотреть на странице "Турниры", расписание матчей на странице "Расписание". Следует отметить, что в расписание Администрацией могут быть внесены изменения и дополнения, о чём будет дополнительно сообщено в официальной рассылке и в новостях.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Параметры игрового дня.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Виды матчей.</span> В разделе расписания для каждого игрового дня задано его описание, обозначающее тип проводимых в этот день матчей. Существует четыре базовых вида матчей: товарищеские игры, игры чемпионата, Лига Чемпионов и чемпионат мира. Подробнее об особенностях каждого из видов читайте ниже.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. Изменение усталости игроков.</span> Каждому из видов матчей соответствует один из типов A, B или C падения/роста усталости игроков (см. также раздел "Усталость игроков (У)").</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.3"><span class="strong">2.3. Распределение мест в турнирах с групповым форматом.</span> Для чемпионатов, кубка межсезонья, группового турнира лиги чемпионов и любых других групповых турниров Лиги действуют следующие правила: В итоговом распределении мест в порядке приоритетности учитываются следующие параметры:</p>
+<p class = "strong text-justify" id = "1"> 1. League tournaments. </p>
+<p class = "text-justify" id = "1.1"> <span class = "strong"> 1.1. Which official tournaments are held. </span> The League hosts national championships, friendlies, the Champions League and the world championship. During the off-season, the off-season cup is held. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.2"> <span class = "strong"> 1.2. League season structure. </span> The League season consists of many playing days. On any game day, a team can play no more than one match. This also applies to the days of friendly matches. The structure of the current playing season can be viewed on the "Tournaments" page, the schedule of matches on the "Schedule" page. It should be noted that the Administration may make changes and additions to the schedule, which will be additionally announced in the official mailing list and in the news. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Game day parameters. </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. Types of matches. </span> In the section of the schedule for each game day, its description is set, indicating the type of matches played on that day. There are four basic types of matches: friendlies, championship games, Champions League and World Championship. Read more about the features of each type below. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. Changes in player fatigue. </span> Each type of match corresponds to one of the types A, B or C of falling / increasing player fatigue (see also the section "Player fatigue (A)"). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.3"> <span class = "strong"> 2.3. Seating allocation in group format tournaments. </span> The following rules apply for the Championships, Midseason Cup, Champions League group stage and any other League group stage:
 <ul>
-<li>набранные турнирные очки (чем больше, тем выше);</li>
-<li>победы (чем больше, тем выше);</li>
-<li>ничьи (чем больше, тем выше);</li>
-<li>разница игровых очков (чем больше, тем выше);</li>
-<li>набраных игровых очков (чем больше, тем выше);</li>
-<li>по рейтингу Vs (чем меньше, тем выше);</li>
+<li> accumulated tournament points (the more, the higher); </li>
+<li> wins (the more, the higher); </li>
+<li> draws (the more, the higher); </li>
+<li> the difference in game points (the more, the higher); </li>
+<li> of the accumulated game points (the more, the higher); </li>
+<li> by Vs rating (the lower the higher); </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.4"><span class="strong">2.4. Распределение мест в турнирах с кубковым форматом.</span> Для кубков, проводящихся по двухраундовой системе, матчи могут закончиться ничьей. В случае равенства счета по сумме двух матчей, назначается дополнительное и, в случае необходимости, серия буллитов.</p>
-<p class="text-justify">Для раунда плей-офф национальных чемпионатов каждый матч играется до выявления победителя. Если основное время закончилось в ничью, назначается дополнительное время.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.5"><span class="strong">2.5. Форс-мажор.</span> Если при проведении игрового дня тем или иным образом менеджером были допущены любые нарушения правил, на его команду налагается штраф в размере, определяемом Администрацией в зависимости от серьезности нарушения. Все результаты матчей, сыгранные в Лиге, являются окончательными в независимости от возможных ошибок и нарушений в работе генератора, менеджеров или системы в целом и подлежат переигровке только в исключительных ситуациях по специальному решению Администрации.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3">3. Товарищеские матчи (тип A).</p>
-<p class="text-justify">Товарищеский матч - это тренировочный матч двух команд, который организовывается самими менеджерами двух участвующих команд и проводится с целью тренировки, проверки тактики или просто чтобы выяснить, чья команда сильнее.</p>
-<p class="text-justify">Товарищеские матчи можно играть, а можно и не играть. Вы сами выбираете себе соперника, отправляете ему приглашение на конкретный игровой день и ждете ответа. Если ответ положительный - организуется товарищеский матч.</p>
-<p class="text-justify">Подробнее о товарищеских матчах вы можете прочитать в отдельном разделе правил - Товарищеские матчи.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4">4. Чемпионаты стран (тип B).</p>
-<p class="text-justify">Чемпионаты стран являются основным турниром для каждой команды в Лиге. Все команды участвуют в чемпионатах своих стран, чемпионат проводится один раз в сезон.</p>
-<p class="text-justify">Чемпионат страны может состоять из нескольких дивизионов. Каждый дивизион, по сути, представляет собой отдельный турнир с той лишь разницей, что между дивизионами одной страны существует ротация команд.</p>
-<p class="text-justify">Все чемпионаты проходят по двухкруговой системе, при этом каждая команда играет со всеми остальными по два матча - дома и на выезде (всего 30 матчей).</p>
-<p class="text-justify">Победители первого дивизиона чемпионата (D1) помимо медалей получают право представлять страну в лиге чемпионов.</p>
-<p class="text-justify">Подробнее о турнире читайте в отдельном разделе - Чемпионаты стран.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="5">5. Лига чемпионов (тип C).</p>
-<p class="text-justify">Это турнир для лучших команд каждой страны. Регламент проведения лиги чемпионов определяется для каждого сезона в отдельности и может достаточно сильно меняться та как число команд в Лиге постоянно растет. Регламент лиги чемпионов для конкретного сезона можно посмотреть в отдельном разделе правил.</p>
-<p class="text-justify">Все матчи лиги чемпионов являются "дополнительными" (тип С).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="6">6. Кубок межсезонья (тип B).</p>
-<p class="text-justify">Кубок межсезонья - это турнир, который проводится в самом начале каждого сезона. В кубке межсезонья принимают участие все команды Лиги.</p>
-<p class="text-justify">Турнир играется по нестабильному календарю, когда для каждой команды выбирается случайный соперник, причем с одной и той же командой можно сыграть только один раз за турнир, а число игр дома и в гостях в конце турнира должно стать равным или отличаться на еденицу (если ваша команда провела нечетное число матчей).</p>
-<p class="text-justify">В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.</p>
-<p class="text-justify">Игры кубка межсезонья - это игры типа B ("обязательные"), т. е. в них изменяется усталость игроков, неигравшие - отдыхают, лечат травмы.</p>
-<p class="text-justify">Подробнее о правилах турнира в отдельном разделе - Кубок межсезонья.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="7">7. Конференция любительских клубов (тип B).</p>
-<p class="text-justify">Конференция любительских клубов - это турнир для новых команд Лиги и команд, которым в текущем сезоне не нашлось место в чемпионатах их стран. Новые команды присоединяются к розыгрышу конференции автоматически по мере регистрации в Лиге и могут начать играть с любого тура и до конца турнира.</p>
-<p class="text-justify">Турнир играется по той же системе, как и кубок межсезонья.</p>
-<p class="text-justify">В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.</p>
-<p class="text-justify">Игры конференции любительских клубов - это игры типа B ("обязательные"), т. е. в них изменяется усталость игроков, неигравшие - отдыхают, лечат травмы. Это касается только команд, которые участвуют в конференции, на остальные команды (т.е. команды, играющие в чемпионатах своих стран) этот турнир никак не влияет.</p>
-<p class="text-justify">Подробнее о правилах турнира в отдельном разделе - Конференция любительских клубов.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="8">8. Чемпионат мира (тип C).</p>
-<p class="text-justify">Это турнир для сборных стран, в которые попадают лучшие игроки каждой национальности. Лучшие менеджеры клубов могут стать еще и тренерами сборных, стать чемпионом мира со сборной своей страны, пожалуй, наивысшее достижение в Лиге.</p>
-<p class="text-justify">Регламент проведения чемпионата мира определяется для каждого сезона в отдельности и может меняться из сезона в сезон. Регламент чемпионата мира для конкретного сезона можно посмотреть в отдельном разделе правил.</p>
-<p class="text-justify">Все матчи чемпионата мира являются "дополнительными" (тип С).</p>
-<p class="text-justify">Подробнее о регламенте, сроках и условиях проведения ЧМ читайте в отдельном разделе правил.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'В каких турнирах можно участвовать?',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.4"> <span class = "strong"> 2.4. Seat allocation in cup format tournaments. </span> For cups held on a two-round system, matches may end in a draw. In the event of an equal score on the aggregate of two matches, an additional and, if necessary, a shootout will be awarded. </p>
+<p class = "text-justify"> For the national championship playoff round, each match is played until a winner is identified. If regular time ends in a draw, extra time is assigned. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.5"> <span class = "strong"> 2.5. Force majeure. </span> If during the playing day any violations of the rules were committed by the manager in one way or another, his team is subject to a fine in the amount determined by the Administration depending on the severity of the violation. All results of matches played in the League are final, regardless of possible errors and irregularities in the operation of the generator, managers or the system as a whole and are subject to replay only in exceptional situations by a special decision of the Administration. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3"> 3. Friendly matches (type A). </p>
+<p class = "text-justify"> A friendly match is a practice match between the two teams, organized by the managers of the two participating teams, to practice, test tactics, or simply to find out which team is stronger. </p>
+<p class = "text-justify"> Friendlies may or may not be played. You choose your opponent yourself, send him an invitation to a specific game day and wait for a response. If the answer is yes, a friendly match will be organized. </p>
+<p class = "text-justify"> You can read more about friendly matches in the separate section of the rules - Friendly matches. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4"> 4. National Championships (type B). </p>
+<p class = "text-justify"> The Country Championships are the main tournament for every team in the League. All teams participate in the championships of their countries, the championship is held once a season. </p>
+<p class = "text-justify"> A national championship can have multiple divisions. Each division is, in fact, a separate tournament, with the only difference that there is a rotation of teams between the divisions of the same country. </p>
+<p class = "text-justify"> All championships are played in a two-round system, with each team playing two matches against everyone else - home and away (30 matches in total). </p>
+<p class = "text-justify"> The winners of the first division of the championship (D1), in addition to medals, are entitled to represent their country in the Champions League. </p>
+<p class = "text-justify"> Read more about the tournament in a separate section - National Championships. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "5"> 5. Champions League (type C). </p>
+<p class = "text-justify"> This is a tournament for the best teams in each country. The regulations for the Champions League are determined for each season separately and can change quite a lot as the number of teams in the League is constantly growing. The season-specific Champions League regulations can be found in a separate section of the rules. </p>
+<p class = "text-justify"> All Champions League matches are optional (type C). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "6"> 6. Offseason Cup (type B). </p>
+<p class = "text-justify"> The Offseason Cup is a tournament that takes place at the very beginning of each season. All League teams take part in the off-season cup. </p>
+<p class = "text-justify"> The tournament is played on an unstable calendar, when a random opponent is selected for each team, moreover, the same team can be played only once per tournament, and the number of home and away games at the end of the tournament must become equal or differ by one (if your team played an odd number of matches). </p>
+<p class = "text-justify"> There is a home bonus in tournament matches - teams play stronger at home. </p>
+<p class = "text-justify"> Offseason Cup games are type B ("must") games, that is, they change player fatigue, non-players rest, heal injuries. </p>
+<p class = "text-justify"> Read more about the tournament rules in a separate section - Offseason Cup. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "7"> 7. Amateur club conference (type B). </p>
+<p class = "text-justify"> The Amateur Club Conference is a tournament for new League teams and teams that have not found a place in their national championships this season. New teams join the conference draw automatically as soon as they register in the League and can start playing from any round until the end of the tournament. </p>
+<p class = "text-justify"> The tournament is played on the same system as the offseason cup. </p>
+<p class = "text-justify"> There is a home bonus in tournament matches - teams play stronger at home. </p>
+<p class = "text-justify"> Games of the conference of amateur clubs are games of type B ("compulsory"), that is, they change the fatigue of the players, non-players - rest, heal injuries. This applies only to the teams that participate in the conference, the other teams (i.e. teams playing in the championships of their countries) are not affected by this tournament. </p>
+<p class = "text-justify"> Read more about the tournament rules in a separate section - Amateur Clubs Conference. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "8"> 8. World Championship (type C). </p>
+<p class = "text-justify"> This is a tournament for national teams, which includes the best players of each nationality. The best club managers can also become national team coaches, become the world champion with the national team of their country, perhaps the highest achievement in the League. </p>
+<p class = "text-justify"> The World Championship regulations are determined for each season separately and may change from season to season. The World Championship regulations for a particular season can be found in a separate section of the rules. </p>
+<p class = "text-justify"> All World Cup matches are "side" matches (type C). </p>
+<p class = "text-justify"> Read more about the rules, terms and conditions of the World Cup in a separate section of the rules. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'What tournaments can I participate in?',
 ];

@@ -17,266 +17,266 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие положения.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General provisions. </a>
 <br/>
-<a href="#1.1">1.1. Что такое база команды?</a>
+<a href="#1.1"> 1.1. What is a team base? </a>
 <br/>
-<a href="#1.2">1.2. Строительство баз.</a>
+<a href="#1.2"> 1.2. Base construction. </a>
 <br/>
-<a href="#1.3">1.3. Строительство спортивных сооружений.</a>
+<a href="#1.3"> 1.3. Construction of sports facilities. </a>
 <br/>
-<a href="#1.4">1.4. Дополнительные правила строительства.</a>
+<a href="#1.4"> 1.4. Additional building rules. </a>
 <br/>
-<a href="#1.5">1.5. Оплата за содержание.</a>
+<a href="#1.5"> 1.5. Pay for content. </a>
 <br/>
-<a href="#2">2. База команды.</a>
+<a href="#2"> 2. Team base. </a>
 <br/>
-<a href="#2.1">2.1. Что такое база команды?</a>
+<a href="#2.1"> 2.1. What is a team base? </a>
 <br/>
-<a href="#2.2">2.2. Таблица уровней баз команд.</a>
+<a href="#2.2"> 2.2. Command base level table. </a>
 <br/>
-<a href="#3">3. Спортшкола.</a>
+<a href="#3"> 3. Sports school. </a>
 <br/>
-<a href="#3.1">3.1. Что такое спортшкола?</a>
+<a href="#3.1"> 3.1. What is a sports school? </a>
 <br/>
-<a href="#3.2">3.2. Как готовить молодежь в спортшколе?</a>
+<a href="#3.2"> 3.2. How to train youth in a sports school? </a>
 <br/>
-<a href="#3.3">3.3. Форма и усталость молодежи из спортшкол.</a>
+<a href="#3.3"> 3.3. The shape and fatigue of youth from sports schools. </a>
 <br/>
-<a href="#3.4">3.4. Таблица уровней спортшкол.</a>
+<a href="#3.4"> 3.4. Sports school level table. </a>
 <br/>
-<a href="#4">4. Тренировочный центр.</a>
+<a href="#4"> 4. Training center. </a>
 <br/>
-<a href="#4.1">4.1. Что такое тренировочный центр?</a>
+<a href="#4.1"> 4.1. What is a training center? </a>
 <br/>
-<a href="#4.2">4.2. Таблица уровней тренировочных центров.</a>
+<a href="#4.2"> 4.2. Training center level table. </a>
 <br/>
-<a href="#4.3">4.3. Ограничения по тренировке.</a>
+<a href="#4.3"> 4.3. Training restrictions. </a>
 <br/>
-<a href="#4.4">4.4. Снятие игроков с тренировки.</a>
+<a href="#4.4"> 4.4. Removing players from training. </a>
 <br/>
-<a href="#5">5. Медицинский центр.</a>
+<a href="#5"> 5. Medical center. </a>
 <br/>
-<a href="#5.1">5.1. Что такое медицинский центр?</a>
+<a href="#5.1"> 5.1. What is a medical center? </a>
 <br/>
-<a href="#5.2">5.2. Таблица уровней медицинских центров.</a>
+<a href="#5.2"> 5.2. Medical center level table. </a>
 <br/>
-<a href="#6">6. Центр физподготовки.</a>
+<a href="#6"> 6. Fitness Center. </a>
 <br/>
-<a href="#6.1">6.1. Что такое центр физподготовки?</a>
+<a href="#6.1"> 6.1. What is a fitness center? </a>
 <br/>
-<a href="#6.2">6.2. Таблица уровней центров физподготовки.</a>
+<a href="#6.2"> 6.2. Fitness center level table. </a>
 <br/>
-<a href="#7">7. Скаут-центры.</a>
+<a href="#7"> 7. Scout centers. </a>
 <br/>
-<a href="#7.1">7.1. Что такое скаут-центр?</a>
+<a href="#7.1"> 7.1. What is a scout center? </a>
 <br/>
-<a href="#7.2">7.2. Скрытые параметры игрока.</a>
+<a href="#7.2"> 7.2. Hidden player parameters. </a>
 <br/>
-<a href="#7.3">7.3. Изучение усталости, автосоставов и ИП/ОП игроков соперников.</a>
+<a href="#7.3"> 7.3. Studying fatigue, autocompositions and IP / OP of rival players. </a>
 <br/>
-<a href="#7.4">7.4. Таблица уровней скаут-центров.</a>
+<a href="#7.4"> 7.4. Scout center level table. </a>
 <br/>
-<a href="#7.5">7.5. Секреты работы скаут-центров.</a>
+<a href="#7.5"> 7.5. Secrets of scout centers. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие положения.</p>
-<p class="text-justify" id="1.1"><span class="strong">1.1. Что такое база команды?</span> Каждая команда может построить и расширять свою командную базу. База - это строительная площадка для различных спортивных сооружений, которые дают различные преимущества команде, в частности, лучшую восстанавливаемость после травм, подготовку молодых игроков, тренировку силы, спецвозможностей, профильных позиций на поле и т.д. Всего разрешена постройка пяти разных видов сооружений - спортшкола, тренировочный центр, медицинский центр, центр физподготовки, скаут-центр.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.2"><span class="strong">1.2. Строительство баз.</span> Команда может в любое время начать расширение базы, если есть достаточно денег для оплаты строительства.</p>
-<p class="text-justify">Во время строительства базы команда не может пользоваться всеми своими строениями (считается, что спортивные сооружения в данный момент у команды нулевого уровня).</p>
-<p class="text-justify">Во время строительства любого другого строения, оно не функционирует, т.е. считается, что у команды в данный момент это строение нулевого уровня.</p>
-<p class="text-justify">Например, если в день выведения усталости на уровень баз вы все еще строите медцентр или всю базу, то усталость игроков вашей команды будет выведена на 50%. Однако совершенно безболезненно в это время можно строить тренировочный центр - на работу медцентра это никак не повлияет.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.3"><span class="strong">1.3. Строительство спортивных сооружений.</span> Команда может в любое время  начать строительство или улучшение имеющихся строений, если есть достаточно денег для оплаты строительства, есть свободный слот на базе и уровень базы соответствует минимальным требованиям для данного сооружения. Во время улучшения спортивного сооружения команда не может им пользоваться.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="1.4">1.4. Дополнительные правила строительства.</p>
-<p class="text-justify">Базы и спортивные сооружения строятся уровень за уровнем (например, нельзя сразу построить медцентр 10 уровня, нужно пройти весь путь строительства от 1).</p>
-<p class="text-justify">Проводить строительство единовременно можно только одной постройки (либо расширять базу), следующее строительство только, когда закончено или отменено предыдущее.</p>
-<p class="text-justify">Прекратить строительство можно в любой момент, команде вернется 100% стоимости начатого строительства.</p>
-<p class="text-justify">Продать постройку нельзя, если на базе команды идёт строительство других сооружений (или идёт расширение базы).</p>
-<p class="text-justify">Единица времени для строительства, тренировок и т.д. - один календарный день.</p>
-<p class="text-justify">В последний день сезона все стройки успешно заканчиваются. Таким образом в конце сезона можно начать какое-нибудь длительное строительство и оно быстро закончится. Таким ускоренным образом можно построить только одно сооружение в сезон.</p>
-<p class="text-justify">Разрушать строения на базе команды нельзя в первые 7 дней после получения команды.</p>
-<p class="text-justify">Разрушать строения на базе команды нельзя, если команда за последние 7 дней более 25% матчей играла автосоставами.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="1.5"><span class="strong">1.5. Оплата за содержание.</span> В начале каждого сезона с команды удерживается стоимость содержания базы и всех занятых слотов на ней. Свободные слоты не оплачиваются. При постройке баз и сооружений оплата за содержание не снимается.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. База команды.</p>
-<p class="text-justify" id="2.1"><span class="strong">2.1. Что такое база команды?</span> База - это основа для дальнейшего строительства на ней спортивных сооружений. Есть 10 уровней баз. Каждый уровень предполагает большее число слотов для строительства, позволяет обеспечить минимальные требования для сооружений более высокого качества, но и соответственно имеет большую стоимость постройки и содержания.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2.2"><span class="strong">2.2. Таблица уровней баз команд.</span> Стоимость и параметры баз команд вы можете узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Слотов (не менее)</th><th>Слотов (не более)</th><th>Cодержание базы</th><th>Cодержание слота</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-right">0$</td><td class="text-right">0$</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">0</td><td class="text-center">5</td><td class="text-right">50 000$</td><td class="text-right">25 000$</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">3</td><td class="text-center">10</td><td class="text-right">100 000$</td><td class="text-right">50 000$</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">8</td><td class="text-center">15</td><td class="text-right">150 000$</td><td class="text-right">75 000$</td><td class="text-right">1 500 000$</td><td class="text-center">6</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">13</td><td class="text-center">20</td><td class="text-right">200 000$</td><td class="text-right">100 000$</td><td class="text-right">2 225 000$</td><td class="text-center">8</td><td class="text-right">3 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">18</td><td class="text-center">25</td><td class="text-right">250 000$</td><td class="text-right">125 000$</td><td class="text-right">3 000 000$</td><td class="text-center">10</td><td class="text-right">4 000 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">23</td><td class="text-center">30</td><td class="text-right">300 000$</td><td class="text-right">150 000$</td><td class="text-right">3 750 000$</td><td class="text-center">12</td><td class="text-right">5 000 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">28</td><td class="text-center">35</td><td class="text-right">350 000$</td><td class="text-right">175 000$</td><td class="text-right">4 500 000$</td><td class="text-center">14</td><td class="text-right">6 000 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">33</td><td class="text-center">40</td><td class="text-right">400 000$</td><td class="text-right">200 000$</td><td class="text-right">5 250 000$</td><td class="text-center">16</td><td class="text-right">7 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">38</td><td class="text-center">45</td><td class="text-right">450 000$</td><td class="text-right">225 000$</td><td class="text-right">6 000 000$</td><td class="text-center">18</td><td class="text-right">8 000 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">43</td><td class="text-center">50</td><td class="text-right">500 000$</td><td class="text-right">250 000$</td><td class="text-right">7 500 000$</td><td class="text-center">20</td><td class="text-right">10 000 000$</td></tr>
+<p class = "strong text-justify" id = "1"> 1. General provisions. </p>
+<p class = "text-justify" id = "1.1"> <span class = "strong"> 1.1. What is a team base? </span> Each team can build and expand their team base. The base is a construction site for various sports facilities that provide various benefits to the team, in particular, better recovery from injuries, training of young players, training of strength, special abilities, profile positions on the field, etc. In total, the construction of five different types of structures is allowed - a sports school, a training center, a medical center, a physical training center, a scout center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.2"> <span class = "strong"> 1.2. Base construction. </span> The team can start expanding the base at any time if there is enough money to pay for the construction. </p>
+<p class = "text-justify"> During the construction of the base, the team cannot use all of their buildings (it is assumed that the sports facilities are currently at the zero level of the team). </p>
+<p class = "text-justify"> During the construction of any other structure, it does not function, ie. the team is considered to have a level 0 structure at the moment. </p>
+<p class = "text-justify"> For example, if you are still building a medical center or the entire base on the day that fatigue is brought to the base level, then the fatigue of your team members will be reduced by 50%. However, it is completely painless to build a training center at this time - this will not affect the work of the medical center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.3"> <span class = "strong"> 1.3. Construction of sports facilities. </span> The team can start building or improving existing buildings at any time, if there is enough money to pay for the construction, there is a free slot in the base and the level of the base meets the minimum requirements for this structure. While upgrading the sports facility, the team cannot use it. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "1.4"> 1.4. Additional building rules. </p>
+<p class = "text-justify"> Bases and sports facilities are built level by level (for example, you cannot immediately build a level 10 medical center, you need to go all the way from 1). </p>
+<p class = "text-justify"> You can only build one building at a time (or expand the base), the next building only when the previous one is completed or canceled. </p>
+<p class = "text-justify"> You can stop construction at any time, the team will get 100% of the cost of the construction started. </p>
+<p class = "text-justify"> You cannot sell a building if other structures are being built on the team\'s base (or the base is being expanded). </p>
+<p class = "text-justify"> Time unit for building, training, etc. - one calendar day. </p>
+<p class = "text-justify"> On the last day of the season, all construction projects are successfully completed. Thus, at the end of the season, you can start some lengthy construction and it will quickly end. Only one structure per season can be built in this way. </p>
+<p class = "text-justify"> Demolition of buildings based on the team is not allowed for the first 7 days after receiving the command. </p>
+<p class = "text-justify"> You cannot destroy buildings on the team base if the team has played more than 25% of matches in the last 7 days with autos. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "1.5"> <span class = "strong"> 1.5. Payment for maintenance. </span> At the beginning of each season, the cost of maintaining the base and all occupied slots on it is deducted from the team. Free slots are not paid. When building bases and structures, maintenance fees are not charged. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Command base. </p>
+<p class = "text-justify" id = "2.1"> <span class = "strong"> 2.1. What is a team base? </span> The base is the basis for the further construction of sports facilities on it. There are 10 levels of bases. Each level assumes more slots for construction, allows you to meet the minimum requirements for structures of higher quality, but also, accordingly, has a higher cost of construction and maintenance. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2.2"> <span class = "strong"> 2.2. Table of command base levels. </span> You can find out the cost and parameters of command bases from the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Level</th> <th> Slots (not less than) </th> <th> Slots (not more than) </th> <th> Base content </th> <th> Slot content < / th> <th> Sell Price </th> <th> Build Speed </th> <th> Build Price </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> <td class = "text-right"> 0 $ </td> <td class = "text-right"> 0 $ </td> <td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 50,000 </td> <td class = "text-right"> $ 25,000 </td> <td class = "text-right"> $ 375,000 </td> < td class = "text-center"> 2 </td> <td class = "text-right"> $ 500,000 </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 10 </td> <td class = "text-right"> $ 100,000 </td> <td class = "text-right"> $ 50,000 </td> <td class = "text-right"> $ 750,000 </td> < td class = "text-center"> 4 </td> <td class = "text-right"> $ 1,000,000 </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 8 </td> <td class = "text-center"> 15 </td> <td class = "text-right"> $ 150,000 </td> <td class = "text-right"> $ 75,000 </td> <td class = "text-right"> $ 1,500,000 </td> <td class = "text-center"> 6 </td> <td class = "text-right"> $ 2,000,000 </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 13 </td> <td class = "text-center"> 20 </td> <td class = "text-right"> $ 200,000 </td> <td class = "text-right"> $ 100,000 </td> <td class = "text-right"> $ 2,225,000 </td> <td class = "text-center"> 8 </td> <td class = "text-right"> $ 3,000,000 </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 18 </td> <td class = "text-center"> 25 </td> <td class = "text-right"> $ 250,000 </td> <td class = "text-right"> $ 125,000 </td> <td class = "text-right"> $ 3,000,000 </td> <td class = "text-center"> 10 </td> <td class = "text-right"> $ 4,000,000 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 23 </td> <td class = "text-center"> 30 </td> <td class = "text-right"> $ 300,000 </td> <td class = "text-right"> $ 150,000 </td> <td class = "text-right"> $ 3,750,000 </td> <td class = "text-center"> 12 </td> <td class = "text-right"> 5,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 28 </td> <td class = "text-center"> 35 </td> <td class = "text-right"> $ 350,000 </td> <td class = "text-right"> $ 175,000 </td> <td class = "text-right"> $ 4,500,000 </td> <td class = "text-center"> 14 </td> <td class = "text-right"> 6,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 33 </td> <td class = "text-center"> 40 </td> <td class = "text-right"> $ 400,000 </td> <td class = "text-right"> $ 200,000 </td> <td class = "text-right"> $ 5,250,000 </td> <td class = "text-center"> 16 </td> <td class = "text-right"> $ 7,000,000 </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 38 </td> <td class = "text-center"> 45 </td> <td class = "text-right"> $ 450,000 </td> <td class = "text-right"> $ 225,000 </td> <td class = "text-right"> $ 6,000,000 </td> <td class = "text-center"> 18 </td> <td class = "text-right"> $ 8,000,000 </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 43 </td> <td class = "text-center"> 50 </td> <td class = "text-right"> $ 500,000 </td> <td class = "text-right"> $ 250,000 </td> <td class = "text-right"> $ 7,500,000 </td> <td class = "text-center"> 20 </td> <td class = "text-right"> $ 10,000,000 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3">3. Спортшкола.</p>
-<p class="text-justify" id="3.1"><span class="strong">3.1. Что такое спортшкола?</span> Спортшкола - это строение на базе команды, позволяющее приводить в вашу команду новых молодых игроков. Чем выше уровень спортшколы, тем лучше подготовленные молодые игроки и больше их количество.</p>
-<p class="text-justify">Молодые игроки приходят в вашу команду бесплатно.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.2"><span class="strong">3.2. Как готовить молодежь в спортшколе?</span> Для того, чтобы начать подготовку молодого игрока в спортшколе, вам нужно указать игроку:
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3"> 3. Sports school. </p>
+<p class = "text-justify" id = "3.1"> <span class = "strong"> 3.1. What is a sports school? </span> A sports school is a team-based structure that allows you to bring new young players to your team. The higher the level of the sports school, the better prepared young players and the greater their number. </p>
+<p class = "text-justify"> Young players join your team for free. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.2"> <span class = "strong"> 3.2. How to train youth in a sports school? </span> In order to start training a young player in a sports school, you need to indicate to the player:
 <ul>
-<li>позицию на поле;</li>
-<li>спецвозможность;</li>
-<li>любимый стиль игры.</li>
+<li> position on the field; </li>
+<li> special feature; </li>
+<li> favorite play style. </li>
 </ul>
-<p class="text-justify">Подготовка нового игрока длится несколько дней в зависимости от уровня спортшколы.</p>
-<p class="text-justify">Можно подготовить двух новых игроков за один сезон, но делать это нужно поочерёдно - сначала подготовить первого игрока, потом второго.</p>
-<p class="text-justify">После каждого игрового дня прогресс начатой подготовки молодого игрока к переходу в команду увеличивается.</p>
-<p class="text-justify">Как только прогресс достигает 100% - подготовка успешно завершается, и ваш молодой игрок появляется в команде. В последний день сезона любая начавшаяся подготовка молодого игрока всегда успешно завершается, даже если это происходит досрочно.</p>
-<p class="text-justify">Нельзя строить или разрушать спортшколу или базу команды, если спортшкола находится в процессе подготовки нового молодого игрока. Нельзя начинать подготовку молодого игрока, если спортшкола или база команды находятся в процессе строительства.</p>
-<p class="text-justify">Отменить подготовку молодого игрока к переходу в команду можно в любой момент, но прогресс подготовки будет потерян.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.3"><span class="strong">3.3. Форма и усталость молодежи из спортшкол.</span> Молодые игроки приходят из спортшкол в свои команды со случайной формой и с усталостью на уровне командного медцентра (если медцентр на момент появления молодых игроков не работает, его уровень равен нулю). У молодых игроков в момент перехода в команду из спортшколы ИП=0, ОП=1.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3.4"><span class="strong">3.4. Таблица уровней спортшкол.</span> Сегодняшнюю стоимость и параметры спортшкол вы можете узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Скорость подготовки игрока</th><th>Игроков</th><th>Из них со стилем</th><th>Из них со спецвозможностью</th><th>Сила игрока</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">34</td><td class="text-right">187 500$</td><td class="text-center">1</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">36</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">38</td><td class="text-right">562 500$</td><td class="text-center">3</td><td class="text-right">750 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">1</td><td class="text-center">40</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">5</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">2</td><td class="text-center">42</td><td class="text-right">937 500$</td><td class="text-center">5</td><td class="text-right">1 250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">6</td><td class="text-center">2</td><td class="text-center">0</td><td class="text-center">2</td><td class="text-center">44</td><td class="text-right">1 125 000$</td><td class="text-center">6</td><td class="text-right">1 500 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">7</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">2</td><td class="text-center">46</td><td class="text-right">1 312 500$</td><td class="text-center">7</td><td class="text-right">1 750 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">8</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">2</td><td class="text-center">48</td><td class="text-right">1 500 000$</td><td class="text-center">8</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">9</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">50</td><td class="text-right">1 687 500$</td><td class="text-center">9</td><td class="text-right">2 250 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">10</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">2</td><td class="text-center">52</td><td class="text-right">1 875 000$</td><td class="text-center">10</td><td class="text-right">2 500 000$</td></tr>
+<p class = "text-justify"> Preparation of a new player takes several days, depending on the level of the sports school. </p>
+<p class = "text-justify"> You can prepare two new players in one season, but you need to do this one at a time - first prepare the first player, then the second. </p>
+<p class = "text-justify"> After each game day, the progress of the young player\'s initial preparation for joining the team increases. </p>
+<p class = "text-justify"> As soon as progress reaches 100%, preparation is completed successfully and your young player appears on the team. On the last day of the season, any started training of a young player always ends successfully, even if it happens ahead of schedule. </p>
+<p class = "text-justify"> You cannot build or destroy a sports school or team base if the sports school is in the process of preparing a new young player. You cannot start training a young player if the sports school or team base is under construction. </p>
+<p class = "text-justify"> You can cancel the preparation of a young player to join the team at any time, but the progress of the preparation will be lost. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.3"> <span class = "strong"> 3.3. The shape and fatigue of youth from sports schools. </span> Young players come from sports schools to their teams with a random shape and with fatigue at the level of the team medical center (if the medical center is not working when the young players appear, its level is zero). Young players at the moment of transferring to a team from a sports school have IP = 0, OP = 1. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3.4"> <span class = "strong"> 3.4. Table of levels of sports schools. </span> You can find out the current cost and parameters of sports schools from the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th>Level</th> <th> Min Base Level </th> <th> Player Preparation Speed </th> <th> Players </th> <th> Of Them With Style </th> <th> Of them with special ability </th> <th> Player Power </th> <th> Sell Price </th> <th> Build Speed </th> <th> Build Price </th> </ tr >
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text- center "> 0 </td> <td class =" text-right "> 0 $ </td> <td class =" text-center "> 0 </td> <td class =" text-right "> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text- center "> 34 </td> <td class =" text-right "> 187,500 $ </td> <td class =" text-center "> 1 </td> <td class =" text-right "> $ 250,000 </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text- center "> 36 </td> <td class =" text-right "> $ 375,000 </td> <td class =" text-center "> 2 </td> <td class =" text-right "> $ 500,000 </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 1 </td> <td class = "text- center "> 38 </td> <td class =" text-right "> 562,500 $ </td> <td class =" text-center "> 3 </td> <td class =" text-right "> $ 750,000 </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 1 </td> <td class = "text- center "> 40 </td> <td class =" text-right "> $ 750,000 </td> <td class =" text-center "> 4 </td> <td class =" text-right "> $ 1,000,000 </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 42 </td> <td class =" text-right "> 937,500 $ </td> <td class =" text-center "> 5 </td> <td class =" text-right "> $ 1,250,000 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 6 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 44 </td> <td class =" text-right "> 1,125,000 $ </td> <td class =" text-center "> 6 </td> <td class =" text-right " > 1,500,000 $ </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 7 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 46 </td> <td class =" text-right "> 1,312,500 $ </td> <td class =" text-center "> 7 </td> <td class =" text-right " > 1,750,000 $ </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 8 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 48 </td> <td class =" text-right "> $ 1,500,000 </td> <td class =" text-center "> 8 </td> <td class =" text-right " > 2,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 9 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 50 </td> <td class =" text-right "> $ 1,687,500 </td> <td class =" text-center "> 9 </td> <td class =" text-right " > 2,250,000 $ </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 10 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 2 </td> <td class = "text- center "> 52 </td> <td class =" text-right "> $ 1,875,000 </td> <td class =" text-center "> 10 </td> <td class =" text-right " > 2,500,000 $ </td> </tr>
 </table>
-<p class="text-justify">Если к вам приходит игрок выбранного вами стиля, то в команду он приходит полностью изученным только при условии наличия скаут-центра пятого уровня и выше. При отсутствии скаут-центра нужного уровня вы будете знать, что игрок скоросного стиля, но игрок будет числиться неизученным и для полноценного использования известных вам данных вам придётся изучать его в скаут-центре.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4">4. Тренировочный центр.</p>
-<p class="text-justify" id="4.1"><span class="strong">4. 1. Что такое тренировочный центр?</span> Тренировочный центр - это спортивное сооружение, позволяющее тренировать вашим регбистам дополнительные баллы силы, а так же новые спецвозможности и профильные позиции на поле. Каждая тренировка имеет свою стоимость. Уровень тренировочного центра позволяет увеличивать максимальное число тренировок в вашей команде за сезон и увеличивать скорость тренировки. Увеличение уровня тренировочного центра в течение сезона увеличивает максимальное число тренировок за сезон, но не сбрасывает этот счетчик. Чтобы начать постройку тренировочного центра, нужно снять с тренировок всех игроков.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4.2"><span class="strong">4.2. Таблица уровней тренировочных центров.</span> Параметры тренировочных центров вы можете узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Скорость тренировки</th><th>Баллов силы</th><th>Стоимость</th><th>Спецвозможности</th><th>Стоимость</th><th>Позиции</th><th>Стоимость</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0%</td><td class="text-center">0</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-center">0$</td><td class="text-center">0</td><td class="text-center">0$</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5%-15%</td><td class="text-center">5</td><td class="text-right">25 000$</td><td class="text-center">1</td><td class="text-center">50 000$</td><td class="text-center">1</td><td class="text-center">50 000$</td><td class="text-right">187 500$</td><td class="text-center">1</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">15%-25%</td><td class="text-center">10</td><td class="text-right">50 000$</td><td class="text-center">1</td><td class="text-center">100 000$</td><td class="text-center">1</td><td class="text-center">100 000$</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">25%-35%</td><td class="text-center">15</td><td class="text-right">75 000$</td><td class="text-center">2</td><td class="text-center">150 000$</td><td class="text-center">2</td><td class="text-center">150 000$</td><td class="text-right">562 500$</td><td class="text-center">3</td><td class="text-right">750 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">35%-45%</td><td class="text-center">20</td><td class="text-right">100 000$</td><td class="text-center">2</td><td class="text-center">200 000$</td><td class="text-center">2</td><td class="text-center">200 000$</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">45%-55%</td><td class="text-center">25</td><td class="text-right">125 000$</td><td class="text-center">3</td><td class="text-center">250 000$</td><td class="text-center">3</td><td class="text-center">250 000$</td><td class="text-right">937 500$</td><td class="text-center">5</td><td class="text-right">1 250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">55%-65%</td><td class="text-center">30</td><td class="text-right">150 000$</td><td class="text-center">3</td><td class="text-center">300 000$</td><td class="text-center">3</td><td class="text-center">300 000$</td><td class="text-right">1 125 000$</td><td class="text-center">6</td><td class="text-right">1 500 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">65%-75%</td><td class="text-center">35</td><td class="text-right">175 000$</td><td class="text-center">4</td><td class="text-center">350 000$</td><td class="text-center">4</td><td class="text-center">350 000$</td><td class="text-right">1 312 500$</td><td class="text-center">7</td><td class="text-right">1 750 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">75%-85%</td><td class="text-center">40</td><td class="text-right">200 000$</td><td class="text-center">4</td><td class="text-center">400 000$</td><td class="text-center">4</td><td class="text-center">400 000$</td><td class="text-right">1 500 000$</td><td class="text-center">8</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">85%-95%</td><td class="text-center">45</td><td class="text-right">225 000$</td><td class="text-center">5</td><td class="text-center">450 000$</td><td class="text-center">5</td><td class="text-center">450 000$</td><td class="text-right">1 687 500$</td><td class="text-center">9</td><td class="text-right">2 250 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">100%</td><td class="text-center">50</td><td class="text-right">250 000$</td><td class="text-center">5</td><td class="text-center">500 000$</td><td class="text-center">5</td><td class="text-center">500 000$</td><td class="text-right">1 875 000$</td><td class="text-center">10</td><td class="text-right">2 500 000$</td></tr>
+<p class = "text-justify"> If a player of your chosen style comes to your team, he comes to the team fully studied only if there is a scout center of the fifth level or higher. In the absence of a scout center of the required level, you will know that the player is fast-paced, but the player will be considered unexplored and in order to fully use the data you know, you will have to study it in the scout center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4"> 4. Training center. </p>
+<p class = "text-justify" id = "4.1"> <span class = "strong"> 4. 1. What is a training center? </span> A training center is a sports facility that allows your rugby players to train additional strength points, as well as new special abilities and profile positions on the field. Each workout has its own cost. The training center level allows you to increase the maximum number of training sessions in your team per season and increase the training speed. Increasing the training center level during the season increases the maximum number of training sessions per season, but does not reset this counter. To start building the training center, you need to remove all players from training. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4.2"> <span class = "strong"> 4.2. Table of levels of training centers. </span> You can find out the parameters of training centers from the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Level</th> <th> Min Base Level </th> <th> Training Speed </th> <th> Power Points </th> <th> Cost </th> <th> Special Features </th> <th> Cost </th> <th> Positions </th> <th> Cost </th> <th> Sell Price </th> <th> Build Speed </th> <th> Build price </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0% </td> < td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> <td class = "text-center"> 0 </td> <td class = " text-center "> 0 $ </td> <td class =" text-center "> 0 </td> <td class =" text-center "> 0 $ </td> <td class =" text-right "> 0 $ </td> <td class =" text-center "> 0 </td> <td class =" text-right "> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 5% -15% </ td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 25,000 </td> <td class = "text-center"> 1 </td> < td class = "text-center"> $ 50,000 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> $ 50,000 </td> <td class = "text-right"> 187,500 $ </td> <td class = "text-center"> 1 </td> <td class = "text-right"> 250,000 $ </td> </ tr >
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 15% -25% </ td> <td class = "text-center"> 10 </td> <td class = "text-right"> $ 50,000 </td> <td class = "text-center"> 1 </td> < td class = "text-center"> 100,000 $ </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 100,000 $ </td> <td class = "text-right"> $ 375,000 </td> <td class = "text-center"> 2 </td> <td class = "text-right"> $ 500,000 </td> </ tr >
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 25% -35% </ td> <td class = "text-center"> 15 </td> <td class = "text-right"> $ 75,000 </td> <td class = "text-center"> 2 </td> < td class = "text-center"> $ 150,000 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> $ 150,000 </td> <td class = "text-right"> 562,500 $ </td> <td class = "text-center"> 3 </td> <td class = "text-right"> 750,000 $ </td> </ tr >
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 35% -45% </ td> <td class = "text-center"> 20 </td> <td class = "text-right"> $ 100,000 </td> <td class = "text-center"> 2 </td> < td class = "text-center"> 200,000 $ </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 200,000 $ </td> <td class = "text-right"> $ 750,000 </td> <td class = "text-center"> 4 </td> <td class = "text-right"> $ 1,000,000 </td> </ tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 45% -55% </ td> <td class = "text-center"> 25 </td> <td class = "text-right"> $ 125,000 </td> <td class = "text-center"> 3 </td> < td class = "text-center"> $ 250,000 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> $ 250,000 </td> <td class = "text-right"> $ 937,500 </td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 1,250,000 </td> </ tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 55% -65% </ td> <td class = "text-center"> 30 </td> <td class = "text-right"> $ 150,000 </td> <td class = "text-center"> 3 </td> < td class = "text-center"> 300,000 $ </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 300,000 $ </td> <td class = "text-right"> $ 1,125,000 </td> <td class = "text-center"> 6 </td> <td class = "text-right"> $ 1,500,000 </td> < / tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 65% -75% </ td> <td class = "text-center"> 35 </td> <td class = "text-right"> $ 175,000 </td> <td class = "text-center"> 4 </td> < td class = "text-center"> 350,000 $ </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 350,000 $ </td> <td class = "text-right"> 1,312,500 $ </td> <td class = "text-center"> 7 </td> <td class = "text-right"> 1,750,000 $ </td> < / tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 75% -85% </ td> <td class = "text-center"> 40 </td> <td class = "text-right"> $ 200,000 </td> <td class = "text-center"> 4 </td> < td class = "text-center"> 400,000 $ </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 400,000 $ </td> <td class = "text-right"> $ 1,500,000 </td> <td class = "text-center"> 8 </td> <td class = "text-right"> $ 2,000,000 </td> < / tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 85% -95% </ td> <td class = "text-center"> 45 </td> <td class = "text-right"> 225,000 $ </td> <td class = "text-center"> 5 </td> < td class = "text-center"> 450,000 $ </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 450,000 $ </td> <td class = "text-right"> $ 1,687,500 </td> <td class = "text-center"> 9 </td> <td class = "text-right"> $ 2,250,000 </td> < / tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 100% </td> < td class = "text-center"> 50 </td> <td class = "text-right"> $ 250,000 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> $ 500,000 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> $ 500,000 </td> <td class = " text-right "> $ 1,875,000 </td> <td class =" text-center "> 10 </td> <td class =" text-right "> $ 2,500,000 </td> </tr>
 </table>
-<p class="text-justify">Игрок, находящийся на тренировке, не может участвовать в сделках.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4.3"><span class="strong">4.3. Ограничения по тренировке.</span> Не могут тренироваться игроки, которые начинают стареть (с 35 лет).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4.4"><span class="strong">4.4. Снятие игроков с тренировки.</span> Назначенные тренировки можно в любой момент остановить. Балл силы, спецвозможность или профильная позиция в этом случае не потеряется, а деньги, потраченные на оплату тренировки, вернутся в кассу команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="5">5. Медицинский центр.</p>
-<p class="text-justify" id="5.1"><span class="strong">5.1. Что такое медицинский центр?</span> Медицинский центр отвечает за базовую усталость, с которой регбисты команды подходят к началу соревнований и приходят из спортшколы, а так же за усталость после восстановления от травм:</p>
+<p class = "text-justify"> A player in training cannot participate in trades. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4.3"> <span class = "strong"> 4.3. Training restrictions. </span> Players who start getting old (over 35) cannot train. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4.4"> <span class = "strong"> 4.4. Removing players from training. </span> You can stop scheduled training sessions at any time. In this case, the strength point, special ability or profile position will not be lost, and the money spent on paying for the training will return to the team\'s cashier. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "5"> 5. Medical center. </p>
+<p class = "text-justify" id = "5.1"> <span class = "strong"> 5.1. What is a medical center? </span> The medical center is responsible for the basic fatigue with which the team\'s rugby players approach the start of the competition and come from the sports school, as well as fatigue after recovering from injuries: </p>
 <ul>
-<li>усталость выводится на базовый уровень перед началом крупных турниров;</li>
-<li>игроки из спортшкол приходят в команду с базовой усталостью;</li>
-<li>игрок, восстановившийся после травмы, имеет базовую усталость, которую обеспечивает после восстановления от травм медицинский центр, имеющийся в команде.</li>
+<li> fatigue is brought back to baseline before major tournaments start; </li>
+<li> players from sports schools come to the team with basic fatigue; </li>
+<li> a player recovering from an injury has the basic fatigue that the team\'s medical center provides after recovering from an injury. </li>
 </ul>
-<p class="text-justify">Чем выше уровень медцентра, тем меньше базовая усталость регбистов.</p>
-<p class="text-justify">Если медицинский центр находится в режиме строительства нового уровня или строится новый уровень базы команды, то медицинский центр работать не может, и игроки в это время при необходимости вывода усталости на базовый уровень получают 50% усталости.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5.2"><span class="strong">5.2. Таблица уровней медицинских центров.</span> Стоимость и параметры медицинских центров вы можете узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Базовый уровень усталости</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">50%</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">45%</td><td class="text-right">187 500$</td><td class="text-center">1</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">40%</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">35%</td><td class="text-right">562 500$</td><td class="text-center">3</td><td class="text-right">750 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">30%</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">25%</td><td class="text-right">937 500$</td><td class="text-center">5</td><td class="text-right">1 250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">20%</td><td class="text-right">1 125 000$</td><td class="text-center">6</td><td class="text-right">1 500 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">15%</td><td class="text-right">1 312 500$</td><td class="text-center">7</td><td class="text-right">1 750 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">10%</td><td class="text-right">1 500 000$</td><td class="text-center">8</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">5%</td><td class="text-right">1 687 500$</td><td class="text-center">9</td><td class="text-right">2 250 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">0%</td><td class="text-right">1 875 000$</td><td class="text-center">10</td><td class="text-right">2 500 000$</td></tr>
+<p class = "text-justify"> The higher the medical center level, the less basic rugby fatigue. </p>
+<p class = "text-justify"> If the medical center is in the construction mode of a new level or a new level of the team base is being built, then the medical center cannot work, and players at this time, if necessary to bring fatigue to the basic level, receive 50% fatigue. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5.2"> <span class = "strong"> 5.2. Table of levels of medical centers. </span> You can find out the cost and parameters of medical centers from the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Level</th> <th> Base Min Level </th> <th> Base Fatigue </th> <th> Sell Price </th> <th> Build Speed </th> < th> Build price </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 50% </td> < td class = "text-right"> 0 $ </td> <td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 45% </td> < td class = "text-right"> 187,500 $ </td> <td class = "text-center"> 1 </td> <td class = "text-right"> 250,000 $ </td> </ tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 40% </td> < td class = "text-right"> $ 375,000 </td> <td class = "text-center"> 2 </td> <td class = "text-right"> $ 500,000 </td> </ tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 35% </td> < td class = "text-right"> 562,500 $ </td> <td class = "text-center"> 3 </td> <td class = "text-right"> 750,000 $ </td> </ tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 30% </td> < td class = "text-right"> $ 750,000 </td> <td class = "text-center"> 4 </td> <td class = "text-right"> $ 1,000,000 </td> < / tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 25% </td> < td class = "text-right"> $ 937,500 </td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 1,250,000 </td> < / tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 20% </td> < td class = "text-right"> 1,125,000 $ </td> <td class = "text-center"> 6 </td> <td class = "text-right"> 1,500,000 $ </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 15% </td> < td class = "text-right"> 1,312,500 $ </td> <td class = "text-center"> 7 </td> <td class = "text-right"> 1,750,000 $ </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 10% </td> < td class = "text-right"> $ 1,500,000 </td> <td class = "text-center"> 8 </td> <td class = "text-right"> $ 2,000,000 </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 5% </td> < td class = "text-right"> $ 1,687,500 </td> <td class = "text-center"> 9 </td> <td class = "text-right"> $ 2,250,000 </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 0% </td> < td class = "text-right"> $ 1,875,000 </td> <td class = "text-center"> 10 </td> <td class = "text-right"> $ 2,500,000 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="6">6. Центр физподготовки.</p>
-<p class="text-justify" id="6.1"><span class="strong">6.1. Что такое центр физподготовки?</span> Центр физподготовки - это место работы физиотерапевтов, тренеров, занимающихся физической формой игроков и команды в целом. Их и ваша задача - распланировать подготовку команды так, чтобы к самым ответственным матчам команда была в оптимальной физической форме. С увеличением уровня центра физподготовки увеличивается и максимальное число изменений физической формы игрокам. Центр физподготовки позволяет получить и доп. преимущества в восстанавливаемости игроков в дни отдыха от матчей.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6.2"><span class="strong">6.2. Таблица уровней центров физподготовки.</span> Стоимость и параметры центров физподготовки вы можете узнать из таблицы:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Число изменений физ.формы</th><th>Бонус к уменьшению усталости игроков</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">+2%</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5</td><td class="text-center">+1%</td><td class="text-right">187 500$</td><td class="text-center">1</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">10</td><td class="text-center">+1%</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">15</td><td class="text-center">0%</td><td class="text-right">562 500$</td><td class="text-center">3</td><td class="text-right">750 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">20</td><td class="text-center">0%</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">25</td><td class="text-center">-1%</td><td class="text-right">937 500$</td><td class="text-center">5</td><td class="text-right">1 250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">30</td><td class="text-center">-1%</td><td class="text-right">1 125 000$</td><td class="text-center">6</td><td class="text-right">1 500 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">35</td><td class="text-center">-2%</td><td class="text-right">1 312 500$</td><td class="text-center">7</td><td class="text-right">1 750 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">40</td><td class="text-center">-2%</td><td class="text-right">1 500 000$</td><td class="text-center">8</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">45</td><td class="text-center">-3%</td><td class="text-right">1 687 500$</td><td class="text-center">9</td><td class="text-right">2 250 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">50</td><td class="text-center">-3%</td><td class="text-right">1 875 000$</td><td class="text-center">10</td><td class="text-right">2 500 000$</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "6"> 6. Fitness Center. </p>
+<p class = "text-justify" id = "6.1"> <span class = "strong"> 6.1. What is a Fitness Center? </span> A Fitness Center is a place where physical therapists, coaches, fitness coaches and the team work. Their and your task is to plan the preparation of the team so that the team is in optimal physical shape for the most important matches. With an increase in the level of the fitness center, the maximum number of changes in physical fitness for players also increases. The physical training center allows you to get extra. benefits in player recovery on match days. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6.2"> <span class = "strong"> 6.2. Table of levels of physical training centers. </span> You can find out the cost and parameters of physical training centers from the table: </p>
+<table class = "table table-bordered table-hover">
+<tr><th> Level</th> <th> Min Base Level </th> <th> Number of Fitness Changes </th> <th> Player Fatigue Reduction Bonus </th> <th> Sell Price </th> <th> Build Speed </th> <th> Build Cost </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> + 2% </td> <td class = "text-right"> 0 $ </td> <td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> + 1% </td> <td class = "text-right"> $ 187,500 </td> <td class = "text-center"> 1 </td> <td class = "text-right"> 250,000 $ </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 10 </td> <td class = "text-center"> + 1% </td> <td class = "text-right"> $ 375,000 </td> <td class = "text-center"> 2 </td> <td class = "text-right"> $ 500,000 </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 15 </td> <td class = "text-center"> 0% </td> <td class = "text-right"> 562,500 $ </td> <td class = "text-center"> 3 </td> <td class = "text-right"> 750,000 $ </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 20 </td> <td class = "text-center"> 0% </td> <td class = "text-right"> $ 750,000 </td> <td class = "text-center"> 4 </td> <td class = "text-right"> 1,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 25 </td> <td class = "text-center"> - 1% </td> <td class = "text-right"> $ 937,500 </td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 1,250,000 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 30 </td> <td class = "text-center"> - 1% </td> <td class = "text-right"> $ 1,125,000 </td> <td class = "text-center"> 6 </td> <td class = "text-right"> $ 1,500,000 </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 35 </td> <td class = "text-center"> - 2% </td> <td class = "text-right"> $ 1,312,500 </td> <td class = "text-center"> 7 </td> <td class = "text-right"> $ 1,750,000 </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 40 </td> <td class = "text-center"> - 2% </td> <td class = "text-right"> $ 1,500,000 </td> <td class = "text-center"> 8 </td> <td class = "text-right"> 2,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 45 </td> <td class = "text-center"> - 3% </td> <td class = "text-right"> $ 1,687,500 </td> <td class = "text-center"> 9 </td> <td class = "text-right"> $ 2,250,000 </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 50 </td> <td class = "text-center"> - 3% </td> <td class = "text-right"> $ 1,875,000 </td> <td class = "text-center"> 10 </td> <td class = "text-right"> 2,500,000 $ </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="7">7. Скаут-центры.</p>
-<p class="text-justify" id="7.1"><span class="strong">7.1. Что такое скаут-центр?</span> Скаут-центр - место работы скаутов, занимающихся изучением:</p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "7"> 7. Scout centers. </p>
+<p class = "text-justify" id = "7.1"> <span class = "strong"> 7.1. What is a scout center? </span> A scout center is the place of work for scouts who study: </p>
 <ul>
-<li>скрытых параметров игроков команды;</li>
-<li>усталости и ИП/ОП игроков соперников;</li>
-<li>физической формы игроков соперников;</li>
-<li>игроков на трансфере при совершении сделок.</li>
+<li> hidden parameters of team players; </li>
+<li> fatigue and PI / OP of opposing players; </li>
+<li> the physical condition of the opposing players; </li>
+<li> players on transfer when making deals. </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7.2"><span class="strong">7.2. Скрытые параметры игрока.</span> В игре у регбистов есть скрытый параметры - любимый стиль игры, который дается им природой при рождении и не меняется на протяжении их карьеры. Этот параметр неизвестен широкой общественности. Для того, чтобы любимый стиль игрока стал известен вам - его нужно изучить в скаут-центре.</p>
-<p class="text-justify">Изучение стиля игрока в скаут-центре происходит в несколько этапов. Каждое изучение любимого стиля игры регбиста отбрасывает из списка один неправильный стиль. Таким образом, только потратив 3 изучения стиля на одного игрока менеджер команды может узнать тот самый единственный любимый стиль регбиста, при игре которым он играет сильнее.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="7.3">7.3. Изучение усталости, автосоставов и ИП/ОП игроков соперников.</p>
-<p class="text-justify">Отправили ли тренеры команд-соперников составы на ближайшие игры с вашей командой могут увидеть на странице отправки состава владельцы команд со скаут-центрами восьмого и выше уровня. Эта информация является лишь незначительным дополнительным бонусом скаут-центра, т.к. состав соперника может быть отправлен за секунду до начала генерации.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7.4"><span class="strong">7.4. Таблица уровней скаут-центров.</span> Стоимость и параметры скаут-центров вы можете узнать из двух таблиц.</p>
-<p class="text-justify">Изучение чужих игроков:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Соперник (ИП/ОП)</th><th>Соперник (У)</th><th>Соперник (Ф)</th><th>Рынки (ИП/ОП)</th><th>Рынки (У)</th><th>Рынки (Ф)</th><th>Цена продажи</th><th>Скорость постройки</th><th>Цена постройки</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-right">0$</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">+</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-right">187 500$</td><td class="text-center">1</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">-</td><td class="text-right">375 000$</td><td class="text-center">2</td><td class="text-right">500 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">562 500$</td><td class="text-center">3</td><td class="text-right">750 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">+</td><td class="text-center">-</td><td class="text-center">-</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">750 000$</td><td class="text-center">4</td><td class="text-right">1 000 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">-</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">937 500$</td><td class="text-center">5</td><td class="text-right">1 250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">1 125 000$</td><td class="text-center">6</td><td class="text-right">1 500 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">1 312 500$</td><td class="text-center">7</td><td class="text-right">1 750 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">1 500 000$</td><td class="text-center">8</td><td class="text-right">2 000 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">1 687 500$</td><td class="text-center">9</td><td class="text-right">2 250 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-center">+</td><td class="text-right">1 875 000$</td><td class="text-center">10</td><td class="text-right">2 500 000$</td></tr>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7.2"> <span class = "strong"> 7.2. Hidden player parameters. </span> In the game, rugby players have hidden parameters - their favorite style of play, which is given to them by nature at birth and does not change throughout their careers. This parameter is unknown to the general public. In order for the player\'s favorite style to become known to you, you need to learn it in the scout center. </p>
+<p class = "text-justify"> Learning a player\'s style in the scout center takes place in several stages. Each study of a rugby player\'s favorite style of play throws one wrong style off the list. Thus, only after spending 3 style studies per player, the team manager can learn the very only favorite rugby style that makes him stronger when playing. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "7.3"> 7.3. Studying fatigue, autocompositions and IP / OP of rival players. </p>
+<p class = "text-justify"> Whether the coaches of the opposing teams have sent the squads for the upcoming games with your team can be seen on the squad submission page by the owners of teams with scout centers of the eighth and higher level. This information is only a minor additional bonus of the scout center, because the opponent\'s squad can be sent one second before the start of the generation. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7.4"> <span class = "strong"> 7.4. Scout center level table. </span> You can find out the cost and parameters of the scout center from two tables. </p>
+<p class = "text-justify"> Learning alien players: </p>
+<table class = "table table-bordered table-hover">
+<tr><th>Level</th> <th> Min level of base </th> <th> Opponent (IP / OP) </th> <th> Opponent (U) </th> <th> Opponent ( F) </th> <th> Markets (IP / OP) </th> <th> Markets (S) </th> <th> Markets (F) </th> <th> Sell Price </th> <th> Build Speed </th> <th> Build Cost </th> </tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text- center "> - </td> <td class =" text-center "> - </td> <td class =" text-right "> 0 $ </td> <td class =" text-center "> 0 </td> <td class = "text-right"> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> + </td> <td class = "text- center "> - </td> <td class =" text-center "> - </td> <td class =" text-right "> $ 187,500 </td> <td class =" text-center "> 1 </td> <td class = "text-right"> $ 250,000 </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> - </td> <td class =" text-right "> $ 375,000 </td> <td class =" text-center "> 2 </td> <td class = "text-right"> $ 500,000 </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> 562,500 $ </td> <td class =" text-center "> 3 </td> <td class = "text-right"> $ 750,000 </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> + </td> <td class = "text-center"> - </td> <td class = "text-center"> - </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> $ 750,000 </td> <td class =" text-center "> 4 </td> <td class = "text-right"> $ 1,000,000 </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> - </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> 937,500 $ </td> <td class =" text-center "> 5 </td> <td class = "text-right"> $ 1,250,000 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> $ 1,125,000 </td> <td class =" text-center " > 6 </td> <td class = "text-right"> $ 1,500,000 </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> $ 1,312,500 </td> <td class =" text-center " > 7 </td> <td class = "text-right"> $ 1,750,000 </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> $ 1,500,000 </td> <td class =" text-center " > 8 </td> <td class = "text-right"> 2,000,000 $ </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> $ 1,687,500 </td> <td class =" text-center " > 9 </td> <td class = "text-right"> 2 250 000 $ </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text-center"> + </td> <td class = "text- center "> + </td> <td class =" text-center "> + </td> <td class =" text-right "> 1,875,000 $ </td> <td class =" text-center " > 10 </td> <td class = "text-right"> 2,500,000 $ </td> </tr>
 </table>
-<p class="text-justify">Изучение своих игроков:</p>
-<table class="table table-bordered table-hover">
-<tr><th>Уровень</th><th>Мин уровень базы</th><th>Скорость изучения</th><th>Любимый стиль</th><th>Стоимость изучения</th></tr>
-<tr><td class="text-center">0</td><td class="text-center">0</td><td class="text-center">0%</td><td class="text-center">0</td><td class="text-right">0$</td></tr>
-<tr><td class="text-center">1</td><td class="text-center">1</td><td class="text-center">5%-15%</td><td class="text-center">5</td><td class="text-right">50 000$</td></tr>
-<tr><td class="text-center">2</td><td class="text-center">1</td><td class="text-center">15%-25%</td><td class="text-center">10</td><td class="text-right">100 000$</td></tr>
-<tr><td class="text-center">3</td><td class="text-center">2</td><td class="text-center">25%-35%</td><td class="text-center">15</td><td class="text-right">150 000$</td></tr>
-<tr><td class="text-center">4</td><td class="text-center">2</td><td class="text-center">35%-45%</td><td class="text-center">20</td><td class="text-right">200 000$</td></tr>
-<tr><td class="text-center">5</td><td class="text-center">3</td><td class="text-center">45%-55%</td><td class="text-center">25</td><td class="text-right">250 000$</td></tr>
-<tr><td class="text-center">6</td><td class="text-center">3</td><td class="text-center">55%-65%</td><td class="text-center">30</td><td class="text-right">300 000$</td></tr>
-<tr><td class="text-center">7</td><td class="text-center">4</td><td class="text-center">65%-75%</td><td class="text-center">35</td><td class="text-right">350 000$</td></tr>
-<tr><td class="text-center">8</td><td class="text-center">4</td><td class="text-center">75%-85%</td><td class="text-center">40</td><td class="text-right">400 000$</td></tr>
-<tr><td class="text-center">9</td><td class="text-center">5</td><td class="text-center">85%-95%</td><td class="text-center">45</td><td class="text-right">450 000$</td></tr>
-<tr><td class="text-center">10</td><td class="text-center">5</td><td class="text-center">100%</td><td class="text-center">50</td><td class="text-right">500 000$</td></tr>
+<p class = "text-justify"> Exploring Your Players: </p>
+<table class = "table table-bordered table-hover">
+<tr><th>Level</th> <th> Min Base Level </th> <th> Learning Speed </th> <th> Favorite Style </th> <th> Learning Cost </th> </ tr>
+<tr> <td class = "text-center"> 0 </td> <td class = "text-center"> 0 </td> <td class = "text-center"> 0% </td> < td class = "text-center"> 0 </td> <td class = "text-right"> 0 $ </td> </tr>
+<tr> <td class = "text-center"> 1 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 5% -15% </ td> <td class = "text-center"> 5 </td> <td class = "text-right"> $ 50,000 </td> </tr>
+<tr> <td class = "text-center"> 2 </td> <td class = "text-center"> 1 </td> <td class = "text-center"> 15% -25% </ td> <td class = "text-center"> 10 </td> <td class = "text-right"> 100,000 $ </td> </tr>
+<tr> <td class = "text-center"> 3 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 25% -35% </ td> <td class = "text-center"> 15 </td> <td class = "text-right"> $ 150,000 </td> </tr>
+<tr> <td class = "text-center"> 4 </td> <td class = "text-center"> 2 </td> <td class = "text-center"> 35% -45% </ td> <td class = "text-center"> 20 </td> <td class = "text-right"> $ 200,000 </td> </tr>
+<tr> <td class = "text-center"> 5 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 45% -55% </ td> <td class = "text-center"> 25 </td> <td class = "text-right"> $ 250,000 </td> </tr>
+<tr> <td class = "text-center"> 6 </td> <td class = "text-center"> 3 </td> <td class = "text-center"> 55% -65% </ td> <td class = "text-center"> 30 </td> <td class = "text-right"> 300,000 $ </td> </tr>
+<tr> <td class = "text-center"> 7 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 65% -75% </ td> <td class = "text-center"> 35 </td> <td class = "text-right"> 350,000 $ </td> </tr>
+<tr> <td class = "text-center"> 8 </td> <td class = "text-center"> 4 </td> <td class = "text-center"> 75% -85% </ td> <td class = "text-center"> 40 </td> <td class = "text-right"> 400,000 $ </td> </tr>
+<tr> <td class = "text-center"> 9 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 85% -95% </ td> <td class = "text-center"> 45 </td> <td class = "text-right"> 450,000 $ </td> </tr>
+<tr> <td class = "text-center"> 10 </td> <td class = "text-center"> 5 </td> <td class = "text-center"> 100% </td> < td class = "text-center"> 50 </td> <td class = "text-right"> $ 500,000 </td> </tr>
 </table>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="7.5">7.5. Секреты работы скаут-центров.</p>
-<p class="text-justify">В любой команде, которая изучает любимый стиль одного и того же игрока, последовательность удаления неправильных стилей - одинаковая. Т.е. если в одной команде первое изучение дало результат, что стиль игрока точно не 10 man rugby, то первое изучение стиля этого же игрока в другой команде тоже даст результат, что стиль точно не скоростной.</p>
-<p class="text-justify">Игрок, находящийся на изучении в скаут-центре, не может участвовать в сделках</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Базы команд',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "7.5"> 7.5. Secrets of the scout centers. </p>
+<p class = "text-justify"> In any team that learns the favorite style of the same player, the sequence for removing incorrect styles is the same. Those. if in one team the first study gave the result that the style of the player is definitely not 10 man rugby, then the first study of the style of the same player in the other team will also give the result that the style is definitely not fast. </p>
+<p class = "text-justify"> A player under study at the scout center cannot participate in trades </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Command Bases',
 ];

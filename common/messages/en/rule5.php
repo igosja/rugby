@@ -17,40 +17,40 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое перерегистрация команды?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What is team re-registration? </a>
 <br/>
-<a href="#2">2. Как начать перерегистрацию?</a>
+<a href="#2"> 2. How to start re-registration? </a>
 <br/>
-<a href="#3">3. Причины отказа в перерегистрации.</a>
+<a href="#3"> 3. Reasons for refusal to re-register. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое перерегистрация команды?</span> Если доставшаяся вам команда находится в безнадежном состоянии, причем до такой степени, что ее перспективы даже меньше, чем у новой, вы можете пройти процедуру перерегистрации клуба. Перерегистрация также возможна, если вас совсем не устраивает то, что сделал с командой ее предыдущий менеджер.</p>
-<p class="text-justify">Перерегистрация - это возможность начать жизнь команды с нуля (правда результаты команды останутся в ее истории). Это возможность превратить безнадежный клуб в новый, т.е. имеющий:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What is team re-registration? </span> If the team you have inherited is in a hopeless state, and to such an extent that its prospects are even less than that of the new one, you can go through the club re-registration procedure. Re-registration is also possible if you are not at all satisfied with what its previous manager did with the team. </p>
+<p class = "text-justify"> Re-registration is an opportunity to start a team\'s life from scratch(although the team\'s results will remain in its history). This is an opportunity to transform a hopeless club into a new one, i.e. having: </p>
 <ul>
-<li>30 регбистов разного возраста;</li>
-<li>стадион вместимостью 100 мест;</li>
-<li>10 миллионов вроликов (наших виртуальных денег) на счету;</li>
-<li>базу 1-го уровня без строений.</li>
-<li>5 бесплатных улучшений базы;</li>
+<li> 30 rugby players of different ages; </li>
+<li> stadium with a capacity of 100 seats; </li>
+<li> 10 million rolls (our virtual money) in the account; </li>
+<li> a level 1 base without buildings. </li>
+<li> 5 free base improvements; </li>
 </ul>
-<p class="text-justify">При перерегистрации все игроки команды становятся новыми игроками, не сыгравшими ни одной минуты игрового времени за эту команду.</p>
-<p class="text-justify">Физическая форма всех игроков команды при перерегистрации определяется случайным образом.</p>
-<p class="text-justify">Усталость всех игроков команды становится одинаковой и равной 50%.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Как начать перерегистрацию?</span> Если вы решили перерегистрировать свой клуб, то вам необходимо зайти в него, перейти на страничку "Анкетные данные" (графическая кнопка с паспортом). Там есть кнопка "Перерегистрировать команду", ведущая на страничку начала процедуры перерегистрации.</p>
-<p class="text-justify">На этой странице вам сообщат причины, по которой перерегистрация команды невозможна, либо предложат подтвердить ваши намерения перерегистрировать команду.</p>
-<p class="text-justify">Если автоматика допустила вашу команду к перерегистрации и вы успешно подтвердили свои намерения, то ваша команда пройдёт процедуру перерегистрации и обратного пути не будет.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Причины отказа в перерегистрации.</span> Нельзя проводить перерегистрацию команды, если:</p>
+<p class = "text-justify"> Upon re-registration, all players on a team become new players who have not played a single minute of playing time for that team. </p>
+<p class = "text-justify"> The physical form of all team players upon re-registration is determined randomly. </p>
+<p class = "text-justify"> The fatigue of all team members is equal to 50%. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. How to start re-registration? </span> If you have decided to re-register your club, then you need to go to it, go to the "Personal data" page (graphical button with a passport). There is a button "Re-register command" leading to the page for starting the re-registration procedure. </p>
+<p class = "text-justify"> This page will tell you the reasons why re-registration of the command is not possible, or will ask you to confirm your intentions to re-register the command. </p>
+<p class = "text-justify"> If the automation allowed your team to re-register and you have successfully confirmed your intentions, then your team will go through the re-registration procedure and there will be no way back. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. Reasons for refusing to re-register. </span> You cannot re-register a team if: </p>
 <ul>
-<li>на трансферном или арендном рынке находятся игроки или есть заявки на покупку/аренду;</li>
-<li>команда совершала сделки, проверка которых ещё не закончена;</li>
-<li>в команде есть арендованные у другой команды игроки;</li>
-<li>есть игроки команды, отданные в аренду;</li>
-<li>в команде есть игроки сборных;</li>
-<li>база команды уже достигла пятого уровня;</li>
+<li> there are players in the transfer or rental market or there are applications for purchase / rent; </li>
+<li> the team made trades, the verification of which has not been completed yet; </li>
+<li> the team has players on loan from another team; </li>
+<li> there are players on the loaned team; </li>
+<li> there are national team players in the team; </li>
+<li> the team base has already reached the fifth level; </li>
 </ul>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Перерегистрация команды',
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Team re-registration',
 ];

@@ -17,93 +17,93 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Что такое усталость и на что она влияет?</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. What is fatigue and what does it affect? ​​</a>
 <br/>
-<a href="#2">2. Что такое играл подряд (ИП), отдыхал подряд (ОП)?</a>
+<a href="#2"> 2. What is playing in a row (IP), resting in a row (RP)? </a>
 <br/>
-<a href="#3">3. Когда усталость выводится на уровень медцентра?</a>
+<a href="#3"> 3. When is fatigue brought to the medical center level? </a>
 <br/>
-<a href="#4">4. Способ изменения усталости в зависимости от типа матча в расписании.</a>
+<a href="#4"> 4. The way fatigue changes depending on the type of match on the schedule. </a>
 <br/>
-<a href="#5">5. Подробно об увеличении усталости.</a>
+<a href="#5"> 5. Learn more about increasing fatigue. </a>
 <br/>
-<a href="#6">6. Подробно об уменьшении усталости.</a>
+<a href="#6"> 6. Learn more about reducing fatigue. </a>
 <br/>
-<a href="#7">7. Усталость игроков, купленных на рынках.</a>
+<a href="#7"> 7. Fatigue of players bought in the markets. </a>
 </p>
-<p class="text-justify" id="1"><span class="strong">1. Что такое усталость и на что она влияет?</span> Усталость - это параметр игрока, отвечающий за соответствие его реальной силы силе номинальной. Усталость игрока может изменяться от 0 до 100%, чаще всего она находится в пределах 0-30% (чем она больше, тем слабее играет регбист, например - игрок с усталостью 25% будет играть на четверть слабее, чем если бы у него усталость была 0%).</p>
-<p class="text-justify">Когда игрок выходит на поле в матче, его усталость увеличивается. Чтобы игрок смог восстановиться, некоторые игры ему придется пропускать.</p>
-<p class="text-justify">Игроки, выходящие на поле сильно уставшими, имеют риск получить травму по итогам матча. Чем больше усталость, тем больше риск.</p>
-<p class="text-justify">У игроков новых команд сразу после регистрации усталость составляет 50%.</p>
-<p class="text-justify">Отдых (пропуск игр вашей команды) помогает вашему игроку восстанавливаться, после пропущенного матча усталость регбиста уменьшится. Но! Обратите внимание, что усталость восстанавливается только после пропущенных обязательных матчей (тип B в расписании) - т.е. чемпионат, конференция и кубок межсезонья. В дополнительных матчах (тип С - лига чемпионов, чемпионат мира) усталость не восстанавливается, т.к. эти матчи - дополнительные для вашей команды.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="2"><span class="strong">2. Что такое играл подряд (ИП), отдыхал подряд (ОП).</span> В ростерах команд есть столбцы ИП и ОП, очень важные для определения, как же будет увеличиваться или уменьшаться усталость каждого интересующего вас игрока в следующем туре:</p>
-<p class="text-justify">ИП - это число игр, которое ваш игрок выходил на поле подряд. Чем больше игр подряд он выходит на поле, тем быстрее у него растет усталость. Т.е. за первую игру после отдыха он может прибавить 2% усталости, а за вторую игру подряд без отдыха - прибавит уже 3% усталости. Чем старше игрок, тем быстрее растет усталость.</p>
-<p class="text-justify">ОП - это число обязательных (тип B) игр, которое ваш игрок отдыхал подряд. В дополнительных играх ОП не увеличивается, да и игрок не отдыхает. Чем больше обязательных игр (тип B) подряд регбист отдыхает, тем медленнее он восстанавливается. Т.е. если после первой пропущенной игры усталость регбиста уменьшится на 15%, то уже после второй пропущенной подряд игры - только на 5%.</p>
-<p class="text-justify">Есть и еще одна зависимость - чем больше игрок перед началом отдыха сыграл матчей подряд (ИП), тем тяжелее у него начинает восстанавливаться усталость. Т.е. если игрок сыграл подряд одну игру и в следующем туре отдыхает, то 15% усталости как не бывало. Если до отдыха он сыграл 2 игры, то усталость уменьшится на первом отдыхе только на 12%.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="3"><span class="strong">3. Когда усталость выводится на уровень медцентра?</span> Усталость в начале крупных соревнований (после перерыва и подготовки) у всех игроков выводится на уровень медцентра тех команд, в которых они находились перед стартом этого соревнования (готовились). К крупным соревнованиям относятся - чемпионат страны, конференция любительских клубов и кубок межсезонья. При этом считается, что в начале такого соревнования у всех игроков ИП=0, а ОП=1.</p>
-<p class="text-justify">После травмы усталость регбиста возвращается на уровень медцентра (усталость арендованного игрока выводится на уровень медцентра арендуемой команды), а вот ОП у него фактически становится равным сроку травмы. Поэтому после тяжелых травм выведение усталости игрока на минимальный уровень - длительный процесс. Иногда его следует выпускать на поле, чтобы он играл, иначе из-за большого ОП усталость его будет восстанавливаться слишком медленно.</p>
-<p class="text-justify">Если медцентр (или база) находится в режиме строительства, то он не работает. Смотрите в таких случаях все параметры для медцентра нулевого уровня. Будьте внимательны: если вы строите медцентр так, что процесс постройки затрагивает начало крупного соревнования - все ваши игроки начнут участие в соревновании с усталостью медцентра нулевого уровня.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="4"><span class="strong">4. Способ изменения усталости в зависимости от типа матча в расписании.</span> Для каждого соревнования определен свой способ изменения усталости игроков, выходивших на поле. Тип матча (т.е. способ изменения усталости) указан в расписании в столбце ТМ в виде кодового обозначения (буквы).</p>
-<p class="text-justify">Существуют три типа изменения усталости игроков по результатам тура:</p>
+<p class = "text-justify" id = "1"> <span class = "strong"> 1. What is fatigue and what does it affect? ​​</span> Fatigue is a player\'s parameter, which is responsible for the correspondence of his real strength to the nominal strength. The player\'s fatigue can vary from 0 to 100%, most often it is in the range of 0-30% (the larger it is, the weaker the rugby player plays, for example - a player with 25% fatigue will play a quarter weaker than if he had fatigue 0%). </p>
+<p class = "text-justify"> When a player enters the field in a match, their fatigue increases. In order for the player to recover, he will have to skip some games. </p>
+<p class = "text-justify"> Players entering the field very tired are at risk of injury at the end of the match. The more fatigue, the greater the risk. </p>
+<p class = "text-justify"> Players on new teams are 50% fatigued right after registration. </p>
+<p class = "text-justify"> Rest (skipping your team\'s games) helps your player to recover so that rugby fatigue will decrease after a missed match. But! Please note that fatigue is only recovered after missed mandatory matches (type B on the schedule) - i.e. championship, conference and off-season cup. In additional matches (type C - Champions League, World Championship), fatigue is not restored, because these matches are optional for your team. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "2"> <span class = "strong"> 2. What is playing in a row (IP), resting in a row (RP). </span> In the team rosters there are columns of IP and RP, which are very important for determining how the fatigue of each player of interest to you will increase or decrease in the next round: </ p >
+<p class = "text-justify"> PI is the number of games your player has played in a row. The more games he takes in a row, the faster his fatigue grows. Those. for the first game after rest, he can add 2% of fatigue, and for the second game in a row without rest - he will add 3% of fatigue. The older the player, the faster fatigue grows. </p>
+<p class = "text-justify"> OP is the number of compulsory (type B) games your player has been resting in a row. In additional games, the OP does not increase, and the player does not rest. The more compulsory games (type B) in a row a rugby player rests, the slower he recovers. Those. if after the first missed game the fatigue of a rugby player decreases by 15%, then after the second missed game - only by 5%. </p>
+<p class = "text-justify"> There is one more dependence - the more a player has played matches in a row (IP) before the start of the rest, the harder his fatigue begins to recover. Those. if a player has played one game in a row and is resting in the next round, then 15% of fatigue is gone. If he played 2 games before the rest, then fatigue will decrease on the first rest by only 12%. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "3"> <span class = "strong"> 3. When is fatigue brought to the level of the medical center? </span> Fatigue at the beginning of major competitions (after a break and preparation) for all players is brought to the level of the medical center of those teams in which they were before the start of this competition (preparing). Major competitions include the national championship, the conference of amateur clubs and the off-season cup. At the same time, it is considered that at the beginning of such a competition, all players have IP = 0, and OP = 1. </p>
+<p class = "text-justify"> After injury, the rugby player\'s fatigue returns to the medical center level (the fatigue of the rented player is brought to the level of the rented team\'s medical center), but his RP actually becomes equal to the length of the injury. Therefore, after severe injuries, bringing the player\'s fatigue to a minimum level is a long process. Sometimes he needs to be released on the field to play, otherwise, due to the large OP, his fatigue will recover too slowly. </p>
+<p class = "text-justify"> If the medical center (or base) is in build mode, then it does not work. In such cases, see all parameters for the zero-level medical center. Be careful: if you build a medical center in such a way that the construction process affects the beginning of a major competition - all your players will start participating in the competition with the fatigue of a level zero medical center. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "4"> <span class = "strong"> 4. The way fatigue changes depending on the type of match in the schedule. </span> Each competition has its own way of changing the fatigue of players entering the field. The type of match (i.e. the way of changing fatigue) is indicated in the schedule in the TM column in the form of a code designation (letter). </p>
+<p class = "text-justify"> There are three types of changes in player fatigue based on round results: </p>
 <ul>
-<li>товарищеские игры - тип A - товарищеские матчи;</li>
-<li>обязательные игры - тип B - кубок межсезонья, чемпионаты стран, конференция любительских клубов;</li>
-<li>дополнительные игры - тип C - лига чемпионов, чемпионат мира.</li>
+<li> friendlies - type A - friendlies; </li>
+<li> Mandatory Games - Type B - Offseason Cup, National Championships, Amateur Club Conference; </li>
+<li> Extra Games - Type C - Champions League, World Cup. </li>
 </ul>
-<p class="text-justify">Общие принципы:</p>
+<p class = "text-justify"> General principles: </p>
 <ul>
-<li>товарищеские игры - тип A - усталость не меняется, у всех игроков она считается одинаковой: 25%;</li>
-<li>обязательные игры - тип B - играющие регбисты устают, усталость отдыхающих уменьшается;</li>
-<li>дополнительные игры - тип C - играющие регбисты слегка устают, усталость отдыхающих не меняется.</li>
+<li> friendly games - type A - fatigue does not change, it is considered the same for all players: 25%; </li>
+<li> compulsory games - type B - rugby players get tired, holiday fatigue decreases; </li>
+<li> extra games - type C - rugby players get a little tired, holiday fatigue does not change. </li>
 </ul>
-<p class="text-justify">Принцип объясняется просто: основные игры есть у всех, они - единица виртуального времени в Лиге. Дополнительные - это, например, игры лиги чемпионов, которые уплотняют график матчей для команды, но не растягивают время.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="5"><span class="strong">5. Подробно об увеличении усталости.</span> Усталость может увеличиваться у игроков, которые в данном туре выходили на поле. Для разных типов изменения усталости действуют следующие правила.</p>
-<p class="text-justify">A - это означает, что усталость всех игроков в этом туре принимается равной 25% и по результатам тура усталость не меняется (не уменьшается и не увеличивается).</p>
-<p class="text-justify">B - это означает, что если регбист играет матч, то его усталость увеличивается в зависимости от возраста:</p>
+<p class = "text-justify"> The principle is explained simply: everyone has basic games, they are a unit of virtual time in the League. Additional ones are, for example, Champions League games, which tighten up the team\'s match schedule, but do not stretch the time. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "5"> <span class = "strong"> 5. More about the increase in fatigue. </span> Fatigue may increase in players who have entered the field in this round. The following rules apply for different types of fatigue changes. </p>
+<p class = "text-justify"> A - this means that the fatigue of all players in this round is taken equal to 25% and, based on the results of the round, fatigue does not change (does not decrease or increase). </p>
+<p class = "text-justify"> B - this means that if a rugby player plays a match, his fatigue increases with age: </p>
 <ul>
-<li>от 17 до 23 лет – регбист будет набирать усталость в таком размере 2-3-4-5-6-7-8..., т.е. за первую сыгранную игру он потеряет 2%, за вторую подряд еще 3% и т.д;</li>
-<li>от 24 до 30 лет – схема набора усталости выглядит так 3-4-5-6-7-8-9-...;</li>
-<li>от 31 до 35 лет – 4-5-6-7-8-9-10-...</li>
+<li> from 17 to 23 years old - the rugby player will gain fatigue in this amount 2-3-4-5-6-7-8 ..., i.e. for the first game played, he will lose 2%, for the second in a row another 3%, etc.; </li>
+<li> from 24 to 30 years old - the scheme for recruiting fatigue looks like this 3-4-5-6-7-8-9 -...; </li>
+<li> from 31 to 35 years old - 4-5-6-7-8-9-10 -... </li>
 </ul>
-<p class="text-justify">C - это означает, что если регбист играет матч, то его усталость увеличивается в зависимости от возраста:</p>
+<p class = "text-justify"> C - this means that if a rugby player plays a match, his fatigue increases with age: </p>
 <ul>
-<li>от 17 до 23 лет – тогда регбист будет набирать усталость в таком размере 1-1-2-2-3-3-4..., т.е. за первую сыгранную игру он наберет 1% усталости, за вторую подряд еще 1%, за третью еще 2% и т.д;</li>
-<li>от 24 до 30 лет – схема набора усталости выглядит так 2-2-3-3-4-4-5-5-...;</li>
-<li>от 31 до 35 лет – 3-3-4-4-5-5-6-6-...</li>
+<li> from 17 to 23 years old - then the rugby player will gain fatigue in this amount 1-1-2-2-3-3-4 ..., i.e. for the first game played, he will gain 1% of fatigue, for the second in a row another 1%, for the third another 2%, etc.; </li>
+<li> from 24 to 30 years old - the scheme of fatigue recruitment looks like this 2-2-3-3-4-4-5-5 -...; </li>
+<li> from 31 to 35 years old - 3-3-4-4-5-5-6-6 -... </li>
 </ul>
-<p class="text-justify">Спецвозможность Атлетизм (Ат) позволяет уменьшить набор усталости.</p>
-<p class="text-justify">Если команда играет супернастроем, усталость игроков растет в два раза больше (при этом число "игр подряд" у игравших регбистов все равно увеличивается только на одну).</p>
-<p class="text-justify">Если команда играет "на отдыхе", усталость ее игроков не увеличивается вообще (при этом число "игр подряд" у игравших регбистов все равно увеличивается на одну).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="6"><span class="strong">6. Подробно об уменьшении усталости (восстановлении игроков).</span> Единственный способ уменьшить усталость игрока - это дать ему отдохнуть.</p>
-<p class="text-justify">Игрок отдыхает только тогда, когда не выходит на поле в игровые дни чемпионата страны, конференции любительских клубов и кубка межсезонья.</p>
-<p class="text-justify">Во время пропуска всех остальных матчей игрок не отдыхает и усталость неигравших регбистов не уменьшается. Происходит это по той причине, что все остальные матчи считаются дополнительными и есть далеко не у всех команд.</p>
-<p class="text-justify">Если игрок отдыхает:</p>
+<p class = "text-justify"> The Athleticism (AT) accessory reduces fatigue. </p>
+<p class = "text-justify"> If a team is playing with super mood, players\' fatigue increases twice as much (while the number of "games in a row" among rugby players still only increases by one). </p>
+<p class = "text-justify"> If a team is playing "on vacation", the fatigue of its players does not increase at all (while the number of "games in a row" among rugby players still increases by one). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "6"> <span class = "strong"> 6. Learn more about reducing player fatigue (recovery). </span> The only way to reduce player fatigue is to give him a break. </p>
+<p class = "text-justify"> A player rests only when he does not take to the field during the playing days of the national championship, the conference of amateur clubs and the off-season cup. </p>
+<p class = "text-justify"> The player does not rest during the skipping of all other matches and the fatigue of non-playing rugby players does not decrease. This happens for the reason that all other matches are considered additional and not all teams have. </p>
+<p class = "text-justify"> If the player is resting: </p>
 <ul>
-<li>после одной "игры подряд", то его усталость уменьшится на 15%;</li>
-<li>после двух "игр подряд", то его усталость уменьшится на 12%;</li>
-<li>после трёх "игр подряд", то его усталость уменьшится на 10%;</li>
-<li>после четырёх "игр подряд", то его усталость уменьшится на 8%;</li>
-<li>после пяти "игр подряд", то его усталость уменьшится на 6%;</li>
-<li>после шести и более "игр подряд", то его усталость уменьшится на 5%.</li>
+<li> after one "game in a row", then his fatigue will decrease by 15%; </li>
+<li> after two "games in a row", his fatigue will decrease by 12%; </li>
+<li> after three "games in a row", his fatigue will decrease by 10%; </li>
+<li> after four "games in a row", his fatigue will decrease by 8%; </li>
+<li> after five "games in a row", his fatigue will decrease by 6%; </li>
+<li> after six or more "games in a row", his fatigue will decrease by 5%. </li>
 </ul>
-<p class="text-justify">После первого же дня отдыха число "игр подряд" у регбиста обнуляется (что логично), зато начинается подсчёт числа "отдыхов подряд".</p>
-<p class="text-justify">Если у игрока это:</p>
+<p class = "text-justify"> After the first day of rest, the number of "games in a row" for a rugby player is reset to zero (which is logical), but the count of the number of "rests in a row" begins. </p>
+<p class = "text-justify"> If the player has this: </p>
 <ul>
-<li>второй "отдых подряд", то его усталость уменьшится на 5%;</li>
-<li>третий и далее "отдых подряд", то его усталость уменьшится на 4%.</li>
+<li> the second "rest in a row", then his fatigue will decrease by 5%; </li>
+<li> the third and further "rest in a row", then his fatigue will decrease by 4%. </li>
 </ul>
-<p class="text-justify">Таким образом, быстрее всего снижается усталость тех игроков, которые играют подряд не более одной игры, но и отдыхают тоже не более одной игры подряд.</p>
-<p class="text-justify">Дополнительный бонус к уменьшению усталости отдыхавших в туре игроков может дать физцентр высокого уровня. Физцентр маленького уровня может дать дополнительный штраф к уменьшению усталости отдыхавших (т.е. восстанавливаться они будут медленнее).</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="text-justify" id="7"><span class="strong">7. Усталость игроков, купленных на рынках.</span> Игроки, купленные (арендованные) в другой команде при переходе сохраняют имеющиеся у них усталость, ИП и ОП, физическую форму. Никуда не исчезают и травмы (поэтому будьте внимательны).</p>
-<p class="text-justify">Игроки, купленные у Лиги имеют параметры ИП=0, ОП=1.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Усталость игроков (У)',
+<p class = "text-justify"> Thus, fatigue is most rapidly reduced for those players who play no more than one game in a row, but also rest no more than one game in a row. </p>
+<p class = "text-justify"> An additional bonus to reducing fatigue of players resting on the tour can be provided by a high-level physical center. A low-level physical center can give an additional penalty to reduce the fatigue of resting (i.e. they will recover more slowly). </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "text-justify" id = "7"> <span class = "strong"> 7. Fatigue of players bought in the markets. </span> Players bought (rented) in another team during the transition retain their fatigue, IP and RP, physical shape. Injuries do not disappear anywhere (so be careful). </p>
+<p class = "text-justify"> Players bought from the League have IP = 0, RP = 1. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Player Fatigue (D)',
 ];

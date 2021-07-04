@@ -17,71 +17,71 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'text' => '<p class="strong text-justify" id="0">Содержание</p>
-<p class="text-justify">
-<a href="#1">1. Общие условия.</a>
+    'text' => '<p class = "strong text-justify" id = "0"> Content </p>
+<p class = "text-justify">
+<a href="#1"> 1. General conditions. </a>
 <br/>
-<a href="#2">2. Авторские права и право собственности на Сайт.</a>
+<a href="#2"> 2. Copyright and ownership of the Site. </a>
 <br/>
-<a href="#3">3. Правила пользования Сайтом.</a>
+<a href="#3"> 3. Terms of use of the Site. </a>
 <br/>
-<a href="#4">4. Пользование платными и бесплатными ресурсами Сайта.</a>
+<a href="#4"> 4. Use of paid and free resources of the Site. </a>
 </p>
-<p class="strong text-justify" id="1">1. Общие условия.</p>
-<p class="text-justify">Владельцем сайта virtual-rugby.com (далее – "Сайт") является Бойко Игорь Владимирович (далее – "Администрация").</p>
-<p class="text-justify">Пользователем Сайта признается любое лицо, осуществляющее доступ к Сайту посредством сети Интернет (далее - "Пользователь"). Настоящее соглашение (далее - "Соглашение") предназначено для урегулирования взаимоотношений между Администрацией и Пользователем.</p>
-<p class="text-justify">Онлайн-игра "Виртуальная Регбийная Лига" (далее - "Игра") - это компьютерная браузерная игра, использующая постоянное соединение с интернетом, представляющая собой программно-технический комплекс сервисов и услуг для личного, некоммерческого, развлекательного использования Пользователем в соответствии с Соглашением и Правилами игры.</p>
-<p class="text-justify">Данный документ является публичной офертой, и в случае принятия изложенных ниже условий пользователем, последний тем сам производит акцепт этой оферты. Регистрация на сайте (начало карьеры менеджера) является акцептом оферты, что считается равносильным заключению Соглашения на условиях, изложенных в оферте.</p>
-<p class="text-justify">Правила игры - свод норм и положений, дополняющих и разъясняющих Соглашение и игровой процесс - о взаимодействии в Игре Пользователей, Сайта и Администрации.</p>
-<p class="text-justify">Зарегистрировавшись на Сайте, Пользователь тем самым выражает своё согласие, в соответствии с которым Пользователь обязуется использовать Игру строго в соответствии с Правилами игры. Регистрация и использование Сайта без принятия условий Соглашения в части либо полностью приравнено к противоправному использованию Игры в отсутствие согласия на такое использование обладателя авторских прав на Игру.</p>
-<p class="text-justify">Администрация имеет право аннулировать регистрацию и/или ограничить доступ к Сайту при нарушении Пользователем условий настоящего Соглашения и/или Правил игры.</p>
-<p class="text-justify">Пользователь имеет право средствами Сайта самостоятельно в любое время аннулировать свою регистрацию ("удалить аккаунт") и тем самым отказаться от исполнения данного Соглашения в дальнейшем.</p>
-<p class="text-justify">Администрация оставляет за собой право изменять текст Соглашения и Правил игры без предварительного уведомления Пользователей. Изменения вступают в силу с момента публикации на Сайте. Пользователь обязуется самостоятельно отслеживать любые подобные изменения.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="2">2. Авторские права и право собственности на Сайт.</p>
-<p class="text-justify">Программные решения, размещенные на Сайте (далее – ресурсы Сайта), являются интеллектуальной собственностью Администрации.</p>
-<p class="text-justify">Авторство текстовых и графических материалов, публикуемых на Сайте Пользователем, должно принадлежать Пользователю или эти материалы должны использоваться Пользователем с разрешения правообладателя.</p>
-<p class="text-justify">Администрация не несет ответственности как за форму, так и за содержание высказываний и информации, публикуемой Пользователями на Сайте, а также за возможные последствия, прямо или косвенно связанные с использованием Сайта.</p>
-<p class="text-justify">Пользователь не имеет права копировать, транслировать, рассылать и публиковать материалы, взятые с Сайта, без письменного разрешения правообладателя, в том числе и после прекращения действия настоящего Соглашения.</p>
-<p class="text-justify">Публикация на страницах Сайта ссылок (включая баннеры) на сайты третьих лиц не подразумевает, что Администрация рекомендует их или предоставляет какие-либо гарантии относительно их.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="3">3. Правила пользования Сайтом.</p>
-<p class="text-justify">На Сайте запрещается:</p>
+<p class = "strong text-justify" id = "1"> 1. General conditions. </p>
+<p class = "text-justify"> The owner of the site virtual-rugby.com (hereinafter - the "Site") is Ihor V. Boiko (hereinafter - the "Administration"). </p>
+<p class = "text-justify"> Any person who accesses the Site via the Internet (hereinafter referred to as the "User") is recognized as a User of the Site. This agreement (hereinafter referred to as the "Agreement") is intended to regulate the relationship between the Administration and the User. </p>
+<p class = "text-justify"> Online game "Virtual Rugby League" (hereinafter - "Game") is a computer browser game that uses a permanent connection to the Internet, which is a software and hardware complex of services and services for personal, non-commercial , entertaining use by the User in accordance with the Agreement and the Game Rules. </p>
+<p class = "text-justify"> This document is a public offer, and if the user accepts the conditions set out below, the latter himself accepts this offer. Registration on the site (the beginning of a manager\'s career) is an acceptance of an offer, which is considered tantamount to concluding an Agreement on the terms set out in the offer. </p>
+<p class = "text-justify"> The rules of the game are a set of rules and regulations that supplement and clarify the Agreement and the game process - on the interaction of the Users, the Site and the Administration in the Game. </p>
+<p class = "text-justify"> By registering on the Site, the User thereby expresses his consent, in accordance with which the User undertakes to use the Game strictly in accordance with the Game Rules. Registration and use of the Site without accepting the terms of the Agreement in part or completely equated to the unlawful use of the Game in the absence of consent to such use of the owner of the copyright for the Game. </p>
+<p class = "text-justify"> The Administration has the right to cancel registration and / or restrict access to the Site if the User violates the terms of this Agreement and / or the Game Rules. </p>
+<p class = "text-justify"> The User has the right to cancel his registration ("delete account") by means of the Site at any time and thereby refuse to execute this Agreement in the future. </p>
+<p class = "text-justify"> The Administration reserves the right to change the text of the Agreement and the Game Rules without prior notice to the Users. Changes come into force from the moment of publication on the Site. The user undertakes to independently monitor any such changes. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "2"> 2. Copyright and ownership of the Site. </p>
+<p class = "text-justify"> Software solutions posted on the Site (hereinafter referred to as the Site resources) are the intellectual property of the Administration. </p>
+<p class = "text-justify"> Authorship of text and graphic materials published on the Site by the User must belong to the User or these materials must be used by the User with the permission of the copyright holder. </p>
+<p class = "text-justify"> The Administration is not responsible either for the form or for the content of statements and information published by Users on the Site, as well as for possible consequences directly or indirectly related to the use of the Site. </p>
+<p class = "text-justify"> The User has no right to copy, broadcast, send and publish materials taken from the Site, without the written permission of the copyright holder, including after the termination of this Agreement. </p>
+<p class = "text-justify"> The publication on the pages of the Site of links (including banners) to third-party sites does not imply that the Administration recommends them or provides any guarantees regarding them. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "3"> 3. Terms of use of the Site. </p>
+<p class = "text-justify"> It is prohibited on the Site: </p>
 <ul>
-<li>Регистрироваться повторно, не аннулировав свою предыдущую регистрацию;</li>
-<li>Осуществлять или пытаться осуществить взлом Сайта.</li>
-<li>Использовать программные ошибки и/или публиковать информацию о них;</li>
-<li>Нарушать условия данного Соглашения и Правил игры;</li>
-<li>Публиковать информацию, призывающую к нарушению условий данного Соглашения и Правил игры;</li>
-<li>Передавать/продавать/обменивать логины и пароли для доступа на Сайт другим лицам с привлечением игровых или неигровых средств оплаты;</li>
-<li>Передавать/продавать/обменивать виртуальные регбийные клубы другим лицам с привлечением игровых или неигровых средств оплаты (за исключением специальных страниц Сайта);</li>
-<li>Передавать/продавать/обменивать единицы своего денежного/личного счёта другим лицам с целью получить игровую или неигровую выгоду (за исключением безвозмездной передачи этих средств посредством специальных страниц Сайта "Перевод денег с личного счета");</li>
-<li>Публиковать нецензурные выражения, оскорбления, провоцировать на это других Пользователей;</li>
-<li>"Флудить" - т.е. публиковать бессмысленную информацию или большое количество несущественной информации.</li>
-<li>Отправлять множество (два и более) однотипных сообщений ("спам"), пользуясь возможностями Сайта и/или контактной информацией, размещенной на Сайте;</li>
-<li>Публиковать информацию, тематика которой не соответствует месту публикации ("оффтопик").</li>
-<li>Заниматься "троллингом" - т.е. написанием множества провокационных сообщений с целью нагнетания искусственного конфликта ради самого конфликта без возможности его разрешения, сообщения могут сопровождаться агрессией, задиранием, принижением, скрытыми или явными оскорблениями другого участника, целью "тролля" является бесконечное продолжение дискуссии на повышенных тонах.</li>
-<li>Публично обсуждать действия Администрации и модераторов (все претензии к Администрации и модераторам следует отправлять в техническую поддержку Сайта);</li>
-<li>Распространять недостоверную информацию об Администрации и её сотрудниках;</li>
-<li>Распространять информацию, порочащую репутацию Администрации и её сотрудников;</li>
-<li>Рекомендовать/рекламировать что-либо, не имеющее отношение к Игре;</li>
-<li>Обсуждать на Сайте сторонние игры/услуги и сайты, не относящиеся к Игре;</li>
-<li>Публично обсуждать платные ресурсы Сайта и/или Пользователей, их использующих;</li>
+<li> Re-register without canceling your previous registration; </li>
+<li> Carry out or attempt to hack the Site. </li>
+<li> Use bugs and / or publish information about them; </li>
+<li> Violate the terms of this Agreement and the Game Rules; </li>
+<li> Publish information that calls for a violation of the terms of this Agreement and the Rules of the Game; </li>
+<li> Transfer / sell / exchange logins and passwords for access to the Site to other persons using gaming or non-gaming means of payment; </li>
+<li> Transfer / sell / exchange virtual rugby clubs to others using gaming or non-gaming means of payment (except for special pages of the Site); </li>
+<li> Transfer / sell / exchange units of your money / personal account to other persons in order to obtain gaming or non-gaming benefits (except for the gratuitous transfer of these funds through special pages of the Site "Transfer of money from a personal account"); </li>
+<li> Publish obscene language, insults, provoke other Users to do so; </li>
+<li> "Flood" - i.e. publish meaningless information or a large amount of irrelevant information. </li>
+<li> Send many (two or more) messages of the same type ("spam"), using the capabilities of the Site and / or contact information posted on the Site; </li>
+<li> Publish information, the subject of which does not correspond to the place of publication ("offtopic"). </li>
+<li> Do "trolling" - ie. writing a lot of provocative messages with the aim of forcing an artificial conflict for the sake of the conflict itself without the possibility of its resolution, messages may be accompanied by aggression, bullying, belittling, hidden or explicit insults to another participant, the purpose of the "troll" is to endlessly continue the discussion in a raised voice. </li>
+<li> Publicly discuss the actions of the Administration and moderators (all claims against the Administration and moderators should be sent to the technical support of the Site); </li>
+<li> Disseminate false information about the Administration and its employees; </li>
+<li> Disseminate information discrediting the reputation of the Administration and its employees; </li>
+<li> Recommend / advertise anything not related to the Game; </li>
+<li> Discuss on the Site third-party games / services and sites not related to the Game; </li>
+<li> Publicly discuss the paid resources of the Site and / or Users using them; </li>
 </ul>
-<p class="text-justify">Зарегистрировавшись на Сайте, Пользователь тем самым выражает свое согласие со следующим:</p>
+<p class = "text-justify"> By registering on the Site, the User thereby agrees with the following: </p>
 <ul>
-<li>Личная переписка Пользователей с использованием соответствующих ресурсов Сайта, может быть подвергнута модерированию (редактированию, удалению и т.п.) со стороны Администрации Сайта по жалобе одного из участников такой переписки.</li>
-<li>На почтовый ящик Пользователя могут приходить письма от администрации Сайта, информирующие об изменениях на сайте либо об изменениях в аккаунте Пользователя.</li>
+<li> The personal correspondence of Users using the relevant resources of the Site may be moderated (edited, deleted, etc.) by the Site Administration upon a complaint from one of the participants in such correspondence. </li>
+<li> The User\'s mailbox can receive letters from the Site administration informing about changes on the site or about changes in the User\'s account. </li>
 </ul>
-<p class="text-justify">Регистрация с использованием почтового адреса, не принадлежащего Пользователю, также приравнено к противоправному использованию Игры в отсутствие согласия на такое использование обладателя авторских прав на Игру. Отказаться от всех писем Пользователь имеет право в любой момент, направив соответствующую просьбу Администрации сайта (в том числе путем аннулирования своей регистрации на Сайте), которая должна быть обработана в течение 30 дней с момента ее получения.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>
-<p class="strong text-justify" id="4">4. Пользование платными и бесплатными ресурсами Сайта.</p>
-<p class="text-justify">Пользователь принимает тот факт, что бесплатные ресурсы данного Сайта предоставлены без каких-либо гарантий и обязательств со стороны Администрации. Объем ресурсов, предоставляемых Пользователям бесплатно, может быть изменен без объяснения причин.</p>
-<p class="text-justify">Пользователям, использующим Сайт на частичной платной основе, гарантируется весь спектр ресурсов Сайта в пределах произведенных оплат. Список платных ресурсов Сайта является исчерпывающим и не подлежит расширенному толкованию. Никаких иных привилегий, в том числе доступа к закрытым страницам, привилегированному занятию поста модератора или президента виртуальной федерации это не влечет.</p>
-<p class="text-justify">Каждый Пользователь, использующий платные ресурсы Сайта, вправе обратиться с обращением-претензией в техническую поддержку Сайта, если посчитает, что права на использование платных ресурсов Сайта, обусловленные его платежом, не были предоставлены Администрацией для использования в соответствии с настоящим Соглашением. Администрация гарантирует детальное изучение вашего обращения в этот раздел в течение 15 дней, после чего в случае правомерности претензии все заявленные требования будут удовлетворены, либо Пользователь получит мотивированный отказ.</p>
-<p class="text-justify">В случае досрочного расторжения Соглашения со стороны Пользователя (аннулирование регистрации), каких-либо компенсаций Администрация не выплачивает. Пользователь, принимая условия настоящего Соглашения осознает, что частично платные ресурсы Сайта предоставляются к использованию путем приобретения права на их пользование в объеме и на срок, обусловленными Правилами игры.</p>
-<p class="text-justify">В случае аннулирования регистрации Пользователя Администрацией по причине нарушения им Соглашения и/или Правил игры, каких-либо компенсаций Администрация не выплачивает. Пользователь, принимая условия настоящего Соглашения осознает, что воспользовавшись правом  на использование платных ресурсов Сайта (а таким является участие в игровом процессе начисления «единиц» на «Ваш денежный счет» в разделе Сайта «Магазин»), он лишается возможности вернуть уплаченные денежные средства, так как указанное право будет в таком случае и предоставлено Администрацией и использовано Пользователем.</p>
-<p class="text-justify">Администрация оставляет за собой право не заключать соглашение о пользовании сайтом на частичной платной основе с отдельным Пользователем по своему усмотрению и без указания причин отказа.</p>
-<p class="text-right text-size-3">[<a href="#0">к содержанию</a>]</p>',
-    'title' => 'Соглашение о пользовании сайтом (оферта)',
+<p class = "text-justify"> Registration using a postal address that does not belong to the User is also equated to illegal use of the Game in the absence of consent to such use of the copyright holder for the Game. The User has the right to refuse all letters at any time by sending an appropriate request to the Site Administration (including by canceling his registration on the Site), which must be processed within 30 days from the date of its receipt. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
+<p class = "strong text-justify" id = "4"> 4. Use of paid and free resources of the Site. </p>
+<p class = "text-justify"> The User accepts the fact that the free resources of this Site are provided without any guarantees and obligations on the part of the Administration. The amount of resources provided to Users free of charge may be changed without explanation. </p>
+<p class = "text-justify"> Users using the Site on a partial paid basis are guaranteed the entire range of Site resources within the limits of the payments made. The list of paid resources of the Site is exhaustive and is not subject to extended interpretation. This does not entail any other privileges, including access to closed pages, privileged occupation of the post of moderator or president of a virtual federation. </p>
+<p class = "text-justify"> Each User using the paid resources of the Site has the right to apply to the technical support of the Site with a claim-claim if he considers that the rights to use the paid resources of the Site due to his payment were not granted by the Administration for use in accordance with this Agreement. The administration guarantees a detailed study of your appeal to this section within 15 days, after which, if the claim is legitimate, all the stated requirements will be satisfied, or the User will receive a reasoned refusal. </p>
+<p class = "text-justify"> In case of early termination of the Agreement by the User (cancellation of registration), the Administration does not pay any compensation. The user, accepting the terms of this Agreement, realizes that partially paid resources of the Site are provided for use by acquiring the right to use them in the amount and for a period stipulated by the Rules of the Game. </p>
+<p class = "text-justify"> In case of cancellation of the User\'s registration by the Administration due to his violation of the Agreement and / or the Rules of the Game, the Administration does not pay any compensation. The user, accepting the terms of this Agreement, realizes that by using the right to use the paid resources of the Site (and this is participation in the game process of crediting "units" to "Your cash account" in the Site section "Store"), he loses the opportunity to return the money paid, since the specified right will in this case be provided by the Administration and used by the User. </p>
+<p class = "text-justify"> The Administration reserves the right not to conclude an agreement on the use of the site on a partial paid basis with an individual User at its own discretion and without specifying the reasons for refusal. </p>
+<p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',
+    'title' => 'Website use agreement (offer)',
 ];
