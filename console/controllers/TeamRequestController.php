@@ -41,6 +41,43 @@ class TeamRequestController extends AbstractController
      * @return bool
      * @throws Exception
      */
+    private function recommendation(): bool
+    {
+        /**
+         * @var TeamRequest $teamRequest
+         */
+        $teamRequest = TeamRequest::find()
+            ->joinWith(['recommendation'])
+            ->andWhere(['!=', 'recommendation.user_id', 0])
+            ->andWhere(['!=', 'recommendation.user_id', 0])
+            ->orderBy(['date' => SORT_ASC])
+            ->limit(1)
+            ->one();
+
+        if (!$teamRequest) {
+            return false;
+        }
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            (new TeamRequestHandleExecute($teamRequest))->execute();
+        } catch (Throwable $e) {
+            if ($transaction) {
+                $transaction->rollBack();
+            }
+            ErrorHelper::log($e);
+            return false;
+        }
+        if ($transaction) {
+            $transaction->commit();
+        }
+        return true;
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
     private function queue(): bool
     {
         $expression = new Expression('UNIX_TIMESTAMP()-IFNULL(`count_history`, 0)*46800');

@@ -10,6 +10,12 @@ use common\models\db\ElectionNationalVice;
 use common\models\db\ElectionNationalViceApplication;
 use common\models\db\ElectionNationalViceVote;
 use common\models\db\ElectionNationalVote;
+use common\models\db\ElectionPresident;
+use common\models\db\ElectionPresidentApplication;
+use common\models\db\ElectionPresidentVice;
+use common\models\db\ElectionPresidentViceApplication;
+use common\models\db\ElectionPresidentViceVote;
+use common\models\db\ElectionPresidentVote;
 use common\models\db\ElectionStatus;
 use common\models\db\Federation;
 use common\models\db\FriendlyInvite;
@@ -397,6 +403,122 @@ class TeamController extends AbstractController
         }
 
         $federation = $this->myTeam->stadium->city->country->federation;
+
+        if (!$federation->president_user_id && !$federation->vice_user_id) {
+            $electionPresident = ElectionPresident::find()
+                ->where([
+                    'federation_id' => $federation->id,
+                    'election_status_id' => [
+                        ElectionStatus::CANDIDATES,
+                        ElectionStatus::OPEN,
+                    ],
+                ])
+                ->limit(1)
+                ->one();
+
+            if (!$electionPresident) {
+                $electionPresident = new ElectionPresident();
+                $electionPresident->election_status_id = ElectionStatus::CANDIDATES;
+                $electionPresident->federation_id = $federation->id;
+                $electionPresident->save();
+            }
+
+            if (ElectionStatus::CANDIDATES === $electionPresident->election_status_id) {
+                $electionPresidentApplication = ElectionPresidentApplication::find()
+                    ->where([
+                        'election_president_id' => $electionPresident->id,
+                        'user_id' => $this->user->id,
+                    ])
+                    ->count();
+                if ($electionPresidentApplication) {
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.president.candidate') . Html::a(
+                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            ['president/application']
+                        );
+                } else {
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.president.application') . Html::a(
+                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            ['president/application']
+                        );
+                }
+            } elseif (ElectionStatus::OPEN === $electionPresident->election_status_id) {
+                $electionPresidentVote = ElectionPresidentVote::find()
+                    ->where([
+                        'election_president_application_id' => ElectionPresidentApplication::find()
+                            ->select(['id'])
+                            ->where(['election_president_id' => $electionPresident->id]),
+                        'user_id' => $this->user->id,
+                    ])
+                    ->count();
+
+                if (!$electionPresidentVote) {
+                    Yii::$app->controller->redirect(['president/poll']);
+                }
+
+                $result[] = Yii::t('frontend', 'controllers.team.notification.president.view') . Html::a(
+                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        ['president/view']
+                    );
+            }
+        }
+
+        if ($federation->president_user_id && !$federation->vice_user_id) {
+            $electionPresidentVice = ElectionPresidentVice::find()
+                ->where([
+                    'federation_id' => $federation->id,
+                    'election_status_id' => [
+                        ElectionStatus::CANDIDATES,
+                        ElectionStatus::OPEN,
+                    ],
+                ])
+                ->limit(1)
+                ->one();
+
+            if (!$electionPresidentVice) {
+                $electionPresidentVice = new ElectionPresidentVice();
+                $electionPresidentVice->election_status_id = ElectionStatus::CANDIDATES;
+                $electionPresidentVice->federation_id = $federation->id;
+                $electionPresidentVice->save();
+            }
+
+            if (ElectionStatus::CANDIDATES === $electionPresidentVice->election_status_id) {
+                $electionPresidentViceApplication = ElectionPresidentViceApplication::find()
+                    ->where([
+                        'election_president_vice_id' => $electionPresidentVice->id,
+                        'user_id' => $this->user->id,
+                    ])
+                    ->count();
+                if ($electionPresidentViceApplication) {
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.candidate') . Html::a(
+                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            ['president-vice/application']
+                        );
+                } else {
+                    $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.application') . Html::a(
+                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            ['president-vice/application']
+                        );
+                }
+            } elseif (ElectionStatus::OPEN === $electionPresidentVice->election_status_id) {
+                $electionPresidentVote = ElectionPresidentViceVote::find()
+                    ->where([
+                        'election_president_vice_application_id' => ElectionPresidentViceApplication::find()
+                            ->select(['id'])
+                            ->where(['election_president_vice_id' => $electionPresidentVice->id]),
+                        'user_id' => $this->user->id,
+                    ])
+                    ->count();
+
+                if (!$electionPresidentVote) {
+                    Yii::$app->controller->redirect(['president-vice/poll']);
+                }
+
+                $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.view') . Html::a(
+                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        ['president-vice/view']
+                    );
+            }
+        }
 
         if ($this->season->id > 1) {
             $national = National::find()

@@ -25,6 +25,7 @@ use yii\helpers\Html;
  * @property int $base_school_id
  * @property int $base_scout_id
  * @property int $base_training_id
+ * - * @property int $federation_news_id
  * @property int $finance
  * @property int $friendly_status_id
  * @property int $free_base_number
@@ -42,6 +43,7 @@ use yii\helpers\Html;
  * @property int $power_s_24
  * @property int $power_v
  * @property int $power_vs
+ * - * @property int $president_attitude_id
  * @property int $price_base
  * @property int $price_player
  * @property int $price_stadium
@@ -64,10 +66,13 @@ use yii\helpers\Html;
  * @property-read BuildingStadium $buildingStadium
  * @property-read Championship $championship
  * @property-read Conference $conference
+ * - * @property-read News $federationNews
  * @property-read FriendlyStatus $friendlyStatus
  * @property-read OffSeason $offSeason
  * @property-read Attitude $nationalAttitude
+ * - * @property-read Attitude $presidentAttitude
  * @property-read RatingTeam $ratingTeam
+ * - * @property-read Recommendation $recommendation
  * @property-read Stadium $stadium
  * @property-read TeamRequest[] $teamRequests
  * @property-read Attitude $u19Attitude
@@ -103,6 +108,7 @@ class Team extends AbstractActiveRecord
                     'mood_rest',
                     'mood_super',
                     'national_attitude_id',
+                    'president_attitude_id',
                     'u19_attitude_id',
                     'u21_attitude_id',
                 ],
@@ -142,6 +148,7 @@ class Team extends AbstractActiveRecord
             ],
             [
                 [
+                    'federation_news_id',
                     'finance',
                     'price_base',
                     'price_player',
@@ -163,8 +170,10 @@ class Team extends AbstractActiveRecord
             [['base_school_id'], 'exist', 'targetRelation' => 'baseSchool'],
             [['base_scout_id'], 'exist', 'targetRelation' => 'baseScout'],
             [['base_training_id'], 'exist', 'targetRelation' => 'baseTraining'],
+            [['federation_news_id'], 'exist', 'targetRelation' => 'federationNews'],
             [['friendly_status_id'], 'exist', 'targetRelation' => 'friendlyStatus'],
             [['national_attitude_id'], 'exist', 'targetRelation' => 'nationalAttitude'],
+            [['president_attitude_id'], 'exist', 'targetRelation' => 'presidentAttitude'],
             [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
             [['u19_attitude_id'], 'exist', 'targetRelation' => 'u19Attitude'],
             [['u21_attitude_id'], 'exist', 'targetRelation' => 'u21Attitude'],
@@ -1079,6 +1088,14 @@ class Team extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getFederationNews(): ActiveQuery
+    {
+        return $this->hasOne(News::class, ['id' => 'federation_news_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getFriendlyStatus(): ActiveQuery
     {
         return $this->hasOne(FriendlyStatus::class, ['id' => 'friendly_status_id']);
@@ -1105,9 +1122,25 @@ class Team extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getPresidentAttitude(): ActiveQuery
+    {
+        return $this->hasOne(Attitude::class, ['id' => 'president_attitude_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getRatingTeam(): ActiveQuery
     {
         return $this->hasOne(RatingTeam::class, ['team_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getRecommendation(): ActiveQuery
+    {
+        return $this->hasOne(Recommendation::class, ['team_id' => 'id']);
     }
 
     /**
