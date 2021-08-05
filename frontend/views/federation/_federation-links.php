@@ -21,6 +21,18 @@ try {
                 'url' => ['federation/national', 'id' => $id],
             ],
             [
+                'text' => Yii::t('frontend', 'views.federation.links.news'),
+                'url' => ['federation/news', 'id' => $id],
+            ],
+            [
+                'text' => Yii::t('frontend', 'views.federation.links.finance'),
+                'url' => ['federation/finance', 'id' => $id],
+            ],
+            [
+                'text' => Yii::t('frontend', 'views.federation.links.vote'),
+                'url' => ['federation/vote', 'id' => $id],
+            ],
+            [
                 'text' => Yii::t('frontend', 'views.federation.links.league'),
                 'url' => ['federation/league', 'id' => $id],
             ],

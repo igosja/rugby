@@ -21,6 +21,14 @@ class MapController extends AbstractController
     /**
      * @return string
      */
+    public function actionFamily()
+    {
+        return $this->renderPartial('family');
+    }
+
+    /**
+     * @return string
+     */
     public function actionPlan()
     {
         return $this->renderPartial('plan');

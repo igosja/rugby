@@ -33,6 +33,7 @@ class M200101000024Team extends Migration
                 'base_school_id' => $this->integer(2)->defaultValue(1),
                 'base_scout_id' => $this->integer(2)->defaultValue(1),
                 'base_training_id' => $this->integer(2)->defaultValue(1),
+                'federation_news_id' => $this->integer(11),
                 'finance' => $this->integer(11)->defaultValue(10000000),
                 'friendly_status_id' => $this->integer(1)->defaultValue(2),
                 'free_base_number' => $this->integer(1)->defaultValue(5),
@@ -50,6 +51,7 @@ class M200101000024Team extends Migration
                 'power_s_24' => $this->integer(5)->defaultValue(0),
                 'power_v' => $this->integer(5)->defaultValue(0),
                 'power_vs' => $this->integer(5)->defaultValue(0),
+                'president_attitude_id' => $this->integer(1)->defaultValue(2),
                 'price_base' => $this->integer(11)->defaultValue(0),
                 'price_player' => $this->integer(11)->defaultValue(0),
                 'price_stadium' => $this->integer(11)->defaultValue(0),
@@ -70,6 +72,7 @@ class M200101000024Team extends Migration
         $this->addForeignKey('team_base_school_id', self::TABLE, 'base_school_id', '{{%base_school}}', 'id');
         $this->addForeignKey('team_base_scout_id', self::TABLE, 'base_scout_id', '{{%base_scout}}', 'id');
         $this->addForeignKey('team_base_training_id', self::TABLE, 'base_training_id', '{{%base_training}}', 'id');
+        $this->addForeignKey('team_federation_news_id', self::TABLE, 'federation_news_id', '{{%news}}', 'id');
         $this->addForeignKey(
             'team_friendly_status_id',
             self::TABLE,
@@ -78,6 +81,7 @@ class M200101000024Team extends Migration
             'id'
         );
         $this->addForeignKey('team_national_attitude_id', self::TABLE, 'national_attitude_id', '{{%attitude}}', 'id');
+        $this->addForeignKey('team_president_attitude_id', self::TABLE, 'president_attitude_id', '{{%attitude}}', 'id');
         $this->addForeignKey('team_stadium_id', self::TABLE, 'stadium_id', '{{%stadium}}', 'id');
         $this->addForeignKey('team_u19_attitude_id', self::TABLE, 'u19_attitude_id', '{{%attitude}}', 'id');
         $this->addForeignKey('team_u21_attitude_id', self::TABLE, 'u21_attitude_id', '{{%attitude}}', 'id');
@@ -94,7 +98,8 @@ class M200101000024Team extends Migration
 
         $this->update(self::TABLE, ['id' => 0], ['id' => 1]);
 
-        Yii::$app->db->createCommand('ALTER TABLE ' . self::TABLE . ' AUTO_INCREMENT=1')->execute();
+        $table = self::TABLE;
+        Yii::$app->db->createCommand("ALTER TABLE $table AUTO_INCREMENT=1")->execute();
 
         $this->batchInsert(
             self::TABLE,

@@ -4,18 +4,18 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&language=uk"></script>
     <title>Карта</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-<style>
-    html, body {
-        height: 100%;
-    }
-
-    #map {
-        width: 100%;
-        height: 100%;
-    }
-</style>
 <div id="map"></div>
 <script>
     function initialize(lat, lng) {
@@ -71,15 +71,23 @@
                 map: map
             }),
             new google.maps.Marker({
-                position: new google.maps.LatLng(50.589704, 30.905293), //Тарасівка
-                map: map
-            }),
-            new google.maps.Marker({
                 position: new google.maps.LatLng(48.639241, 25.737360), //Заліщики
                 map: map
             }),
             new google.maps.Marker({
                 position: new google.maps.LatLng(27.978610, 34.393610), //Шарм-еш-шейх
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(50.06611, 31.44222), //Переяслав
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(50.623485, 31.006459), //Тарасівка
+                map: map
+            }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(49.3367912, 30.6206369), //Чаплинка
                 map: map
             }),
         ];

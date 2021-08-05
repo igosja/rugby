@@ -24,7 +24,7 @@ class M200101000049Tactic extends Migration
             self::TABLE,
             [
                 'id' => $this->primaryKey(1),
-                'name' => $this->string(20)->notNull()->unique(),
+                'name' => $this->string(30)->notNull()->unique(),
             ]
         );
 
@@ -32,8 +32,8 @@ class M200101000049Tactic extends Migration
             self::TABLE,
             ['name'],
             [
-                [Yii::t('console', 'migrations.tactic.super-defence')],
-                [Yii::t('console', 'migrations.tactic.defence')],
+                [Yii::t('console', 'migrations.tactic.super-defense')],
+                [Yii::t('console', 'migrations.tactic.defense')],
                 [Yii::t('console', 'migrations.tactic.normal')],
                 [Yii::t('console', 'migrations.tactic.attack')],
                 [Yii::t('console', 'migrations.tactic.super-attack')],

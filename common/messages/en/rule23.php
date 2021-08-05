@@ -57,9 +57,9 @@ return [
 <p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p>
 <p class = "text-justify" id = "7"> <span class = "strong"> 7. Prize money. </span> According to the results of the championship, the teams receive prize money depending on the division. </p>
 <p class = "text-justify"> The prize money for the championship is calculated using the following formula: </p>
-<p class = "text-justify"> 20000000 * 0.98 ^ ((M - 1) + (D - 1) * 16), where </p>
+<p class = "text-justify"> 20000000 * 0.98 ^ ((P - 1) + (D - 1) * 16), where </p>
 <ul>
-<li> М - place in the standings; </li>
+<li> P - place in the standings; </li>
 <li> D - division level; </li>
 </ul>
 <p class = "text-right text-size-3"> [<a href="#0"> to content </a>] </p> ',

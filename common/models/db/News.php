@@ -17,6 +17,7 @@ use yii\db\StaleObjectException;
  * @property int $id
  * @property int $check
  * @property int $date
+ * @property int $federation_id
  * @property string $text
  * @property string $title
  * @property int $user_id
@@ -75,6 +76,14 @@ class News extends AbstractActiveRecord
         }
         User::updateAll(['news_id' => null], ['news_id' => $this->id]);
         return parent::beforeDelete();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFederation(): ActiveQuery
+    {
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
     }
 
     /**

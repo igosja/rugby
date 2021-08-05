@@ -144,7 +144,7 @@ class M200101000028Name extends Migration
                 ['Julien'],
                 ['Laurent'],
                 ['Michel'],
-                ['Nicolas'],
+                ['Nicolau'],
                 ['Olivier'],
                 ['Pascal'],
                 ['Philippe'],
