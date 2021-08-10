@@ -7,6 +7,7 @@ use common\models\db\Game;
 use common\models\db\League;
 use common\models\db\TournamentType;
 use common\models\db\User;
+use kartik\select2\Select2;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -37,12 +38,21 @@ $user = Yii::$app->user->identity;
         <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'seasonId',
-            $seasonId,
-            $seasonArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $seasonArray,
+                'id' => 'seasonId',
+                'name' => 'seasonId',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $seasonId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
@@ -83,12 +93,21 @@ $user = Yii::$app->user->identity;
         <?= Html::label(Yii::t('frontend', 'views.label.stage'), 'stageId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'stageId',
-            $stageId,
-            $stageArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'stageId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $stageArray,
+                'id' => 'stageId',
+                'name' => 'stageId',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $stageId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>

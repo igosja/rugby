@@ -2,6 +2,8 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 
 /**
@@ -26,12 +28,21 @@ use yii\helpers\Html;
         <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'seasonId',
-            $seasonId,
-            $seasonArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $seasonArray,
+                'id' => 'seasonId',
+                'name' => 'seasonId',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $seasonId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>

@@ -2,7 +2,7 @@
 
 // TODO refactor
 
-use frontend\components\widgets\LinkPager;
+use kartik\select2\Select2;
 use yii\grid\GridView;
 use yii\redis\Session;
 use yii\widgets\ListView;
@@ -43,8 +43,8 @@ return [
                     'pageCssClass' => 'btn pagination',
                 ],
             ],
-            \yii\widgets\LinkPager::class => [
-                'class' => LinkPager::class,
+            Select2::class => [
+                'theme' => Select2::THEME_DEFAULT,
             ],
         ],
     ],

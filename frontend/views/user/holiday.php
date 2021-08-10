@@ -7,6 +7,7 @@ use common\components\helpers\FormatHelper;
 use common\models\db\Team;
 use common\models\db\UserHoliday;
 use frontend\models\forms\Holiday;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -74,12 +75,21 @@ print $this->render('//user/_top');
             ) ?>
         </div>
         <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
-            <?= Html::dropDownList(
-                'vice[' . $team->id . ']',
-                $team->vice_user_id,
-                $item['userArray'],
-                ['prompt' => Yii::t('frontend', 'views.user.holiday.prompt.no'), 'id' => 'vice-' . $team->id, 'class' => 'form-control']
-            ) ?>
+            <?php
+
+            try {
+                print Select2::widget([
+                    'data' => $item['userArray'],
+                    'id' => 'vice-' . $team->id,
+                    'name' => 'vice[' . $team->id . ']',
+                    'options' => ['prompt' => Yii::t('frontend', 'views.user.holiday.prompt.no')],
+                    'value' => $team->vice_user_id,
+                ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+
+            ?>
         </div>
     </div>
 <?php endforeach ?>

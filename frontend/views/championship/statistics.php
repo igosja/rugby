@@ -8,6 +8,7 @@ use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -50,12 +51,21 @@ use yii\helpers\Html;
         <?= Html::label(Yii::t('frontend', 'views.championship.statistics.label.statistic-type'), 'statisticType') ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-8">
-        <?= Html::dropDownList(
-            'id',
-            Yii::$app->request->get('id'),
-            $statisticTypeArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'statisticType']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $statisticTypeArray,
+                'id' => 'statisticType',
+                'name' => 'id',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => Yii::$app->request->get('id'),
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>

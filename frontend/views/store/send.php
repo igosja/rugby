@@ -2,8 +2,10 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\models\db\User;
 use frontend\models\forms\UserTransferMoney;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -57,10 +59,21 @@ use yii\widgets\ActiveForm;
                     {error}',
             ],
         ]) ?>
-        <?= $form
-            ->field($model, 'userId')
-            ->dropDownList($userArray, ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.store.send.prompt.user')])
-            ->label(Yii::t('frontend', 'views.store.send.label.user')) ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'userId')
+                ->widget(Select2::class, [
+                    'data' => $userArray,
+                    'options' => ['prompt' => Yii::t('frontend', 'views.store.send.prompt.user')]
+                ])
+                ->label(Yii::t('frontend', 'views.store.send.label.user'));
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
                 <?= Yii::t('frontend', 'views.store.send.label.available') ?>

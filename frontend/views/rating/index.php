@@ -10,6 +10,7 @@ use common\models\db\RatingTeam;
 use common\models\db\RatingType;
 use common\models\db\RatingUser;
 use common\models\db\Season;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -32,23 +33,41 @@ use yii\helpers\Html;
 <?= Html::beginForm(['rating/index'], 'get') ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= Html::dropDownList(
-            'id',
-            $ratingType->id,
-            $ratingTypeArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'ratingTypeId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $ratingTypeArray,
+                'id' => 'ratingTypeId',
+                'name' => 'id',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $ratingType->id,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
 </div>
 <?php if (RatingChapter::TEAM === $ratingType->rating_chapter_id): ?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <?= Html::dropDownList(
-                'countryId',
-                $countryId,
-                $countryArray,
-                ['class' => 'form-control submit-on-change', 'id' => 'countryId', 'prompt' => Yii::t('frontend', 'views.rating.index.prompt.country')]
-            ) ?>
+            <?php
+
+            try {
+                print Select2::widget([
+                    'data' => $countryArray,
+                    'id' => 'countryId',
+                    'name' => 'countryId',
+                    'options' => ['class' => 'submit-on-change'],
+                    'value' => $countryId,
+                ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+
+            ?>
         </div>
     </div>
 <?php endif ?>

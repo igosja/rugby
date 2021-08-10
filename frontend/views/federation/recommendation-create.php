@@ -2,9 +2,11 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\models\db\Federation;
 use common\models\db\Recommendation;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -46,7 +48,17 @@ print $this->render('_federation', [
                     {error}',
             ],
         ]) ?>
-        <?= $form->field($model, 'user_id')->dropDownList($userArray) ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'user_id')
+                ->widget(Select2::class, ['data' => $userArray]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton(Yii::t('frontend', 'views.federation.recommendation-create.submit'), ['class' => 'btn margin']) ?>

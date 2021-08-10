@@ -5,6 +5,7 @@
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Finance;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -29,12 +30,21 @@ print $this->render('//user/_top');
                 <?= Html::label(Yii::t('frontend', 'views.label.season'), 'season_id') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?= Html::dropDownList(
-                    'season_id',
-                    $seasonId,
-                    $seasonArray,
-                    ['class' => 'form-control submit-on-change', 'id' => 'season_id']
-                ) ?>
+                <?php
+
+                try {
+                    print Select2::widget([
+                        'data' => $seasonArray,
+                        'id' => 'seasonId',
+                        'name' => 'seasonId',
+                        'options' => ['class' => 'submit-on-change'],
+                        'value' => $seasonId,
+                    ]);
+                } catch (Exception $e) {
+                    ErrorHelper::log($e);
+                }
+
+                ?>
             </div>
         </div>
     </div>
