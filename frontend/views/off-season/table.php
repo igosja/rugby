@@ -5,6 +5,7 @@
 use common\components\helpers\ErrorHelper;
 use common\models\db\OffSeason;
 use common\models\db\User;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -33,12 +34,21 @@ $user = $this->context->user;
         <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'seasonId',
-            $seasonId,
-            $seasonArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $seasonArray,
+                'id' => 'seasonId',
+                'name' => 'seasonId',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $seasonId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
@@ -48,12 +58,21 @@ $user = $this->context->user;
         <?= Html::label(Yii::t('frontend', 'views.off-season.table.label.federation'), 'federationId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'federationId',
-            $federationId,
-            $countryArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'federationId', 'prompt' => Yii::t('frontend', 'views.prompt.all')]
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $countryArray,
+                'id' => 'federationId',
+                'name' => 'federationId',
+                'options' => ['class' => 'submit-on-change', 'prompt' => Yii::t('frontend', 'views.prompt.all')],
+                'value' => $federationId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>

@@ -20,6 +20,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4.0",
+    "ext-curl": "*",
+    "ext-gd": "*",
     "yiisoft/yii2": "^2.0",
     "yiisoft/yii2-bootstrap": "~2.0.0",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
@@ -27,8 +29,7 @@
     "rmrevin/yii2-fontawesome": "~3.5",
     "miloschuman/yii2-highcharts-widget": "dev-master",
     "codeonyii/yii2-at-least-validator": "dev-master",
-    "ext-curl": "*",
-    "ext-gd": "*"
+    "kartik-v/yii2-widget-select2": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

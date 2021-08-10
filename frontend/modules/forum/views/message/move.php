@@ -2,7 +2,9 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\models\db\ForumMessage;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -55,7 +57,18 @@ use yii\widgets\ActiveForm;
                 'template' => '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{input}</div>{error}',
             ],
         ]) ?>
-        <?= $form->field($model, 'forum_theme_id')->dropDownList($forumThemeArray)->label(false) ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'forum_theme_id')
+                ->widget(Select2::class, ['data' => $forumThemeArray])
+                ->label(false);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <?= Html::submitButton(Yii::t('frontend', 'modules.forum.views.message.move.submit'), ['class' => 'btn margin']) ?>

@@ -3,6 +3,7 @@
 // TODO refactor
 
 use common\components\helpers\ErrorHelper;
+use kartik\select2\Select2;
 use miloschuman\highcharts\Highcharts;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -26,22 +27,38 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?= Html::beginForm(['analytics/snapshot'], 'get', ['class' => 'form-inline']) ?>
         <div class="form-group">
-            <label for="num"><?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?></label>
-            <?= Html::dropDownList(
-                'seasonId',
-                $seasonId,
-                $seasonArray,
-                ['class' => 'form-control', 'id' => 'seasonId']
-            ) ?>
+            <label for="seasonId"><?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?></label>
+            <?php
+
+            try {
+                print Select2::widget([
+                    'data' => $seasonArray,
+                    'id' => 'seasonId',
+                    'name' => 'seasonId',
+                    'value' => $seasonId,
+                ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+
+            ?>
         </div>
         <div class="form-group">
-            <label for="num"><?= Html::label(Yii::t('backend', 'views.analytics.snapshot.label.id'), 'id') ?></label>
-            <?= Html::dropDownList(
-                'id',
-                $id,
-                ArrayHelper::map($categoryArray, 'id', 'name'),
-                ['class' => 'form-control', 'id' => 'id']
-            ) ?>
+            <label for="id"><?= Html::label(Yii::t('backend', 'views.analytics.snapshot.label.id'), 'id') ?></label>
+            <?php
+
+            try {
+                print Select2::widget([
+                    'data' => ArrayHelper::map($categoryArray, 'id', 'name'),
+                    'id' => 'id',
+                    'name' => 'id',
+                    'value' => $id,
+                ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+
+            ?>
         </div>
         <?= Html::submitButton(Yii::t('backend', 'views.analytics.snapshot.submit'), ['class' => 'btn btn-default']) ?>
         <?= Html::endForm() ?>

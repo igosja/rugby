@@ -2,8 +2,10 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\models\db\School;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\web\View;
@@ -157,28 +159,48 @@ use yii\web\View;
                     </td>
                     <td class="text-center"><?= School::AGE ?></td>
                     <td class="text-center">
-                        <?= Html::dropDownList(
-                            'position_id',
-                            null,
-                            $positionArray,
-                            ['class' => 'form-control']
-                        ) ?>
+                        <?php
+
+                        try {
+                            print Select2::widget([
+                                'data' => $positionArray,
+                                'name' => 'position_id',
+                            ]);
+                        } catch (Exception $e) {
+                            ErrorHelper::log($e);
+                        }
+
+                        ?>
                     </td>
                     <td class="text-center">
-                        <?= Html::dropDownList(
-                            'special_id',
-                            null,
-                            $specialArray,
-                            ['class' => 'form-control', 'prompt' => '-']
-                        ) ?>
+                        <?php
+
+                        try {
+                            print Select2::widget([
+                                'data' => $specialArray,
+                                'name' => 'special_id',
+                                'options' => ['prompt' => '-'],
+                            ]);
+                        } catch (Exception $e) {
+                            ErrorHelper::log($e);
+                        }
+
+                        ?>
                     </td>
                     <td class="text-center">
-                        <?= Html::dropDownList(
-                            'style_id',
-                            null,
-                            $styleArray,
-                            ['class' => 'form-control', 'prompt' => '-']
-                        ) ?>
+                        <?php
+
+                        try {
+                            print Select2::widget([
+                                'data' => $styleArray,
+                                'name' => 'style_id',
+                                'options' => ['prompt' => '-'],
+                            ]);
+                        } catch (Exception $e) {
+                            ErrorHelper::log($e);
+                        }
+
+                        ?>
                     </td>
                 </tr>
             </table>

@@ -2,9 +2,11 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Federation;
 use frontend\models\forms\FederationTransferFinance;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -47,9 +49,20 @@ print $this->render('_federation', [
                     {error}',
             ],
         ]) ?>
-        <?= $form
-            ->field($model, 'teamId')
-            ->dropDownList($teamArray, ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.federation.money-transfer.team.prompt')]) ?>
+        <?php
+
+        try {
+            $form
+                ->field($model, 'teamId')
+                ->widget(Select2::class, [
+                    'data' => $teamArray,
+                    'options' => ['prompt' => Yii::t('frontend', 'views.federation.money-transfer.team.prompt')]
+                ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
                 <?= Yii::t('frontend', 'views.federation.money-transfer.available') ?>

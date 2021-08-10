@@ -2,8 +2,10 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use frontend\models\forms\UserTransferFinance;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -52,14 +54,32 @@ print $this->render('_top');
                     {error}',
             ],
         ]) ?>
-        <?= $form
-            ->field($model, 'teamId')
-            ->dropDownList($teamArray, ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.user.money-transfer.prompt.team')])
-            ->label(Yii::t('frontend', 'views.user.money-transfer.label.team')) ?>
-        <?= $form
-            ->field($model, 'federationId')
-            ->dropDownList($federationArray, ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.user.money-transfer.prompt.federation')])
-            ->label(Yii::t('frontend', 'views.user.money-transfer.label.federation')) ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'teamId')
+                ->widget(Select2::class, [
+                    'data' => $teamArray,
+                    'options' => ['prompt' => Yii::t('frontend', 'views.user.money-transfer.prompt.team')]
+                ])
+                ->label(Yii::t('frontend', 'views.user.money-transfer.label.team'));
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        } ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'federationId')
+                ->widget(Select2::class, [
+                    'data' => $federationArray,
+                    'options' => ['prompt' => Yii::t('frontend', 'views.user.money-transfer.prompt.federation')]
+                ])
+                ->label(Yii::t('frontend', 'views.user.money-transfer.label.federation'));
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        } ?>
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 text-right xs-text-center">
                 <?= Yii::t('frontend', 'views.user.money-transfer.available') ?>

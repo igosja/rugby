@@ -2,8 +2,10 @@
 
 // TODO refactor
 
+use common\components\helpers\ErrorHelper;
 use common\models\db\Federation;
 use common\models\db\Vote;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -43,10 +45,20 @@ print $this->render('_federation', [
                    {error}',
             ],
         ]) ?>
-        <?= $form->field($model, 'federation_id')->dropDownList([
-            $model->federation_id => Yii::t('frontend', 'views.federation.vote-create.federation'),
-            0 => Yii::t('frontend', 'views.federation.vote-create.league'),
-        ]) ?>
+        <?php
+
+        try {
+            print $form
+                ->field($model, 'federation_id')
+                ->widget(Select2::class, ['data' => [
+                    $model->federation_id => Yii::t('frontend', 'views.federation.vote-create.federation'),
+                    0 => Yii::t('frontend', 'views.federation.vote-create.league'),
+                ]]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
         <?= $form->field($model, 'text')->textarea() ?>
         <?php for ($i = 0; $i < 15; $i++) : ?>
             <?= $form->field($model, 'answers[' . $i . ']')->textarea() ?>

@@ -6,6 +6,7 @@ use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use frontend\models\search\PlayerSearch;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -41,10 +42,18 @@ use yii\widgets\ActiveForm;
             <?= Yii::t('frontend', 'views.player.index.search') ?>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-            <?= $form->field($model, 'country')->dropDownList(
-                $countryArray,
-                ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.player.index.prompt-country')]
-            ) ?>
+            <?php
+
+            try {
+                print $form
+                    ->field($model, 'country')
+                    ->widget(Select2::class, [
+                        'data' => $countryArray,
+                        'options' => ['prompt' => Yii::t('frontend', 'views.player.index.prompt-country')]
+                    ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            } ?>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
             <?= $form->field($model, 'name')->textInput([
@@ -59,10 +68,18 @@ use yii\widgets\ActiveForm;
             ]) ?>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-            <?= $form->field($model, 'position')->dropDownList(
-                $positionArray,
-                ['class' => 'form-control', 'prompt' => Yii::t('frontend', 'views.player.index.prompt-position')]
-            ) ?>
+            <?php
+
+            try {
+                $form
+                    ->field($model, 'position')
+                    ->widget(Select2::class, [
+                        'data' => $positionArray,
+                        'options' => ['prompt' => Yii::t('frontend', 'views.player.index.prompt-position')]
+                    ]);
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            } ?>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
             <?= $form->field($model, 'ageMin')->textInput([
