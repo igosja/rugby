@@ -14,7 +14,6 @@ use frontend\components\widgets\Alert;
 use frontend\components\widgets\Menu;
 use frontend\controllers\AbstractController;
 use frontend\models\preparers\SitePrepare;
-use kartik\select2\Select2;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\web\View;
@@ -103,21 +102,15 @@ $context = $this->context;
                             'post',
                             ['class' => 'form-inline']
                         ) ?>
-                        <?php
-
-                        try {
-                            print Select2::widget([
-                                'data' => $context->getDropDownItems(),
-                                'id' => 'changeTeamId',
-                                'name' => 'teamId',
-                                'options' => ['onchange' => 'this.form.submit();'],
-                                'value' => $context->myTeamOrVice->id ?? 0,
-                            ]);
-                        } catch (Exception $e) {
-                            ErrorHelper::log($e);
-                        }
-
-                        ?>
+                        <?= Html::dropDownList(
+                            'teamId',
+                            $context->myTeamOrVice->id ?? 0,
+                            $context->getDropDownItems(),
+                            [
+                                'class' => 'form-control',
+                                'onchange' => 'this.form.submit();'
+                            ]
+                        ) ?>
                     <?php endif ?>
                     <?= Html::a(
                         Yii::t('frontend', 'views.layouts.main.link.sign-out'),

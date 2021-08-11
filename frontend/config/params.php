@@ -10,4 +10,5 @@ return [
     'pageSizeNewsComment' => 20,
     'pageSizeTable' => 50,
     'pageSizeVote' => 10,
+    'bsDependencyEnabled' => false,
 ];

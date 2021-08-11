@@ -76,7 +76,6 @@ class NewsController extends AbstractController
 
         $model = new NewsComment();
         $model->news_id = $id;
-        $model->user_id = $this->user->id;
         if ($this->user && (new NewsCommentSaveExecutor($this->user, $model, Yii::$app->request->post()))->execute()) {
             $this->setSuccessFlash(Yii::t('frontend', 'controllers.news.view.success'));
             return $this->refresh();

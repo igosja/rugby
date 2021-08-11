@@ -339,7 +339,7 @@ return [
     'controllers.team.notification.deal' => 'У вас есть непроверенные сделки в вашей федерации. ',
     'controllers.team.notification.deal.minus' => 'У вас есть непроверенные сделки с отрицательными оценками. ',
     'controllers.team.notification.friendly' => 'У вас есть новые приглашения сыграть товарищеский матч. ',
-    'controllers.team.notification.lineup' => '<span class="font-red">Вы не отправили состав на ближайший матч своей команды.</span>. ',
+    'controllers.team.notification.lineup' => '<span class="font-red">Вы не отправили состав на ближайший матч своей команды.</span> ',
     'controllers.team.notification.lineup.national' => '<span class="font-yellow">Вы не отправили состав на ближайший матч сборной.</span> ',
     'controllers.team.notification.president-vice.application' => 'В вашей стране открыт прием заявок от кандидатов заместителей президентов федерации. ',
     'controllers.team.notification.president-vice.candidate' => 'Вы являетесь кандидатом на должность заместителя президента федерации. ',
