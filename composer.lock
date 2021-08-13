@@ -3178,10 +3178,10 @@
         },
         "require": {
           "ext-tokenizer": "*",
-          "php": "^7.3 || ^8.0"
+          "php": "^7.1"
         },
         "require-dev": {
-          "phpunit/phpunit": "^9.0"
+          "phpunit/phpunit": "^7.0"
         },
         "type": "library",
         "extra": {
