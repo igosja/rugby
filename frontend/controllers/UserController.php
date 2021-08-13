@@ -8,6 +8,7 @@ use common\components\helpers\ErrorHelper;
 use common\components\helpers\TimeZoneHelper;
 use common\models\db\Achievement;
 use common\models\db\Blacklist;
+use common\models\db\City;
 use common\models\db\Country;
 use common\models\db\Finance;
 use common\models\db\History;
@@ -401,6 +402,17 @@ class UserController extends AbstractController
             return $this->refresh();
         }
 
+        $federationArray = Country::find()
+            ->where(['!=', 'id', 0])
+            ->andWhere(['id' => City::find()->select(['country_id'])])
+            ->orderBy(['name' => SORT_ASC])
+            ->all();
+        $federationItems = [];
+
+        foreach ($federationArray as $federation) {
+            $federationItems[$federation->id] = $federation->name;
+        }
+
         /**
          * @var Team[] $teamArray
          */
@@ -417,6 +429,7 @@ class UserController extends AbstractController
         $this->setSeoTitle(Yii::t('frontend', 'controllers.user.money-transfer.title'));
 
         return $this->render('money-transfer', [
+            'federationArray' => $federationItems,
             'model' => $model,
             'teamArray' => $teamItems,
         ]);

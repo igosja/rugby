@@ -77,6 +77,7 @@ class NewsCommentSaveExecutor implements ExecuteInterface
         }
 
         try {
+            $this->model->user_id = $this->user->id;
             if (!$this->model->save()) {
                 return false;
             }

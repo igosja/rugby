@@ -109,6 +109,7 @@ class TournamentPrepare
          */
         $divisionArray = Division::find()
             ->orderBy(['id' => SORT_ASC])
+            ->limit(2)
             ->all();
 
         foreach ($countryArray as $i => $iValue) {
