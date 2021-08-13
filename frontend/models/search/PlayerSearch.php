@@ -19,52 +19,52 @@ class PlayerSearch extends Player
     /**
      * @var int|null $ageMax
      */
-    public ?int $ageMax = null;
+    public $ageMax;
 
     /**
      * @var int|null $ageMin
      */
-    public ?int $ageMin = null;
+    public $ageMin;
 
     /**
      * @var int|null $country
      */
-    public ?int $country = null;
+    public $country;
 
     /**
      * @var string|null $name
      */
-    public ?string $name = null;
+    public $name;
 
     /**
      * @var int|null $position
      */
-    public ?int $position = null;
+    public $position;
 
     /**
      * @var int|null $powerMax
      */
-    public ?int $powerMax = null;
+    public $powerMax;
 
     /**
      * @var int|null $powerMin
      */
-    public ?int $powerMin = null;
+    public $powerMin;
 
     /**
      * @var int|null $priceMax
      */
-    public ?int $priceMax = null;
+    public $priceMax;
 
     /**
      * @var int|null $priceMin
      */
-    public ?int $priceMin = null;
+    public $priceMin;
 
     /**
      * @var string|null $surname
      */
-    public ?string $surname = null;
+    public $surname;
 
     /**
      * @return array

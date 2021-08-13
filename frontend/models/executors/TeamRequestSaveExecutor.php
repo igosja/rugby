@@ -19,17 +19,17 @@ class TeamRequestSaveExecutor implements ExecuteInterface
     /**
      * @var int|null
      */
-    private ?int $leaveId;
+    private $leaveId;
 
     /**
      * @var int $teamId
      */
-    private int $teamId;
+    private $teamId;
 
     /**
      * @var int $userId
      */
-    private int $userId;
+    private $userId;
 
     /**
      * TeamRequestSaveExecutor constructor.

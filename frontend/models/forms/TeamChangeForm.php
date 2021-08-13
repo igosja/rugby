@@ -17,7 +17,7 @@ class TeamChangeForm extends Model
     /**
      * @var int|null $leaveId
      */
-    public ?int $leaveId = null;
+    public $leaveId;
 
     /**
      * @return array

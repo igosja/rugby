@@ -21,17 +21,17 @@ class SignInForm extends Model
     /**
      * @var string $login
      */
-    public string $login = '';
+    public $login = '';
 
     /**
      * @var string $password
      */
-    public string $password = '';
+    public $password = '';
 
     /**
      * @var User|null $user
      */
-    private ?User $user = null;
+    private $user;
 
     /**
      * @return array
