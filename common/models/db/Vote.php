@@ -33,7 +33,7 @@ class Vote extends AbstractActiveRecord
     /**
      * @var array $answers
      */
-    public array $answers = [];
+    public $answers = [];
 
     /**
      * @return string

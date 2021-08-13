@@ -17,7 +17,7 @@ class HistoryLogExecutor implements ExecuteInterface
     /**
      * @var array $data
      */
-    private array $data;
+    private $data;
 
     /**
      * HistoryLogExecutor constructor.

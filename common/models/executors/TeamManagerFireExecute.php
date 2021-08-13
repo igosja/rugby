@@ -29,12 +29,12 @@ class TeamManagerFireExecute implements ExecuteInterface
     /**
      * @var int $fireReasonId
      */
-    private int $fireReasonId;
+    private $fireReasonId;
 
     /**
      * @var Team $team
      */
-    private Team $team;
+    private $team;
 
     /**
      * TeamManagerFireExecute constructor.

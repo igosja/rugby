@@ -21,17 +21,17 @@ class NewsCommentSaveExecutor implements ExecuteInterface
     /**
      * @var array $data
      */
-    private array $data;
+    private $data;
 
     /**
      * @var NewsComment $model
      */
-    private NewsComment $model;
+    private $model;
 
     /**
      * @var User $user
      */
-    private User $user;
+    private $user;
 
     /**
      * NewsCommentSaveExecutor constructor.

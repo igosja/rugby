@@ -47,52 +47,52 @@ abstract class AbstractController extends AbstractWebController
     /**
      * @var National|null $myNational
      */
-    public ?National $myNational = null;
+    public $myNational;
 
     /**
      * @var National|null $myNationalOrVice
      */
-    public ?National $myNationalOrVice = null;
+    public $myNationalOrVice;
 
     /**
      * @var National|null $myNationalVice
      */
-    public ?National $myNationalVice = null;
+    public $myNationalVice;
 
     /**
      * @var Team[] $myOwnTeamArray
      */
-    public array $myOwnTeamArray = [];
+    public $myOwnTeamArray = [];
 
     /**
      * @var Team|null $myTeam
      */
-    public ?Team $myTeam = null;
+    public $myTeam;
 
     /**
      * @var Team[] $myTeamArray
      */
-    public array $myTeamArray = [];
+    public $myTeamArray = [];
 
     /**
      * @var Team|null $myTeamOrVice
      */
-    public ?Team $myTeamOrVice = null;
+    public $myTeamOrVice;
 
     /**
      * @var Team|null $myTeamVice
      */
-    public ?Team $myTeamVice = null;
+    public $myTeamVice;
 
     /**
      * @var Season|null $season
      */
-    public ?Season $season;
+    public $season;
 
     /**
      * @var User|null $user
      */
-    public ?User $user = null;
+    public $user;
 
     /**
      * @param Action $action
