@@ -10,11 +10,11 @@ return [
         'db' => [
             'class' => Connection::class,
             'charset' => 'utf8',
-            'dsn' => 'mysql:host=localhost;dbname=vrol',
+            'dsn' => 'mysql:host=localhost;dbname=admin_vrol',
             'enableSchemaCache' => true,
             'password' => 'JGvjBoCmVhLVzKDnYiH6',
             'schemaCacheDuration' => 3600,
-            'username' => 'vrol',
+            'username' => 'admin_vrol',
         ],
         'mailer' => [
             'class' => Mailer::class,
