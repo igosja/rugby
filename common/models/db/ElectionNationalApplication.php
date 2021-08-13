@@ -32,12 +32,12 @@ class ElectionNationalApplication extends AbstractActiveRecord
     /**
      * @var array $player
      */
-    public array $player = [];
+    public $player = [];
 
     /**
      * @var array $playerArray
      */
-    public array $playerArray = [];
+    public $playerArray = [];
 
     /**
      * @return string

@@ -55,22 +55,22 @@ class GameResult
     /**
      * @var Game|null
      */
-    private ?Game $game = null;
+    private $game;
 
     /**
      * @var array $result
      */
-    private array $result = [];
+    private $result = [];
 
     /**
      * @var array $playerIds
      */
-    private array $playerIds = [];
+    private $playerIds = [];
 
     /**
      * @var array $positions
      */
-    private array $positions = [
+    private $positions = [
         Position::POS_01,
         Position::POS_02,
         Position::POS_03,
@@ -91,7 +91,7 @@ class GameResult
     /**
      * @var array $positions_forward
      */
-    private array $positions_forward = [
+    private $positions_forward = [
         Position::POS_01,
         Position::POS_02,
         Position::POS_03,
@@ -105,7 +105,7 @@ class GameResult
     /**
      * @var array $positions_back
      */
-    private array $positions_back = [
+    private $positions_back = [
         Position::POS_11,
         Position::POS_12,
         Position::POS_13,

@@ -24,17 +24,17 @@ class SignUpForm extends Model
     /**
      * @var string $email
      */
-    public string $email = '';
+    public $email = '';
 
     /**
      * @var string $login
      */
-    public string $login = '';
+    public $login = '';
 
     /**
      * @var string $password
      */
-    public string $password = '';
+    public $password = '';
 
     /**
      * @return array

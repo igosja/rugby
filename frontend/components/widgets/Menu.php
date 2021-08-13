@@ -54,17 +54,17 @@ class Menu extends Widget
     /**
      * @var array $menuItemList
      */
-    private array $menuItemList = [];
+    private $menuItemList = [];
 
     /**
      * @var array $menuItems
      */
-    private array $menuItems = [];
+    private $menuItems = [];
 
     /**
      * @var string $menu
      */
-    private string $menu = '';
+    private $menu = '';
 
     /**
      * @return string

@@ -21,12 +21,12 @@ class ActivationRepeatForm extends Model
     /**
      * @var string $email
      */
-    public string $email = '';
+    public $email = '';
 
     /**
      * @var User|null $user
      */
-    private ?User $user = null;
+    private $user;
 
     /**
      * @return array

@@ -19,12 +19,12 @@ class ActivationForm extends Model
     /**
      * @var string $code
      */
-    public string $code = '';
+    public $code = '';
 
     /**
      * @var User|null $user
      */
-    private ?User $user = null;
+    private $user;
 
     /**
      * @return array

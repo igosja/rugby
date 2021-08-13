@@ -7,7 +7,6 @@ namespace frontend\components\widgets;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
-use function GuzzleHttp\Psr7\str;
 
 /**
  * Class LinkBar
@@ -24,27 +23,27 @@ class LinkBar extends Widget
     /**
      * @var array $items
      */
-    public array $items = [];
+    public $items = [];
 
     /**
      * @var string $bar
      */
-    private string $bar = '';
+    private $bar = '';
 
     /**
      * @var array $item
      */
-    private array $item = [];
+    private $item = [];
 
     /**
      * @var string $route
      */
-    private string $route = '';
+    private $route = '';
 
     /**
      * @var array $params
      */
-    private array $params = [];
+    private $params = [];
 
     /**
      * @return void

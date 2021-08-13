@@ -23,17 +23,17 @@ class ForgotPasswordForm extends Model
     /**
      * @var string|null
      */
-    public ?string $email = null;
+    public $email;
 
     /**
      * @var string|null
      */
-    public ?string $login = null;
+    public $login;
 
     /**
      * @var User|null $user
      */
-    private ?User $user = null;
+    private $user;
 
     /**
      * @return array

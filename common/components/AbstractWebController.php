@@ -26,7 +26,7 @@ abstract class AbstractWebController extends Controller
     /**
      * @var User|null $user
      */
-    public ?User $user = null;
+    public $user;
 
     /**
      * @param Action $action
