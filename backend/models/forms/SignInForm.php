@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\models\forms;
 
 use common\models\db\User;
@@ -19,17 +21,17 @@ class SignInForm extends Model
     /**
      * @var string $login
      */
-    public $login;
+    public string $login = '';
 
     /**
      * @var string $password
      */
-    public $password;
+    public string $password = '';
 
     /**
-     * @var User $_user
+     * @var User|null $user
      */
-    private $_user;
+    private ?User $user = null;
 
     /**
      * @return array
@@ -44,30 +46,33 @@ class SignInForm extends Model
 
     /**
      * @param string $attribute
+     * @return bool
      */
-    public function validatePassword(string $attribute)
+    public function validatePassword(string $attribute): bool
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неправильная комбинация логин/пароль');
+                $this->addError($attribute, Yii::t('backend', 'models.forms.sing-in.password.error'));
             }
         }
+
+        return true;
     }
 
     /**
      * @return User|null
      */
-    private function getUser()
+    private function getUser(): ?User
     {
-        if (null === $this->_user) {
-            $this->_user = User::find()
-                ->where(['user_login' => $this->login, 'user_user_role_id' => UserRole::ADMIN])
+        if (null === $this->user) {
+            $this->user = User::find()
+                ->where(['login' => $this->login, 'user_role_id' => UserRole::ADMIN])
                 ->limit(1)
                 ->one();
         }
 
-        return $this->_user;
+        return $this->user;
     }
 
     /**

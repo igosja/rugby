@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,13 +10,17 @@ use common\components\AbstractActiveRecord;
  * Class Mood
  * @package common\models\db
  *
- * @property int $mood_id
- * @property string $mood_name
+ * @property int $id
+ * @property string $name
  */
 class Mood extends AbstractActiveRecord
 {
-    const START_REST = 3;
-    const START_SUPER = 3;
+    public const NORMAL = 2;
+    public const REST = 3;
+    public const SUPER = 1;
+
+    public const START_REST = 3;
+    public const START_SUPER = 3;
 
     /**
      * @return string
@@ -22,5 +28,18 @@ class Mood extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%mood}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 10],
+            [['name'], 'unique'],
+        ];
     }
 }

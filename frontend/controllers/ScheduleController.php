@@ -1,10 +1,12 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\components\helpers\FormatHelper;
+use common\models\db\Schedule;
 use common\models\db\Season;
-use frontend\components\AbstractController;
 use frontend\models\preparers\GamePrepare;
 use frontend\models\preparers\SchedulePrepare;
 use frontend\models\queries\ScheduleQuery;
@@ -22,13 +24,13 @@ class ScheduleController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
 
         $dataProvider = SchedulePrepare::getScheduleDataProvider($seasonId);
         $scheduleId = ScheduleQuery::getCurrentScheduleIds();
         $seasonArray = Season::getSeasonArray();
 
-        $this->seoTitle('Расписание');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.schedule.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'seasonArray' => $seasonArray,
@@ -44,14 +46,17 @@ class ScheduleController extends AbstractController
      */
     public function actionView(int $id): string
     {
+        /**
+         * @var Schedule $schedule
+         */
         $schedule = ScheduleQuery::getScheduleById($id);
         $this->notFound($schedule);
 
         $dataProvider = GamePrepare::getGameDataProvider($id);
 
-        $this->seoTitle(
-            'Список матчей игрового дня '
-            . FormatHelper::asDate($schedule->schedule_date)
+        $this->setSeoTitle(
+            Yii::t('frontend', 'controllers.schedule.view.title')
+            . FormatHelper::asDate($schedule->date)
         );
         return $this->render('view', [
             'dataProvider' => $dataProvider,

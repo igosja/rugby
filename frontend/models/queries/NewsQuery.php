@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\queries;
 
 use common\models\db\News;
@@ -14,64 +16,28 @@ class NewsQuery
 {
     /**
      * @param int $id
-     * @param int $countryId
      * @return News|null
      */
-    public static function getNewsById(int $id, int $countryId = 0): ?News
+    public static function getNewsById(int $id): ?News
     {
         /**
          * @var News $result
          */
         $result = News::find()
-            ->with([
-                'user' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'user_id',
-                        'user_login',
-                    ]);
-                },
-            ])
-            ->select([
-                'news_date',
-                'news_title',
-                'news_text',
-                'news_user_id',
-            ])
-            ->where(['news_id' => $id, 'news_country_id' => $countryId])
+            ->andWhere(['id' => $id])
             ->limit(1)
             ->one();
         return $result;
     }
 
     /**
-     * @param int $countryId
      * @return ActiveQuery
      */
-    public static function getNewsListQuery(int $countryId = 0): ActiveQuery
+    public static function getNewsListQuery(): ActiveQuery
     {
         return News::find()
-            ->with([
-                'newsComments' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'news_comment_news_id',
-                    ]);
-                },
-                'user' => static function (ActiveQuery $query) {
-                    $query->select([
-                        'user_id',
-                        'user_login',
-                    ]);
-                },
-            ])
-            ->select([
-                'news_date',
-                'news_id',
-                'news_title',
-                'news_text',
-                'news_user_id',
-            ])
-            ->where(['news_country_id' => $countryId])
-            ->orderBy(['news_id' => SORT_DESC]);
+            ->with(['user', 'newsComments'])
+            ->orderBy(['id' => SORT_DESC]);
     }
 
     /**
@@ -80,24 +46,37 @@ class NewsQuery
     public static function updateUserNewsId(User $user): void
     {
         $lastNewsId = self::getLastNewsId();
-        if ($user->user_news_id < $lastNewsId) {
+        if ($user->news_id < $lastNewsId) {
             User::updateAll(
-                ['user_news_id' => $lastNewsId],
-                ['user_id' => $user->user_id]
+                ['news_id' => $lastNewsId],
+                ['id' => $user->id]
             );
         }
     }
 
     /**
-     * @param int $countryId
      * @return int
      */
-    public static function getLastNewsId(int $countryId = 0): int
+    public static function getLastNewsId(): int
     {
         return News::find()
-            ->select(['news_id'])
-            ->where(['news_country_id' => $countryId])
-            ->orderBy(['news_id' => SORT_DESC])
+            ->select(['id'])
+            ->orderBy(['id' => SORT_DESC])
             ->scalar() ?: 0;
+    }
+
+    /**
+     * @return News
+     */
+    public static function getLastNews(): ?News
+    {
+        /**
+         * @var News $news
+         */
+        $news = News::find()
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(1)
+            ->one();
+        return $news;
     }
 }

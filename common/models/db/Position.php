@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,27 +10,38 @@ use common\components\AbstractActiveRecord;
  * Class Position
  * @package common\models\db
  *
- * @property int $position_id
- * @property string $position_name
- * @property string $position_text
+ * @property int $id
+ * @property string $name
+ * @property string $text
  */
 class Position extends AbstractActiveRecord
 {
-    const POS_01 = 1;
-    const POS_02 = 2;
-    const POS_03 = 3;
-    const POS_04 = 4;
-    const POS_05 = 5;
-    const POS_06 = 6;
-    const POS_07 = 7;
-    const POS_08 = 8;
-    const POS_09 = 9;
-    const POS_10 = 10;
-    const POS_11 = 11;
-    const POS_12 = 12;
-    const POS_13 = 13;
-    const POS_14 = 14;
-    const POS_15 = 15;
+    public const CENTRE = 9;
+    public const EIGHT = 5;
+    public const FLANKER = 4;
+    public const FLY_HALF = 7;
+    public const FULL_BACK = 10;
+    public const HOOKER = 2;
+    public const LOCK = 3;
+    public const PROP = 1;
+    public const SCRUM_HALF = 6;
+    public const WING = 8;
+
+    public const POS_01 = 1;
+    public const POS_02 = 2;
+    public const POS_03 = 3;
+    public const POS_04 = 4;
+    public const POS_05 = 5;
+    public const POS_06 = 6;
+    public const POS_07 = 7;
+    public const POS_08 = 8;
+    public const POS_09 = 9;
+    public const POS_10 = 10;
+    public const POS_11 = 11;
+    public const POS_12 = 12;
+    public const POS_13 = 13;
+    public const POS_14 = 14;
+    public const POS_15 = 15;
 
     /**
      * @return string
@@ -36,5 +49,19 @@ class Position extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%position}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name', 'text'], 'required'],
+            [['name', 'text'], 'trim'],
+            [['name'], 'string', 'max' => 2],
+            [['text'], 'string', 'max' => 255],
+            [['name', 'text'], 'unique'],
+        ];
     }
 }

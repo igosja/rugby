@@ -1,9 +1,9 @@
 <?php
 
+// TODO refactor
+
 namespace common\components;
 
-use common\components\helpers\ErrorHelper;
-use Exception;
 use yii\db\ActiveRecord;
 
 /**
@@ -16,14 +16,9 @@ abstract class AbstractActiveRecord extends ActiveRecord
      * @param bool $runValidation
      * @param null $attributeNames
      * @return bool
-     * @throws Exception
      */
-    public function save($runValidation = true, $attributeNames = null)
+    public function save($runValidation = true, $attributeNames = null): bool
     {
-        if (!parent::save($runValidation, $attributeNames)) {
-            throw new Exception(ErrorHelper::modelErrorsToString($this));
-        }
-
-        return true;
+        return parent::save($runValidation, $attributeNames);
     }
 }

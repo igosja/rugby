@@ -1,130 +1,135 @@
 <?php
 
+// TODO refactor
+
 /**
  * @var Team $team
  */
 
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAS;
 use yii\helpers\Html;
 
 ?>
 <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-3 col-xs-4 text-center team-logo-div">
         <?= Html::a(
-            $team->logo(),
-            ['team/logo', 'id' => $team->team_id],
+            $team->getLogo(),
+            ['team/logo', 'id' => $team->id],
             ['class' => 'team-logo-link']
-        ); ?>
+        ) ?>
     </div>
     <div class="col-lg-9 col-md-8 col-sm-9 col-xs-8">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-1 strong">
-                <?= $team->iconFreeTeam(); ?>
-                <?= $team->fullName(); ?>
+                <?= $team->iconFreeTeam() ?>
+                <?= $team->fullName() ?>
             </div>
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                Кубок межсезонья: <?= $team->offSeason(); ?>
+                <?= Yii::t('frontend', 'views.team.team-top-left.off-season') ?> <?= $team->offSeason() ?>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3">
-                Дивизион: <?= $team->division(); ?>
+                <?= Yii::t('frontend', 'views.team.team-top-left.division') ?> <?= $team->division() ?>
             </div>
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Менеджер:
-                <?php if ($team->manager->canDialog()) : ?>
+                <?= Yii::t('frontend', 'views.team.team-top-left.manager') ?>
+                <?php if ($team->user->canDialog()) : ?>
                     <?= Html::a(
-                        '<i class="fa fa-envelope-o"></i>',
-                        ['messenger/view', 'id' => $team->manager->user_id],
-                        ['title' => 'Написать']
-                    ); ?>
-                <?php endif; ?>
+                        FAS::icon(FAS::_ENVELOPE),
+                        ['messenger/view', 'id' => $team->user->id],
+                        ['title' => Yii::t('frontend', 'views.team.team-top-left.title.messenger')]
+                    ) ?>
+                <?php endif ?>
                 <?= Html::a(
-                    $team->manager->fullName(),
-                    ['user/view', 'id' => $team->manager->user_id],
+                    $team->user->fullName(),
+                    ['user/view', 'id' => $team->user->id],
                     ['class' => 'strong']
-                ); ?>
+                ) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Ник:
-                <?= $team->manager->iconVip(); ?>
-                <?= $team->manager->userLink(['class' => 'strong']); ?>
+                <?= Yii::t('frontend', 'views.team.team-top-left.nick') ?>
+                <?= $team->user->iconVip() ?>
+                <?= $team->user->getUserLink(['class' => 'strong']) ?>
             </div>
         </div>
-        <?php if ($team->team_vice_id) : ?>
+        <?php if ($team->vice_user_id) : ?>
             <div class="row margin-top-small">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    Заместитель:
-                    <?php if ($team->vice->canDialog()) : ?>
+                    <?= Yii::t('frontend', 'views.team.team-top-left.vice') ?>
+                    <?php if ($team->viceUser->canDialog()) : ?>
                         <?= Html::a(
-                            '<i class="fa fa-envelope-o"></i>',
-                            ['messenger/view', 'id' => $team->vice->user_id],
-                            ['title' => 'Написать']
-                        ); ?>
-                    <?php endif; ?>
+                            FAS::icon(FAS::_ENVELOPE),
+                            ['messenger/view', 'id' => $team->viceUser->id],
+                            ['title' => Yii::t('frontend', 'views.team.team-top-left.title.messenger')]
+                        ) ?>
+                    <?php endif ?>
                     <?= Html::a(
-                        $team->vice->fullName(),
-                        ['user/view', 'id' => $team->vice->user_id],
+                        $team->viceUser->fullName(),
+                        ['user/view', 'id' => $team->viceUser->id],
                         ['class' => 'strong']
-                    ); ?>
+                    ) ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    Ник:
-                    <?= $team->vice->iconVip(); ?>
-                    <?= $team->vice->userLink(['class' => 'strong']); ?>
+                    <?= Yii::t('frontend', 'views.team.team-top-left.nick') ?>
+                    <?= $team->viceUser->iconVip() ?>
+                    <?= $team->viceUser->getUserLink(['class' => 'strong']) ?>
                     <?php if ($team->canViceLeave()) : ?>
                         <?= Html::a(
-                            '<i class="fa fa-sign-out"></i>',
+                            FAS::icon(FAS::_SIGN_OUT_ALT),
                             ['team/vice-leave', 'id' => $team->team_id],
-                            ['title' => 'Отказаться от заместительства']
-                        ); ?>
-                    <?php endif; ?>
+                            ['title' => Yii::t('frontend', 'views.team.team-top-left.title.vice-leave')]
+                        ) ?>
+                    <?php endif ?>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Стадион:
-                <?= $team->stadium->stadium_name; ?>,
-                <strong><?= Yii::$app->formatter->asInteger($team->stadium->stadium_capacity); ?></strong>
+                <?= Yii::t('frontend', 'views.team.team-top-left.stadium') ?>
+                <?= $team->stadium->name ?>,
+                <strong><?= Yii::$app->formatter->asInteger($team->stadium->capacity) ?></strong>
                 <?php if ($team->myTeam()) : ?>
                     <?= Html::a(
-                        '<i class="fa fa-search" aria-hidden="true"></i>',
+                        FAS::icon(FAS::_SEARCH),
                         ['stadium/increase']
-                    ); ?>
-                <?php endif; ?>
+                    ) ?>
+                <?php endif ?>
                 <?php if ($team->buildingStadium) : ?>
-                    <i class="fa fa-cog" aria-hidden="true" title="На стадионе идет строительство"></i>
-                <?php endif; ?>
+                    <?= FAS::icon(FAS::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building-stadium')]) ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                База:
-                <span class="strong"><?= $team->base->base_level; ?></span> уровень
-                (<span class="strong"><?= $team->baseUsed(); ?></span> из
-                <span class="strong"><?= $team->base->base_slot_max; ?></span>)
+                <?= Yii::t('frontend', 'views.team.team-top-left.base') ?>
+                <?= Yii::t('frontend', 'views.team.team-top-left.level', [
+                    'level' => $team->base->level,
+                    'max' => $team->base->slot_max,
+                    'used' => $team->baseUsed(),
+                ]) ?>
                 <?= Html::a(
-                    '<i class="fa fa-search" aria-hidden="true"></i>',
-                    ['base/view', 'id' => $team->team_id]
-                ); ?>
+                    FAS::icon(FAS::_SEARCH),
+                    ['base/view', 'id' => $team->id]
+                ) ?>
                 <?php if ($team->buildingBase) : ?>
-                    <i class="fa fa-cog" aria-hidden="true" title="На базе идет строительство"></i>
-                <?php endif; ?>
+                    <?= FAS::icon(FAS::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building.base')]) ?>
+                <?php endif ?>
             </div>
         </div>
         <div class="row margin-top-small">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Финансы:
+                <?= Yii::t('frontend', 'views.team.team-top-left.finance') ?>
                 <span class="strong">
-                    <?= FormatHelper::asCurrency($team->team_finance); ?>
+                    <?= FormatHelper::asCurrency($team->finance) ?>
                 </span>
             </div>
         </div>

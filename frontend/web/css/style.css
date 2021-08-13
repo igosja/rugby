@@ -496,23 +496,68 @@ a.pagination {
     text-align: justify;
 }
 
+.select2-container--default .select2-selection--single {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+.select2-dropdown {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+.select2-container .select2-selection--single {
+    height: inherit;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: inherit;
+    line-height: inherit;
+    padding-left: 7px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 17px;
+}
+
 .form-inline .form-control {
     display: inline-block;
     vertical-align: middle;
     width: auto;
 }
 
-.form-control {
+.select2-results__option {
+    padding: 0 0 0 5px;
+}
+
+.form-control,
+.select2-search--dropdown .select2-search__field {
     background-color: #ffffff;
     border-radius: 3px;
     border: 1px solid #cccccc;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    color: inherit;
     display: block;
+    font-size: inherit;
+    height: inherit;
+    line-height: inherit;
+    padding: inherit;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     width: 100%;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+}
+
+.select2-search--dropdown .select2-search__field {
+    border: 1px solid #cccccc;
+    padding: 0;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: inherit;
+    line-height: inherit;
 }
 
 .form-inline .form-small {
@@ -663,8 +708,17 @@ tfoot td {
 }
 
 .table-bordered th,
-.table-bordered td {
+.table-bordered td,
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
     border: 1px solid #dddddd;
+    padding: 0;
+    vertical-align: inherit;
+    line-height: inherit;
 }
 
 .table-bordered-no {
@@ -708,6 +762,10 @@ td.table-bordered-right {
 .info {
     background-color: #BDE5F8;
     border-color: #00529B;
+    color: #00529B;
+}
+
+.info a {
     color: #00529B;
 }
 
@@ -868,7 +926,7 @@ fieldset legend {
 }
 
 .forum-row-head {
-    background-color: #286090;
+    background-color: #00782D;
     font-weight: bold;
     padding: 2px;
 }

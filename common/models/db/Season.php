@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -9,7 +11,8 @@ use yii\helpers\ArrayHelper;
  * Class Season
  * @package common\models\db
  *
- * @property int $season_id
+ * @property int $id
+ * @property bool $is_future
  */
 class Season extends AbstractActiveRecord
 {
@@ -22,20 +25,13 @@ class Season extends AbstractActiveRecord
     }
 
     /**
-     * @param bool $cache
-     * @return int
+     * @return array
      */
-    public static function getCurrentSeason(bool $cache = true): int
+    public function rules(): array
     {
-        $query = self::find()
-            ->select(['season_id'])
-            ->orderBy(['season_id' => SORT_DESC]);
-        if ($cache) {
-            $query->cache();
-        } else {
-            $query->noCache();
-        }
-        return $query->scalar();
+        return [
+            [['is_future'], 'boolean'],
+        ];
     }
 
     /**
@@ -44,9 +40,16 @@ class Season extends AbstractActiveRecord
     public static function getSeasonArray(): array
     {
         $result = self::find()
-            ->select(['season_id'])
-            ->orderBy(['season_id' => SORT_DESC])
+            ->orderBy(['id' => SORT_DESC])
             ->all();
-        return ArrayHelper::map($result, 'season_id', 'season_id');
+        return ArrayHelper::map($result, 'id', 'id');
+    }
+
+    /**
+     * @return int
+     */
+    public static function getCurrentSeason(): int
+    {
+        return self::find()->andWhere(['is_future' => false])->max('id');
     }
 }

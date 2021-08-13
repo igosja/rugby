@@ -1,18 +1,21 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
-use common\models\db\Country;
+use common\models\db\Federation;
 use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
 
 /**
- * @var Country $country
+ * @var Federation $federation
  * @var ActiveDataProvider $dataProvider
  * @var array $divisionArray
  * @var int $divisionId
@@ -27,8 +30,8 @@ use yii\helpers\Html;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
             <?= Html::a(
-                $country->country_name,
-                ['federation/news', 'id' => $country->country_id],
+                $federation->country->name,
+                ['federation/news', 'id' => $federation->country->id],
                 ['class' => 'country-header-link']
             ) ?>
         </h1>
@@ -42,45 +45,54 @@ use yii\helpers\Html;
 <?= Html::beginForm([''], 'get') ?>
 <?= Html::hiddenInput('seasonId', $seasonId) ?>
 <?= Html::hiddenInput('divisionId', $divisionId) ?>
-<?= Html::hiddenInput('countryId', $country->country_id) ?>
+<?= Html::hiddenInput('federationId', $federation->country_id) ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-        <?= Html::label('Статистика', 'statisticType') ?>
+        <?= Html::label(Yii::t('frontend', 'views.championship.statistics.label.statistic-type'), 'statisticType') ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-8">
-        <?= Html::dropDownList(
-            'id',
-            Yii::$app->request->get('id'),
-            $statisticTypeArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'statisticType']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $statisticTypeArray,
+                'id' => 'statisticType',
+                'name' => 'id',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => Yii::$app->request->get('id'),
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
 <?php
 
-if ($statisticType->isTeamChapter()) {
+if (1 === $statisticType->statistic_chapter_id) {
     $columns = [
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticTeam $model) {
-                return $model->team->teamLink('img');
+                return $model->team->getTeamLink();
             }
         ],
         [
             'contentOptions' => ['class' => 'text-center'],
             'headerOptions' => ['class' => 'col-10'],
             'value' => static function (StatisticTeam $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
@@ -90,30 +102,30 @@ if ($statisticType->isTeamChapter()) {
         [
             'class' => SerialColumn::class,
             'contentOptions' => ['class' => 'text-center'],
-            'footer' => '№',
-            'header' => '№',
+            'footer' => '#',
+            'header' => '#',
             'headerOptions' => ['class' => 'col-10'],
         ],
         [
-            'footer' => 'Игрок',
+            'footer' => Yii::t('frontend', 'views.th.player'),
             'format' => 'raw',
-            'label' => 'Игрок',
+            'label' => Yii::t('frontend', 'views.th.player'),
             'value' => static function (StatisticPlayer $model) {
-                return $model->player->playerLink();
+                return $model->player->getPlayerLink();
             }
         ],
         [
-            'footer' => 'Команда',
+            'footer' => Yii::t('frontend', 'views.th.team'),
             'format' => 'raw',
-            'label' => 'Команда',
+            'label' => Yii::t('frontend', 'views.th.team'),
             'value' => static function (StatisticPlayer $model) {
-                return $model->team->teamLink('img');
+                return $model->team->getTeamLink();
             }
         ],
         [
             'contentOptions' => ['class' => 'text-center'],
             'value' => static function (StatisticPlayer $model) use ($statisticType) {
-                $select = $statisticType->statistic_type_select;
+                $select = $statisticType->select_field;
                 return $model->$select;
             }
         ],
@@ -128,14 +140,12 @@ if ($statisticType->isTeamChapter()) {
         print GridView::widget([
             'columns' => $columns,
             'dataProvider' => $dataProvider,
-            'rowOptions' => static function ($model) use ($myTeam, $statisticType): array {
+            'rowOptions' => static function ($model) use ($myTeam) {
                 if (!$myTeam) {
                     return [];
                 }
                 $class = '';
-                if ($statisticType->isTeamChapter() && $model->statistic_team_team_id == $myTeam->team_id) {
-                    $class = 'info';
-                } elseif (!$statisticType->isTeamChapter() && $model->statistic_player_team_id == $myTeam->team_id) {
+                if ($model->team_id === $myTeam->id) {
                     $class = 'info';
                 }
                 return ['class' => $class];
@@ -153,10 +163,10 @@ if ($statisticType->isTeamChapter()) {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p>
             <?= Html::a(
-                'Турнирная таблица',
+                Yii::t('frontend', 'views.championship.statistics.link.index'),
                 [
                     'index',
-                    'countryId' => $country->country_id,
+                    'federationId' => $federation->id,
                     'divisionId' => $divisionId,
                     'seasonId' => $seasonId,
                 ],

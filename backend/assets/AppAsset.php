@@ -1,11 +1,17 @@
 <?php
 
+// TODO refactor
+
 namespace backend\assets;
 
+use rmrevin\yii\fontawesome\AssetBundle as FontAwesomeAssetBundle;
+use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
- * Main backend application asset bundle.
+ * Class AppAsset
+ * @package backend\assets
  */
 class AppAsset extends AssetBundle
 {
@@ -20,7 +26,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
 
     /**
-     * @var array $css
+     * @var string[] $css
      */
     public $css = [
         'css/metisMenu.css',
@@ -29,7 +35,7 @@ class AppAsset extends AssetBundle
     ];
 
     /**
-     * @var array $js
+     * @var string[] $js
      */
     public $js = [
         'js/metisMenu.js',
@@ -38,11 +44,11 @@ class AppAsset extends AssetBundle
     ];
 
     /**
-     * @var array $depends
+     * @var string[] $depends
      */
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'rmrevin\yii\fontawesome\AssetBundle',
+        YiiAsset::class,
+        BootstrapAsset::class,
+        FontAwesomeAssetBundle::class,
     ];
 }

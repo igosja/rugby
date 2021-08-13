@@ -1,8 +1,12 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\assets;
 
+use rmrevin\yii\fontawesome\CdnFreeAssetBundle;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
  * Class AppAsset
@@ -10,17 +14,36 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+    /**
+     * @var string $basePath
+     */
     public $basePath = '@webroot';
+
+    /**
+     * @var string $baseUrl
+     */
     public $baseUrl = '@web';
+
+    /**
+     * @var string[] $css
+     */
     public $css = [
         'css/style.css',
     ];
+
+    /**
+     * @var string[] $js
+     */
     public $js = [
         'js/site.js',
     ];
+
+    /**
+     * @var string[] $depends
+     */
     public $depends = [
-        'yii\web\YiiAsset',
-        'rmrevin\yii\fontawesome\AssetBundle',
+        YiiAsset::class,
+        CdnFreeAssetBundle::class,
     ];
 }
 

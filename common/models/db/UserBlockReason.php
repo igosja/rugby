@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,8 +10,8 @@ use common\components\AbstractActiveRecord;
  * Class UserBlockReason
  * @package common\models\db
  *
- * @property int $user_block_reason_id
- * @property string $user_block_reason_text
+ * @property int $id
+ * @property string $text
  */
 class UserBlockReason extends AbstractActiveRecord
 {
@@ -19,5 +21,18 @@ class UserBlockReason extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%user_block_reason}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['text'], 'required'],
+            [['text'], 'trim'],
+            [['text'], 'string', 'max' => 255],
+            [['text'], 'unique'],
+        ];
     }
 }

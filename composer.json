@@ -17,15 +17,19 @@
     "irc": "irc://irc.freenode.net/yii",
     "source": "https://github.com/yiisoft/yii2"
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
-    "php": ">=5.6.0",
-    "yiisoft/yii2": "~2.0.14",
+    "php": ">=7.4.0",
+    "ext-curl": "*",
+    "ext-gd": "*",
+    "yiisoft/yii2": "^2.0",
     "yiisoft/yii2-bootstrap": "~2.0.0",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "yiisoft/yii2-redis": "^2.0",
     "rmrevin/yii2-fontawesome": "~3.5",
-    "miloschuman/yii2-highcharts-widget": "dev-master"
+    "miloschuman/yii2-highcharts-widget": "dev-master",
+    "codeonyii/yii2-at-least-validator": "dev-master",
+    "kartik-v/yii2-widget-select2": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
@@ -35,9 +39,10 @@
     "codeception/module-asserts": "^1.0",
     "codeception/module-yii2": "^1.0",
     "codeception/module-filesystem": "^1.0",
-    "phpunit/phpunit": "~5.7.27 || ~6.5.5",
+    "phpunit/phpunit": "^8.5.15",
     "codeception/verify": "~0.5.0 || ~1.1.0",
-    "symfony/browser-kit": ">=2.7 <=4.2.4"
+    "symfony/browser-kit": ">=2.7 <=4.2.4",
+    "roave/security-advisories": "dev-latest"
   },
   "config": {
     "process-timeout": 1800,

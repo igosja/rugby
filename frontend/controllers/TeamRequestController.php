@@ -1,14 +1,16 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\components\helpers\ErrorHelper;
 use Exception;
-use frontend\components\AbstractController;
-use frontend\models\executors\TeamRequestSaveExecute;
+use frontend\models\executors\TeamRequestSaveExecutor;
 use frontend\models\preparers\TeamRequestPrepare;
 use frontend\models\queries\TeamQuery;
 use frontend\models\queries\TeamRequestQuery;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Response;
 
@@ -21,24 +23,14 @@ class TeamRequestController extends AbstractController
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => [
-                    'index',
-                    'request',
-                    'delete',
-                ],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => [
-                            'index',
-                            'request',
-                            'delete',
-                        ],
                         'roles' => ['@'],
                     ],
                 ],
@@ -52,13 +44,13 @@ class TeamRequestController extends AbstractController
     public function actionIndex()
     {
         if ($this->myTeam) {
-            return $this->redirect(['team/view']);
+            return $this->redirectToMyTeam();
         }
 
         $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
-        $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->user_id);
+        $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
-        $this->seoTitle('Получение команды');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.team-request.index.title'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'myDataProvider' => $myDataProvider,
@@ -72,23 +64,24 @@ class TeamRequestController extends AbstractController
     public function actionRequest(int $id): Response
     {
         if ($this->myTeam) {
-            return $this->redirect(['team/view']);
+            return $this->redirectToMyTeam();
         }
 
         if (!TeamQuery::getFreeTeamById($id)) {
-            $this->setErrorFlash('Команда выбрана неправильно');
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.team'));
             return $this->redirect(['team-request/index']);
         }
 
-        if (TeamRequestQuery::getTeamRequestByIdAndUser($id, $this->user->user_id)) {
-            $this->setErrorFlash('Вы уже подали заявку на эту команду');
+        if (TeamRequestQuery::getTeamRequestByIdAndUser($id, $this->user->id)) {
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.request'));
             return $this->redirect(['team-request/index']);
         }
 
         try {
-            (new TeamRequestSaveExecute($id, $this->user->user_id))->execute();
-            $this->setSuccessFlash('Заявка успешно подана');
+            (new TeamRequestSaveExecutor($id, $this->user->id))->execute();
+            $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-request.request.success'));
         } catch (Exception $e) {
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.catch'));
             ErrorHelper::log($e);
         }
 
@@ -102,11 +95,11 @@ class TeamRequestController extends AbstractController
     public function actionDelete(int $id): Response
     {
         if ($this->myTeam) {
-            return $this->redirect(['team-request/index']);
+            return $this->redirectToMyTeam();
         }
 
-        TeamRequestQuery::deleteTeamRequest($id, $this->user->user_id);
-        $this->setSuccessFlash('Заявка успешно удалена');
+        TeamRequestQuery::deleteTeamRequest($id, $this->user->id);
+        $this->setSuccessFlash(Yii::t('frontend', 'controllers.team-request.delete.success'));
 
         return $this->redirect(['team-request/index']);
     }

@@ -1,9 +1,11 @@
 <?php
 
+// TODO refactor
+
 namespace common\components\helpers;
 
+use common\components\AbstractWebController;
 use Exception;
-use frontend\components\AbstractController;
 use Yii;
 
 /**
@@ -36,11 +38,11 @@ class FormatHelper
         $result = '';
         try {
             /**
-             * @var AbstractController $controller
+             * @var AbstractWebController $controller
              */
             $controller = Yii::$app->controller;
-            if (isset($controller->user, $controller->user->user_timezone) && $controller->user && $controller->user->user_timezone) {
-                Yii::$app->formatter->timeZone = $controller->user->user_timezone;
+            if ($controller->user && $controller->user->timezone) {
+                Yii::$app->formatter->timeZone = $controller->user->timezone;
             }
 
             $result = Yii::$app->formatter->asDate($time, 'short');
@@ -59,11 +61,11 @@ class FormatHelper
         $result = '';
         try {
             /**
-             * @var AbstractController $controller
+             * @var AbstractWebController $controller
              */
             $controller = Yii::$app->controller;
-            if (isset($controller->user, $controller->user->user_timezone) && $controller->user && $controller->user->user_timezone) {
-                Yii::$app->formatter->timeZone = $controller->user->user_timezone;
+            if ($controller->user && $controller->user->timezone) {
+                Yii::$app->formatter->timeZone = $controller->user->timezone;
             }
 
             $result = Yii::$app->formatter->asDatetime($time, 'short');

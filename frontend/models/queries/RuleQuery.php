@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\queries;
 
 use common\models\db\Rule;
@@ -20,12 +22,7 @@ class RuleQuery
          * @var Rule $result
          */
         $result = Rule::find()
-            ->select([
-                'rule_date',
-                'rule_text',
-                'rule_title',
-            ])
-            ->where(['rule_id' => $id])
+            ->where(['id' => $id])
             ->limit(1)
             ->one();
         return $result;
@@ -37,11 +34,7 @@ class RuleQuery
     public static function getRuleList(): array
     {
         return Rule::find()
-            ->select([
-                'rule_id',
-                'rule_title',
-            ])
-            ->orderBy(['rule_order' => SORT_ASC])
+            ->orderBy(['order' => SORT_ASC])
             ->all();
     }
 }

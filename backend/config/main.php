@@ -1,8 +1,9 @@
 <?php
 
+// TODO refactor
+
 use common\models\db\User;
 use yii\grid\GridView;
-use yii\log\FileTarget;
 use yii\redis\Session;
 
 $params = array_merge(
@@ -14,22 +15,12 @@ $params = array_merge(
 
 return [
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'components' => [
         'assetManager' => [
             'appendTimestamp' => true,
         ],
         'errorHandler' => [
             'errorAction' => '/site/error',
-        ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-            'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
         'request' => [
             'baseUrl' => '/qTwnVrXEBN',
@@ -68,6 +59,7 @@ return [
     ],
     'controllerNamespace' => 'backend\controllers',
     'id' => 'app-backend',
+    'name' => 'Rugby admin',
     'params' => $params,
 ];
 

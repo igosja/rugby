@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -9,13 +11,12 @@ use yii\db\ActiveQuery;
  * Class StatisticType
  * @package common\models\db
  *
- * @property int $statistic_type_id
- * @property string $statistic_type_name
- * @property int $statistic_type_order
- * @property string $statistic_type_select
- * @property int $statistic_type_statistic_chapter_id
+ * @property int $id
+ * @property string $name
+ * @property string $select_field
+ * @property int $statistic_chapter_id
  *
- * @property StatisticChapter $statisticChapter
+ * @property-read StatisticChapter $statisticChapter
  */
 class StatisticType extends AbstractActiveRecord
 {
@@ -69,32 +70,25 @@ class StatisticType extends AbstractActiveRecord
     }
 
     /**
-     * @return bool
+     * @return array
      */
-    public function isTeamChapter(): bool
+    public function rules(): array
     {
-        return in_array($this->statistic_type_id, [
-            self::TEAM_NO_PASS,
-            self::TEAM_NO_SCORE,
-            self::TEAM_LOOSE,
-            self::TEAM_LOOSE_SHOOTOUT,
-            self::TEAM_LOOSE_OVER,
-            self::TEAM_PASS,
-            self::TEAM_SCORE,
-            self::TEAM_PENALTY,
-            self::TEAM_PENALTY_OPPONENT,
-            self::TEAM_WIN,
-            self::TEAM_WIN_SHOOTOUT,
-            self::TEAM_WIN_OVER,
-            self::TEAM_WIN_PERCENT,
-        ]);
+        return [
+            [['name', 'order', 'select_field', 'statistic_chapter_id'], 'required'],
+            [['name', 'select_field'], 'trim'],
+            [['name', 'select_field'], 'string', 'max' => 255],
+            [['statistic_chapter_id'], 'integer', 'min' => 1, 'max' => 9],
+            [['order'], 'integer', 'min' => 1, 'max' => 99],
+            [['statistic_chapter_id'], 'exist', 'targetRelation' => 'statisticChapter'],
+        ];
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getStatisticType(): ActiveQuery
+    public function getStatisticChapter(): ActiveQuery
     {
-        return $this->hasOne(StatisticChapter::class, ['statistic_chapter_id' => 'statistic_type_statistic_chapter_id']);
+        return $this->hasOne(StatisticChapter::class, ['id' => 'statistic_chapter_id']);
     }
 }

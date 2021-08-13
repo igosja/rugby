@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,8 +10,8 @@ use common\components\AbstractActiveRecord;
  * Class Weather
  * @package common\models\db
  *
- * @property int $weather_id
- * @property string $weather_name
+ * @property int $id
+ * @property string $name
  */
 class Weather extends AbstractActiveRecord
 {
@@ -19,5 +21,18 @@ class Weather extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%weather}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 20],
+            [['name'], 'unique'],
+        ];
     }
 }

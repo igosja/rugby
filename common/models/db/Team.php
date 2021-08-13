@@ -1,11 +1,14 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\ErrorHelper;
 use Exception;
-use frontend\components\AbstractController;
-use frontend\models\queries\GameQuery;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
@@ -14,65 +17,72 @@ use yii\helpers\Html;
  * Class Team
  * @package common\models\db
  *
- * @property int $team_id
- * @property float $team_age
- * @property int $team_attitude_national
- * @property int $team_attitude_president
- * @property int $team_attitude_u19
- * @property int $team_attitude_u21
- * @property int $team_auto
- * @property int $team_base_id
- * @property int $team_base_medical_id
- * @property int $team_base_physical_id
- * @property int $team_base_school_id
- * @property int $team_base_scout_id
- * @property int $team_base_training_id
- * @property int $team_finance
- * @property int $team_friendly_status_id
- * @property int $team_free_base
- * @property int $team_mood_rest
- * @property int $team_mood_super
- * @property string $team_name
- * @property int $team_news_id
- * @property int $team_player
- * @property int $team_power_c_15
- * @property int $team_power_c_19
- * @property int $team_power_c_24
- * @property int $team_power_s_15
- * @property int $team_power_s_19
- * @property int $team_power_s_24
- * @property int $team_power_v
- * @property int $team_power_vs
- * @property int $team_price_base
- * @property int $team_price_player
- * @property int $team_price_stadium
- * @property int $team_price_total
- * @property int $team_salary
- * @property int $team_stadium_id
- * @property int $team_user_id
- * @property int $team_vice_id
- * @property int $team_visitor
+ * @property int $id
+ * @property int $auto_number
+ * @property int $base_id
+ * @property int $base_medical_id
+ * @property int $base_physical_id
+ * @property int $base_school_id
+ * @property int $base_scout_id
+ * @property int $base_training_id
+ * - * @property int $federation_news_id
+ * @property int $finance
+ * @property int $friendly_status_id
+ * @property int $free_base_number
+ * @property int $mood_rest
+ * @property int $mood_super
+ * @property string $name
+ * @property int $national_attitude_id
+ * @property float $player_average_age
+ * @property int $player_number
+ * @property int $power_c_15
+ * @property int $power_c_19
+ * @property int $power_c_24
+ * @property int $power_s_15
+ * @property int $power_s_19
+ * @property int $power_s_24
+ * @property int $power_v
+ * @property int $power_vs
+ * - * @property int $president_attitude_id
+ * @property int $price_base
+ * @property int $price_player
+ * @property int $price_stadium
+ * @property int $price_total
+ * @property int $salary
+ * @property int $stadium_id
+ * @property int $u19_attitude_id
+ * @property int $u21_attitude_id
+ * @property int $user_id
+ * @property int $vice_user_id
+ * @property int $visitor
  *
- * @property Base $base
- * @property BaseMedical $baseMedical
- * @property BasePhysical $basePhysical
- * @property BaseSchool $baseSchool
- * @property BaseScout $baseScout
- * @property BaseTraining $baseTraining
- * @property BuildingBase $buildingBase
- * @property BuildingStadium $buildingStadium
- * @property Championship $championship
- * @property Conference $conference
- * @property User $manager
- * @property OffSeason $offSeason
- * @property Player[] $players
- * @property RatingTeam $ratingTeam
- * @property Stadium $stadium
- * @property TeamRequest[] $teamRequests
- * @property User $vice
+ * @property-read Base $base
+ * @property-read BaseMedical $baseMedical
+ * @property-read BasePhysical $basePhysical
+ * @property-read BaseSchool $baseSchool
+ * @property-read BaseScout $baseScout
+ * @property-read BaseTraining $baseTraining
+ * @property-read BuildingBase $buildingBase
+ * @property-read BuildingStadium $buildingStadium
+ * @property-read Championship $championship
+ * @property-read Conference $conference
+ * - * @property-read News $federationNews
+ * @property-read FriendlyStatus $friendlyStatus
+ * @property-read OffSeason $offSeason
+ * @property-read Attitude $nationalAttitude
+ * - * @property-read Attitude $presidentAttitude
+ * @property-read RatingTeam $ratingTeam
+ * - * @property-read Recommendation $recommendation
+ * @property-read Stadium $stadium
+ * @property-read TeamRequest[] $teamRequests
+ * @property-read Attitude $u19Attitude
+ * @property-read Attitude $u21Attitude
+ * @property-read User $user
+ * @property-read User $viceUser
  */
 class Team extends AbstractActiveRecord
 {
+    public const MAX_AUTO_GAMES = 5;
     public const START_MONEY = 10000000;
 
     /**
@@ -89,111 +99,496 @@ class Team extends AbstractActiveRecord
     public function rules(): array
     {
         return [
+            [['name', 'stadium_id'], 'required'],
             [
                 [
-                    'team_id',
-                    'team_attitude_national',
-                    'team_attitude_president',
-                    'team_attitude_u19',
-                    'team_attitude_u21',
-                    'team_auto',
-                    'team_base_id',
-                    'team_base_medical_id',
-                    'team_base_physical_id',
-                    'team_base_school_id',
-                    'team_base_scout_id',
-                    'team_base_training_id',
-                    'team_finance',
-                    'team_friendly_status_id',
-                    'team_free_base',
-                    'team_mood_rest',
-                    'team_mood_super',
-                    'team_news_id',
-                    'team_player',
-                    'team_power_c_15',
-                    'team_power_c_19',
-                    'team_power_c_24',
-                    'team_power_s_15',
-                    'team_power_s_19',
-                    'team_power_s_24',
-                    'team_power_v',
-                    'team_power_vs',
-                    'team_price_base',
-                    'team_price_player',
-                    'team_price_stadium',
-                    'team_price_total',
-                    'team_salary',
-                    'team_stadium_id',
-                    'team_user_id',
-                    'team_vice_id',
-                    'team_visitor',
+                    'auto_number',
+                    'friendly_status_id',
+                    'free_base_number',
+                    'mood_rest',
+                    'mood_super',
+                    'national_attitude_id',
+                    'president_attitude_id',
+                    'u19_attitude_id',
+                    'u21_attitude_id',
                 ],
-                'integer'
+                'integer',
+                'min' => 0,
+                'max' => 9
             ],
-            [['team_age'], 'number'],
-            [['team_name'], 'string', 'max' => 255],
-            [['team_name'], 'trim'],
+            [
+                [
+                    'base_id',
+                    'base_medical_id',
+                    'base_physical_id',
+                    'base_school_id',
+                    'base_scout_id',
+                    'base_training_id'
+                ],
+                'integer',
+                'min' => 0,
+                'max' => 99
+            ],
+            [['player_average_age'], 'number', 'min' => 0, 'max' => 99],
+            [['player_number', 'visitor'], 'integer', 'min' => 0, 'max' => 999],
+            [
+                [
+                    'power_c_15',
+                    'power_c_19',
+                    'power_c_24',
+                    'power_s_15',
+                    'power_s_19',
+                    'power_s_24',
+                    'power_v',
+                    'power_vs',
+                ],
+                'integer',
+                'min' => 0,
+                'max' => 99999
+            ],
+            [
+                [
+                    'federation_news_id',
+                    'finance',
+                    'price_base',
+                    'price_player',
+                    'price_stadium',
+                    'price_total',
+                    'salary',
+                    'stadium_id',
+                    'user_id',
+                    'vice_user_id',
+                ],
+                'number',
+                'min' => 0
+            ],
+            [['name'], 'trim'],
+            [['name'], 'string'],
+            [['base_id'], 'exist', 'targetRelation' => 'base'],
+            [['base_medical_id'], 'exist', 'targetRelation' => 'baseMedical'],
+            [['base_physical_id'], 'exist', 'targetRelation' => 'basePhysical'],
+            [['base_school_id'], 'exist', 'targetRelation' => 'baseSchool'],
+            [['base_scout_id'], 'exist', 'targetRelation' => 'baseScout'],
+            [['base_training_id'], 'exist', 'targetRelation' => 'baseTraining'],
+            [['federation_news_id'], 'exist', 'targetRelation' => 'federationNews'],
+            [['friendly_status_id'], 'exist', 'targetRelation' => 'friendlyStatus'],
+            [['national_attitude_id'], 'exist', 'targetRelation' => 'nationalAttitude'],
+            [['president_attitude_id'], 'exist', 'targetRelation' => 'presidentAttitude'],
+            [['stadium_id'], 'exist', 'targetRelation' => 'stadium'],
+            [['u19_attitude_id'], 'exist', 'targetRelation' => 'u19Attitude'],
+            [['u21_attitude_id'], 'exist', 'targetRelation' => 'u21Attitude'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+            [['vice_user_id'], 'exist', 'targetRelation' => 'viceUser'],
         ];
     }
 
-
     /**
-     * @param bool $insert
-     * @return bool
+     * @return int
      */
-    public function beforeSave($insert): bool
+    public function availablePhysical(): int
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->team_attitude_national = Attitude::NEUTRAL;
-            $this->team_attitude_president = Attitude::NEUTRAL;
-            $this->team_attitude_u19 = Attitude::NEUTRAL;
-            $this->team_attitude_u21 = Attitude::NEUTRAL;
-            $this->team_base_id = Base::START_LEVEL;
-            $this->team_base_medical_id = BaseMedical::START_LEVEL;
-            $this->team_base_physical_id = BasePhysical::START_LEVEL;
-            $this->team_base_school_id = BaseSchool::START_LEVEL;
-            $this->team_base_scout_id = BaseScout::START_LEVEL;
-            $this->team_base_training_id = BaseTraining::START_LEVEL;
-            $this->team_finance = Team::START_MONEY;
-            $this->team_free_base = Base::FREE_SLOTS;
-            $this->team_mood_rest = Mood::START_REST;
-            $this->team_mood_super = Mood::START_SUPER;
-            $this->team_player = Player::START_NUMBER_OF_PLAYERS;
-        }
-        return true;
+        return $this->basePhysical->change_count - $this->usedPhysical();
     }
 
     /**
-     * @param bool $insert
-     * @param array $changedAttributes
-     * @return bool
-     * @throws Exception
+     * @return int
      */
-    public function afterSave($insert, $changedAttributes): bool
+    public function availableSchool(): int
     {
-        parent::afterSave($insert, $changedAttributes);
+        return $this->baseSchool->player_count - $this->usedSchool();
+    }
 
-        if ($insert) {
-            History::log([
-                'history_history_text_id' => HistoryText::TEAM_REGISTER,
-                'history_team_id' => $this->team_id,
-            ]);
-            Finance::log([
-                'finance_finance_text_id' => FinanceText::TEAM_RE_REGISTER,
-                'finance_team_id' => $this->team_id,
-                'finance_value' => Team::START_MONEY,
-                'finance_value_after' => Team::START_MONEY,
-                'finance_value_before' => 0,
-            ]);
-            $this->createPlayers();
-            $this->createLeaguePlayers();
-            $this->updatePower();
+    /**
+     * @return int
+     */
+    public function availableSchoolWithSpecial(): int
+    {
+        return $this->baseSchool->with_special - $this->usedSchoolWithSpecial();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableSchoolWithStyle(): int
+    {
+        return $this->baseSchool->with_style - $this->usedSchoolWithStyle();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableScout(): int
+    {
+        return $this->baseScout->my_style_count - $this->usedScout();
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingPower(): int
+    {
+        $result = $this->baseTraining->power_count - $this->usedTrainingPower();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingSpecial(): int
+    {
+        $result = $this->baseTraining->special_count - $this->usedTrainingSpecial();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function availableTrainingPosition(): int
+    {
+        $result = $this->baseTraining->position_count - $this->usedTrainingPosition();
+        if ($result < 0) {
+            $result = 0;
+        }
+        return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSchool(): bool
+    {
+        $onSchool = School::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onSchool ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScout(): bool
+    {
+        $onScout = Scout::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onScout ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTraining(): bool
+    {
+        $onScout = Training::find()
+            ->where(['team_id' => $this->id, 'ready' => null])
+            ->count();
+        return $onScout ? true : false;
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingPower(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['is_power' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingSpecial(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['not', ['special_id' => 0]])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedTrainingPosition(): int
+    {
+        return Training::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere(['not', ['position_id' => 0]])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchool(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchoolWithSpecial(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_with_special' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedSchoolWithStyle(): int
+    {
+        return School::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_with_style' => true])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedScout(): int
+    {
+        return Scout::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason(), 'is_school' => false])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function usedPhysical(): int
+    {
+        return PhysicalChange::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function planPhysical(): int
+    {
+        return PhysicalChange::find()
+            ->where(['team_id' => $this->id, 'season_id' => Season::getCurrentSeason()])
+            ->andWhere([
+                '>',
+                'schedule_id',
+                Schedule::find()
+                    ->select(['id'])
+                    ->where(['season_id' => Season::getCurrentSeason()])
+                    ->andWhere(['>', 'date', time()])
+                    ->orderBy(['date' => SORT_DESC])
+                    ->limit(1)
+            ])
+            ->count();
+    }
+
+    /**
+     * @return array
+     */
+    public function reRegister(): array
+    {
+        if ($this->base->level >= 5) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.level')
+            ];
         }
 
-        return true;
+        if ($this->buildingBase) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.building-base')
+            ];
+        }
+
+        if ($this->buildingStadium) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.building-stadium')
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['loan_team_id' => $this->id])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.has-loan')
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['team_id' => $this->id])
+            ->andWhere(['not', ['loan_team_id' => null]])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.in-loan')
+            ];
+        }
+
+        $player = Player::find()
+            ->where(['team_id' => $this->id])
+            ->andWhere(['not', ['national_id' => null]])
+            ->count();
+        if ($player) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.national')
+            ];
+        }
+
+        $transfer = Transfer::find()
+            ->where(['team_seller_id' => $this->id, 'ready' => null])
+            ->count();
+        if ($transfer) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.on-transfer')
+            ];
+        }
+
+        $loan = Loan::find()
+            ->where(['team_seller_id' => $this->id, 'ready' => null])
+            ->count();
+        if ($loan) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.on-loan')
+            ];
+        }
+
+        $transfer = Transfer::find()
+            ->where(['voted' => null])
+            ->andWhere([
+                'or',
+                ['team_buyer_id' => $this->id],
+                ['team_seller_id' => $this->id]
+            ])
+            ->count();
+        if ($transfer) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.transfer-vote')
+            ];
+        }
+
+        $loan = Loan::find()
+            ->where(['voted' => null])
+            ->andWhere([
+                'or',
+                ['team_buyer_id' => $this->id],
+                ['team_seller_id' => $this->id]
+            ])
+            ->count();
+        if ($loan) {
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.loan-vote')
+            ];
+        }
+
+        try {
+            $playerArray = Player::find()
+                ->where(['team_id' => $this->id])
+                ->all();
+            foreach ($playerArray as $player) {
+                /**
+                 * @var Player $player
+                 */
+                $player->makeFree();
+            }
+
+            Training::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            Scout::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            School::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+            PhysicalChange::deleteAll([
+                'team_id' => $this->id,
+                'season_id' => Season::getCurrentSeason()
+            ]);
+
+            Finance::log([
+                'finance_text_id' => FinanceText::TEAM_RE_REGISTER,
+                'team_id' => $this->id,
+                'value' => self::START_MONEY - $this->finance,
+                'value_after' => self::START_MONEY,
+                'value_before' => $this->finance,
+            ]);
+
+            $this->base_id = 2;
+            $this->base_medical_id = 1;
+            $this->base_physical_id = 1;
+            $this->base_school_id = 1;
+            $this->base_scout_id = 1;
+            $this->base_training_id = 1;
+            $this->finance = self::START_MONEY;
+            $this->free_base_number = 5;
+            $this->mood_rest = 3;
+            $this->mood_super = 3;
+            $this->visitor = 100;
+            $this->save(true, [
+                'base_id',
+                'base_medical_id',
+                'base_physical_id',
+                'base_school_id',
+                'base_scout_id',
+                'base_training_id',
+                'finance',
+                'free_base_number',
+                'mood_rest',
+                'mood_super',
+                'visitor',
+            ]);
+
+            $this->stadium->capacity = 100;
+            $this->stadium->countMaintenance();
+            $this->stadium->save(true, [
+                'capacity',
+                'maintenance',
+            ]);
+
+            History::log([
+                'history_text_id' => HistoryText::TEAM_RE_REGISTER,
+                'team_id' => $this->id,
+            ]);
+
+            $this->createPlayers();
+            $this->updatePower();
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+            return [
+                'status' => false,
+                'message' => Yii::t('common', 'models.db.team.re-register.error'),
+            ];
+        }
+
+        return [
+            'status' => true,
+            'message' => Yii::t('common', 'models.db.team.re-register.success'),
+        ];
     }
 
     /**
@@ -202,101 +597,73 @@ class Team extends AbstractActiveRecord
      */
     private function createPlayers(): bool
     {
-        $position = [
-            Position::POS_01,
-            Position::POS_01,
-            Position::POS_02,
-            Position::POS_02,
-            Position::POS_03,
-            Position::POS_03,
-            Position::POS_04,
-            Position::POS_04,
-            Position::POS_05,
-            Position::POS_05,
-            Position::POS_06,
-            Position::POS_06,
-            Position::POS_07,
-            Position::POS_07,
-            Position::POS_08,
-            Position::POS_08,
-            Position::POS_09,
-            Position::POS_09,
-            Position::POS_10,
-            Position::POS_10,
-            Position::POS_11,
-            Position::POS_11,
-            Position::POS_12,
-            Position::POS_12,
-            Position::POS_13,
-            Position::POS_13,
-            Position::POS_14,
-            Position::POS_14,
-            Position::POS_15,
-            Position::POS_15,
+        $positions = [
+            Position::PROP,
+            Position::PROP,
+            Position::HOOKER,
+            Position::HOOKER,
+            Position::PROP,
+            Position::PROP,
+            Position::LOCK,
+            Position::LOCK,
+            Position::LOCK,
+            Position::LOCK,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::FLANKER,
+            Position::EIGHT,
+            Position::EIGHT,
+            Position::SCRUM_HALF,
+            Position::SCRUM_HALF,
+            Position::FLY_HALF,
+            Position::FLY_HALF,
+            Position::WING,
+            Position::WING,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::CENTRE,
+            Position::WING,
+            Position::WING,
+            Position::FULL_BACK,
+            Position::FULL_BACK,
         ];
 
-        shuffle($position);
+        shuffle($positions);
 
-        for ($i = 0, $countPosition = count($position); $i < $countPosition; $i++) {
-            $this->createOnePlayer($position[$i], $i, $this->team_id);
+        foreach ($positions as $i => $position) {
+            $age = 17 + $i;
+
+            if ($age > 35) {
+                $age -= 17;
+            }
+
+            $player = new Player();
+            $player->age = $age;
+            $player->country_id = $this->stadium->city->country_id;
+            $player->name_id = NameCountry::getRandNameId($this->stadium->city->country_id);
+            $player->physical_id = Physical::getRandPhysicalId();
+            $player->power_nominal = $age * 2;
+            $player->power_nominal_s = $age * 2;
+            $player->school_team_id = $this->id;
+            $player->style_id = Style::getRandStyleId();
+            $player->surname_id = SurnameCountry::getRandFreeSurnameId(
+                $this->id,
+                $this->stadium->city->country_id
+            );
+            $player->team_id = $this->id;
+            $player->tire = Player::TIRE_DEFAULT;
+            $player->training_ability = random_int(1, 5);
+            $player->save();
+
+            $playerPosition = new PlayerPosition();
+            $playerPosition->player_id = $player->id;
+            $playerPosition->position_id = $position;
+            $playerPosition->save();
         }
 
         return true;
-    }
-
-    /**
-     * @return bool
-     * @throws Exception
-     */
-    private function createLeaguePlayers(): bool
-    {
-        $position = [
-            Position::POS_01,
-            Position::POS_02,
-            Position::POS_03,
-            Position::POS_04,
-            Position::POS_05,
-            Position::POS_06,
-            Position::POS_07,
-            Position::POS_08,
-            Position::POS_09,
-            Position::POS_10,
-            Position::POS_11,
-            Position::POS_12,
-            Position::POS_13,
-            Position::POS_14,
-            Position::POS_15,
-        ];
-
-        shuffle($position);
-
-        for ($i = 0, $countPosition = count($position); $i < $countPosition; $i++) {
-            $this->createOnePlayer($position[$i], $i);
-        }
-
-        return true;
-    }
-
-    /**
-     * @param int $position
-     * @param int $i
-     * @param int $teamId
-     * @throws Exception
-     */
-    private function createOnePlayer(int $position, int $i, int $teamId = 0)
-    {
-        $age = 17 + $i;
-
-        if ($age > 35) {
-            $age = $age - 17;
-        }
-
-        $player = new Player();
-        $player->player_age = $age;
-        $player->player_country_id = $this->stadium->city->city_country_id;
-        $player->player_position_id = $position;
-        $player->player_team_id = $teamId;
-        $player->save();
     }
 
     /**
@@ -306,113 +673,109 @@ class Team extends AbstractActiveRecord
     public function updatePower(): bool
     {
         $player15 = Player::find()
-            ->select(['player_id'])
-            ->where(['player_team_id' => $this->team_id])
-            ->orderBy(['player_power_nominal' => SORT_DESC])
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
             ->limit(15)
             ->column();
         $player19 = Player::find()
-            ->select(['player_id'])
-            ->where(['player_team_id' => $this->team_id])
-            ->orderBy(['player_power_nominal' => SORT_DESC])
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
             ->limit(19)
             ->column();
         $player24 = Player::find()
-            ->select(['player_id'])
-            ->where(['player_team_id' => $this->team_id])
-            ->orderBy(['player_power_nominal' => SORT_DESC])
+            ->select(['id'])
+            ->where(['team_id' => $this->id])
+            ->orderBy(['power_nominal' => SORT_DESC])
             ->limit(24)
             ->column();
-        $power_c_15 = Player::find()->where(['player_id' => $player15])->sum('player_power_nominal');
-        $power_c_19 = Player::find()->where(['player_id' => $player19])->sum('player_power_nominal');
-        $power_c_24 = Player::find()->where(['player_id' => $player24])->sum('player_power_nominal');
-        $power_s_15 = Player::find()->where(['player_id' => $player15])->sum('player_power_nominal_s');
-        $power_s_19 = Player::find()->where(['player_id' => $player19])->sum('player_power_nominal_s');
-        $power_s_24 = Player::find()->where(['player_id' => $player24])->sum('player_power_nominal_s');
+        $power_c_15 = Player::find()->where(['id' => $player15])->sum('power_nominal');
+        $power_c_19 = Player::find()->where(['id' => $player19])->sum('power_nominal');
+        $power_c_24 = Player::find()->where(['id' => $player24])->sum('power_nominal');
+        $power_s_15 = Player::find()->where(['id' => $player15])->sum('power_nominal_s');
+        $power_s_19 = Player::find()->where(['id' => $player19])->sum('power_nominal_s');
+        $power_s_24 = Player::find()->where(['id' => $player24])->sum('power_nominal_s');
         $power_v = round(($power_c_15 + $power_c_19 + $power_c_24) / 58 * 15);
         $power_vs = round(($power_s_15 + $power_s_19 + $power_s_24) / 58 * 15);
 
-        $this->team_power_c_15 = $power_c_15;
-        $this->team_power_c_19 = $power_c_19;
-        $this->team_power_c_24 = $power_c_24;
-        $this->team_power_s_15 = $power_s_15;
-        $this->team_power_s_19 = $power_s_19;
-        $this->team_power_s_24 = $power_s_24;
-        $this->team_power_v = $power_v;
-        $this->team_power_vs = $power_vs;
+        $this->power_c_15 = $power_c_15;
+        $this->power_c_19 = $power_c_19;
+        $this->power_c_24 = $power_c_24;
+        $this->power_s_15 = $power_s_15;
+        $this->power_s_19 = $power_s_19;
+        $this->power_s_24 = $power_s_24;
+        $this->power_v = $power_v;
+        $this->power_vs = $power_vs;
         $this->save(true, [
-            'team_power_c_15',
-            'team_power_c_19',
-            'team_power_c_24',
-            'team_power_s_15',
-            'team_power_s_19',
-            'team_power_s_24',
-            'team_power_v',
-            'team_power_vs',
+            'power_c_15',
+            'power_c_19',
+            'power_c_24',
+            'power_s_15',
+            'power_s_19',
+            'power_s_24',
+            'power_v',
+            'power_vs',
         ]);
 
         return true;
     }
 
     /**
-     * @return string
+     * @return ForumMessage[]
      */
-    public function offSeason(): string
+    public function forumLastArray(): array
     {
-        $result = '-';
-        if ($this->offSeason) {
-            $result = Html::a(
-                $this->offSeason->off_season_place . ' место',
-                ['off-season/table']
-            );
-        }
-        return $result;
+        return ForumMessage::find()
+            ->select([
+                '*',
+                'id' => 'MAX(forum_message.id)',
+                'date' => 'MAX(forum_message.date)',
+            ])
+            ->joinWith(['forumTheme.forumGroup'])
+            ->where([
+                'forum_group.federation_id' => $this->stadium->city->country->federation->id
+            ])
+            ->groupBy(['forum_theme_id'])
+            ->orderBy(['forum_message.id' => SORT_DESC])
+            ->limit(5)
+            ->all();
     }
 
     /**
-     * @return string
+     * @return Game[]
      */
-    public function division(): string
+    public function nearestGame(): array
     {
-        if ($this->championship) {
-            $result = Html::a(
-                $this->championship->country->country_name . ', ' .
-                $this->championship->division->division_name . ', ' .
-                $this->championship->championship_place . ' ' .
-                'место',
-                [
-                    'championship/index',
-                    'countryId' => $this->championship->country->country_id,
-                    'divisionId' => $this->championship->division->division_id,
-                ]
-            );
-        } else {
-            $result = Html::a(
-                'Конференция, ' . $this->conference->conference_place . ' место',
-                ['conference/table']
-            );
-        }
-        return $result;
+        return Game::find()
+            ->joinWith(['schedule'])
+            ->andWhere(['or', ['home_team_id' => $this->id], ['guest_team_id' => $this->id]])
+            ->andWhere(['played' => null])
+            ->orderBy(['date' => SORT_ASC])
+            ->limit(2)
+            ->all();
     }
 
     /**
-     * @return string
+     * @return Game[]
      */
-    public function logo(): string
+    public function latestGame(): array
     {
-        $result = 'Добавить<br/>эмблему';
-        if (file_exists(Yii::getAlias('@webroot') . '/img/team/125/' . $this->team_id . '.png')) {
-            $result = Html::img(
-                '/img/team/125/' . $this->team_id . '.png?v='
-                . filemtime(Yii::getAlias('@webroot') . '/img/team/125/' . $this->team_id . '.png'),
-                [
-                    'alt' => $this->team_name,
-                    'class' => 'team-logo',
-                    'title' => $this->team_name,
-                ]
-            );
-        }
-        return $result;
+        return array_reverse(Game::find()
+            ->joinWith(['schedule'])
+            ->andWhere(['or', ['home_team_id' => $this->id], ['guest_team_id' => $this->id]])
+            ->andWhere(['not', ['played' => null]])
+            ->orderBy(['date' => SORT_DESC])
+            ->limit(3)
+            ->all());
+    }
+
+    /**
+     * @return int
+     */
+    public function baseMaintenance(): int
+    {
+        return $this->base->maintenance_base + $this->base->maintenance_slot * $this->baseUsed();
     }
 
     /**
@@ -420,62 +783,11 @@ class Team extends AbstractActiveRecord
      */
     public function baseUsed(): int
     {
-        return $this->baseMedical->base_medical_level
-            + $this->basePhysical->base_physical_level
-            + $this->baseSchool->base_school_level
-            + $this->baseScout->base_scout_level
-            + $this->baseTraining->base_training_level;
-    }
-
-    /**
-     * @return string
-     */
-    public function fullName(): string
-    {
-        return $this->team_name
-            . ' (' . $this->stadium->city->city_name
-            . ', ' . $this->stadium->city->country->country_name
-            . ')';
-    }
-
-    /**
-     * @param string $type
-     * @param bool $short
-     * @return string
-     */
-    public function teamLink(string $type = 'string', bool $short = false): string
-    {
-        if ('img' == $type) {
-            return $this->stadium->city->country->countryImage()
-                . ' '
-                . Html::a(
-                    $this->team_name
-                    . ' <span class="hidden-xs">('
-                    . $this->stadium->city->city_name
-                    . ')</span>',
-                    ['team/view', 'id' => $this->team_id]
-                );
-        } else {
-            if ($short) {
-                return Html::a(
-                    $this->team_name
-                    . ' <span class="hidden-xs">('
-                    . $this->stadium->city->city_name
-                    . ')</span>',
-                    ['team/view', 'id' => $this->team_id]
-                );
-            } else {
-                return Html::a(
-                    $this->team_name
-                    . ' <span class="hidden-xs">('
-                    . $this->stadium->city->city_name
-                    . ', '
-                    . $this->stadium->city->country->country_name
-                    . ')</span>',
-                    ['team/view', 'id' => $this->team_id]
-                );
-            }
-        }
+        return $this->baseMedical->level
+            + $this->basePhysical->level
+            + $this->baseSchool->level
+            + $this->baseScout->level
+            + $this->baseTraining->level;
     }
 
     /**
@@ -492,7 +804,7 @@ class Team extends AbstractActiveRecord
             return false;
         }
 
-        if ($controller->myTeam->team_id != $this->team_id) {
+        if ($controller->myTeam->id !== $this->id) {
             return false;
         }
 
@@ -513,75 +825,11 @@ class Team extends AbstractActiveRecord
             return false;
         }
 
-        if ($controller->myTeamOrVice->team_id != $this->team_id) {
+        if ($controller->myTeamOrVice->id !== $this->id) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function iconFreeTeam(): string
-    {
-        $result = ' ';
-        if (!$this->team_user_id) {
-            $result = Html::tag('i', '', ['class' => ['fa', 'fa-flag-o'], 'title' => 'Свободная команда']) . $result;
-        }
-        return $result;
-    }
-
-    /**
-     * @return string
-     */
-    public function rosterPhrase(): string
-    {
-        $data = [
-            'Уезжая надолго и без интернета не забудьте поставить статус ' . Html::a('в отпуске', ['user/holiday']),
-            Html::a('Пригласите друзей', ['user/referral']) . ' в Лигу и получите вознаграждение',
-            'Если у вас есть вопросы, задайте их специалистам ' . Html::a('тех.поддержки', ['support/index']) . ' Лиги',
-            'Можно достичь высоких результатов, не нарушая правил',
-            'Играйте честно - так интереснее выигрывать',
-        ];
-        return $data[array_rand($data)];
-    }
-
-    /**
-     * @return Game[]
-     */
-    public function latestGame(): array
-    {
-        return array_reverse(GameQuery::getLastThreeGames($this->team_id));
-    }
-
-    /**
-     * @return Game[]
-     */
-    public function nearestGame(): array
-    {
-        return GameQuery::getNearestTwoGames($this->team_id);
-    }
-
-    /**
-     * @return ForumMessage[]
-     */
-    public function forumLastArray(): array
-    {
-        return ForumMessage::find()
-            ->select([
-                '*',
-                'forum_message_id' => 'MAX(forum_message_id)',
-                'forum_message_date' => 'MAX(forum_message_date)',
-            ])
-            ->joinWith(['forumTheme.forumGroup'])
-            ->where([
-                'forum_group.forum_group_country_id' => $this->stadium->city->country->country_id
-            ])
-            ->groupBy(['forum_message_forum_theme_id'])
-            ->orderBy(['forum_message_id' => SORT_DESC])
-            ->limit(5)
-            ->all();
     }
 
     /**
@@ -593,10 +841,160 @@ class Team extends AbstractActiveRecord
          * @var AbstractController $controller
          */
         $controller = Yii::$app->controller;
-        if ($controller->user && $controller->user->user_id == $this->team_vice_id) {
-            return true;
+        return $controller->user && $controller->user->id === $this->vice_user_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo(): string
+    {
+        $result = Yii::t('common', 'models.db.team.get-logo.add');
+        if (file_exists(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png')) {
+            $result = Html::img(
+                '/img/team/125/' . $this->id . '.png?v=' . filemtime(Yii::getAlias('@webroot') . '/img/team/125/' . $this->id . '.png'),
+                [
+                    'alt' => $this->name,
+                    'class' => 'team-logo',
+                    'title' => $this->name,
+                ]
+            );
         }
-        return false;
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconFreeTeam(): string
+    {
+        $result = '';
+        if (!$this->user_id) {
+            $result = FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.team.icon-free-team.title')]) . ' ';
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return $this->name
+            . ' (' . $this->stadium->city->name
+            . ', ' . $this->stadium->city->country->name
+            . ')';
+    }
+
+    /**
+     * @return string
+     */
+    public function offSeason(): string
+    {
+        $result = '-';
+        if ($this->offSeason) {
+            $result = Html::a(
+                $this->offSeason->place . ' ' . Yii::t('common', 'models.db.team.off-season.place'),
+                ['off-season/table']
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function division(): string
+    {
+        $result = '';
+        if ($this->championship) {
+            $result = Html::a(
+                $this->championship->federation->country->name . ', ' .
+                $this->championship->division->name . ', ' .
+                $this->championship->place . ' ' .
+                Yii::t('common', 'models.db.team.division.place'),
+                [
+                    'championship/index',
+                    'federationId' => $this->championship->federation->id,
+                    'divisionId' => $this->championship->division->id,
+                ]
+            );
+        } elseif ($this->conference) {
+            $result = Html::a(
+                Yii::t('common', 'models.db.team.division.conference')
+                . ', '
+                . $this->conference->place
+                . ' '
+                . Yii::t('common', 'models.db.team.division.place'),
+                ['conference/table']
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfUseSlot(): int
+    {
+        return $this->baseMedical->level
+            + $this->basePhysical->level
+            + $this->baseSchool->level
+            + $this->baseScout->level
+            + $this->baseTraining->level;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeamLink(): string
+    {
+        return Html::a(
+            $this->name,
+            ['team/view', 'id' => $this->id],
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeamCityLink(): string
+    {
+        return Html::a(
+            $this->name . ' (' . $this->stadium->city->name . ')',
+            ['team/view', 'id' => $this->id],
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeamImageLink(): string
+    {
+        return $this->stadium->city->country->getImage()
+            . ' '
+            . Html::a(
+                $this->name
+                . ' <span class="hidden-xs">('
+                . $this->stadium->city->name
+                . ')</span>',
+                ['team/view', 'id' => $this->id]
+            );
+    }
+
+    /**
+     * @return string
+     */
+    public function rosterPhrase(): string
+    {
+        $data = [
+            Yii::t('common', 'models.db.team.roster-phrase.1', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.holiday'), ['user/holiday'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.2', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.referral'), ['user/referral'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.3', ['link' => Html::a(Yii::t('common', 'models.db.team.roster-phrase.link.support'), ['support/index'])]),
+            Yii::t('common', 'models.db.team.roster-phrase.4'),
+            Yii::t('common', 'models.db.team.roster-phrase.5'),
+        ];
+        return $data[array_rand($data)];
     }
 
     /**
@@ -604,7 +1002,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBase(): ActiveQuery
     {
-        return $this->hasOne(Base::class, ['base_id' => 'team_base_id']);
+        return $this->hasOne(Base::class, ['id' => 'base_id']);
     }
 
     /**
@@ -612,7 +1010,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBaseMedical(): ActiveQuery
     {
-        return $this->hasOne(BaseMedical::class, ['base_medical_id' => 'team_base_medical_id']);
+        return $this->hasOne(BaseMedical::class, ['id' => 'base_medical_id']);
     }
 
     /**
@@ -620,7 +1018,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBasePhysical(): ActiveQuery
     {
-        return $this->hasOne(BasePhysical::class, ['base_physical_id' => 'team_base_physical_id']);
+        return $this->hasOne(BasePhysical::class, ['id' => 'base_physical_id']);
     }
 
     /**
@@ -628,7 +1026,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBaseSchool(): ActiveQuery
     {
-        return $this->hasOne(BaseSchool::class, ['base_school_id' => 'team_base_school_id']);
+        return $this->hasOne(BaseSchool::class, ['id' => 'base_school_id']);
     }
 
     /**
@@ -636,7 +1034,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBaseScout(): ActiveQuery
     {
-        return $this->hasOne(BaseScout::class, ['base_scout_id' => 'team_base_scout_id']);
+        return $this->hasOne(BaseScout::class, ['id' => 'base_scout_id']);
     }
 
     /**
@@ -644,7 +1042,7 @@ class Team extends AbstractActiveRecord
      */
     public function getBaseTraining(): ActiveQuery
     {
-        return $this->hasOne(BaseTraining::class, ['base_training_id' => 'team_base_training_id']);
+        return $this->hasOne(BaseTraining::class, ['id' => 'base_training_id']);
     }
 
     /**
@@ -653,8 +1051,8 @@ class Team extends AbstractActiveRecord
     public function getBuildingBase(): ActiveQuery
     {
         return $this
-            ->hasOne(BuildingBase::class, ['building_base_team_id' => 'team_id'])
-            ->andWhere(['building_base_ready' => 0]);
+            ->hasOne(BuildingBase::class, ['team_id' => 'id'])
+            ->andWhere(['ready' => null]);
     }
 
     /**
@@ -663,8 +1061,8 @@ class Team extends AbstractActiveRecord
     public function getBuildingStadium(): ActiveQuery
     {
         return $this
-            ->hasOne(BuildingStadium::class, ['building_stadium_team_id' => 'team_id'])
-            ->andWhere(['building_stadium_ready' => 0]);
+            ->hasOne(BuildingStadium::class, ['team_id' => 'id'])
+            ->andWhere(['ready' => null]);
     }
 
     /**
@@ -673,9 +1071,8 @@ class Team extends AbstractActiveRecord
     public function getChampionship(): ActiveQuery
     {
         return $this
-            ->hasOne(Championship::class, ['championship_team_id' => 'team_id'])
-            ->andWhere(['championship_season_id' => Season::getCurrentSeason()])
-            ->cache();
+            ->hasOne(Championship::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
     }
 
     /**
@@ -684,17 +1081,32 @@ class Team extends AbstractActiveRecord
     public function getConference(): ActiveQuery
     {
         return $this
-            ->hasOne(Conference::class, ['conference_team_id' => 'team_id'])
-            ->andWhere(['conference_season_id' => Season::getCurrentSeason()])
-            ->cache();
+            ->hasOne(Conference::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getManager(): ActiveQuery
+    public function getFederationNews(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'team_user_id']);
+        return $this->hasOne(News::class, ['id' => 'federation_news_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFriendlyStatus(): ActiveQuery
+    {
+        return $this->hasOne(FriendlyStatus::class, ['id' => 'friendly_status_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getNationalAttitude(): ActiveQuery
+    {
+        return $this->hasOne(Attitude::class, ['id' => 'national_attitude_id']);
     }
 
     /**
@@ -703,17 +1115,16 @@ class Team extends AbstractActiveRecord
     public function getOffSeason(): ActiveQuery
     {
         return $this
-            ->hasOne(OffSeason::class, ['off_season_team_id' => 'team_id'])
-            ->andWhere(['off_season_season_id' => Season::getCurrentSeason()])
-            ->cache();
+            ->hasOne(OffSeason::class, ['team_id' => 'id'])
+            ->andWhere(['season_id' => Season::getCurrentSeason()]);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getPlayers(): ActiveQuery
+    public function getPresidentAttitude(): ActiveQuery
     {
-        return $this->hasMany(Player::class, ['player_team_id' => 'team_id']);
+        return $this->hasOne(Attitude::class, ['id' => 'president_attitude_id']);
     }
 
     /**
@@ -721,7 +1132,15 @@ class Team extends AbstractActiveRecord
      */
     public function getRatingTeam(): ActiveQuery
     {
-        return $this->hasOne(RatingTeam::class, ['rating_team_team_id' => 'team_id']);
+        return $this->hasOne(RatingTeam::class, ['team_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getRecommendation(): ActiveQuery
+    {
+        return $this->hasOne(Recommendation::class, ['team_id' => 'id']);
     }
 
     /**
@@ -729,7 +1148,7 @@ class Team extends AbstractActiveRecord
      */
     public function getStadium(): ActiveQuery
     {
-        return $this->hasOne(Stadium::class, ['stadium_id' => 'team_stadium_id']);
+        return $this->hasOne(Stadium::class, ['id' => 'stadium_id']);
     }
 
     /**
@@ -737,14 +1156,38 @@ class Team extends AbstractActiveRecord
      */
     public function getTeamRequests(): ActiveQuery
     {
-        return $this->hasMany(TeamRequest::class, ['team_request_team_id' => 'team_id']);
+        return $this->hasMany(TeamRequest::class, ['team_id' => 'id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getVice(): ActiveQuery
+    public function getU19Attitude(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'team_vice_id']);
+        return $this->hasOne(Attitude::class, ['id' => 'u19_attitude_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getU21Attitude(): ActiveQuery
+    {
+        return $this->hasOne(Attitude::class, ['id' => 'u21_attitude_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getViceUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'vice_user_id']);
     }
 }

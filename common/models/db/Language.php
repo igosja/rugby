@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,9 +10,9 @@ use common\components\AbstractActiveRecord;
  * Class Language
  * @package common\models\db
  *
- * @property int $language_id
- * @property string $language_code
- * @property string $language_name
+ * @property int $id
+ * @property string $code
+ * @property string $name
  */
 class Language extends AbstractActiveRecord
 {
@@ -20,5 +22,19 @@ class Language extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%language}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['code', 'name'], 'required'],
+            [['code', 'name'], 'trim'],
+            [['code'], 'string', 'max' => 2],
+            [['name'], 'string', 'max' => 255],
+            [['code', 'name'], 'unique'],
+        ];
     }
 }

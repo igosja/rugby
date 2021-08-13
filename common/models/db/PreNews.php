@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,9 +10,9 @@ use common\components\AbstractActiveRecord;
  * Class PreNews
  * @package common\models\db
  *
- * @property int $pre_news_id
- * @property string $pre_news_new
- * @property string $pre_news_error
+ * @property int $id
+ * @property string $new
+ * @property string $error
  */
 class PreNews extends AbstractActiveRecord
 {
@@ -20,5 +22,16 @@ class PreNews extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%pre_news}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['error', 'new'], 'trim'],
+            [['error', 'new'], 'string'],
+        ];
     }
 }

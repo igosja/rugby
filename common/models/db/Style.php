@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,16 +10,16 @@ use common\components\AbstractActiveRecord;
  * Class Style
  * @package common\models\db
  *
- * @property int $style_id
- * @property string $style_name
+ * @property int $id
+ * @property string $name
  */
 class Style extends AbstractActiveRecord
 {
-    const NORMAL = 1;
-    const DOWN_THE_MIDDLE = 2;
-    const CHAMPAGNE = 3;
-    const MAN_10 = 4;
-    const MAN_15 = 5;
+    public const NORMAL = 1;
+    public const DOWN_THE_MIDDLE = 2;
+    public const CHAMPAGNE = 3;
+    public const MAN_10 = 4;
+    public const MAN_15 = 5;
 
     /**
      * @return string
@@ -28,15 +30,28 @@ class Style extends AbstractActiveRecord
     }
 
     /**
-     * @param array|null $notIn
-     * @return int
+     * @return array[]
      */
-    public static function getRandStyleId(array $notIn = null): int
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 15],
+            [['name'], 'unique'],
+        ];
+    }
+
+    /**
+     * @param array|null $notIn
+     * @return false|string|null
+     */
+    public static function getRandStyleId(array $notIn = null)
     {
         return self::find()
-            ->select(['style_id'])
-            ->where(['!=', 'style_id', self::NORMAL])
-            ->andFilterWhere(['not', ['style_id' => $notIn]])
+            ->select(['id'])
+            ->where(['!=', 'id', self::NORMAL])
+            ->andFilterWhere(['not', ['id' => $notIn]])
             ->orderBy('RAND()')
             ->limit(1)
             ->scalar();

@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+
+// TODO refactor
 /**
  * Yii console bootstrap file.
  */

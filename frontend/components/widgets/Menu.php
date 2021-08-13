@@ -1,8 +1,17 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\components\widgets;
 
-use frontend\components\AbstractController;
+use common\models\db\Message;
+use common\models\db\News;
+use common\models\db\Support;
+use common\models\db\Vote;
+use common\models\db\VoteAnswer;
+use common\models\db\VoteStatus;
+use common\models\db\VoteUser;
+use frontend\controllers\AbstractController;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -28,22 +37,34 @@ class Menu extends Widget
     public const ITEM_NEWS = 'news';
     public const ITEM_PASSWORD = 'password';
     public const ITEM_PLAYER = 'player';
-    public const ITEM_POLL = 'poll';
     public const ITEM_PROFILE = 'profile';
     public const ITEM_RATING = 'rating';
     public const ITEM_ROSTER = 'roster';
     public const ITEM_RULE = 'rule';
     public const ITEM_SCHEDULE = 'schedule';
     public const ITEM_SING_UP = 'signUp';
+    public const ITEM_STORE = 'store';
     public const ITEM_SUPPORT = 'support';
     public const ITEM_TEAM = 'team';
     public const ITEM_TOURNAMENT = 'tournament';
     public const ITEM_TRANSFER = 'transfer';
     public const ITEM_VIP = 'vip';
+    public const ITEM_VOTE = 'vote';
 
-    private $menuItemList;
-    private $menuItems;
-    private $menu;
+    /**
+     * @var array $menuItemList
+     */
+    private array $menuItemList = [];
+
+    /**
+     * @var array $menuItems
+     */
+    private array $menuItems = [];
+
+    /**
+     * @var string $menu
+     */
+    private string $menu = '';
 
     /**
      * @return string
@@ -86,7 +107,7 @@ class Menu extends Widget
                     self::ITEM_HOME,
                     self::ITEM_NEWS,
                     self::ITEM_RULE,
-                    self::ITEM_POLL,
+                    self::ITEM_VOTE,
                 ],
                 [
                     self::ITEM_SING_UP,
@@ -128,7 +149,7 @@ class Menu extends Widget
                 ],
                 [
                     self::ITEM_VIP,
-                    self::ITEM_POLL,
+                    self::ITEM_VOTE,
                     self::ITEM_CHANGE_TEAM,
                 ],
             ],
@@ -153,9 +174,10 @@ class Menu extends Widget
                 [
                     self::ITEM_MESSENGER,
                     self::ITEM_FEDERATION,
-                    self::ITEM_SUPPORT,
+                    self::ITEM_STORE,
                 ],
                 [
+                    self::ITEM_SUPPORT,
                     self::ITEM_FORUM,
                     self::ITEM_CHAT,
                     self::ITEM_RATING,
@@ -226,202 +248,151 @@ class Menu extends Widget
          * @var AbstractController $controller
          */
         $controller = Yii::$app->controller;
-        $countryInfo = 0;
         $messenger = 0;
         $news = 0;
         $support = 0;
-        $poll = 0;
+        $vote = 0;
         if (!Yii::$app->user->isGuest) {
-            $support = 0;
-            $messenger = 0;
-            $news = 0;
-            $poll = 0;
-//            $support = Support::find()
-//                ->where(['support_user_id' => Yii::$app->user->id, 'support_question' => 0, 'support_read' => 0, 'support_inside' => 0])
-//                ->count();
-//
-//            $messenger = Message::find()
-//                ->where(['message_user_id_to' => Yii::$app->user->id, 'message_read' => 0])
-//                ->count();
-//
-//            $news = News::find()
-//                ->where(['news_country_id' => 0])
-//                ->andWhere(['>', 'news_id', $controller->user->user_news_id])
-//                ->count();
-//
-//            $poll = Poll::find()
-//                ->where(['poll_poll_status_id' => PollStatus::OPEN, 'poll_country_id' => 0])
-//                ->andWhere([
-//                    'not',
-//                    [
-//                        'poll_id' => PollAnswer::find()
-//                            ->select(['poll_answer_poll_id'])
-//                            ->where([
-//                                'poll_answer_id' => PollUser::find()
-//                                    ->select(['poll_user_poll_answer_id'])
-//                                    ->where(['poll_user_user_id' => Yii::$app->user->id])
-//                            ])
-//                    ]
-//                ])
-//                ->count();
-//            if ($controller->myTeam) {
-//                $countryNews = News::find()
-//                    ->where(['news_country_id' => $controller->myTeam->stadium->city->country->country_id])
-//                    ->andWhere(['>', 'news_id', $controller->myTeam->team_news_id])
-//                    ->count();
-//
-//                $supportManager = Support::find()
-//                    ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 0, 'support_read' => 0, 'support_user_id' => Yii::$app->user->id])
-//                    ->count();
-//
-//                $supportAdmin = 0;
-//                $supportPresident = 0;
-//
-//                if (in_array($controller->user->user_id, [$controller->myTeam->stadium->city->country->country_president_id, $controller->myTeam->stadium->city->country->country_president_vice_id])) {
-//                    $supportAdmin = Support::find()
-//                        ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 0, 'support_question' => 0, 'support_read' => 0])
-//                        ->count();
-//
-//                    $supportPresident = Support::find()
-//                        ->where(['support_country_id' => $controller->myTeam->stadium->city->country->country_id, 'support_inside' => 1, 'support_question' => 1, 'support_read' => 0])
-//                        ->count();
-//                }
-//
-//                $countryInfo = $countryNews + $supportManager + $supportAdmin + $supportPresident;
-//
-//                if (!$poll) {
-//                    $poll = Poll::find()
-//                        ->where([
-//                            'poll_poll_status_id' => PollStatus::OPEN,
-//                            'poll_country_id' => $controller->myTeam->stadium->city->country->country_id,
-//                        ])
-//                        ->andWhere([
-//                            'not',
-//                            [
-//                                'poll_id' => PollAnswer::find()
-//                                    ->select(['poll_answer_poll_id'])
-//                                    ->where([
-//                                        'poll_answer_id' => PollUser::find()
-//                                            ->select(['poll_user_poll_answer_id'])
-//                                            ->where(['poll_user_user_id' => Yii::$app->user->id])
-//                                    ])
-//                            ]
-//                        ])
-//                        ->count();
-//                }
-//            }
+            $support = Support::find()
+                ->andWhere([
+                    'user_id' => $controller->user->id,
+                    'is_question' => false,
+                    'read' => null
+                ])
+                ->count();
+
+            $messenger = Message::find()
+                ->andWhere(['to_user_id' => $controller->user->id, 'read' => null])
+                ->count();
+
+            $news = News::find()
+                ->andFilterWhere(['>', 'id', $controller->user->news_id])
+                ->count();
+
+            $vote = Vote::find()
+                ->andWhere(['vote_status_id' => VoteStatus::OPEN])
+                ->andWhere([
+                    'not',
+                    [
+                        'id' => VoteAnswer::find()
+                            ->select(['vote_id'])
+                            ->andWhere([
+                                'id' => VoteUser::find()
+                                    ->select(['vote_answer_id'])
+                                    ->andWhere(['user_id' => $controller->user->id])
+                            ])
+                    ]
+                ])
+                ->count();
         }
 
-        $nationalId = 0;
-        if ($controller->myNational) {
-            $nationalId = $controller->myNational->national_id;
-        }
-        if ($controller->myNationalVice) {
-            $nationalId = $controller->myNationalVice->national_id;
-        }
+        $nationalId = $controller->myNationalVice->id ?? $controller->myNational->id ?? 0;
 
         $this->menuItemList = [
             self::ITEM_CHANGE_TEAM => [
-                'label' => 'Сменить клуб',
-                'url' => ['team/change'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.change-team'),
+                'url' => ['/team-change/index'],
             ],
             self::ITEM_CHAT => [
-                'label' => 'Чат',
+                'label' => Yii::t('frontend', 'components.widgets.menu.chat'),
                 'target' => '_blank',
-                'url' => ['chat/index'],
+                'url' => ['/chat/index'],
             ],
             self::ITEM_FEDERATION => [
-                'css' => $countryInfo ? 'red' : '',
-                'label' => 'Федерация' . ($countryInfo ? ' <sup class="text-size-4">' . $countryInfo . '</sup>' : ''),
-                'url' => ['federation/news'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.federation'),
+                'url' => ['/federation/news'],
             ],
             self::ITEM_FORUM => [
-                'label' => 'Форум',
+                'label' => Yii::t('frontend', 'components.widgets.menu.forum'),
                 'target' => '_blank',
-                'url' => ['forum/default/index'],
+                'url' => ['/forum/default/index'],
             ],
             self::ITEM_HOME => [
-                'label' => 'Главная',
-                'url' => ['site/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.home'),
+                'url' => ['/site/index'],
             ],
             self::ITEM_LOAN => [
-                'label' => 'Аренда',
-                'url' => ['loan/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.loan'),
+                'url' => ['/loan/index'],
             ],
             self::ITEM_MESSENGER => [
                 'css' => $messenger ? 'red' : '',
-                'label' => 'Сообщения' . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
+                'label' => Yii::t('frontend', 'components.widgets.menu.messenger') . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
                 'url' => ['messenger/index'],
             ],
             self::ITEM_NATIONAL_TEAM => [
                 'css' => $nationalId ? 'red' : 'hidden',
-                'label' => 'Сборная',
-                'url' => ['national/view', 'id' => $nationalId],
+                'label' => Yii::t('frontend', 'components.widgets.menu.national'),
+                'url' => ['/national/view', 'id' => $nationalId],
             ],
             self::ITEM_NEWS => [
                 'css' => $news ? 'red' : '',
-                'label' => 'Новости' . ($news ? '<sup class="text-size-4">' . $news . '</sup>' : ''),
-                'url' => ['news/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.news') . ($news ? '<sup class="text-size-4">' . $news . '</sup>' : ''),
+                'url' => ['/news/index'],
             ],
             self::ITEM_PASSWORD => [
-                'label' => 'Забыли пароль?',
-                'url' => ['site/forgot-password'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.password'),
+                'url' => ['/site/forgot-password'],
             ],
             self::ITEM_PLAYER => [
-                'label' => 'Игроки',
-                'url' => ['player/index'],
-            ],
-            self::ITEM_POLL => [
-                'css' => $poll ? 'red' : '',
-                'label' => 'Опросы' . ($poll ? '<sup class="text-size-4">' . $poll . '</sup>' : ''),
-                'url' => ['poll/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.player'),
+                'url' => ['/player/index'],
             ],
             self::ITEM_PROFILE => [
-                'label' => 'Профиль',
-                'url' => ['user/view'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.profile'),
+                'url' => ['/user/view'],
             ],
             self::ITEM_RATING => [
-                'label' => 'Рейтинги',
-                'url' => ['rating/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.rating'),
+                'url' => ['/rating/index'],
             ],
             self::ITEM_ROSTER => [
                 'css' => 'red',
-                'label' => 'Ростер',
-                'url' => ['team/view'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.roster'),
+                'url' => ['/team/view'],
             ],
             self::ITEM_RULE => [
-                'label' => 'Правила',
-                'url' => ['rule/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.rule'),
+                'url' => ['/rule/index'],
             ],
             self::ITEM_SCHEDULE => [
-                'label' => 'Рассписание',
-                'url' => ['schedule/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.schedule'),
+                'url' => ['/schedule/index'],
             ],
             self::ITEM_SING_UP => [
                 'css' => 'red',
-                'label' => 'Регистрация',
-                'url' => ['site/sign-up'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.signup'),
+                'url' => ['/site/sign-up'],
+            ],
+            self::ITEM_STORE => [
+                'label' => Yii::t('frontend', 'components.widgets.menu.store'),
+                'url' => ['store/index'],
             ],
             self::ITEM_SUPPORT => [
                 'css' => $support ? 'red' : '',
-                'label' => 'Тех.поддержка' . ($support ? ' <sup class="text-size-4">' . $support . '</sup>' : ''),
-                'url' => ['support/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.support') . ($support ? ' <sup class="text-size-4">' . $support . '</sup>' : ''),
+                'url' => ['/support/index'],
             ],
             self::ITEM_TEAM => [
-                'label' => 'Команды',
-                'url' => ['team/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.team'),
+                'url' => ['/team/index'],
             ],
             self::ITEM_TOURNAMENT => [
-                'label' => 'Турниры',
-                'url' => ['tournament/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.tournament'),
+                'url' => ['/tournament/index'],
             ],
             self::ITEM_TRANSFER => [
-                'label' => 'Трансфер',
-                'url' => ['transfer/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.transfer'),
+                'url' => ['/transfer/index'],
             ],
             self::ITEM_VIP => [
-                'label' => 'VIP клуб',
-                'url' => ['vip/index'],
+                'label' => Yii::t('frontend', 'components.widgets.menu.vip'),
+                'url' => ['/vip/index'],
+            ],
+            self::ITEM_VOTE => [
+                'css' => $vote ? 'red' : '',
+                'label' => Yii::t('frontend', 'components.widgets.menu.vote') . ($vote ? '<sup class="text-size-4">' . $vote . '</sup>' : ''),
+                'url' => ['/vote/index'],
             ],
         ];
     }

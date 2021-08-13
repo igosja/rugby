@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Federation;
 use common\models\db\Team;
@@ -25,34 +27,34 @@ print $this->render('_federation', [
         $columns = [
             [
                 'attribute' => 'team',
-                'footer' => 'Команда',
+                'footer' => Yii::t('frontend', 'views.th.team'),
                 'format' => 'raw',
-                'label' => 'Команда',
-                'value' => function (Team $model) {
-                    return $model->iconFreeTeam() . $model->teamLink('string', true);
+                'label' => Yii::t('frontend', 'views.th.team'),
+                'value' => static function (Team $model) {
+                    return $model->iconFreeTeam() . $model->getTeamCityLink();
                 }
             ],
             [
-                'attribute' => 'manager',
+                'attribute' => 'user',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Менеджер',
+                'footer' => Yii::t('frontend', 'views.th.manager'),
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-40'],
-                'label' => 'Менеджер',
-                'value' => function (Team $model) {
-                    return $model->manager->iconVip() . ' ' . $model->manager->userLink();
+                'label' => Yii::t('frontend', 'views.th.manager'),
+                'value' => static function (Team $model) {
+                    return $model->user->iconVip() . ' ' . $model->user->getUserLink();
                 }
             ],
             [
                 'attribute' => 'last_visit',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Последний визит',
+                'footer' => Yii::t('frontend', 'views.federation.team.th.visit'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-20 hidden-xs'],
-                'label' => 'Последний визит',
-                'value' => function (Team $model) {
-                    return $model->manager->lastVisit();
+                'label' => Yii::t('frontend', 'views.federation.team.th.visit'),
+                'value' => static function (Team $model) {
+                    return $model->user->lastVisit();
                 }
             ],
         ];
@@ -67,5 +69,4 @@ print $this->render('_federation', [
 
     ?>
 </div>
-<?= $this->render('//site/_show-full-table'); ?>
-
+<?= $this->render('//site/_show-full-table') ?>

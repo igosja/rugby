@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -10,11 +12,11 @@ use yii\helpers\ArrayHelper;
  * Class StatisticChapter
  * @package common\models\db
  *
- * @property int $statistic_chapter_id
- * @property string $statistic_chapter_name
- * @property int $statistic_chapter_order
+ * @property int $id
+ * @property string $name
+ * @property int $order
  *
- * @property StatisticType[] $statisticTypes
+ * @property-read StatisticType[] $statisticTypes
  */
 class StatisticChapter extends AbstractActiveRecord
 {
@@ -27,24 +29,37 @@ class StatisticChapter extends AbstractActiveRecord
     }
 
     /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name', 'order'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 10],
+            [['order'], 'integer', 'min' => 1, 'max' => 9],
+            [['name', 'order'], 'unique'],
+        ];
+    }
+    /**
      * @return array
      */
     public static function selectOptions(): array
     {
         /**
-         * @var self[] $typesArray
+         * @var StatisticChapter[] $typesArray
          */
         $typesArray = self::find()
             ->with(['statisticTypes'])
-            ->orderBy(['statistic_chapter_order' => SORT_ASC])
+            ->orderBy(['order' => SORT_ASC])
             ->all();
 
         $result = [];
         foreach ($typesArray as $item) {
-            $result[$item->statistic_chapter_name] = ArrayHelper::map(
+            $result[$item->name] = ArrayHelper::map(
                 $item->statisticTypes,
-                'statistic_type_id',
-                'statistic_type_name'
+                'id',
+                'name'
             );
         }
 
@@ -56,6 +71,6 @@ class StatisticChapter extends AbstractActiveRecord
      */
     public function getStatisticTypes(): ActiveQuery
     {
-        return $this->hasMany(StatisticType::class, ['statistic_type_statistic_chapter_id' => 'statistic_chapter_id']);
+        return $this->hasMany(StatisticType::class, ['statistic_chapter_id' => 'id']);
     }
 }

@@ -1,137 +1,55 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Exception;
+use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 use yii\helpers\Html;
 
 /**
  * Class History
  * @package common\models\db
  *
- * @property int $history_id
- * @property int $history_building_id
- * @property int $history_country_id
- * @property int $history_date
- * @property int $history_fire_reason
- * @property int $history_game_id
- * @property int $history_history_text_id
- * @property int $history_national_id
- * @property int $history_player_id
- * @property int $history_position_id
- * @property int $history_season_id
- * @property int $history_special_id
- * @property int $history_team_id
- * @property int $history_team_2_id
- * @property int $history_user_id
- * @property int $history_user_2_id
- * @property int $history_value
+ * @property int $id
+ * @property int $building_id
+ * @property int $federation_id
+ * @property int $date
+ * @property int $fire_reason_id
+ * @property int $game_id
+ * @property int $history_text_id
+ * @property int $national_id
+ * @property int $player_id
+ * @property int $position_id
+ * @property int $season_id
+ * @property int $second_team_id
+ * @property int $second_user_id
+ * @property int $special_id
+ * @property int $team_id
+ * @property int $user_id
+ * @property int $value
  *
- * @property Building $building
- * @property Country $country
- * @property Game $game
- * @property HistoryText $historyText
- * @property National $national
- * @property Player $player
- * @property Position $position
- * @property Special $special
- * @property Team $team
- * @property Team $teamTwo
- * @property User $user
- * @property User $userTwo
+ * @property-read Building $building
+ * @property-read Federation $federation
+ * @property-read FireReason $fireReason
+ * @property-read Game $game
+ * @property-read HistoryText $historyText
+ * @property-read National $national
+ * @property-read Player $player
+ * @property-read Position $position
+ * @property-read Season $season
+ * @property-read Team $secondTeam
+ * @property-read User $secondUser
+ * @property-read Special $special
+ * @property-read Team $team
+ * @property-read User $user
  */
 class History extends AbstractActiveRecord
 {
-    /**
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            [
-                [
-                    'history_building_id',
-                    'history_country_id',
-                    'history_game_id',
-                    'history_history_text_id',
-                    'history_national_id',
-                    'history_player_id',
-                    'history_position_id',
-                    'history_special_id',
-                    'history_team_id',
-                    'history_team_2_id',
-                    'history_user_id',
-                    'history_user_2_id',
-                    'history_value',
-                ],
-                'integer'
-            ],
-            [['history_history_text_id'], 'required'],
-            [
-                ['history_building_id'],
-                'exist',
-                'targetRelation' => 'building',
-            ],
-            [
-                ['history_country_id'],
-                'exist',
-                'targetRelation' => 'country',
-            ],
-            [
-                ['history_game_id'],
-                'exist',
-                'targetRelation' => 'game',
-            ],
-            [
-                ['history_history_text_id'],
-                'exist',
-                'targetRelation' => 'historyText',
-            ],
-            [
-                ['history_national_id'],
-                'exist',
-                'targetRelation' => 'national',
-            ],
-            [
-                ['history_player_id'],
-                'exist',
-                'targetRelation' => 'player',
-            ],
-            [
-                ['history_position_id'],
-                'exist',
-                'targetRelation' => 'position',
-            ],
-            [
-                ['history_special_id'],
-                'exist',
-                'targetRelation' => 'special',
-            ],
-            [
-                ['history_team_id'],
-                'exist',
-                'targetRelation' => 'team',
-            ],
-            [
-                ['history_team_2_id'],
-                'exist',
-                'targetRelation' => 'teamTwo',
-            ],
-            [
-                ['history_user_id'],
-                'exist',
-                'targetRelation' => 'user',
-            ],
-            [
-                ['history_user_2_id'],
-                'exist',
-                'targetRelation' => 'userTwo',
-            ],
-        ];
-    }
-
     /**
      * @return string
      */
@@ -141,19 +59,58 @@ class History extends AbstractActiveRecord
     }
 
     /**
-     * @param bool $insert
-     * @return bool
+     * @return array
      */
-    public function beforeSave($insert): bool
+    public function behaviors(): array
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->history_season_id = Season::getCurrentSeason();
-            $this->history_date = time();
-        }
-        return true;
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['building_id'], 'integer', 'min' => 1, 'max' => 9],
+            [['fire_reason_id', 'history_text_id', 'position_id', 'special_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['federation_id', 'national_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['game_id', 'player_id', 'value'], 'integer', 'min' => 1],
+            [['second_team_id', 'second_user_id', 'team_id', 'user_id'], 'integer', 'min' => 0],
+            [['building_id'], 'exist', 'targetRelation' => 'building'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
+            [['fire_reason_id'], 'exist', 'targetRelation' => 'fireReason'],
+            [['game_id'], 'exist', 'targetRelation' => 'game'],
+            [['history_text_id'], 'exist', 'targetRelation' => 'historyText'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['position_id'], 'exist', 'targetRelation' => 'position'],
+            [['season_id'], 'exist', 'targetRelation' => 'season'],
+            [['second_team_id'], 'exist', 'targetRelation' => 'secondTeam'],
+            [['second_user_id'], 'exist', 'targetRelation' => 'secondUser'],
+            [['special_id'], 'exist', 'targetRelation' => 'special'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws Exception
+     */
+    public static function log(array $data): bool
+    {
+        $history = new self();
+        $history->setAttributes($data);
+        $history->season_id = Season::getCurrentSeason();
+        return $history->save();
     }
 
     /**
@@ -161,18 +118,18 @@ class History extends AbstractActiveRecord
      */
     public function text(): string
     {
-        $text = $this->historyText->history_text_text;
+        $text = $this->historyText->text;
         if (false !== strpos($text, '{team}')) {
             $text = str_replace(
                 '{team}',
-                $this->team->teamLink(),
+                $this->team->getTeamLink(),
                 $text
             );
         }
-        if (false !== strpos($text, '{team2}')) {
+        if ($this->second_team_id && false !== strpos($text, '{team2}')) {
             $text = str_replace(
                 '{team2}',
-                $this->teamTwo->teamLink(),
+                $this->secondTeam->getTeamLink(),
                 $text
             );
         }
@@ -186,7 +143,14 @@ class History extends AbstractActiveRecord
         if (false !== strpos($text, '{country}')) {
             $text = str_replace(
                 '{country}',
-                Html::a($this->country->country_name, ['country/news', 'id' => $this->history_country_id]),
+                Html::a($this->federation->country->name, ['federation/news', 'id' => $this->federation_id]),
+                $text
+            );
+        }
+        if (false !== strpos($text, '{federation}')) {
+            $text = str_replace(
+                '{federation}',
+                Html::a($this->federation->country->name, ['federation/news', 'id' => $this->federation_id]),
                 $text
             );
         }
@@ -194,8 +158,8 @@ class History extends AbstractActiveRecord
             $text = str_replace(
                 '{player}',
                 Html::a(
-                    $this->player->name->name_name . ' ' . $this->player->surname->surname_name,
-                    ['player/view', 'id' => $this->history_player_id]
+                    $this->player->playerName(),
+                    ['player/view', 'id' => $this->player_id]
                 ),
                 $text
             );
@@ -203,10 +167,7 @@ class History extends AbstractActiveRecord
         if (false !== strpos($text, '{user}')) {
             $text = str_replace(
                 '{user}',
-                Html::a(
-                    Html::encode($this->user->user_login),
-                    ['user/view', 'id' => $this->history_user_id]
-                ),
+                $this->user->getUserLink(),
                 $text
             );
         }
@@ -215,7 +176,7 @@ class History extends AbstractActiveRecord
                 '{game}',
                 Html::a(
                     $this->game->teamOrNationalLink('home', false, false) . ' - ' . $this->game->teamOrNationalLink('guest', false, false),
-                    ['game/view', 'id' => $this->game->game_id]
+                    ['game/view', 'id' => $this->game->id]
                 ),
                 $text
             );
@@ -223,31 +184,31 @@ class History extends AbstractActiveRecord
         if (false !== strpos($text, '{position}')) {
             $text = str_replace(
                 '{position}',
-                $this->position->position_text,
+                $this->position->text,
                 $text
             );
         }
         if (false !== strpos($text, '{special}')) {
             $text = str_replace(
                 '{special}',
-                $this->special->special_text,
+                $this->special->text,
                 $text
             );
         }
         if (false !== strpos($text, '{building}')) {
             $building = '';
-            if (Building::BASE === $this->history_building_id) {
-                $building = 'база';
-            } elseif (Building::MEDICAL === $this->history_building_id) {
-                $building = 'медцентр';
-            } elseif (Building::PHYSICAL === $this->history_building_id) {
-                $building = 'центр физподготовки';
-            } elseif (Building::SCHOOL === $this->history_building_id) {
-                $building = 'спортшкола';
-            } elseif (Building::SCOUT === $this->history_building_id) {
-                $building = 'скаут-центр';
-            } elseif (Building::TRAINING === $this->history_building_id) {
-                $building = 'тренировочный центр';
+            if (Building::BASE === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.base');
+            } elseif (Building::MEDICAL === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.medical');
+            } elseif (Building::PHYSICAL === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.physical');
+            } elseif (Building::SCHOOL === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.school');
+            } elseif (Building::SCOUT === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.scout');
+            } elseif (Building::TRAINING === $this->building_id) {
+                $building = Yii::t('common', 'models.db.history.text.training');
             }
             $text = str_replace(
                 '{building}',
@@ -255,24 +216,11 @@ class History extends AbstractActiveRecord
                 $text
             );
         }
-        $text = str_replace(
+        return str_replace(
             ['{capacity}', '{level}', '{day}'],
-            [$this->history_value, $this->history_value, $this->history_value . 'd'],
+            [$this->value, $this->value, Yii::t('common', 'models.db.history.text.day', ['day' => $this->value])],
             $text
         );
-        return $text;
-    }
-
-    /**
-     * @param array $data
-     * @return bool
-     * @throws Exception
-     */
-    public static function log(array $data): bool
-    {
-        $history = new self();
-        $history->setAttributes($data);
-        return $history->save();
     }
 
     /**
@@ -280,15 +228,23 @@ class History extends AbstractActiveRecord
      */
     public function getBuilding(): ActiveQuery
     {
-        return $this->hasOne(Building::class, ['building_id' => 'history_building_id'])->cache();
+        return $this->hasOne(Building::class, ['id' => 'building_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getCountry(): ActiveQuery
+    public function getFederation(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'history_country_id'])->cache();
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFireReason(): ActiveQuery
+    {
+        return $this->hasOne(FireReason::class, ['id' => 'fire_reason_id']);
     }
 
     /**
@@ -296,7 +252,7 @@ class History extends AbstractActiveRecord
      */
     public function getGame(): ActiveQuery
     {
-        return $this->hasOne(Game::class, ['game_id' => 'history_game_id'])->cache();
+        return $this->hasOne(Game::class, ['id' => 'game_id']);
     }
 
     /**
@@ -304,7 +260,7 @@ class History extends AbstractActiveRecord
      */
     public function getHistoryText(): ActiveQuery
     {
-        return $this->hasOne(HistoryText::class, ['history_text_id' => 'history_history_text_id'])->cache();
+        return $this->hasOne(HistoryText::class, ['id' => 'history_text_id']);
     }
 
     /**
@@ -312,7 +268,7 @@ class History extends AbstractActiveRecord
      */
     public function getNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['national_id' => 'history_national_id'])->cache();
+        return $this->hasOne(National::class, ['id' => 'national_id']);
     }
 
     /**
@@ -320,7 +276,7 @@ class History extends AbstractActiveRecord
      */
     public function getPlayer(): ActiveQuery
     {
-        return $this->hasOne(Player::class, ['player_id' => 'history_player_id'])->cache();
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
     }
 
     /**
@@ -328,7 +284,31 @@ class History extends AbstractActiveRecord
      */
     public function getPosition(): ActiveQuery
     {
-        return $this->hasOne(Position::class, ['position_id' => 'history_position_id'])->cache();
+        return $this->hasOne(Position::class, ['id' => 'position_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSeason(): ActiveQuery
+    {
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSecondTeam(): ActiveQuery
+    {
+        return $this->hasOne(Team::class, ['id' => 'second_team_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSecondUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'second_user_id']);
     }
 
     /**
@@ -336,7 +316,7 @@ class History extends AbstractActiveRecord
      */
     public function getSpecial(): ActiveQuery
     {
-        return $this->hasOne(Special::class, ['special_id' => 'history_special_id'])->cache();
+        return $this->hasOne(Special::class, ['id' => 'special_id']);
     }
 
     /**
@@ -344,15 +324,7 @@ class History extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'history_team_id'])->cache();
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getTeamTwo(): ActiveQuery
-    {
-        return $this->hasOne(Team::class, ['team_id' => 'history_team_2_id'])->cache();
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
     /**
@@ -360,14 +332,6 @@ class History extends AbstractActiveRecord
      */
     public function getUser(): ActiveQuery
     {
-        return $this->hasOne(User::class, ['user_id' => 'history_user_id'])->cache();
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getUserTwo(): ActiveQuery
-    {
-        return $this->hasOne(User::class, ['user_id' => 'history_user_2_id'])->cache();
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

@@ -1,19 +1,26 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
  * Class GameComment
  * @package common\models\db
  *
- * @property int $game_comment_id
- * @property int $game_comment_check
- * @property int $game_comment_date
- * @property int $game_comment_game_id
- * @property string $game_comment_text
- * @property int $game_comment_user_id
+ * @property int $id
+ * @property int $check
+ * @property int $date
+ * @property int $game_id
+ * @property string $text
+ * @property int $user_id
+ *
+ * @property-read Game $game
+ * @property-read User $user
  */
 class GameComment extends AbstractActiveRecord
 {
@@ -23,5 +30,50 @@ class GameComment extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%game_comment}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['game_id', 'text', 'user_id'], 'required'],
+            [['check', 'game_id', 'user_id'], 'integer', 'min' => 1],
+            [['text'], 'trim'],
+            [['text'], 'string'],
+            [['game_id'], 'exist', 'targetRelation' => 'game'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getGame(): ActiveQuery
+    {
+        return $this->hasOne(Game::class, ['id' => 'game_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

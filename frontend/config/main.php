@@ -1,7 +1,10 @@
 <?php
 
-use frontend\components\widgets\LinkPager;
+// TODO refactor
+
+use kartik\select2\Select2;
 use yii\grid\GridView;
+use yii\redis\Session;
 use yii\widgets\ListView;
 
 $params = array_merge(
@@ -13,7 +16,6 @@ $params = array_merge(
 
 return [
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'container' => [
         'definitions' => [
             GridView::class => [
@@ -41,8 +43,8 @@ return [
                     'pageCssClass' => 'btn pagination',
                 ],
             ],
-            \yii\widgets\LinkPager::class => [
-                'class' => LinkPager::class,
+            Select2::class => [
+                'theme' => Select2::THEME_DEFAULT,
             ],
         ],
     ],
@@ -54,21 +56,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-        ],
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
         ],
         'session' => [
-            'class' => 'yii\redis\Session',
+            'class' => Session::class,
             'name' => 'ezubukhqon',
         ],
         'urlManager' => [
@@ -79,9 +72,9 @@ return [
                 'activation/repeat' => 'site/activation-repeat',
                 'forgot-password' => 'site/forgot-password',
                 'forum' => 'forum/default/index',
-                'sign-in' => 'site/sign-in',
-                'password' => 'site/password',
                 'password/restore' => 'site/password-restore',
+                'sign-in' => 'site/sign-in',
+                'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
                 '<module:(forum)>/<controller:\w+>' => '<module>/<controller>/index',
                 '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',

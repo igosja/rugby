@@ -1,8 +1,11 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\forms;
 
 use common\models\db\User;
+use common\models\db\UserLogin;
 use Yii;
 use yii\base\Model;
 
@@ -18,17 +21,17 @@ class SignInForm extends Model
     /**
      * @var string $login
      */
-    public $login;
+    public string $login = '';
 
     /**
      * @var string $password
      */
-    public $password;
+    public string $password = '';
 
     /**
-     * @var User $_user
+     * @var User|null
      */
-    private $_user;
+    private ?User $user = null;
 
     /**
      * @return array
@@ -37,6 +40,7 @@ class SignInForm extends Model
     {
         return [
             [['login', 'password'], 'required'],
+            [['login'], 'trim'],
             [['password'], 'validatePassword'],
         ];
     }
@@ -49,7 +53,7 @@ class SignInForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неправильная комбинация логин/пароль');
+                $this->addError($attribute, Yii::t('frontend', 'models.forms.sign-in.password.error'));
             }
         }
     }
@@ -60,21 +64,40 @@ class SignInForm extends Model
     public function login(): bool
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+            if (!Yii::$app->user->login($this->getUser(), 3600 * 24 * 30)) {
+                return false;
+            }
+            return $this->updateLastUserLogin();
         }
 
         return false;
     }
 
-    /**
-     * @return array
-     */
-    public function attributeLabels(): array
+    private function updateLastUserLogin(): bool
     {
-        return [
-            'login' => 'Логин',
-            'password' => 'Пароль',
-        ];
+        $userId = Yii::$app->user->id;
+        $userIp = Yii::$app->request->headers->get('x-real-ip');
+        if (!$userIp) {
+            $userIp = Yii::$app->request->userIP;
+        }
+        $userAgent = Yii::$app->request->userAgent;
+        $userLogin = UserLogin::find()
+            ->andWhere(
+                [
+                    'user_id' => $userId,
+                    'ip' => $userIp,
+                    'agent' => $userAgent
+                ]
+            )
+            ->limit(1)
+            ->one();
+        if (!$userLogin) {
+            $userLogin = new UserLogin();
+            $userLogin->user_id = $userId;
+            $userLogin->ip = $userIp;
+            $userLogin->agent = $userAgent;
+        }
+        return $userLogin->save();
     }
 
     /**
@@ -82,13 +105,13 @@ class SignInForm extends Model
      */
     private function getUser(): ?User
     {
-        if (!$this->_user) {
-            $this->_user = User::find()
-                ->where(['user_login' => $this->login])
+        if (!$this->user) {
+            $this->user = User::find()
+                ->andWhere(['login' => $this->login])
                 ->limit(1)
                 ->one();
         }
 
-        return $this->_user;
+        return $this->user;
     }
 }

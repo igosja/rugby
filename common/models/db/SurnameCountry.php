@@ -1,19 +1,23 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\db\Query;
 
 /**
  * Class SurnameCountry
  * @package common\models\db
  *
- * @property int $surname_country_country_id
- * @property int $surname_country_surname_id
+ * @property int $country_id
+ * @property int $surname_id
  *
- * @property Surname $surname
+ * @property-read Country $country
+ * @property-read Surname $surname
  */
 class SurnameCountry extends AbstractActiveRecord
 {
@@ -26,16 +30,36 @@ class SurnameCountry extends AbstractActiveRecord
     }
 
     /**
-     * @param int $countryId
-     * @param string $andWhere
-     * @return int
+     * @return array[]
      */
-    public static function getRandSurnameId(int $countryId, $andWhere = '1=1'): int
+    public function rules(): array
+    {
+        return [
+            [['country_id', 'surname_id'], 'required'],
+            [
+                ['surname_id'],
+                'unique',
+                'filter' => function (Query $query): Query {
+                    return $query->andWhere(['country_id' => $this->country_id]);
+                }
+            ],
+            [['country_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['surname_id'], 'exist', 'targetRelation' => 'surname'],
+        ];
+    }
+
+    /**
+     * @param integer $countryId
+     * @param string $andWhere
+     * @return false|null|string
+     */
+    public static function getRandSurnameId(int $countryId, $andWhere = '1=1')
     {
         return self::find()
             ->joinWith(['surname'])
-            ->select(['surname_country_surname_id'])
-            ->where(['surname_country_country_id' => $countryId])
+            ->select(['surname.id'])
+            ->where(['country_id' => $countryId])
             ->andWhere($andWhere)
             ->orderBy('RAND()')
             ->limit(1)
@@ -52,17 +76,17 @@ class SurnameCountry extends AbstractActiveRecord
     {
         $teamSurnameArray = Surname::find()
             ->joinWith(['players'])
-            ->select(['surname_name' => new Expression('SUBSTRING(`surname_name`, 1, ' . $length . ')')])
-            ->where(['player_team_id' => $teamId])
-            ->orderBy(['player_id' => SORT_ASC])
+            ->select(['name' => new Expression('SUBSTRING(`name`, 1, ' . $length . ')')])
+            ->where(['team_id' => $teamId])
+            ->orderBy(['player.id' => SORT_ASC])
             ->column();
 
-        if (0 == count($teamSurnameArray)) {
+        if (!count($teamSurnameArray)) {
             $surnameId = self::getRandSurnameId($countryId);
         } else {
             $surnameId = self::getRandSurnameId(
                 $countryId,
-                ['not', ['SUBSTRING(`surname_name`, 1, ' . $length . ')' => $teamSurnameArray]]
+                ['not', ['SUBSTRING(`name`, 1, ' . $length . ')' => $teamSurnameArray]]
             );
 
             if (!$surnameId) {
@@ -77,8 +101,16 @@ class SurnameCountry extends AbstractActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getCountry(): ActiveQuery
+    {
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getSurname(): ActiveQuery
     {
-        return $this->hasOne(Surname::class, ['surname_id' => 'surname_country_surname_id'])->cache();
+        return $this->hasOne(Surname::class, ['id' => 'surname_id']);
     }
 }

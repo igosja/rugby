@@ -1,4 +1,10 @@
 <?php
+
+// TODO refactor
+
+use yii\console\controllers\FixtureController;
+use yii\web\UrlManager;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -12,26 +18,17 @@ return [
         '@npm' => '@vendor/npm-asset',
     ],
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'fixture' => [
-            'class' => 'yii\console\controllers\FixtureController',
+            'class' => FixtureController::class,
             'namespace' => 'common\fixtures',
         ],
     ],
     'components' => [
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
         'urlManager' => [
             'baseUrl' => '/',
-            'class' => 'yii\web\UrlManager',
+            'class' => UrlManager::class,
             'enablePrettyUrl' => true,
             'scriptUrl' => 'index.php',
             'showScriptName' => false,

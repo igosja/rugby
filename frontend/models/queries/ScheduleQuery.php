@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\queries;
 
 use common\models\db\Schedule;
@@ -17,8 +19,8 @@ class ScheduleQuery
     public static function getCurrentScheduleIds(): array
     {
         return Schedule::find()
-            ->select(['schedule_id'])
-            ->where('FROM_UNIXTIME(`schedule_date`, "%Y-%m-%d")=CURDATE()')
+            ->select(['id'])
+            ->andWhere('FROM_UNIXTIME(`date`, "%Y-%m-%d")=CURDATE()')
             ->column();
     }
 
@@ -26,31 +28,10 @@ class ScheduleQuery
      * @param int $id
      * @return Schedule|null
      */
-    public static function getScheduleById(int $id)
+    public static function getScheduleById(int $id): ?Schedule
     {
         return Schedule::find()
-            ->with([
-                'stage' => function (ActiveQuery $query) {
-                    $query->select([
-                        'stage_id',
-                        'stage_name',
-                    ]);
-                },
-                'tournamentType' => function (ActiveQuery $query) {
-                    $query->select([
-                        'tournament_type_id',
-                        'tournament_type_name',
-                    ]);
-                },
-            ])
-            ->select([
-                'schedule_date',
-                'schedule_id',
-                'schedule_season_id',
-                'schedule_stage_id',
-                'schedule_tournament_type_id',
-            ])
-            ->where(['schedule_id' => $id])
+            ->andWhere(['id' => $id])
             ->limit(1)
             ->one();
     }
@@ -62,27 +43,8 @@ class ScheduleQuery
     public static function getScheduleListQuery(int $seasonId): ActiveQuery
     {
         return Schedule::find()
-            ->with([
-                'stage' => function (ActiveQuery $query) {
-                    $query->select([
-                        'stage_id',
-                        'stage_name',
-                    ]);
-                },
-                'tournamentType' => function (ActiveQuery $query) {
-                    $query->select([
-                        'tournament_type_id',
-                        'tournament_type_name',
-                    ]);
-                },
-            ])
-            ->select([
-                'schedule_date',
-                'schedule_id',
-                'schedule_stage_id',
-                'schedule_tournament_type_id',
-            ])
-            ->where(['schedule_season_id' => $seasonId])
-            ->orderBy(['schedule_date' => SORT_ASC, 'schedule_id' => SORT_ASC]);
+            ->with(['tournamentType', 'stage'])
+            ->andWhere(['season_id' => $seasonId])
+            ->orderBy(['date' => SORT_ASC, 'id' => SORT_ASC]);
     }
 }

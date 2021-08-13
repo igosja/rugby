@@ -1,7 +1,10 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
+use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -9,47 +12,36 @@ use yii\db\ActiveQuery;
  * Class StatisticPlayer
  * @package common\models\db
  *
- * @property int $statistic_player_id
- * @property int $statistic_player_assist
- * @property int $statistic_player_assist_power
- * @property int $statistic_player_assist_short
- * @property int $statistic_player_shootout_win
- * @property int $statistic_player_championship_playoff
- * @property int $statistic_player_country_id
- * @property int $statistic_player_division_id
- * @property int $statistic_player_face_off
- * @property float $statistic_player_face_off_percent
- * @property int $statistic_player_face_off_win
- * @property int $statistic_player_game
- * @property int $statistic_player_game_with_shootout
- * @property int $statistic_player_is_gk
- * @property int $statistic_player_loose
- * @property int $statistic_player_national_id
- * @property int $statistic_player_pass
- * @property float $statistic_player_pass_per_game
- * @property int $statistic_player_penalty
- * @property int $statistic_player_player_id
- * @property int $statistic_player_plus_minus
- * @property int $statistic_player_point
- * @property int $statistic_player_save
- * @property float $statistic_player_save_percent
- * @property int $statistic_player_score
- * @property int $statistic_player_score_draw
- * @property int $statistic_player_score_power
- * @property int $statistic_player_score_short
- * @property float $statistic_player_score_shot_percent
- * @property int $statistic_player_score_win
- * @property int $statistic_player_season_id
- * @property int $statistic_player_shot
- * @property int $statistic_player_shot_gk
- * @property float $statistic_player_shot_per_game
- * @property int $statistic_player_shutout
- * @property int $statistic_player_team_id
- * @property int $statistic_player_tournament_type_id
- * @property int $statistic_player_win
+ * @property int $id
+ * @property int $clean_break
+ * @property int $defender_beaten
+ * @property int $division_id
+ * @property int $draw
+ * @property int $federation_id
+ * @property int $game
+ * @property int $loose
+ * @property int $metre_gained
+ * @property int $national_id
+ * @property int $pass
+ * @property int $player_id
+ * @property int $point
+ * @property int $red_card
+ * @property int $season_id
+ * @property int $tackle
+ * @property int $team_id
+ * @property int $tournament_type_id
+ * @property int $turnover_won
+ * @property int $try
+ * @property int $win
+ * @property int $yellow_card
  *
- * @property Player $player
- * @property Team $team
+ * @property-read Division $division
+ * @property-read Federation $federation
+ * @property-read National $national
+ * @property-read Player $player
+ * @property-read Season $season
+ * @property-read Team $team
+ * @property-read TournamentType $tournamentType
  */
 class StatisticPlayer extends AbstractActiveRecord
 {
@@ -62,11 +54,82 @@ class StatisticPlayer extends AbstractActiveRecord
     }
 
     /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['player_id', 'tournament_type_id'], 'required'],
+            [['national_id'], AtLeastValidator::class, 'in' => ['national_id', 'team_id']],
+            [['division_id', 'red_card', 'tournament_type_id'], 'integer', 'min' => 0, 'max' => 9],
+            [
+                [
+                    'clean_break',
+                    'defender_beaten',
+                    'draw',
+                    'game',
+                    'loose',
+                    'turnover_won',
+                    'try',
+                    'win',
+                    'yellow_card',
+                ],
+                'integer',
+                'min' => 0,
+                'max' => 99
+            ],
+            [['federation_id', 'point', 'season_id', 'tackle'], 'integer', 'min' => 0, 'max' => 999],
+            [['metre_gained', 'pass'], 'integer', 'min' => 0, 'max' => 9999],
+            [['national_id'], 'integer', 'min' => 0, 'max' => 99999],
+            [['player_id', 'team_id'], 'integer', 'min' => 0],
+            [['division_id'], 'exist', 'targetRelation' => 'division'],
+            [['federation_id'], 'exist', 'targetRelation' => 'federation'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['season_id'], 'exist', 'targetRelation' => 'season'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+            [['tournament_type_id'], 'exist', 'targetRelation' => 'tournamentType'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getDivision(): ActiveQuery
+    {
+        return $this->hasOne(Division::class, ['id' => 'division_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getFederation(): ActiveQuery
+    {
+        return $this->hasOne(Federation::class, ['id' => 'federation_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getNational(): ActiveQuery
+    {
+        return $this->hasOne(National::class, ['id' => 'national_id']);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getPlayer(): ActiveQuery
     {
-        return $this->hasOne(Player::class, ['player_id' => 'statistic_player_player_id']);
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSeason(): ActiveQuery
+    {
+        return $this->hasOne(Season::class, ['id' => 'season_id']);
     }
 
     /**
@@ -74,6 +137,14 @@ class StatisticPlayer extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'statistic_player_team_id']);
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTournamentType(): ActiveQuery
+    {
+        return $this->hasOne(TournamentType::class, ['id' => 'tournament_type_id']);
     }
 }

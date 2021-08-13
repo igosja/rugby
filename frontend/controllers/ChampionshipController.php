@@ -1,11 +1,14 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\models\db\Championship;
 use common\models\db\Conference;
 use common\models\db\Country;
 use common\models\db\Division;
+use common\models\db\Federation;
 use common\models\db\Game;
 use common\models\db\Schedule;
 use common\models\db\Stage;
@@ -14,7 +17,6 @@ use common\models\db\StatisticPlayer;
 use common\models\db\StatisticTeam;
 use common\models\db\StatisticType;
 use common\models\db\TournamentType;
-use frontend\components\AbstractController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -34,9 +36,9 @@ class ChampionshipController extends AbstractController
     {
         return $this->redirect([
             'championship/table',
-            'countryId' => Yii::$app->request->get('countryId', Country::DEFAULT_ID),
+            'federationId' => Yii::$app->request->get('federationId', Country::DEFAULT_ID),
             'divisionId' => Yii::$app->request->get('divisionId', Division::D1),
-            'seasonId' => Yii::$app->request->get('seasonId', $this->season->season_id),
+            'seasonId' => Yii::$app->request->get('seasonId', $this->season->id),
         ]);
     }
 
@@ -46,47 +48,53 @@ class ChampionshipController extends AbstractController
      */
     public function actionTable(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
-        $countryId = Yii::$app->request->get('countryId', Country::DEFAULT_ID);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
+        $federationId = Yii::$app->request->get('federationId', Country::DEFAULT_ID);
         $divisionId = Yii::$app->request->get('divisionId', Division::D1);
         $stageId = Yii::$app->request->get('stageId');
 
-        $country = Country::find()
-            ->where(['country_id' => $countryId])
+        /**
+         * @var Federation $federation
+         */
+        $federation = Federation::find()
+            ->where(['id' => $federationId])
             ->limit(1)
             ->one();
-        $this->notFound($country);
+        $this->notFound($federation);
 
+        /**
+         * @var Schedule $schedule
+         */
         if (!$stageId) {
             $schedule = Schedule::find()
                 ->where([
-                    'schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                    'schedule_season_id' => $seasonId,
+                    'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                    'season_id' => $seasonId,
                 ])
-                ->andWhere(['<=', 'schedule_date', time()])
-                ->andWhere(['<=', 'schedule_stage_id', Stage::TOUR_30])
-                ->orderBy(['schedule_date' => SORT_DESC])
+                ->andWhere(['<=', 'date', time()])
+                ->andWhere(['<=', 'stage_id', Stage::TOUR_30])
+                ->orderBy(['date' => SORT_DESC])
                 ->limit(1)
                 ->one();
             if (!$schedule) {
                 $schedule = Schedule::find()
                     ->where([
-                        'schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                        'schedule_season_id' => $seasonId,
+                        'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                        'season_id' => $seasonId,
                     ])
-                    ->andWhere(['>', 'schedule_date', time()])
-                    ->andWhere(['<=', 'schedule_stage_id', Stage::TOUR_30])
-                    ->orderBy(['schedule_date' => SORT_ASC])
+                    ->andWhere(['>', 'date', time()])
+                    ->andWhere(['<=', 'stage_id', Stage::TOUR_30])
+                    ->orderBy(['date' => SORT_ASC])
                     ->limit(1)
                     ->one();
             }
-            $stageId = $schedule->schedule_stage_id;
+            $stageId = $schedule->stage_id;
         } else {
             $schedule = Schedule::find()
                 ->where([
-                    'schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                    'schedule_season_id' => $seasonId,
-                    'schedule_stage_id' => $stageId,
+                    'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                    'season_id' => $seasonId,
+                    'stage_id' => $stageId,
                 ])
                 ->limit(1)
                 ->one();
@@ -96,11 +104,11 @@ class ChampionshipController extends AbstractController
 
         $query = Championship::find()
             ->where([
-                'championship_season_id' => $seasonId,
-                'championship_country_id' => $countryId,
-                'championship_division_id' => $divisionId,
+                'division_id' => $divisionId,
+                'federation_id' => $federationId,
+                'season_id' => $seasonId,
             ])
-            ->orderBy(['championship_place' => SORT_ASC]);
+            ->orderBy(['place' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'pagination' => false,
@@ -110,41 +118,40 @@ class ChampionshipController extends AbstractController
 
         $stageArray = Schedule::find()
             ->where([
-                'schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                'schedule_season_id' => $seasonId,
+                'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                'season_id' => $seasonId,
             ])
-            ->andWhere(['<=', 'schedule_stage_id', Stage::TOUR_30])
-            ->orderBy(['schedule_stage_id' => SORT_ASC])
+            ->andWhere(['<=', 'stage_id', Stage::TOUR_30])
+            ->orderBy(['stage_id' => SORT_ASC])
             ->all();
-        $stageArray = ArrayHelper::map($stageArray, 'stage.stage_id', 'stage.stage_name');
+        $stageArray = ArrayHelper::map($stageArray, 'stage.id', 'stage.name');
 
         $gameArray = Game::find()
             ->joinWith(['schedule'])
             ->where([
-                'schedule_stage_id' => $stageId,
-                'schedule.schedule_season_id' => $seasonId,
-                'schedule.schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                'game_home_team_id' => Championship::find()
-                    ->select(['championship_team_id'])
+                'stage_id' => $stageId,
+                'season_id' => $seasonId,
+                'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                'home_team_id' => Championship::find()
+                    ->select(['team_id'])
                     ->where([
-                        'championship_season_id' => $seasonId,
-                        'championship_country_id' => $countryId,
-                        'championship_division_id' => $divisionId,
+                        'division_id' => $divisionId,
+                        'federation_id' => $federationId,
+                        'season_id' => $seasonId,
                     ])
             ])
-            ->orderBy(['game_id' => SORT_ASC])
+            ->orderBy(['game.id' => SORT_ASC])
             ->all();
 
-        $this->seoTitle($country->country_name . '. Национальный чемпионат');
+        $this->setSeoTitle($federation->country->name . '. ' . Yii::t('frontend', 'controllers.championship.table.title'));
 
         return $this->render('table', [
-            'country' => $country,
+            'federation' => $federation,
             'dataProvider' => $dataProvider,
-            'divisionArray' => $this->getDivisionLinksArray($countryId, $seasonId),
+            'divisionArray' => $this->getDivisionLinksArray($federationId, $seasonId),
             'divisionId' => $divisionId,
             'gameArray' => $gameArray,
-            'scheduleId' => $schedule->schedule_id,
-            'seasonArray' => $this->getSeasonArray($countryId, $divisionId),
+            'seasonArray' => $this->getSeasonArray($federationId, $divisionId),
             'seasonId' => $seasonId,
             'stageArray' => $stageArray,
             'stageId' => $stageId,
@@ -152,48 +159,51 @@ class ChampionshipController extends AbstractController
     }
 
     /**
-     * @param $countryId
+     * @param $federationId
      * @param $seasonId
      * @return array
      */
-    private function getDivisionLinksArray($countryId, $seasonId)
+    private function getDivisionLinksArray($federationId, $seasonId): array
     {
         $result = [];
 
+        /**
+         * @var Championship[] $championshipArray
+         */
         $championshipArray = Championship::find()
             ->with(['division'])
             ->where([
-                'championship_country_id' => $countryId,
-                'championship_season_id' => $seasonId,
+                'federation_id' => $federationId,
+                'season_id' => $seasonId,
             ])
-            ->groupBy(['championship_division_id'])
-            ->orderBy(['championship_division_id' => SORT_ASC])
+            ->groupBy(['division_id'])
+            ->orderBy(['division_id' => SORT_ASC])
             ->all();
         foreach ($championshipArray as $championship) {
             $result[] = [
-                'text' => $championship->division->division_name,
+                'text' => $championship->division->name,
                 'url' => [
-                    'championship/index',
-                    'countryId' => $countryId,
-                    'divisionId' => $championship->championship_division_id,
+                    'championship/table',
+                    'federationId' => $federationId,
+                    'divisionId' => $championship->division_id,
                     'seasonId' => $seasonId,
                 ]
             ];
         }
 
         $conference = Conference::find()
-            ->joinWith(['team.stadium.city'])
+            ->joinWith(['team.stadium.city.country.federation'])
             ->where([
-                'city_country_id' => $countryId,
-                'conference_season_id' => $seasonId,
+                'federation.id' => $federationId,
+                'season_id' => $seasonId,
             ])
             ->count();
         if ($conference) {
             $result[] = [
-                'text' => 'КЛК',
+                'text' => Yii::t('frontend', 'controllers.championship.division.link.conference'),
                 'url' => [
                     'conference/table',
-                    'countryId' => $countryId,
+                    'federationId' => $federationId,
                     'seasonId' => $seasonId,
                 ]
             ];
@@ -202,19 +212,19 @@ class ChampionshipController extends AbstractController
     }
 
     /**
-     * @param int $countryId
+     * @param int $federationId
      * @param int $divisionId
      * @return array
      */
-    private function getSeasonArray($countryId, $divisionId)
+    private function getSeasonArray(int $federationId, int $divisionId): array
     {
         $season = Championship::find()
-            ->select(['championship_season_id'])
-            ->where(['championship_country_id' => $countryId, 'championship_division_id' => $divisionId])
-            ->groupBy(['championship_season_id'])
-            ->orderBy(['championship_season_id' => SORT_DESC])
+            ->select(['season_id'])
+            ->where(['federation_id' => $federationId, 'division_id' => $divisionId])
+            ->groupBy(['season_id'])
+            ->orderBy(['season_id' => SORT_DESC])
             ->all();
-        return ArrayHelper::map($season, 'championship_season_id', 'championship_season_id');
+        return ArrayHelper::map($season, 'season_id', 'season_id');
     }
 
     /**
@@ -222,62 +232,64 @@ class ChampionshipController extends AbstractController
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionStatistics($id = StatisticType::TEAM_NO_PASS)
+    public function actionStatistics(int $id = StatisticType::TEAM_NO_PASS): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
-        $countryId = Yii::$app->request->get('countryId', Country::DEFAULT_ID);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
+        $federationId = Yii::$app->request->get('federationId', Country::DEFAULT_ID);
         $divisionId = Yii::$app->request->get('divisionId', Division::D1);
 
-        $country = Country::find()
-            ->where(['country_id' => $countryId])
+        $federation = Federation::find()
+            ->where(['id' => $federationId])
             ->limit(1)
             ->one();
-        $this->notFound($country);
-
+        $this->notFound($federation);
+        
         $statisticType = StatisticType::find()
-            ->where(['statistic_type_id' => $id])
+            ->where(['id' => $id])
             ->limit(1)
             ->one();
         if (!$statisticType) {
             $statisticType = StatisticType::find()
-                ->where(['statistic_type_id' => StatisticType::TEAM_NO_PASS])
+                ->where(['id' => StatisticType::TEAM_NO_PASS])
                 ->limit(1)
                 ->one();
         }
 
-        if ($statisticType->isTeamChapter()) {
+        if (1 === $statisticType->statistic_chapter_id) {
             $query = StatisticTeam::find()
                 ->where([
-                    'statistic_team_country_id' => $countryId,
-                    'statistic_team_division_id' => $divisionId,
-                    'statistic_team_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                    'statistic_team_season_id' => $seasonId,
+                    'federation_id' => $federationId,
+                    'division_id' => $divisionId,
+                    'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         } else {
             $query = StatisticPlayer::find()
                 ->where([
-                    'statistic_player_country_id' => $countryId,
-                    'statistic_player_division_id' => $divisionId,
-                    'statistic_player_tournament_type_id' => TournamentType::CHAMPIONSHIP,
-                    'statistic_player_season_id' => $seasonId,
+                    'federation_id' => $federationId,
+                    'division_id' => $divisionId,
+                    'tournament_type_id' => TournamentType::CHAMPIONSHIP,
+                    'season_id' => $seasonId,
                 ])
-                ->orderBy([$statisticType->statistic_type_select => $statisticType->statistic_type_order]);
+                ->orderBy([$statisticType->select_field => SORT_DESC]);
         }
 
-        $dataProvider = new ActiveDataProvider([
-            'pagination' => [
-                'pageSize' => Yii::$app->params['pageSizeTable'],
-            ],
-            'query' => $query,
-            'sort' => false,
-        ]);
-        $this->seoTitle($country->country_name . '. Статистика национального чемпионата');
+        $dataProvider = new ActiveDataProvider(
+            [
+                'pagination' => [
+                    'pageSize' => Yii::$app->params['pageSizeTable'],
+                ],
+                'query' => $query,
+                'sort' => false,
+            ]
+        );
+        $this->setSeoTitle($federation->country->name . '. ' . Yii::t('frontend', 'controllers.championship.statistics.title'));
 
         return $this->render('statistics', [
-            'country' => $country,
+            'federation' => $federation,
             'dataProvider' => $dataProvider,
-            'divisionArray' => $this->getDivisionStatisticsLinksArray($countryId, $seasonId),
+            'divisionArray' => $this->getDivisionStatisticsLinksArray($federationId, $seasonId),
             'divisionId' => $divisionId,
             'myTeam' => $this->myTeam,
             'seasonId' => $seasonId,
@@ -287,30 +299,33 @@ class ChampionshipController extends AbstractController
     }
 
     /**
-     * @param int $countryId
+     * @param int $federationId
      * @param int $seasonId
      * @return array
      */
-    private function getDivisionStatisticsLinksArray(int $countryId, int $seasonId): array
+    private function getDivisionStatisticsLinksArray(int $federationId, int $seasonId): array
     {
         $result = [];
 
+        /**
+         * @var Championship[] $championshipArray
+         */
         $championshipArray = Championship::find()
             ->with(['division'])
             ->where([
-                'championship_country_id' => $countryId,
-                'championship_season_id' => $seasonId,
+                'federation_id' => $federationId,
+                'season_id' => $seasonId,
             ])
-            ->groupBy(['championship_division_id'])
-            ->orderBy(['championship_division_id' => SORT_ASC])
+            ->groupBy(['division_id'])
+            ->orderBy(['division_id' => SORT_ASC])
             ->all();
         foreach ($championshipArray as $championship) {
             $result[] = [
-                'text' => $championship->division->division_name,
+                'text' => $championship->division->name,
                 'url' => [
                     'championship/statistics',
-                    'countryId' => $countryId,
-                    'divisionId' => $championship->division->division_id,
+                    'federationId' => $federationId,
+                    'divisionId' => $championship->division->id,
                     'seasonId' => $seasonId,
                 ]
             ];

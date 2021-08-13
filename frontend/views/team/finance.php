@@ -1,9 +1,12 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Finance;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -26,23 +29,32 @@ use yii\web\View;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?= Html::beginForm(['team/finance', 'id' => $team->team_id], 'get') ?>
+<?= Html::beginForm(['team/finance', 'id' => $team->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Сезон', 'seasonId') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?= Html::dropDownList(
-                    'seasonId',
-                    $seasonId,
-                    $seasonArray,
-                    ['class' => 'form-control submit-on-change', 'id' => 'season_id']
-                ) ?>
+                <?php
+
+                try {
+                    print Select2::widget([
+                        'data' => $seasonArray,
+                        'id' => 'seasonId',
+                        'name' => 'seasonId',
+                        'options' => ['class' => 'submit-on-change'],
+                        'value' => $seasonId,
+                    ]);
+                } catch (Exception $e) {
+                    ErrorHelper::log($e);
+                }
+
+                ?>
             </div>
         </div>
     </div>
@@ -55,48 +67,48 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.th.date'),
                 'value' => static function (Finance $model) {
-                    return FormatHelper::asDate($model->finance_date);
+                    return FormatHelper::asDate($model->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Было',
+                'footer' => Yii::t('frontend', 'views.finance.th.before'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Было',
+                'label' => Yii::t('frontend', 'views.finance.th.before'),
                 'value' => static function (Finance $model) {
-                    return FormatHelper::asCurrency($model->finance_value_before);
+                    return FormatHelper::asCurrency($model->value_before);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-right'],
-                'footer' => '+/-',
+                'footer' => Yii::t('frontend', 'views.finance.th.value'),
                 'headerOptions' => ['class' => 'col-10'],
-                'label' => '+/-',
+                'label' => Yii::t('frontend', 'views.finance.th.value'),
                 'value' => static function (Finance $model) {
-                    return FormatHelper::asCurrency($model->finance_value);
+                    return FormatHelper::asCurrency($model->value);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Стало',
+                'footer' => Yii::t('frontend', 'views.finance.th.after'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Стало',
+                'label' => Yii::t('frontend', 'views.finance.th.after'),
                 'value' => static function (Finance $model) {
-                    return FormatHelper::asCurrency($model->finance_value_after);
+                    return FormatHelper::asCurrency($model->value_after);
                 }
             ],
             [
-                'footer' => 'Комментарий',
+                'footer' => Yii::t('frontend', 'views.finance.th.comment'),
                 'format' => 'raw',
-                'label' => 'Комментарий',
+                'label' => Yii::t('frontend', 'views.finance.th.comment'),
                 'value' => static function (Finance $model) {
-                    return $model->text();
+                    return $model->getText();
                 }
             ],
         ];
@@ -114,7 +126,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

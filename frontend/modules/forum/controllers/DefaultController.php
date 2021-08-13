@@ -1,9 +1,19 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\modules\forum\controllers;
 
-use frontend\components\AbstractController;
+use common\models\db\ForumChapter;
+use common\models\db\ForumMessage;
+use frontend\controllers\AbstractController;
+use Yii;
+use yii\data\ActiveDataProvider;
 
+/**
+ * Class DefaultController
+ * @package frontend\modules\forum\controllers
+ */
 class DefaultController extends AbstractController
 {
     /**
@@ -11,6 +21,39 @@ class DefaultController extends AbstractController
      */
     public function actionIndex(): string
     {
-        return $this->render('index');
+        $forumChapterArray = ForumChapter::find()
+            ->orderBy(['order' => SORT_ASC])
+            ->all();
+
+        $myFederationArray = [];
+        foreach ($this->myTeamArray as $team) {
+            $myFederationArray[] = $team->stadium->city->country->federation->id;
+        }
+
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.default.index.title'));
+        return $this->render('index', [
+            'forumChapterArray' => $forumChapterArray,
+            'myFederationArray' => $myFederationArray,
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionSearch(): string
+    {
+        $query = ForumMessage::find()
+            ->filterWhere(['like', 'text', Yii::$app->request->get('q')]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => Yii::$app->params['pageSizeForum']
+            ]
+        ]);
+
+        $this->setSeoTitle(Yii::t('frontend', 'modules.forum.controllers.default.search.title'));
+        return $this->render('search', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

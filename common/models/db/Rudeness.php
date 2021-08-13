@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -8,16 +10,31 @@ use common\components\AbstractActiveRecord;
  * Class Rudeness
  * @package common\models\db
  *
- * @property int $rudeness_id
- * @property string $rudeness_name
+ * @property int $id
+ * @property string $name
  */
 class Rudeness extends AbstractActiveRecord
 {
+    public const NORMAL = 1;
+
     /**
      * @return string
      */
     public static function tableName(): string
     {
         return '{{%rudeness}}';
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 10],
+            [['name'], 'unique'],
+        ];
     }
 }

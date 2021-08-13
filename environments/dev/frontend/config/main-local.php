@@ -1,5 +1,10 @@
 <?php
 
+// TODO refactor
+
+use yii\gii\Module as GiiModule;
+use yii\debug\Module as DebugModule;
+
 $config = [
     'components' => [
         'request' => [
@@ -13,12 +18,12 @@ if (!YII_ENV_TEST) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
+        'class' => DebugModule::class,
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
+        'class' => GiiModule::class,
     ];
 }
 

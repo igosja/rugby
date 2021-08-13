@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\queries;
 
 use common\models\db\Achievement;
@@ -18,11 +20,8 @@ class AchievementQuery
     public static function getTeamAchievementListQuery(int $teamId): ActiveQuery
     {
         return Achievement::find()
-            ->select([
-                'achievement_id',
-            ])
-            ->where(['achievement_team_id' => $teamId])
-            ->orderBy(['achievement_id' => SORT_DESC]);
+            ->where(['team_id' => $teamId])
+            ->orderBy(['id' => SORT_DESC]);
     }
 
     /**
@@ -32,14 +31,11 @@ class AchievementQuery
     public static function getTeamTrophyListQuery(int $teamId): ActiveQuery
     {
         return Achievement::find()
-            ->select([
-                'achievement_id',
-            ])
             ->where([
-                'achievement_team_id' => $teamId,
-                'achievement_place' => [0, 1],
-                'achievement_stage_id' => 0,
+                'team_id' => $teamId,
+                'place' => [null, 1],
+                'stage_id' => null,
             ])
-            ->orderBy(['achievement_id' => SORT_DESC]);
+            ->orderBy(['id' => SORT_DESC]);
     }
 }

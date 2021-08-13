@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
@@ -9,12 +11,14 @@ use yii\db\ActiveQuery;
  * Class PlayerSpecial
  * @package common\models\db
  *
- * @property int $player_special_id
- * @property int $player_special_level
- * @property int $player_special_player_id
- * @property int $player_special_special_id
+ * @property int $id
+ * @property int $level
+ * @property int $player_id
+ * @property int $special_id
  *
- * @property Special $special
+ * @property-read Lineup $lineup
+ * @property-read Player $player
+ * @property-read Special $special
  */
 class PlayerSpecial extends AbstractActiveRecord
 {
@@ -27,10 +31,41 @@ class PlayerSpecial extends AbstractActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            [['level', 'player_id', 'special_id'], 'required'],
+            [['level'], 'integer', 'min' => 1, 'max' => 4],
+            [['special_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['player_id'], 'integer', 'min' => 1],
+            [['player_id'], 'exist', 'targetRelation' => 'player'],
+            [['special_id'], 'exist', 'targetRelation' => 'special'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLineup(): ActiveQuery
+    {
+        return $this->hasMany(Lineup::class, ['player_id' => 'player_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getPlayer(): ActiveQuery
+    {
+        return $this->hasOne(Player::class, ['id' => 'player_id']);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getSpecial(): ActiveQuery
     {
-        return $this->hasOne(Special::class, ['special_id' => 'player_special_special_id']);
+        return $this->hasOne(Special::class, ['id' => 'special_id']);
     }
 }

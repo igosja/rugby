@@ -1,10 +1,14 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Team;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
+use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -44,7 +48,7 @@ $controller = Yii::$app->controller;
 <?php endif ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
@@ -55,16 +59,16 @@ $controller = Yii::$app->controller;
             [
                 'class' => SerialColumn::class,
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => '№',
-                'header' => '№',
+                'footer' => '#',
+                'header' => '#',
             ],
             [
                 'attribute' => 'squad',
-                'footer' => 'Игрок',
+                'footer' => Yii::t('frontend', 'views.th.player'),
                 'format' => 'raw',
-                'label' => 'Игрок',
+                'label' => Yii::t('frontend', 'views.th.player'),
                 'value' => static function (Player $model) {
-                    return $model->playerLink()
+                    return $model->getPlayerLink()
                         . $model->iconPension()
                         . $model->iconInjury()
                         . $model->iconNational()
@@ -77,23 +81,23 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'country',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Нац',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Национальность'],
+                'footer' => Yii::t('frontend', 'views.th.national'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.national')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => 'Национальность'],
-                'label' => 'Нац',
+                'headerOptions' => ['class' => 'hidden-xs col-1', 'title' => Yii::t('frontend', 'views.title.national')],
+                'label' => Yii::t('frontend', 'views.th.national'),
                 'value' => static function (Player $model) {
-                    return $model->country->countryImageLink();
+                    return $model->country->getImageLink();
                 }
             ],
             [
                 'attribute' => 'position',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Поз',
-                'footerOptions' => ['title' => 'Позиция'],
+                'footer' => Yii::t('frontend', 'views.th.position'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Позиция'],
-                'label' => 'Поз',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                'label' => Yii::t('frontend', 'views.th.position'),
                 'value' => static function (Player $model) {
                     return $model->position();
                 }
@@ -101,22 +105,22 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'age',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'В',
-                'footerOptions' => ['title' => 'Возраст'],
-                'headerOptions' => ['title' => 'Возраст'],
-                'label' => 'В',
+                'footer' => Yii::t('frontend', 'views.th.age'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.age')],
+                'label' => Yii::t('frontend', 'views.th.age'),
                 'value' => static function (Player $model) {
-                    return $model->player_age;
+                    return $model->age;
                 }
             ],
             [
                 'attribute' => 'power_nominal',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Номинальная сила'],
+                'footer' => Yii::t('frontend', 'views.th.nominal-power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Номинальная сила'],
-                'label' => 'С',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.nominal-power')],
+                'label' => Yii::t('frontend', 'views.th.nominal-power'),
                 'value' => static function (Player $model) {
                     return $model->powerNominal();
                 }
@@ -124,10 +128,10 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'tire',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'У',
-                'footerOptions' => ['title' => 'Усталость'],
-                'headerOptions' => ['title' => 'Усталость'],
-                'label' => 'У',
+                'footer' => Yii::t('frontend', 'views.th.tire'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.tire')],
+                'label' => Yii::t('frontend', 'views.th.tire'),
                 'value' => static function (Player $model) {
                     return $model->playerTire();
                 }
@@ -135,11 +139,11 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'physical',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Ф',
-                'footerOptions' => ['title' => 'Форма'],
+                'footer' => Yii::t('frontend', 'views.th.physical'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.physical')],
                 'format' => 'raw',
-                'headerOptions' => ['title' => 'Форма'],
-                'label' => 'Ф',
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.physical')],
+                'label' => Yii::t('frontend', 'views.th.physical'),
                 'value' => static function (Player $model) {
                     return $model->playerPhysical();
                 }
@@ -147,32 +151,33 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'power_real',
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'РС',
-                'footerOptions' => ['title' => 'Реальная сила'],
-                'headerOptions' => ['title' => 'Реальная сила'],
-                'label' => 'РС',
+                'footer' => Yii::t('frontend', 'views.th.real-power'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                'headerOptions' => ['title' => Yii::t('frontend', 'views.title.real-power')],
+                'label' => Yii::t('frontend', 'views.th.real-power'),
                 'value' => static function (Player $model) use ($team) {
-                    return $team->myTeam() ? $model->player_power_real : '~' . $model->player_power_nominal;
+                    return $team->myTeam() ? $model->power_real : '~' . $model->power_nominal;
                 }
             ],
             [
                 'attribute' => 'special',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Спец',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Спецвозможности'],
-                'label' => 'Спец',
+                'footer' => Yii::t('frontend', 'views.th.special'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                'format' => 'raw',
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.special')],
+                'label' => Yii::t('frontend', 'views.th.special'),
                 'value' => static function (Player $model) {
                     return $model->special();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Ст',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
+                'footer' => Yii::t('frontend', 'views.team.view.th.style'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.team.view.title.style')],
                 'format' => 'raw',
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Стиль'],
-                'label' => 'Ст',
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.team.view.title.style')],
+                'label' => Yii::t('frontend', 'views.team.view.th.style'),
                 'value' => static function (Player $model) {
                     return $model->iconStyle(true);
                 }
@@ -180,10 +185,10 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'game_row',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'ИО',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Играл/отдыхал подряд'],
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Играл/отдыхал подряд'],
-                'label' => 'ИО',
+                'footer' => Yii::t('frontend', 'views.th.row'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.row')],
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.row')],
+                'label' => Yii::t('frontend', 'views.th.row'),
                 'value' => static function (Player $model) {
                     return $model->playerGameRow();
                 }
@@ -191,27 +196,23 @@ $controller = Yii::$app->controller;
             [
                 'attribute' => 'game',
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'И',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Игры'],
-                'headerOptions' => ['class' => 'hidden-xs', 'title' => 'Игры'],
-                'label' => 'И',
-                'value' => static function (Player $model) {
-                    $result = 0;
-                    foreach ($model->statisticPlayer as $statisticPlayer) {
-                        $result += $statisticPlayer->statistic_player_game;
-                    }
-                    return $result;
+                'footer' => Yii::t('frontend', 'views.th.game'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.game')],
+                'headerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.title.game')],
+                'label' => Yii::t('frontend', 'views.th.game'),
+                'value' => static function () {
+                    return 0;
                 }
             ],
             [
-                'attribute' => 'player_price',
+                'attribute' => 'price',
                 'contentOptions' => ['class' => 'hidden-xs text-right'],
-                'footer' => 'Цена',
+                'footer' => Yii::t('frontend', 'views.th.price'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'hidden-xs'],
-                'label' => 'Цена',
+                'label' => Yii::t('frontend', 'views.th.price'),
                 'value' => static function (Player $model) {
-                    return FormatHelper::asCurrency($model->player_price);
+                    return FormatHelper::asCurrency($model->price);
                 }
             ],
         ];
@@ -221,7 +222,7 @@ $controller = Yii::$app->controller;
             'rowOptions' => static function (Player $model) use ($team) {
                 $result = [];
                 if ($model->squad && $team->myTeam()) {
-                    $result['style'] = ['background-color' => '#' . $model->squad->squad_color];
+                    $result['style'] = ['background-color' => '#' . $model->squad->color];
                 }
                 return $result;
             },
@@ -236,75 +237,80 @@ $controller = Yii::$app->controller;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>
 <div class="row margin-top">
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-size-2">
-        <span class="italic">Показатели команды:</span>
+        <span class="italic"><?= Yii::t('frontend', 'views.team.view.values') ?>:</span>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Рейтинг силы команды (Vs)
+                - <?= Yii::t('frontend', 'views.team.view.vs') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_vs ?>
+                <?= $team->power_vs ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Сила 15 лучших (s15)
+                - <?= Yii::t('frontend', 'views.team.view.s15') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_15 ?>
+                <?= $team->power_s_15 ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Сила 19 лучших (s19)
+                - <?= Yii::t('frontend', 'views.team.view.s19') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_19 ?>
+                <?= $team->power_s_19 ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Сила 24 лучших (s24)
+                - <?= Yii::t('frontend', 'views.team.view.s24') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= $team->team_power_s_24 ?>
+                <?= $team->power_s_24 ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Стоимость строений
+                - <?= Yii::t('frontend', 'views.team.view.price.base') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= FormatHelper::asCurrency($team->team_price_base) ?>
+                <?= FormatHelper::asCurrency($team->price_base) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                - Общая стоимость
+                - <?= Yii::t('frontend', 'views.team.view.price.total') ?>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
-                <?= FormatHelper::asCurrency($team->team_price_total) ?>
+                <?= FormatHelper::asCurrency($team->price_total) ?>
             </div>
         </div>
         <div class="row margin-top">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                Расскажите друзьям о Лиге:
+                <?= Yii::t('frontend', 'views.team.view.share') ?>:
                 <p>
-                    <?= Html::a(
-                        '<i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>',
-                        'https://www.facebook.com/sharer/sharer.php?u=' . Url::to(['site/index'], true),
-                        ['class' => ['no-underline'], 'target' => '_blank']
-                    ) ?>
-                    <?= Html::a(
-                        '<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>',
-                        'https://twitter.com/intent/tweet?text=Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер.&url=' . Url::to(['site/index'], true),
-                        ['class' => ['no-underline'], 'target' => '_blank']
-                    ) ?>
+                    <?php try {
+                        print Html::a(
+                                FAS::icon(FAS::_FACEBOOK)->size(FAS::SIZE_2X),
+                                'https://www.facebook.com/sharer/sharer.php?u=' . Url::to(['site/index'], true),
+                                ['class' => ['no-underline'], 'target' => '_blank']
+                            )
+                            . ' '
+                            . Html::a(
+                                FAS::icon(FAS::_TWITTER)->size(FAS::SIZE_2X),
+                                'https://twitter.com/intent/tweet?text=' . Yii::t('frontend', 'views.team.view.text') . '&url=' . Url::to(['site/index'], true),
+                                ['class' => ['no-underline'], 'target' => '_blank']
+                            );
+                    } catch (InvalidConfigException $e) {
+                        ErrorHelper::log($e);
+                    } ?>
                 </p>
             </div>
         </div>

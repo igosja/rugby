@@ -1,9 +1,10 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\models\db\Rule;
-use frontend\components\AbstractController;
 use frontend\models\queries\RuleQuery;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -22,7 +23,7 @@ class RuleController extends AbstractController
     {
         $ruleArray = RuleQuery::getRuleList();
 
-        $this->seoTitle('Правила');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.rule.index.title'));
         return $this->render('index', [
             'ruleArray' => $ruleArray,
         ]);
@@ -35,10 +36,13 @@ class RuleController extends AbstractController
      */
     public function actionView(int $id): string
     {
+        /**
+         * @var Rule $rule
+         */
         $rule = RuleQuery::getRuleById($id);
         $this->notFound($rule);
 
-        $this->seoTitle($rule->rule_title . ' - Правила');
+        $this->setSeoTitle($rule->title . ' - ' . Yii::t('frontend', 'controllers.rule.view.title'));
         return $this->render('view', [
             'rule' => $rule,
         ]);
@@ -50,19 +54,14 @@ class RuleController extends AbstractController
     public function actionSearch(): string
     {
         $query = Rule::find()
-            ->select([
-                'rule_id',
-                'rule_text',
-                'rule_title',
-            ])
-            ->filterWhere(['like', 'rule_text', Yii::$app->request->get('q')])
-            ->orderBy(['rule_id' => SORT_ASC]);
+            ->filterWhere(['like', 'text', Yii::$app->request->get('q')])
+            ->orderBy(['id' => SORT_ASC]);
         $dataProvider = new ActiveDataProvider([
             'pagination' => false,
             'query' => $query,
         ]);
 
-        $this->seoTitle('Результаты поиска - Правила');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.rule.search.title'));
         return $this->render('search', [
             'dataProvider' => $dataProvider,
         ]);

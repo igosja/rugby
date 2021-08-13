@@ -1,14 +1,15 @@
 <?php
 
+// TODO refactor
+
 namespace console\controllers;
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\History;
 use common\models\db\HistoryText;
-use common\models\db\Site;
 use common\models\db\TeamRequest;
 use common\models\executors\TeamRequestHandleExecute;
-use console\components\AbstractController;
+use common\models\queries\SiteQuery;
 use Throwable;
 use Yii;
 use yii\db\Exception;
@@ -25,13 +26,12 @@ class TeamRequestController extends AbstractController
      * @return bool
      * @throws Exception
      */
-    public function actionIndex()
+    public function actionIndex(): bool
     {
-        if (!Site::status()) {
+        if (!SiteQuery::getStatus()) {
             return true;
         }
 
-        $this->recommendation();
         $this->queue();
 
         return true;
@@ -41,15 +41,16 @@ class TeamRequestController extends AbstractController
      * @return bool
      * @throws Exception
      */
-    private function recommendation()
+    private function recommendation(): bool
     {
         /**
          * @var TeamRequest $teamRequest
          */
         $teamRequest = TeamRequest::find()
             ->joinWith(['recommendation'])
-            ->where(['!=', 'recommendation_user_id', 0])
-            ->orderBy(['team_request_date' => SORT_ASC])
+            ->andWhere(['!=', 'recommendation.user_id', 0])
+            ->andWhere(['!=', 'recommendation.user_id', 0])
+            ->orderBy(['date' => SORT_ASC])
             ->limit(1)
             ->one();
 
@@ -61,11 +62,15 @@ class TeamRequestController extends AbstractController
         try {
             (new TeamRequestHandleExecute($teamRequest))->execute();
         } catch (Throwable $e) {
-            $transaction->rollBack();
+            if ($transaction) {
+                $transaction->rollBack();
+            }
             ErrorHelper::log($e);
             return false;
         }
-        $transaction->commit();
+        if ($transaction) {
+            $transaction->commit();
+        }
         return true;
     }
 
@@ -73,7 +78,7 @@ class TeamRequestController extends AbstractController
      * @return bool
      * @throws Exception
      */
-    private function queue()
+    private function queue(): bool
     {
         $expression = new Expression('UNIX_TIMESTAMP()-IFNULL(`count_history`, 0)*46800');
         /**
@@ -83,18 +88,18 @@ class TeamRequestController extends AbstractController
             ->leftJoin(
                 [
                     't1' => '(' . (new Query())
-                            ->select(['count_history' => 'COUNT(history_id)', 'history_user_id'])
+                            ->select(['count_history' => 'COUNT(id)', 'user_id'])
                             ->from(History::tableName())
-                            ->where(['history_history_text_id' => HistoryText::USER_MANAGER_TEAM_IN])
-                            ->andWhere(['history_user_id' => TeamRequest::find()->select(['team_request_user_id'])])
-                            ->groupBy(['history_user_id'])
+                            ->where(['history_text_id' => HistoryText::USER_MANAGER_TEAM_IN])
+                            ->andWhere(['user_id' => TeamRequest::find()->select(['user_id'])])
+                            ->groupBy(['user_id'])
                             ->createCommand()
                             ->rawSql . ')'
                 ],
-                'team_request_user_id=history_user_id'
+                'team_request.user_id=t1.user_id'
             )
-            ->where(['<', 'team_request_date', $expression])
-            ->orderBy(['IFNULL(`count_history`, 0)' => SORT_ASC, 'team_request_date' => SORT_ASC])
+            ->where(['<', 'team_request.date', $expression])
+            ->orderBy(['IFNULL(`count_history`, 0)' => SORT_ASC, 'team_request.date' => SORT_ASC])
             ->limit(1)
             ->one();
         if (!$teamRequest) {
@@ -105,11 +110,15 @@ class TeamRequestController extends AbstractController
         try {
             (new TeamRequestHandleExecute($teamRequest))->execute();
         } catch (Throwable $e) {
-            $transaction->rollBack();
+            if ($transaction) {
+                $transaction->rollBack();
+            }
             ErrorHelper::log($e);
             return false;
         }
-        $transaction->commit();
+        if ($transaction) {
+            $transaction->commit();
+        }
         return true;
     }
 }

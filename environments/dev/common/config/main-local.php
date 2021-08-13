@@ -1,20 +1,31 @@
 <?php
+
+// TODO refactor
+
+use yii\db\Connection;
+use yii\swiftmailer\Mailer;
+
 return [
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
+            'class' => Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => Mailer::class,
             'viewPath' => '@common/mail',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'ssl',
+                'host' => 'smtp-pulse.com',
+                'password' => 'W93pcY9MW7L',
+                'port' => '465',
+                'username' => 'igosja@ukr.net',
+            ],
         ],
     ],
 ];

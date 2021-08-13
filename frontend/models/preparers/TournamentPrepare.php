@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\preparers;
 
 use common\models\db\Division;
@@ -7,7 +9,6 @@ use common\models\db\NationalType;
 use common\models\db\Schedule;
 use common\models\db\TournamentType;
 use frontend\models\queries\ChampionshipQuery;
-use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -25,46 +26,38 @@ class TournamentPrepare
     {
         $tournamentArray = [];
 
+        /**
+         * @var Schedule[] $scheduleArray
+         */
         $scheduleArray = Schedule::find()
-            ->with([
-                'tournamentType' => function (ActiveQuery $query) {
-                    $query->select([
-                        'tournament_type_id',
-                        'tournament_type_name',
-                    ]);
-                },
-            ])
-            ->select([
-                'schedule_tournament_type_id'
-            ])
-            ->where(['schedule_season_id' => $seasonId])
-            ->groupBy(['schedule_tournament_type_id'])
-            ->orderBy(['schedule_tournament_type_id' => SORT_ASC])
+            ->andWhere(['season_id' => $seasonId])
+            ->groupBy(['tournament_type_id'])
+            ->orderBy(['tournament_type_id' => SORT_ASC])
             ->all();
         foreach ($scheduleArray as $schedule) {
-            if (!in_array($schedule->schedule_tournament_type_id, [
+            if (!in_array($schedule->tournament_type_id, [
                 TournamentType::NATIONAL,
                 TournamentType::LEAGUE,
                 TournamentType::CONFERENCE,
                 TournamentType::OFF_SEASON,
-            ])) {
+            ], true)) {
                 continue;
             }
 
             $params = ['seasonId' => $seasonId];
-            if (TournamentType::NATIONAL == $schedule->schedule_tournament_type_id) {
+            if (TournamentType::NATIONAL === $schedule->tournament_type_id) {
                 $route = ['world-cup/index'];
                 $params = ArrayHelper::merge($params, ['divisionId' => Division::D1, 'nationalTypeId' => NationalType::MAIN]);
-            } elseif (TournamentType::LEAGUE == $schedule->schedule_tournament_type_id) {
-                $route = ['champions-league/index'];
-            } elseif (TournamentType::CONFERENCE == $schedule->schedule_tournament_type_id) {
+            } elseif (TournamentType::LEAGUE === $schedule->tournament_type_id) {
+                $route = ['league/index'];
+            } elseif (TournamentType::CONFERENCE === $schedule->tournament_type_id) {
                 $route = ['conference/index'];
             } else {
                 $route = ['off-season/index'];
             }
 
             $tournamentArray[] = Html::a(
-                $schedule->tournamentType->tournament_type_name,
+                $schedule->tournamentType->name,
                 ArrayHelper::merge($route, $params)
             );
         }
@@ -78,51 +71,51 @@ class TournamentPrepare
      */
     public static function getCountriesWithChampionships(int $seasonId): array
     {
-        $countryId = 0;
         $countryName = '';
         $countryArray = [];
         $divisionArray = [];
+        $federationId = 0;
 
         $championshipArray = ChampionshipQuery::getChampionshipsForTournament($seasonId);
 
         foreach ($championshipArray as $championship) {
-            if ($countryId != $championship->championship_country_id) {
-                if ($countryId) {
+            if ($federationId !== $championship->federation_id) {
+                if ($federationId) {
                     $countryArray[] = [
-                        'countryId' => $countryId,
+                        'federationId' => $federationId,
                         'countryName' => $countryName,
                         'division' => $divisionArray,
                     ];
                 }
 
-                $countryId = $championship->championship_country_id;
-                $countryName = $championship->country->country_name;
+                $federationId = $championship->federation_id;
+                $countryName = $championship->federation->country->name;
                 $divisionArray = [];
             }
 
-            $divisionArray[$championship->championship_division_id] = $championship->division->division_name;
+            $divisionArray[$championship->division_id] = $championship->division->name;
         }
 
-        if ($countryId) {
+        if ($federationId) {
             $countryArray[] = [
-                'countryId' => $countryId,
+                'federationId' => $federationId,
                 'countryName' => $countryName,
                 'division' => $divisionArray,
             ];
         }
 
+        /**
+         * @var Division[] $divisionArray
+         */
         $divisionArray = Division::find()
-            ->select([
-                'division_id',
-                'division_name',
-            ])
-            ->orderBy(['division_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
+            ->limit(2)
             ->all();
 
-        for ($i = 0, $countCountry = count($countryArray); $i < $countCountry; $i++) {
+        foreach ($countryArray as $i => $iValue) {
             foreach ($divisionArray as $division) {
-                if (!isset($countryArray[$i]['division'][$division->division_id])) {
-                    $countryArray[$i]['division'][$division->division_id] = '-';
+                if (!isset($iValue['division'][$division->id])) {
+                    $countryArray[$i]['division'][$division->id] = '-';
                 }
             }
         }

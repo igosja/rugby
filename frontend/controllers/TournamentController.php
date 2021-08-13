@@ -1,9 +1,10 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
 use common\models\db\Season;
-use frontend\components\AbstractController;
 use frontend\models\preparers\TournamentPrepare;
 use Yii;
 
@@ -18,13 +19,13 @@ class TournamentController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $seasonId = Yii::$app->request->get('seasonId', $this->season->season_id);
+        $seasonId = Yii::$app->request->get('seasonId', $this->season->id);
 
         $countryArray = TournamentPrepare::getCountriesWithChampionships($seasonId);
         $tournaments = TournamentPrepare::getTournaments($seasonId);
         $seasonArray = Season::getSeasonArray();
 
-        $this->seoTitle('Турниры');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.tournament.index.title'));
         return $this->render('index', [
             'countryArray' => $countryArray,
             'seasonArray' => $seasonArray,

@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\models\db\Achievement;
 use common\models\db\Team;
@@ -24,39 +26,41 @@ use yii\web\View;
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
     <?php
 
+    // TODO refactor
+
     try {
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'С',
-                'footerOptions' => ['title' => 'Сезон'],
-                'label' => 'С',
-                'headerOptions' => ['class' => 'col-5', 'title' => 'Сезон'],
+                'footer' => Yii::t('frontend', 'views.th.season'),
+                'footerOptions' => ['title' => Yii::t('frontend', 'views.title.season')],
+                'label' => Yii::t('frontend', 'views.th.season'),
+                'headerOptions' => ['class' => 'col-5', 'title' => Yii::t('frontend', 'views.title.season')],
                 'value' => static function (Achievement $model) {
-                    return $model->achievement_season_id;
+                    return $model->season_id;
                 }
             ],
             [
-                'footer' => 'Турнир',
-                'label' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.th.tournament'),
+                'label' => Yii::t('frontend', 'views.th.tournament'),
                 'value' => static function (Achievement $model) {
-                    return $model->tournament();
+                    return $model->getTournament();
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Место',
+                'footer' => Yii::t('frontend', 'views.title.place'),
                 'format' => 'raw',
-                'label' => 'Место',
+                'label' => Yii::t('frontend', 'views.title.place'),
                 'headerOptions' => ['class' => 'col-10'],
                 'value' => static function (Achievement $model) {
-                    return $model->position();
+                    return $model->getPosition();
                 }
             ],
         ];
@@ -74,7 +78,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

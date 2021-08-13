@@ -1,9 +1,10 @@
 <?php
 
-namespace frontend\controllers;
+// TODO refactor
 
-use frontend\components\AbstractController;
+namespace frontend\controllers;
 use frontend\models\queries\UserQuery;
+use Yii;
 
 /**
  * Class VipController
@@ -18,7 +19,7 @@ class VipController extends AbstractController
     {
         $count = UserQuery::countVipUsers();
 
-        $this->seoTitle('VIP клуб');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.vip.index.title'));
         return $this->render('index', [
             'count' => $count,
         ]);

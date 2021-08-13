@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
 use yii\web\View;
@@ -20,149 +22,149 @@ use yii\web\View;
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <th colspan="2" rowspan="2">Статистический показатель</th>
-                <th class="hidden-xs" colspan="3">Место</th>
+                <th colspan="2" rowspan="2"><?= Yii::t('frontend', 'views.team.statistics.th.name') ?></th>
+                <th class="hidden-xs" colspan="3"><?= Yii::t('frontend', 'views.team.statistics.th.place') ?></th>
             </tr>
             <tr>
-                <th class="col-15 hidden-xs">в лиге</th>
-                <th class="col-15 hidden-xs">в стране</th>
+                <th class="col-15 hidden-xs"><?= Yii::t('frontend', 'views.team.statistics.th.league') ?></th>
+                <th class="col-15 hidden-xs"><?= Yii::t('frontend', 'views.team.statistics.th.country') ?></th>
             </tr>
             <tr>
-                <td>Рейтинг посещаемости:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.visitor') ?>:</td>
                 <td class="col-10 text-center">
-                    <?= Yii::$app->formatter->asDecimal($team->team_visitor / 100) ?>
+                    <?= Yii::$app->formatter->asDecimal($team->visitor / 100) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_visitor_place ?? 0 ?>
+                    <?= $team->ratingTeam->visitor_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_visitor_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->visitor_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Вместимость стадиона:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.capacity') ?>:</td>
                 <td class="text-center">
-                    <?= $team->stadium->stadium_capacity ?>
+                    <?= $team->stadium->capacity ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_stadium_place ?? 0 ?>
+                    <?= $team->ratingTeam->stadium_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_stadium_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->stadium_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Средн. возраст игроков:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.age') ?>:</td>
                 <td class="text-center">
-                    <?= Yii::$app->formatter->asDecimal($team->team_age) ?></td>
+                    <?= Yii::$app->formatter->asDecimal($team->player_average_age) ?></td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_age_place ?? 0 ?>
+                    <?= $team->ratingTeam->age_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_age_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->age_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Количество игроков:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.player') ?>:</td>
                 <td class="text-center">
-                    <?= $team->team_player ?>
+                    <?= $team->player_number ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_player_place ?? 0 ?>
+                    <?= $team->ratingTeam->player_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_player_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->player_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Средн. сила состава с учетом спецвозможностей (Vs):</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.vs') ?>:</td>
                 <td class="text-center">
-                    <?= $team->team_power_vs ?>
+                    <?= $team->power_vs ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_power_vs_place ?? 0 ?>
+                    <?= $team->ratingTeam->power_vs_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_power_vs_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->power_vs_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>База:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.base') ?>:</td>
                 <td class="text-center">
-                    <?= $team->base->base_level ?> (<?= $team->baseUsed() ?>)
+                    <?= $team->base->level ?> (<?= $team->baseUsed() ?>)
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_base_place ?? 0 ?>
+                    <?= $team->ratingTeam->base_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_base_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->base_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Зарплата игроков:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.salary') ?>:</td>
                 <td class="text-center">
-                    <?= FormatHelper::asCurrency($team->team_salary) ?>
+                    <?= FormatHelper::asCurrency($team->salary) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_salary_place ?? 0 ?>
+                    <?= $team->ratingTeam->salary_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_salary_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->salary_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Денег в кассе:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.finance') ?>:</td>
                 <td class="text-center">
-                    <?= FormatHelper::asCurrency($team->team_finance) ?>
+                    <?= FormatHelper::asCurrency($team->finance) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_finance_place ?? 0 ?>
+                    <?= $team->ratingTeam->finance_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_finance_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->finance_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Стоимость базы:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.price.base') ?>:</td>
                 <td class="text-center">
-                    <?= FormatHelper::asCurrency($team->team_price_base) ?>
+                    <?= FormatHelper::asCurrency($team->price_base) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_base_place ?? 0 ?>
+                    <?= $team->ratingTeam->price_base_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_base_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->price_base_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Стоимость стадиона:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.price.stadium') ?>:</td>
                 <td class="text-center">
-                    <?= FormatHelper::asCurrency($team->team_price_stadium) ?>
+                    <?= FormatHelper::asCurrency($team->price_stadium) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_stadium_place ?? 0 ?>
+                    <?= $team->ratingTeam->price_stadium_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_stadium_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->price_stadium_place_federation ?? 0 ?>
                 </td>
             </tr>
             <tr>
-                <td>Общая стоимость команды:</td>
+                <td><?= Yii::t('frontend', 'views.team.statistics.price') ?>:</td>
                 <td class="text-center">
-                    <?= FormatHelper::asCurrency($team->team_price_total) ?>
+                    <?= FormatHelper::asCurrency($team->price_total) ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_total_place ?? 0 ?>
+                    <?= $team->ratingTeam->price_total_place ?? 0 ?>
                 </td>
                 <td class="hidden-xs text-center">
-                    <?= $team->ratingTeam->rating_team_price_total_place_country ?? 0 ?>
+                    <?= $team->ratingTeam->price_total_place_federation ?? 0 ?>
                 </td>
             </tr>
         </table>
@@ -170,7 +172,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

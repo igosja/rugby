@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\News;
 use yii\helpers\Html;
@@ -10,19 +12,19 @@ use yii\helpers\Html;
 
 ?>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strong text-size-1">
-    <?= $model->news_title; ?>
+    <?= $model->title ?>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-size-3 font-grey">
-    <?= FormatHelper::asDateTime($model->news_date); ?>
+    <?= FormatHelper::asDateTime($model->date) ?>
     -
-    <?= $model->user->userLink(['class' => 'strong']); ?>
+    <?= $model->user->getUserLink(['class' => 'strong']) ?>
     -
     <?= Html::a(
-        'Комментарии: ' . count($model->newsComments),
-        ['news/view', 'id' => $model->news_id],
+        Yii::t('frontend', 'views.news.news.comments', ['count' => count($model->newsComments)]),
+        ['view', 'id' => $model->id],
         ['class' => 'strong text-size-3']
-    ); ?>
+    ) ?>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <?= $model->news_text; ?>
+    <?= $model->text ?>
 </div>

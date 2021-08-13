@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Squad;
@@ -18,7 +20,7 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
         $squadArray = Squad::find()->all();
         $squadStyle = [];
         foreach ($squadArray as $item) {
-            $squadStyle[$item->squad_id] = ['style' => ['background-color' => '#' . $item->squad_color]];
+            $squadStyle[$item->id] = ['style' => ['background-color' => '#' . $item->color]];
         }
     }
 }
@@ -28,52 +30,53 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-size-1 strong">
-                <?= $player->playerName(); ?>
+                <?= $player->playerName() ?>
             </div>
             <?php if (isset($squadArray)): ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <?php if ($player->myPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                                <label for="select-line">Состав:</label>
+                                <label for="select-line"><?= Yii::t('frontend', 'views.player.player.squad') ?>:</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
                                     'squad_id',
-                                    $player->player_squad_id,
-                                    ArrayHelper::map($squadArray, 'squad_id', 'squad_name'),
+                                    $player->squad_id,
+                                    ArrayHelper::map($squadArray, 'id', 'name'),
                                     [
                                         'class' => 'form-control',
-                                        'data' => ['url' => Url::to(['squad', 'id' => $player->player_id])],
+                                        'data' => ['url' => Url::to(['squad', 'id' => $player->id])],
                                         'id' => 'select-squad',
                                         'options' => $squadStyle,
                                     ]
-                                ); ?>
+                                ) ?>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php endif ?>
                     <?php if ($player->myNationalPlayer()): ?>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                                <label for="select-line">Состав в сборной:</label>
+                                <label for="select-line"><?= Yii::t('frontend', 'views.player.player.squad.national') ?>
+                                    :</label>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <?= Html::dropDownList(
                                     'squad_id',
-                                    $player->player_national_squad_id,
-                                    ArrayHelper::map($squadArray, 'squad_id', 'squad_name'),
+                                    $player->national_squad_id,
+                                    ArrayHelper::map($squadArray, 'id', 'name'),
                                     [
                                         'class' => 'form-control',
-                                        'data' => ['url' => Url::to(['national-squad', 'id' => $player->player_id])],
+                                        'data' => ['url' => Url::to(['national-squad', 'id' => $player->id])],
                                         'id' => 'select-national-squad',
                                         'options' => $squadStyle,
                                     ]
-                                ); ?>
+                                ) ?>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php endif ?>
                 </div>
-            <?php endif; ?>
+            <?php endif ?>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top">
@@ -81,121 +84,121 @@ if ($player->myPlayer() || $player->myNationalPlayer()) {
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Национальность:
+                        <?= Yii::t('frontend', 'views.player.player.national') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->country->countryLink(); ?>
-                        <?= $player->iconNational(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Возраст:
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_age; ?>
-                        <?= $player->iconPension(); ?>
+                        <?= $player->country->getTextLink() ?>
+                        <?= $player->iconNational() ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Сила:
+                        <?= Yii::t('frontend', 'views.player.player.age') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->player_power_nominal; ?>
-                        <?= $player->iconDeal(); ?>
-                        <?= $player->iconTraining(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Усталость:
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->playerTire(); ?>
-                        <?= $player->iconInjury(); ?>
+                        <?= $player->age ?>
+                        <?= $player->iconPension() ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Форма:
+                        <?= Yii::t('frontend', 'views.player.player.power') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->playerPhysical(); ?>
+                        <?= $player->power_nominal ?>
+                        <?= $player->iconDeal() ?>
+                        <?= $player->iconTraining() ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Реальная сила:
+                        <?= Yii::t('frontend', 'views.player.player.tire') ?>:
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= $player->playerTire() ?>
+                        <?= $player->iconInjury() ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= Yii::t('frontend', 'views.player.player.physical') ?>:
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= $player->playerPhysical() ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= Yii::t('frontend', 'views.player.player.real-power') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <?php if ($player->myPlayer()) : ?>
-                            <?= $player->player_power_real; ?>
+                            <?= $player->power_real ?>
                         <?php else: ?>
-                            ~<?= $player->player_power_nominal; ?>
-                        <?php endif; ?>
+                            ~<?= $player->power_nominal ?>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Стиль:
+                        <?= Yii::t('frontend', 'views.player.player.style') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->iconStyle(); ?>
-                        <?= $player->iconScout(); ?>
+                        <?= $player->iconStyle() ?>
+                        <?= $player->iconScout() ?>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Команда:
+                        <?= Yii::t('frontend', 'views.player.player.team') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->team->teamLink('img'); ?>
+                        <?= $player->team->getTeamLink() ?>
                     </div>
                 </div>
-                <?php if ($player->loanTeam->team_id) : ?>
+                <?php if ($player->loan_team_id) : ?>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            В аренде:
+                            <?= Yii::t('frontend', 'views.player.player.loan') ?>:
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <?= $player->loanTeam->teamLink('img'); ?>
-                            <?= $player->iconLoan(); ?>
+                            <?= $player->loanTeam->getTeamLink() ?>
+                            <?= $player->iconLoan() ?>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php endif ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Позиция:
+                        <?= Yii::t('frontend', 'views.player.player.position') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->position(); ?>
+                        <?= $player->position() ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Спецвозможности:
+                        <?= Yii::t('frontend', 'views.player.player.special') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= $player->special(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Зарплата в день:
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_salary); ?>
+                        <?= $player->special() ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        Стоимость:
+                        <?= Yii::t('frontend', 'views.player.player.salary') ?>:
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <?= FormatHelper::asCurrency($player->player_price); ?>
+                        <?= FormatHelper::asCurrency($player->salary) ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= Yii::t('frontend', 'views.player.player.price') ?>:
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <?= FormatHelper::asCurrency($player->price) ?>
                     </div>
                 </div>
             </div>

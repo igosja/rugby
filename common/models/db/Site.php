@@ -1,23 +1,22 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use common\components\helpers\ErrorHelper;
-use common\components\helpers\FormatHelper;
-use Exception;
 
 /**
  * Class Site
  * @package common\models\db
  *
- * @property int $site_id
- * @property int $site_date_cron
- * @property int $site_status
- * @property int $site_version_1
- * @property int $site_version_2
- * @property int $site_version_3
- * @property int $site_version_date
+ * @property int $id
+ * @property int $date_cron
+ * @property bool $status
+ * @property int $version_1
+ * @property int $version_2
+ * @property int $version_3
+ * @property int $version_date
  */
 class Site extends AbstractActiveRecord
 {
@@ -30,44 +29,28 @@ class Site extends AbstractActiveRecord
     }
 
     /**
-     * @return string
+     * @return array[]
      */
-    public static function version(): string
+    public function rules(): array
     {
-        $version = '0.0.0';
-        $date = time();
-
-        /**
-         * @var self $site
-         */
-        $site = self::find()
-            ->select(['site_version_1', 'site_version_2', 'site_version_3', 'site_version_date'])
-            ->where(['site_id' => 1])
-            ->one();
-
-        if ($site) {
-            $version = implode('.', [$site->site_version_1, $site->site_version_2, $site->site_version_3]);
-            $date = $site->site_version_date;
-        }
-
-        try {
-            $date = FormatHelper::asDate($date);
-        } catch (Exception $e) {
-            ErrorHelper::log($e);
-        }
-
-        return 'Версия ' . $version . ' от ' . $date;
+        return [
+            [['status'], 'boolean'],
+            [['version_1', 'version_2', 'version_3'], 'integer', 'min' => 0, 'max' => 99],
+            [['date_cron', 'version_date'], 'integer', 'min' => 0],
+        ];
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public static function status(): int
+    public static function switchStatus(): bool
     {
-        return self::find()
-            ->select(['site_status'])
-            ->where(['site_id' => 1])
-            ->limit(1)
-            ->scalar();
+        $model = self::find()
+            ->where(['id' => 1])
+            ->one();
+        $model->status = 1 - $model->status;
+        $model->save(true, ['status']);
+
+        return true;
     }
 }

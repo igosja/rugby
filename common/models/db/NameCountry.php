@@ -1,15 +1,22 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\db\ActiveQuery;
+use yii\db\Query;
 
 /**
  * Class NameCountry
  * @package common\models\db
  *
- * @property int $name_country_country_id
- * @property int $name_country_name_id
+ * @property int $country_id
+ * @property int $name_id
+ *
+ * @property-read Country $country
+ * @property-read Name $name
  */
 class NameCountry extends AbstractActiveRecord
 {
@@ -22,16 +29,52 @@ class NameCountry extends AbstractActiveRecord
     }
 
     /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['country_id', 'name_id'], 'required'],
+            [
+                ['name_id'],
+                'unique',
+                'filter' => function (Query $query): Query {
+                    return $query->andWhere(['country_id' => $this->country_id]);
+                }
+            ],
+            [['country_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['name_id'], 'exist', 'targetRelation' => 'name'],
+        ];
+    }
+
+    /**
      * @param int $countryId
      * @return int
      */
     public static function getRandNameId(int $countryId): int
     {
         return self::find()
-            ->select(['name_country_name_id'])
-            ->where(['name_country_country_id' => $countryId])
+            ->select(['name_id'])
+            ->where(['country_id' => $countryId])
             ->orderBy('RAND()')
             ->limit(1)
             ->scalar();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCountry(): ActiveQuery
+    {
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getName(): ActiveQuery
+    {
+        return $this->hasOne(Name::class, ['id' => 'name_id']);
     }
 }

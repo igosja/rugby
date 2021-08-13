@@ -1,75 +1,76 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Exception;
-use frontend\components\AbstractController;
+use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAS;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
  * Class Player
  * @package common\models\db
  *
- * @property int $player_id
- * @property int $player_age
- * @property int $player_country_id
- * @property int $player_date_no_action
- * @property int $player_game_row
- * @property int $player_game_row_old
- * @property int $player_injury
- * @property int $player_injury_day
- * @property int $player_loan_day
- * @property int $player_loan_team_id
- * @property int $player_mood_id
- * @property int $player_name_id
- * @property int $player_national_id
- * @property int $player_national_squad_id
- * @property int $player_no_deal
- * @property int $player_order
- * @property int $player_physical_id
- * @property int $player_position_id
- * @property int $player_power_nominal
- * @property int $player_power_nominal_s
- * @property int $player_power_old
- * @property int $player_power_real
- * @property int $player_price
- * @property int $player_rookie
- * @property int $player_salary
- * @property int $player_school_id
- * @property int $player_squad_id
- * @property int $player_style_id
- * @property int $player_surname_id
- * @property int $player_team_id
- * @property int $player_tire
- * @property int $player_training_ability
+ * @property int $id
+ * @property int $age
+ * @property int $country_id
+ * @property int $date_no_action
+ * @property int $game_row
+ * @property int $game_row_old
+ * @property int $injury_day
+ * @property int $is_injury
+ * @property int $is_no_deal
+ * @property int $loan_day
+ * @property int $loan_team_id
+ * @property int $mood_id
+ * @property int $name_id
+ * @property int $national_id
+ * @property int $national_squad_id
+ * @property int $order
+ * @property int $physical_id
+ * @property int $power_nominal
+ * @property int $power_nominal_s
+ * @property int $power_old
+ * @property int $power_real
+ * @property int $price
+ * @property int $salary
+ * @property int $school_team_id
+ * @property int $squad_id
+ * @property int $style_id
+ * @property int $surname_id
+ * @property int $team_id
+ * @property int $tire
+ * @property int $training_ability
  *
- * @property Country $country
- * @property Loan $loan
- * @property Team $loanTeam
- * @property Name $name
- * @property National $national
- * @property Physical $physical
- * @property PlayerPosition[] $playerPositions
- * @property PlayerSpecial[] $playerSpecials
- * @property Team $schoolTeam
- * @property Scout $scout
- * @property Scout[] $scouts
- * @property Squad $squad
- * @property Squad $squadNational
- * @property StatisticPlayer[] $statisticPlayer
- * @property Style $style
- * @property Surname $surname
- * @property Team $team
- * @property Training $training
- * @property Transfer $transfer
+ * @property-read Country $country
+ * @property-read Loan $loan
+ * @property-read Team $loanTeam
+ * @property-read Mood $mood
+ * @property-read Name $name
+ * @property-read National $national
+ * @property-read Squad $nationalSquad
+ * @property-read Physical $physical
+ * @property-read PlayerPosition[] $playerPositions
+ * @property-read PlayerSpecial[] $playerSpecials
+ * @property-read Team $schoolTeam
+ * @property-read Squad $squad
+ * @property-read Style $style
+ * @property-read Surname $surname
+ * @property-read Team $team
+ * @property-read Transfer $transfer
  */
 class Player extends AbstractActiveRecord
 {
-    public const AGE_READY_FOR_PENSION = 34;
+    public const AGE_READY_FOR_PENSION = 35;
     public const START_NUMBER_OF_PLAYERS = 30;
+    public const TIRE_DEFAULT = 50;
+    public const TIRE_MAX_FOR_LINEUP = 90;
 
     /**
      * @return string
@@ -80,173 +81,173 @@ class Player extends AbstractActiveRecord
     }
 
     /**
-     * @param bool $insert
-     * @return bool
-     * @throws Exception
+     * @return array
      */
-    public function beforeSave($insert): bool
+    public function rules(): array
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $physical = Physical::getRandPhysical();
-
-            if (!$this->player_age) {
-                $this->player_age = 17;
-            }
-            if (!$this->player_name_id) {
-                $this->player_name_id = NameCountry::getRandNameId($this->player_country_id);
-            }
-            if (!$this->player_power_nominal) {
-                $this->player_power_nominal = $this->player_age * 2;
-            }
-            if (!$this->player_style_id) {
-                $this->player_style_id = Style::getRandStyleId();
-            }
-            if (!isset($this->player_tire)) {
-                $this->player_tire = 50;
-            }
-            if ($this->player_team_id) {
-                $this->player_school_id = $this->player_team_id;
-            }
-
-            $this->player_game_row = -1;
-            $this->player_game_row_old = -1;
-            $this->player_squad_id = 1;
-            $this->player_national_squad_id = 1;
-            $this->player_physical_id = $physical->physical_id;
-            $this->player_power_nominal_s = $this->player_power_nominal;
-            $this->player_power_old = $this->player_power_nominal;
-            if ($this->player_team_id) {
-                $this->player_surname_id = SurnameCountry::getRandFreeSurnameId($this->player_team_id, $this->player_country_id);
-            } else {
-                $this->player_surname_id = SurnameCountry::getRandSurnameId($this->player_country_id);
-            }
-            $this->player_training_ability = random_int(1, 5);
-            $this->player_power_real = $this->countRealPower($physical);
-            $this->player_price = $this->countPrice();
-            $this->player_salary = $this->countSalary();
-        }
-        return true;
+        return [
+            [
+                [
+                    'age',
+                    'country_id',
+                    'name_id',
+                    'physical_id',
+                    'school_team_id',
+                    'style_id',
+                    'surname_id',
+                    'team_id',
+                ],
+                'required'
+            ],
+            [['is_injury', 'is_no_deal'], 'boolean'],
+            [['loan_day'], 'integer', 'min' => 0, 'max' => 9],
+            [
+                ['mood_id', 'national_squad_id', 'squad_id', 'style_id', 'training_ability'],
+                'integer',
+                'min' => 1,
+                'max' => 9
+            ],
+            [['age', 'physical_id', 'tire'], 'integer', 'min' => 1, 'max' => 99],
+            [['game_row', 'game_row_old'], 'integer', 'min' => -99, 'max' => 99],
+            [
+                ['country_id', 'national_id', 'order', 'power_nominal', 'power_nominal_s', 'power_old', 'power_real'],
+                'integer',
+                'min' => 0,
+                'max' => 999
+            ],
+            [
+                ['date_no_action', 'name_id', 'price', 'salary', 'school_team_id', 'surname_id', 'team_id'],
+                'integer',
+                'min' => 0
+            ],
+            [['country_id'], 'exist', 'targetRelation' => 'country'],
+            [['loan_team_id'], 'exist', 'targetRelation' => 'loanTeam'],
+            [['mood_id'], 'exist', 'targetRelation' => 'mood'],
+            [['name_id'], 'exist', 'targetRelation' => 'name'],
+            [['national_id'], 'exist', 'targetRelation' => 'national'],
+            [['national_squad_id'], 'exist', 'targetRelation' => 'nationalSquad'],
+            [['physical_id'], 'exist', 'targetRelation' => 'physical'],
+            [['school_team_id'], 'exist', 'targetRelation' => 'schoolTeam'],
+            [['squad_id'], 'exist', 'targetRelation' => 'squad'],
+            [['style_id'], 'exist', 'targetRelation' => 'style'],
+            [['surname_id'], 'exist', 'targetRelation' => 'surname'],
+            [['team_id'], 'exist', 'targetRelation' => 'team'],
+        ];
     }
 
     /**
-     * @param bool $insert
-     * @param array $changedAttributes
-     * @return bool
-     * @throws Exception
-     */
-    public function afterSave($insert, $changedAttributes): bool
-    {
-        parent::afterSave($insert, $changedAttributes);
-
-        if ($insert) {
-            $playerPosition = new PlayerPosition();
-            $playerPosition->player_position_player_id = $this->player_id;
-            $playerPosition->player_position_position_id = $this->player_position_id;
-            $playerPosition->save();
-
-            History::log([
-                'history_history_text_id' => HistoryText::PLAYER_FROM_SCHOOL,
-                'history_player_id' => $this->player_id,
-                'history_team_id' => $this->player_team_id
-            ]);
-        }
-        return true;
-    }
-
-    /**
-     * @return int
-     */
-    public function countPrice(): int
-    {
-        return round(((150 - (28 - $this->player_age)) ** 2) * $this->player_power_nominal);
-    }
-
-    /**
-     * @return float|int
-     */
-    public function countSalary(): int
-    {
-        return round($this->player_price / 999);
-    }
-
-    /**
-     * @param Physical|null $physical
-     * @return float|int
-     */
-    public function countRealPower(Physical $physical = null)
-    {
-        if (!$physical) {
-            $physical = $this->physical;
-        }
-        return $this->player_power_nominal * $this->player_tire / 100 * $physical->physical_value / 100;
-    }
-
-    /**
-     * @param array $options
      * @return string
      */
-    public function playerLink(array $options = []): string
+    public function trainingPositionDropDownList(): string
     {
-        return Html::a(
-            $this->name->name_name . ' ' . $this->surname->surname_name,
-            ['player/view', 'id' => $this->player_id],
-            $options
+        if (2 === count($this->playerPositions)) {
+            return '';
+        }
+
+        $positionArray = Position::find()
+            ->andWhere([
+                'not',
+                [
+                    'id' => PlayerPosition::find()
+                        ->select(['position_id'])
+                        ->where(['player_id' => $this->id])
+                ]
+            ])
+            ->orderBy(['id' => SORT_ASC])
+            ->all();
+
+        return Html::dropDownList(
+            'position[' . $this->id . ']',
+            null,
+            ArrayHelper::map($positionArray, 'id', 'name'),
+            ['class' => 'form-control form-small', 'prompt' => '-']
         );
     }
 
     /**
      * @return string
      */
-    public function powerNominal(): string
+    public function trainingSpecialDropDownList(): string
     {
-        $class = '';
-        if ($this->player_power_nominal > $this->player_power_old) {
-            $class = 'font-green';
-        } elseif ($this->player_power_nominal < $this->player_power_old) {
-            $class = 'font-red';
+        $playerSpecial = PlayerSpecial::find()
+            ->where(['level' => Special::MAX_LEVEL, 'player_id' => $this->id])
+            ->count();
+        if (Special::MAX_SPECIALS === $playerSpecial) {
+            return '';
         }
-        return Html::tag('span', $this->player_power_nominal, ['class' => $class]);
+
+        $specialId = null;
+        $playerSpecial = PlayerSpecial::find()
+            ->where(['player_id' => $this->id])
+            ->count();
+        if (Special::MAX_SPECIALS === $playerSpecial) {
+            $specialId = PlayerSpecial::find()
+                ->select(['special_id'])
+                ->where(['player_id' => $this->id])
+                ->andWhere(['<', 'level', Special::MAX_LEVEL])
+                ->column();
+        }
+
+        $specialArray = Special::find()
+            ->andWhere([
+                'not',
+                [
+                    'id' => PlayerSpecial::find()
+                        ->select(['special_id'])
+                        ->where([
+                            'level' => Special::MAX_LEVEL,
+                            'player_id' => $this->id,
+                        ])
+                ]
+            ])
+            ->andFilterWhere(['id' => $specialId])
+            ->orderBy(['id' => SORT_ASC])
+            ->all();
+
+        return Html::dropDownList(
+            'special[' . $this->id . ']',
+            null,
+            ArrayHelper::map($specialArray, 'id', 'name'),
+            ['class' => 'form-control form-small', 'prompt' => '-']
+        );
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function makeFree(): bool
+    {
+        History::log([
+            'history_text_id' => HistoryText::PLAYER_FREE,
+            'player_id' => $this->id,
+            'team_id' => $this->team_id,
+        ]);
+
+        $this->loan_day = null;
+        $this->loan_team_id = null;
+        $this->national_squad_id = Squad::SQUAD_DEFAULT;
+        $this->order = 0;
+        $this->squad_id = Squad::SQUAD_DEFAULT;
+        $this->team_id = 0;
+        $this->save(true, [
+            'loan_day',
+            'loan_team_id',
+            'national_squad_id',
+            'order',
+            'squad_id',
+            'team_id',
+        ]);
+
+        return true;
     }
 
     /**
      * @return string
      */
-    public function playerTire(): string
+    public function playerName(): string
     {
-        /**
-         * @var AbstractController $controller
-         */
-        $controller = Yii::$app->controller;
-        $realTire = $this->player_tire . '%';
-
-        if (!$controller->myTeam) {
-            return '?';
-        }
-
-        if ($this->myPlayer()) {
-            return $realTire;
-        }
-
-        if ($this->myNationalPlayer()) {
-            return $realTire;
-        }
-
-        if ($controller->myTeam->baseScout->canSeeOpponentTire()) {
-            return $realTire;
-        }
-
-        if (!$this->loan && !$this->transfer) {
-            return '?';
-        }
-
-        if ($controller->myTeam->baseScout->canSeeDealTire()) {
-            return $realTire;
-        }
-
-        return '?';
+        return $this->name->name . ' ' . $this->surname->name;
     }
 
     /**
@@ -258,7 +259,7 @@ class Player extends AbstractActiveRecord
          * @var AbstractController $controller
          */
         $controller = Yii::$app->controller;
-        $realGameRow = $this->player_game_row;
+        $realGameRow = $this->game_row;
 
         if (!$controller->myTeam) {
             return '?';
@@ -337,7 +338,7 @@ class Player extends AbstractActiveRecord
         if (!$controller->myTeam) {
             return false;
         }
-        if ($controller->myTeamOrVice->team_id !== $this->player_team_id) {
+        if ($controller->myTeamOrVice->id !== $this->team_id) {
             return false;
         }
         return true;
@@ -355,7 +356,7 @@ class Player extends AbstractActiveRecord
         if (!$controller->myNational) {
             return false;
         }
-        if ($controller->myNational->national_id !== $this->player_national_id) {
+        if ($controller->myNational->id !== $this->national_id) {
             return false;
         }
         return true;
@@ -364,37 +365,94 @@ class Player extends AbstractActiveRecord
     /**
      * @return string
      */
-    public function playerName(): string
+    public function playerTire(): string
     {
-        return $this->name->name_name . ' ' . $this->surname->surname_name;
+        /**
+         * @var AbstractController $controller
+         */
+        $controller = Yii::$app->controller;
+        $realTire = $this->tire . '%';
+
+        if (!$controller->myTeam) {
+            return '?';
+        }
+
+        if ($this->myPlayer()) {
+            return $realTire;
+        }
+
+        if ($this->myNationalPlayer()) {
+            return $realTire;
+        }
+
+        if ($controller->myTeam->baseScout->canSeeOpponentTire()) {
+            return $realTire;
+        }
+
+        if (!$this->loan && !$this->transfer) {
+            return '?';
+        }
+
+        if ($controller->myTeam->baseScout->canSeeDealTire()) {
+            return $realTire;
+        }
+
+        return '?';
     }
 
     /**
      * @return string
      */
-    public function position(): string
+    public function powerNominal(): string
     {
-        $result = [];
-        foreach ($this->playerPositions as $position) {
-            $result[] = Html::tag(
-                'span',
-                $position->position->position_name,
-                ['title' => $position->position->position_text]
-            );
+        $class = '';
+        if ($this->power_nominal > $this->power_old) {
+            $class = 'font-green';
+        } elseif ($this->power_nominal < $this->power_old) {
+            $class = 'font-red';
         }
-        return implode('/', $result);
+        return Html::tag('span', $this->power_nominal, ['class' => $class]);
     }
 
     /**
      * @return string
      */
-    public function special(): string
+    public function iconInjury(): string
     {
-        $result = [];
-        foreach ($this->playerSpecials as $special) {
-            $result[] = $special->special->special_name . $special->player_special_level;
+        $result = '';
+        if ($this->is_injury) {
+            $result = ' ' . FAS::icon(FAS::_AMBULANCE, ['title' => Yii::t('common', 'models.db.player.injury', ['day' => $this->injury_day])]);
         }
-        return implode(' ', $result);
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconDeal(): string
+    {
+        $result = '';
+        if ($this->loan || $this->transfer) {
+            $result = ' ' . FAS::icon(FAS::_BALANCE_SCALE, ['title' => Yii::t('common', 'models.db.player.deal')]);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function iconNational(): string
+    {
+        $result = '';
+        if ($this->national_id) {
+            if (NationalType::MAIN === $this->national->national_type_id) {
+                $text = Yii::t('common', 'models.db.player.national');
+            } else {
+                $text = Yii::t('common', 'models.db.player.national-type', ['type' => $this->national->nationalType->name]);
+            }
+            $result = ' ' . FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.player.national-player') . ' ' . $text]);
+        }
+        return $result;
     }
 
     /**
@@ -402,12 +460,9 @@ class Player extends AbstractActiveRecord
      */
     public function iconPension(): string
     {
-        $result = ' ';
-        if (self::AGE_READY_FOR_PENSION === $this->player_age) {
-            $result .= Html::tag('i', '', [
-                'class' => ['fa', 'fa-fa-home'],
-                'title' => 'Заканчивает карьеру в конце текущего сезона',
-            ]);
+        $result = '';
+        if (self::AGE_READY_FOR_PENSION === $this->age) {
+            $result = ' ' . FAS::icon(FAS::_HOME, ['title' => Yii::t('common', 'models.db.player.pension')]);
         }
         return $result;
     }
@@ -427,50 +482,51 @@ class Player extends AbstractActiveRecord
         if (!$myTeam) {
             if (!$showOnlyIfStudied) {
                 $styleArray = Style::find()
-                    ->select(['style_id', 'style_name'])
-                    ->where(['!=', 'style_id', Style::NORMAL])
-                    ->orderBy(['style_id' => SORT_ASC])
+                    ->andWhere(['!=', 'id', Style::NORMAL])
+                    ->orderBy(['id' => SORT_ASC])
                     ->all();
             } else {
                 $styleArray = [];
             }
         } else {
-            $countScout = count($this->scouts);
+            $countScout = Scout::find()
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id])
+                ->andWhere(['not', ['ready' => null]])
+                ->count();
+
             if (2 === $countScout) {
                 $styleArray = Style::find()
-                    ->select(['style_id', 'style_name'])
-                    ->where(['style_id' => $this->player_style_id])
-                    ->orderBy(['style_id' => SORT_ASC])
+                    ->andWhere(['id' => $this->style_id])
+                    ->orderBy(['id' => SORT_ASC])
                     ->all();
             } elseif (!$showOnlyIfStudied) {
-                $in = [$this->player_style_id];
-                for ($i = 1; $i < 3 - $countScout; $i++) {
+                $in = [$this->style_id];
+                for ($i = 1; $i < 4 - $countScout; $i++) {
                     $styleToIn = Style::getRandStyleId($in);
                     $in[] = $styleToIn;
                 }
                 $styleArray = Style::find()
-                    ->select(['style_id', 'style_name'])
-                    ->where(['style_id' => $in])
-                    ->orderBy(['style_id' => SORT_ASC])
-                    ->limit(3 - $countScout)
+                    ->where(['id' => $in])
+                    ->orderBy(['id' => SORT_ASC])
+                    ->limit(4 - $countScout)
                     ->all();
             } else {
                 $styleArray = [];
             }
         }
 
+        /**
+         * @var Style[] $styleArray
+         */
         $result = [];
-        foreach ($styleArray as $style) {
-            /**
-             * @var Style $style
-             */
+        foreach ($styleArray as $item) {
             $result[] = Html::img(
-                '/img/style/' . $style->style_id . '.png',
-                [
-                    'alt' => $style->style_name,
-                    'title' => ucfirst($style->style_name),
-                ]
-            );
+                    '/img/style/' . $item->id . '.png',
+                    [
+                        'alt' => $item->name,
+                        'title' => ucfirst($item->name),
+                    ]
+                ) . $item->id;
         }
 
         return implode(' ', $result);
@@ -489,8 +545,8 @@ class Player extends AbstractActiveRecord
 
         if ($myTeam) {
             return Scout::find()
-                ->where(['scout_player_id' => $this->player_id, 'scout_team_id' => $myTeam->team_id])
-                ->andWhere(['!=', 'scout_ready', 0])
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id])
+                ->andWhere(['not', ['ready' => null]])
                 ->count();
         }
 
@@ -502,12 +558,13 @@ class Player extends AbstractActiveRecord
      */
     public function iconTraining(): string
     {
-        $result = ' ';
-        if ($this->training) {
-            $result .= Html::tag('i', '', [
-                'class' => ['fa', 'fa-level-up'],
-                'title' => 'На тренировке',
-            ]);
+        $countTraining = Training::find()
+            ->andWhere(['player_id' => $this->id, 'team_id' => $this->team_id, 'ready' => null])
+            ->count();
+
+        $result = '';
+        if ($countTraining) {
+            $result = ' ' . FAS::icon(FAS::_LEVEL_UP_ALT, ['title' => Yii::t('common', 'models.db.player.training')]);
         }
         return $result;
     }
@@ -523,17 +580,17 @@ class Player extends AbstractActiveRecord
         $controller = Yii::$app->controller;
         $myTeam = $controller->myTeam;
 
-        $scout = null;
         if ($myTeam) {
-            $scout = $this->scout;
+            $countScout = Scout::find()
+                ->andWhere(['player_id' => $this->id, 'team_id' => $myTeam->id, 'ready' => null])
+                ->count();
+        } else {
+            $countScout = 0;
         }
 
-        $result = ' ';
-        if ($scout) {
-            $result .= Html::tag('i', '', [
-                'class' => ['fa', 'fa-search'],
-                'title' => 'Изучается в скаутцентре вашей команды',
-            ]);
+        $result = '';
+        if ($countScout) {
+            $result = ' ' . FAS::icon(FAS::_SEARCH, ['title' => Yii::t('common', 'models.db.player.scout')]);
         }
         return $result;
     }
@@ -543,9 +600,9 @@ class Player extends AbstractActiveRecord
      */
     public function iconLoan(): string
     {
-        $result = ' ';
-        if ($this->player_loan_day) {
-            $result .= Html::tag('span', '(' . $this->player_loan_day . ')', ['title' => 'В аренде']);
+        $result = '';
+        if ($this->loan_day) {
+            $result = ' <span title="' . Yii::t('common', 'models.db.player.loan') . '">(' . $this->loan_day . ')</i>';
         }
         return $result;
     }
@@ -553,43 +610,46 @@ class Player extends AbstractActiveRecord
     /**
      * @return string
      */
-    public function iconInjury(): string
+    public function position(): string
     {
-        $result = ' ';
-        if ($this->player_injury) {
-            $result .= Html::tag('i', '', [
-                'class' => ['fa', 'fa-ambulance'],
-                'title' => 'Травмирован на ' . $this->player_injury_day . ' дн.',
-            ]);
+        $result = [];
+        foreach ($this->playerPositions as $playerPosition) {
+            $result[] = Html::tag(
+                'span',
+                $playerPosition->position->name,
+                ['title' => $playerPosition->position->text]
+            );
         }
-        return $result;
+        return implode('/', $result);
     }
 
     /**
      * @return string
      */
-    public function iconDeal(): string
+    public function special(): string
     {
-        $result = ' ';
-        if ($this->loan || $this->transfer) {
-            $result .= Html::tag('i', '', ['class' => ['fa', 'fa-usd'], 'title' => 'Выставлен на трансфер/аренду']);
+        $result = [];
+        foreach ($this->playerSpecials as $playerSpecial) {
+            $result[] = Html::tag(
+                'span',
+                $playerSpecial->special->name . $playerSpecial->level,
+                ['title' => $playerSpecial->special->text]
+            );
         }
-        return $result;
+        return implode(' ', $result);
     }
 
     /**
+     * @param array $options
      * @return string
      */
-    public function iconNational(): string
+    public function getPlayerLink(array $options = []): string
     {
-        $result = ' ';
-        if ($this->player_national_id) {
-            $result .= Html::tag('i', '', [
-                'class' => ['fa', 'fa-flag'],
-                'title' => 'Игрок ' . $this->national->nationalType->national_type_name . ' сборной',
-            ]);
-        }
-        return $result;
+        return Html::a(
+            $this->name->name . ' ' . $this->surname->name,
+            ['/player/view', 'id' => $this->id],
+            $options
+        );
     }
 
     /**
@@ -597,7 +657,7 @@ class Player extends AbstractActiveRecord
      */
     public function getCountry(): ActiveQuery
     {
-        return $this->hasOne(Country::class, ['country_id' => 'player_country_id'])->cache();
+        return $this->hasOne(Country::class, ['id' => 'country_id']);
     }
 
     /**
@@ -605,7 +665,7 @@ class Player extends AbstractActiveRecord
      */
     public function getLoan(): ActiveQuery
     {
-        return $this->hasOne(Loan::class, ['loan_player_id' => 'player_id'])->andWhere(['loan_ready' => 0]);
+        return $this->hasOne(Loan::class, ['player_id' => 'id'])->andWhere(['ready' => null]);
     }
 
     /**
@@ -613,7 +673,15 @@ class Player extends AbstractActiveRecord
      */
     public function getLoanTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'player_loan_team_id']);
+        return $this->hasOne(Team::class, ['id' => 'loan_team_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getMood(): ActiveQuery
+    {
+        return $this->hasOne(Mood::class, ['id' => 'mood_id']);
     }
 
     /**
@@ -621,7 +689,7 @@ class Player extends AbstractActiveRecord
      */
     public function getName(): ActiveQuery
     {
-        return $this->hasOne(Name::class, ['name_id' => 'player_name_id'])->cache();
+        return $this->hasOne(Name::class, ['id' => 'name_id']);
     }
 
     /**
@@ -629,7 +697,15 @@ class Player extends AbstractActiveRecord
      */
     public function getNational(): ActiveQuery
     {
-        return $this->hasOne(National::class, ['national_id' => 'player_national_id']);
+        return $this->hasOne(National::class, ['id' => 'national_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getNationalSquad(): ActiveQuery
+    {
+        return $this->hasOne(Squad::class, ['id' => 'national_squad_id']);
     }
 
     /**
@@ -637,7 +713,7 @@ class Player extends AbstractActiveRecord
      */
     public function getPhysical(): ActiveQuery
     {
-        return $this->hasOne(Physical::class, ['physical_id' => 'player_physical_id']);
+        return $this->hasOne(Physical::class, ['id' => 'physical_id']);
     }
 
     /**
@@ -645,7 +721,7 @@ class Player extends AbstractActiveRecord
      */
     public function getPlayerPositions(): ActiveQuery
     {
-        return $this->hasMany(PlayerPosition::class, ['player_position_player_id' => 'player_id']);
+        return $this->hasMany(PlayerPosition::class, ['player_id' => 'id']);
     }
 
     /**
@@ -653,7 +729,7 @@ class Player extends AbstractActiveRecord
      */
     public function getPlayerSpecials(): ActiveQuery
     {
-        return $this->hasMany(PlayerSpecial::class, ['player_special_player_id' => 'player_id']);
+        return $this->hasMany(PlayerSpecial::class, ['player_id' => 'id']);
     }
 
     /**
@@ -661,47 +737,7 @@ class Player extends AbstractActiveRecord
      */
     public function getSchoolTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'player_school_id'])->cache();
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getScout(): ActiveQuery
-    {
-        /**
-         * @var AbstractController $controller
-         */
-        $controller = Yii::$app->controller;
-        $team = $controller->myTeam;
-        $teamId = null;
-        if ($team) {
-            $teamId = $team->team_id;
-        }
-        return $this
-            ->hasOne(Scout::class, ['scout_player_id' => 'player_id'])
-            ->andWhere(['scout_ready' => 0])
-            ->andFilterWhere(['scout_team_id' => $teamId]);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getScouts(): ActiveQuery
-    {
-        /**
-         * @var AbstractController $controller
-         */
-        $controller = Yii::$app->controller;
-        $team = $controller->myTeam;
-        $teamId = null;
-        if ($team) {
-            $teamId = $team->team_id;
-        }
-        return $this
-            ->hasMany(Scout::class, ['scout_player_id' => 'player_id'])
-            ->andWhere(['!=', 'scout_ready', 0])
-            ->andFilterWhere(['scout_team_id' => $teamId]);
+        return $this->hasOne(Team::class, ['id' => 'school_team_id']);
     }
 
     /**
@@ -709,25 +745,7 @@ class Player extends AbstractActiveRecord
      */
     public function getSquad(): ActiveQuery
     {
-        return $this->hasOne(Squad::class, ['squad_id' => 'player_squad_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getSquadNational(): ActiveQuery
-    {
-        return $this->hasOne(Squad::class, ['squad_id' => 'player_national_squad_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getStatisticPlayer(): ActiveQuery
-    {
-        return $this
-            ->hasMany(StatisticPlayer::class, ['statistic_player_player_id' => 'player_id'])
-            ->andWhere(['statistic_player_season_id' => Season::getCurrentSeason()]);
+        return $this->hasOne(Squad::class, ['id' => 'squad_id']);
     }
 
     /**
@@ -735,7 +753,7 @@ class Player extends AbstractActiveRecord
      */
     public function getStyle(): ActiveQuery
     {
-        return $this->hasOne(Style::class, ['style_id' => 'player_style_id'])->cache();
+        return $this->hasOne(Style::class, ['id' => 'style_id']);
     }
 
     /**
@@ -743,7 +761,7 @@ class Player extends AbstractActiveRecord
      */
     public function getSurname(): ActiveQuery
     {
-        return $this->hasOne(Surname::class, ['surname_id' => 'player_surname_id'])->cache();
+        return $this->hasOne(Surname::class, ['id' => 'surname_id']);
     }
 
     /**
@@ -751,15 +769,7 @@ class Player extends AbstractActiveRecord
      */
     public function getTeam(): ActiveQuery
     {
-        return $this->hasOne(Team::class, ['team_id' => 'player_team_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getTraining(): ActiveQuery
-    {
-        return $this->hasOne(Training::class, ['training_player_id' => 'player_id'])->andWhere(['training_ready' => 0]);
+        return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
     /**
@@ -767,6 +777,6 @@ class Player extends AbstractActiveRecord
      */
     public function getTransfer(): ActiveQuery
     {
-        return $this->hasOne(Transfer::class, ['transfer_player_id' => 'player_id'])->andWhere(['transfer_ready' => 0]);
+        return $this->hasOne(Transfer::class, ['player_id' => 'id'])->andWhere(['ready' => null]);
     }
 }

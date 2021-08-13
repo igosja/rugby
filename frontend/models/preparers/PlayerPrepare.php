@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\models\preparers;
 
 use common\models\db\Team;
@@ -20,48 +22,48 @@ class PlayerPrepare
     {
         return new ActiveDataProvider([
             'pagination' => false,
-            'query' => PlayerQuery::getPlayerTeamList($team->team_id),
+            'query' => PlayerQuery::getPlayerTeamList($team->id),
             'sort' => [
                 'attributes' => [
                     'age' => [
-                        'asc' => ['player_age' => SORT_ASC],
-                        'desc' => ['player_age' => SORT_DESC],
+                        'asc' => ['age' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['age' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'country' => [
-                        'asc' => ['player_country_id' => SORT_ASC],
-                        'desc' => ['player_country_id' => SORT_DESC],
+                        'asc' => ['country_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['country_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'game_row' => [
-                        'asc' => ['player_game_row' => SORT_ASC],
-                        'desc' => ['player_game_row' => SORT_DESC],
+                        'asc' => ['game_row' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['game_row' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'position' => [
-                        'asc' => ['player_position_id' => SORT_ASC, 'player_id' => SORT_ASC],
-                        'desc' => ['player_position_id' => SORT_DESC, 'player_id' => SORT_DESC],
+                        'asc' => ['position_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['position_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'physical' => [
-                        'asc' => [$team->myTeam() ? 'player_physical_id' : 'player_position_id' => SORT_ASC],
-                        'desc' => [$team->myTeam() ? 'player_physical_id' : 'player_position_id' => SORT_DESC],
+                        'asc' => [$team->myTeam() ? 'physical_id' : 'position_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => [$team->myTeam() ? 'physical_id' : 'position_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'power_nominal' => [
-                        'asc' => ['player_power_nominal' => SORT_ASC],
-                        'desc' => ['player_power_nominal' => SORT_DESC],
+                        'asc' => ['power_nominal' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['power_nominal' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'power_real' => [
-                        'asc' => [$team->myTeam() ? 'player_power_real' : 'player_power_nominal' => SORT_ASC],
-                        'desc' => [$team->myTeam() ? 'player_power_real' : 'player_power_nominal' => SORT_DESC],
+                        'asc' => [$team->myTeam() ? 'power_real' : 'position_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => [$team->myTeam() ? 'power_real' : 'position_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'price' => [
-                        'asc' => ['player_price' => SORT_ASC],
-                        'desc' => ['player_price' => SORT_DESC],
+                        'asc' => ['price' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['price' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'squad' => [
-                        'asc' => ['player_squad_id' => SORT_ASC, 'player_position_id' => SORT_ASC],
-                        'desc' => ['player_squad_id' => SORT_DESC, 'player_position_id' => SORT_ASC],
+                        'asc' => ['squad_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => ['squad_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                     'tire' => [
-                        'asc' => [$team->myTeam() ? 'player_tire' : 'player_position_id' => SORT_ASC],
-                        'desc' => [$team->myTeam() ? 'player_tire' : 'player_position_id' => SORT_DESC],
+                        'asc' => [$team->myTeam() ? 'tire' : 'position_id' => SORT_ASC, 'id' => SORT_ASC],
+                        'desc' => [$team->myTeam() ? 'tire' : 'position_id' => SORT_DESC, 'id' => SORT_DESC],
                     ],
                 ],
                 'defaultOrder' => ['position' => SORT_ASC],

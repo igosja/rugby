@@ -1,10 +1,13 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\components\widgets;
 
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * Class LinkBar
@@ -21,38 +24,38 @@ class LinkBar extends Widget
     /**
      * @var array $items
      */
-    public $items;
+    public array $items = [];
 
     /**
      * @var string $bar
      */
-    private $bar;
+    private string $bar = '';
 
     /**
      * @var array $item
      */
-    private $item;
+    private array $item = [];
 
     /**
      * @var string $route
      */
-    private $route;
+    private string $route = '';
 
     /**
      * @var array $params
      */
-    private $params;
+    private array $params = [];
 
     /**
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
-        if ($this->route === null && Yii::$app->controller !== null) {
+        if ('' === $this->route && Yii::$app->controller !== null) {
             $this->route = Yii::$app->controller->getRoute();
         }
-        if ($this->params === null) {
+        if ([] === $this->params) {
             $this->params = Yii::$app->request->getQueryParams();
         }
     }
@@ -60,7 +63,7 @@ class LinkBar extends Widget
     /**
      * @return string
      */
-    public function run()
+    public function run(): string
     {
         $this->renderBar();
         return $this->bar;
@@ -69,7 +72,7 @@ class LinkBar extends Widget
     /**
      * @return void
      */
-    private function renderBar()
+    private function renderBar(): void
     {
         $result = [];
         foreach ($this->items as $item) {
@@ -83,7 +86,7 @@ class LinkBar extends Widget
     /**
      * @return void
      */
-    private function addUrlToAlias()
+    private function addUrlToAlias(): void
     {
         if (!isset($this->item['alias'])) {
             $this->item['alias'] = [$this->item['url']];
@@ -95,23 +98,23 @@ class LinkBar extends Widget
     /**
      * @return string
      */
-    private function renderItem()
+    private function renderItem(): string
     {
         if ($this->isActive()) {
             return Html::tag('span', $this->item['text'], ['class' => 'strong']);
-        } else {
-            return Html::a($this->item['text'], $this->item['url']);
         }
+
+        return Html::a($this->item['text'], $this->item['url']);
     }
 
     /**
      * @return bool
      */
-    private function isActive()
+    private function isActive(): bool
     {
         if (isset($this->item['alias']) && is_array($this->item['alias'])) {
             foreach ($this->item['alias'] as $alias) {
-                if (isset($alias) && is_array($alias) && isset($alias[0])) {
+                if (isset($alias[0]) && is_array($alias)) {
                     $route = $alias[0];
                     if ($route[0] !== '/' && Yii::$app->controller) {
                         $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
@@ -127,7 +130,8 @@ class LinkBar extends Widget
                             if ($value !== null) {
                                 if (!isset($this->params[$name])) {
                                     continue;
-                                } elseif ($this->params[$name] != $value) {
+                                }
+                                if ($this->params[$name] !== (string)$value) {
                                     return false;
                                 }
                             }

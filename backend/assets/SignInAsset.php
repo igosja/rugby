@@ -1,5 +1,7 @@
 <?php
 
+// TODO refactor
+
 namespace backend\assets;
 
 use yii\web\AssetBundle;

@@ -1,9 +1,12 @@
 <?php
 
+// TODO refactor
+
 use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Game;
 use common\models\db\Team;
+use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -12,11 +15,11 @@ use yii\web\View;
 /**
  * @var ActiveDataProvider $dataProvider
  * @var array $seasonArray
- * @var integer $seasonId
+ * @var int $seasonId
  * @var Team $team
  * @var View $this
  * @var array $totalGameResult
- * @var integer $totalPoint
+ * @var int $totalPoint
  */
 
 ?>
@@ -28,23 +31,32 @@ use yii\web\View;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?= Html::beginForm(['team/game', 'id' => $team->team_id], 'get') ?>
+<?= Html::beginForm(['team/game', 'id' => $team->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                <?= Html::label('Сезон', 'seasonId') ?>
+                <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?= Html::dropDownList(
-                    'seasonId',
-                    $seasonId,
-                    $seasonArray,
-                    ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-                ); ?>
+                <?php
+
+                try {
+                    print Select2::widget([
+                        'data' => $seasonArray,
+                        'id' => 'seasonId',
+                        'name' => 'seasonId',
+                        'options' => ['class' => 'submit-on-change'],
+                        'value' => $seasonId,
+                    ]);
+                } catch (Exception $e) {
+                    ErrorHelper::log($e);
+                }
+
+                ?>
             </div>
         </div>
     </div>
@@ -54,22 +66,22 @@ use yii\web\View;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <th>Итоги сезона</th>
-                <th class="col-10" title="Матчи">М</th>
-                <th class="col-10 hidden-xs" title="Победы">В</th>
-                <th class="col-10 hidden-xs" title="Победы в овертайме">ВО</th>
-                <th class="col-10 hidden-xs" title="Ничьи и победы/поражения по буллитам">Н</th>
-                <th class="col-10 hidden-xs" title="Поражения в овертайме">ПО</th>
-                <th class="col-10 hidden-xs" title="Поражения">П</th>
+                <th><?= Yii::t('frontend', 'views.team.game.th.results') ?></th>
+                <th class="col-10"
+                    title="<?= Yii::t('frontend', 'views.team.game.title.game') ?>"><?= Yii::t('frontend', 'views.team.game.th.game') ?></th>
+                <th class="col-10 hidden-xs"
+                    title="<?= Yii::t('frontend', 'views.team.game.title.win') ?>"><?= Yii::t('frontend', 'views.team.game.th.win') ?></th>
+                <th class="col-10 hidden-xs"
+                    title="<?= Yii::t('frontend', 'views.team.game.title.draw') ?>"><?= Yii::t('frontend', 'views.team.game.th.draw') ?></th>
+                <th class="col-10 hidden-xs"
+                    title="<?= Yii::t('frontend', 'views.team.game.title.loose') ?>"><?= Yii::t('frontend', 'views.team.game.th.loose') ?></th>
             </tr>
             <tr>
-                <td>Всего сыграно матчей</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
-                <td class="text-center">0</td>
+                <td><?= Yii::t('frontend', 'views.team.game.td.total') ?></td>
+                <td class="text-center"><?= $totalGameResult['game'] ?></td>
+                <td class="text-center"><?= $totalGameResult['win'] ?></td>
+                <td class="text-center"><?= $totalGameResult['draw'] ?></td>
+                <td class="text-center"><?= $totalGameResult['loose'] ?></td>
             </tr>
         </table>
     </div>
@@ -81,94 +93,94 @@ use yii\web\View;
         $columns = [
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Дата',
+                'footer' => Yii::t('frontend', 'views.team.game.th.date'),
                 'headerOptions' => ['class' => 'col-15'],
-                'label' => 'Дата',
+                'label' => Yii::t('frontend', 'views.team.game.th.date'),
                 'value' => static function (Game $model): string {
-                    return FormatHelper::asDate($model->schedule->schedule_date);
+                    return FormatHelper::asDate($model->schedule->date);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Турнир',
+                'footer' => Yii::t('frontend', 'views.team.game.th.tournament'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-30 hidden-xs'],
-                'label' => 'Турнир',
+                'label' => Yii::t('frontend', 'views.team.game.th.tournament'),
                 'value' => static function (Game $model): string {
-                    return $model->schedule->tournamentType->tournament_type_name;
+                    return $model->schedule->tournamentType->name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'Стадия',
+                'footer' => Yii::t('frontend', 'views.team.game.th.stage'),
                 'footerOptions' => ['class' => 'hidden-xs'],
                 'headerOptions' => ['class' => 'col-10 hidden-xs'],
-                'label' => 'Стадия',
+                'label' => Yii::t('frontend', 'views.team.game.th.stage'),
                 'value' => static function (Game $model): string {
-                    return $model->schedule->stage->stage_name;
+                    return $model->schedule->stage->name;
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Дома/В гостях'],
-                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Дома/В гостях'],
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.home-guest')],
+                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.home-guest')],
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gameHomeGuest($team->team_id);
+                    return $model->gameHomeGuest($team);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'С/С',
+                'footer' => Yii::t('frontend', 'views.team.game.th.power-percent'),
                 'footerOptions' => [
                     'class' => 'hidden-xs',
-                    'title' => 'Соотношение сил (чем больше это число, тем сильнее соперник)'
+                    'title' => Yii::t('frontend', 'views.team.game.title.power-percent')
                 ],
                 'headerOptions' => [
                     'class' => 'col-5 hidden-xs',
-                    'title' => 'Соотношение сил (чем больше это число, тем сильнее соперник)'
+                    'title' => Yii::t('frontend', 'views.team.game.title.power-percent')
                 ],
-                'label' => 'С/С',
+                'label' => Yii::t('frontend', 'views.team.game.th.power-percent'),
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gamePowerPercent($team->team_id);
+                    return $model->gamePowerPercent($team);
                 }
             ],
             [
-                'footer' => 'Соперник',
+                'footer' => Yii::t('frontend', 'views.team.game.th.opponent'),
                 'format' => 'raw',
-                'label' => 'Соперник',
+                'label' => Yii::t('frontend', 'views.team.game.th.opponent'),
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->opponentLink($team->team_id);
+                    return $model->opponentLink($team);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 'А',
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Автосостав'],
-                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Автосостав'],
-                'label' => 'А',
+                'footer' => Yii::t('frontend', 'views.team.game.th.auto'),
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.auto')],
+                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.auto')],
+                'label' => Yii::t('frontend', 'views.team.game.th.auto'),
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gameAuto($team->team_id);
+                    return $model->gameAuto($team);
                 }
             ],
             [
                 'contentOptions' => ['class' => 'text-center'],
-                'footer' => 'Счёт',
+                'footer' => Yii::t('frontend', 'views.team.game.th.score'),
                 'format' => 'raw',
-                'label' => 'Счёт',
+                'label' => Yii::t('frontend', 'views.team.game.th.score'),
                 'value' => static function (Game $model) use ($team): string {
                     return Html::a(
-                        $model->formatTeamScore($team->team_id),
-                        ['game/view', 'id' => $model->game_id]
+                        $model->formatTeamScore($team),
+                        ['game/view', 'id' => $model->id]
                     );
                 }
             ],
             [
                 'contentOptions' => ['class' => 'hidden-xs text-center'],
-                'footer' => 0,
-                'footerOptions' => ['class' => 'hidden-xs', 'title' => 'Количество набранных/потерянных баллов'],
-                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => 'Количество набранных/потерянных баллов'],
+                'footer' => $totalPoint,
+                'footerOptions' => ['class' => 'hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.plus-minus')],
+                'headerOptions' => ['class' => 'col-1 hidden-xs', 'title' => Yii::t('frontend', 'views.team.game.title.plus-minus')],
                 'value' => static function (Game $model) use ($team): string {
-                    return $model->gamePlusMinus($team->team_id);
+                    return $model->gamePlusMinus($team);
                 }
             ],
         ];
@@ -186,7 +198,7 @@ use yii\web\View;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $this->render('//team/_team-links', ['id' => $team->team_id]) ?>
+        <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>
     </div>
 </div>
 <?= $this->render('//site/_show-full-table') ?>

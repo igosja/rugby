@@ -1,21 +1,28 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\db\ActiveQuery;
 use yii\helpers\Html;
 
 /**
  * Class Physical
  * @package common\models\db
  *
- * @property int $physical_id
- * @property string $physical_name
- * @property int $physical_opposite
- * @property int $physical_value
+ * @property int $id
+ * @property string $name
+ * @property int $opposite_physical_id
+ * @property int $value
+ *
+ * @property-read Physical $oppositePhysical
  */
 class Physical extends AbstractActiveRecord
 {
+    public const DEFAULT_ID = 16;
+
     /**
      * @return string
      */
@@ -25,14 +32,19 @@ class Physical extends AbstractActiveRecord
     }
 
     /**
-     * @return Physical
+     * @return array
      */
-    public static function getRandPhysical(): Physical
+    public function rules(): array
     {
-        $physicalArray = self::find()
-            ->select(['physical_id', 'physical_value'])
-            ->all();
-        return $physicalArray[array_rand($physicalArray)];
+        return [
+            [['name', 'opposite_physical_id', 'value'], 'required'],
+            [['name'], 'trim'],
+            [['name'], 'string', 'max' => 20],
+            [['opposite_id'], 'integer', 'min' => 1, 'max' => 99],
+            [['value'], 'integer', 'min' => -999, 'max' => 999],
+            [['opposite_id'], 'exist', 'targetRelation' => 'opposite'],
+            [['name', 'opposite_physical_id'], 'unique'],
+        ];
     }
 
     /**
@@ -41,11 +53,31 @@ class Physical extends AbstractActiveRecord
     public function image(): string
     {
         return Html::img(
-            '/img/physical/' . $this->physical_id . '.png',
+            '/img/physical/' . $this->id . '.png',
             [
-                'alt' => $this->physical_name,
-                'title' => $this->physical_name,
+                'alt' => $this->name,
+                'title' => $this->name,
             ]
         );
+    }
+
+    /**
+     * @return int
+     */
+    public static function getRandPhysicalId(): int
+    {
+        return self::find()
+            ->select(['id'])
+            ->andWhere(['!=', 'id', 21])
+            ->orderBy('RAND()')
+            ->scalar();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getOppositePhysical(): ActiveQuery
+    {
+        return $this->hasOne(self::class, ['id' => 'opposite_physical_id']);
     }
 }

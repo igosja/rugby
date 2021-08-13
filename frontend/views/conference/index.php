@@ -1,5 +1,9 @@
 <?php
 
+// TODO refactor
+
+use common\components\helpers\ErrorHelper;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 
 /**
@@ -12,23 +16,32 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1>
-            Конференция любительских клубов
+            <?= Yii::t('frontend', 'views.conference.index.h1') ?>
         </h1>
     </div>
 </div>
-<?= Html::beginForm('', 'get') ?>
+<?= Html::beginForm(null, 'get') ?>
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
-        <?= Html::label('Сезон', 'seasonId') ?>
+        <?= Html::label(Yii::t('frontend', 'views.label.season'), 'seasonId') ?>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-        <?= Html::dropDownList(
-            'seasonId',
-            $seasonId,
-            $seasonArray,
-            ['class' => 'form-control submit-on-change', 'id' => 'seasonId']
-        ) ?>
+        <?php
+
+        try {
+            print Select2::widget([
+                'data' => $seasonArray,
+                'id' => 'seasonId',
+                'name' => 'seasonId',
+                'options' => ['class' => 'submit-on-change'],
+                'value' => $seasonId,
+            ]);
+        } catch (Exception $e) {
+            ErrorHelper::log($e);
+        }
+
+        ?>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4"></div>
 </div>
@@ -36,39 +49,28 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <p class="text-justify">
-            Турнир проводится среди новых команд и команд, не попавших в чемпионаты своих стран.
-            <br/>
-            Новые и вылетевшие в конференцию команды автоматически становятся участниками турнира,
-            выйти из числа участников невозможно, в случае неотправки составов заявленная команда играет на
-            автосоставах,
-            определяемых компьютером.
-            Всего команд в Конференции в этом сезоне - <span class="strong"><?= $count ?></span>.
+            <?= Yii::t('frontend', 'views.conference.index.p.1', ['count' => $count]) ?>
         </p>
         <p class="text-center">
-            <?= Html::a('Турнирная таблица', ['table', 'seasonId' => $seasonId]) ?>
+            <?= Html::a(Yii::t('frontend', 'views.conference.index.link.table'), ['table', 'seasonId' => $seasonId]) ?>
             |
-            <?= Html::a('Статистика', ['statistics', 'seasonId' => $seasonId]) ?>
+            <?= Html::a(Yii::t('frontend', 'views.conference.index.link.statistics'), ['statistics', 'seasonId' => $seasonId]) ?>
         </p>
         <p class="text-justify">
-            Турнир играется по швейцарской системе, когда для каждого тура сводятся в пары команды одного ранга
-            (расположенные достаточно близко друг от друга в турнирной таблице,
-            но так, чтобы не нарушались принципы турнира).
+            <?= Yii::t('frontend', 'views.conference.index.p.2') ?>
         </p>
         <p class="text-justify">
-            В матчах турнира есть домашний бонус - в родных стенах команды играют сильнее.
+            <?= Yii::t('frontend', 'views.conference.index.p.3') ?>
         </p>
         <p class="text-justify">
-            Каждая команда имеет право сыграть 3 матча на супере и 3 матча на отдыхе
-            во время розыгрыша кубка межсезонья.
+            <?= Yii::t('frontend', 'views.conference.index.p.4') ?>
         </p>
         <p class="text-justify">
-            В конференции участники не могут встречаться между собой более двух раз и сводятся в пары,
-            имеющие ближайшие места в турнирной таблице, но такие,
-            которые могут играть между собой в соответствии с принципами жеребьёвки:
+            <?= Yii::t('frontend', 'views.conference.index.p.5') ?>
         </p>
         <ul class="text-left">
-            <li>две команды не могут играть между собой более двух матчей;</li>
-            <li>ни одна из команд не может сыграть более половины матчей турнира дома или в гостях.</li>
+            <li><?= Yii::t('frontend', 'views.conference.index.li.1') ?></li>
+            <li><?= Yii::t('frontend', 'views.conference.index.li.2') ?></li>
         </ul>
     </div>
 </div>

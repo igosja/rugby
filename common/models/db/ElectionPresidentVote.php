@@ -1,17 +1,24 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
  * Class ElectionPresidentVote
  * @package common\models\db
  *
- * @property int $election_president_vote_id
- * @property int $election_president_vote_application_id
- * @property int $election_president_vote_date
- * @property int $election_president_vote_user_id
+ * @property int $id
+ * @property int $election_president_application_id
+ * @property int $date
+ * @property int $user_id
+ *
+ * @property-read ElectionPresidentApplication $electionPresidentApplication
+ * @property-read User $user
  */
 class ElectionPresidentVote extends AbstractActiveRecord
 {
@@ -21,5 +28,48 @@ class ElectionPresidentVote extends AbstractActiveRecord
     public static function tableName(): string
     {
         return '{{%election_president_vote}}';
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @return array[]
+     */
+    public function rules(): array
+    {
+        return [
+            [['election_president_application_id', 'user_id'], 'required'],
+            [['election_president_application_id', 'user_id'], 'integer', 'min' => 1],
+            [['election_president_application_id'], 'exist', 'targetRelation' => 'electionPresidentApplication'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getElectionPresidentApplication(): ActiveQuery
+    {
+        return $this->hasOne(ElectionPresidentApplication::class, ['id' => 'election_president_application_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

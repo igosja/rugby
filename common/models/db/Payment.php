@@ -1,27 +1,33 @@
 <?php
 
+// TODO refactor
+
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Yii;
-use yii\db\Expression;
-use yii\db\Query;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
  * Class Payment
  * @package common\models\db
  *
- * @property int $payment_id
- * @property int $payment_date
- * @property string $payment_log
- * @property int $payment_status
- * @property float $payment_sum
- * @property int $payment_user_id
+ * @property int $id
+ * @property int $date
+ * @property string $log
+ * @property int $status
+ * @property float $sum
+ * @property int $user_id
+ *
+ * @property-read User $user
  */
 class Payment extends AbstractActiveRecord
 {
-    const NOT_PAID = 0;
-    const PAID = 1;
+    public const PAID = 1;
+
+    public const MERCHANT_ID = 27937;
+    public const MERCHANT_SECRET = 'h8lzyqfr';
+    public const MERCHANT_SECRET_KEY = 's3lyp66r';
 
     /**
      * @return string
@@ -34,86 +40,58 @@ class Payment extends AbstractActiveRecord
     /**
      * @return array
      */
-    public function rules(): array
+    public function behaviors(): array
     {
         return [
-            [['payment_status'], 'in', 'range' => [self::NOT_PAID, self::PAID]],
-            [['payment_id', 'payment_date'], 'integer'],
-            [['payment_sum'], 'number', 'min' => 1],
-            [['payment_sum'], 'required'],
-            [['payment_log'], 'string'],
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'date',
+                'updatedAtAttribute' => false,
+            ],
         ];
     }
 
     /**
-     * @param bool $insert
-     * @return bool
+     * @return array[]
      */
-    public function beforeSave($insert): bool
+    public function rules(): array
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if ($this->isNewRecord) {
-            $this->payment_date = time();
-            if (!$this->payment_user_id) {
-                $this->payment_user_id = Yii::$app->user->id;
-            }
-        }
-        return true;
+        return [
+            [['status', 'sum', 'user_id'], 'required'],
+            [['status'], 'boolean'],
+            [['sum'], 'number'],
+            [['user_id'], 'integer', 'min' => 1],
+            [['log'], 'trim'],
+            [['log'], 'string'],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
+        ];
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public static function getPaymentHighChartsData(): array
+    public function paymentUrl(): string
     {
-        $expression = new Expression('FROM_UNIXTIME(`payment_date`, \'%b-%Y\')');
-        $payment = (new Query())
-            ->select(['date' => 'FROM_UNIXTIME(`payment_date`, \'%b %Y\')', 'total' => 'SUM(`payment_sum`)'])
-            ->from(self::tableName())
-            ->where(['payment_status' => self::PAID])
-            ->groupBy($expression)
-            ->all();
+        $merchantId = self::MERCHANT_ID;
+        $secretKey = self::MERCHANT_SECRET_KEY;
+        $orderId = $this->id;
 
-        $dateStart = strtotime('-11months', strtotime(date('Y-m-01')));
-        $dateEnd = strtotime(date('Y-m-t'));
-        $dateArray = self::getDateArrayByMonth($dateStart, $dateEnd);
+        $params = [
+            'm' => $merchantId,
+            'oa' => $this->sum * 50,
+            'o' => $orderId,
+            's' => md5($merchantId . ':' . $this->sum * 50 . ':' . $secretKey . ':' . $orderId),
+            'lang' => 'ru',
+        ];
 
-        $valueArray = [];
-
-        foreach ($dateArray as $date) {
-            $inArray = false;
-
-            foreach ($payment as $item) {
-                if ($item['date'] == $date) {
-                    $valueArray[] = (int)$item['total'];
-                    $inArray = true;
-                }
-            }
-
-            if (false == $inArray) {
-                $valueArray[] = 0;
-            }
-        }
-
-        return [$dateArray, $valueArray];
+        return 'http://www.free-kassa.ru/merchant/cash.php?' . http_build_query($params);
     }
 
     /**
-     * @param string $dateStart
-     * @param string $dateEnd
-     * @return array
+     * @return ActiveQuery
      */
-    public static function getDateArrayByMonth(string $dateStart, string $dateEnd): array
+    public function getUser(): ActiveQuery
     {
-        $dateArray = [];
-
-        while ($dateStart < $dateEnd) {
-            $dateArray[] = date('M Y', $dateStart);
-            $dateStart = strtotime('+1month', strtotime(date('Y-m-d', $dateStart)));
-        }
-
-        return $dateArray;
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

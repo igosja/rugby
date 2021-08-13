@@ -1,19 +1,27 @@
 <?php
 
+// TODO refactor
+
 namespace frontend\controllers;
 
-use frontend\components\AbstractController;
+use common\components\helpers\ErrorHelper;
+use common\models\db\User;
+use Exception;
+use frontend\models\forms\ActivationForm;
+use frontend\models\forms\ActivationRepeatForm;
+use frontend\models\forms\ForgotPasswordForm;
+use frontend\models\forms\PasswordRestoreForm;
 use frontend\models\forms\SignInForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\VerifyEmailForm;
+use frontend\models\forms\SignUpForm;
+use frontend\models\queries\ForumMessageQuery;
+use frontend\models\queries\NewsQuery;
+use frontend\models\queries\UserQuery;
 use Yii;
-use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
-use yii\web\BadRequestHttpException;
 use yii\web\ErrorAction;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * Class SiteController
@@ -63,13 +71,105 @@ class SiteController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $this->view->title = 'Регбийный онлайн менеджер';
+        $birthdayBoys = UserQuery::getBirthdayBoys();
+        $forumMessage = ForumMessageQuery::getLastForumGroupsByMessageDate();
+        $news = NewsQuery::getLastNews();
+
+        $this->view->title = Yii::t('frontend', 'controllers.site.index.title');
         $this->view->registerMetaTag([
             'name' => 'description',
-            'content' => 'Виртуальная Регбийная Лига - лучший бесплатный регбийный онлайн-менеджер',
+            'content' => Yii::t('frontend', 'controllers.site.index.description'),
         ]);
 
-        return $this->render('index');
+        return $this->render('index', [
+            'birthdayBoys' => $birthdayBoys,
+            'forumMessage' => $forumMessage,
+            'news' => $news,
+        ]);
+    }
+
+    /**
+     * @return array|string
+     */
+    public function actionActivation()
+    {
+        $activationForm = new ActivationForm();
+
+        if (Yii::$app->request->isAjax && $activationForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($activationForm);
+        }
+
+        if (($activationForm->load(Yii::$app->request->post()) ||
+                $activationForm->load(Yii::$app->request->get(), '')) && $activationForm->code) {
+            try {
+                if ($activationForm->activate()) {
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.activation.success'));
+                    return $this->redirect(['site/activation']);
+                }
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.site.activation.error'));
+        }
+
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.activation.title'));
+
+        return $this->render('activation', [
+            'activationForm' => $activationForm,
+        ]);
+    }
+
+    /**
+     * @return array|string
+     */
+    public function actionActivationRepeat()
+    {
+        $activationRepeatForm = new ActivationRepeatForm();
+
+        if (Yii::$app->request->isAjax && $activationRepeatForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($activationRepeatForm);
+        }
+
+        if ($activationRepeatForm->load(Yii::$app->request->post())) {
+            try {
+                if ($activationRepeatForm->send()) {
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.activation-repeat.success'));
+                    return $this->redirect(['site/activation']);
+                }
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+            }
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.site.activation-repeat.error'));
+        }
+
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.activation-repeat.title'));
+        return $this->render('activation-repeat', [
+            'activationRepeatForm' => $activationRepeatForm,
+        ]);
+    }
+
+    /**
+     * @param string $code
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionAuth(string $code): Response
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+        }
+
+        $user = User::find()
+            ->where(['user_code' => $code])
+            ->limit(1)
+            ->one();
+        $this->notFound($user);
+
+        Yii::$app->user->login($user, 2592000);
+
+        return $this->redirect(['team/view']);
     }
 
     /**
@@ -81,27 +181,87 @@ class SiteController extends AbstractController
     }
 
     /**
-     *
+     * @return array|string|Response
      */
     public function actionForgotPassword()
     {
+        $forgotPasswordForm = new ForgotPasswordForm();
+
+        if (Yii::$app->request->isAjax && $forgotPasswordForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($forgotPasswordForm);
+        }
+
+        if ($forgotPasswordForm->load(Yii::$app->request->post())) {
+            try {
+                if ($forgotPasswordForm->send()) {
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.forgot-password.success'));
+                    return $this->refresh();
+                }
+
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.forgot-password.error'));
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.forgot-password.error'));
+            }
+        }
+
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.forgot-password.title'));
+        return $this->render('forgot-password', [
+            'forgotPasswordForm' => $forgotPasswordForm,
+        ]);
     }
 
     /**
-     * @return string|Response
+     * @return array|string|Response
+     */
+    public function actionPasswordRestore()
+    {
+        $passwordRestoreForm = new PasswordRestoreForm();
+        $passwordRestoreForm->setAttributes(Yii::$app->request->get());
+
+        if (Yii::$app->request->isAjax && $passwordRestoreForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($passwordRestoreForm);
+        }
+
+        if ($passwordRestoreForm->load(Yii::$app->request->post())) {
+            try {
+                if ($passwordRestoreForm->restore()) {
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.password-restore.success'));
+                    return $this->redirect(['sign-in']);
+                }
+
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.password-restore.error'));
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.password-restore.error'));
+            }
+        }
+
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.password-restore.title'));
+        return $this->render('password-restore', [
+            'passwordRestoreForm' => $passwordRestoreForm,
+        ]);
+    }
+
+    /**
+     * @return array|string|Response
      */
     public function actionSignIn()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['team/view']);
+        $signInForm = new SignInForm();
+
+        if (Yii::$app->request->isAjax && $signInForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($signInForm);
         }
 
-        $signInForm = new SignInForm();
         if ($signInForm->load(Yii::$app->request->post()) && $signInForm->login()) {
             return $this->redirect(['team/view']);
         }
 
-        $this->seoTitle('Вход');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.sign-in.title'));
         return $this->render('sign-in', [
             'signInForm' => $signInForm,
         ]);
@@ -118,99 +278,33 @@ class SiteController extends AbstractController
     }
 
     /**
-     *
+     * @return array|string|Response
      */
     public function actionSignUp()
     {
+        $model = new SignUpForm();
 
-    }
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
-    /**
-     * Requests password reset.
-     *
-     * @return mixed
-     */
-    public function actionRequestPasswordReset()
-    {
-        $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+        if ($model->load(Yii::$app->request->post())) {
+            try {
+                if ($model->signUp()) {
+                    $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.sign-up.success'));
+                    return $this->redirect(['site/activation']);
+                }
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.sign-up.error'));
+            } catch (Exception $e) {
+                ErrorHelper::log($e);
+                $this->setErrorFlash(Yii::t('frontend', 'controllers.site.sign-up.error'));
             }
         }
 
-        return $this->render('index');
-    }
-
-    /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
-     */
-    public function actionResetPassword($token)
-    {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-
-            return $this->goHome();
-        }
-
-        return $this->render('index');
-    }
-
-    /**
-     * Verify email address
-     *
-     * @param string $token
-     * @return Response
-     * @throws BadRequestHttpException
-     */
-    public function actionVerifyEmail($token)
-    {
-        try {
-            $model = new VerifyEmailForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        if ($user = $model->verifyEmail()) {
-            if (Yii::$app->user->login($user)) {
-                Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
-                return $this->goHome();
-            }
-        }
-
-        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
-        return $this->goHome();
-    }
-
-    /**
-     * Resend verification email
-     *
-     * @return mixed
-     */
-    public function actionResendVerificationEmail()
-    {
-        $model = new ResendVerificationEmailForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-                return $this->goHome();
-            }
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
-        }
-
-        return $this->render('index');
+        $this->setSeoTitle(Yii::t('frontend', 'controllers.site.sign-up.title'));
+        return $this->render('sign-up', [
+            'model' => $model,
+        ]);
     }
 }
