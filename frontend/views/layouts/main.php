@@ -40,7 +40,7 @@ $context = $this->context;
     <link rel="manifest" href="/img/favicon/manifest.json">
     <?php if (YII_ENV_PROD) : ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90926144-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4JYQJ84RM"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
 
@@ -49,15 +49,16 @@ $context = $this->context;
             }
 
             gtag('js', new Date());
-            gtag('config', 'UA-90926144-1');
+
+            gtag('config', 'G-B4JYQJ84RM');
         </script>
         <!-- /Global site tag (gtag.js) - Google Analytics -->
         <!--LiveInternet counter-->
-        <script type="text/javascript">
-            new Image().src = "//counter.yadro.ru/hit?r" +
-                escape(document.referrer) + ((typeof (screen) === "undefined") ? "" :
+        <script>
+            new Image().src = "https://counter.yadro.ru/hit?r" +
+                escape(document.referrer) + ((typeof (screen) == "undefined") ? "" :
                     ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
-                    screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+                        screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
                 ";h" + escape(document.title.substring(0, 150)) +
                 ";" + Math.random();
         </script>
@@ -65,7 +66,8 @@ $context = $this->context;
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
     <?php if (!$context->user || !$context->user->isVip()): ?>
         <!-- Google AdSense -->
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script data-ad-client="ca-pub-9189986235139627" async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
     <?php endif ?>
     <?php endif ?>
