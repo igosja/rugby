@@ -951,7 +951,7 @@ class Team extends AbstractActiveRecord
     {
         return Html::a(
             $this->name,
-            ['team/view', 'id' => $this->id],
+            ['team/view', 'id' => $this->id]
         );
     }
 
@@ -962,7 +962,7 @@ class Team extends AbstractActiveRecord
     {
         return Html::a(
             $this->name . ' (' . $this->stadium->city->name . ')',
-            ['team/view', 'id' => $this->id],
+            ['team/view', 'id' => $this->id]
         );
     }
 
