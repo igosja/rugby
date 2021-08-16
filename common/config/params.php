@@ -3,7 +3,7 @@
 // TODO refactor
 
 return [
-    'infoEmail' => 'info@virual-rugby-league.org',
-    'noReplyEmail' => 'noreply@virual-rugby-league.org',
+    'infoEmail' => 'info@virual-rugby.com',
+    'noReplyEmail' => 'noreply@virual-rugby.com',
     'noReplyName' => 'Virtual Rugby League',
 ];
