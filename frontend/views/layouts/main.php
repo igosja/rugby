@@ -145,6 +145,11 @@ $context = $this->context;
                 </div>
             </div>
         </noscript>
+        <div class="row margin-top">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
+                <?= Yii::t('frontend', 'views.layouts.main.development') ?>
+            </div>
+        </div>
         <?php
 
         try {
