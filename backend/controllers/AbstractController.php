@@ -51,6 +51,7 @@ abstract class AbstractController extends AbstractWebController
 
         $allowedIp = [
             '127.0.0.1',
+            '91.214.85.240',
         ];
 
         $userIp = Yii::$app->request->headers->get('x-real-ip');
@@ -58,10 +59,10 @@ abstract class AbstractController extends AbstractWebController
             $userIp = Yii::$app->request->userIP;
         }
 
-//        if (!in_array($userIp, $allowedIp, true)) {
-//            Yii::$app->request->setBaseUrl('');
-//            return $this->redirect(['site/index']);
-//        }
+        if (!in_array($userIp, $allowedIp, true)) {
+            Yii::$app->request->setBaseUrl('');
+            return $this->redirect(['site/index']);
+        }
 
         return true;
     }
