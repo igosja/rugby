@@ -210,20 +210,6 @@ use yii\helpers\Html;
                             </a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                            <a href="//www.free-kassa.ru/" rel="nofollow" target="_blank">
-                                <?= Html::img(
-                                    '//www.free-kassa.ru/img/fk_btn/13.png',
-                                    [
-                                        'alt' => 'Free Kassa',
-                                        'border' => 0,
-                                        'title' => 'Free Kassa',
-                                    ]
-                                ) ?>
-                            </a>
-                        </div>
-                    </div>
                 </fieldset>
             </div>
         </div>

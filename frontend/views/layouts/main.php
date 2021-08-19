@@ -66,8 +66,7 @@ $context = $this->context;
         <!-- fb1ddcd0fe2ed10ac5f2f029a4c98dc5d17b9bea -->
     <?php if (!$context->user || !$context->user->isVip()): ?>
         <!-- Google AdSense -->
-        <script data-ad-client="ca-pub-9189986235139627" async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- /Google AdSense -->
     <?php endif ?>
     <?php endif ?>
