@@ -99,6 +99,7 @@ print $this->render('//user/_top');
     ['class' => 'form-control form-small']
 ) ?>
 <?= $form->field($model, 'is_no_vice')->checkbox([], false) ?>
+<?= $form->field($model, 'is_translation_mode')->checkbox([], false) ?>
 <div class="row margin-top-small">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center text-size-3">
         <?= Yii::t('frontend', 'views.user.questionnaire.p.2') ?>
