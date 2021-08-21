@@ -29,7 +29,7 @@ use yii\web\View;
         <?= $this->render('//team/_team-top-right', ['team' => $team]) ?>
     </div>
 </div>
-<?= Html::beginForm(['team/event', 'id' => $team->id], 'get') ?>
+<?= Html::beginForm(['team/history', 'id' => $team->id], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
         <?= $this->render('//team/_team-links', ['id' => $team->id]) ?>

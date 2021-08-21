@@ -89,7 +89,7 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return array|string
+     * @return array|string|\yii\web\Response
      */
     public function actionActivation()
     {
@@ -121,7 +121,7 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @return array|string
+     * @return array|string|\yii\web\Response
      */
     public function actionActivationRepeat()
     {
@@ -306,5 +306,13 @@ class SiteController extends AbstractController
         return $this->render('sign-up', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @return \yii\web\Response
+     */
+    public function actionRedirect(): Response
+    {
+        return $this->redirect(['index']);
     }
 }

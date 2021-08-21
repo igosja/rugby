@@ -90,8 +90,8 @@ class UserController extends AbstractController
 
     /**
      * @param int $id
-     * @return string|Response
-     * @throws Exception
+     * @return string|\yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionView(int $id = 0)
     {
@@ -100,6 +100,12 @@ class UserController extends AbstractController
 
             return $this->redirect(['user/view', 'id' => $id]);
         }
+
+        $user = User::find()
+            ->andWhere(['id' => $id])
+            ->limit(1)
+            ->one();
+        $this->notFound($user);
 
         $query = Team::find()
             ->where(['or', ['user_id' => $id], ['vice_user_id' => $id]]);
