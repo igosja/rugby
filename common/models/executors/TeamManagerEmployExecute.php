@@ -20,12 +20,12 @@ class TeamManagerEmployExecute implements ExecuteInterface
     /**
      * @var Team $team
      */
-    private Team $team;
+    private $team;
 
     /**
      * @var User $user
      */
-    private User $user;
+    private $user;
 
     /**
      * TeamManagerEmployExecute constructor.
