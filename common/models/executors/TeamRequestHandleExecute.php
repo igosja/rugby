@@ -21,7 +21,7 @@ class TeamRequestHandleExecute implements ExecuteInterface
     /**
      * @var TeamRequest $teamRequest
      */
-    private TeamRequest $teamRequest;
+    private $teamRequest;
 
     /**
      * TeamRequestHandleExecute constructor.
