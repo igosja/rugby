@@ -40,10 +40,27 @@ class TranslateController extends AbstractController
     public function actionIndex()
     {
         $translateKey = TranslateKey::find()
-            ->andWhere(['id' => 1])
+            ->andWhere([
+                'not',
+                [
+                    'id' => TranslateOption::find()
+                        ->select(['translate_key_id'])
+                        ->andWhere([
+                            'id' => TranslateVote::find()
+                                ->select(['id'])
+                                ->andWhere(['user_id' => $this->user->id])
+                        ])
+                ]
+            ])
             ->orderBy('RAND()')
             ->limit(1)
             ->one();
+        if (!$translateKey) {
+            $translateKey = TranslateKey::find()
+                ->orderBy('RAND()')
+                ->limit(1)
+                ->one();
+        }
 
         $translateVote = TranslateVote::find()
             ->andWhere([
