@@ -48,6 +48,7 @@ class Menu extends Widget
     public const ITEM_TEAM = 'team';
     public const ITEM_TOURNAMENT = 'tournament';
     public const ITEM_TRANSFER = 'transfer';
+    public const ITEM_TRANSLATE = 'translate';
     public const ITEM_VIP = 'vip';
     public const ITEM_VOTE = 'vote';
 
@@ -151,6 +152,7 @@ class Menu extends Widget
                     self::ITEM_VIP,
                     self::ITEM_VOTE,
                     self::ITEM_CHANGE_TEAM,
+                    self::ITEM_TRANSLATE,
                 ],
             ],
             [
@@ -384,6 +386,11 @@ class Menu extends Widget
             self::ITEM_TRANSFER => [
                 'label' => Yii::t('frontend', 'components.widgets.menu.transfer'),
                 'url' => ['/transfer/index'],
+            ],
+            self::ITEM_TRANSLATE => [
+                'css' => $controller->user->is_translation_mode ? '' : 'hidden',
+                'label' => Yii::t('frontend', 'components.widgets.menu.translate'),
+                'url' => ['/translate/index'],
             ],
             self::ITEM_VIP => [
                 'label' => Yii::t('frontend', 'components.widgets.menu.vip'),
