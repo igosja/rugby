@@ -9,6 +9,7 @@ return [
     'pageSizeNews' => 10,
     'pageSizeNewsComment' => 20,
     'pageSizeTable' => 50,
+    'pageSizeTranslate' => 50,
     'pageSizeVote' => 10,
     'bsDependencyEnabled' => false,
 ];

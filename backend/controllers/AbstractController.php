@@ -51,6 +51,7 @@ abstract class AbstractController extends AbstractWebController
 
         $allowedIp = [
             '127.0.0.1',
+            '91.214.85.134',
             '91.214.85.240',
         ];
 

@@ -35,6 +35,7 @@ use yii\web\IdentityInterface;
  * @property int $finance
  * @property bool $is_no_vice
  * @property bool $is_referrer_done
+ * @property bool $is_translation_mode
  * @property int $language_id
  * @property string $login
  * @property float $money
@@ -85,7 +86,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['email', 'login', 'user_role_id'], 'required'],
             [['email', 'login', 'social_facebook_id', 'social_google_id'], 'unique'],
             [['email'], 'email'],
-            [['is_no_vice', 'is_referrer_done'], 'boolean'],
+            [['is_no_vice', 'is_referrer_done', 'is_translation_mode'], 'boolean'],
             [
                 [
                     'city',
@@ -146,6 +147,18 @@ class User extends AbstractActiveRecord implements IdentityInterface
             [['referrer_user_id'], 'exist', 'targetRelation' => 'referrerUser'],
             [['sex_id'], 'exist', 'targetRelation' => 'sex'],
             [['user_role_id'], 'exist', 'targetRelation' => 'userRole'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'is_no_vice' => Yii::t('common', 'models.db.user.label.is_no_vice'),
+            'is_translation_mode' => Yii::t('common', 'models.db.user.label.is_translation_mode'),
+            'timezone' => Yii::t('common', 'models.db.user.label.timezone'),
         ];
     }
 
@@ -224,6 +237,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
             'city',
             'country_id',
             'is_no_vice',
+            'is_translation_mode',
             'name',
             'sex_id',
             'surname',
