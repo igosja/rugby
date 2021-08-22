@@ -5,6 +5,7 @@
 namespace console\controllers;
 
 use common\components\helpers\ErrorHelper;
+use common\models\db\Schedule;
 use console\models\generator\CheckCaptain;
 use console\models\generator\CheckCronDate;
 use console\models\generator\CheckLineup;
@@ -96,6 +97,7 @@ use console\models\generator\UserFireExtraTeam;
 use console\models\generator\UserHolidayEnd;
 use console\models\generator\UserToRating;
 use Exception;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class GeneratorController
@@ -108,97 +110,126 @@ class GeneratorController extends AbstractController
      */
     public function actionIndex(): void
     {
+        $schedule = Schedule::find()
+            ->select('id')
+            ->andWhere('FROM_UNIXTIME(`date`, "%Y-%m-%d")=CURDATE()')
+            ->count();
+
         $modelArray = [
             new UpdateCronDate,
             new SiteClose,
             new DumpDatabase,
-            new PlayerPowerNewToOld,
-            new CheckLineup,
-            new FillLineup,
-            new PlayerSpecialToLineup,
-            new CheckCaptain,
-            new SetAuto,
-            new CheckTeamMoodLimit,
-            new SetDefaultStyle,
-            new SetUserAuto,
-            new SetTicketPrice,
-            new SetStadium,
-            new CountVisitor,
-            new FinanceStadium,
-            new TeamToStatistic,
-            new UserToRating,
-            new LineupToStatistic,
-            new NationalVs,
-            new GameResult,
-            new UpdateLeagueCoefficient,
-            new UpdateUserRating,
-            new CountryAuto,
-            new TeamVisitorAfterGame,
-            new UpdateTeamVisitor,
-            new PlusMinus,
-            new Standing,
-            new StandingPlace,
-            new PlayerGameRow,
-            new PlayerTire,
-            new UpdateBuildingBase,
-            new UpdateBuildingStadium,
-            new UpdateTraining,
-            new UpdatePhysical,
-            new UpdateSchool,
-            new UpdateScout,
-            new StadiumMaintenance,
-            new DecreaseInjury,
-            new SetInjury,
-            new MakePlayed,
-            new LeagueOut,
-            new LeagueLot,
-            new InsertAchievement,
-            new Prize,
-            new InsertSwiss,
-            new LoanDecreaseAndReturn,
-            new MakeTransfer,
-            new TransferCheck,
-            new MakeLoan,
-            new LoanCheck,
-            new TireBaseLevel,
-            new GameRowReset,
-            new MoodReset,
-            new IncreaseNationalUserDay,
-            new IncreaseNationalPlayerDay,
-            new UserDecrementAutoForVocation,
-            new UserFire,
-            new UserHolidayEnd,
-            new NationalVoteStatus,
-            new NationalViceVoteStatus,
-            new NationalFire,
-            new NationalViceFire,
-            new PresidentVoteStatus,
-            new PresidentViceVoteStatus,
-            new PresidentFire,
-            new PresidentViceFire,
-            new ReferrerBonus,
-            new NewSeason,
-            new PlayerLeaguePower,
-            new PlayerPrice,
-            new PlayerPowerS,
-            new PlayerRealPower,
-            new TakeSalary,
-            new TeamPowerVs,
-            new TeamPrice,
-            new TeamAge,
-            new TeamPlayerCount,
-            new CountryStadiumCapacity,
-            new UpdateUserTotalRating,
-            new UpdateRating,
-            new InsertNews,
-            new PresidentVip,
-            new FriendlyInviteDelete,
-            new UserFireExtraTeam,
-            new NationalStadium,
-            new SetFreePlayerOnTransfer,
-            new Snapshot,
-            new SiteOpen,
         ];
+        if ($schedule) {
+            $modelArray = ArrayHelper::merge(
+                $modelArray,
+                [
+                    new PlayerPowerNewToOld,
+                    new CheckLineup,
+                    new FillLineup,
+                    new PlayerSpecialToLineup,
+                    new CheckCaptain,
+                    new SetAuto,
+                    new CheckTeamMoodLimit,
+                    new SetDefaultStyle,
+                    new SetUserAuto,
+                    new SetTicketPrice,
+                    new SetStadium,
+                    new CountVisitor,
+                    new FinanceStadium,
+                    new TeamToStatistic,
+                ]
+            );
+        }
+        $modelArray = ArrayHelper::merge(
+            $modelArray,
+            [
+                new UserToRating,
+            ]
+        );
+        if ($schedule) {
+            $modelArray = ArrayHelper::merge(
+                $modelArray,
+                [
+                    new LineupToStatistic,
+                    new NationalVs,
+                    new GameResult,
+                    new UpdateLeagueCoefficient,
+                    new UpdateUserRating,
+                    new CountryAuto,
+                    new TeamVisitorAfterGame,
+                    new UpdateTeamVisitor,
+                    new PlusMinus,
+                    new Standing,
+                    new StandingPlace,
+                    new PlayerGameRow,
+                    new PlayerTire,
+                    new UpdateBuildingBase,
+                    new UpdateBuildingStadium,
+                    new UpdateTraining,
+                    new UpdatePhysical,
+                    new UpdateSchool,
+                    new UpdateScout,
+                    new StadiumMaintenance,
+                    new DecreaseInjury,
+                    new SetInjury,
+                    new MakePlayed,
+                    new LeagueOut,
+                    new LeagueLot,
+                    new InsertAchievement,
+                    new Prize,
+                    new InsertSwiss,
+                    new LoanDecreaseAndReturn,
+                    new MakeTransfer,
+                    new TransferCheck,
+                    new MakeLoan,
+                    new LoanCheck,
+                    new TireBaseLevel,
+                    new GameRowReset,
+                    new MoodReset,
+                    new IncreaseNationalUserDay,
+                    new IncreaseNationalPlayerDay,
+                    new UserDecrementAutoForVocation,
+                    new UserFire,
+                    new UserHolidayEnd,
+                    new NationalVoteStatus,
+                    new NationalViceVoteStatus,
+                    new NationalFire,
+                    new NationalViceFire,
+                    new PresidentVoteStatus,
+                    new PresidentViceVoteStatus,
+                    new PresidentFire,
+                    new PresidentViceFire,
+                    new ReferrerBonus,
+                    new NewSeason,
+                    new PlayerLeaguePower,
+                    new PlayerPrice,
+                    new PlayerPowerS,
+                    new PlayerRealPower,
+                    new TakeSalary,
+                    new SetFreePlayerOnTransfer,
+                    new FriendlyInviteDelete,
+                    new InsertNews,
+                    new PresidentVip,
+                    new UserFireExtraTeam,
+                ]
+            );
+        }
+        $modelArray = ArrayHelper::merge(
+            $modelArray,
+            [
+                new TeamPowerVs,
+                new TeamPrice,
+                new TeamAge,
+                new TeamPlayerCount,
+                new CountryStadiumCapacity,
+                new UpdateUserTotalRating,
+                new UpdateRating,
+                new NationalStadium,
+                new Snapshot,
+                new SiteOpen,
+            ]
+        );
 
         try {
             (new CheckCronDate)->execute();
