@@ -33,24 +33,8 @@ use yii\helpers\Html;
             try {
                 $columns = [
                     [
-                        'attribute' => 'id',
-                        'headerOptions' => ['class' => 'col-lg-1'],
-                    ],
-                    [
                         'attribute' => 'log_time',
                         'format' => 'datetime',
-                        'headerOptions' => ['class' => 'col-lg-1'],
-                    ],
-                    [
-                        'attribute' => 'level',
-                        'headerOptions' => ['class' => 'col-lg-1'],
-                    ],
-                    [
-                        'attribute' => 'category',
-                        'headerOptions' => ['class' => 'col-lg-1'],
-                    ],
-                    [
-                        'attribute' => 'prefix',
                         'headerOptions' => ['class' => 'col-lg-1'],
                     ],
                     [
