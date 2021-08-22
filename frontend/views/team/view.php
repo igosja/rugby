@@ -222,7 +222,10 @@ $controller = Yii::$app->controller;
             'rowOptions' => static function (Player $model) use ($team) {
                 $result = [];
                 if ($model->squad && $team->myTeam()) {
-                    $result['style'] = ['background-color' => '#' . $model->squad->color];
+                    $result['style']['background-color'] = '#' . $model->squad->color;
+                }
+                if ($model->is_injury) {
+                    $result['class'] = 'font-red';
                 }
                 return $result;
             },
