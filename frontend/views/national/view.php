@@ -230,7 +230,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             'rowOptions' => static function (Player $model) use ($national) {
                 $result = [];
                 if ($model->nationalSquad && $national->myTeamOrVice()) {
-                    $result['style'] = ['background-color' => '#' . $model->nationalSquad->color];
+                    $result['style']['background-color'] = '#' . $model->nationalSquad->color;
+                }
+                if ($model->is_injury) {
+                    $result['class'] = 'font-red';
                 }
                 return $result;
             },
