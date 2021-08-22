@@ -86,6 +86,30 @@ class FederationController extends AbstractController
 
     /**
      * @param int $id
+     * @return \yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionAttitudePresident(int $id): Response
+    {
+        if (!$this->myTeam) {
+            return $this->redirect(['federation/news', 'id' => $id]);
+        }
+
+        $federation = $this->getFederation($id);
+        if ($federation->president_user_id === $this->user->id) {
+            return $this->redirect(['federation/news', 'id' => $id]);
+        }
+
+        if (!$this->myTeam->load(Yii::$app->request->post())) {
+            return $this->redirect(['federation/news', 'id' => $id]);
+        }
+
+        $this->myTeam->save(true, ['president_attitude_id']);
+        return $this->redirect(['federation/news', 'id' => $id]);
+    }
+
+    /**
+     * @param int $id
      * @return string
      * @throws NotFoundHttpException
      */

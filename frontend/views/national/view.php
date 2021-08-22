@@ -39,7 +39,7 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
         <?= $this->render('//national/_national-top-right', ['national' => $national]) ?>
     </div>
 </div>
-<?php if ($controller->myTeam && $controller->myTeam->stadium->city->country->federation->id === $national->federation_id) : ?>
+<?php if ($national->user_id && $controller->myTeam && $controller->myTeam->stadium->city->country->federation->id === $national->federation_id && $national->user_id !== $controller->user->id) : ?>
     <?php $form = ActiveForm::begin([
         'action' => ['attitude-national', 'id' => $national->id],
         'fieldConfig' => [
@@ -230,7 +230,10 @@ $attitudeArray = ArrayHelper::map($attitudeArray, 'id', 'name');
             'rowOptions' => static function (Player $model) use ($national) {
                 $result = [];
                 if ($model->nationalSquad && $national->myTeamOrVice()) {
-                    $result['style'] = ['background-color' => '#' . $model->nationalSquad->color];
+                    $result['style']['background-color'] = '#' . $model->nationalSquad->color;
+                }
+                if ($model->is_injury) {
+                    $result['class'] = 'font-red';
                 }
                 return $result;
             },
