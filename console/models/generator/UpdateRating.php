@@ -271,13 +271,13 @@ class UpdateRating
         Yii::$app->db->createCommand()->batchInsert(
             RatingTeam::tableName(),
             $teamInsertKeys,
-            $teamInsertData,
+            $teamInsertData
         )->execute();
 
         Yii::$app->db->createCommand()->batchInsert(
             RatingUser::tableName(),
             $userInsertKeys,
-            $userInsertData,
+            $userInsertData
         )->execute();
     }
 }

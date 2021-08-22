@@ -4,12 +4,12 @@
 
 namespace console\models\newSeason;
 
-use common\models\Game;
-use common\models\NationalType;
-use common\models\Schedule;
-use common\models\Season;
-use common\models\TournamentType;
-use common\models\WorldCup;
+use common\models\db\Game;
+use common\models\db\NationalType;
+use common\models\db\Schedule;
+use common\models\db\Season;
+use common\models\db\TournamentType;
+use common\models\db\WorldCup;
 use Exception;
 use Yii;
 use yii\db\Expression;

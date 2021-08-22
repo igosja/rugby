@@ -4,9 +4,9 @@
 
 namespace console\models\newSeason;
 
-use common\models\LeagueDistribution;
-use common\models\RatingCountry;
-use common\models\Season;
+use common\models\db\LeagueDistribution;
+use common\models\db\RatingFederation;
+use common\models\db\Season;
 use Yii;
 use yii\db\Exception;
 
@@ -26,7 +26,7 @@ class LeagueLimit
 
         $data = [];
 
-        $ratingCountryArray = RatingCountry::find()
+        $ratingCountryArray = RatingFederation::find()
             ->orderBy(['rating_country_league_place' => SORT_ASC])
             ->all();
         foreach ($ratingCountryArray as $ratingCountry) {

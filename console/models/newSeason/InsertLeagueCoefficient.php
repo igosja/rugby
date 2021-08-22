@@ -4,9 +4,9 @@
 
 namespace console\models\newSeason;
 
-use common\models\LeagueCoefficient;
-use common\models\ParticipantLeague;
-use common\models\Season;
+use common\models\db\LeagueCoefficient;
+use common\models\db\ParticipantLeague;
+use common\models\db\Season;
 use Yii;
 use yii\db\Exception;
 

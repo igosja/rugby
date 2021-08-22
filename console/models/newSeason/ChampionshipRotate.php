@@ -4,13 +4,13 @@
 
 namespace console\models\newSeason;
 
-use common\models\Championship;
-use common\models\Conference;
-use common\models\Country;
-use common\models\Division;
-use common\models\ParticipantChampionship;
-use common\models\Season;
-use common\models\Stage;
+use common\models\db\Championship;
+use common\models\db\Conference;
+use common\models\db\Country;
+use common\models\db\Division;
+use common\models\db\ParticipantChampionship;
+use common\models\db\Season;
+use common\models\db\Stage;
 use Yii;
 use yii\db\Exception;
 
