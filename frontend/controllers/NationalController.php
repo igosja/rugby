@@ -60,8 +60,8 @@ class NationalController extends AbstractController
 
     /**
      * @param int $id
-     * @return Response
-     * @throws \yii\db\Exception
+     * @return \yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionAttitudeNational(int $id): Response
     {
@@ -69,11 +69,16 @@ class NationalController extends AbstractController
             return $this->redirect(['national/view', 'id' => $id]);
         }
 
+        $national = $this->getNational($id);
+        if ($national->user_id === $this->user->id) {
+            return $this->redirect(['national/view', 'id' => $id]);
+        }
+
         if (!$this->myTeam->load(Yii::$app->request->post())) {
             return $this->redirect(['national/view', 'id' => $id]);
         }
 
-        $this->myTeam->save(true, ['team_attitude_national', 'team_attitude_u21', 'team_attitude_u19']);
+        $this->myTeam->save(true, ['national_attitude_id', 'u19_attitude_id', 'u21_attitude_id']);
         return $this->redirect(['national/view', 'id' => $id]);
     }
 

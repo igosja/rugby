@@ -131,45 +131,47 @@ $file_name = 'file_name';
     </div>
 </div>
 <?php if ($controller->myTeam && $controller->myTeam->stadium->city->country_id === $federation->country_id) : ?>
-    <?php $form = ActiveForm::begin([
-        'action' => ['federation/president-attitude', 'id' => $federation->id],
-        'fieldConfig' => [
-            'labelOptions' => ['class' => 'strong'],
-            'options' => ['class' => 'row text-left'],
-            'template' => '<div class="col-lg-3 col-md-3 col-sm-2"></div>{input}',
-        ],
-    ]) ?>
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 relation-head">
-            <?= Yii::t('frontend', 'views.federation.federation.attitude') ?>
-            <a href="javascript:" id="relation-link"><?= $controller->myTeam->presidentAttitude->name ?></a>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 relation-body hidden">
-            <?= $form
-                ->field($controller->myTeam, 'president_attitude_id')
-                ->radioList($attitudeArray, [
-                    'item' => static function ($index, $model, $name, $checked, $value) {
-                        return '<div class="hidden-lg hidden-md hidden-sm col-xs-3"></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-9">'
-                            . Html::radio($name, $checked, [
-                                'index' => $index,
-                                'label' => $model,
-                                'value' => $value,
-                            ])
-                            . '</div>';
-                    }
-                ])
-                ->label(false) ?>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?= Html::submitButton(
-                        Yii::t('frontend', 'views.federation.federation.submit'),
-                        ['class' => 'btn margin']
-                    ) ?>
+    <?php if ($federation->president_user_id && $federation->president_user_id !== $controller->user->id) : ?>
+        <?php $form = ActiveForm::begin([
+            'action' => ['federation/attitude-president', 'id' => $federation->id],
+            'fieldConfig' => [
+                'labelOptions' => ['class' => 'strong'],
+                'options' => ['class' => 'row text-left'],
+                'template' => '<div class="col-lg-3 col-md-3 col-sm-2"></div>{input}',
+            ],
+        ]) ?>
+        <div class="row text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 relation-head">
+                <?= Yii::t('frontend', 'views.federation.federation.attitude') ?>
+                <a href="javascript:" id="relation-link"><?= $controller->myTeam->presidentAttitude->name ?></a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 relation-body hidden">
+                <?= $form
+                    ->field($controller->myTeam, 'president_attitude_id')
+                    ->radioList($attitudeArray, [
+                        'item' => static function ($index, $model, $name, $checked, $value) {
+                            return '<div class="hidden-lg hidden-md hidden-sm col-xs-3"></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-9">'
+                                . Html::radio($name, $checked, [
+                                    'index' => $index,
+                                    'label' => $model,
+                                    'value' => $value,
+                                ])
+                                . '</div>';
+                        }
+                    ])
+                    ->label(false) ?>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <?= Html::submitButton(
+                            Yii::t('frontend', 'views.federation.federation.submit'),
+                            ['class' => 'btn margin']
+                        ) ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <?php ActiveForm::end() ?>
+        <?php ActiveForm::end() ?>
+    <?php endif ?>
     <div class="row margin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
             <?= Html::a(
