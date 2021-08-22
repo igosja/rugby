@@ -4,14 +4,14 @@
 
 namespace console\models\newSeason;
 
-use common\models\Championship;
-use common\models\Conference;
-use common\models\Game;
-use common\models\Schedule;
-use common\models\Season;
-use common\models\Stage;
-use common\models\Team;
-use common\models\TournamentType;
+use common\models\db\Championship;
+use common\models\db\Conference;
+use common\models\db\Game;
+use common\models\db\Schedule;
+use common\models\db\Season;
+use common\models\db\Stage;
+use common\models\db\Team;
+use common\models\db\TournamentType;
 use Yii;
 use yii\db\Exception;
 

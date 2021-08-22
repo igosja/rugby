@@ -4,9 +4,9 @@
 
 namespace console\models\newSeason;
 
-use common\models\City;
-use common\models\National;
-use common\models\NationalType;
+use common\models\db\City;
+use common\models\db\National;
+use common\models\db\NationalType;
 use Yii;
 use yii\db\Exception;
 

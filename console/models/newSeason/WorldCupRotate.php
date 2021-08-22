@@ -4,10 +4,10 @@
 
 namespace console\models\newSeason;
 
-use common\models\Division;
-use common\models\NationalType;
-use common\models\Season;
-use common\models\WorldCup;
+use common\models\db\Division;
+use common\models\db\NationalType;
+use common\models\db\Season;
+use common\models\db\WorldCup;
 use Yii;
 use yii\db\Exception;
 
