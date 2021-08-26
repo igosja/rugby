@@ -7,8 +7,6 @@ namespace backend\controllers;
 use common\components\AbstractWebController;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\BadRequestHttpException;
-use yii\web\Response;
 
 /**
  * Class AbstractController
@@ -35,11 +33,11 @@ abstract class AbstractController extends AbstractWebController
     }
 
     /**
-     * @param $action
-     * @return bool|Response
-     * @throws BadRequestHttpException
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
      */
-    public function beforeAction($action)
+    public function beforeAction($action): bool
     {
         if (!parent::beforeAction($action)) {
             return false;
@@ -48,23 +46,6 @@ abstract class AbstractController extends AbstractWebController
         if ('en' !== Yii::$app->language) {
             Yii::$app->language = 'en';
         }
-
-        $allowedIp = [
-            '127.0.0.1',
-            '91.214.85.134',
-            '91.214.85.240',
-        ];
-
-        $userIp = Yii::$app->request->headers->get('x-real-ip');
-        if (!$userIp) {
-            $userIp = Yii::$app->request->userIP;
-        }
-
-        if (!in_array($userIp, $allowedIp, true)) {
-            Yii::$app->request->setBaseUrl('');
-            return $this->redirect(['site/index']);
-        }
-
         return true;
     }
 }
