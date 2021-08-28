@@ -10,12 +10,16 @@ use common\models\db\User;
 use Yii;
 
 /**
+ * Insert translates from files into database table for user voting.
+ *
  * Class TranslateController
  * @package console\controllers
  */
 class TranslateController extends AbstractController
 {
     /**
+     * Insert translates from files into database table for user voting.
+     *
      * @return bool
      */
     public function actionIndex(): bool
