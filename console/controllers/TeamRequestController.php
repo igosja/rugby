@@ -17,12 +17,16 @@ use yii\db\Expression;
 use yii\db\Query;
 
 /**
+ * Processes the team-request queue.
+ *
  * Class TeamRequestController
  * @package console\controllers
  */
 class TeamRequestController extends AbstractController
 {
     /**
+     * Processes the team-request queue.
+     *
      * @return bool
      * @throws Exception
      */
