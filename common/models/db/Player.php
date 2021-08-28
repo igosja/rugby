@@ -5,6 +5,7 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use common\components\helpers\IconHelper;
 use frontend\controllers\AbstractController;
 use rmrevin\yii\fontawesome\FAS;
 use Yii;
@@ -520,13 +521,10 @@ class Player extends AbstractActiveRecord
          */
         $result = [];
         foreach ($styleArray as $item) {
-            $result[] = Html::img(
-                    '/img/style/' . $item->id . '.png',
-                    [
-                        'alt' => $item->name,
-                        'title' => ucfirst($item->name),
-                    ]
-                ) . $item->id;
+            $result[] = IconHelper::style($item->id, [
+                'alt' => $item->name,
+                'title' => ucfirst($item->name),
+            ]);
         }
 
         return implode(' ', $result);
