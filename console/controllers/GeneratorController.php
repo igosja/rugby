@@ -100,12 +100,16 @@ use Exception;
 use yii\helpers\ArrayHelper;
 
 /**
+ * Generate match day.
+ *
  * Class GeneratorController
  * @package console\controllers
  */
 class GeneratorController extends AbstractController
 {
     /**
+     * Generate match day.
+     *
      * @return void
      */
     public function actionIndex(): void
