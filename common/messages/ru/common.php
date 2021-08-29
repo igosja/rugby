@@ -21,7 +21,6 @@ return [
     'mail.password-text.text' => 'Вы запросили восстановление пароля на сайте Виртуальной Регбийной Лиги. Чтобы восстановить пароль перейдите по ссылке {link}',
     'mail.signUp-html.text' => 'Вы успешно зарегистрированы на сайте Виртуальной Регбийной Лиги под логином<strong>{login}</strong>.<br/>Чтобы завершить регистрацию подтвердите свой email по ссылке {link} или введите код <strong>{code}</strong> на странице {page}',
     'mail.signUp-text.text' => 'Вы успешно зарегистрированы на сайте Виртуальной Регбийной Лиги под логином {login}. Чтобы завершить регистрацию подтвердите свой email по ссылке {link} или введите код {code} на странице {page}',
-    'models.db.achievement-player.position.champion' => 'Чемпион',
     'models.db.deal.alert.auto' => 'Команда <span class="strong">{team}</span> сыграла {auto} последних матчей автосоставом.',
     'models.db.deal.alert.cancel' => 'У менеджера <span class="strong">{user}</span> в этом сезоне уже отменяли <span class="strong">{deal} сделок</span>.',
     'models.db.deal.alert.deal' => 'Менеджеры уже заключали <span class="strong">{deal} сделок</span> между собой.',

@@ -281,6 +281,8 @@ return [
     'controllers.site.sign-up.error' => 'Registration failed',
     'controllers.site.sign-up.success' => ' Registration was successful. It remains to confirm your email. ',
     'controllers.site.sign-up.title' => 'Registration',
+    'controllers.social.connect.error' => 'This profile is already in use by another user.',
+    'controllers.social.login.error' => 'User with such an account was not found.',
     'controllers.stadium.build.error.building' => 'The stadium is already under construction.',
     'controllers.stadium.build.error.finance' => 'Building requires <span class = "strong"> {price} </span>.',
     'controllers.stadium.build.message' => 'Increasing the stadium to <span class = "strong"> {capacity} </span> seats will cost <span class = "strong"> {price} </span> and will take <span class = "strong"> {day} </span> days',

@@ -3,6 +3,8 @@
 // TODO refactor
 
 use common\components\helpers\ErrorHelper;
+use frontend\models\forms\OAuthFacebook;
+use frontend\models\forms\OAuthGoogle;
 use frontend\models\forms\SignInForm;
 use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FontAwesome;
@@ -60,7 +62,7 @@ use yii\widgets\ActiveForm;
         try {
             print Html::a(
                 FAB::icon(FontAwesome::_FACEBOOK_SQUARE)->size(FontAwesome::SIZE_2X),
-                'javascript:',
+                OAuthFacebook::getConnectUrl('login'),
                 ['title' => 'Facebook']
             );
         } catch (InvalidConfigException $e) {
@@ -72,7 +74,7 @@ use yii\widgets\ActiveForm;
         try {
             print Html::a(
                 FAB::icon(FontAwesome::_GOOGLE_PLUS_SQUARE)->size(FontAwesome::SIZE_2X),
-                'javascript:',
+                OAuthGoogle::getConnectUrl('login'),
                 ['title' => 'Google+']
             );
         } catch (InvalidConfigException $e) {
