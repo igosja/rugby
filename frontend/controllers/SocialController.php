@@ -72,7 +72,7 @@ class SocialController extends AbstractController
 
         $user = User::find()
             ->where([$field => $oauthId])
-            ->andWhere(['!=', 'user_id', $this->user->id])
+            ->andWhere(['!=', 'id', $this->user->id])
             ->limit(1)
             ->one();
         if ($user) {
