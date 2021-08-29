@@ -5,7 +5,8 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use Yii;
+use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\db\ActiveQuery;
 
 /**
@@ -90,7 +91,7 @@ class AchievementPlayer extends AbstractActiveRecord
                 } else {
                     $color = '#6A3805';
                 }
-                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
+                $result .= ' ' . FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => $color]]);
             }
         } elseif ($this->stage) {
             $result = $this->stage->name;
@@ -100,10 +101,10 @@ class AchievementPlayer extends AbstractActiveRecord
                 } else {
                     $color = '#6A3805';
                 }
-                $result .= ' <i class="fa fa-trophy" style="color: ' . $color . ';"></i>';
+                $result .= ' ' . FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => $color]]);
             }
         } else {
-            $result = Yii::t('common', 'models.db.achievement-player.position.champion') . ' <i class="fa fa-trophy" style="color: gold;"></i>';
+            $result = FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => 'gold']]);
         }
 
         return $result;

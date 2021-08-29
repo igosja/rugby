@@ -6,7 +6,9 @@ use backend\assets\AppAsset;
 use common\components\helpers\ErrorHelper;
 use common\models\queries\SiteQuery;
 use common\widgets\Alert;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -53,40 +55,40 @@ AppAsset::register($this);
 
     $menuItems = [
         [
-            'label' => FAS::icon(FAS::_BELL)
+            'label' => FAR::icon(FontAwesome::_BELL)
                 . ' <span class="badge" id="admin-bell" data-url="'
                 . Url::to(['bell/index'])
                 . '"></span>',
             'items' => [
                 [
-                    'label' => FAS::icon(FAS::_FOOTBALL_BALL) . ' ' . Yii::t('backend', 'views.layout.main.label.team-request') . ' <span class="badge"></span>',
+                    'label' => FAS::icon(FontAwesome::_FOOTBALL_BALL) . ' ' . Yii::t('backend', 'views.layout.main.label.team-request') . ' <span class="badge"></span>',
                     'url' => ['team-request/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SHIELD_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logo') . ' <span class="badge admin-logo"></span>',
+                    'label' => FAS::icon(FontAwesome::_SHIELD_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logo') . ' <span class="badge admin-logo"></span>',
                     'url' => ['logo/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_USER) . ' ' . Yii::t('backend', 'views.layout.main.label.photo') . ' <span class="badge admin-photo"></span>',
+                    'label' => FAR::icon(FontAwesome::_USER) . ' ' . Yii::t('backend', 'views.layout.main.label.photo') . ' <span class="badge admin-photo"></span>',
                     'url' => ['photo/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_COMMENTS) . ' ' . Yii::t('backend', 'views.layout.main.label.support') . ' <span class="badge admin-support"></span>',
+                    'label' => FAR::icon(FontAwesome::_COMMENTS) . ' ' . Yii::t('backend', 'views.layout.main.label.support') . ' <span class="badge admin-support"></span>',
                     'url' => ['support/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_EXCLAMATION_CIRCLE) . ' ' . Yii::t('backend', 'views.layout.main.label.complaint') . ' <span class="badge admin-complaint"></span>',
+                    'label' => FAS::icon(FontAwesome::_EXCLAMATION_CIRCLE) . ' ' . Yii::t('backend', 'views.layout.main.label.complaint') . ' <span class="badge admin-complaint"></span>',
                     'url' => ['complaint/index'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_CHART_BAR) . ' ' . Yii::t('backend', 'views.layout.main.label.vote') . ' <span class="badge admin-vote"></span>',
+                    'label' => FAS::icon(FontAwesome::_CHART_BAR) . ' ' . Yii::t('backend', 'views.layout.main.label.vote') . ' <span class="badge admin-vote"></span>',
                     'url' => ['vote/index'],
                 ],
             ],
             'url' => 'javascript:',
         ],
         [
-            'label' => FAS::icon(FAS::_FILE_ALT),
+            'label' => FAR::icon(FontAwesome::_FILE_ALT),
             'items' => [
                 [
                     'label' => Yii::t('backend', 'views.layout.main.label.log'),
@@ -96,18 +98,18 @@ AppAsset::register($this);
             'url' => 'javascript:',
         ],
         [
-            'label' => FAS::icon(FAS::_COG),
+            'label' => FAS::icon(FontAwesome::_COG),
             'items' => [
                 [
-                    'label' => FAS::icon(FAS::_POWER_OFF) . ' ' . (SiteQuery::getStatus() ? Yii::t('backend', 'views.layout.main.label.turn-off') : Yii::t('backend', 'views.layout.main.label.turn-on')),
+                    'label' => FAS::icon(FontAwesome::_POWER_OFF) . ' ' . (SiteQuery::getStatus() ? Yii::t('backend', 'views.layout.main.label.turn-off') : Yii::t('backend', 'views.layout.main.label.turn-on')),
                     'url' => ['site/status'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SIGNAL) . ' ' . Yii::t('backend', 'views.layout.main.label.version'),
+                    'label' => FAS::icon(FontAwesome::_SIGNAL) . ' ' . Yii::t('backend', 'views.layout.main.label.version'),
                     'url' => ['site/version'],
                 ],
                 [
-                    'label' => FAS::icon(FAS::_SIGN_OUT_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logout'),
+                    'label' => FAS::icon(FontAwesome::_SIGN_OUT_ALT) . ' ' . Yii::t('backend', 'views.layout.main.label.logout'),
                     'url' => ['site/logout'],
                 ],
             ],

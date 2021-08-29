@@ -7,7 +7,8 @@ use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Team;
 use frontend\controllers\AbstractController;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -299,15 +300,17 @@ $controller = Yii::$app->controller;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?= Yii::t('frontend', 'views.team.view.share') ?>:
                 <p>
-                    <?php try {
+                    <?php
+
+                    try {
                         print Html::a(
-                                FAS::icon(FAS::_FACEBOOK)->size(FAS::SIZE_2X),
+                                FAB::icon(FontAwesome::_FACEBOOK)->size(FontAwesome::SIZE_2X),
                                 'https://www.facebook.com/sharer/sharer.php?u=' . Url::to(['site/index'], true),
                                 ['class' => ['no-underline'], 'target' => '_blank']
                             )
                             . ' '
                             . Html::a(
-                                FAS::icon(FAS::_TWITTER)->size(FAS::SIZE_2X),
+                                FAB::icon(FontAwesome::_TWITTER)->size(FontAwesome::SIZE_2X),
                                 'https://twitter.com/intent/tweet?text=' . Yii::t('frontend', 'views.team.view.text') . '&url=' . Url::to(['site/index'], true),
                                 ['class' => ['no-underline'], 'target' => '_blank']
                             );

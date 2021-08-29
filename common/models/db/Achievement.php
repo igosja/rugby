@@ -7,6 +7,7 @@ namespace common\models\db;
 use codeonyii\yii2validators\AtLeastValidator;
 use common\components\AbstractActiveRecord;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\db\ActiveQuery;
 
 /**
@@ -93,7 +94,7 @@ class Achievement extends AbstractActiveRecord
                 } else {
                     $color = '#6A3805';
                 }
-                $result .= ' ' . FAS::icon(FAS::_TROPHY, ['style' => ['color' => $color]]);
+                $result .= ' ' . FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => $color]]);
             }
         } elseif ($this->stage) {
             $result = $this->stage->name;
@@ -103,10 +104,10 @@ class Achievement extends AbstractActiveRecord
                 } else {
                     $color = '#6A3805';
                 }
-                $result .= ' ' . FAS::icon(FAS::_TROPHY, ['style' => ['color' => $color]]);
+                $result .= ' ' . FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => $color]]);
             }
         } else {
-            $result = FAS::icon(FAS::_TROPHY, ['style' => ['color' => 'gold']]);
+            $result = FAS::icon(FontAwesome::_TROPHY, ['style' => ['color' => 'gold']]);
         }
 
         return $result;

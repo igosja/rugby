@@ -11,6 +11,8 @@ use common\models\db\Team;
 use common\models\db\TournamentType;
 use frontend\assets\LineupAsset;
 use frontend\models\forms\GameSend;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -261,8 +263,7 @@ LineupAsset::register($this);
                 <td class="col-30 text-center strong"><?= Yii::t('frontend', 'views.lineup.view.rudeness') ?></td>
                 <td class="col-30 text-center strong">
                     <?= Yii::t('frontend', 'views.lineup.view.style') ?>
-                    <i class="fa fa-question-circle-o"
-                       title="<?= Yii::t('frontend', 'views.lineup.view.tooltip.style') ?>"></i>
+                    <?= FAR::icon(FontAwesome::_QUESTION_CIRCLE, ['title' => Yii::t('frontend', 'views.lineup.view.tooltip.style')]) ?>
                 </td>
             </tr>
             <tr>

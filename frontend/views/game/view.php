@@ -11,7 +11,9 @@ use common\models\db\GameComment;
 use common\models\db\Lineup;
 use common\models\db\User;
 use common\models\db\UserBlock;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -38,7 +40,7 @@ $user = Yii::$app->user->identity;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if (!Yii::$app->user->isGuest) : ?>
             <?= Html::a(
-                FAS::i(FAS::_THUMBS_UP),
+                FAB::i(FontAwesome::_THUMBS_UP),
                 ['vote', 'id' => $game->id, 'vote' => 1],
                 ['title' => Yii::t('frontend', 'views.game.view.vote-up')]
             ) ?>
@@ -46,7 +48,7 @@ $user = Yii::$app->user->identity;
         <span title="<?= Yii::t('frontend', 'views.game.view.title.rating') ?>"><?= $game->rating() ?></span>
         <?php if (!Yii::$app->user->isGuest) : ?>
             <?= Html::a(
-                FAS::i(FAS::_THUMBS_DOWN),
+                FAR::i(FontAwesome::_THUMBS_DOWN),
                 ['vote', 'id' => $game->id, 'vote' => -1],
                 ['title' => Yii::t('frontend', 'views.game.view.vote-down')]
             ) ?>
@@ -107,11 +109,9 @@ $user = Yii::$app->user->identity;
         <?php endif ?>
         <div>
             <?php if ($game->home_plus_minus >= 0): ?>
-                <i class="fa fa-plus-square font-green"
-                   title="<?= Yii::t('frontend', 'views.game.view.point.up') ?>"></i>
+                <?= FAR::icon(FontAwesome::_PLUS_SQUARE, ['title' => Yii::t('frontend', 'views.game.view.point.up')])->addCssClass('font-green') ?>
             <?php else: ?>
-                <i class="fa fa-minus-square font-red"
-                   title="<?= Yii::t('frontend', 'views.game.view.point.down') ?>"></i>
+                <?= FAR::icon(FontAwesome::_MINUS_SQUARE, ['title' => Yii::t('frontend', 'views.game.view.point.down')])->addCssClass('font-red') ?>
             <?php endif ?>
             <?= abs($game->home_plus_minus) ?>
         </div>
@@ -155,11 +155,9 @@ $user = Yii::$app->user->identity;
         <?php endif ?>
         <div>
             <?php if ($game->guest_plus_minus >= 0): ?>
-                <i class="fa fa-plus-square font-green"
-                   title="<?= Yii::t('frontend', 'views.game.view.point.up') ?>"></i>
+                <?= FAR::icon(FontAwesome::_PLUS_SQUARE, ['title' => Yii::t('frontend', 'views.game.view.point.up')])->addCssClass('font-green') ?>
             <?php else: ?>
-                <i class="fa fa-minus-square font-red"
-                   title="<?= Yii::t('frontend', 'views.game.view.point.down') ?>"></i>
+                <?= FAR::icon(FontAwesome::_MINUS_SQUARE, ['title' => Yii::t('frontend', 'views.game.view.point.down')])->addCssClass('font-red') ?>
             <?php endif ?>
             <?= abs($game->guest_plus_minus) ?>
         </div>

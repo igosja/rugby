@@ -8,6 +8,7 @@ use common\components\AbstractActiveRecord;
 use common\components\helpers\IconHelper;
 use frontend\controllers\AbstractController;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Exception;
@@ -422,7 +423,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if ($this->is_injury) {
-            $result = ' ' . FAS::icon(FAS::_AMBULANCE, ['title' => Yii::t('common', 'models.db.player.injury', ['day' => $this->injury_day])]);
+            $result = ' ' . FAS::icon(FontAwesome::_AMBULANCE, ['title' => Yii::t('common', 'models.db.player.injury', ['day' => $this->injury_day])]);
         }
         return $result;
     }
@@ -434,7 +435,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if ($this->loan || $this->transfer) {
-            $result = ' ' . FAS::icon(FAS::_BALANCE_SCALE, ['title' => Yii::t('common', 'models.db.player.deal')]);
+            $result = ' ' . FAS::icon(FontAwesome::_BALANCE_SCALE, ['title' => Yii::t('common', 'models.db.player.deal')]);
         }
         return $result;
     }
@@ -451,7 +452,7 @@ class Player extends AbstractActiveRecord
             } else {
                 $text = Yii::t('common', 'models.db.player.national-type', ['type' => $this->national->nationalType->name]);
             }
-            $result = ' ' . FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.player.national-player') . ' ' . $text]);
+            $result = ' ' . FAS::icon(FontAwesome::_FLAG, ['title' => Yii::t('common', 'models.db.player.national-player') . ' ' . $text]);
         }
         return $result;
     }
@@ -463,7 +464,7 @@ class Player extends AbstractActiveRecord
     {
         $result = '';
         if (self::AGE_READY_FOR_PENSION === $this->age) {
-            $result = ' ' . FAS::icon(FAS::_HOME, ['title' => Yii::t('common', 'models.db.player.pension')]);
+            $result = ' ' . FAS::icon(FontAwesome::_HOME, ['title' => Yii::t('common', 'models.db.player.pension')]);
         }
         return $result;
     }
@@ -562,7 +563,7 @@ class Player extends AbstractActiveRecord
 
         $result = '';
         if ($countTraining) {
-            $result = ' ' . FAS::icon(FAS::_LEVEL_UP_ALT, ['title' => Yii::t('common', 'models.db.player.training')]);
+            $result = ' ' . FAS::icon(FontAwesome::_LEVEL_UP_ALT, ['title' => Yii::t('common', 'models.db.player.training')]);
         }
         return $result;
     }
@@ -588,7 +589,7 @@ class Player extends AbstractActiveRecord
 
         $result = '';
         if ($countScout) {
-            $result = ' ' . FAS::icon(FAS::_SEARCH, ['title' => Yii::t('common', 'models.db.player.scout')]);
+            $result = ' ' . FAS::icon(FontAwesome::_SEARCH, ['title' => Yii::t('common', 'models.db.player.scout')]);
         }
         return $result;
     }

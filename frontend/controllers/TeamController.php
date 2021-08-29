@@ -43,6 +43,8 @@ use frontend\models\preparers\PlayerPrepare;
 use frontend\models\preparers\TeamPrepare;
 use frontend\models\preparers\TransferPrepare;
 use frontend\models\queries\TeamQuery;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
@@ -351,7 +353,7 @@ class TeamController extends AbstractController
             if (($closestGame->home_team_id === $this->myTeam->id && !$closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && !$closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.team.notification.lineup') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup/view', 'id' => $closestGame->id]
                     );
             }
@@ -359,7 +361,7 @@ class TeamController extends AbstractController
             if (($closestGame->home_team_id === $this->myTeam->id && Mood::SUPER === $closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && Mood::SUPER === $closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.team.notification.super') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup/view', 'id' => $closestGame->id]
                     );
             }
@@ -367,7 +369,7 @@ class TeamController extends AbstractController
             if (($closestGame->home_team_id === $this->myTeam->id && Mood::REST === $closestGame->home_mood_id) ||
                 ($closestGame->guest_team_id === $this->myTeam->id && Mood::REST === $closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.team.notification.rest') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup/view', 'id' => $closestGame->id]
                     );
             }
@@ -375,14 +377,14 @@ class TeamController extends AbstractController
 
         if ($user->isVip() && $user->date_vip < time() + 604800) {
             $result[] = Yii::t('frontend', 'controllers.team.notification.vip') . Html::a(
-                    '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                    FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                     ['store/index']
                 );
         }
 
         if ($this->myTeam->free_base_number) {
             $result[] = Yii::t('frontend', 'controllers.team.notification.base') . Html::a(
-                    '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                    FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                     ['base-free/view']
                 );
         }
@@ -397,7 +399,7 @@ class TeamController extends AbstractController
             ->one();
         if ($friendlyInvite) {
             $result[] = Yii::t('frontend', 'controllers.team.notification.friendly') . Html::a(
-                    '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                    FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                     ['friendly/view', 'id' => $friendlyInvite->schedule_id]
                 );
         }
@@ -432,12 +434,12 @@ class TeamController extends AbstractController
                     ->count();
                 if ($electionPresidentApplication) {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.president.candidate') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['president/application']
                         );
                 } else {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.president.application') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['president/application']
                         );
                 }
@@ -456,7 +458,7 @@ class TeamController extends AbstractController
                 }
 
                 $result[] = Yii::t('frontend', 'controllers.team.notification.president.view') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['president/view']
                     );
             }
@@ -490,12 +492,12 @@ class TeamController extends AbstractController
                     ->count();
                 if ($electionPresidentViceApplication) {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.candidate') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['president-vice/application']
                         );
                 } else {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.application') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['president-vice/application']
                         );
                 }
@@ -514,7 +516,7 @@ class TeamController extends AbstractController
                 }
 
                 $result[] = Yii::t('frontend', 'controllers.team.notification.president-vice.view') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['president-vice/view']
                     );
             }
@@ -556,12 +558,12 @@ class TeamController extends AbstractController
                         ->count();
                     if ($electionNationalApplication) {
                         $result[] = Yii::t('frontend', 'controllers.team.notification.coach.candidate') . Html::a(
-                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                 ['national-election/application']
                             );
                     } else {
                         $result[] = Yii::t('frontend', 'controllers.team.notification.coach.application') . Html::a(
-                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                 ['national-election/application']
                             );
                     }
@@ -580,7 +582,7 @@ class TeamController extends AbstractController
                     }
 
                     $result[] = Yii::t('frontend', 'controllers.team.notification.coach.election') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['national-election/view']
                         );
                 }
@@ -616,12 +618,12 @@ class TeamController extends AbstractController
                         ->count();
                     if ($electionNationalViceApplication) {
                         $result[] = Yii::t('frontend', 'controllers.team.notification.vice.candidate') . Html::a(
-                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                 ['national-election-vice/application']
                             );
                     } else {
                         $result[] = Yii::t('frontend', 'controllers.team.notification.vice.application') . Html::a(
-                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                 ['national-election-vice/application']
                             );
                     }
@@ -640,7 +642,7 @@ class TeamController extends AbstractController
                     }
 
                     $result[] = Yii::t('frontend', 'controllers.team.notification.vice.election') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['national-election-vice/view']
                         );
                 }
@@ -690,7 +692,7 @@ class TeamController extends AbstractController
                 ->one();
             if ($transfer) {
                 $result[] = Yii::t('frontend', 'controllers.team.notification.deal') . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['transfer/view', 'id' => $transfer->id]
                     );
             } else {
@@ -719,7 +721,7 @@ class TeamController extends AbstractController
                     ->one();
                 if ($loan) {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.deal') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['loan/view', 'id' => $loan->id]
                         );
                 } else {
@@ -743,7 +745,7 @@ class TeamController extends AbstractController
                         ->one();
                     if ($transfer) {
                         $result[] = Yii::t('frontend', 'controllers.team.notification.deal.minus') . Html::a(
-                                '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                 ['transfer/view', 'id' => $transfer->id]
                             );
                     } else {
@@ -767,7 +769,7 @@ class TeamController extends AbstractController
                             ->one();
                         if ($loan) {
                             $result[] = Yii::t('frontend', 'controllers.team.notification.deal.minus') . Html::a(
-                                    '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                                    FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                                     ['loan/view', 'id' => $loan->id]
                                 );
                         }
@@ -792,7 +794,7 @@ class TeamController extends AbstractController
                 if (($closestGame->home_national_id === $this->myNationalOrVice->id && !$closestGame->home_mood_id) ||
                     ($closestGame->guest_national_id === $this->myNationalOrVice->id && !$closestGame->guest_mood_id)) {
                     $result[] = Yii::t('frontend', 'controllers.team.notification.lineup.national') . Html::a(
-                            '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['lineup-national/view', 'id' => $closestGame->id]
                         );
                 }
