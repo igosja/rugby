@@ -5,7 +5,7 @@
 return [
     'components' => [
         'urlManager' => [
-            'hostInfo' => 'http://vrol.local/',
+            'hostInfo' => 'https://virtual-rugby.com/',
         ],
     ],
 ];
