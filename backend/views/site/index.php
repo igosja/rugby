@@ -5,7 +5,9 @@
 use common\components\helpers\ErrorHelper;
 use common\models\db\Payment;
 use miloschuman\highcharts\Highcharts;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -53,7 +55,7 @@ use yii\web\View;
                 <?= Html::a(
                     '<div class="panel-footer">
                         <span class="pull-left">' . Yii::t('backend', 'views.site.index.link.details') . '</span>
-                        <span class="pull-right">' . FAS::icon(FAS::_ARROW_CIRCLE_RIGHT) . '</span>
+                        <span class="pull-right">' . FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT) . '</span>
                         <div class="clearfix"></div>
                     </div>',
                     $panel['url']
@@ -66,7 +68,7 @@ use yii\web\View;
     <div class="col-lg-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?= FAS::icon(FAS::_MONEY_BILL_ALT) ?> <?= Yii::t('backend', 'views.site.index.payment') ?>
+                <?= FAR::icon(FontAwesome::_MONEY_BILL_ALT) ?> <?= Yii::t('backend', 'views.site.index.payment') ?>
             </div>
             <div class="panel-body">
                 <?php
@@ -138,7 +140,7 @@ use yii\web\View;
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?= FAS::icon(FAS::_CHECK_CIRCLE) ?> <?= Yii::t('backend', 'views.site.index.check') ?>
+                <?= FAR::icon(FontAwesome::_CHECK_CIRCLE) ?> <?= Yii::t('backend', 'views.site.index.check') ?>
                 (<?= $countModeration ?>)
             </div>
             <div class="panel-body">

@@ -9,6 +9,8 @@ use common\models\db\FriendlyInviteStatus;
 use common\models\db\FriendlyStatus;
 use common\models\db\Schedule;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -111,11 +113,11 @@ use yii\helpers\Html;
                 'value' => static function (FriendlyInvite $model) {
                     if (FriendlyInviteStatus::NEW_ONE === $model->friendly_invite_status_id) {
                         return Html::a(
-                                '<i class="fa fa-check-circle"></i>',
+                                FAR::icon(FontAwesome::_CHECK_CIRCLE),
                                 ['accept', 'id' => $model->id],
                                 ['title' => Yii::t('frontend', 'views.friendly.view.link.accept')]
                             ) . ' ' . Html::a(
-                                '<i class="fa fa-times-circle"></i>',
+                                FAR::icon(FontAwesome::_TIMES_CIRCLE),
                                 ['cancel', 'id' => $model->id],
                                 ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
                             );
@@ -194,7 +196,7 @@ use yii\helpers\Html;
                 'value' => static function (FriendlyInvite $model) {
                     if (FriendlyInviteStatus::NEW_ONE === $model->friendly_invite_status_id) {
                         return Html::a(
-                            '<i class="fa fa-times-circle"></i>',
+                            FAR::icon(FontAwesome::_TIMES_CIRCLE),
                             ['cancel', 'id' => $model->id],
                             ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
                         );
@@ -244,7 +246,7 @@ use yii\helpers\Html;
                 'headerOptions' => ['class' => 'col-5'],
                 'value' => static function (Team $model) {
                     return Html::a(
-                        '<i class="fa fa-check-circle"></i>',
+                        FAR::icon(FontAwesome::_CHECK_CIRCLE),
                         ['send', 'id' => Yii::$app->request->get('id'), 'teamId' => $model->id],
                         ['title' => Yii::t('frontend', 'views.friendly.view.link.send')]
                     );

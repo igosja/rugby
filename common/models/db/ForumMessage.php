@@ -5,7 +5,9 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -132,7 +134,7 @@ class ForumMessage extends AbstractActiveRecord
         $isUser = (UserRole::USER === $user->user_role_id);
         $linkArray = [
             Html::a(
-                FAS::icon(FAS::_QUOTE_RIGHT),
+                FAS::icon(FontAwesome::_QUOTE_RIGHT),
                 'javascript:',
                 ['class' => 'forum-quote', 'data' => ['text' => $this->text], 'title' => Yii::t('common', 'models.db.forum-message.links.quote')]
             ),
@@ -140,7 +142,7 @@ class ForumMessage extends AbstractActiveRecord
 
         if (($user->id === $this->user_id && !$this->date_blocked) || !$isUser) {
             $linkArray[] = Html::a(
-                FAS::icon(FAS::_PENCIL_ALT),
+                FAS::icon(FontAwesome::_PENCIL_ALT),
                 ['message/edit', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.edit')]
             );
@@ -148,7 +150,7 @@ class ForumMessage extends AbstractActiveRecord
 
         if ($user->id === $this->user_id || !$isUser) {
             $linkArray[] = Html::a(
-                FAS::icon(FAS::_TRASH_ALT),
+                FAR::icon(FontAwesome::_TRASH_ALT),
                 ['message/delete', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.delete')]
             );
@@ -156,7 +158,7 @@ class ForumMessage extends AbstractActiveRecord
 
         if (!$this->complaints) {
             $linkArray[] = Html::a(
-                FAS::icon(FAS::_EXCLAMATION_TRIANGLE),
+                FAS::icon(FontAwesome::_EXCLAMATION_TRIANGLE),
                 ['message/complaint', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.complaint')]
             );
@@ -164,17 +166,17 @@ class ForumMessage extends AbstractActiveRecord
 
         if (!$isUser) {
             $linkArray[] = Html::a(
-                FAS::icon(FAS::_ARROW_CIRCLE_RIGHT),
+                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                 ['message/move', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.move')]
             );
 
             if (!$this->date_blocked) {
                 $text = Yii::t('common', 'models.db.forum-message.links.block');
-                $icon = FAS::_LOCK_OPEN;
+                $icon = FontAwesome::_LOCK_OPEN;
             } else {
                 $text = Yii::t('common', 'models.db.forum-message.links.unblock');
-                $icon = FAS::_LOCK;
+                $icon = FontAwesome::_LOCK;
             }
             $linkArray[] = Html::a(
                 FAS::icon($icon),

@@ -6,7 +6,8 @@ use common\components\helpers\FormatHelper;
 use common\models\db\TransferComment;
 use common\models\db\User;
 use common\models\db\UserRole;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -27,7 +28,7 @@ $identity = Yii::$app->user->identity;
     <?= FormatHelper::asDateTime($model->date) ?>
     <?php if (!Yii::$app->user->isGuest && UserRole::ADMIN === $identity->user_role_id) : ?>
         <?= Html::a(
-            FAS::icon(FAS::_TRASH),
+            FAR::icon(FontAwesome::_TRASH_ALT),
             ['delete-comment', 'id' => $model->id, 'transferId' => $model->transfer_id],
             ['title' => Yii::t('frontend', 'views.transfer.comment.link.delete')]
         ) ?>

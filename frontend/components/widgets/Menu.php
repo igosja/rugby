@@ -388,7 +388,7 @@ class Menu extends Widget
                 'url' => ['/transfer/index'],
             ],
             self::ITEM_TRANSLATE => [
-                'css' => $controller->user->is_translation_mode ? '' : 'hidden',
+                'css' => $controller->user && $controller->user->is_translation_mode ? '' : 'hidden',
                 'label' => Yii::t('frontend', 'components.widgets.menu.translate'),
                 'url' => ['/translate/index'],
             ],

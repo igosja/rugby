@@ -281,6 +281,8 @@ return [
     'controllers.site.sign-up.error' => 'Не удалось провести регистрацию',
     'controllers.site.sign-up.success' => 'Регистрация прошла успешно. Осталось подтвердить ваш email.',
     'controllers.site.sign-up.title' => 'Регистрация',
+    'controllers.social.connect.error' => 'Этот профиль уже используется другим пользователем',
+    'controllers.social.login.error' => 'Пользователь с такой учётной записью не найден.',
     'controllers.stadium.build.error.building' => 'На стадионе уже идет строительство.',
     'controllers.stadium.build.error.finance' => 'Для строительства нужно <span class="strong">{price}</span>.',
     'controllers.stadium.build.message' => 'Увеличение стадиона до <span class="strong">{capacity}</span> мест будет стоить <span class="strong">{price}</span> и займет <span class="strong">{day}</span> дн.',

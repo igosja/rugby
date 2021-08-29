@@ -5,6 +5,8 @@
 use common\components\helpers\ErrorHelper;
 use common\models\db\Federation;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -54,13 +56,13 @@ print $this->render('_federation', [
                 'value' => static function (Team $model) {
                     if ($model->recommendation) {
                         $result = Html::a(
-                            '<i class="fa fa-minus-circle"></i>',
+                            FAR::icon(FontAwesome::_TIMES_CIRCLE),
                             ['recommendation-delete', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
                             ['title' => Yii::t('frontend', 'views.federation.free-team.link.delete')]
                         );
                     } else {
                         $result = Html::a(
-                            '<i class="fa fa-plus-circle"></i>',
+                            FAR::icon(FontAwesome::_CHECK_CIRCLE),
                             ['recommendation-create', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
                             ['title' => Yii::t('frontend', 'views.federation.free-team.link.create')]
                         );

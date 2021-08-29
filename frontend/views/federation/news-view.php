@@ -10,7 +10,9 @@ use common\models\db\NewsComment;
 use common\models\db\User;
 use common\models\db\UserBlock;
 use common\models\db\UserBlockType;
+use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -44,12 +46,12 @@ print $this->render('_federation', [
         <?php if (!Yii::$app->user->isGuest && $news->user_id === Yii::$app->user->id) : ?>
             <span class="text-size-3 font-grey">
                 <?= Html::a(
-                    FAS::icon(FAS::_PENCIL_ALT),
+                    FAS::icon(FontAwesome::_PENCIL_ALT),
                     ['news-update', 'id' => $news->federation_id, 'newsId' => $news->id]
                 ) ?>
                 |
                 <?= Html::a(
-                    FAS::icon(FAS::_TRASH),
+                    FAB::icon(FontAwesome::_TRASH_ALT),
                     ['news-delete', 'id' => $news->federation_id, 'newsId' => $news->id]
                 ) ?>
             </span>

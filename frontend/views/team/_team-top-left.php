@@ -8,7 +8,9 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 ?>
@@ -40,7 +42,7 @@ use yii\helpers\Html;
                 <?= Yii::t('frontend', 'views.team.team-top-left.manager') ?>
                 <?php if ($team->user->canDialog()) : ?>
                     <?= Html::a(
-                        FAS::icon(FAS::_ENVELOPE),
+                        FAR::icon(FontAwesome::_ENVELOPE),
                         ['messenger/view', 'id' => $team->user->id],
                         ['title' => Yii::t('frontend', 'views.team.team-top-left.title.messenger')]
                     ) ?>
@@ -65,7 +67,7 @@ use yii\helpers\Html;
                     <?= Yii::t('frontend', 'views.team.team-top-left.vice') ?>
                     <?php if ($team->viceUser->canDialog()) : ?>
                         <?= Html::a(
-                            FAS::icon(FAS::_ENVELOPE),
+                            FAR::icon(FontAwesome::_ENVELOPE),
                             ['messenger/view', 'id' => $team->viceUser->id],
                             ['title' => Yii::t('frontend', 'views.team.team-top-left.title.messenger')]
                         ) ?>
@@ -84,7 +86,7 @@ use yii\helpers\Html;
                     <?= $team->viceUser->getUserLink(['class' => 'strong']) ?>
                     <?php if ($team->canViceLeave()) : ?>
                         <?= Html::a(
-                            FAS::icon(FAS::_SIGN_OUT_ALT),
+                            FAS::icon(FontAwesome::_SIGN_OUT_ALT),
                             ['team/vice-leave', 'id' => $team->team_id],
                             ['title' => Yii::t('frontend', 'views.team.team-top-left.title.vice-leave')]
                         ) ?>
@@ -99,12 +101,12 @@ use yii\helpers\Html;
                 <strong><?= Yii::$app->formatter->asInteger($team->stadium->capacity) ?></strong>
                 <?php if ($team->myTeam()) : ?>
                     <?= Html::a(
-                        FAS::icon(FAS::_SEARCH),
+                        FAS::icon(FontAwesome::_SEARCH),
                         ['stadium/increase']
                     ) ?>
                 <?php endif ?>
                 <?php if ($team->buildingStadium) : ?>
-                    <?= FAS::icon(FAS::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building-stadium')]) ?>
+                    <?= FAS::icon(FontAwesome::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building-stadium')]) ?>
                 <?php endif ?>
             </div>
         </div>
@@ -117,11 +119,11 @@ use yii\helpers\Html;
                     'used' => $team->baseUsed(),
                 ]) ?>
                 <?= Html::a(
-                    FAS::icon(FAS::_SEARCH),
+                    FAS::icon(FontAwesome::_SEARCH),
                     ['base/view', 'id' => $team->id]
                 ) ?>
                 <?php if ($team->buildingBase) : ?>
-                    <?= FAS::icon(FAS::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building.base')]) ?>
+                    <?= FAS::icon(FontAwesome::_COG, ['title' => Yii::t('frontend', 'views.team.team-top-left.title.building.base')]) ?>
                 <?php endif ?>
             </div>
         </div>

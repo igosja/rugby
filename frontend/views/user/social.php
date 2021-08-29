@@ -5,7 +5,8 @@
 use common\models\db\User;
 use frontend\models\forms\OAuthFacebook;
 use frontend\models\forms\OAuthGoogle;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -36,7 +37,7 @@ print $this->render('//user/_top');
 </div>
 <div class="row margin-top-small">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        <?= FAS::icon(FAS::_FACEBOOK_SQUARE) ?>
+        <?= FAB::icon(FontAwesome::_FACEBOOK_SQUARE) ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if ($model->social_facebook_id) : ?>
@@ -58,7 +59,7 @@ print $this->render('//user/_top');
 </div>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        <?= FAS::icon(FAS::_GOOGLE_PLUS_SQUARE) ?>
+        <?= FAB::icon(FontAwesome::_GOOGLE_PLUS_SQUARE) ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if ($model->social_google_id) : ?>

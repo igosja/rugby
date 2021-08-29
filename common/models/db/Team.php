@@ -8,7 +8,8 @@ use common\components\AbstractActiveRecord;
 use common\components\helpers\ErrorHelper;
 use Exception;
 use frontend\controllers\AbstractController;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Html;
@@ -870,7 +871,7 @@ class Team extends AbstractActiveRecord
     {
         $result = '';
         if (!$this->user_id) {
-            $result = FAS::icon(FAS::_FLAG, ['title' => Yii::t('common', 'models.db.team.icon-free-team.title')]) . ' ';
+            $result = FAR::icon(FontAwesome::_FLAG, ['title' => Yii::t('common', 'models.db.team.icon-free-team.title')]) . ' ';
         }
         return $result;
     }

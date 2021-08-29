@@ -6,7 +6,8 @@ use common\components\helpers\ErrorHelper;
 use common\components\helpers\FormatHelper;
 use common\models\db\Team;
 use common\models\db\TeamRequest;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -36,7 +37,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1'],
                 'value' => static function (TeamRequest $model) {
                     return Html::a(
-                        FAS::icon(FAS::_TIMES_CIRCLE),
+                        FAR::icon(FontAwesome::_TIMES_CIRCLE),
                         ['delete', 'id' => $model->id],
                         ['title' => Yii::t('frontend', 'views.team-change.index.link.delete')]
                     );
@@ -85,7 +86,7 @@ use yii\web\View;
                 'headerOptions' => ['class' => 'col-1'],
                 'value' => static function (Team $model) {
                     return Html::a(
-                        FAS::icon(FAS::_CHECK_CIRCLE),
+                        FAR::icon(FontAwesome::_CHECK_CIRCLE),
                         ['confirm', 'id' => $model->id],
                         ['title' => Yii::t('frontend', 'views.team-change.index.link.confirm')]
                     );

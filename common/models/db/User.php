@@ -6,7 +6,10 @@ namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
 use common\components\helpers\FormatHelper;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -318,10 +321,10 @@ class User extends AbstractActiveRecord implements IdentityInterface
             ->limit(1)
             ->one();
         if ($blacklist) {
-            return FAS::icon(FAS::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.remove')]);
+            return FAS::icon(FontAwesome::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.remove')]);
         }
 
-        return FAS::icon(FAS::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.add')]);
+        return FAB::icon(FontAwesome::_FILE_ALT, ['title' => Yii::t('common', 'models.db.user.blacklist.add')]);
     }
 
     /**
@@ -441,7 +444,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
     {
         $result = '';
         if ($this->isVip()) {
-            $result = ' ' . FAS::icon(FAS::_STAR, ['title' => 'vip']);
+            $result = ' ' . FAR::icon(FontAwesome::_STAR, ['title' => 'vip']);
         }
         return $result;
     }

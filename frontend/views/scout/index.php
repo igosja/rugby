@@ -7,6 +7,8 @@ use common\components\helpers\FormatHelper;
 use common\models\db\Player;
 use common\models\db\Scout;
 use common\models\db\Team;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -110,7 +112,7 @@ use yii\web\View;
                         <td class="text-center"><?= $item->percent ?>%</td>
                         <td class="text-center">
                             <?= Html::a(
-                                '<i class="fa fa-times-circle"></i>',
+                                FAR::icon(FontAwesome::_TIMES_CIRCLE),
                                 ['cancel', 'id' => $item->id],
                                 ['title' => Yii::t('frontend', 'views.scout.index.link.cancel')]
                             ) ?>

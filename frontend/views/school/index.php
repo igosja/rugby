@@ -6,6 +6,8 @@ use common\components\helpers\ErrorHelper;
 use common\models\db\School;
 use common\models\db\Team;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\web\View;
@@ -112,7 +114,7 @@ use yii\web\View;
                         <td class="text-center"><?= $item->day ?></td>
                         <td class="text-center">
                             <?= Html::a(
-                                '<i class="fa fa-times-circle"></i>',
+                                FAR::icon(FontAwesome::_TIMES_CIRCLE),
                                 ['cancel', 'id' => $item->id],
                                 ['title' => Yii::t('frontend', 'views.school.link.cancel')]
                             ) ?>

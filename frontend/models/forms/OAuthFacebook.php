@@ -4,6 +4,7 @@
 
 namespace frontend\models\forms;
 
+use frontend\controllers\SocialController;
 use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -14,8 +15,8 @@ use yii\helpers\Url;
  */
 class OAuthFacebook
 {
-    private const ID = '2534206653296281';
-    private const SECRET = '896771d7bda40410d95c63a63c55a4dc';
+    private const ID = '373890474144474';
+    private const SECRET = '57712f90d5f35d63ccea93a5bdd7f280';
     private const URL_AUTH = 'https://www.facebook.com/dialog/oauth';
     private const URL_TOKEN = 'https://graph.facebook.com/oauth/access_token';
     private const URL_USER_INFO = 'https://graph.facebook.com/me';
@@ -28,7 +29,7 @@ class OAuthFacebook
     {
         $params = [
             'client_id' => self::ID,
-            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => 'fb'], true),
+            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => SocialController::FACEBOOK], true),
             'response_type' => 'code',
         ];
 
@@ -49,7 +50,7 @@ class OAuthFacebook
 
         $params = [
             'client_id' => self::ID,
-            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => 'fb'], true),
+            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => SocialController::FACEBOOK], true),
             'client_secret' => self::SECRET,
             'code' => $code,
         ];
