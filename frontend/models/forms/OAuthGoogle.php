@@ -4,6 +4,7 @@
 
 namespace frontend\models\forms;
 
+use frontend\controllers\SocialController;
 use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -14,9 +15,9 @@ use yii\helpers\Url;
  */
 class OAuthGoogle
 {
-    private const ID = '87690355653-hotu889cp6n9d56b4e4ojff61vu9kh02.apps.googleusercontent.com';
+    private const ID = '258341387058-9u59vrr5g1o87po7166dti4v3dm9oggd.apps.googleusercontent.com';
     private const SCOPE = 'https://www.googleapis.com/auth/userinfo.profile';
-    private const SECRET = '44i5c35zLgv8Lc9onai0R0VI';
+    private const SECRET = 'ceAoGhaI8pf2wehDg0Eoe9pH';
     private const URL_AUTH = 'https://accounts.google.com/o/oauth2/auth';
     private const URL_TOKEN = 'https://accounts.google.com/o/oauth2/token';
     private const URL_USER_INFO = 'https://www.googleapis.com/oauth2/v1/userinfo';
@@ -28,7 +29,7 @@ class OAuthGoogle
     public static function getConnectUrl(string $redirectUrl): string
     {
         $params = [
-            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => 'gl'], true),
+            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => SocialController::GOOGLE], true),
             'response_type' => 'code',
             'client_id' => self::ID,
             'scope' => self::SCOPE,
@@ -52,7 +53,7 @@ class OAuthGoogle
         $params = [
             'client_id' => self::ID,
             'client_secret' => self::SECRET,
-            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => 'gl'], true),
+            'redirect_uri' => Url::to(['social/' . $redirectUrl, 'id' => SocialController::GOOGLE], true),
             'grant_type' => 'authorization_code',
             'code' => $code,
         ];

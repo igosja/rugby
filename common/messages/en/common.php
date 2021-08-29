@@ -21,7 +21,6 @@ return [
     'mail.password-text.text' => 'You have requested a password recovery on the Virtual Rugby League website. To recover your password, follow the link {link} ',
     'mail.signUp-html.text' => 'You have successfully registered on the Virtual Rugby League website under the login <strong> {login} </strong>. <br/> To complete the registration, confirm your email using the {link} link or enter code <strong> {code} </strong> on the page {page} ',
     'mail.signUp-text.text' => 'You have successfully registered on the website of the Virtual Rugby League under the login {login}. To complete the registration, confirm your email using the {link} or enter the code {code} on the {page} ',
-    'models.db.achievement-player.position.champion' => 'Champion',
     'models.db.deal.alert.auto' => 'The <span class = "strong"> {team} </span> has played the last {auto} autos.',
     'models.db.deal.alert.cancel' => 'The manager of <span class = "strong"> {user} </span> has already canceled <span class = "strong"> {deal} deals this season </ span>. ',
     'models.db.deal.alert.deal' => 'Managers have already concluded <span class = "strong"> {deal} deals </span> with each other.',
