@@ -45,7 +45,7 @@ class TranslateController extends AbstractController
                         'message' => $message
                     ])
                     ->limit(1)
-                    ->all();
+                    ->one();
                 if (!$translateKey) {
                     $translateKey = new TranslateKey();
                     $translateKey->category = $category;
