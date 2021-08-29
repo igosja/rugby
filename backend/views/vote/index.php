@@ -6,7 +6,8 @@ use backend\models\search\VoteSearch;
 use common\components\helpers\ErrorHelper;
 use common\models\db\Vote;
 use common\models\db\VoteStatus;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
@@ -47,7 +48,7 @@ use yii\web\View;
                 'value' => static function (Vote $model): string {
                     $result = '';
                     if (VoteStatus::NEW === $model->vote_status_id) {
-                        $result .= FAS::icon(FAS::_CLOCK) . ' ';
+                        $result .= FAR::icon(FontAwesome::_CLOCK) . ' ';
                     }
                     $result .= $model->text;
                     return $result;

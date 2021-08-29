@@ -16,6 +16,8 @@ use common\models\db\Position;
 use common\models\db\Season;
 use Exception;
 use frontend\models\forms\NationalPlayer;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -203,7 +205,7 @@ class NationalController extends AbstractController
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && !$closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && !$closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.national.notification.lineup') . ' ' . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
             }
@@ -211,7 +213,7 @@ class NationalController extends AbstractController
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && Mood::SUPER === $closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && Mood::SUPER === $closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.national.notification.super') . ' ' . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
             }
@@ -219,7 +221,7 @@ class NationalController extends AbstractController
             if (($closestGame->home_national_id === $this->myNationalOrVice->id && Mood::REST === $closestGame->home_mood_id) ||
                 ($closestGame->guest_national_id === $this->myNationalOrVice->id && Mood::REST === $closestGame->guest_mood_id)) {
                 $result[] = Yii::t('frontend', 'controllers.national.notification.rest') . ' ' . Html::a(
-                        '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>',
+                        FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                         ['lineup-national/view', 'id' => $closestGame->id]
                     );
             }

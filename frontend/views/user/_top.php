@@ -4,7 +4,8 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\User;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -40,7 +41,7 @@ $user = User::find()
                         <span class="strong"><?= Html::encode($user->login) ?></span>
                         <?php if ($user->canDialog()) : ?>
                             <?= Html::a(
-                                FAS::icon(FAS::_ENVELOPE),
+                                FAR::icon(FontAwesome::_ENVELOPE),
                                 ['messenger/view', 'id' => $user->id]
                             ) ?>
                             <?= Html::a(
@@ -131,7 +132,7 @@ $user = User::find()
                     </span>
                     <span class="strong">
                         <?= Html::a(
-                            FAS::icon(FAS::_ARROW_CIRCLE_RIGHT),
+                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['user/social']
                         ) ?>
                     </span>

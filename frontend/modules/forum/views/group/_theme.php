@@ -6,7 +6,8 @@ use common\components\helpers\FormatHelper;
 use common\models\db\ForumTheme;
 use common\models\db\User;
 use common\models\db\UserRole;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -26,7 +27,7 @@ use yii\helpers\Html;
             <?php if ($user && UserRole::ADMIN === $user->user_role_id) : ?>
                 |
                 <?= Html::a(
-                    FAS::icon(FAS::_TRASH),
+                    FAB::icon(FontAwesome::_TRASH),
                     ['theme/delete', 'id' => $model->id],
                     ['class' => 'font-grey']
                 ) ?>

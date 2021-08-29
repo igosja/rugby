@@ -4,7 +4,9 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\News;
+use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -17,13 +19,13 @@ use yii\helpers\Html;
     <?php if (!Yii::$app->user->isGuest && $model->user_id === Yii::$app->user->id) : ?>
         <span class="text-size-3 font-grey">
             <?= Html::a(
-                FAS::icon(FAS::_PENCIL_ALT),
+                FAS::icon(FontAwesome::_PENCIL_ALT),
                 ['news-update', 'id' => $model->federation_id, 'newsId' => $model->id],
                 ['title' => Yii::t('frontend', 'views.federation.news.link.edit')]
             ) ?>
             |
             <?= Html::a(
-                FAS::icon(FAS::_TRASH),
+                FAB::icon(FontAwesome::_TRASH_ALT),
                 ['news-delete', 'id' => $model->federation_id, 'newsId' => $model->id],
                 ['title' => Yii::t('frontend', 'views.federation.news.link.delete')]
             ) ?>

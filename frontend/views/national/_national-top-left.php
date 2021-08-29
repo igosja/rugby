@@ -8,7 +8,8 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\National;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 ?>
@@ -29,7 +30,7 @@ use yii\helpers\Html;
                 <?= Yii::t('frontend', 'views.national.national-top-right.manager') ?>:
                 <?php if ($national->user->canDialog()) : ?>
                     <?= Html::a(
-                        FAS::icon(FAS::_ENVELOPE),
+                        FAB::icon(FontAwesome::_ENVELOPE),
                         ['messenger/view', 'id' => $national->user->id]
                     ) ?>
                 <?php endif ?>
@@ -63,7 +64,7 @@ use yii\helpers\Html;
                     <?= Yii::t('frontend', 'views.national.national-top-right.vice') ?>:
                     <?php if ($national->viceUser->canDialog()) : ?>
                         <?= Html::a(
-                            FAS::icon(FAS::_ENVELOPE),
+                            FAB::icon(FontAwesome::_ENVELOPE),
                             ['messenger/view', 'id' => $national->viceUser->id]
                         ) ?>
                     <?php endif ?>

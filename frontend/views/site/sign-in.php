@@ -4,7 +4,8 @@
 
 use common\components\helpers\ErrorHelper;
 use frontend\models\forms\SignInForm;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -58,7 +59,7 @@ use yii\widgets\ActiveForm;
 
         try {
             print Html::a(
-                FAS::icon(FAS::_FACEBOOK_SQUARE)->size(FAS::SIZE_2X),
+                FAB::icon(FontAwesome::_FACEBOOK_SQUARE)->size(FontAwesome::SIZE_2X),
                 'javascript:',
                 ['title' => 'Facebook']
             );
@@ -70,7 +71,7 @@ use yii\widgets\ActiveForm;
 
         try {
             print Html::a(
-                FAS::icon(FAS::_GOOGLE_PLUS_SQUARE)->size(FAS::SIZE_2X),
+                FAB::icon(FontAwesome::_GOOGLE_PLUS_SQUARE)->size(FontAwesome::SIZE_2X),
                 'javascript:',
                 ['title' => 'Google+']
             );

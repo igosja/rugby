@@ -4,6 +4,9 @@
 
 use common\models\db\LineupTemplate;
 use frontend\controllers\AbstractController;
+use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -28,7 +31,7 @@ $controller = Yii::$app->controller;
                 </td>
                 <td class="text-center">
                     <?= Html::a(
-                        '<i class="fa fa-upload" aria-hidden="true" title="' . Yii::t('frontend', 'views.lineup.template-table.link.load') . '"></i>',
+                        FAS::icon(FontAwesome::_UPLOAD, ['title' => Yii::t('frontend', 'views.lineup.template-table.link.load')]),
                         'javascript:',
                         [
                             'class' => 'template-load',
@@ -37,7 +40,7 @@ $controller = Yii::$app->controller;
                     ) ?>
                     <?php if ($lineupTemplate->team_id === $controller->myTeam->id) : ?>
                         <?= Html::a(
-                            '<i class="fa fa-trash-o" aria-hidden="true" title="' . Yii::t('frontend', 'views.lineup.template-table.link.delete') . '"></i>',
+                            FAR::icon(FontAwesome::_TRASH_ALT, ['title' => Yii::t('frontend', 'views.lineup.template-table.link.delete')]),
                             'javascript:',
                             [
                                 'class' => 'template-delete',

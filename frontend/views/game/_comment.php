@@ -6,7 +6,8 @@ use common\components\helpers\FormatHelper;
 use common\models\db\GameComment;
 use common\models\db\User;
 use common\models\db\UserRole;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 /**
@@ -28,7 +29,7 @@ $identity = Yii::$app->user->identity;
         <?= FormatHelper::asDateTime($model->date) ?>
         <?php if (!Yii::$app->user->isGuest && UserRole::ADMIN === $identity->user_role_id) : ?>
             <?= Html::a(
-                FAS::icon(FAS::_TRASH),
+                FAB::icon(FontAwesome::_TRASH_ALT),
                 ['delete-comment', 'id' => $model->id, 'gameId' => $model->game_id],
                 ['title' => Yii::t('frontend', 'views.game.comment.link.delete')]
             ) ?>

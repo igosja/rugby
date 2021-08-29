@@ -6,7 +6,7 @@ use common\components\helpers\FormatHelper;
 use common\models\db\NewsComment;
 use common\models\db\User;
 use common\models\db\UserRole;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
@@ -28,7 +28,7 @@ $identity = Yii::$app->user->identity;
     <?= FormatHelper::asDateTime($model->date) ?>
     <?php if (!Yii::$app->user->isGuest && UserRole::ADMIN === $identity->user_role_id) : ?>
         <?= Html::a(
-            FAS::icon(FontAwesome::_TRASH),
+            FAB::icon(FontAwesome::_TRASH_ALT),
             ['delete-news-comment', 'id' => $model->id, 'newsId' => $model->news_id],
             ['title' => Yii::t('frontend', 'views.federation.comment.link.delete')]
         ) ?>
