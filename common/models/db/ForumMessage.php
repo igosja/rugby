@@ -166,7 +166,7 @@ class ForumMessage extends AbstractActiveRecord
 
         if (!$isUser) {
             $linkArray[] = Html::a(
-                FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
+                FAS::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                 ['message/move', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.move')]
             );

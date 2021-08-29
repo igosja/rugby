@@ -55,7 +55,7 @@ use yii\web\View;
                 <?= Html::a(
                     '<div class="panel-footer">
                         <span class="pull-left">' . Yii::t('backend', 'views.site.index.link.details') . '</span>
-                        <span class="pull-right">' . FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT) . '</span>
+                        <span class="pull-right">' . FAS::icon(FontAwesome::_ARROW_CIRCLE_RIGHT) . '</span>
                         <div class="clearfix"></div>
                     </div>',
                     $panel['url']

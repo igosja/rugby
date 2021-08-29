@@ -71,7 +71,6 @@ class SocialController extends AbstractController
         }
 
         $user = User::find()
-            ->select(['user_id'])
             ->where([$field => $oauthId])
             ->andWhere(['!=', 'user_id', $this->user->id])
             ->limit(1)
@@ -141,7 +140,7 @@ class SocialController extends AbstractController
             ->limit(1)
             ->one();
         if (!$user) {
-            $this->setErrorFlash(Yii::t('frontend', 'controllers.social.connect.error'));
+            $this->setErrorFlash(Yii::t('frontend', 'controllers.social.login.error'));
             return $this->redirect(['site/sign-in']);
         }
 

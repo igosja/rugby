@@ -5,6 +5,7 @@
 use common\components\helpers\FormatHelper;
 use common\models\db\User;
 use rmrevin\yii\fontawesome\FAR;
+use rmrevin\yii\fontawesome\FAS;
 use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
@@ -132,7 +133,7 @@ $user = User::find()
                     </span>
                     <span class="strong">
                         <?= Html::a(
-                            FAR::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
+                            FAS::icon(FontAwesome::_ARROW_CIRCLE_RIGHT),
                             ['user/social']
                         ) ?>
                     </span>
