@@ -142,7 +142,7 @@ class SocialController extends AbstractController
             ->one();
         if (!$user) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.social.connect.error'));
-            return $this->redirect(['site/login']);
+            return $this->redirect(['site/sign-in']);
         }
 
         Yii::$app->user->login($user, 2592000);
