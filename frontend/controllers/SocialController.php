@@ -133,7 +133,7 @@ class SocialController extends AbstractController
 
         if (!$oauthId) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.social.login.error'));
-            return $this->redirect(['site/login']);
+            return $this->redirect(['site/sign-in']);
         }
 
         $user = User::find()
