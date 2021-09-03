@@ -4,7 +4,8 @@
 
 namespace backend\controllers;
 
-use Exception;
+use common\models\db\Test;
+use yii\data\ActiveDataProvider;
 
 /**
  * Class TestController
@@ -13,10 +14,22 @@ use Exception;
 class TestController extends AbstractController
 {
     /**
-     * @throws Exception
+     * @return string
      */
-    public function actionIndex(): void
+    public function actionIndex(): string
     {
-//        (new GameResult)->execute();
+        $this->view->title = 'Test';
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $this->render('index', [
+            'dataProvider' => new ActiveDataProvider(
+                [
+                    'query' => Test::find(),
+                    'sort' => [
+                        'defaultOrder' => ['id' => SORT_DESC],
+                    ],
+                ]
+            ),
+        ]);
     }
 }
