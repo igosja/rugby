@@ -18,6 +18,7 @@ use frontend\models\queries\NewsQuery;
 use frontend\models\queries\UserQuery;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\ErrorAction;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -64,6 +65,18 @@ class SiteController extends AbstractController
                 'class' => ErrorAction::class,
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        if (ArrayHelper::isIn($action->id, ['index', 'hacking'])) {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
     }
 
     /**
@@ -311,7 +324,7 @@ class SiteController extends AbstractController
     /**
      * @return \yii\web\Response
      */
-    public function actionRedirect(): Response
+    public function actionHacking(): Response
     {
         return $this->redirect(['index']);
     }
