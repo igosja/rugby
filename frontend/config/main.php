@@ -2,6 +2,7 @@
 
 // TODO refactor
 
+use common\models\db\User;
 use kartik\select2\Select2;
 use yii\grid\GridView;
 use yii\redis\Session;
@@ -76,19 +77,6 @@ return [
                 'sign-in' => 'site/sign-in',
                 'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
-                '_ignition/execute-solution' => 'site/redirect',
-                'admin//config.php' => 'site/redirect',
-                'api/jsonws/invoke' => 'site/redirect',
-                'console' => 'site/redirect',
-                'ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application' => 'site/redirect',
-                'emergency.php' => 'site/redirect',
-                'index.php' => 'site/redirect',
-                'owa/auth/logon.aspx' => 'site/redirect',
-                'vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php' => 'site/redirect',
-                'wp-content/plugins/iva-business-hours-pro/assets/fontello/LICENSE.txt' => 'site/redirect',
-                'wp-login.php' => 'site/redirect',
-                'xmlrpc.php' => 'site/redirect',
-                '.env' => 'site/redirect',
                 '<module:(forum)>/<controller:\w+>' => '<module>/<controller>/index',
                 '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:(forum)>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
@@ -102,7 +90,7 @@ return [
         ],
         'user' => [
             'enableAutoLogin' => true,
-            'identityClass' => 'common\models\db\User',
+            'identityClass' => User::class,
             'identityCookie' => ['name' => 'brynouxwgj', 'httpOnly' => true],
             'loginUrl' => ['site/sign-in'],
         ],

@@ -4,6 +4,8 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
     # если /qTwnVrXEBN, то в backend
     RewriteCond %{REQUEST_URI} ^/(qTwnVrXEBN)
     RewriteRule ^qTwnVrXEBN/assets/(.*)$ backend/web/assets/$1 [L]
