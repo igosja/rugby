@@ -20,12 +20,12 @@ use yii\web\View;
  * @var View $this
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 
 ?>
-<?= Html::beginForm(['federation/finance', 'id' => Yii::$app->request->get('id')], 'get') ?>
+<?= Html::beginForm(['/federation/finance/index', 'id' => Yii::$app->request->get('id')], 'get') ?>
 <div class="row margin-top-small">
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8"></div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">

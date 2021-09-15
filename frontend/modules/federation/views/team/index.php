@@ -15,7 +15,7 @@ use yii\web\View;
  * @var View $this
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 

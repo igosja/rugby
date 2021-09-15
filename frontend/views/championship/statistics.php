@@ -31,7 +31,7 @@ use yii\helpers\Html;
         <h1>
             <?= Html::a(
                 $federation->country->name,
-                ['federation/news', 'id' => $federation->country->id],
+                ['federation/default/news', 'id' => $federation->country->id],
                 ['class' => 'country-header-link']
             ) ?>
         </h1>

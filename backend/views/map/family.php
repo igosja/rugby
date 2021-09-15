@@ -90,6 +90,10 @@
                 position: new google.maps.LatLng(49.3367912, 30.6206369), //Чаплинка
                 map: map
             }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(47.838367, 35.136873), //Запоріжжя
+                map: map
+            }),
         ];
         marker.setMap(map);
     }
