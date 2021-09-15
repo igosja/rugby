@@ -77,10 +77,10 @@ return [
                 'sign-in' => 'site/sign-in',
                 'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
-                '<module:(forum)>/<controller:\w+>' => '<module>/<controller>/index',
-                '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
-                '<module:(forum)>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
-                '<module:(forum)>/<controller:\w+>/<action:\w+>/' => '<module>/<controller>/<action>',
+                '<module:(federation|forum)>/<controller:\w+>' => '<module>/<controller>/index',
+                '<module:(federation|forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
+                '<module:(federation|forum)>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
+                '<module:(federation|forum)>/<controller:\w+>/<action:\w+>/' => '<module>/<controller>/<action>',
                 '<controller:\w+>' => '<controller>/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -96,6 +96,9 @@ return [
         ],
     ],
     'modules' => [
+        'federation' => [
+            'class' => 'frontend\modules\federation\Module',
+        ],
         'forum' => [
             'class' => 'frontend\modules\forum\Module',
         ],

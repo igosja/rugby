@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
  * @var News $model
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 
@@ -21,7 +21,7 @@ print $this->render('_federation', [
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
         <table class="table table-bordered table-hover">
             <tr>
-                <th><?= Yii::t('frontend', 'views.federation.news-create.title') ?></th>
+                <th><?= Yii::t('frontend', 'views.federation.news-update.title') ?></th>
             </tr>
         </table>
     </div>
@@ -42,11 +42,11 @@ print $this->render('_federation', [
                     {error}',
             ],
         ]) ?>
-        <?= $form->field($model, 'title')->textInput(['class' => 'form-control'])->label(Yii::t('frontend', 'views.federation.news-create.label.title')) ?>
-        <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.federation.news-create.label.text')) ?>
+        <?= $form->field($model, 'title')->textInput(['class' => 'form-control'])->label(Yii::t('frontend', 'views.federation.news-update.label.title')) ?>
+        <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.federation.news-update.label.text')) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton(Yii::t('frontend', 'views.federation.news-create.submit'), ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.federation.news-update.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

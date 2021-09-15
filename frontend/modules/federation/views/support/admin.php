@@ -26,7 +26,7 @@ print $this->render('_federation');
                         'continue' => $lazy,
                         'limit' => Yii::$app->params['pageSizeMessage'],
                         'offset' => Yii::$app->params['pageSizeMessage'],
-                        'url' => Url::to(['federation/support-admin-load', 'id' => $id]),
+                        'url' => Url::to(['federation/default/support-admin-load', 'id' => $id]),
                     ],
                     'id' => 'lazy',
                 ]) ?>

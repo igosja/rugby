@@ -63,7 +63,7 @@ print $this->render('//user/_top');
                 'value' => static function (Transfer $model) {
                     return Html::a(
                         $model->player->country->getImage(),
-                        ['federation/news', 'id' => $model->player->country->federation->id]
+                        ['federation/default/news', 'id' => $model->player->country->federation->id]
                     );
                 }
             ],
@@ -182,7 +182,7 @@ print $this->render('//user/_top');
                 'value' => static function (Transfer $model) {
                     return Html::a(
                         $model->player->country->getImage(),
-                        ['federation/news', 'id' => $model->player->country->federation->id]
+                        ['federation/default/news', 'id' => $model->player->country->federation->id]
                     );
                 }
             ],
@@ -301,7 +301,7 @@ print $this->render('//user/_top');
                 'value' => static function (Loan $model) {
                     return Html::a(
                         $model->player->country->getImage(),
-                        ['federation/news', 'id' => $model->player->country->federation->id]
+                        ['federation/default/news', 'id' => $model->player->country->federation->id]
                     );
                 }
             ],
@@ -428,7 +428,7 @@ print $this->render('//user/_top');
                 'value' => static function (Loan $model) {
                     return Html::a(
                         $model->player->country->getImage(),
-                        ['federation/news', 'id' => $model->player->country->federation->id]
+                        ['federation/default/news', 'id' => $model->player->country->federation->id]
                     );
                 }
             ],
