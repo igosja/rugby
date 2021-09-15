@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
  * @var Vote $model
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 

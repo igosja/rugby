@@ -14,27 +14,27 @@ try {
         'items' => [
             [
                 'text' => Yii::t('frontend', 'views.federation.links.team'),
-                'url' => ['federation/team', 'id' => $id],
+                'url' => ['/federation/team/index', 'id' => $id],
             ],
             [
                 'text' => Yii::t('frontend', 'views.federation.links.national'),
-                'url' => ['federation/national', 'id' => $id],
+                'url' => ['/federation/national/index', 'id' => $id],
             ],
             [
                 'text' => Yii::t('frontend', 'views.federation.links.news'),
-                'url' => ['federation/news', 'id' => $id],
+                'url' => ['/federation/news/index', 'id' => $id],
             ],
             [
                 'text' => Yii::t('frontend', 'views.federation.links.finance'),
-                'url' => ['federation/finance', 'id' => $id],
+                'url' => ['/federation/finance/index', 'id' => $id],
             ],
             [
                 'text' => Yii::t('frontend', 'views.federation.links.vote'),
-                'url' => ['federation/vote', 'id' => $id],
+                'url' => ['/federation/vote/index', 'id' => $id],
             ],
             [
                 'text' => Yii::t('frontend', 'views.federation.links.league'),
-                'url' => ['federation/league', 'id' => $id],
+                'url' => ['/federation/league/index', 'id' => $id],
             ],
         ]
     ]);

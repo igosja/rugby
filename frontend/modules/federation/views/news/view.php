@@ -30,7 +30,7 @@ use yii\widgets\ListView;
 
 $user = Yii::$app->user->identity;
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 

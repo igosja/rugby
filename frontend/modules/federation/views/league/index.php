@@ -13,7 +13,7 @@ use common\models\db\Federation;
 use common\models\db\LeagueDistribution;
 use common\models\db\ParticipantLeague;
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 

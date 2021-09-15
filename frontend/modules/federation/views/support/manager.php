@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var int $id
- * @var int $user_id
  * @var int $lazy
  * @var Support $model
  * @var Support[] $supportArray
@@ -27,7 +26,7 @@ print $this->render('_federation');
                     'continue' => $lazy,
                     'limit' => Yii::$app->params['pageSizeMessage'],
                     'offset' => Yii::$app->params['pageSizeMessage'],
-                    'url' => Url::to(['federation/support-president-view-load', 'id' => $id, 'user_id' => $user_id]),
+                    'url' => Url::to(['federation/default/support-manager-load', 'id' => $id]),
                 ],
                 'id' => 'lazy',
             ]) ?>
@@ -35,11 +34,11 @@ print $this->render('_federation');
                 <div class="row margin-top">
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-size-3">
                         <?= FormatHelper::asDateTime($support->date) ?>,
-                        <?= $support->question ? $support->user->getUserLink() : $support->presidentUser->getUserLink() ?>
+                        <?= $support->is_question ? $support->user->getUserLink() : $support->presidentUser->getUserLink() ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message <?php if ($support->is_question) : ?>message-to-me<?php else : ?>message-from-me<?php endif ?>">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message <?php if ($support->is_question) : ?>message-from-me<?php else : ?>message-to-me<?php endif ?>">
                         <?= nl2br($support->text) ?>
                     </div>
                 </div>
@@ -62,10 +61,10 @@ print $this->render('_federation');
                <div class="row">{error}</div>',
             ],
         ]) ?>
-        <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.federation.support-president-view.label.text')) ?>
+        <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.federation.support-manager.label.text')) ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <?= Html::submitButton(Yii::t('frontend', 'views.federation.support-president-view.submit'), ['class' => 'btn margin']) ?>
+                <?= Html::submitButton(Yii::t('frontend', 'views.federation.support-manager.submit'), ['class' => 'btn margin']) ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>
@@ -80,7 +79,7 @@ var lazy_div = $('#lazy');
 scroll_div.scrollTop(scroll_div.prop('scrollHeight'));
 
 scroll_div.on('scroll', function() {
-  if (scroll_div.scrollTop() + scroll_div.offset().top <= lazy_div.offset().top && 0 === lazy_in_progress && 1 === lazy_div.data('continue'))
+   if (scroll_div.scrollTop() + scroll_div.offset().top <= lazy_div.offset().top && 0 === lazy_in_progress && 1 === lazy_div.data('continue'))
    {
        lazy_in_progress = 1;
 
