@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
  * @var array $userArray
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 

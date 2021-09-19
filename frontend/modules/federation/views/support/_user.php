@@ -22,8 +22,8 @@ use yii\helpers\Html;
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= Yii::t('frontend', 'views.federation.support-user.rating') ?> <span
-                class="strong"><?= $model->user->rating ?></span>
+        <?= Yii::t('frontend', 'views.federation.support-user.rating') ?>
+        <span class="strong"><?= $model->user->rating ?></span>
     </div>
 </div>
 <div class="row">
@@ -40,14 +40,14 @@ use yii\helpers\Html;
         <?php if (!$model->read) { ?>
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.support-user.link.new'),
-                ['federation/default/support-president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id],
+                ['/federation/support/president', 'id' => $model->federation_id, 'user_id' => $model->user->id],
                 ['class' => 'strong']
             ) ?>
             |
         <?php } ?>
         <?= Html::a(
             Yii::t('frontend', 'views.federation.support-user.link.write'),
-            ['federation/default/support-president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id]
+            ['/federation/support/president', 'id' => $model->federation_id, 'user_id' => $model->user->id]
         ) ?>
     </div>
 </div>

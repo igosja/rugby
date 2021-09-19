@@ -68,7 +68,7 @@ class NewsController extends AbstractController
             if ($this->myTeamOrVice) {
                 $id = $this->myTeamOrVice->stadium->city->country->federation->id;
             }
-            return $this->redirect(['news', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $federation = $this->getFederation($id);
@@ -114,7 +114,7 @@ class NewsController extends AbstractController
         $federation = $this->getFederation($id);
         if (!in_array($this->user->id, [$federation->president_user_id, $federation->vice_user_id], true)) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.federation.news-create.error'));
-            return $this->redirect(['news', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $model = new News();
@@ -123,7 +123,7 @@ class NewsController extends AbstractController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash(Yii::t('frontend', 'controllers.federation.news-create.success'));
-            return $this->redirect(['news', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.news-create.title'));
@@ -153,7 +153,7 @@ class NewsController extends AbstractController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->setSuccessFlash(Yii::t('frontend', 'controllers.federation.news-update.success'));
-            return $this->redirect(['news', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.news-update.title'));

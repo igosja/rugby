@@ -9,7 +9,6 @@ use common\components\AbstractActiveRecord;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\Exception;
 
 /**
  * Class Support
@@ -77,7 +76,6 @@ class Support extends AbstractActiveRecord
 
     /**
      * @return bool
-     * @throws Exception
      */
     public function addQuestion(): bool
     {
@@ -89,9 +87,88 @@ class Support extends AbstractActiveRecord
             return false;
         }
 
-        $this->user_id = Yii::$app->user->id;
-        $this->is_question = true;
         $this->is_inside = false;
+        $this->is_question = true;
+        $this->user_id = Yii::$app->user->id;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $federationId
+     * @return bool
+     */
+    public function addFederationAdminQuestion(int $federationId): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->federation_id = $federationId;
+        $this->is_inside = false;
+        $this->is_question = true;
+        $this->president_user_id = Yii::$app->user->id;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $federationId
+     * @return bool
+     */
+    public function addFederationManagerQuestion(int $federationId): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->federation_id = $federationId;
+        $this->is_inside = true;
+        $this->is_question = true;
+        $this->user_id = Yii::$app->user->id;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $federationId
+     * @return bool
+     */
+    public function addFederationManagerAnswer(int $federationId, int $userId): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->federation_id = $federationId;
+        $this->is_inside = true;
+        $this->is_question = false;
+        $this->president_user_id = Yii::$app->user->id;
+        $this->user_id = $userId;
 
         if (!$this->save()) {
             return false;

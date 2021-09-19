@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
  * @var array $teamArray
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 
@@ -52,7 +52,7 @@ print $this->render('_federation', [
         <?php
 
         try {
-            $form
+            print $form
                 ->field($model, 'teamId')
                 ->widget(Select2::class, [
                     'data' => $teamArray,

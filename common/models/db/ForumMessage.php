@@ -5,7 +5,6 @@
 namespace common\models\db;
 
 use common\components\AbstractActiveRecord;
-use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
 use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
@@ -150,7 +149,7 @@ class ForumMessage extends AbstractActiveRecord
 
         if ($user->id === $this->user_id || !$isUser) {
             $linkArray[] = Html::a(
-                FAR::icon(FontAwesome::_TRASH_ALT),
+                FAS::icon(FontAwesome::_TRASH),
                 ['message/delete', 'id' => $this->id],
                 ['title' => Yii::t('common', 'models.db.forum-message.links.delete')]
             );

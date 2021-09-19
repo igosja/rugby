@@ -56,7 +56,7 @@ class VoteController extends AbstractController
         $federation = $this->getFederation($id);
         if (!in_array($this->user->id, [$federation->president_user_id, $federation->vice_user_id], true)) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.federation.vote-create.error'));
-            return $this->redirect(['vote', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $model = new Vote();
@@ -66,7 +66,7 @@ class VoteController extends AbstractController
 
         if ($model->saveVote()) {
             $this->setSuccessFlash(Yii::t('frontend', 'controllers.federation.vote-create.success'));
-            return $this->redirect(['vote', 'id' => $id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         $this->setSeoTitle(Yii::t('frontend', 'controllers.federation.vote-create.title'));

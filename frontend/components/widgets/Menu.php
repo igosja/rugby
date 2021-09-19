@@ -302,7 +302,7 @@ class Menu extends Widget
             ],
             self::ITEM_FEDERATION => [
                 'label' => Yii::t('frontend', 'components.widgets.menu.federation'),
-                'url' => ['/federation/news'],
+                'url' => ['/federation/news/index'],
             ],
             self::ITEM_FORUM => [
                 'label' => Yii::t('frontend', 'components.widgets.menu.forum'),
@@ -320,7 +320,7 @@ class Menu extends Widget
             self::ITEM_MESSENGER => [
                 'css' => $messenger ? 'red' : '',
                 'label' => Yii::t('frontend', 'components.widgets.menu.messenger') . ($messenger ? '<sup class="text-size-4">' . $messenger . '</sup>' : ''),
-                'url' => ['messenger/index'],
+                'url' => ['/messenger/index'],
             ],
             self::ITEM_NATIONAL_TEAM => [
                 'css' => $nationalId ? 'red' : 'hidden',

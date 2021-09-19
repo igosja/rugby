@@ -67,7 +67,7 @@ class Vote extends AbstractActiveRecord
             [['text'], 'trim'],
             [['text'], 'string'],
             [['vote_status_id'], 'integer', 'min' => 1, 'max' => 9],
-            [['federation_id'], 'integer', 'min' => 1, 'max' => 999],
+            [['federation_id'], 'integer', 'min' => 0, 'max' => 999],
             [['user_id'], 'integer', 'min' => 1],
             [['federation_id'], 'exist', 'targetRelation' => 'federation'],
             [['user_id'], 'exist', 'targetRelation' => 'user'],

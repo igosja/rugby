@@ -9,13 +9,16 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
+ * @var \common\models\db\Federation $federation
  * @var int $id
  * @var int $lazy
  * @var Support $model
  * @var Support[] $supportArray
  */
 
-print $this->render('_federation');
+print $this->render('/default/_federation', [
+    'federation' => $federation,
+]);
 
 ?>
 <div class="row">
@@ -26,7 +29,7 @@ print $this->render('_federation');
                     'continue' => $lazy,
                     'limit' => Yii::$app->params['pageSizeMessage'],
                     'offset' => Yii::$app->params['pageSizeMessage'],
-                    'url' => Url::to(['federation/default/support-manager-load', 'id' => $id]),
+                    'url' => Url::to(['federation/support/manager-load', 'id' => $id]),
                 ],
                 'id' => 'lazy',
             ]) ?>
