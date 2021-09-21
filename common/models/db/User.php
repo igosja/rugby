@@ -483,7 +483,7 @@ class User extends AbstractActiveRecord implements IdentityInterface
 
         return Html::a(
             Html::encode($this->login),
-            ['user/view', 'id' => $this->id],
+            ['/user/view', 'id' => $this->id],
             $options
         );
     }

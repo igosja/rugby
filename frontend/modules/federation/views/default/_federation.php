@@ -133,7 +133,7 @@ $file_name = 'file_name';
 <?php if ($controller->myTeam && $controller->myTeam->stadium->city->country_id === $federation->country_id) : ?>
     <?php if ($federation->president_user_id && $federation->president_user_id !== $controller->user->id) : ?>
         <?php $form = ActiveForm::begin([
-            'action' => ['federation/default/attitude-president', 'id' => $federation->id],
+            'action' => ['/federation/default/attitude-president', 'id' => $federation->id],
             'fieldConfig' => [
                 'labelOptions' => ['class' => 'strong'],
                 'options' => ['class' => 'row text-left'],
@@ -177,7 +177,7 @@ $file_name = 'file_name';
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.support-manager')
                 . ($supportManager ? '<sup class="text-size-4">' . $supportManager . '</sup>' : ''),
-                ['federation/default/support-manager', 'id' => $federation->id],
+                ['/federation/support/manager', 'id' => $federation->id],
                 ['class' => ($supportManager ? 'red' : '')]
             ) ?>
         </div>
@@ -188,44 +188,44 @@ $file_name = 'file_name';
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center alert info">
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.news-create'),
-                ['federation/default/news-create', 'id' => $federation->id]
+                ['/federation/news/create', 'id' => $federation->id]
             ) ?>
             |
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.vote-create'),
-                ['federation/default/vote-create', 'id' => $federation->id]
+                ['/federation/vote/create', 'id' => $federation->id]
             ) ?>
             |
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.support-admin')
                 . ($supportAdmin ? '<sup class="text-size-4">' . $supportAdmin . '</sup>' : ''),
-                ['federation/default/support-admin', 'id' => $federation->id],
+                ['/federation/support/admin', 'id' => $federation->id],
                 ['class' => ($supportAdmin ? 'red' : '')]
             ) ?>
             |
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.support-president')
                 . ($supportPresident ? '<sup class="text-size-4">' . $supportPresident . '</sup>' : ''),
-                ['federation/default/support-president', 'id' => $federation->id],
+                ['/federation/support/user', 'id' => $federation->id],
                 ['class' => ($supportPresident ? 'red' : '')]
             ) ?>
             |
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.federation.link.free-team'),
-                ['federation/default/free-team', 'id' => $federation->id]
+                ['/federation/recommendation/free-team', 'id' => $federation->id]
             ) ?>
             <?php if (Yii::$app->user->id === $federation->president_user_id): ?>
                 |
                 <?= Html::a(
                     Yii::t('frontend', 'views.federation.federation.link.money-transfer'),
-                    ['federation/default/money-transfer', 'id' => $federation->id]
+                    ['/federation/finance/transfer', 'id' => $federation->id]
                 ) ?>
             <?php endif ?>
             <?php if ((Yii::$app->user->id === $federation->president_user_id && $federation->vice_user_id) || Yii::$app->user->id === $federation->vice_user_id) : ?>
                 |
                 <?= Html::a(
                     Yii::t('frontend', 'views.federation.federation.link.fire'),
-                    ['federation/default/fire', 'id' => $federation->id]
+                    ['/federation/default/fire', 'id' => $federation->id]
                 ) ?>
             <?php endif ?>
         </div>

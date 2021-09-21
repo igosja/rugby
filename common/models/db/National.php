@@ -184,7 +184,7 @@ class National extends AbstractActiveRecord
         }
         $result .= Html::a(
             $this->federation->country->name . ' (' . $this->nationalType->name . ')',
-            ['national/view', 'id' => $this->id]
+            ['/national/view', 'id' => $this->id]
         );
         return $result;
     }

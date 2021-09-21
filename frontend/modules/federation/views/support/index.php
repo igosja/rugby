@@ -9,16 +9,12 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \common\models\db\Federation $federation
- * @var int $id
  * @var int $lazy
  * @var Support $model
  * @var Support[] $supportArray
  */
 
-print $this->render('/default/_federation', [
-    'federation' => $federation,
-]);
+print $this->render('//user/_top');
 
 ?>
     <div class="row">
@@ -29,7 +25,7 @@ print $this->render('/default/_federation', [
                         'continue' => $lazy,
                         'limit' => Yii::$app->params['pageSizeMessage'],
                         'offset' => Yii::$app->params['pageSizeMessage'],
-                        'url' => Url::to(['/federation/support/admin-load', 'id' => $id]),
+                        'url' => Url::to(['load']),
                     ],
                     'id' => 'lazy',
                 ]) ?>
@@ -37,11 +33,11 @@ print $this->render('/default/_federation', [
                     <div class="row margin-top">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-size-3">
                             <?= FormatHelper::asDateTime($support->date) ?>,
-                            <?= $support->is_question ? $support->presidentUser->getUserLink() : $support->adminUser->getUserLink() ?>
+                            <?= $support->is_question ? $support->user->getUserLink() : $support->adminUser->getUserLink() ?>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message <?php if ($support->is_question) : ?>message-from-me<?php else : ?>message-to-me<?php endif; ?>">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 message <?php if ($support->is_question) : ?>message-from-me<?php else : ?>message-to-me<?php endif ?>">
                             <?= nl2br($support->text) ?>
                         </div>
                     </div>
@@ -64,13 +60,13 @@ print $this->render('/default/_federation', [
                 <div class="row">{error}</div>',
                 ],
             ]) ?>
-            <?= $form->field($model, 'text')->textarea()->label(Yii::t('frontend', 'views.federation.support-admin.label.text')) ?>
+            <?= $form->field($model, 'text')->textarea(['rows' => 5])->label(Yii::t('frontend', 'views.support.index.label.text')) ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <?= Html::submitButton(Yii::t('frontend', 'views.federation.support-admin.submit'), ['class' => 'btn margin']) ?>
+                    <?= Html::submitButton(Yii::t('frontend', 'views.support.index.submit'), ['class' => 'btn margin']) ?>
                 </div>
             </div>
-            <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 <?php

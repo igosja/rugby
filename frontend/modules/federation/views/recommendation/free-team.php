@@ -18,7 +18,7 @@ use yii\web\View;
  * @var View $this
  */
 
-print $this->render('_federation', [
+print $this->render('/default/_federation', [
     'federation' => $federation,
 ]);
 
@@ -57,13 +57,13 @@ print $this->render('_federation', [
                     if ($model->recommendation) {
                         $result = Html::a(
                             FAR::icon(FontAwesome::_TIMES_CIRCLE),
-                            ['recommendation-delete', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
+                            ['delete', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
                             ['title' => Yii::t('frontend', 'views.federation.free-team.link.delete')]
                         );
                     } else {
                         $result = Html::a(
                             FAR::icon(FontAwesome::_CHECK_CIRCLE),
-                            ['recommendation-create', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
+                            ['create', 'id' => $model->stadium->city->country->federation->id, 'teamId' => $model->id],
                             ['title' => Yii::t('frontend', 'views.federation.free-team.link.create')]
                         );
                     }
