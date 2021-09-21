@@ -61,9 +61,9 @@ use yii\helpers\Html;
                     <td>
                         <?= Html::a(
                             Html::img('@country12/' . $item['federationId'] . '.png'),
-                            ['federation/default/team', 'id' => $item['federationId']]
+                            ['/federation/team/index', 'id' => $item['federationId']]
                         ) ?>
-                        <?= Html::a($item['countryName'], ['federation/default/team', 'id' => $item['federationId']]) ?>
+                        <?= Html::a($item['countryName'], ['/federation/team/index', 'id' => $item['federationId']]) ?>
                     </td>
                     <?php foreach ($item['division'] as $key => $value) : ?>
                         <td class="text-center col-10">

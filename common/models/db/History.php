@@ -143,14 +143,14 @@ class History extends AbstractActiveRecord
         if (false !== strpos($text, '{country}')) {
             $text = str_replace(
                 '{country}',
-                Html::a($this->federation->country->name, ['federation/news', 'id' => $this->federation_id]),
+                Html::a($this->federation->country->name, ['/federation/news/index', 'id' => $this->federation_id]),
                 $text
             );
         }
         if (false !== strpos($text, '{federation}')) {
             $text = str_replace(
                 '{federation}',
-                Html::a($this->federation->country->name, ['federation/news', 'id' => $this->federation_id]),
+                Html::a($this->federation->country->name, ['/federation/news/index', 'id' => $this->federation_id]),
                 $text
             );
         }

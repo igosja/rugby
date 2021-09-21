@@ -4,7 +4,6 @@
 
 use common\components\helpers\FormatHelper;
 use common\models\db\News;
-use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FAS;
 use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
@@ -20,13 +19,13 @@ use yii\helpers\Html;
         <span class="text-size-3 font-grey">
             <?= Html::a(
                 FAS::icon(FontAwesome::_PENCIL_ALT),
-                ['news-update', 'id' => $model->federation_id, 'newsId' => $model->id],
+                ['update', 'id' => $model->federation_id, 'newsId' => $model->id],
                 ['title' => Yii::t('frontend', 'views.federation.news.link.edit')]
             ) ?>
             |
             <?= Html::a(
-                FAB::icon(FontAwesome::_TRASH_ALT),
-                ['news-delete', 'id' => $model->federation_id, 'newsId' => $model->id],
+                FAS::icon(FontAwesome::_TRASH),
+                ['delete', 'id' => $model->federation_id, 'newsId' => $model->id],
                 ['title' => Yii::t('frontend', 'views.federation.news.link.delete')]
             ) ?>
         </span>

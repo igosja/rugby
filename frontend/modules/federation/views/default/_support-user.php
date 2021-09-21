@@ -40,14 +40,14 @@ use yii\helpers\Html;
         <?php if (!$model->read) { ?>
             <?= Html::a(
                 Yii::t('frontend', 'views.federation.support-user.link.new'),
-                ['federation/default/support-president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id],
+                ['/federation/support/president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id],
                 ['class' => 'strong']
             ) ?>
             |
         <?php } ?>
         <?= Html::a(
             Yii::t('frontend', 'views.federation.support-user.link.write'),
-            ['federation/default/support-president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id]
+            ['/federation/support/president-view', 'id' => $model->federation_id, 'user_id' => $model->user->id]
         ) ?>
     </div>
 </div>
