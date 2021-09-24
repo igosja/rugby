@@ -6,6 +6,7 @@ namespace frontend\models\forms;
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\User;
+use common\models\db\UserLogin;
 use common\models\db\UserRole;
 use Yii;
 use yii\base\Exception;
@@ -75,7 +76,17 @@ class SignUpForm extends Model
 
             $refUser = User::find()
                 ->andWhere(['id' => $referrerUserId])
-                ->andWhere(['!=', 'user_ip', $userIp])
+                ->andWhere([
+                    'not',
+                    [
+                        'id' => UserLogin::find()
+                            ->select(['user_id'])
+                            ->andWhere([
+                                'ip' => $userIp,
+                                'user_id' => $referrerUserId,
+                            ])
+                    ]
+                ])
                 ->limit(1)
                 ->one();
             if (!$refUser) {
