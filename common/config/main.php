@@ -6,7 +6,6 @@ use common\components\TranslationEventHandler;
 use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\log\DbTarget;
-use yii\log\EmailTarget;
 use yii\redis\Cache;
 use yii\redis\Connection;
 
@@ -69,16 +68,6 @@ return [
                 [
                     'class' => DbTarget::class,
                     'levels' => ['error', 'warning'],
-                ],
-                [
-                    'class' => EmailTarget::class,
-                    'levels' => ['error'],
-                    'categories' => ['yii\db\*'],
-                    'message' => [
-                        'from' => ['log@virtual-rugby.com'],
-                        'to' => ['igosja@ukr.net'],
-                        'subject' => 'Database errors on the virtual-rugby.com website',
-                    ],
                 ],
             ],
             'traceLevel' => YII_DEBUG ? 3 : 0,
