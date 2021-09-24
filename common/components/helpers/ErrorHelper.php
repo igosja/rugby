@@ -21,7 +21,7 @@ class ErrorHelper
      */
     public static function log(Throwable $e)
     {
-        if (Yii::$app->controller instanceof AbstractWebController || User::ADMIN_USER_ID === Yii::$app->user->id) {
+        if (Yii::$app->controller instanceof AbstractWebController && User::ADMIN_USER_ID === Yii::$app->user->id) {
             print '<pre>';
             print_r($e->__toString());
             exit;
