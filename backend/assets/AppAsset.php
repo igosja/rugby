@@ -4,7 +4,7 @@
 
 namespace backend\assets;
 
-use rmrevin\yii\fontawesome\AssetBundle as FontAwesomeAssetBundle;
+use rmrevin\yii\fontawesome\CdnFreeAssetBundle;
 use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
 use yii\web\YiiAsset;
@@ -30,14 +30,15 @@ class AppAsset extends AssetBundle
      */
     public $css = [
         'css/metisMenu.css',
+        'css/timeline.css',
         'css/sb-admin-2.css',
-        'css/morris.css',
     ];
 
     /**
      * @var string[] $js
      */
     public $js = [
+        'js/bootstrap.js',
         'js/metisMenu.js',
         'js/sb-admin-2.js',
         'js/admin.js',
@@ -49,6 +50,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         YiiAsset::class,
         BootstrapAsset::class,
-        FontAwesomeAssetBundle::class,
+        CdnFreeAssetBundle::class,
     ];
 }
