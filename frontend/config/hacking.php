@@ -5,6 +5,7 @@
 $urls = [
     '.env',
     '.well-known/apple-app-site-association',
+    '.well-known/security.txt',
     '_ignition/execute-solution',
     '2019/wp-includes/wlwmanifest.xml',
     '2020/wp-includes/wlwmanifest.xml',
@@ -34,6 +35,7 @@ $urls = [
     'libs/js/iframe.js',
     'mifs/.;/services/LogService',
     'news/wp-includes/wlwmanifest.xml',
+    'news/wp-login.php',
     'owa',
     'owa/auth/logon.aspx',
     'owa/auth/x.js',
@@ -72,8 +74,6 @@ $config = [];
 
 foreach ($urls as $url) {
     $config['components']['urlManager']['rules'][$url] = 'site/hacking';
-    $config['components']['urlManager']['rules']['/' . $url] = 'site/hacking';
-    $config['components']['urlManager']['rules']['//' . $url] = 'site/hacking';
 }
 
 return $config;
