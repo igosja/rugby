@@ -3,9 +3,13 @@
 // TODO refactor
 
 use common\models\db\User;
+use frontend\components\FrontendRequest;
+use frontend\modules\federation\Module as ModuleFederation;
+use frontend\modules\forum\Module as ModuleForum;
 use kartik\select2\Select2;
 use yii\grid\GridView;
 use yii\redis\Session;
+use yii\web\Request;
 use yii\widgets\ListView;
 
 $params = array_merge(
@@ -19,6 +23,7 @@ return [
     'basePath' => dirname(__DIR__),
     'container' => [
         'definitions' => [
+            Request::class => FrontendRequest::class,
             GridView::class => [
                 'emptyText' => false,
                 'options' => ['class' => 'col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive'],
@@ -77,8 +82,9 @@ return [
                 'sign-in' => 'site/sign-in',
                 'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
+                '<module:(federation)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/index',
+                '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:(federation|forum)>/<controller:\w+>' => '<module>/<controller>/index',
-                '<module:(federation|forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:(federation|forum)>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
                 '<module:(federation|forum)>/<controller:\w+>/<action:\w+>/' => '<module>/<controller>/<action>',
                 '<controller:\w+>' => '<controller>/index',
@@ -97,10 +103,10 @@ return [
     ],
     'modules' => [
         'federation' => [
-            'class' => 'frontend\modules\federation\Module',
+            'class' => ModuleFederation::class,
         ],
         'forum' => [
-            'class' => 'frontend\modules\forum\Module',
+            'class' => ModuleForum::class,
         ],
     ],
     'id' => 'app-frontend',
