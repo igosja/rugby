@@ -82,6 +82,7 @@ return [
                 'sign-in' => 'site/sign-in',
                 'sign-out' => 'site/sign-out',
                 'sign-up' => 'site/sign-up',
+                'sitemap.xml' => 'sitemap/index',
                 '<module:(federation)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/index',
                 '<module:(forum)>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
                 '<module:(federation|forum)>/<controller:\w+>' => '<module>/<controller>/index',
