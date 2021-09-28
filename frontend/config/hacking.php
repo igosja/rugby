@@ -3,6 +3,7 @@
 // TODO refactor
 
 $urls = [
+    '@/@/h31l0/new_server.py',
     '.env',
     '.well-known/apple-app-site-association',
     '.well-known/security.txt',
@@ -17,6 +18,7 @@ $urls = [
     'ads.txt',
     'api/jsonws/invoke',
     'apple-app-site-association',
+    'autodiscover/autodiscover.json',
     'Autodiscover/Autodiscover.xml',
     'bag2/index',
     'blog/wp-includes/wlwmanifest.xml',
