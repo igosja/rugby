@@ -151,7 +151,7 @@ abstract class AbstractController extends AbstractWebController
      */
     public function redirectToMyTeam(): Response
     {
-        return $this->redirect(['team/view', 'id' => $this->myTeam->id]);
+        return $this->redirect(['/team/view', 'id' => $this->myTeam->id]);
     }
 
     /**
@@ -285,11 +285,11 @@ abstract class AbstractController extends AbstractWebController
     {
         $siteStatus = SiteQuery::getStatus();
         if (!$siteStatus && !('site' === $action->controller->id && 'closed' === $action->id)) {
-            return $this->redirect(['site/closed']);
+            return $this->redirect(['/site/closed']);
         }
 
         if ($siteStatus && 'site' === $action->controller->id && 'closed' === $action->id) {
-            return $this->redirect(['site/index']);
+            return $this->redirect(['/site/index']);
         }
         return false;
     }
