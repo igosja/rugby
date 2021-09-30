@@ -155,6 +155,8 @@ jQuery(document).ready(function () {
         }).on('click', '.link-template-load', function () {
             $('.div-template-save').hide(400);
             $('.div-template-load').toggle(400);
+        }).on('beforeValidate', '#sign-up-form', function () {
+            gtag('event', 'sign_up');
         });
     });
 

@@ -85,7 +85,7 @@ $context = $this->context;
                             'class' => 'img-responsive'
                         ]
                     ),
-                    ['site/index']
+                    ['/site/index']
                 ) ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right xs-text-center">
