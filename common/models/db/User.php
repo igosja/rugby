@@ -99,8 +99,6 @@ class User extends AbstractActiveRecord implements IdentityInterface
                     'name',
                     'notes',
                     'password',
-                    'social_facebook_id',
-                    'social_google_id',
                     'surname',
                     'timezone'
                 ],
