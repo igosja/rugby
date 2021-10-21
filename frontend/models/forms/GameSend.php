@@ -167,6 +167,14 @@ class GameSend extends Model
         }
         $this->game->save();
 
+        Lineup::updateAll(
+            ['player_id' => null],
+            [
+                'game_id' => $this->game->id,
+                'team_id' => $this->team->id,
+            ]
+        );
+
         foreach ($this->line as $positionId => $playerId) {
             $lineup = Lineup::find()
                 ->where([
@@ -182,20 +190,6 @@ class GameSend extends Model
                 $lineup->position_id = $positionId;
                 $lineup->team_id = $this->team->id;
             }
-            $lineup->is_captain = false;
-            $lineup->player_id = $positionId;
-            $lineup->save();
-        }
-
-        foreach ($this->line as $positionId => $playerId) {
-            $lineup = Lineup::find()
-                ->where([
-                    'game_id' => $this->game->id,
-                    'position_id' => $positionId,
-                    'team_id' => $this->team->id,
-                ])
-                ->limit(1)
-                ->one();
             if ($this->captain === $playerId) {
                 $lineup->is_captain = true;
             } else {
