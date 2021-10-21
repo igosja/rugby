@@ -174,20 +174,6 @@ class GameNationalSend extends Model
                 $lineup->position_id = $positionId;
                 $lineup->national_id = $this->national->id;
             }
-            $lineup->is_captain = false;
-            $lineup->player_id = $positionId;
-            $lineup->save();
-        }
-
-        foreach ($this->line as $positionId => $playerId) {
-            $lineup = Lineup::find()
-                ->where([
-                    'game_id' => $this->game->id,
-                    'position_id' => $positionId,
-                    'national_id' => $this->national->id,
-                ])
-                ->limit(1)
-                ->one();
             if ($this->captain === $playerId) {
                 $lineup->is_captain = true;
             } else {
