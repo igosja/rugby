@@ -23,7 +23,16 @@ use yii\helpers\Html;
     </div>
     <ul class="list-inline preview-links text-center">
         <li>
-            <?= Html::a('Clear', ['clear'], ['class' => 'btn btn-default']) ?>
+            <?= Html::a(
+                'Clear',
+                ['clear'],
+                [
+                    'class' => 'btn btn-default',
+                    'data' => [
+                        'confirm' => 'Are you sure?',
+                    ],
+                ]
+            ) ?>
         </li>
     </ul>
     <div class="row">
