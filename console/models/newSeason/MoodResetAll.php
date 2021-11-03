@@ -4,8 +4,8 @@
 
 namespace console\models\newSeason;
 
-use common\models\National;
-use common\models\Team;
+use common\models\db\National;
+use common\models\db\Team;
 
 /**
  * Class MoodResetAll
@@ -16,9 +16,10 @@ class MoodResetAll
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Team::updateAll(['team_mood_rest' => 2, 'team_mood_super' => 2]);
-        National::updateAll(['national_mood_rest' => 2, 'national_mood_super' => 2]);
+        Team::updateAll(['mood_rest' => 2, 'mood_super' => 2]);
+        National::updateAll(['mood_rest' => 2, 'mood_super' => 2]);
     }
 }
+

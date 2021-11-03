@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Scout;
+use common\models\db\Scout;
 
 /**
  * Class EndScout
@@ -15,11 +15,11 @@ class EndScout
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         Scout::updateAll(
-            ['scout_percent' => 100, 'scout_ready' => time()],
-            ['scout_ready' => 0]
+            ['percent' => 100, 'ready' => time()],
+            ['ready' => null]
         );
     }
 }

@@ -4,12 +4,12 @@
 
 namespace console\models\newSeason;
 
-use common\models\History;
-use common\models\HistoryText;
-use common\models\Player;
-use common\models\PlayerPosition;
-use common\models\PlayerSpecial;
-use common\models\Training;
+use common\models\db\History;
+use common\models\db\HistoryText;
+use common\models\db\Player;
+use common\models\db\PlayerPosition;
+use common\models\db\PlayerSpecial;
+use common\models\db\Training;
 use Exception;
 
 /**
@@ -29,23 +29,23 @@ class EndTraining
      * @throws Exception
      * @throws \yii\db\Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $this->increasePercent();
 
         $trainingArray = Training::find()
-            ->where(['>=', 'training_percent', 100])
-            ->andWhere(['training_ready' => 0])
-            ->orderBy(['training_id' => SORT_ASC])
+            ->where(['>=', 'percent', 100])
+            ->andWhere(['ready' => null])
+            ->orderBy(['id' => SORT_ASC])
             ->each();
         foreach ($trainingArray as $training) {
             $this->training = $training;
 
-            if ($this->training->training_power) {
+            if ($this->training->is_power) {
                 $this->power();
-            } elseif ($this->training->training_position_id) {
+            } elseif ($this->training->position_id) {
                 $this->position();
-            } elseif ($this->training->training_special_id) {
+            } elseif ($this->training->special_id) {
                 $this->special();
             }
         }
@@ -55,77 +55,79 @@ class EndTraining
 
     /**
      * @return void
-     * @throws \yii\db\Exception
      */
-    private function increasePercent()
+    private function increasePercent(): void
     {
-        Training::updateAll(['training_percent' => 100], ['training_ready' => 0]);
+        Training::updateAll(['percent' => 100], ['ready' => null]);
     }
 
     /**
      * @throws Exception
      */
-    private function power()
+    private function power(): void
     {
         Player::updateAllCounters(
-            ['player_power_nominal' => 1],
-            ['player_id' => $this->training->training_player_id]
+            ['power_nominal' => 1],
+            ['id' => $this->training->player_id]
         );
 
         History::log([
-            'history_history_text_id' => HistoryText::PLAYER_TRAINING_POINT,
-            'history_player_id' => $this->training->training_player_id,
+            'history_text_id' => HistoryText::PLAYER_TRAINING_POINT,
+            'player_id' => $this->training->player_id,
         ]);
     }
 
     /**
      * @throws Exception
      */
-    private function position()
+    private function position(): void
     {
         $model = new PlayerPosition();
-        $model->player_position_player_id = $this->training->training_player_id;
-        $model->player_position_position_id = $this->training->training_position_id;
+        $model->player_id = $this->training->player_id;
+        $model->position_id = $this->training->position_id;
         $model->save();
 
         History::log([
-            'history_history_text_id' => HistoryText::PLAYER_TRAINING_POSITION,
-            'history_player_id' => $this->training->training_player_id,
-            'history_position_id' => $this->training->training_position_id,
+            'history_text_id' => HistoryText::PLAYER_TRAINING_POSITION,
+            'player_id' => $this->training->player_id,
+            'position_id' => $this->training->position_id,
         ]);
     }
 
     /**
      * @throws Exception
      */
-    private function special()
+    private function special(): void
     {
         $model = PlayerSpecial::find()->where([
-            'player_special_player_id' => $this->training->training_player_id,
-            'player_special_special_id' => $this->training->training_special_id,
+            'player_id' => $this->training->player_id,
+            'special_id' => $this->training->special_id,
         ])->limit(1)->one();
         if (!$model) {
             $model = new PlayerSpecial();
-            $model->player_special_player_id = $this->training->training_player_id;
-            $model->player_special_special_id = $this->training->training_special_id;
-            $model->player_special_level = 1;
+            $model->player_id = $this->training->player_id;
+            $model->special_id = $this->training->special_id;
+            $model->level = 1;
         } else {
-            $model->player_special_level = $model->player_special_level + 1;
+            $model->level++;
         }
         $model->save();
 
         History::log([
-            'history_history_text_id' => HistoryText::PLAYER_TRAINING_SPECIAL,
-            'history_player_id' => $this->training->training_player_id,
-            'history_special_id' => $this->training->training_special_id,
+            'history_text_id' => HistoryText::PLAYER_TRAINING_SPECIAL,
+            'player_id' => $this->training->player_id,
+            'special_id' => $this->training->special_id,
         ]);
     }
 
-    private function ready()
+    /**
+     * @return void
+     */
+    private function ready(): void
     {
         Training::updateAll(
-            ['training_percent' => 100, 'training_ready' => time()],
-            ['and', ['>=', 'training_percent', 100], ['training_ready' => 0]]
+            ['percent' => 100, 'ready' => time()],
+            ['and', ['>=', 'percent', 100], ['ready' => null]]
         );
     }
 }

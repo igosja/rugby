@@ -20,26 +20,26 @@ class LeagueLimit
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 2;
 
         $data = [];
 
         $ratingCountryArray = RatingFederation::find()
-            ->orderBy(['rating_country_league_place' => SORT_ASC])
+            ->orderBy(['league_place' => SORT_ASC])
             ->all();
         foreach ($ratingCountryArray as $ratingCountry) {
-            if ($ratingCountry->rating_country_league_place <= 2) {
-                $data[] = [$ratingCountry->rating_country_country_id, 1, 1, 2, 1, $seasonId];
-            } elseif ($ratingCountry->rating_country_league_place <= 6) {
-                $data[] = [$ratingCountry->rating_country_country_id, 1, 1, 1, 2, $seasonId];
-            } elseif ($ratingCountry->rating_country_league_place <= 10) {
-                $data[] = [$ratingCountry->rating_country_country_id, 0, 2, 1, 1, $seasonId];
-            } elseif ($ratingCountry->rating_country_league_place <= 12) {
-                $data[] = [$ratingCountry->rating_country_country_id, 0, 1, 2, 1, $seasonId];
+            if ($ratingCountry->league_place <= 3) {
+                $data[] = [$ratingCountry->federation_id, 3, 3, 0, 0, $seasonId];
+            } elseif ($ratingCountry->league_place <= 4) {
+                $data[] = [$ratingCountry->federation_id, 3, 2, 1, 0, $seasonId];
+            } elseif ($ratingCountry->league_place <= 6) {
+                $data[] = [$ratingCountry->federation_id, 2, 2, 1, 0, $seasonId];
+            } elseif ($ratingCountry->league_place <= 8) {
+                $data[] = [$ratingCountry->federation_id, 1, 2, 2, 0, $seasonId];
             } else {
-                $data[] = [$ratingCountry->rating_country_country_id, 0, 1, 1, 2, $seasonId];
+                $data[] = [$ratingCountry->federation_id, 0, 2, 1, 1, $seasonId];
             }
         }
 
@@ -48,12 +48,12 @@ class LeagueLimit
             ->batchInsert(
                 LeagueDistribution::tableName(),
                 [
-                    'league_distribution_country_id',
-                    'league_distribution_group',
-                    'league_distribution_qualification_3',
-                    'league_distribution_qualification_2',
-                    'league_distribution_qualification_1',
-                    'league_distribution_season_id',
+                    'federation_id',
+                    'group',
+                    'qualification_3',
+                    'qualification_2',
+                    'qualification_1',
+                    'season_id',
                 ],
                 $data
             )

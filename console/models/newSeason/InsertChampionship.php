@@ -4,11 +4,11 @@
 
 namespace console\models\newSeason;
 
-use common\models\Championship;
-use common\models\Game;
-use common\models\Schedule;
-use common\models\Season;
-use common\models\TournamentType;
+use common\models\db\Championship;
+use common\models\db\Game;
+use common\models\db\Schedule;
+use common\models\db\Season;
+use common\models\db\TournamentType;
 use Yii;
 use yii\db\Exception;
 use yii\db\Expression;
@@ -23,71 +23,71 @@ class InsertChampionship
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 1;
 
         Championship::updateAll(
-            ['championship_place' => new Expression('`championship_id`-((CEIL(`championship_id`/16)-1)*16)')],
-            ['championship_place' => 0, 'championship_season_id' => $seasonId]
+            ['place' => new Expression('`id`-((CEIL(`id`/16)-1)*16)')],
+            ['place' => 0, 'season_id' => $seasonId]
         );
 
         $scheduleArray = Schedule::find()
             ->where([
-                'schedule_season_id' => $seasonId,
-                'schedule_tournament_type_id' => TournamentType::CHAMPIONSHIP
+                'season_id' => $seasonId,
+                'tournament_type_id' => TournamentType::CHAMPIONSHIP
             ])
-            ->orderBy(['schedule_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->limit(30)
             ->all();
 
-        $scheduleId01 = $scheduleArray[0]->schedule_id;
-        $scheduleId02 = $scheduleArray[1]->schedule_id;
-        $scheduleId03 = $scheduleArray[2]->schedule_id;
-        $scheduleId04 = $scheduleArray[3]->schedule_id;
-        $scheduleId05 = $scheduleArray[4]->schedule_id;
-        $scheduleId06 = $scheduleArray[5]->schedule_id;
-        $scheduleId07 = $scheduleArray[6]->schedule_id;
-        $scheduleId08 = $scheduleArray[7]->schedule_id;
-        $scheduleId09 = $scheduleArray[8]->schedule_id;
-        $scheduleId10 = $scheduleArray[9]->schedule_id;
-        $scheduleId11 = $scheduleArray[10]->schedule_id;
-        $scheduleId12 = $scheduleArray[11]->schedule_id;
-        $scheduleId13 = $scheduleArray[12]->schedule_id;
-        $scheduleId14 = $scheduleArray[13]->schedule_id;
-        $scheduleId15 = $scheduleArray[14]->schedule_id;
-        $scheduleId16 = $scheduleArray[15]->schedule_id;
-        $scheduleId17 = $scheduleArray[16]->schedule_id;
-        $scheduleId18 = $scheduleArray[17]->schedule_id;
-        $scheduleId19 = $scheduleArray[18]->schedule_id;
-        $scheduleId20 = $scheduleArray[19]->schedule_id;
-        $scheduleId21 = $scheduleArray[20]->schedule_id;
-        $scheduleId22 = $scheduleArray[21]->schedule_id;
-        $scheduleId23 = $scheduleArray[22]->schedule_id;
-        $scheduleId24 = $scheduleArray[23]->schedule_id;
-        $scheduleId25 = $scheduleArray[24]->schedule_id;
-        $scheduleId26 = $scheduleArray[25]->schedule_id;
-        $scheduleId27 = $scheduleArray[26]->schedule_id;
-        $scheduleId28 = $scheduleArray[27]->schedule_id;
-        $scheduleId29 = $scheduleArray[28]->schedule_id;
-        $scheduleId30 = $scheduleArray[29]->schedule_id;
+        $scheduleId01 = $scheduleArray[0]->id;
+        $scheduleId02 = $scheduleArray[1]->id;
+        $scheduleId03 = $scheduleArray[2]->id;
+        $scheduleId04 = $scheduleArray[3]->id;
+        $scheduleId05 = $scheduleArray[4]->id;
+        $scheduleId06 = $scheduleArray[5]->id;
+        $scheduleId07 = $scheduleArray[6]->id;
+        $scheduleId08 = $scheduleArray[7]->id;
+        $scheduleId09 = $scheduleArray[8]->id;
+        $scheduleId10 = $scheduleArray[9]->id;
+        $scheduleId11 = $scheduleArray[10]->id;
+        $scheduleId12 = $scheduleArray[11]->id;
+        $scheduleId13 = $scheduleArray[12]->id;
+        $scheduleId14 = $scheduleArray[13]->id;
+        $scheduleId15 = $scheduleArray[14]->id;
+        $scheduleId16 = $scheduleArray[15]->id;
+        $scheduleId17 = $scheduleArray[16]->id;
+        $scheduleId18 = $scheduleArray[17]->id;
+        $scheduleId19 = $scheduleArray[18]->id;
+        $scheduleId20 = $scheduleArray[19]->id;
+        $scheduleId21 = $scheduleArray[20]->id;
+        $scheduleId22 = $scheduleArray[21]->id;
+        $scheduleId23 = $scheduleArray[22]->id;
+        $scheduleId24 = $scheduleArray[23]->id;
+        $scheduleId25 = $scheduleArray[24]->id;
+        $scheduleId26 = $scheduleArray[25]->id;
+        $scheduleId27 = $scheduleArray[26]->id;
+        $scheduleId28 = $scheduleArray[27]->id;
+        $scheduleId29 = $scheduleArray[28]->id;
+        $scheduleId30 = $scheduleArray[29]->id;
 
         $countryArray = Championship::find()
-            ->select(['championship_country_id'])
-            ->where(['championship_season_id' => $seasonId])
-            ->groupBy(['championship_country_id'])
-            ->orderBy(['championship_country_id' => SORT_ASC])
+            ->select(['federation_id'])
+            ->where(['season_id' => $seasonId])
+            ->groupBy(['federation_id'])
+            ->orderBy(['federation_id' => SORT_ASC])
             ->all();
 
         foreach ($countryArray as $country) {
             $divisionArray = Championship::find()
-                ->select(['championship_division_id'])
+                ->select(['division_id'])
                 ->where([
-                    'championship_season_id' => $seasonId,
-                    'championship_country_id' => $country->championship_country_id,
+                    'season_id' => $seasonId,
+                    'federation_id' => $country->federation_id,
                 ])
-                ->groupBy(['championship_division_id'])
-                ->orderBy(['championship_division_id' => SORT_ASC])
+                ->groupBy(['division_id'])
+                ->orderBy(['division_id' => SORT_ASC])
                 ->all();
 
             foreach ($divisionArray as $division) {
@@ -97,45 +97,45 @@ class InsertChampionship
                 $teamArray = Championship::find()
                     ->with(['team'])
                     ->where([
-                        'championship_country_id' => $country->championship_country_id,
-                        'championship_division_id' => $division->championship_division_id,
-                        'championship_season_id' => $seasonId,
+                        'federation_id' => $country->federation_id,
+                        'division_id' => $division->division_id,
+                        'season_id' => $seasonId,
                     ])
                     ->orderBy('RAND()')
                     ->all();
-                $teamId01 = $teamArray[0]->championship_team_id;
-                $teamId02 = $teamArray[1]->championship_team_id;
-                $teamId03 = $teamArray[2]->championship_team_id;
-                $teamId04 = $teamArray[3]->championship_team_id;
-                $teamId05 = $teamArray[4]->championship_team_id;
-                $teamId06 = $teamArray[5]->championship_team_id;
-                $teamId07 = $teamArray[6]->championship_team_id;
-                $teamId08 = $teamArray[7]->championship_team_id;
-                $teamId09 = $teamArray[8]->championship_team_id;
-                $teamId10 = $teamArray[9]->championship_team_id;
-                $teamId11 = $teamArray[10]->championship_team_id;
-                $teamId12 = $teamArray[11]->championship_team_id;
-                $teamId13 = $teamArray[12]->championship_team_id;
-                $teamId14 = $teamArray[13]->championship_team_id;
-                $teamId15 = $teamArray[14]->championship_team_id;
-                $teamId16 = $teamArray[15]->championship_team_id;
+                $teamId01 = $teamArray[0]->team_id;
+                $teamId02 = $teamArray[1]->team_id;
+                $teamId03 = $teamArray[2]->team_id;
+                $teamId04 = $teamArray[3]->team_id;
+                $teamId05 = $teamArray[4]->team_id;
+                $teamId06 = $teamArray[5]->team_id;
+                $teamId07 = $teamArray[6]->team_id;
+                $teamId08 = $teamArray[7]->team_id;
+                $teamId09 = $teamArray[8]->team_id;
+                $teamId10 = $teamArray[9]->team_id;
+                $teamId11 = $teamArray[10]->team_id;
+                $teamId12 = $teamArray[11]->team_id;
+                $teamId13 = $teamArray[12]->team_id;
+                $teamId14 = $teamArray[13]->team_id;
+                $teamId15 = $teamArray[14]->team_id;
+                $teamId16 = $teamArray[15]->team_id;
 
-                $stadiumId01 = $teamArray[0]->team->team_stadium_id;
-                $stadiumId02 = $teamArray[1]->team->team_stadium_id;
-                $stadiumId03 = $teamArray[2]->team->team_stadium_id;
-                $stadiumId04 = $teamArray[3]->team->team_stadium_id;
-                $stadiumId05 = $teamArray[4]->team->team_stadium_id;
-                $stadiumId06 = $teamArray[5]->team->team_stadium_id;
-                $stadiumId07 = $teamArray[6]->team->team_stadium_id;
-                $stadiumId08 = $teamArray[7]->team->team_stadium_id;
-                $stadiumId09 = $teamArray[8]->team->team_stadium_id;
-                $stadiumId10 = $teamArray[9]->team->team_stadium_id;
-                $stadiumId11 = $teamArray[10]->team->team_stadium_id;
-                $stadiumId12 = $teamArray[11]->team->team_stadium_id;
-                $stadiumId13 = $teamArray[12]->team->team_stadium_id;
-                $stadiumId14 = $teamArray[13]->team->team_stadium_id;
-                $stadiumId15 = $teamArray[14]->team->team_stadium_id;
-                $stadiumId16 = $teamArray[15]->team->team_stadium_id;
+                $stadiumId01 = $teamArray[0]->team->stadium_id;
+                $stadiumId02 = $teamArray[1]->team->stadium_id;
+                $stadiumId03 = $teamArray[2]->team->stadium_id;
+                $stadiumId04 = $teamArray[3]->team->stadium_id;
+                $stadiumId05 = $teamArray[4]->team->stadium_id;
+                $stadiumId06 = $teamArray[5]->team->stadium_id;
+                $stadiumId07 = $teamArray[6]->team->stadium_id;
+                $stadiumId08 = $teamArray[7]->team->stadium_id;
+                $stadiumId09 = $teamArray[8]->team->stadium_id;
+                $stadiumId10 = $teamArray[9]->team->stadium_id;
+                $stadiumId11 = $teamArray[10]->team->stadium_id;
+                $stadiumId12 = $teamArray[11]->team->stadium_id;
+                $stadiumId13 = $teamArray[12]->team->stadium_id;
+                $stadiumId14 = $teamArray[13]->team->stadium_id;
+                $stadiumId15 = $teamArray[14]->team->stadium_id;
+                $stadiumId16 = $teamArray[15]->team->stadium_id;
 
                 $data = [
                     [$teamId02, $teamId01, $scheduleId01, $stadiumId02],
@@ -384,7 +384,7 @@ class InsertChampionship
                     ->createCommand()
                     ->batchInsert(
                         Game::tableName(),
-                        ['game_home_team_id', 'game_guest_team_id', 'game_schedule_id', 'game_stadium_id'],
+                        ['home_team_id', 'guest_team_id', 'schedule_id', 'stadium_id'],
                         $data
                     )
                     ->execute();

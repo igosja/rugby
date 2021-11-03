@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Player;
+use common\models\db\Player;
 
 /**
  * Class GameRow
@@ -15,8 +15,8 @@ class GameRow
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Player::updateAll(['player_game_row' => -1], ['!=', 'player_game_row', -1]);
+        Player::updateAll(['game_row' => -1], ['!=', 'game_row', -1]);
     }
 }

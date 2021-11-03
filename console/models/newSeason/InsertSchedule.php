@@ -24,10 +24,10 @@ class InsertSchedule
     public function execute()
     {
         $seasonId = Season::getCurrentSeason() + 1;
-        $scheduleFriendlyArray = [6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90, 97];
+        $scheduleFriendlyArray = [6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 82, 83];
         $scheduleOffSeasonArray = [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12];
         $scheduleLeagueArray = [15, 17, 22, 24, 29, 31, 36, 38, 43, 45, 50, 52, 57, 59, 64, 66, 71, 73, 78, 80];
-        $scheduleWorldCupArray = [19, 26, 33, 40, 47, 54, 61, 68, 75, 82, 96];
+        $scheduleWorldCupArray = [19, 26, 33, 40, 47, 54, 61, 68, 75];
         $scheduleStageArray = [
             Stage::TOUR_1,
             Stage::TOUR_2,
@@ -111,21 +111,7 @@ class InsertSchedule
             Stage::TOUR_29,
             Stage::FINAL_GAME,
             Stage::TOUR_30,
-            Stage::TOUR_10,
             Stage::FRIENDLY,
-            Stage::QUARTER,
-            Stage::QUARTER,
-            Stage::QUARTER,
-            Stage::SEMI,
-            Stage::SEMI,
-            Stage::SEMI,
-            Stage::FRIENDLY,
-            Stage::FINAL_GAME,
-            Stage::FINAL_GAME,
-            Stage::FINAL_GAME,
-            Stage::FINAL_GAME,
-            Stage::FINAL_GAME,
-            Stage::TOUR_11,
             Stage::FRIENDLY,
         ];
         $scheduleConferenceStageArray = [
@@ -211,21 +197,7 @@ class InsertSchedule
             Stage::TOUR_29,
             Stage::FINAL_GAME,
             Stage::TOUR_30,
-            Stage::TOUR_10,
             Stage::FRIENDLY,
-            Stage::TOUR_31,
-            Stage::TOUR_32,
-            Stage::TOUR_33,
-            Stage::TOUR_34,
-            Stage::TOUR_35,
-            Stage::TOUR_36,
-            Stage::FRIENDLY,
-            Stage::TOUR_37,
-            Stage::TOUR_38,
-            Stage::TOUR_39,
-            Stage::TOUR_40,
-            Stage::TOUR_41,
-            Stage::TOUR_11,
             Stage::FRIENDLY,
         ];
 
@@ -253,43 +225,6 @@ class InsertSchedule
             $data[] = [$date, $seasonId, $scheduleStageArray[$i], $tournamentType];
             if ($conference) {
                 $data[] = [$date, $seasonId, $scheduleConferenceStageArray[$i], TournamentType::CONFERENCE];
-                if (in_array($scheduleConferenceStageArray[$i], [
-                    Stage::TOUR_31,
-                    Stage::TOUR_32,
-                    Stage::TOUR_33,
-                    Stage::TOUR_34,
-                    Stage::TOUR_35,
-                    Stage::TOUR_36,
-                    Stage::TOUR_37,
-                    Stage::TOUR_38,
-                    Stage::TOUR_39,
-                    Stage::TOUR_40,
-                    Stage::TOUR_41,
-                ])) {
-                    $data[] = [$date, $seasonId, Stage::FRIENDLY, TournamentType::FRIENDLY];
-                }
-
-                if (0 == $seasonId % 4) {
-                    if (Stage::TOUR_31 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::TOUR_OLYMPIAD_1, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_32 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::TOUR_OLYMPIAD_2, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_33 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::TOUR_OLYMPIAD_3, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_34 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::TOUR_OLYMPIAD_4, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_35 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::TOUR_OLYMPIAD_5, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_36 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::ROUND_OF_16, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_37 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::QUARTER, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_38 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::SEMI, TournamentType::OLYMPIAD];
-                    } elseif (Stage::TOUR_39 == $scheduleConferenceStageArray[$i]) {
-                        $data[] = [$date, $seasonId, Stage::FINAL_GAME, TournamentType::OLYMPIAD];
-                    }
-                }
             }
         }
 
@@ -297,7 +232,7 @@ class InsertSchedule
             ->createCommand()
             ->batchInsert(
                 Schedule::tableName(),
-                ['schedule_date', 'schedule_season_id', 'schedule_stage_id', 'schedule_tournament_type_id'],
+                ['date', 'season_id', 'stage_id', 'tournament_type_id'],
                 $data
             )
             ->execute();

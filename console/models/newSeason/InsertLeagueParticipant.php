@@ -7,7 +7,6 @@ namespace console\models\newSeason;
 use common\models\db\Championship;
 use common\models\db\Division;
 use common\models\db\LeagueDistribution;
-use common\models\db\ParticipantChampionship;
 use common\models\db\ParticipantLeague;
 use common\models\db\Season;
 use common\models\db\Stage;
@@ -24,108 +23,40 @@ class InsertLeagueParticipant
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason();
 
         $data = [];
 
         $distributionArray = LeagueDistribution::find()
-            ->where(['league_distribution_season_id' => $seasonId + 1])
-            ->orderBy(['league_distribution_id' => SORT_ASC])
+            ->where(['season_id' => $seasonId + 1])
+            ->orderBy(['id' => SORT_ASC])
             ->all();
         foreach ($distributionArray as $distribution) {
             $participantArray = [];
 
-            $distributionTotal = $distribution->league_distribution_group + $distribution->league_distribution_qualification_3 + $distribution->league_distribution_qualification_2 + $distribution->league_distribution_qualification_1;
+            $distributionTotal = $distribution->group + $distribution->qualification_3 + $distribution->qualification_2 + $distribution->qualification_1;
 
-            $participantChampionship = ParticipantChampionship::find()
-                ->where([
-                    'participant_championship_country_id' => $distribution->league_distribution_country_id,
-                    'participant_championship_division_id' => Division::D1,
-                    'participant_championship_season_id' => $seasonId,
-                    'participant_championship_stage_id' => 0,
-                ])
-                ->limit(1)
-                ->one();
-
-            $participantArray[] = $participantChampionship->participant_championship_team_id;
-
-            if ($distributionTotal > 1) {
+            for ($i = 1; $i <= $distributionTotal; $i++) {
                 $championship = Championship::find()
                     ->where([
-                        'championship_country_id' => $distribution->league_distribution_country_id,
-                        'championship_division_id' => Division::D1,
-                        'championship_season_id' => $seasonId,
-                        'championship_place' => 1,
+                        'federation_id' => $distribution->federation_id,
+                        'division_id' => Division::D1,
+                        'season_id' => $seasonId,
                     ])
-                    ->andWhere(['not', ['championship_team_id' => $participantArray]])
+                    ->andWhere(['not', ['team_id' => $participantArray]])
+                    ->orderBy(['place' => SORT_ASC])
                     ->limit(1)
                     ->one();
                 if ($championship) {
-                    $participantArray[] = $championship->championship_team_id;
-                } else {
-                    $participantChampionship = ParticipantChampionship::find()
-                        ->where([
-                            'participant_championship_country_id' => $distribution->league_distribution_country_id,
-                            'participant_championship_division_id' => Division::D1,
-                            'participant_championship_season_id' => $seasonId,
-                            'participant_championship_stage_id' => Stage::FINAL_GAME,
-                        ])
-                        ->andWhere(['not', ['participant_championship_team_id' => $participantArray]])
-                        ->limit(1)
-                        ->one();
-                    $participantArray[] = $participantChampionship->participant_championship_team_id;
+                    $participantArray[] = $championship->team_id;
                 }
             }
 
-            if ($distributionTotal > 2) {
-                $participantChampionship = ParticipantChampionship::find()
-                    ->where([
-                        'participant_championship_country_id' => $distribution->league_distribution_country_id,
-                        'participant_championship_division_id' => Division::D1,
-                        'participant_championship_season_id' => $seasonId,
-                        'participant_championship_stage_id' => Stage::FINAL_GAME,
-                    ])
-                    ->andWhere(['not', ['participant_championship_team_id' => $participantArray]])
-                    ->limit(1)
-                    ->one();
-                if ($participantChampionship) {
-                    $participantArray[] = $participantChampionship->participant_championship_team_id;
-                } else {
-                    $championship = Championship::find()
-                        ->where([
-                            'championship_country_id' => $distribution->league_distribution_country_id,
-                            'championship_division_id' => Division::D1,
-                            'championship_season_id' => $seasonId,
-                        ])
-                        ->andWhere(['not', ['championship_team_id' => $participantArray]])
-                        ->orderBy(['championship_place' => SORT_ASC])
-                        ->limit(1)
-                        ->one();
-                    $participantArray[] = $championship->championship_team_id;
-                }
-            }
-
-            if ($distributionTotal > 3) {
-                $championshipArray = Championship::find()
-                    ->where([
-                        'championship_country_id' => $distribution->league_distribution_country_id,
-                        'championship_division_id' => Division::D1,
-                        'championship_season_id' => $seasonId,
-                    ])
-                    ->andWhere(['not', ['championship_team_id' => $participantArray]])
-                    ->orderBy(['championship_place' => SORT_ASC])
-                    ->limit($distributionTotal - count($participantArray))
-                    ->all();
-                foreach ($championshipArray as $championship) {
-                    $participantArray[] = $championship->championship_team_id;
-                }
-            }
-
-            if ($distribution->league_distribution_group) {
-                $groupParticipantArray = array_slice($participantArray, 0, $distribution->league_distribution_group);
-                array_splice($participantArray, 0, $distribution->league_distribution_group);
+            if ($distribution->group) {
+                $groupParticipantArray = array_slice($participantArray, 0, $distribution->group);
+                array_splice($participantArray, 0, $distribution->group);
 
                 foreach ($groupParticipantArray as $item) {
                     $data[] = [$seasonId + 1, Stage::TOUR_LEAGUE_1, $item];
@@ -133,11 +64,11 @@ class InsertLeagueParticipant
             }
 
             for ($i = 3; $i >= 1; $i--) {
-                $qualify = 'league_distribution_qualification_' . $i;
-                if (0 != $distribution->$qualify) {
-                    if (3 == $i) {
+                $qualify = 'qualification_' . $i;
+                if (0 !== $distribution->$qualify) {
+                    if (3 === $i) {
                         $stage = Stage::QUALIFY_3;
-                    } elseif (2 == $i) {
+                    } elseif (2 === $i) {
                         $stage = Stage::QUALIFY_2;
                     } else {
                         $stage = Stage::QUALIFY_1;
@@ -158,9 +89,9 @@ class InsertLeagueParticipant
             ->batchInsert(
                 ParticipantLeague::tableName(),
                 [
-                    'participant_league_season_id',
-                    'participant_league_stage_in',
-                    'participant_league_team_id',
+                    'season_id',
+                    'stage_in_id',
+                    'team_id',
                 ],
                 $data
             )

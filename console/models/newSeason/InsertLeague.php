@@ -4,12 +4,12 @@
 
 namespace console\models\newSeason;
 
-use common\models\Game;
-use common\models\ParticipantLeague;
-use common\models\Schedule;
-use common\models\Season;
-use common\models\Stage;
-use common\models\TournamentType;
+use common\models\db\Game;
+use common\models\db\ParticipantLeague;
+use common\models\db\Schedule;
+use common\models\db\Season;
+use common\models\db\Stage;
+use common\models\db\TournamentType;
 use Exception;
 use Yii;
 
@@ -23,72 +23,68 @@ class InsertLeague
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 1;
 
-        $teamArray = $this->lot(Stage::QUALIFY_1);
+        $teamArray = $this->lot();
 
         $stageArray = Schedule::find()
             ->where([
-                'schedule_season_id' => $seasonId,
-                'schedule_stage_id' => Stage::QUALIFY_1,
-                'schedule_tournament_type_id' => TournamentType::LEAGUE,
+                'season_id' => $seasonId,
+                'stage_id' => Stage::QUALIFY_1,
+                'tournament_type_id' => TournamentType::LEAGUE,
             ])
-            ->orderBy(['schedule_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->limit(2)
             ->all();
 
         foreach ($teamArray as $item) {
             $model = new Game();
-            $model->game_guest_team_id = $item['guest'];
-            $model->game_home_team_id = $item['home'];
-            $model->game_schedule_id = $stageArray[0]->schedule_id;
+            $model->guest_team_id = $item['guest'];
+            $model->home_team_id = $item['home'];
+            $model->schedule_id = $stageArray[0]->id;
             $model->save();
 
             $model = new Game();
-            $model->game_guest_team_id = $item['home'];
-            $model->game_home_team_id = $item['guest'];
-            $model->game_schedule_id = $stageArray[1]->schedule_id;
+            $model->guest_team_id = $item['home'];
+            $model->home_team_id = $item['guest'];
+            $model->schedule_id = $stageArray[1]->id;
             $model->save();
         }
 
         $sql = "UPDATE `game`
                 LEFT JOIN `team`
-                ON `game_home_team_id`=`team_id`
-                SET `game_stadium_id`=`team_stadium_id`
-                WHERE `game_schedule_id` IN (" . $stageArray[0]->schedule_id . ", " . $stageArray[1]->schedule_id . ")";
+                ON `home_team_id`=`team`.`id`
+                SET `game`.`stadium_id`=`team`.`stadium_id`
+                WHERE `schedule_id` IN (" . $stageArray[0]->id . ", " . $stageArray[1]->id . ")";
         Yii::$app->db->createCommand($sql)->execute();
     }
 
     /**
-     * @param int $stageId
      * @return array
      */
-    private function lot(int $stageId): array
+    private function lot(): array
     {
-        $teamArray = $this->prepare($stageId);
-        $teamArray = $this->all($teamArray, $stageId);
-
-        return $teamArray;
+        $teamArray = $this->prepare();
+        return $this->all($teamArray, Stage::QUALIFY_1);
     }
 
     /**
-     * @param int $stageId
      * @return array
      */
-    private function prepare(int $stageId): array
+    private function prepare(): array
     {
         $seasonId = Season::getCurrentSeason() + 1;
 
         $participantLeagueArray = ParticipantLeague::find()
             ->joinwith(['team'])
             ->where([
-                'participant_league_season_id' => $seasonId,
-                'participant_league_stage_id' => 0,
-                'participant_league_stage_in' => [Stage::QUALIFY_1],
+                'season_id' => $seasonId,
+                'stage_out_id' => 0,
+                'stage_in_id' => [Stage::QUALIFY_1],
             ])
-            ->orderBy(['team_power_vs' => SORT_DESC])
+            ->orderBy(['power_vs' => SORT_DESC])
             ->all();
 
         $teamResultArray = [[], []];
@@ -96,11 +92,11 @@ class InsertLeague
         $countParticipantLeague = count($participantLeagueArray);
         $limitHalf = $countParticipantLeague / 2;
 
-        for ($i = 0; $i < $countParticipantLeague; $i++) {
+        foreach ($participantLeagueArray as $i => $participantLeague) {
             if ($i < $limitHalf) {
-                $teamResultArray[0][] = $participantLeagueArray[$i];
+                $teamResultArray[0][] = $participantLeague;
             } else {
-                $teamResultArray[1][] = $participantLeagueArray[$i];
+                $teamResultArray[1][] = $participantLeague;
             }
         }
 
@@ -140,8 +136,7 @@ class InsertLeague
             'guest' => $guestTeam['team_id']
         ];
 
-        unset($teamArray[0][$homeTeam['i']]);
-        unset($teamArray[1][$guestTeam['i']]);
+        unset($teamArray[0][$homeTeam['i']], $teamArray[1][$guestTeam['i']]);
 
         $teamArray = array(
             array_values($teamArray[0]),
@@ -156,7 +151,7 @@ class InsertLeague
     }
 
     /**
-     * @param array $teamArray
+     * @param ParticipantLeague[][] $teamArray
      * @return array
      */
     private function teamHome(array $teamArray): array
@@ -165,13 +160,13 @@ class InsertLeague
 
         return [
             'i' => $team,
-            'team_id' => $teamArray[0][$team]->participant_league_team_id,
-            'country_id' => $teamArray[0][$team]->team->stadium->city->city_country_id,
+            'team_id' => $teamArray[0][$team]->team_id,
+            'country_id' => $teamArray[0][$team]->team->stadium->city->country_id,
         ];
     }
 
     /**
-     * @param array $teamArray
+     * @param ParticipantLeague[][] $teamArray
      * @param array $homeTeam
      * @return array
      */
@@ -182,12 +177,12 @@ class InsertLeague
         shuffle($shuffleArray);
 
         foreach ($shuffleArray as $item) {
-            if ($item->team->stadium->city->city_country_id != $homeTeam['country_id']) {
-                for ($i = 0, $countTeam = count($teamArray[1]); $i < $countTeam; $i++) {
-                    if ($teamArray[1][$i]->participant_league_team_id == $item->participant_league_team_id) {
+            if ($item->team->stadium->city->country_id !== $homeTeam['country_id']) {
+                foreach ($teamArray[1] as $i => $team) {
+                    if ($team->team_id === $item->team_id) {
                         return [
                             'i' => $i,
-                            'team_id' => $teamArray[1][$i]->participant_league_team_id,
+                            'team_id' => $team->team_id,
                         ];
                     }
                 }
