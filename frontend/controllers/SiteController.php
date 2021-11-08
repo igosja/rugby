@@ -175,7 +175,7 @@ class SiteController extends AbstractController
         }
 
         $user = User::find()
-            ->where(['user_code' => $code])
+            ->where(['code' => $code])
             ->limit(1)
             ->one();
         $this->notFound($user);
