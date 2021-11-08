@@ -64,6 +64,7 @@ use yii\web\IdentityInterface;
  * @property-read User $referrerUser
  * @property-read Sex $sex
  * @property-read Team[] $teams
+ * @property-read UserLogin[] $userLogins
  * @property-read UserRole $userRole
  */
 class User extends AbstractActiveRecord implements IdentityInterface
@@ -619,6 +620,14 @@ class User extends AbstractActiveRecord implements IdentityInterface
             ->hasOne(UserBlock::class, ['user_id' => 'id'])
             ->andWhere(['user_block_type_id' => $userBlockTypeId])
             ->orderBy(['date' => SORT_DESC]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUserLogins(): ActiveQuery
+    {
+        return $this->hasMany(UserLogin::class, ['user_id' => 'id']);
     }
 
     /**

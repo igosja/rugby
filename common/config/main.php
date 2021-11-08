@@ -67,6 +67,7 @@ return [
             'targets' => [
                 [
                     'class' => DbTarget::class,
+                    'except' => ['yii\web\HttpException:404'],
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -75,7 +76,7 @@ return [
         'redis' => [
             'class' => Connection::class,
             'database' => 0,
-            'hostname' => 'localhost',
+            'hostname' => 'redis',
             'port' => 6379,
         ],
     ],

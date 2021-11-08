@@ -2,13 +2,12 @@
 
 // TODO refactor
 
-use common\models\db\User;
 use yii\helpers\Html;
-use yii\web\View;
 
 /**
- * @var User $model
- * @var View $this
+ * @var \common\models\db\User $model
+ * @var \yii\web\View $this
+ * @var array $userArray
  */
 
 ?>
@@ -20,7 +19,9 @@ use yii\web\View;
 <ul class="list-inline preview-links text-center">
     <li>
         <?= Html::a('List', ['index'], ['class' => 'btn btn-default']) ?>
+    </li>
+    <li>
         <?= Html::a('View', ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
     </li>
 </ul>
-<?= $this->render('_form', ['model' => $model]) ?>
+<?= $this->render('_form', ['model' => $model, 'userArray' => $userArray]) ?>
