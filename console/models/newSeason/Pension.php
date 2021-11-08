@@ -4,14 +4,14 @@
 
 namespace console\models\newSeason;
 
-use common\models\Finance;
-use common\models\FinanceText;
-use common\models\History;
-use common\models\HistoryText;
-use common\models\Player;
-use common\models\Special;
-use common\models\Squad;
-use common\models\Team;
+use common\models\db\Finance;
+use common\models\db\FinanceText;
+use common\models\db\History;
+use common\models\db\HistoryText;
+use common\models\db\Player;
+use common\models\db\Special;
+use common\models\db\Squad;
+use common\models\db\Team;
 use Throwable;
 use yii\db\StaleObjectException;
 
@@ -25,32 +25,32 @@ class Pension
      * @throws Throwable
      * @throws StaleObjectException
      */
-    public function execute()
+    public function execute(): void
     {
         $playerArray = Player::find()
-            ->with(['playerSpecial'])
-            ->where(['>=', 'player_age', Player::AGE_READY_FOR_PENSION])
-            ->andWhere(['!=', 'player_team_id', 0])
-            ->orderBy(['player_id' => SORT_ASC])
+            ->with(['playerSpecials'])
+            ->where(['>=', 'age', Player::AGE_READY_FOR_PENSION])
+            ->andWhere(['!=', 'team_id', 0])
+            ->orderBy(['id' => SORT_ASC])
             ->each();
         foreach ($playerArray as $player) {
             /**
              * @var Player $player
              */
             History::log([
-                'history_history_text_id' => HistoryText::PLAYER_PENSION_GO,
-                'history_player_id' => $player->player_id,
-                'history_team_id' => $player->player_team_id,
+                'history_text_id' => HistoryText::PLAYER_PENSION_GO,
+                'player_id' => $player->id,
+                'team_id' => $player->team_id,
             ]);
 
             $special = 0;
-            foreach ($player->playerSpecial as $playerSpecial) {
-                if (Special::IDOL == $playerSpecial->player_special_id) {
-                    if (1 == $playerSpecial->player_special_level) {
+            foreach ($player->playerSpecials as $playerSpecial) {
+                if (Special::IDOL === $playerSpecial->special_id) {
+                    if (1 === $playerSpecial->level) {
                         $special = 15;
-                    } elseif (2 == $playerSpecial->player_special_level) {
+                    } elseif (2 === $playerSpecial->level) {
                         $special = 25;
-                    } elseif (3 == $playerSpecial->player_special_level) {
+                    } elseif (3 === $playerSpecial->level) {
                         $special = 40;
                     } else {
                         $special = 50;
@@ -58,29 +58,29 @@ class Pension
                 }
             }
 
-            $price = ceil($player->player_price / 2 + $player->player_price * $special / 100);
+            $price = ceil($player->price / 2 + $player->price * $special / 100);
 
             $team = Team::find()
-                ->where(['team_id' => $player->player_team_id])
+                ->where(['id' => $player->team_id])
                 ->limit(1)
                 ->one();
 
             Finance::log([
-                'finance_finance_text_id' => FinanceText::INCOME_PENSION,
-                'finance_team_id' => $player->player_team_id,
-                'finance_value' => $price,
-                'finance_value_after' => $team->team_finance + $price,
-                'finance_value_before' => $team->team_finance,
+                'finance_text_id' => FinanceText::INCOME_PENSION,
+                'team_id' => $player->team_id,
+                'value' => $price,
+                'value_after' => $team->finance + $price,
+                'value_before' => $team->finance,
             ]);
 
-            $team->team_finance = $team->team_finance + $price;
-            $team->save(true, ['team_finance']);
+            $team->finance += $price;
+            $team->save(true, ['finance']);
 
-            $player->player_squad_id = Squad::SQUAD_DEFAULT;
-            $player->player_order = 0;
-            $player->player_loan_day = 0;
-            $player->player_loan_team_id = 0;
-            $player->player_team_id = 0;
+            $player->squad_id = Squad::SQUAD_DEFAULT;
+            $player->order = 0;
+            $player->loan_day = 0;
+            $player->loan_team_id = 0;
+            $player->team_id = 0;
             $player->save();
 
             if ($player->transfer) {

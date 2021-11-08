@@ -4,11 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\NationalPlayerDay;
-use common\models\NationalUserDay;
-use common\models\PhysicalChange;
-use common\models\TeamVisitor;
-use common\models\Teamwork;
+use common\models\db\TeamVisitor;
 use Exception;
 use Yii;
 
@@ -22,12 +18,8 @@ class TruncateTables
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         Yii::$app->db->createCommand()->truncateTable(TeamVisitor::tableName())->execute();
-        Yii::$app->db->createCommand()->truncateTable(PhysicalChange::tableName())->execute();
-        Yii::$app->db->createCommand()->truncateTable(NationalPlayerDay::tableName())->execute();
-        Yii::$app->db->createCommand()->truncateTable(NationalUserDay::tableName())->execute();
-        Yii::$app->db->createCommand()->truncateTable(Teamwork::tableName())->execute();
     }
 }

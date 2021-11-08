@@ -4,10 +4,10 @@
 
 namespace console\models\newSeason;
 
-use common\models\Attitude;
-use common\models\History;
-use common\models\National;
-use common\models\Team;
+use common\models\db\Attitude;
+use common\models\db\FireReason;
+use common\models\db\National;
+use common\models\db\Team;
 use Exception;
 
 /**
@@ -20,29 +20,29 @@ class FireNational
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $nationalArray = National::find()
             ->where([
                 'or',
-                ['!=', 'national_user_id', 0],
-                ['!=', 'national_vice_id', 0]
+                ['!=', 'user_id', 0],
+                ['!=', 'vice_user_id', 0]
             ])
-            ->orderBy(['national_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->all();
         foreach ($nationalArray as $national) {
-            if ($national->vice) {
+            if ($national->viceUser) {
                 $national->fireVice();
             }
             if ($national->user) {
-                $national->fireUser(History::FIRE_REASON_NEW_SEASON);
+                $national->fireUser(FireReason::FIRE_REASON_NEW_SEASON);
             }
         }
 
         Team::updateAll([
-            'team_attitude_national' => Attitude::NEUTRAL,
-            'team_attitude_u21' => Attitude::NEUTRAL,
-            'team_attitude_u19' => Attitude::NEUTRAL,
+            'national_attitude_id' => Attitude::NEUTRAL,
+            'u21_attitude_id' => Attitude::NEUTRAL,
+            'u19_attitude_id' => Attitude::NEUTRAL,
         ]);
     }
 }

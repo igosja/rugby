@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Player;
+use common\models\db\Player;
 
 /**
  * Class OlderPlayer
@@ -15,15 +15,15 @@ class OlderPlayer
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         Player::updateAllCounters(
-            ['player_age' => 1],
-            ['and', ['!=', 'player_team_id', 0], ['<=', 'player_age', Player::AGE_READY_FOR_PENSION]]
+            ['age' => 1],
+            ['and', ['!=', 'team_id', 0], ['<=', 'age', Player::AGE_READY_FOR_PENSION]]
         );
         Player::updateAllCounters(
-            ['player_age' => 1],
-            ['and', ['player_team_id' => 0], ['!=', 'player_age', 18], ['<=', 'player_age', Player::AGE_READY_FOR_PENSION]]
+            ['age' => 1],
+            ['and', ['team_id' => 0], ['!=', 'age', 18], ['<=', 'age', Player::AGE_READY_FOR_PENSION]]
         );
     }
 }

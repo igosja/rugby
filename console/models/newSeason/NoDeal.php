@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Player;
+use common\models\db\Player;
 
 /**
  * Class NoDeal
@@ -15,8 +15,8 @@ class NoDeal
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Player::updateAll(['player_no_deal' => 0], ['player_no_deal' => 1]);
+        Player::updateAll(['is_no_deal' => false], ['is_no_deal' => true]);
     }
 }

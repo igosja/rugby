@@ -6,6 +6,7 @@ namespace console\models\generator;
 
 use common\components\helpers\ErrorHelper;
 use common\models\db\Schedule;
+use common\models\db\Season;
 use console\controllers\AbstractController;
 use console\models\newSeason\BaseMaintenance;
 use console\models\newSeason\ChampionshipRotate;
@@ -59,7 +60,8 @@ class NewSeason
     public function execute(): bool
     {
         $schedule = Schedule::find()
-            ->where('FROM_UNIXTIME(`date`-86400, \'%Y-%m-%d\')=CURDATE()')
+            ->andWhere('FROM_UNIXTIME(`date`-86400, \'%Y-%m-%d\')=CURDATE()')
+            ->andWhere(['season_id' => Season::getCurrentSeason()])
             ->limit(1)
             ->one();
         if ($schedule) {
@@ -67,43 +69,42 @@ class NewSeason
         }
 
         $modelArray = [
-            new NoDeal(),
-            new FireNational(),
-            new PlayerFromNational(),
-            new NationalTransferMoney(),
-            new InsertLeagueParticipant(),
-            new InsertLeagueCoefficient(),
-            new LeagueLimit(),
-            new InsertSchedule(),
-            new InsertNational(),
-            new ChampionshipRotate(),
-            new WorldCupRotate(),
-            new InsertOffSeason(),
-            new InsertConference(),
-            new InsertChampionship(),
-            new InsertLeague(),
-            new InsertWorldCup(),
-            new InsertOlympiad(),
-            new EndBuildingBase(),
-            new EndBuildingStadium(),
-            new RandPhysical(),
-            new PlayerTireBaseLevel(),
-            new EndTraining(),
-            new EndSchool(),
-            new EndScout(),
-            new PlayerPowerChange(),
-            new Injury(),
-            new Pension(),
-            new OlderPlayer(),
-            new PensionInform(),
-            new PlayerPriceAndSalary(),
-            new BaseMaintenance(),
-            new MoodResetAll(),
-            new VisitorResetAll(),
-            new GameRow(),
-            new CountryAutoReset(),
-            new TruncateTables(),
-            new InsertNewSeason(),
+            new NoDeal,
+            new FireNational,
+            new PlayerFromNational,
+            new NationalTransferMoney,
+            new InsertLeagueParticipant,
+            new InsertLeagueCoefficient,
+            new LeagueLimit,
+            new InsertSchedule,
+            new InsertNational,
+            new ChampionshipRotate,
+            new WorldCupRotate,
+            new InsertOffSeason,
+            new InsertConference,
+            new InsertChampionship,
+            new InsertLeague,
+            new InsertWorldCup,
+            new EndBuildingBase,
+            new EndBuildingStadium,
+            new RandPhysical,
+            new PlayerTireBaseLevel,
+            new EndTraining,
+            new EndSchool,
+            new EndScout,
+            new PlayerPowerChange,
+            new Injury,
+            new Pension,
+            new OlderPlayer,
+            new PensionInform,
+            new PlayerPriceAndSalary,
+            new BaseMaintenance,
+            new MoodResetAll,
+            new VisitorResetAll,
+            new GameRow,
+            new CountryAutoReset,
+            new TruncateTables,
+            new InsertNewSeason,
         ];
 
         try {

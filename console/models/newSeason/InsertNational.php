@@ -20,15 +20,15 @@ class InsertNational
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $nationalTypeArray = NationalType::find()
             ->each();
         $cityArray = City::find()
-            ->where(['!=', 'city_country_id', 0])
-            ->andWhere(['not', ['city_country_id' => National::find()->select(['national_country_id'])]])
-            ->groupBy('city_country_id')
-            ->orderBy(['city_country_id' => SORT_ASC])
+            ->andWhere(['!=', 'country_id', 0])
+            ->andWhere(['not', ['country_id' => National::find()->joinWith(['federation'])->select(['country_id'])]])
+            ->groupBy('country_id')
+            ->orderBy(['country_id' => SORT_ASC])
             ->each();
 
         $data = [];
@@ -40,7 +40,7 @@ class InsertNational
                 /**
                  * @var NationalType $nationalType
                  */
-                $data[] = [$nationalType->national_type_id, $city->city_country_id];
+                $data[] = [$nationalType->id, $city->country->federation->id];
             }
         }
 
@@ -48,7 +48,7 @@ class InsertNational
             ->createCommand()
             ->batchInsert(
                 National::tableName(),
-                ['national_national_type_id', 'national_country_id'],
+                ['national_type_id', 'federation_id'],
                 $data
             )
             ->execute();

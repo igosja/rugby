@@ -20,13 +20,13 @@ class InsertLeagueCoefficient
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 1;
 
         $participantLeagueArray = ParticipantLeague::find()
-            ->where(['participant_league_season_id' => $seasonId])
-            ->orderBy(['participant_league_id' => SORT_ASC])
+            ->where(['season_id' => $seasonId])
+            ->orderBy(['id' => SORT_ASC])
             ->each();
 
         $data = [];
@@ -35,9 +35,9 @@ class InsertLeagueCoefficient
              * @var ParticipantLeague $participantLeague
              */
             $data[] = [
-                $participantLeague->team->stadium->city->country->country_id,
+                $participantLeague->team->stadium->city->country->federation->id,
                 $seasonId,
-                $participantLeague->participant_league_team_id,
+                $participantLeague->team_id,
             ];
         }
 
@@ -46,9 +46,9 @@ class InsertLeagueCoefficient
             ->batchInsert(
                 LeagueCoefficient::tableName(),
                 [
-                    'league_coefficient_country_id',
-                    'league_coefficient_season_id',
-                    'league_coefficient_team_id',
+                    'federation_id',
+                    'season_id',
+                    'team_id',
                 ],
                 $data
             )

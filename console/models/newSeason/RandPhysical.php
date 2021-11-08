@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Player;
+use common\models\db\Player;
 use yii\db\Expression;
 
 /**
@@ -16,8 +16,8 @@ class RandPhysical
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Player::updateAll(['player_physical_id' => new Expression('FLOOR(1+RAND()*20)')], ['!=', 'player_team_id', 0]);
+        Player::updateAll(['physical_id' => new Expression('FLOOR(1+RAND()*20)')], ['!=', 'team_id', 0]);
     }
 }

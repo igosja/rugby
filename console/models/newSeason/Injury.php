@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Player;
+use common\models\db\Player;
 
 /**
  * Class Injury
@@ -15,8 +15,8 @@ class Injury
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Player::updateAll(['player_injury' => 0, 'player_injury_day' => 0], ['player_injury' => 1]);
+        Player::updateAll(['is_injury' => false, 'injury_day' => 0], ['is_injury' => true]);
     }
 }
