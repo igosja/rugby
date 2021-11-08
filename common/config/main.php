@@ -76,7 +76,7 @@ return [
         'redis' => [
             'class' => Connection::class,
             'database' => 0,
-            'hostname' => 'redis',
+            'hostname' => 'localhost',
             'port' => 6379,
         ],
     ],
