@@ -21,16 +21,16 @@ class WorldCupRotate
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason();
 
         $divisionArray = Division::find()
-            ->orderBy(['division_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->all();
 
         $nationalTypeArray = NationalType::find()
-            ->orderBy(['national_type_id' => SORT_ASC])
+            ->orderBy(['id' => SORT_ASC])
             ->all();
         foreach ($nationalTypeArray as $nationalType) {
             $rotateArray = [];
@@ -38,120 +38,85 @@ class WorldCupRotate
             foreach ($divisionArray as $division) {
                 $rotateWorldCup = [];
 
-                if (Division::D1 == $division->division_id) {
+                $worldCupArray = WorldCup::find()
+                    ->where([
+                        'division_id' => $division->id - 1,
+                        'national_id' => $nationalType->id,
+                        'season_id' => $seasonId,
+                    ])
+                    ->orderBy(['place' => SORT_ASC])
+                    ->offset(8)
+                    ->limit(2)
+                    ->all();
+                if (!$worldCupArray) {
                     $worldCupArray = WorldCup::find()
                         ->where([
-                            'world_cup_division_id' => $division->division_id,
-                            'world_cup_national_type_id' => $nationalType->national_type_id,
-                            'world_cup_season_id' => $seasonId,
+                            'division_id' => $division->id,
+                            'national_id' => $nationalType->id,
+                            'season_id' => $seasonId,
                         ])
-                        ->orderBy(['world_cup_place' => SORT_ASC])
-                        ->limit(10)
-                        ->all();
-                    foreach ($worldCupArray as $worldCup) {
-                        $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                    }
-
-                    $worldCupArray = WorldCup::find()
-                        ->where([
-                            'world_cup_division_id' => $division->division_id + 1,
-                            'world_cup_national_type_id' => $nationalType->national_type_id,
-                            'world_cup_season_id' => $seasonId,
-                        ])
-                        ->orderBy(['world_cup_place' => SORT_ASC])
+                        ->orderBy(['place' => SORT_ASC])
                         ->limit(2)
                         ->all();
-                    if ($worldCupArray) {
-                        foreach ($worldCupArray as $worldCup) {
-                            $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                        }
-                    } else {
-                        $worldCupArray = WorldCup::find()
-                            ->where([
-                                'world_cup_division_id' => $division->division_id,
-                                'world_cup_national_type_id' => $nationalType->national_type_id,
-                                'world_cup_season_id' => $seasonId,
-                            ])
-                            ->orderBy(['world_cup_place' => SORT_ASC])
-                            ->offset(10)
-                            ->limit(2)
-                            ->all();
-                        foreach ($worldCupArray as $worldCup) {
-                            $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                        }
+                }
+                foreach ($worldCupArray as $worldCup) {
+                    $rotateWorldCup[] = $worldCup->national_id;
+                }
+
+                $worldCupArray = WorldCup::find()
+                    ->where([
+                        'division_id' => $division->id,
+                        'national_type_id' => $nationalType->id,
+                        'season_id' => $seasonId,
+                    ])
+                    ->orderBy(['place' => SORT_ASC])
+                    ->offset(2)
+                    ->limit(6)
+                    ->all();
+                foreach ($worldCupArray as $worldCup) {
+                    $rotateWorldCup[] = $worldCup->national_id;
+                }
+
+                $worldCupArray = WorldCup::find()
+                    ->where([
+                        'division_id' => $division->id + 1,
+                        'national_type_id' => $nationalType->id,
+                        'season_id' => $seasonId,
+                    ])
+                    ->orderBy(['place' => SORT_ASC])
+                    ->limit(2)
+                    ->all();
+                if ($worldCupArray) {
+                    foreach ($worldCupArray as $worldCup) {
+                        $rotateWorldCup[] = $worldCup->national_id;
                     }
                 } else {
                     $worldCupArray = WorldCup::find()
                         ->where([
-                            'world_cup_division_id' => $division->division_id,
-                            'world_cup_national_type_id' => $nationalType->national_type_id,
-                            'world_cup_season_id' => $seasonId,
+                            'division_id' => $division->id,
+                            'national_type_id' => $nationalType->id,
+                            'season_id' => $seasonId,
                         ])
-                        ->orderBy(['world_cup_place' => SORT_ASC])
-                        ->offset(2)
-                        ->limit(8)
+                        ->orderBy(['place' => SORT_ASC])
+                        ->offset(8)
+                        ->limit(2)
                         ->all();
-                    if ($worldCupArray) {
-                        foreach ($worldCupArray as $worldCup) {
-                            $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                        }
-
-                        $worldCupArray = WorldCup::find()
-                            ->where([
-                                'world_cup_division_id' => $division->division_id - 1,
-                                'world_cup_national_type_id' => $nationalType->national_type_id,
-                                'world_cup_season_id' => $seasonId,
-                            ])
-                            ->orderBy(['world_cup_place' => SORT_ASC])
-                            ->offset(10)
-                            ->limit(2)
-                            ->all();
-                        foreach ($worldCupArray as $worldCup) {
-                            $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                        }
-
-                        $worldCupArray = WorldCup::find()
-                            ->where([
-                                'world_cup_division_id' => $division->division_id + 1,
-                                'world_cup_national_type_id' => $nationalType->national_type_id,
-                                'world_cup_season_id' => $seasonId,
-                            ])
-                            ->orderBy(['world_cup_place' => SORT_ASC])
-                            ->limit(2)
-                            ->all();
-                        if ($worldCupArray) {
-                            foreach ($worldCupArray as $worldCup) {
-                                $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                            }
-                        } else {
-                            $worldCupArray = WorldCup::find()
-                                ->where([
-                                    'world_cup_division_id' => $division->division_id,
-                                    'world_cup_national_type_id' => $nationalType->national_type_id,
-                                    'world_cup_season_id' => $seasonId,
-                                ])
-                                ->orderBy(['world_cup_place' => SORT_ASC])
-                                ->offset(10)
-                                ->limit(2)
-                                ->all();
-                            foreach ($worldCupArray as $worldCup) {
-                                $rotateWorldCup[] = $worldCup->world_cup_national_id;
-                            }
-                        }
+                    foreach ($worldCupArray as $worldCup) {
+                        $rotateWorldCup[] = $worldCup->national_id;
                     }
                 }
 
                 if ($rotateWorldCup) {
-                    $rotateArray[$division->division_id] = $rotateWorldCup;
+                    $rotateArray[$division->id] = $rotateWorldCup;
                 }
             }
 
             foreach ($divisionArray as $division) {
-                if (isset($rotateArray[$division->division_id])) {
+                if (isset($rotateArray[$division->id])) {
                     $data = [];
 
-                    foreach ($rotateArray[$division->division_id] as $item) {
-                        $data[] = [$nationalType->national_type_id, $division->division_id, $seasonId + 1, $item];
+                    foreach ($rotateArray[$division->id] as $item) {
+                        $data[] = [$nationalType->id, $division->id, $seasonId + 1, $item];
                     }
 
                     Yii::$app->db
@@ -159,10 +124,10 @@ class WorldCupRotate
                         ->batchInsert(
                             WorldCup::tableName(),
                             [
-                                'world_cup_national_type_id',
-                                'world_cup_division_id',
-                                'world_cup_season_id',
-                                'world_cup_national_id'
+                                'national_type_id',
+                                'division_id',
+                                'season_id',
+                                'national_id'
                             ],
                             $data
                         )

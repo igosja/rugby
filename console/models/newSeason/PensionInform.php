@@ -4,9 +4,9 @@
 
 namespace console\models\newSeason;
 
-use common\models\History;
-use common\models\HistoryText;
-use common\models\Player;
+use common\models\db\History;
+use common\models\db\HistoryText;
+use common\models\db\Player;
 use Exception;
 
 /**
@@ -19,21 +19,21 @@ class PensionInform
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $playerArray = Player::find()
-            ->where(['player_age' => Player::AGE_READY_FOR_PENSION])
-            ->andWhere(['!=', 'player_team_id', 0])
-            ->orderBy(['player_id' => SORT_ASC])
+            ->where(['age' => Player::AGE_READY_FOR_PENSION])
+            ->andWhere(['!=', 'team_id', 0])
+            ->orderBy(['id' => SORT_ASC])
             ->each();
         foreach ($playerArray as $player) {
             /**
              * @var Player $player
              */
             History::log([
-                'history_history_text_id' => HistoryText::PLAYER_PENSION_SAY,
-                'history_player_id' => $player->player_id,
-                'history_team_id' => $player->player_team_id,
+                'history_text_id' => HistoryText::PLAYER_PENSION_SAY,
+                'player_id' => $player->id,
+                'team_id' => $player->team_id,
             ]);
         }
     }

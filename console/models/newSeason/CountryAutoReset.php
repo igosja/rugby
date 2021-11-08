@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Country;
+use common\models\db\Federation;
 
 /**
  * Class CountryAutoReset
@@ -15,8 +15,8 @@ class CountryAutoReset
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Country::updateAll(['country_auto' => 0], ['!=', 'country_auto', 0]);
+        Federation::updateAll(['auto' => 0], ['!=', 'auto', 0]);
     }
 }

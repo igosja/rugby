@@ -4,10 +4,10 @@
 
 namespace console\models\newSeason;
 
-use common\models\Finance;
-use common\models\FinanceText;
-use common\models\Season;
-use common\models\Team;
+use common\models\db\Finance;
+use common\models\db\FinanceText;
+use common\models\db\Season;
+use common\models\db\Team;
 use Exception;
 
 /**
@@ -20,13 +20,13 @@ class BaseMaintenance
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 1;
 
         $teamArray = Team::find()
-            ->where(['!=', 'team_id', 0])
-            ->orderBy(['team_id' => SORT_ASC])
+            ->where(['!=', 'id', 0])
+            ->orderBy(['id' => SORT_ASC])
             ->each();
         foreach ($teamArray as $team) {
             /**
@@ -35,16 +35,16 @@ class BaseMaintenance
             $maintenance = $team->baseMaintenance();
 
             Finance::log([
-                'finance_finance_text_id' => FinanceText::OUTCOME_MAINTENANCE,
-                'finance_season_id' => $seasonId,
-                'finance_team_id' => $team->team_id,
-                'finance_value' => -$maintenance,
-                'finance_value_after' => $team->team_finance - $maintenance,
-                'finance_value_before' => $team->team_finance,
+                'finance_text_id' => FinanceText::OUTCOME_MAINTENANCE,
+                'season_id' => $seasonId,
+                'team_id' => $team->id,
+                'value' => -$maintenance,
+                'value_after' => $team->finance - $maintenance,
+                'value_before' => $team->finance,
             ]);
 
-            $team->team_finance = $team->team_finance - $maintenance;
-            $team->save(true, ['team_finance']);
+            $team->finance -= $maintenance;
+            $team->save(true, ['finance']);
         }
     }
 }

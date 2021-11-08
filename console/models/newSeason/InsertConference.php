@@ -25,19 +25,19 @@ class InsertConference
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
         $seasonId = Season::getCurrentSeason() + 1;
         $teamArray = Team::find()
             ->where([
                 'not',
                 [
-                    'team_id' => Championship::find()
-                        ->select(['championship_team_id'])
-                        ->where(['championship_season_id' => $seasonId])
+                    'id' => Championship::find()
+                        ->select(['team_id'])
+                        ->where(['season_id' => $seasonId])
                 ]
             ])
-            ->andWhere(['!=', 'team_id', 0])
+            ->andWhere(['!=', 'id', 0])
             ->orderBy('RAND()')
             ->each();
 
@@ -46,24 +46,24 @@ class InsertConference
             /**
              * @var Team $team
              */
-            $data[] = [$seasonId, $team->team_id];
+            $data[] = [$seasonId, $team->id];
         }
 
         Yii::$app->db
             ->createCommand()
             ->batchInsert(
                 Conference::tableName(),
-                ['conference_season_id', 'conference_team_id'],
+                ['season_id', 'team_id'],
                 $data
             )
             ->execute();
 
         $scheduleId = Schedule::find()
-            ->select(['schedule_id'])
+            ->select(['id'])
             ->where([
-                'schedule_tournament_type_id' => TournamentType::CONFERENCE,
-                'schedule_stage_id' => Stage::TOUR_1,
-                'schedule_season_id' => $seasonId,
+                'tournament_type_id' => TournamentType::CONFERENCE,
+                'stage_id' => Stage::TOUR_1,
+                'season_id' => $seasonId,
             ])
             ->limit(1)
             ->scalar();
@@ -71,7 +71,7 @@ class InsertConference
         /** @var Conference[] $conferenceArray */
         $conferenceArray = Conference::find()
             ->with(['team'])
-            ->where(['conference_season_id' => $seasonId])
+            ->where(['season_id' => $seasonId])
             ->orderBy(['id' => SORT_ASC])
             ->all();
 
@@ -94,15 +94,15 @@ class InsertConference
 
         $data = [];
         foreach ($keyArray as $item) {
-            if (!isset($conferenceArray[$item[0]]) || !isset($conferenceArray[$item[1]])) {
+            if (!isset($conferenceArray[$item[0]], $conferenceArray[$item[1]])) {
                 continue;
             }
 
             $data[] = [
-                $conferenceArray[$item[1]]->conference_team_id,
-                $conferenceArray[$item[0]]->conference_team_id,
+                $conferenceArray[$item[1]]->team_id,
+                $conferenceArray[$item[0]]->team_id,
                 $scheduleId,
-                $conferenceArray[$item[0]]->team->team_stadium_id,
+                $conferenceArray[$item[0]]->team->stadium_id,
             ];
         }
 
@@ -110,7 +110,7 @@ class InsertConference
             ->createCommand()
             ->batchInsert(
                 Game::tableName(),
-                ['game_guest_team_id', 'game_home_team_id', 'game_schedule_id', 'game_stadium_id'],
+                ['guest_team_id', 'home_team_id', 'schedule_id', 'stadium_id'],
                 $data
             )
             ->execute();

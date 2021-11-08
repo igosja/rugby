@@ -4,7 +4,7 @@
 
 namespace console\models\newSeason;
 
-use common\models\Season;
+use common\models\db\Season;
 use Exception;
 
 /**
@@ -17,10 +17,28 @@ class InsertNewSeason
      * @return void
      * @throws Exception
      */
-    public function execute()
+    public function execute(): void
     {
-        $model = new Season();
-        $model->season_id = Season::getCurrentSeason() + 1;
-        $model->save();
+        $season = Season::find()
+            ->andWhere(['id' => Season::getCurrentSeason() + 1])
+            ->limit(1)
+            ->one();
+        if (!$season) {
+            $season = new Season();
+            $season->id = Season::getCurrentSeason() + 1;
+        }
+        $season->is_future = false;
+        $season->save();
+
+        $season = Season::find()
+            ->andWhere(['id' => Season::getCurrentSeason() + 1])
+            ->limit(1)
+            ->one();
+        if (!$season) {
+            $season = new Season();
+            $season->id = Season::getCurrentSeason() + 1;
+        }
+        $season->is_future = true;
+        $season->save();
     }
 }

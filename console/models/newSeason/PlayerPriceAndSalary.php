@@ -4,7 +4,8 @@
 
 namespace console\models\newSeason;
 
-use common\models\Season;
+use common\models\db\Player;
+use common\models\db\Season;
 use Yii;
 use yii\db\Exception;
 
@@ -25,59 +26,59 @@ class PlayerPriceAndSalary
         $sql = "UPDATE `player`
                 LEFT JOIN
                 (
-                    SELECT `player_special_player_id`, SUM(`player_special_level`) AS `special_level`
+                    SELECT `player_id`, SUM(`level`) AS `level`
                     FROM `player_special`
                     LEFT JOIN `player`
-                    ON `player_special_player_id`=`player_id`
-                    WHERE `player_age`<40
-                    GROUP BY `player_special_player_id`
+                    ON `player_id`=`player`.`id`
+                    WHERE `age`<=" . Player::AGE_READY_FOR_PENSION . "
+                    GROUP BY `player_id`
                 ) AS `t1`
-                ON `player_special_player_id`=`player_id`
+                ON `t1`.`player_id`=`player`.`id`
                 LEFT JOIN
                 (
-                    SELECT `player_position_player_id`, COUNT(`player_position_position_id`) AS `position`
+                    SELECT `player_id`, COUNT(`position_id`) AS `position`
                     FROM `player_position`
                     LEFT JOIN `player`
-                    ON `player_position_player_id`=`player_id`
-                    WHERE `player_age`<40
-                    GROUP BY `player_position_player_id`
+                    ON `player_id`=`player`.`id`
+                    WHERE `age`<" . Player::AGE_READY_FOR_PENSION . "
+                    GROUP BY `player_id`
                 ) AS `t2`
-                ON `player_position_player_id`=`player_id`
-                SET `player_price`=POW(150-(28-`player_age`), 2)*(`position`-1+`player_power_nominal`+IFNULL(`special_level`, 0))
-                WHERE `player_age`<40";
+                ON `t2`.`player_id`=`player`.`id`
+                SET `price`=POW(150-(28-`age`), 2)*(`position`-2+`power_nominal`+IFNULL(`level`, 0)*10)
+                WHERE `age`<" . Player::AGE_READY_FOR_PENSION;
         Yii::$app->db->createCommand($sql)->execute();
 
         $sql = "UPDATE `player`
                 LEFT JOIN `team`
-                ON `player_team_id`=`team_id`
+                ON `team_id`=`team`.`id`
                 LEFT JOIN `base`
-                ON `team_base_id`=`base_id`
+                ON `base_id`=`base`.`id`
                 LEFT JOIN
                 (
-                    SELECT `championship_team_id`,
-                           `championship_division_id`
+                    SELECT `team_id`,
+                           `division_id`
                     FROM `championship`
-                    WHERE `championship_season_id`=$seasonId
+                    WHERE `season_id`=$seasonId
                 ) AS `t1`
-                ON `team_id`=`championship_team_id`
-                SET `player_salary`=`player_price`*(`base_level`+3)/10000*IF(`championship_division_id`=1, 1, IF(`championship_division_id`=2, 0.95, IF(`championship_division_id`=3, 0.90, 0.8)))
-                WHERE `championship_team_id` IS NOT NULL";
+                ON `team`.`id`=`t1`.`team_id`
+                SET `player`.`salary`=`price`*(`level`+3)/10000*IF(`division_id`=1, 1, IF(`division_id`=2, 0.95, IF(`division_id`=3, 0.90, 0.8)))
+                WHERE `t1`.`team_id` IS NOT NULL";
         Yii::$app->db->createCommand($sql)->execute();
 
         $sql = "UPDATE `player`
                 LEFT JOIN `team`
-                ON `player_team_id`=`team_id`
+                ON `team_id`=`team`.`id`
                 LEFT JOIN `base`
-                ON `team_base_id`=`base_id`
+                ON `base_id`=`base`.`id`
                 LEFT JOIN
                 (
-                    SELECT `conference_team_id`
+                    SELECT `team_id`
                     FROM `conference`
-                    WHERE `conference_season_id`=$seasonId
+                    WHERE `season_id`=$seasonId
                 ) AS `t1`
-                ON `team_id`=`conference_team_id`
-                SET `player_salary`=`player_price`*(`base_level`+3)/10000*0.7
-                WHERE `conference_team_id` IS NOT NULL";
+                ON `team`.`id`=`t1`.`team_id`
+                SET `player`.`salary`=`price`*(`level`+3)/10000*0.7
+                WHERE `t1`.`team_id` IS NOT NULL";
         Yii::$app->db->createCommand($sql)->execute();
     }
 }

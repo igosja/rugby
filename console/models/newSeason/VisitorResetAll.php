@@ -4,8 +4,8 @@
 
 namespace console\models\newSeason;
 
-use common\models\National;
-use common\models\Team;
+use common\models\db\National;
+use common\models\db\Team;
 
 /**
  * Class VisitorResetAll
@@ -16,9 +16,9 @@ class VisitorResetAll
     /**
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
-        Team::updateAll(['team_visitor' => 100]);
-        National::updateAll(['national_visitor' => 100]);
+        Team::updateAll(['visitor' => 100]);
+        National::updateAll(['visitor' => 100]);
     }
 }
