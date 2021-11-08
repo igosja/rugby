@@ -30,7 +30,7 @@ class UserFire
                 'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
             ->andWhere(['!=', 'user_id', 0])
-            ->andWhere(['<', 'date_vip', time()])
+            ->andWhere(['or', ['<', 'date_vip', time()], ['date_vip' => null]])
             ->andWhere(['>=', 'auto_number', Team::MAX_AUTO_GAMES])
             ->orderBy(['team.id' => SORT_ASC])
             ->each();
@@ -47,7 +47,7 @@ class UserFire
                 'not', ['user_id' => UserHoliday::find()->select(['user_id'])->where(['date_end' => null])]
             ])
             ->andWhere(['!=', 'user_id', 0])
-            ->andWhere(['<', 'date_vip', time()])
+            ->andWhere(['or', ['<', 'date_vip', time()], ['date_vip' => null]])
             ->andWhere(['<', 'date_login', time() - 1296000])//15 days
             ->orderBy(['team.id' => SORT_ASC])
             ->each();
