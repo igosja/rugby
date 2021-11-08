@@ -2,33 +2,36 @@ version: '3.2'
 
 services:
 
-  frontend:
-    build: frontend
+  vrol:
+    build: .
     ports:
-      - 20080:80
+      - "21080:80"
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+    links:
+      - dbvrol
+      - redis
 
-  backend:
-    build: backend
-    ports:
-      - 21080:80
-    volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
-
-  mysql:
+  dbvrol:
     image: mysql:5.7
+    volumes:
+      - ./mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=JGvjBoCmVhLVzKDnYiH6
+      - MYSQL_DATABASE=vrol
+      - MYSQL_USER=vrol
+      - MYSQL_PASSWORD=JGvjBoCmVhLVzKDnYiH6
+    ports:
+      - "33061:3306"
+    command: mysqld --sql_mode=""
+
+  redis:
+    image: redis:3.0
+    ports:
+      - "63791:6379"
 
   #pgsql:
   #  image: postgres:9.5
