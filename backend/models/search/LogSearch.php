@@ -17,6 +17,16 @@ class LogSearch extends Log
     /**
      * @return array
      */
+    public function rules(): array
+    {
+        return [
+            [['message'], 'string'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public function scenarios(): array
     {
         return Model::scenarios();

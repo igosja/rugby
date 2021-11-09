@@ -7,7 +7,6 @@ use yii\console\controllers\MigrateController;
 use yii\i18n\PhpMessageSource;
 use yii\log\DbTarget;
 use yii\redis\Cache;
-use yii\redis\Connection;
 
 return [
     'aliases' => [
@@ -67,17 +66,13 @@ return [
             'targets' => [
                 [
                     'class' => DbTarget::class,
-                    'except' => ['yii\web\HttpException:404'],
+                    'except' => [
+                        'yii\web\HttpException:404',
+                    ],
                     'levels' => ['error', 'warning'],
                 ],
             ],
             'traceLevel' => YII_DEBUG ? 3 : 0,
-        ],
-        'redis' => [
-            'class' => Connection::class,
-            'database' => 0,
-            'hostname' => 'localhost',
-            'port' => 6379,
         ],
     ],
     'controllerMap' => [

@@ -55,7 +55,8 @@ class TeamQuery
                 'stadium.city.country',
                 'teamRequests',
             ])
-            ->where(['!=', 'id', 0])
+            ->joinWith(['base', 'stadium.city'])
+            ->where(['!=', 'team.id', 0])
             ->andWhere(['user_id' => 0]);
     }
 

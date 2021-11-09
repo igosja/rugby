@@ -107,11 +107,11 @@ abstract class AbstractController extends AbstractWebController
             return false;
         }
 
+        $this->loadCurrentSeason();
+
         if ($redirect = $this->redirectBySiteStatus($action)) {
             return $redirect;
         }
-
-        $this->loadCurrentSeason();
 
         if (!Yii::$app->user->isGuest) {
             if (!('restore' === $action->id && 'user' === $action->controller->id) && $this->user->date_delete) {
@@ -173,6 +173,9 @@ abstract class AbstractController extends AbstractWebController
         );
     }
 
+    /**
+     * @return void
+     */
     private function checkEmailConfirmation(): void
     {
         if (!$this->user->date_confirm) {
@@ -183,6 +186,9 @@ abstract class AbstractController extends AbstractWebController
         }
     }
 
+    /**
+     * @return void
+     */
     private function checkSessionMyTeamId(): void
     {
         $session = Yii::$app->session;
@@ -217,6 +223,9 @@ abstract class AbstractController extends AbstractWebController
         }
     }
 
+    /**
+     * @return void
+     */
     private function loadCurrentSeason(): void
     {
         $this->season = Season::find()
@@ -225,11 +234,17 @@ abstract class AbstractController extends AbstractWebController
             ->one();
     }
 
+    /**
+     * @return void
+     */
     private function loadMyTeamArray(): void
     {
         $this->myTeamArray = TeamQuery::getTeamListByUserId($this->user->id);
     }
 
+    /**
+     * @return void
+     */
     private function loadNationals(): void
     {
         /**
@@ -248,6 +263,9 @@ abstract class AbstractController extends AbstractWebController
         $this->myNationalOrVice = $this->myNational ?: $this->myNationalVice;
     }
 
+    /**
+     * @return void
+     */
     private function loadTeams(): void
     {
         $mySessionTeamId = (int)Yii::$app->session->get('myTeamId');
