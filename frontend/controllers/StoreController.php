@@ -128,7 +128,7 @@ class StoreController extends AbstractController
         $model->log = Json::encode($_REQUEST);
         $model->status = Payment::PAID;
         $model->user_id = $this->user->id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (false && $model->load(Yii::$app->request->post()) && $model->save()) {
             Money::log([
                 'money_text_id' => MoneyText::INCOME_ADD_FUNDS,
                 'user_id' => $model->user_id,
@@ -155,7 +155,6 @@ class StoreController extends AbstractController
                 $model->user->referrerUser->save(true, ['money']);
             }
 
-            return $this->redirect(['index']);
             return $this->redirect($model->paymentUrl());
         }
 
