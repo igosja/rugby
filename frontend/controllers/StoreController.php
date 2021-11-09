@@ -155,6 +155,7 @@ class StoreController extends AbstractController
                 $model->user->referrerUser->save(true, ['money']);
             }
 
+            return $this->redirect(['index']);
             return $this->redirect($model->paymentUrl());
         }
 
