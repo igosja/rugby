@@ -4,12 +4,14 @@
 
 use common\models\db\User;
 use frontend\components\FrontendRequest;
+use frontend\components\widgets\LinkPager as FrontendLinkPager;
 use frontend\modules\federation\Module as ModuleFederation;
 use frontend\modules\forum\Module as ModuleForum;
 use kartik\select2\Select2;
 use yii\grid\GridView;
 use yii\redis\Session;
 use yii\web\Request;
+use yii\widgets\LinkPager as BaseLinkPager;
 use yii\widgets\ListView;
 
 $params = array_merge(
@@ -36,6 +38,9 @@ return [
                     'pageCssClass' => 'btn pagination',
                 ],
                 'tableOptions' => ['class' => 'table table-bordered table-hover'],
+            ],
+            BaseLinkPager::class => [
+                'class' => FrontendLinkPager::class,
             ],
             ListView::class => [
                 'emptyText' => false,

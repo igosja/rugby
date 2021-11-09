@@ -32,6 +32,7 @@ class LogController extends AbstractController
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

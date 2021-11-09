@@ -68,11 +68,15 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @inheritdoc
+     * @param \yii\base\Action $action
+     * @return bool|\yii\web\Response
+     * @throws \yii\db\Exception
+     * @throws \yii\web\BadRequestHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function beforeAction($action)
     {
-        if (ArrayHelper::isIn($action->id, ['index', 'hacking'])) {
+        if (ArrayHelper::isIn($action->id, ['index', 'sign-in'])) {
             $this->enableCsrfValidation = false;
         }
 
@@ -113,8 +117,7 @@ class SiteController extends AbstractController
             return ActiveForm::validate($activationForm);
         }
 
-        if (($activationForm->load(Yii::$app->request->post()) ||
-                $activationForm->load(Yii::$app->request->get(), '')) && $activationForm->code) {
+        if (($activationForm->load(Yii::$app->request->post()) || $activationForm->load(Yii::$app->request->get(), '')) && $activationForm->code) {
             try {
                 if ($activationForm->activate()) {
                     $this->setSuccessFlash(Yii::t('frontend', 'controllers.site.activation.success'));
@@ -319,13 +322,5 @@ class SiteController extends AbstractController
         return $this->render('sign-up', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * @return \yii\web\Response
-     */
-    public function actionHacking(): Response
-    {
-        return $this->redirect(['index']);
     }
 }

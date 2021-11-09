@@ -25,28 +25,28 @@ class TeamRequestPrepare
             'sort' => [
                 'attributes' => [
                     'base' => [
-                        'asc' => ['base_id' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['base_id' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['base_id' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['base_id' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                     'country' => [
-                        'asc' => ['city_country_id' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['city_country_id' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['country_id' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['country_id' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                     'finance' => [
-                        'asc' => ['finance' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['finance' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['finance' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['finance' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                     'stadium' => [
-                        'asc' => ['stadium_capacity' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['stadium_capacity' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['capacity' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['capacity' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                     'team' => [
-                        'asc' => ['name' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['name' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['name' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['name' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                     'vs' => [
-                        'asc' => ['power_vs' => SORT_ASC, 'id' => SORT_ASC],
-                        'desc' => ['power_vs' => SORT_DESC, 'id' => SORT_ASC],
+                        'asc' => ['power_vs' => SORT_ASC, 'team.id' => SORT_ASC],
+                        'desc' => ['power_vs' => SORT_DESC, 'team.id' => SORT_ASC],
                     ],
                 ],
                 'defaultOrder' => ['vs' => SORT_DESC],

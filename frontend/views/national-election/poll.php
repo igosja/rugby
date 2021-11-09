@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
  * @var ElectionNationalVote $model
  */
 
-print $this->render('//federation/_federation', ['federation' => $federation]);
+print $this->render('/../modules/federation/views/default/_federation', ['federation' => $federation]);
 
 ?>
 <div class="row">

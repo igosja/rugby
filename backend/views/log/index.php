@@ -4,6 +4,7 @@
 
 /**
  * @var ArrayDataProvider $dataProvider
+ * @var \backend\models\search\LogSearch $searchModel
  */
 
 use common\components\helpers\ErrorHelper;
@@ -63,6 +64,7 @@ use yii\helpers\Html;
                 print GridView::widget([
                     'columns' => $columns,
                     'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
                 ]);
             } catch (Exception $e) {
                 ErrorHelper::log($e);
