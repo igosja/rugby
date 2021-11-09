@@ -10,9 +10,10 @@ use yii\widgets\ActiveForm;
 /**
  * @var Federation $federation
  * @var ElectionPresidentApplication $model
+ * @var \yii\web\View $this
  */
 
-print $this->render('//federation/_federation', ['federation' => $federation]);
+print $this->render('/../modules/federation/views/default/_federation', ['federation' => $federation]);
 
 ?>
 <div class="row">

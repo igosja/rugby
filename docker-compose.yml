@@ -18,7 +18,7 @@ services:
   dbvrol:
     image: mysql:5.7
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./docker/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=JGvjBoCmVhLVzKDnYiH6
       - MYSQL_DATABASE=vrol
@@ -30,6 +30,8 @@ services:
 
   redis:
     image: redis:3.0
+    volumes:
+      - ./docker/redis:/data
     ports:
       - "63791:6379"
 

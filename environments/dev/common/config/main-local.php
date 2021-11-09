@@ -2,13 +2,14 @@
 
 // TODO refactor
 
-use yii\db\Connection;
+use yii\db\Connection as DbConnection;
+use yii\redis\Connection as RedisConnection;
 use yii\swiftmailer\Mailer;
 
 return [
     'components' => [
         'db' => [
-            'class' => Connection::class,
+            'class' => DbConnection::class,
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
             'username' => 'root',
             'password' => '',
@@ -26,6 +27,12 @@ return [
                 'port' => '465',
                 'username' => 'igosja@ukr.net',
             ],
+        ],
+        'redis' => [
+            'class' => RedisConnection::class,
+            'database' => 0,
+            'hostname' => 'localhost',
+            'port' => 6379,
         ],
     ],
 ];
