@@ -15,7 +15,7 @@ use backend\models\queries\NewsQuery;
 use backend\models\queries\TransferCommentQuery;
 use common\models\db\Site;
 use console\models\generator\SiteOpen;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\ErrorAction;
@@ -94,42 +94,42 @@ class SiteController extends AbstractController
             [
                 'class' => 'freeTeam',
                 'color' => 'green',
-                'icon' => FAS::_FOOTBALL_BALL,
+                'icon' => FontAwesome::_FOOTBALL_BALL,
                 'text' => 'Free teams',
                 'url' => ['team/index'],
             ],
             [
                 'class' => 'logo',
                 'color' => 'primary',
-                'icon' => FAS::_SHIELD_ALT,
+                'icon' => FontAwesome::_SHIELD_ALT,
                 'text' => 'Logos',
                 'url' => ['logo/index'],
             ],
             [
                 'class' => 'photo',
                 'color' => 'primary',
-                'icon' => FAS::_USER,
+                'icon' => FontAwesome::_USER,
                 'text' => 'Photos',
                 'url' => ['photo/index'],
             ],
             [
                 'class' => 'support',
                 'color' => 'red',
-                'icon' => FAS::_COMMENTS,
+                'icon' => FontAwesome::_COMMENTS,
                 'text' => 'Support',
                 'url' => ['support/index'],
             ],
             [
                 'class' => 'complaint',
                 'color' => 'red',
-                'icon' => FAS::_EXCLAMATION_CIRCLE,
+                'icon' => FontAwesome::_EXCLAMATION_CIRCLE,
                 'text' => 'Complaints',
                 'url' => ['complaint/index'],
             ],
             [
                 'class' => 'vote',
                 'color' => 'yellow',
-                'icon' => FAS::_CHART_BAR,
+                'icon' => FontAwesome::_CHART_BAR,
                 'text' => 'Voting',
                 'url' => ['vote/index'],
             ],
