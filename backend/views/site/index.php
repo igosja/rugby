@@ -40,7 +40,7 @@ use yii\web\View;
                             <?php
 
                             try {
-                                print FAS::icon($panel['icon'])->size(FAS::SIZE_5X);
+                                print FAS::icon($panel['icon'])->size(FontAwesome::SIZE_5X);
                             } catch (InvalidConfigException $e) {
                                 ErrorHelper::log($e);
                             }
@@ -115,6 +115,7 @@ use yii\web\View;
                         [
                             'attribute' => 'user_id',
                             'enableSorting' => false,
+                            'format' => 'raw',
                             'value' => static function (Payment $model) {
                                 return Html::a(
                                     Html::encode($model->user->login),

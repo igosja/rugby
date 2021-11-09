@@ -31,7 +31,7 @@ class PaymentPrepare
 
             foreach ($payments as $item) {
                 if ($item['date'] === $date) {
-                    $valueArray[] = (int)$item['total'] * 50;
+                    $valueArray[] = (int)$item['total'];
                     $inArray = true;
                 }
             }
