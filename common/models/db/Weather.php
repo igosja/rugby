@@ -15,6 +15,8 @@ use common\components\AbstractActiveRecord;
  */
 class Weather extends AbstractActiveRecord
 {
+    public const CLOUDY = 4;
+
     /**
      * @return string
      */
