@@ -61,7 +61,6 @@ class ThemeController extends AbstractController
         $this->notFound($forumTheme);
 
         $model = new ForumMessage();
-        $model->user_id = $this->user->id;
         $model->forum_theme_id = $id;
         if ($model->addMessage()) {
             $this->setSuccessFlash(Yii::t('frontend', 'modules.forum.controllers.theme.view.success'));
