@@ -99,6 +99,34 @@ class Support extends AbstractActiveRecord
     }
 
     /**
+     * @param \common\models\db\Support $support
+     * @return bool
+     */
+    public function addAnswer(Support $support): bool
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (!$this->load(Yii::$app->request->post())) {
+            return false;
+        }
+
+        $this->admin_user_id = Yii::$app->user->id;
+        $this->federation_id = $support->federation_id;
+        $this->president_user_id = $support->president_user_id;
+        $this->is_question = false;
+        $this->user_id = $support->user_id;
+        $this->is_inside = false;
+
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @param int $federationId
      * @return bool
      */
