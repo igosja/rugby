@@ -162,10 +162,6 @@ class SupportController extends AbstractController
     public function actionManager(int $id)
     {
         $federation = $this->getFederation($id);
-        if (!ArrayHelper::isIn($this->user->id, [$federation->president_user_id, $federation->vice_user_id], true)) {
-            $this->setErrorFlash(Yii::t('frontend', 'controllers.federation.free-team.error'));
-            return $this->redirect(['/federation/team/index', 'id' => $id]);
-        }
 
         $model = new Support();
         if ($model->addFederationManagerQuestion($federation->id)) {
