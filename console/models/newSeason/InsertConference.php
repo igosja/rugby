@@ -12,6 +12,7 @@ use common\models\db\Season;
 use common\models\db\Stage;
 use common\models\db\Team;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use Yii;
 use yii\db\Exception;
 
@@ -24,6 +25,7 @@ class InsertConference
     /**
      * @return void
      * @throws Exception
+     * @throws \Exception
      */
     public function execute(): void
     {
@@ -103,6 +105,7 @@ class InsertConference
                 $conferenceArray[$item[0]]->team_id,
                 $scheduleId,
                 $conferenceArray[$item[0]]->team->stadium_id,
+                Weather::getRandomWeatherId()
             ];
         }
 
@@ -110,7 +113,7 @@ class InsertConference
             ->createCommand()
             ->batchInsert(
                 Game::tableName(),
-                ['guest_team_id', 'home_team_id', 'schedule_id', 'stadium_id'],
+                ['guest_team_id', 'home_team_id', 'schedule_id', 'stadium_id', 'weather_id'],
                 $data
             )
             ->execute();

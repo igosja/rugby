@@ -11,6 +11,7 @@ use common\models\db\Schedule;
 use common\models\db\Season;
 use common\models\db\Stage;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use Exception;
 use Yii;
 
@@ -207,11 +208,15 @@ class LeagueLot
                         [$team_id_1, $team_id_4, $schedule_id_6, $stadium_id_1],
                     ];
 
+                    foreach ($data as $i => $value) {
+                        $data[$i][] = Weather::getRandomWeatherId();
+                    }
+
                     Yii::$app->db
                         ->createCommand()
                         ->batchInsert(
                             Game::tableName(),
-                            ['home_team_id', 'guest_team_id', 'schedule_id', 'stadium_id'],
+                            ['home_team_id', 'guest_team_id', 'schedule_id', 'stadium_id', 'weather_id'],
                             $data
                         )
                         ->execute();
@@ -658,13 +663,13 @@ class LeagueLot
              * @var ParticipantLeague $item
              */
             if ($item->team->stadium->city->country_id !== $team_1['country_id'] && $item->team->user_id !== $team_1['user_id']) {
-                for ($i = 0, $count_team = count($teamArray[1]); $i < $count_team; $i++) {
-                    if ($teamArray[1][$i]->team_id === $item->team_id) {
+                foreach ($teamArray[1] as $i => $iValue) {
+                    if ($iValue->team_id === $item->team_id) {
                         return [
                             'i' => $i,
-                            'team_id' => $teamArray[1][$i]->team_id,
-                            'country_id' => $teamArray[1][$i]->team->stadium->city->country_id,
-                            'user_id' => $teamArray[1][$i]->team->user_id,
+                            'team_id' => $iValue->team_id,
+                            'country_id' => $iValue->team->stadium->city->country_id,
+                            'user_id' => $iValue->team->user_id,
                         ];
                     }
                 }
@@ -691,13 +696,13 @@ class LeagueLot
              * @var ParticipantLeague $item
              */
             if (!in_array($item->team->stadium->city->country_id, [$team_1['country_id'], $team_2['country_id']], true) && !in_array($item->team->user_id, [$team_1['user_id'], $team_2['user_id']], true)) {
-                for ($i = 0, $count_team = count($teamArray[2]); $i < $count_team; $i++) {
-                    if ($teamArray[2][$i]->team_id === $item->team_id) {
+                foreach ($teamArray[2] as $i => $iValue) {
+                    if ($iValue->team_id === $item->team_id) {
                         return [
                             'i' => $i,
-                            'team_id' => $teamArray[2][$i]->team_id,
-                            'country_id' => $teamArray[2][$i]->team->stadium->city->country_id,
-                            'user_id' => $teamArray[2][$i]->team->user_id,
+                            'team_id' => $iValue->team_id,
+                            'country_id' => $iValue->team->stadium->city->country_id,
+                            'user_id' => $iValue->team->user_id,
                         ];
                     }
                 }
@@ -725,11 +730,11 @@ class LeagueLot
              * @var ParticipantLeague $item
              */
             if (!in_array($item->team->stadium->city->country_id, [$team_1['country_id'], $team_2['country_id'], $team_3['country_id']], true) && !in_array($item->team->user_id, [$team_1['user_id'], $team_2['user_id'], $team_3['user_id']], true)) {
-                for ($i = 0, $count_team = count($teamArray[3]); $i < $count_team; $i++) {
-                    if ($teamArray[3][$i]->team_id === $item->team_id) {
+                foreach ($teamArray[3] as $i => $iValue) {
+                    if ($iValue->team_id === $item->team_id) {
                         return [
                             'i' => $i,
-                            'team_id' => $teamArray[3][$i]->team_id,
+                            'team_id' => $iValue->team_id,
                         ];
                     }
                 }
