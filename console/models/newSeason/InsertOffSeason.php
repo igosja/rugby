@@ -11,6 +11,7 @@ use common\models\db\Season;
 use common\models\db\Stage;
 use common\models\db\Team;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use Exception;
 use Yii;
 
@@ -74,7 +75,8 @@ class InsertOffSeason
                 $offSeasonArray[$i]->team_id,
                 $offSeasonArray[$i + 1]->team_id,
                 $scheduleId,
-                $offSeasonArray[$i + 1]->team->stadium_id
+                $offSeasonArray[$i + 1]->team->stadium_id,
+                Weather::getRandomWeatherId()
             ];
         }
 
@@ -82,7 +84,7 @@ class InsertOffSeason
             ->createCommand()
             ->batchInsert(
                 Game::tableName(),
-                ['guest_team_id', 'home_team_id', 'schedule_id', 'stadium_id'],
+                ['guest_team_id', 'home_team_id', 'schedule_id', 'stadium_id', 'weather_id'],
                 $data
             )
             ->execute();

@@ -103,6 +103,9 @@ class ForumMessage extends AbstractActiveRecord
             return false;
         }
 
+        /**
+         * @var UserBlock $userBlock
+         */
         $userBlock = $user->getUserBlock(UserBlockType::TYPE_COMMENT)->one();
         if ($userBlock && $userBlock->date >= time()) {
             return false;

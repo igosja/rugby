@@ -9,6 +9,7 @@ use common\models\db\NationalType;
 use common\models\db\Schedule;
 use common\models\db\Season;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use common\models\db\WorldCup;
 use Exception;
 use Yii;
@@ -140,11 +141,15 @@ class InsertWorldCup
                     [0, $national_id_05, $national_id_06, $schedule_id_09],
                 ];
 
+                foreach ($data as $i => $value) {
+                    $data[$i][] = Weather::getRandomWeatherId();
+                }
+
                 Yii::$app->db
                     ->createCommand()
                     ->batchInsert(
                         Game::tableName(),
-                        ['bonus_home', 'home_national_id', 'guest_national_id', 'schedule_id'],
+                        ['bonus_home', 'home_national_id', 'guest_national_id', 'schedule_id', 'weather_id'],
                         $data
                     )
                     ->execute();
