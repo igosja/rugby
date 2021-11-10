@@ -2,8 +2,8 @@
 
 // TODO refactor
 
-use yii\gii\Module as GiiModule;
 use yii\debug\Module as DebugModule;
+use yii\gii\Module as GiiModule;
 
 $config = [
     'components' => [
@@ -18,6 +18,7 @@ if (!YII_ENV_TEST) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
+        'allowedIPs' => ['*'],
         'class' => DebugModule::class,
     ];
 

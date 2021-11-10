@@ -108,6 +108,7 @@ class ForumMessage extends AbstractActiveRecord
             return false;
         }
 
+        $this->user_id = $user->id;
         if (!$this->load(Yii::$app->request->post())) {
             return false;
         }
