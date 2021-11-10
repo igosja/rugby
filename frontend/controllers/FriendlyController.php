@@ -14,6 +14,7 @@ use common\models\db\Season;
 use common\models\db\Team;
 use common\models\db\TournamentType;
 use common\models\db\User;
+use common\models\db\Weather;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
@@ -404,6 +405,7 @@ class FriendlyController extends AbstractController
                 $model->home_team_id = $this->myTeam->id;
                 $model->schedule_id = $id;
                 $model->stadium_id = $this->myTeam->stadium_id;
+                $model->weather_id = Weather::CLOUDY;
                 $model->save();
 
                 FriendlyInvite::updateAll(
@@ -545,6 +547,7 @@ class FriendlyController extends AbstractController
             $model->home_team_id = $invite->home_team_id;
             $model->schedule_id = $invite->schedule_id;
             $model->stadium_id = $invite->homeTeam->stadium_id;
+            $model->weather_id = Weather::CLOUDY;
             $model->save();
 
             FriendlyInvite::updateAll(
