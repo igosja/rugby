@@ -375,6 +375,7 @@ class FriendlyController extends AbstractController
             ])
             ->andWhere([
                 'schedule_id' => Schedule::find()
+                    ->select(['id'])
                     ->andWhere([
                         'season_id' => Season::getCurrentSeason(),
                         'tournament_type_id' => TournamentType::FRIENDLY,
