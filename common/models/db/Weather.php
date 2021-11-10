@@ -15,7 +15,12 @@ use common\components\AbstractActiveRecord;
  */
 class Weather extends AbstractActiveRecord
 {
+    public const VERY_HOT = 1;
+    public const HOT = 2;
+    public const SUNNY = 3;
     public const CLOUDY = 4;
+    public const RAIN = 5;
+    public const SNOW = 6;
 
     /**
      * @return string
@@ -36,5 +41,14 @@ class Weather extends AbstractActiveRecord
             [['name'], 'string', 'max' => 20],
             [['name'], 'unique'],
         ];
+    }
+
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    public static function getRandomWeatherId(): int
+    {
+        return random_int(self::VERY_HOT, self::SNOW);
     }
 }

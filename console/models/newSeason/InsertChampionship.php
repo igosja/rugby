@@ -9,6 +9,7 @@ use common\models\db\Game;
 use common\models\db\Schedule;
 use common\models\db\Season;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use Yii;
 use yii\db\Exception;
 use yii\db\Expression;
@@ -22,6 +23,7 @@ class InsertChampionship
     /**
      * @return void
      * @throws Exception
+     * @throws \Exception
      */
     public function execute(): void
     {
@@ -380,11 +382,15 @@ class InsertChampionship
                     [$teamId01, $teamId16, $scheduleId30, $stadiumId01],
                 ];
 
+                foreach ($data as $i => $value) {
+                    $data[$i][] = Weather::getRandomWeatherId();
+                }
+
                 Yii::$app->db
                     ->createCommand()
                     ->batchInsert(
                         Game::tableName(),
-                        ['home_team_id', 'guest_team_id', 'schedule_id', 'stadium_id'],
+                        ['home_team_id', 'guest_team_id', 'schedule_id', 'stadium_id', 'weather_id'],
                         $data
                     )
                     ->execute();

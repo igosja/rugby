@@ -50,8 +50,8 @@ class TeamVisitorAfterGame
             }
             $guestPoints = floor($guestPoints / 8);
 
-            $homeVisitor = 0.5 + $homePoints * 0.05 + 0.45 - $guestPoints * 0.05;
-            $guestVisitor = 0.5 + $guestPoints * 0.05 + 0.45 - $homePoints * 0.05;
+            $homeVisitor = 50 + $homePoints * 5 + 45 - $guestPoints * 5;
+            $guestVisitor = 50 + $guestPoints * 5 + 45 - $homePoints * 5;
 
             $insertData[] = [$game->home_team_id, $homeVisitor];
             $insertData[] = [$game->guest_team_id, $guestVisitor];
