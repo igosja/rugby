@@ -11,7 +11,6 @@ use common\models\db\GameComment;
 use common\models\db\Lineup;
 use common\models\db\User;
 use common\models\db\UserBlock;
-use rmrevin\yii\fontawesome\FAB;
 use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FontAwesome;
 use yii\base\InvalidConfigException;
@@ -40,7 +39,7 @@ $user = Yii::$app->user->identity;
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <?php if (!Yii::$app->user->isGuest) : ?>
             <?= Html::a(
-                FAB::i(FontAwesome::_THUMBS_UP),
+                FAR::i(FontAwesome::_THUMBS_UP),
                 ['vote', 'id' => $game->id, 'vote' => 1],
                 ['title' => Yii::t('frontend', 'views.game.view.vote-up')]
             ) ?>
