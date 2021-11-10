@@ -387,10 +387,10 @@ LineupAsset::register($this);
                     'attribute' => 'position',
                     'contentOptions' => ['class' => 'text-center'],
                     'footer' => Yii::t('frontend', 'views.th.position'),
-                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.national')],
+                    'footerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
                     'format' => 'raw',
-                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.national')],
-                    'label' => Yii::t('frontend', 'views.th.national'),
+                    'headerOptions' => ['title' => Yii::t('frontend', 'views.title.position')],
+                    'label' => Yii::t('frontend', 'views.th.position'),
                     'value' => static function (Player $model) {
                         return $model->position();
                     }
