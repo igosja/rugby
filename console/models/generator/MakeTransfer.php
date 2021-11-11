@@ -382,6 +382,8 @@ class MakeTransfer
                 $transfer->price_buyer = $price;
                 $transfer->ready = time();
                 $transfer->season_id = $seasonId;
+                $transfer->team_seller_id = 0;
+                $transfer->user_seller_id = 0;
                 $transfer->save();
 
                 foreach ($transfer->player->playerPositions as $position) {
