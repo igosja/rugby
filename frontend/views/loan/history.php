@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
     ],
     'method' => 'get',
 ]) ?>
-<div class="row">
+<div class="row flex">
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
         <?= Yii::t('frontend', 'views.loan.search') ?>:
     </div>

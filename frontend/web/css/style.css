@@ -1047,3 +1047,8 @@ blockquote:before {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
