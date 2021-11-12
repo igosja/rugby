@@ -67,14 +67,18 @@ use yii\web\View;
         <table class="table table-bordered table-hover">
             <tr>
                 <th><?= Yii::t('frontend', 'views.team.game.th.results') ?></th>
-                <th class="col-10"
-                    title="<?= Yii::t('frontend', 'views.team.game.title.game') ?>"><?= Yii::t('frontend', 'views.team.game.th.game') ?></th>
-                <th class="col-10 hidden-xs"
-                    title="<?= Yii::t('frontend', 'views.team.game.title.win') ?>"><?= Yii::t('frontend', 'views.team.game.th.win') ?></th>
-                <th class="col-10 hidden-xs"
-                    title="<?= Yii::t('frontend', 'views.team.game.title.draw') ?>"><?= Yii::t('frontend', 'views.team.game.th.draw') ?></th>
-                <th class="col-10 hidden-xs"
-                    title="<?= Yii::t('frontend', 'views.team.game.title.loose') ?>"><?= Yii::t('frontend', 'views.team.game.th.loose') ?></th>
+                <th class="col-10" title="<?= Yii::t('frontend', 'views.team.game.title.game') ?>">
+                    <?= Yii::t('frontend', 'views.team.game.th.game') ?>
+                </th>
+                <th class="col-10 hidden-xs" title="<?= Yii::t('frontend', 'views.team.game.title.win') ?>">
+                    <?= Yii::t('frontend', 'views.team.game.th.win') ?>
+                </th>
+                <th class="col-10 hidden-xs" title="<?= Yii::t('frontend', 'views.team.game.title.draw') ?>">
+                    <?= Yii::t('frontend', 'views.team.game.th.draw') ?>
+                </th>
+                <th class="col-10 hidden-xs" title="<?= Yii::t('frontend', 'views.team.game.title.loose') ?>">
+                    <?= Yii::t('frontend', 'views.team.game.th.loose') ?>
+                </th>
             </tr>
             <tr>
                 <td><?= Yii::t('frontend', 'views.team.game.td.total') ?></td>
