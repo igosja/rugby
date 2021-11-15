@@ -5,7 +5,10 @@
 namespace frontend\controllers;
 
 use common\components\helpers\ErrorHelper;
+use common\models\db\Site;
 use common\models\db\User;
+use DateTime;
+use DateTimeInterface;
 use Exception;
 use frontend\models\forms\ActivationForm;
 use frontend\models\forms\ActivationRepeatForm;
@@ -92,11 +95,7 @@ class SiteController extends AbstractController
         $forumMessage = ForumMessageQuery::getLastForumGroupsByMessageDate();
         $news = NewsQuery::getLastNews();
 
-        $this->view->title = Yii::t('frontend', 'controllers.site.index.title');
-        $this->view->registerMetaTag([
-            'name' => 'description',
-            'content' => Yii::t('frontend', 'controllers.site.index.description'),
-        ]);
+        $this->registerViewTags();
 
         return $this->render('index', [
             'birthdayBoys' => $birthdayBoys,
@@ -321,6 +320,41 @@ class SiteController extends AbstractController
         $this->setSeoTitle(Yii::t('frontend', 'controllers.site.sign-up.title'));
         return $this->render('sign-up', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    private function registerViewTags(): void
+    {
+        $site = Site::find()
+            ->andWhere(['id' => 1])
+            ->limit(1)
+            ->one();
+        $lastCron = $site->date_cron;
+        $nextCron = $lastCron + 60 * 60 * (24 + 1);
+
+        $this->view->title = Yii::t('frontend', 'controllers.site.index.title');
+        $this->view->registerMetaTag([
+            'name' => 'description',
+            'content' => Yii::t('frontend', 'controllers.site.index.description'),
+        ]);
+        $this->view->registerMetaTag([
+            'http-equiv' => 'expires',
+            'content' => (new DateTime())->setTimestamp($nextCron)->format(DateTimeInterface::RFC850),
+        ]);
+        $this->view->registerMetaTag([
+            'http-equiv' => 'last-modified',
+            'content' => (new DateTime())->setTimestamp($lastCron)->format(DateTimeInterface::RFC850),
+        ]);
+        $this->view->registerMetaTag([
+            'http-equiv' => 'content-language',
+            'content' => Yii::$app->language,
+        ]);
+        $this->view->registerMetaTag([
+            'http-equiv' => 'content-type',
+            'content' => 'text/html;charset=utf-8',
         ]);
     }
 }
