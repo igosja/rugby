@@ -118,8 +118,8 @@ class LoanHistorySearch extends Loan
 
         $query
             ->andFilterWhere(['country_id' => $this->country])
-            ->andFilterWhere(['<=', 'age', $this->ageMax])
-            ->andFilterWhere(['>=', 'age', $this->ageMin])
+            ->andFilterWhere(['<=', 'loan.age', $this->ageMax])
+            ->andFilterWhere(['>=', 'loan.age', $this->ageMin])
             ->andFilterWhere(['<=', 'power', $this->powerMax])
             ->andFilterWhere(['>=', 'power', $this->powerMin])
             ->andFilterWhere(['<=', 'price_buyer', $this->priceMax])
