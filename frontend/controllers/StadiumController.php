@@ -55,9 +55,12 @@ class StadiumController extends AbstractController
 
         $model = new StadiumIncrease($team->stadium);
 
+        $canChange = $team->canBuild();
+
         $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.increase.title'));
 
         return $this->render('increase', [
+            'canChange' => $canChange,
             'model' => $model,
             'team' => $team,
         ]);
@@ -74,11 +77,14 @@ class StadiumController extends AbstractController
 
         $team = $this->myTeam;
 
+        $canChange = $team->canBuild();
+
         $model = new StadiumDecrease($team->stadium);
 
         $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.decrease.title'));
 
         return $this->render('decrease', [
+            'canChange' => $canChange,
             'model' => $model,
             'team' => $team,
         ]);
@@ -89,7 +95,7 @@ class StadiumController extends AbstractController
      */
     public function actionBuild()
     {
-        if (!$this->myTeam) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 
@@ -172,7 +178,7 @@ class StadiumController extends AbstractController
      */
     public function actionDestroy()
     {
-        if (!$this->myTeam) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 

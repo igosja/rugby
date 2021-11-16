@@ -115,12 +115,12 @@ class LoanSearch extends Loan
             'sort' => [
                 'attributes' => [
                     'age' => [
-                        'asc' => ['age' => SORT_ASC],
-                        'desc' => ['age' => SORT_DESC],
+                        'asc' => ['player.age' => SORT_ASC],
+                        'desc' => ['player.age' => SORT_DESC],
                     ],
                     'country' => [
-                        'asc' => ['name' => SORT_ASC],
-                        'desc' => ['name' => SORT_DESC],
+                        'asc' => ['country.name' => SORT_ASC],
+                        'desc' => ['country.name' => SORT_DESC],
                     ],
                     'days' => [
                         'asc' => ['day_min' => SORT_ASC],

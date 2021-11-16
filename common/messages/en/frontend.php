@@ -1279,6 +1279,7 @@ return [
     'views.stadium.increase.finance' => 'Team finance',
     'views.stadium.increase.label.capacity' => 'New capacity',
     'views.stadium.increase.link.cancel' => 'Cancel construction',
+    'views.stadium.increase.no' => 'You cannot change the capacity of the stadium if the team is playing with an auto-squad',
     'views.stadium.increase.on-building' => 'The stadium is currently under construction. Completion date of construction - {date} ',
     'views.stadium.increase.price' => 'Construction cost',
     'views.stadium.increase.submit' => 'Start construction',

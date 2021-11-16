@@ -232,6 +232,25 @@ AppAsset::register($this);
                         ],
                         'url' => 'javascript:',
                     ],
+                    [
+                        'label' => 'Map',
+                        'template' => '<a href="{url}">{label}<span class="fa arrow"></span></a>',
+                        'items' => [
+                            [
+                                'label' => 'I was',
+                                'url' => ['map/index'],
+                            ],
+                            [
+                                'label' => 'I was with wife',
+                                'url' => ['map/family'],
+                            ],
+                            [
+                                'label' => 'I want',
+                                'url' => ['map/plan'],
+                            ],
+                        ],
+                        'url' => 'javascript:',
+                    ],
                 ];
 
                 try {

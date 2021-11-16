@@ -94,6 +94,10 @@
                 position: new google.maps.LatLng(47.838367, 35.136873), //Запоріжжя
                 map: map
             }),
+            new google.maps.Marker({
+                position: new google.maps.LatLng(50.2540414, 28.6550473), //Житомир
+                map: map
+            }),
         ];
         marker.setMap(map);
     }
