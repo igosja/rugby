@@ -16,6 +16,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /**
+ * @var bool $canSendAndAccept
  * @var ActiveDataProvider $receivedDataProvider
  * @var ActiveDataProvider $sentDataProvider
  * @var array $scheduleStatusArray
@@ -110,18 +111,27 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5'],
-                'value' => static function (FriendlyInvite $model) {
+                'value' => static function (FriendlyInvite $model) use ($canSendAndAccept) {
                     if (FriendlyInviteStatus::NEW_ONE === $model->friendly_invite_status_id) {
-                        return Html::a(
-                                FAR::icon(FontAwesome::_CHECK_CIRCLE),
-                                ['accept', 'id' => $model->id],
-                                ['title' => Yii::t('frontend', 'views.friendly.view.link.accept')]
-                            ) . ' ' . Html::a(
-                                FAR::icon(FontAwesome::_TIMES_CIRCLE),
-                                ['cancel', 'id' => $model->id],
-                                ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
-                            );
+                        $result = '';
+
+                        if ($canSendAndAccept) {
+                            $result .= Html::a(
+                                    FAR::icon(FontAwesome::_CHECK_CIRCLE),
+                                    ['accept', 'id' => $model->id],
+                                    ['title' => Yii::t('frontend', 'views.friendly.view.link.accept')]
+                                ) . ' ';
+                        }
+
+                        $result .= Html::a(
+                            FAR::icon(FontAwesome::_TIMES_CIRCLE),
+                            ['cancel', 'id' => $model->id],
+                            ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
+                        );
+
+                        return $result;
                     }
+
                     return '';
                 }
             ],
@@ -193,7 +203,7 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5'],
-                'value' => static function (FriendlyInvite $model) {
+                'value' => static function (FriendlyInvite $model) use ($canSendAndAccept) {
                     if (FriendlyInviteStatus::NEW_ONE === $model->friendly_invite_status_id) {
                         return Html::a(
                             FAR::icon(FontAwesome::_TIMES_CIRCLE),
@@ -201,6 +211,7 @@ use yii\helpers\Html;
                             ['title' => Yii::t('frontend', 'views.friendly.view.link.cancel')]
                         );
                     }
+
                     return '';
                 }
             ],
@@ -244,12 +255,18 @@ use yii\helpers\Html;
                 'contentOptions' => ['class' => 'text-center'],
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'col-5'],
-                'value' => static function (Team $model) {
-                    return Html::a(
-                        FAR::icon(FontAwesome::_CHECK_CIRCLE),
-                        ['send', 'id' => Yii::$app->request->get('id'), 'teamId' => $model->id],
-                        ['title' => Yii::t('frontend', 'views.friendly.view.link.send')]
-                    );
+                'value' => static function (Team $model) use ($canSendAndAccept) {
+                    $result = '';
+
+                    if ($canSendAndAccept) {
+                        $result .= Html::a(
+                            FAR::icon(FontAwesome::_CHECK_CIRCLE),
+                            ['send', 'id' => Yii::$app->request->get('id'), 'teamId' => $model->id],
+                            ['title' => Yii::t('frontend', 'views.friendly.view.link.send')]
+                        );
+                    }
+
+                    return $result;
                 }
             ],
             [
