@@ -8,6 +8,7 @@ use common\models\db\Game;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 /**
  * @var ActiveDataProvider $dataProvider
@@ -67,11 +68,16 @@ use yii\helpers\Html;
                 <?= $game->tournamentLink() ?>
             </div>
         </div>
-        <?php if ($game->stadium) : ?>
+        <?php if ($game->stadium || $game->weather) : ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <?= Html::a($game->stadium->name, ['team/view', 'id' => $game->stadium->team->id]) ?>
-                    (<?= $game->played ? $game->stadium_capacity : $game->stadium->capacity ?>)
+                    <?php if ($game->stadium) : ?>
+                        <?= Html::a($game->stadium->name, ['team/view', 'id' => $game->stadium->team->id]) ?>
+                        (<?= $game->played ? $game->stadium_capacity : $game->stadium->capacity ?>),
+                    <?php endif ?>
+                    <?php if ($game->weather) : ?>
+                        <?= StringHelper::mb_ucfirst($game->weather->name) ?>
+                    <?php endif ?>
                 </div>
             </div>
         <?php endif ?>
