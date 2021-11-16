@@ -140,6 +140,8 @@ class FriendlyController extends AbstractController
             ->one();
         $this->notFound($scheduleMain);
 
+        $canSendAndAccept = ($scheduleMain->date >= time() + 24 * 60 * 60);
+
         $query = Schedule::find()
             ->where(['tournament_type_id' => TournamentType::FRIENDLY])
             ->andWhere(['>', 'date', time()])
@@ -206,7 +208,7 @@ class FriendlyController extends AbstractController
         ]);
 
         $query = Team::find()
-            ->where(['!=', 'user_id', 0])
+            ->andWhere(['!=', 'user_id', 0])
             ->andWhere(['!=', 'id', $team->id])
             ->andWhere(['!=', 'user_id', $this->user->id])
             ->andWhere(['!=', 'friendly_status_id', FriendlyStatus::NONE])
@@ -287,6 +289,7 @@ class FriendlyController extends AbstractController
         $this->setSeoTitle(Yii::t('frontend', 'controllers.friendly.view.title'));
 
         return $this->render('view', [
+            'canSendAndAccept' => $canSendAndAccept,
             'receivedDataProvider' => $receivedDataProvider,
             'sentDataProvider' => $sentDataProvider,
             'scheduleStatusArray' => $scheduleStatusArray,

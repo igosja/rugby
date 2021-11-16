@@ -112,28 +112,6 @@ class TransferHistorySearch extends Transfer
                 'pageSize' => Yii::$app->params['pageSizeTable'],
             ],
             'query' => $query,
-            'sort' => [
-                'attributes' => [
-                    'age' => [
-                        'asc' => ['age' => SORT_ASC],
-                        'desc' => ['age' => SORT_DESC],
-                    ],
-                    'country' => [
-                        'asc' => ['country.name' => SORT_ASC],
-                        'desc' => ['country.name' => SORT_DESC],
-                    ],
-                    'power' => [
-                        'asc' => ['power' => SORT_ASC],
-                        'desc' => ['power' => SORT_DESC],
-                    ],
-                    'price' => [
-                        'asc' => ['price_buyer' => SORT_ASC],
-                        'desc' => ['price_buyer' => SORT_DESC],
-                    ],
-                    'id',
-                ],
-                'defaultOrder' => ['id' => SORT_ASC],
-            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -142,8 +120,8 @@ class TransferHistorySearch extends Transfer
 
         $query
             ->andFilterWhere(['country_id' => $this->country])
-            ->andFilterWhere(['<=', 'age', $this->ageMax])
-            ->andFilterWhere(['>=', 'age', $this->ageMin])
+            ->andFilterWhere(['<=', 'transfer.age', $this->ageMax])
+            ->andFilterWhere(['>=', 'transfer.age', $this->ageMin])
             ->andFilterWhere(['<=', 'power', $this->powerMax])
             ->andFilterWhere(['>=', 'power', $this->powerMin])
             ->andFilterWhere(['<=', 'price_buyer', $this->priceMax])

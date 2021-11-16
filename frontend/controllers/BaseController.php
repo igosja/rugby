@@ -101,14 +101,14 @@ class BaseController extends AbstractController
                 $delScout = true;
                 $delTraining = true;
             } else {
-                if ($team->base->level < Building::MAX_LEVEL) {
+                if ($team->base->level < Building::MAX_LEVEL && $team->canBuild()) {
                     $linkBaseArray[] = Html::a(
                         Yii::t('frontend', 'controllers.base.view.link.build'),
                         ['build', 'building' => Building::BASE],
                         ['class' => 'btn margin']
                     );
                 }
-                if ($team->base->level > Building::MIN_LEVEL) {
+                if ($team->base->level > Building::MIN_LEVEL && $team->canBuild()) {
                     $linkBaseArray[] = Html::a(
                         Yii::t('frontend', 'controllers.base.view.link.destroy'),
                         ['destroy', 'building' => Building::BASE],
@@ -125,7 +125,7 @@ class BaseController extends AbstractController
 
                     $delTraining = true;
                 } else {
-                    if ($team->baseTraining->level < Building::MAX_LEVEL) {
+                    if ($team->baseTraining->level < Building::MAX_LEVEL && $team->canBuild()) {
                         $linkTrainingArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.build'),
                             ['build', 'building' => Building::TRAINING],
@@ -133,11 +133,13 @@ class BaseController extends AbstractController
                         );
                     }
                     if ($team->baseTraining->level > Building::MIN_LEVEL) {
-                        $linkTrainingArray[] = Html::a(
-                            Yii::t('frontend', 'controllers.base.view.link.destroy'),
-                            ['destroy', 'building' => Building::TRAINING],
-                            ['class' => 'btn margin']
-                        );
+                        if ($team->canBuild()) {
+                            $linkTrainingArray[] = Html::a(
+                                Yii::t('frontend', 'controllers.base.view.link.destroy'),
+                                ['destroy', 'building' => Building::TRAINING],
+                                ['class' => 'btn margin']
+                            );
+                        }
                         $linkTrainingArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.training'),
                             ['training/index'],
@@ -155,7 +157,7 @@ class BaseController extends AbstractController
 
                     $delPhysical = true;
                 } else {
-                    if ($team->basePhysical->level < Building::MAX_LEVEL) {
+                    if ($team->basePhysical->level < Building::MAX_LEVEL && $team->canBuild()) {
                         $linkPhysicalArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.build'),
                             ['build', 'building' => Building::PHYSICAL],
@@ -163,11 +165,13 @@ class BaseController extends AbstractController
                         );
                     }
                     if ($team->basePhysical->level > Building::MIN_LEVEL) {
-                        $linkPhysicalArray[] = Html::a(
-                            Yii::t('frontend', 'controllers.base.view.link.destroy'),
-                            ['destroy', 'building' => Building::PHYSICAL],
-                            ['class' => 'btn margin']
-                        );
+                        if ($team->canBuild()) {
+                            $linkPhysicalArray[] = Html::a(
+                                Yii::t('frontend', 'controllers.base.view.link.destroy'),
+                                ['destroy', 'building' => Building::PHYSICAL],
+                                ['class' => 'btn margin']
+                            );
+                        }
                         $linkPhysicalArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.physical'),
                             ['physical/index'],
@@ -185,7 +189,7 @@ class BaseController extends AbstractController
 
                     $delSchool = true;
                 } else {
-                    if ($team->baseSchool->level < Building::MAX_LEVEL) {
+                    if ($team->baseSchool->level < Building::MAX_LEVEL && $team->canBuild()) {
                         $linkSchoolArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.build'),
                             ['build', 'building' => Building::SCHOOL],
@@ -193,11 +197,13 @@ class BaseController extends AbstractController
                         );
                     }
                     if ($team->baseSchool->level > Building::MIN_LEVEL) {
-                        $linkSchoolArray[] = Html::a(
-                            Yii::t('frontend', 'controllers.base.view.link.destroy'),
-                            ['destroy', 'building' => Building::SCHOOL],
-                            ['class' => 'btn margin']
-                        );
+                        if ($team->canBuild()) {
+                            $linkSchoolArray[] = Html::a(
+                                Yii::t('frontend', 'controllers.base.view.link.destroy'),
+                                ['destroy', 'building' => Building::SCHOOL],
+                                ['class' => 'btn margin']
+                            );
+                        }
                         $linkSchoolArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.school'),
                             ['school/index'],
@@ -215,7 +221,7 @@ class BaseController extends AbstractController
 
                     $delScout = true;
                 } else {
-                    if ($team->baseScout->level < Building::MAX_LEVEL) {
+                    if ($team->baseScout->level < Building::MAX_LEVEL && $team->canBuild()) {
                         $linkScoutArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.build'),
                             ['build', 'building' => Building::SCOUT],
@@ -223,11 +229,13 @@ class BaseController extends AbstractController
                         );
                     }
                     if ($team->baseScout->level > Building::MIN_LEVEL) {
-                        $linkScoutArray[] = Html::a(
-                            Yii::t('frontend', 'controllers.base.view.link.destroy'),
-                            ['destroy', 'building' => Building::SCOUT],
-                            ['class' => 'btn margin']
-                        );
+                        if ($team->canBuild()) {
+                            $linkScoutArray[] = Html::a(
+                                Yii::t('frontend', 'controllers.base.view.link.destroy'),
+                                ['destroy', 'building' => Building::SCOUT],
+                                ['class' => 'btn margin']
+                            );
+                        }
                         $linkScoutArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.scout'),
                             ['scout/index'],
@@ -245,14 +253,14 @@ class BaseController extends AbstractController
 
                     $delMedical = true;
                 } else {
-                    if ($team->baseMedical->level < Building::MAX_LEVEL) {
+                    if ($team->baseMedical->level < Building::MAX_LEVEL && $team->canBuild()) {
                         $linkMedicalArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.build'),
                             ['build', 'building' => Building::MEDICAL],
                             ['class' => 'btn margin']
                         );
                     }
-                    if ($team->baseMedical->level > Building::MIN_LEVEL) {
+                    if ($team->baseMedical->level > Building::MIN_LEVEL && $team->canBuild()) {
                         $linkMedicalArray[] = Html::a(
                             Yii::t('frontend', 'controllers.base.view.link.destroy'),
                             ['destroy', 'building' => Building::MEDICAL],
@@ -289,7 +297,7 @@ class BaseController extends AbstractController
      */
     public function actionBuild(int $building)
     {
-        if (!$this->myTeam) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 
@@ -485,13 +493,15 @@ class BaseController extends AbstractController
 
     /**
      * @param int $building
-     * @return string|Response
-     * @throws NotFoundHttpException
+     * @return string|\yii\web\Response
      */
     public function actionDestroy(int $building)
     {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
+            return $this->redirect(['team/view']);
+        }
+
         $team = $this->myTeam;
-        $this->notFound($team);
 
         if ($team->buildingBase) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.base.destroy.error.building'));
@@ -666,10 +676,10 @@ class BaseController extends AbstractController
     }
 
     /**
-     * @param $id
-     * @return string|Response
+     * @param int $id
+     * @return string|\yii\web\Response
      */
-    public function actionCancel($id)
+    public function actionCancel(int $id)
     {
         if (!$this->myTeam) {
             return $this->redirect(['team/view']);
