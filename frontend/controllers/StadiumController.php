@@ -55,7 +55,7 @@ class StadiumController extends AbstractController
 
         $model = new StadiumIncrease($team->stadium);
 
-        $canChange = $this->canChange();
+        $canChange = $team->canBuild();
 
         $this->setSeoTitle($team->stadium->name . '. ' . Yii::t('frontend', 'controllers.stadium.increase.title'));
 
@@ -77,7 +77,7 @@ class StadiumController extends AbstractController
 
         $team = $this->myTeam;
 
-        $canChange = $this->canChange();
+        $canChange = $team->canBuild();
 
         $model = new StadiumDecrease($team->stadium);
 
@@ -95,7 +95,7 @@ class StadiumController extends AbstractController
      */
     public function actionBuild()
     {
-        if (!$this->myTeam || !$this->canChange()) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 
@@ -178,7 +178,7 @@ class StadiumController extends AbstractController
      */
     public function actionDestroy()
     {
-        if (!$this->myTeam || !$this->canChange()) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 
@@ -325,17 +325,5 @@ class StadiumController extends AbstractController
             'price' => -$finance->value,
             'team' => $team,
         ]);
-    }
-
-    /**
-     * @return bool
-     */
-    private function canChange(): bool
-    {
-        if ($this->myTeam->auto_number) {
-            return false;
-        }
-
-        return true;
     }
 }
