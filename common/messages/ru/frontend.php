@@ -1281,6 +1281,7 @@ return [
     'views.stadium.increase.finance' => 'Финансы команды',
     'views.stadium.increase.label.capacity' => 'Новая вместимость',
     'views.stadium.increase.link.cancel' => 'Отменить строительство',
+    'views.stadium.increase.no' => 'Нельзя менять вместимость стадиона, если команда играет автосоставом',
     'views.stadium.increase.on-building' => 'На стадионе сейчас идет строительство. Дата окончания строительства - {date}',
     'views.stadium.increase.price' => 'Стоимость строительства',
     'views.stadium.increase.submit' => 'Начать строительтво',
