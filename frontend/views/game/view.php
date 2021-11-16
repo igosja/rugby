@@ -17,6 +17,7 @@ use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 
@@ -128,7 +129,8 @@ $user = Yii::$app->user->identity;
                 (<?= $game->stadium_capacity ?>),
                 <?= Yii::t('frontend', 'views.game.view.visitor') ?>: <?= $game->visitor ?>.
                 <?= Yii::t('frontend', 'views.game.view.ticket') ?>
-                : <?= FormatHelper::asCurrency($game->ticket_price) ?>
+                : <?= FormatHelper::asCurrency($game->ticket_price) ?>,
+                <?= StringHelper::mb_ucfirst($game->weather->name) ?>
             </div>
         </div>
     </div>
