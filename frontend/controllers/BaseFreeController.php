@@ -90,7 +90,7 @@ class BaseFreeController extends AbstractController
             $delScout = true;
             $delTraining = true;
         } else {
-            if ($team->base->level < Building::MAX_LEVEL) {
+            if ($team->base->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkBaseArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::BASE],
@@ -101,7 +101,7 @@ class BaseFreeController extends AbstractController
             if ($team->buildingBase && Building::TRAINING === $team->buildingBase->building_id) {
                 $linkTrainingArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delTraining = true;
-            } elseif ($team->baseTraining->level < Building::MAX_LEVEL) {
+            } elseif ($team->baseTraining->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkTrainingArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::TRAINING],
@@ -112,7 +112,7 @@ class BaseFreeController extends AbstractController
             if ($team->buildingBase && Building::PHYSICAL === $team->buildingBase->building_id) {
                 $linkPhysicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delPhysical = true;
-            } elseif ($team->basePhysical->level < Building::MAX_LEVEL) {
+            } elseif ($team->basePhysical->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkPhysicalArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::PHYSICAL],
@@ -123,7 +123,7 @@ class BaseFreeController extends AbstractController
             if ($team->buildingBase && Building::SCHOOL === $team->buildingBase->building_id) {
                 $linkSchoolArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delSchool = true;
-            } elseif ($team->baseSchool->level < Building::MAX_LEVEL) {
+            } elseif ($team->baseSchool->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkSchoolArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::SCHOOL],
@@ -134,7 +134,7 @@ class BaseFreeController extends AbstractController
             if ($team->buildingBase && Building::SCOUT === $team->buildingBase->building_id) {
                 $linkScoutArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delScout = true;
-            } elseif ($team->baseScout->level < Building::MAX_LEVEL) {
+            } elseif ($team->baseScout->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkScoutArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::SCOUT],
@@ -145,7 +145,7 @@ class BaseFreeController extends AbstractController
             if ($team->buildingBase && Building::MEDICAL === $team->buildingBase->building_id) {
                 $linkMedicalArray[] = Html::a(Yii::t('frontend', 'controllers.base.view.link.on-build'), 'javascript:', ['class' => 'btn margin']);
                 $delMedical = true;
-            } elseif ($team->baseMedical->level < Building::MAX_LEVEL) {
+            } elseif ($team->baseMedical->level < Building::MAX_LEVEL && $team->canBuild()) {
                 $linkMedicalArray[] = Html::a(
                     Yii::t('frontend', 'controllers.base.view.link.build'),
                     ['build', 'building' => Building::MEDICAL],
@@ -180,7 +180,7 @@ class BaseFreeController extends AbstractController
      */
     public function actionBuild(int $building)
     {
-        if (!$this->myTeam) {
+        if (!$this->myTeam || !$this->myTeam->canBuild()) {
             return $this->redirect(['team/view']);
         }
 

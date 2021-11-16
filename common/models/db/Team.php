@@ -999,6 +999,18 @@ class Team extends AbstractActiveRecord
     }
 
     /**
+     * @return bool
+     */
+    public function canBuild(): bool
+    {
+        if ($this->auto_number) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getBase(): ActiveQuery
