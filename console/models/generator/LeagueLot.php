@@ -70,12 +70,14 @@ class LeagueLot
                     $model->guest_team_id = $item['guest'];
                     $model->home_team_id = $item['home'];
                     $model->schedule_id = $stageArray[0]->id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
 
                     $model = new Game();
                     $model->guest_team_id = $item['home'];
                     $model->home_team_id = $item['guest'];
                     $model->schedule_id = $stageArray[1]->id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
                 }
 
@@ -112,12 +114,14 @@ class LeagueLot
                     $model->guest_team_id = $item['guest'];
                     $model->home_team_id = $item['home'];
                     $model->schedule_id = $stageArray[0]->id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
 
                     $model = new Game();
                     $model->guest_team_id = $item['home'];
                     $model->home_team_id = $item['guest'];
                     $model->schedule_id = $stageArray[1]->id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
                 }
 
@@ -251,6 +255,7 @@ class LeagueLot
                 $model->home_team_id = $teamArray[0]->team_id;
                 $model->schedule_id = $stageArray[0]->id;
                 $model->stadium_id = $teamArray[0]->team->stadium_id;
+                $model->weather_id = Weather::getRandomWeatherId();
                 $model->save();
 
                 $model = new Game();
@@ -258,6 +263,7 @@ class LeagueLot
                 $model->home_team_id = $teamArray[1]->team_id;
                 $model->schedule_id = $stageArray[1]->id;
                 $model->stadium_id = $teamArray[1]->team->stadium_id;
+                $model->weather_id = Weather::getRandomWeatherId();
                 $model->save();
             }
         } elseif (Stage::ROUND_OF_16 === $schedule->stage_id) {
@@ -297,6 +303,7 @@ class LeagueLot
                     $model->home_team_id = $teamArray[0]->team_id;
                     $model->schedule_id = $stageArray[0]->id;
                     $model->stadium_id = $teamArray[0]->team->stadium_id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
 
                     $model = new Game();
@@ -304,6 +311,7 @@ class LeagueLot
                     $model->home_team_id = $teamArray[1]->team_id;
                     $model->schedule_id = $stageArray[1]->id;
                     $model->stadium_id = $teamArray[1]->team->stadium_id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
                 }
             }
@@ -344,6 +352,7 @@ class LeagueLot
                     $model->home_team_id = $teamArray[0]->team_id;
                     $model->schedule_id = $stageArray[0]->id;
                     $model->stadium_id = $teamArray[0]->team->stadium_id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
 
                     $model = new Game();
@@ -351,6 +360,7 @@ class LeagueLot
                     $model->home_team_id = $teamArray[1]->team_id;
                     $model->schedule_id = $stageArray[1]->id;
                     $model->stadium_id = $teamArray[1]->team->stadium_id;
+                    $model->weather_id = Weather::getRandomWeatherId();
                     $model->save();
                 }
             }
@@ -390,6 +400,7 @@ class LeagueLot
                 $model->home_team_id = $teamArray[0]->team_id;
                 $model->schedule_id = $stageArray[0]->id;
                 $model->stadium_id = $teamArray[0]->team->stadium_id;
+                $model->weather_id = Weather::getRandomWeatherId();
                 $model->save();
 
                 $model = new Game();
@@ -397,6 +408,7 @@ class LeagueLot
                 $model->home_team_id = $teamArray[1]->team_id;
                 $model->schedule_id = $stageArray[1]->id;
                 $model->stadium_id = $teamArray[1]->team->stadium_id;
+                $model->weather_id = Weather::getRandomWeatherId();
                 $model->save();
             }
         }

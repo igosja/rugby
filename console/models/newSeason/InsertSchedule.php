@@ -205,7 +205,7 @@ class InsertSchedule
 
         $data = [];
 
-        for ($i = 0; $i < 98; $i++) {
+        for ($i = 0; $i < 84; $i++) {
             $date = $startDate + $i * 24 * 60 * 60;
             $conference = 0;
 

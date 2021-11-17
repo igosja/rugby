@@ -37,7 +37,7 @@ class M200101000112ParticipantLeague extends Migration
         $this->addForeignKey('participant_league_season_id', self::TABLE, 'season_id', '{{%season}}', 'id');
         $this->addForeignKey('participant_league_stage_in_id', self::TABLE, 'stage_in_id', '{{%stage}}', 'id');
         $this->addForeignKey('participant_league_stage_out_id', self::TABLE, 'stage_out_id', '{{%stage}}', 'id');
-        $this->addForeignKey('participant_league_team_id', self::TABLE, 'team_id', '{{%stage}}', 'id');
+        $this->addForeignKey('participant_league_team_id', self::TABLE, 'team_id', '{{%team}}', 'id');
 
         $this->createIndex('team_season', self::TABLE, ['team_id', 'season_id'], true);
 
