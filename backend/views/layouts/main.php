@@ -251,6 +251,10 @@ AppAsset::register($this);
                         ],
                         'url' => 'javascript:',
                     ],
+                    [
+                        'label' => 'Generate password',
+                        'url' => ['generate/password'],
+                    ],
                 ];
 
                 try {

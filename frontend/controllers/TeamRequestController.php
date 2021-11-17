@@ -47,7 +47,7 @@ class TeamRequestController extends AbstractController
             return $this->redirectToMyTeam();
         }
 
-        $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
+        $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider($this->user->id);
         $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
         $this->setSeoTitle(Yii::t('frontend', 'controllers.team-request.index.title'));
@@ -67,7 +67,7 @@ class TeamRequestController extends AbstractController
             return $this->redirectToMyTeam();
         }
 
-        if (!TeamQuery::getFreeTeamById($id)) {
+        if (!TeamQuery::getFreeTeamById($id, $this->user->id)) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.team-request.request.error.team'));
             return $this->redirect(['team-request/index']);
         }

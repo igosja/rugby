@@ -15,13 +15,14 @@ use yii\data\ActiveDataProvider;
 class TeamRequestPrepare
 {
     /**
-     * @return ActiveDataProvider
+     * @param int|null $userId
+     * @return \yii\data\ActiveDataProvider
      */
-    public static function getFreeTeamDataProvider(): ActiveDataProvider
+    public static function getFreeTeamDataProvider(int $userId = null): ActiveDataProvider
     {
         return new ActiveDataProvider([
             'pagination' => false,
-            'query' => TeamQuery::getFreeTeamListQuery(),
+            'query' => TeamQuery::getFreeTeamListQuery($userId),
             'sort' => [
                 'attributes' => [
                     'base' => [
