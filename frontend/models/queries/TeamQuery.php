@@ -4,6 +4,8 @@
 
 namespace frontend\models\queries;
 
+use common\models\db\History;
+use common\models\db\HistoryText;
 use common\models\db\Team;
 use yii\db\ActiveQuery;
 
@@ -15,34 +17,41 @@ class TeamQuery
 {
     /**
      * @param int $teamId
-     * @return Team|null
+     * @param int|null $userId
+     * @return \common\models\db\Team|null
      */
-    public static function getFreeTeamById(int $teamId): ?Team
+    public static function getFreeTeamById(int $teamId, int $userId = null): ?Team
     {
         /**
          * @var Team $team
          */
-        $team = Team::find()
-            ->select(
+        return Team::find()
+            ->select([
+                'id',
+            ])
+            ->andWhere([
+                'id' => $teamId,
+                'user_id' => 0,
+            ])
+            ->andWhere([
+                'not',
                 [
-                    'id',
+                    'id' => History::find()
+                        ->select(['team_id'])
+                        ->andWhere(['history_text_id' => HistoryText::USER_MANAGER_TEAM_OUT])
+                        ->andWhere(['>', 'date', time() - 2 * 24 * 60 * 90])
+                        ->andFilterWhere(['!=', 'user_id', $userId])
                 ]
-            )
-            ->where(
-                [
-                    'id' => $teamId,
-                    'user_id' => 0,
-                ]
-            )
+            ])
             ->limit(1)
             ->one();
-        return $team;
     }
 
     /**
-     * @return ActiveQuery
+     * @param int|null $userId
+     * @return \yii\db\ActiveQuery
      */
-    public static function getFreeTeamListQuery(): ActiveQuery
+    public static function getFreeTeamListQuery(int $userId = null): ActiveQuery
     {
         return Team::find()
             ->with([
@@ -57,7 +66,17 @@ class TeamQuery
             ])
             ->joinWith(['base', 'stadium.city'])
             ->where(['!=', 'team.id', 0])
-            ->andWhere(['user_id' => 0]);
+            ->andWhere(['user_id' => 0])
+            ->andWhere([
+                'not',
+                [
+                    'team.id' => History::find()
+                        ->select(['team_id'])
+                        ->andWhere(['history_text_id' => HistoryText::USER_MANAGER_TEAM_OUT])
+                        ->andWhere(['>', 'date', time() - 2 * 24 * 60 * 90])
+                        ->andFilterWhere(['!=', 'user_id', $userId])
+                ]
+            ]);
     }
 
     /**

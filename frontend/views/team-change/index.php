@@ -98,10 +98,7 @@ use yii\web\View;
                 'format' => 'raw',
                 'label' => Yii::t('frontend', 'views.th.team'),
                 'value' => static function (Team $model) {
-                    return Html::a(
-                        $model->name,
-                        ['team/view', $model->id]
-                    );
+                    return $model->getTeamLink();
                 }
             ],
             [
