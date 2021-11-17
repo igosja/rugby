@@ -295,7 +295,7 @@ class LeagueController extends AbstractController
                             'season_id' => $seasonId,
                             'tournament_type_id' => TournamentType::LEAGUE,])
                 ])
-                ->orderBy(['game_id' => SORT_ASC])
+                ->orderBy(['id' => SORT_ASC])
                 ->all();
             $groupArray[$group]['game'] = $gameArray;
 

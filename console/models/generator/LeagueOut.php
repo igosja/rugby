@@ -67,7 +67,7 @@ class LeagueOut
                             'guest_team_id' => $game->home_team_id
                         ],
                     ])
-                    ->andWhere(['not', ['played' => 0]])
+                    ->andWhere(['not', ['played' => null]])
                     ->andWhere([
                         'tournament_type_id' => TournamentType::LEAGUE,
                         'stage_id' => $schedule->stage_id,
