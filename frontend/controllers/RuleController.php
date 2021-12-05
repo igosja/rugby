@@ -49,12 +49,17 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @return string
+     *
      */
-    public function actionSearch(): string
+    public function actionSearch()
     {
+        $queryString = trim(Yii::$app->request->get('q'));
+        if (!$queryString) {
+            return $this->redirect(['index']);
+        }
+
         $query = Rule::find()
-            ->filterWhere(['like', 'text', Yii::$app->request->get('q')])
+            ->filterWhere(['like', 'text', $queryString])
             ->orderBy(['id' => SORT_ASC]);
         $dataProvider = new ActiveDataProvider([
             'pagination' => false,
