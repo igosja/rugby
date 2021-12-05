@@ -8,7 +8,6 @@ use common\models\db\Championship;
 use common\models\db\Conference;
 use common\models\db\Division;
 use common\models\db\Federation;
-use common\models\db\ParticipantChampionship;
 use common\models\db\Season;
 use Yii;
 use yii\db\Exception;
@@ -32,7 +31,7 @@ class ChampionshipRotate
             ->all();
 
         $federationArray = Federation::find()
-            ->joinWith(['country.city'])
+            ->joinWith(['country.cities'])
             ->where(['!=', 'city.id', 0])
             ->groupBy(['federation.id'])
             ->orderBy(['federation.id' => SORT_ASC])
@@ -42,6 +41,24 @@ class ChampionshipRotate
 
             foreach ($divisionArray as $division) {
                 $rotateChampionship = [];
+
+                $championshipArray = Championship::find()
+                    ->where([
+                        'division_id' => $division->id,
+                        'federation_id' => $federation->id,
+                        'season_id' => $seasonId,
+                    ])
+                    ->orderBy(['place' => SORT_ASC])
+                    ->offset(2)
+                    ->limit(12)
+                    ->all();
+                if (!$championshipArray) {
+                    continue;
+                }
+
+                foreach ($championshipArray as $team) {
+                    $rotateChampionship[] = $team->team_id;
+                }
 
                 $championshipArray = Championship::find()
                     ->where([
@@ -64,20 +81,6 @@ class ChampionshipRotate
                         ->limit(2)
                         ->all();
                 }
-                foreach ($championshipArray as $team) {
-                    $rotateChampionship[] = $team->team_id;
-                }
-
-                $championshipArray = Championship::find()
-                    ->where([
-                        'division_id' => $division->id,
-                        'federation_id' => $federation->id,
-                        'season_id' => $seasonId,
-                    ])
-                    ->orderBy(['place' => SORT_ASC])
-                    ->offset(2)
-                    ->limit(12)
-                    ->all();
                 foreach ($championshipArray as $team) {
                     $rotateChampionship[] = $team->team_id;
                 }
@@ -175,7 +178,7 @@ class ChampionshipRotate
 
             $rotateArray['conference'] = $rotateConference;
 
-            if (count($rotateArray) < 5 && count($rotateArray['conference']) >= 16) {
+            if (count($rotateArray) < 3 && count($rotateArray['conference']) >= 16) {
                 foreach ($divisionArray as $item) {
                     if (!isset($rotateArray[$item->id])) {
                         $rotateArray[$item->id] = array_slice($rotateArray['conference'], 0, 16);

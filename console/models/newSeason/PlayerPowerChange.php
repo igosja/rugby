@@ -19,12 +19,12 @@ class PlayerPowerChange
     public function execute()
     {
         Player::updateAll(
-            ['player_power_nominal' => new Expression('`player_power_nominal`+27-`player_age`')],
-            ['<=', 'player_age', 23]
+            ['power_nominal' => new Expression('`power_nominal`+27-`age`')],
+            ['<=', 'age', 23]
         );
         Player::updateAll(
-            ['player_power_nominal' => new Expression('ROUND(`player_power_nominal`*(100-(`player_age`-30)*5)/100)')],
-            ['between', 'player_age', 31, 34]
+            ['power_nominal' => new Expression('ROUND(`power_nominal`*(100-(`age`-30)*5)/100)')],
+            ['between', 'age', 31, 34]
         );
     }
 }

@@ -10,6 +10,7 @@ use common\models\db\Schedule;
 use common\models\db\Season;
 use common\models\db\Stage;
 use common\models\db\TournamentType;
+use common\models\db\Weather;
 use Exception;
 use Yii;
 
@@ -44,12 +45,14 @@ class InsertLeague
             $model->guest_team_id = $item['guest'];
             $model->home_team_id = $item['home'];
             $model->schedule_id = $stageArray[0]->id;
+            $model->weather_id = Weather::getRandomWeatherId();
             $model->save();
 
             $model = new Game();
             $model->guest_team_id = $item['home'];
             $model->home_team_id = $item['guest'];
             $model->schedule_id = $stageArray[1]->id;
+            $model->weather_id = Weather::getRandomWeatherId();
             $model->save();
         }
 
@@ -81,7 +84,7 @@ class InsertLeague
             ->joinwith(['team'])
             ->where([
                 'season_id' => $seasonId,
-                'stage_out_id' => 0,
+                'stage_out_id' => null,
                 'stage_in_id' => [Stage::QUALIFY_1],
             ])
             ->orderBy(['power_vs' => SORT_DESC])

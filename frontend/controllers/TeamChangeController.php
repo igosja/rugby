@@ -10,6 +10,7 @@ use common\models\db\TeamRequest;
 use Exception;
 use frontend\models\forms\TeamChangeForm;
 use frontend\models\preparers\TeamRequestPrepare;
+use frontend\models\queries\TeamQuery;
 use frontend\models\queries\TeamRequestQuery;
 use Yii;
 use yii\base\Action;
@@ -67,7 +68,7 @@ class TeamChangeController extends AbstractController
      */
     public function actionIndex(): string
     {
-        $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider();
+        $dataProvider = TeamRequestPrepare::getFreeTeamDataProvider($this->user->id);
         $myDataProvider = TeamRequestPrepare::getTeamRequestDataProvider($this->user->id);
 
         $this->setSeoTitle(Yii::t('frontend', 'controllers.team-change.index.title'));
@@ -86,7 +87,7 @@ class TeamChangeController extends AbstractController
         /**
          * @var Team $team
          */
-        $team = Team::find()->where(['id' => $id, 'user_id' => 0])->limit(1)->one();
+        $team = TeamQuery::getFreeTeamById($id, $this->user->id);
         if (!$team) {
             $this->setErrorFlash(Yii::t('frontend', 'controllers.team-change.confirm.error.team'));
             return $this->redirect(['index']);

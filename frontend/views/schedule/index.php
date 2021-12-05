@@ -8,6 +8,7 @@ use common\models\db\Schedule;
 use kartik\select2\Select2;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -105,7 +106,7 @@ use yii\helpers\Html;
             'columns' => $columns,
             'dataProvider' => $dataProvider,
             'rowOptions' => static function (Schedule $model) use ($scheduleId) {
-                if (in_array($model->id, $scheduleId, true)) {
+                if (ArrayHelper::isIn($model->id, $scheduleId)) {
                     return ['class' => 'info'];
                 }
                 return [];

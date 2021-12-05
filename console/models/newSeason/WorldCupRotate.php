@@ -5,6 +5,7 @@
 namespace console\models\newSeason;
 
 use common\models\db\Division;
+use common\models\db\National;
 use common\models\db\NationalType;
 use common\models\db\Season;
 use common\models\db\WorldCup;
@@ -103,6 +104,17 @@ class WorldCupRotate
                         ->all();
                     foreach ($worldCupArray as $worldCup) {
                         $rotateWorldCup[] = $worldCup->national_id;
+                    }
+                }
+
+                if (!$rotateWorldCup && Division::D1 === $division->id) {
+                    $nationalArray = National::find()
+                        ->andWhere(['!=', 'id', 0])
+                        ->andWhere(['national_type_id' => $nationalType->id])
+                        ->orderBy(['id' => SORT_ASC])
+                        ->all();
+                    foreach ($nationalArray as $national) {
+                        $rotateWorldCup[] = $national->id;
                     }
                 }
 

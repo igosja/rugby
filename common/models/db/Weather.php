@@ -49,6 +49,19 @@ class Weather extends AbstractActiveRecord
      */
     public static function getRandomWeatherId(): int
     {
-        return random_int(self::VERY_HOT, self::SNOW);
+        $array = [];
+        for ($i = 0; $i < 1; $i++) {
+            $array[] = self::VERY_HOT;
+            $array[] = self::SNOW;
+        }
+        for ($i = 0; $i < 5; $i++) {
+            $array[] = self::HOT;
+            $array[] = self::RAIN;
+        }
+        for ($i = 0; $i < 10; $i++) {
+            $array[] = self::SUNNY;
+            $array[] = self::CLOUDY;
+        }
+        return $array[array_rand($array)];
     }
 }
