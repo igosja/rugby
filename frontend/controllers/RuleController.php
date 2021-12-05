@@ -49,7 +49,7 @@ class RuleController extends AbstractController
     }
 
     /**
-     *
+     * @return string|\yii\web\Response
      */
     public function actionSearch()
     {
