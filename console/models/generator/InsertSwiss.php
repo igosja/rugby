@@ -325,8 +325,14 @@ class InsertSwiss
      */
     private function swissConference(array $teamArray, int $stageId): array
     {
+        $invert = false;
         $stage = $stageId - 1;
         $countTeam = count($teamArray);
+
+        if ($stage >= $countTeam) {
+            $stage = $stage - $countTeam;
+            $invert = true;
+        }
 
         $scheme = 1;
         if (0 === $stage % 2) {
@@ -364,9 +370,17 @@ class InsertSwiss
         $gameArray = [];
 
         foreach ($keyArray as $item) {
+            if (!$invert) {
+                $keyOne = $item[1];
+                $keyTwo = $item[0];
+            } else {
+                $keyOne = $item[0];
+                $keyTwo = $item[1];
+            }
+
             $gameArray[] = [
-                'home' => $teamArray[$item[0]]->team_id,
-                'guest' => $teamArray[$item[1]]->team_id,
+                'home' => $teamArray[$keyOne]->team_id,
+                'guest' => $teamArray[$keyTwo]->team_id,
             ];
         }
 
